@@ -1,0 +1,790 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Manage Members | BulSU MSC</title>
+  <link href="./Logos/Bulsu MSC Logo-02.png" rel="icon" type="image/png" />
+
+  <!-- Updated font imports to match admin_manage_events -->
+  <link href="https://fonts.googleapis.com/css2?family=Segoe+UI:wght@400;500;600;700&family=Orbitron:wght@400;700;900&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+
+  <style>
+    /* Updated base styles to match admin_manage_events */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #080c24;
+      color: #ffffff;
+      overflow-x: hidden;
+    }
+
+    .container {
+      display: flex;
+      min-height: 100vh;
+    }
+
+    /* Updated sidebar styles to match admin_manage_events */
+    .sidebar {
+      width: 280px;
+      background-color: #00071c;
+      padding: 20px 0;
+      position: fixed;
+      height: 100vh;
+      overflow-y: auto;
+      z-index: 1000;
+    }
+
+    .logo-section {
+      text-align: center;
+      padding: 0 20px 30px;
+      border-bottom: 1px solid #1a1f3a;
+      margin-bottom: 30px;
+      /* Added display flex and flex-direction to ensure proper centering */
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .logo-section img {
+      width: 60px;
+      height: 60px;
+      margin-bottom: 10px;
+      /* Added margin auto for additional centering assurance */
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .logo-section h2 {
+      font-family: 'Orbitron', monospace;
+      font-size: 18px;
+      font-weight: 700;
+      color: #b9da05;
+      margin-bottom: 5px;
+    }
+
+    .logo-section p {
+      font-size: 12px;
+      color: #8892b0;
+    }
+
+    .nav-menu {
+      list-style: none;
+      padding: 0 15px;
+    }
+
+    .nav-menu li {
+      margin-bottom: 8px;
+    }
+
+    .nav-menu a {
+      display: flex;
+      align-items: center;
+      padding: 12px 15px;
+      color: #8892b0;
+      text-decoration: none;
+      border-radius: 8px;
+      transition: all 0.3s ease;
+      font-weight: 500;
+    }
+
+    .nav-menu a:hover,
+    .nav-menu a.active {
+      background-color: #011538;
+      color: #b9da05;
+      transform: translateX(5px);
+    }
+
+    .nav-menu a i {
+      margin-right: 12px;
+      font-size: 16px;
+      width: 20px;
+    }
+
+    .footer-section {
+      margin-top: auto;
+      padding: 20px;
+      text-align: center;
+      border-top: 1px solid #1a1f3a;
+    }
+
+    .footer-section p {
+      font-size: 10px;
+      color: #64748b;
+      line-height: 1.4;
+    }
+
+    /* Updated main content styles */
+    .main-content {
+      margin-left: 280px;
+      flex: 1;
+      padding: 20px;
+      background-color: #080c24;
+      min-width: 0; /* Allows flex item to shrink below content size */
+    }
+
+    .header {
+      margin-bottom: 30px;
+    }
+
+    .header h1 {
+      font-family: 'Orbitron', monospace;
+      font-size: 28px;
+      font-weight: 700;
+      color: #b9da05;
+      margin-bottom: 5px;
+    }
+
+    .header p {
+      color: #8892b0;
+      font-size: 14px;
+    }
+
+    /* Updated button styles */
+    .btn {
+      padding: 8px 16px;
+      border: none;
+      border-radius: 6px;
+      font-size: 12px;
+      font-weight: 500;
+      cursor: pointer;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      transition: all 0.3s ease;
+    }
+
+    .btn-primary {
+      background-color: #b9da05;
+      color: #000000;
+    }
+
+    .btn-primary:hover {
+      background-color: #a8c905;
+      transform: translateY(-1px);
+    }
+
+    .btn-secondary {
+      background-color: #374151;
+      color: #ffffff;
+    }
+
+    .btn-secondary:hover {
+      background-color: #4b5563;
+    }
+
+    .btn-danger {
+      background-color: #ef4444;
+      color: #ffffff;
+    }
+
+    .btn-danger:hover {
+      background-color: #dc2626;
+    }
+    
+    /* Added modal styles */
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 1000;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.8);
+      overflow-y: auto;
+    }
+    
+    .modal-content {
+      background-color: #080c24;
+      margin: 2% auto;
+      padding: 0;
+      border: 2px solid #b9da05;
+      border-radius: 12px;
+      width: 90%;
+      max-width: 800px;
+      max-height: 90vh;
+      overflow-y: auto;
+      position: relative;
+    }
+    
+    .modal-header {
+      background-color: #00071c;
+      padding: 20px;
+      border-bottom: 1px solid #b9da05;
+      border-radius: 10px 10px 0 0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    
+    .modal-body {
+      padding: 20px;
+      color: white;
+    }
+    
+    .close {
+      color: #b9da05;
+      font-size: 28px;
+      font-weight: bold;
+      cursor: pointer;
+      background: none;
+      border: none;
+    }
+    
+    .close:hover {
+      color: white;
+    }
+    
+    /* Form styles for the modal */
+    .form-group {
+      margin-bottom: 15px;
+    }
+    
+    .form-group label {
+      display: block;
+      margin-bottom: 5px;
+      color: white;
+      font-weight: 500;
+    }
+    
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+      width: 100%;
+      padding: 8px 12px;
+      background-color: #011538;
+      border-radius: 6px;
+      color: white;
+      font-size: 14px;
+      border: 1px solid #374151;
+    }
+    
+    .form-group input:focus,
+    .form-group select:focus,
+    .form-group textarea:focus {
+      outline: none;
+      border-color: #b9da05;
+      box-shadow: 0 0 0 2px rgba(185, 218, 5, 0.2);
+    }
+    
+    .form-row {
+      display: grid;
+      gap: 15px;
+      margin-bottom: 15px;
+    }
+    
+    .form-row.two-col {
+      grid-template-columns: 1fr 1fr;
+    }
+    
+    .form-row.three-col {
+      grid-template-columns: 1fr 1fr 1fr;
+    }
+    
+    .form-row.four-col {
+      grid-template-columns: 1fr 1fr 1fr 1fr;
+    }
+    
+    .password-wrapper {
+      position: relative;
+    }
+    
+    .toggle-password {
+      position: absolute;
+      right: 10px;
+      top: 50%;
+      transform: translateY(-50%);
+      background: none;
+      border: none;
+      color: #b9da05;
+      cursor: pointer;
+    }
+    
+    .password-strength {
+      font-size: 12px;
+      margin-top: 5px;
+    }
+    
+    .password-strength.weak { color: #ff4444; }
+    .password-strength.medium { color: #ffaa00; }
+    .password-strength.strong { color: #00aa00; }
+    
+    .checkbox input[type="checkbox"] {
+      width: auto;
+      margin-right: 8px;
+    }
+    
+    .form-actions {
+      text-align: center;
+      margin-top: 20px;
+      padding-top: 20px;
+      border-top: 1px solid #333;
+    }
+    
+    /* Custom scrollbar styling for better table scrolling experience */
+    .overflow-x-auto {
+      scrollbar-width: thin;
+      scrollbar-color: #b9da05 #011538;
+    }
+    
+    .overflow-x-auto::-webkit-scrollbar {
+      height: 8px;
+    }
+    
+    .overflow-x-auto::-webkit-scrollbar-track {
+      background: #011538;
+      border-radius: 4px;
+    }
+    
+    .overflow-x-auto::-webkit-scrollbar-thumb {
+      background: #b9da05;
+      border-radius: 4px;
+    }
+    
+    .overflow-x-auto::-webkit-scrollbar-thumb:hover {
+      background: #a8c905;
+    }
+    
+    @media (max-width: 768px) {
+      .form-row.two-col,
+      .form-row.three-col,
+      .form-row.four-col {
+        grid-template-columns: 1fr;
+      }
+      
+      .modal-content {
+        width: 95%;
+        margin: 5% auto;
+      }
+
+      .sidebar {
+        transform: translateX(-100%);
+        transition: transform 0.3s ease;
+      }
+
+      .sidebar.open {
+        transform: translateX(0);
+      }
+
+      /* Updated mobile responsive styles for better table viewing */
+      .main-content {
+        margin-left: 0;
+        padding: 15px;
+      }
+      
+      /* Ensure table is fully scrollable on mobile */
+      .overflow-x-auto {
+        -webkit-overflow-scrolling: touch;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <!-- Updated sidebar structure to match admin_manage_events -->
+    <nav class="sidebar">
+      <div class="logo-section">
+        <img src="./Logos/Bulsu MSC Logo-02.png" alt="BulSU MSC Logo" onerror="this.style.display='none'">
+        <h2>BulSU MSC</h2>
+        <p>ADMINISTRATOR</p>
+      </div>
+      
+      <ul class="nav-menu">
+        <li><a href="admin_dashboard.html"><i class="bi bi-speedometer2"></i>Dashboard</a></li>
+        <li><a href="admin_manage_members.html" class="active"><i class="bi bi-people"></i>Members</a></li>
+        <li><a href="admin_manage_committees.html"><i class="bi bi-diagram-3"></i>Committees</a></li>
+        <li><a href="admin_manage_announcements.html"><i class="bi bi-megaphone"></i>Announcements</a></li>
+        <li><a href="admin_manage_events.html"><i class="bi bi-calendar-event"></i>Events</a></li>
+        <li><a href="verify_attendance.html"><i class="bi bi-check2-square"></i>Attendance Verifier</a></li>
+        <li><a href="admin_event_calendar.html"><i class="bi bi-calendar3"></i>Calendar</a></li>
+      </ul>
+      
+      <div class="footer-section">
+        <p>&copy; 2024 Bulacan State University<br>Microsoft Student Community<br>All Rights Reserved.</p>
+      </div>
+    </nav>
+
+    <button id="sidebarToggle" class="lg:hidden fixed top-4 left-4 z-50 bg-[#b9da05] text-[#011538] p-2 rounded-md">
+      <i class="fas fa-bars"></i>
+    </button>
+
+    <!-- Updated main content structure -->
+    <main class="main-content">
+      <div class="header">
+        <h1>Manage Members</h1>
+        <p>Manage and oversee MSC community members</p>
+      </div>
+
+      <!-- Header Buttons -->
+      <div class="flex flex-wrap gap-3 mb-6">
+        <button id="filterBtn" class="bg-[#011538] border text-white px-4 py-2 rounded-lg hover:bg-[#b9da05] hover:text-[#011538] transition">
+          <i class="fas fa-filter mr-2"></i> Filters (0 Members)
+        </button>
+        <button id="exportBtn" class="bg-[#011538] border text-white px-4 py-2 rounded-lg hover:bg-[#b9da05] hover:text-[#011538] transition">
+          <i class="fas fa-file-excel mr-2"></i> Export to Excel
+        </button>
+        <!-- Updated Add New Member button to match Apply button style -->
+        <button id="addBtn" class="bg-[#011538] border text-white px-4 py-2 rounded-lg hover:bg-[#b9da05] hover:text-[#011538] transition">
+          <i class="fas fa-user-plus mr-2"></i> Add New Member
+        </button>
+      </div>
+
+      <!-- Top Controls -->
+      <div class="flex justify-between items-center mb-4 flex-wrap gap-4">
+        <div class="flex items-center gap-2">
+          <label for="bulkAction" class="text-white">With Selected:</label>
+          <select id="bulkAction" class="bg-[#011538] border text-white px-2 py-1 rounded">
+            <option>-- Select Action --</option>
+            <option value="delete">Delete Selected</option>
+            <option value="active">Set Status to Active</option>
+            <option value="inactive">Set Status to Inactive</option>
+          </select>
+          <button id="applyBtn" class="bg-[#b9da05] text-[#011538] px-3 py-1 rounded">Apply</button>
+        </div>
+        <div class="flex items-center gap-2">
+          <label for="rowsPerPage" class="text-white">Rows per page:</label>
+          <select id="rowsPerPage" class="bg-[#011538] border text-white px-2 py-1 rounded">
+            <option>5</option>
+            <option>25</option>
+            <option>50</option>
+            <option>75</option>
+            <option>100</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- Members Table -->
+      <div class="w-full bg-[#011538] rounded-xl border shadow">
+        <div class="overflow-x-auto">
+          <table class="min-w-full text-sm text-left text-white" style="min-width: 1400px;">
+            <thead class="bg-[#00071c] text-white uppercase text-xs">
+              <tr>
+                <th class="px-2 py-3 w-12"><input type="checkbox" id="selectAll"></th>
+                <th class="px-3 py-3 min-w-[100px]">Membership ID</th>
+                <th class="px-3 py-3 min-w-[120px]">First Name</th>
+                <th class="px-3 py-3 min-w-[120px]">Middle Name</th>
+                <th class="px-3 py-3 min-w-[120px]">Last Name <button class="ml-2" id="sortLastName"><i class="fas fa-sort"></i></button></th>
+                <th class="px-3 py-3 min-w-[80px]">Suffix</th>
+                <th class="px-3 py-3 min-w-[120px]">Student No.</th>
+                <th class="px-3 py-3 min-w-[200px]">Email</th>
+                <th class="px-3 py-3 min-w-[120px]">Phone</th>
+                <th class="px-3 py-3 min-w-[80px]">Gender</th>
+                <th class="px-3 py-3 min-w-[150px]">Program</th>
+                <th class="px-3 py-3 min-w-[80px]">Year</th>
+                <th class="px-3 py-3 min-w-[120px]">College</th>
+                <th class="px-3 py-3 min-w-[100px]">Section</th>
+                <th class="px-3 py-3 min-w-[200px]">Address</th>
+                <th class="px-3 py-3 min-w-[150px]">Facebook</th>
+              </tr>
+            </thead>
+            <tbody id="membersTableBody" class="divide-y divide-gray-700">
+              <!-- JS will populate rows here -->
+            </tbody>
+          </table>
+        </div>
+        <!-- Added scroll indicator for better UX -->
+        <div class="text-center py-2 text-xs text-gray-400 border-t border-gray-700">
+          <i class="fas fa-arrows-alt-h mr-1"></i>
+          Scroll horizontally to view all columns
+        </div>
+      </div>
+    </main>
+
+    <!-- Added Add Member Modal -->
+    <div id="addMemberModal" class="modal">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h2 class="text-2xl font-bold text-white">Add New Member</h2>
+          <button class="close" id="closeModal">&times;</button>
+        </div>
+        <div class="modal-body">
+          <form id="addMemberForm">
+            <div class="form-row two-col">
+              <div class="form-group">
+                <label for="username">Username:</label>
+                <input type="text" id="username" name="username" required>
+              </div>
+              <div class="form-group">
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" required>
+              </div>
+            </div>
+
+            <div class="form-row two-col">
+              <div class="form-group">
+                <label for="regPassword">Password</label>
+                <div class="password-wrapper">
+                  <input id="regPassword" name="password" type="password" required placeholder="Enter password">
+                  <button type="button" class="toggle-password" aria-label="Show or hide password">
+                    <i class="fa-solid fa-eye"></i>
+                  </button>
+                </div>
+                <div id="password-strength" class="password-strength"></div>
+              </div>
+              <div class="form-group">
+                <label for="confirmPassword">Confirm Password</label>
+                <div class="password-wrapper">
+                  <input id="confirmPassword" name="confirmPassword" type="password" required placeholder="Re-enter password">
+                  <button type="button" class="toggle-password" aria-label="Show or hide confirm password">
+                    <i class="fa-solid fa-eye"></i>
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <div class="form-row four-col">
+              <div class="form-group">
+                <label for="firstName">First Name:</label>
+                <input type="text" id="firstName" name="firstName" required>
+              </div>
+              <div class="form-group">
+                <label for="middleName">Middle Name:</label>
+                <input type="text" id="middleName" name="middleName">
+              </div>
+              <div class="form-group">
+                <label for="lastName">Last Name:</label>
+                <input type="text" id="lastName" name="lastName" required>
+              </div>
+              <div class="form-group">
+                <label for="suffix">Suffix:</label>
+                <select id="suffix" name="suffix">
+                  <option value="">None</option>
+                  <option value="Jr.">Jr.</option>
+                  <option value="Sr.">Sr.</option>
+                  <option value="I">I</option>
+                  <option value="II">II</option>
+                  <option value="III">III</option>
+                  <option value="IV">IV</option>
+                  <option value="V">V</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="form-row three-col">
+              <div class="form-group">
+                <label for="birthdate">Birthdate:</label>
+                <input type="date" id="birthdate" name="birthdate" required>
+              </div>
+              <div class="form-group">
+                <label for="gender">Gender:</label>
+                <select id="gender" name="gender" required>
+                  <option value="">Select Gender</option>
+                  <option value="Male">Male</option>
+                  <option value="Female">Female</option>
+                  <option value="Other">Other</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="phone">Phone Number:</label>
+                <input type="tel" id="phone" name="phone" placeholder="e.g. 09123456789" required>
+              </div>
+            </div>
+
+            <div class="form-row checkbox">
+              <div class="form-group checkbox">
+                <label>
+                  <input type="checkbox" id="isAdviser" name="isAdviser"> Register as Adviser / Faculty
+                </label>
+              </div>
+            </div>
+
+            <div class="form-row three-col">
+              <div class="form-group">
+                <label for="studentNo">Student Number:</label>
+                <input type="text" id="studentNo" name="studentNo" required>
+              </div>
+              <div class="form-group">
+                <label for="regCollege">College:</label>
+                <select id="regCollege" name="college" required>
+                  <option value="">Select College</option>
+                  <option value="CICT">College of Information and Communications Technology</option>
+                  <option value="COE">College of Engineering</option>
+                  <option value="CBA">College of Business Administration</option>
+                  <option value="CAS">College of Arts and Sciences</option>
+                  <option value="COED">College of Education</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="regProgram">Program:</label>
+                <select id="regProgram" name="program" required>
+                  <option value="">Select a College first</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="form-row three-col">
+              <div class="form-group">
+                <label for="yearLevel">Year Level:</label>
+                <select id="yearLevel" name="yearLevel" required>
+                  <option value="">Select Year</option>
+                  <option value="1st Year">1st Year</option>
+                  <option value="2nd Year">2nd Year</option>
+                  <option value="3rd Year">3rd Year</option>
+                  <option value="4th Year">4th Year</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="section">Section:</label>
+                <input type="text" id="section" name="section" required>
+              </div>
+              <div class="form-group">
+                <label for="facebook">Facebook Username (Optional):</label>
+                <input type="text" id="facebook" name="facebook">
+              </div>
+            </div>
+
+            <div class="form-row">
+              <div class="form-group">
+                <label for="address">Address (Optional):</label>
+                <textarea id="address" name="address" rows="2"></textarea>
+              </div>
+            </div>
+
+            <div class="form-actions bg-[#b9da05] text-[#011538] px-4 py-2 rounded-lg hover:bg-[#a8c905] transition">
+              <button type="submit" class="btn">Add Member</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <!-- Added success modal -->
+    <div id="successModal" class="modal">
+      <div class="modal-content" style="max-width: 400px;">
+        <div class="modal-body" style="text-align: center; padding: 40px;">
+          <h3 style="color: #b9da05; margin-bottom: 20px;">✅ Member Added Successfully!</h3>
+          <button id="closeSuccessModal" class="btn">OK</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Sidebar toggle
+    document.getElementById('sidebarToggle').addEventListener('click', function() {
+      const sidebar = document.getElementById('sidebar');
+      sidebar.classList.toggle('open');
+    });
+
+    const addBtn = document.getElementById('addBtn');
+    const modal = document.getElementById('addMemberModal');
+    const closeModal = document.getElementById('closeModal');
+    const successModal = document.getElementById('successModal');
+    const closeSuccessModal = document.getElementById('closeSuccessModal');
+    const form = document.getElementById('addMemberForm');
+
+    // Open modal
+    addBtn.addEventListener('click', function() {
+      modal.style.display = 'block';
+    });
+
+    // Close modal
+    closeModal.addEventListener('click', function() {
+      modal.style.display = 'none';
+    });
+
+    // Close modal when clicking outside
+    window.addEventListener('click', function(event) {
+      if (event.target === modal) {
+        modal.style.display = 'none';
+      }
+      if (event.target === successModal) {
+        successModal.style.display = 'none';
+      }
+    });
+
+    // Form submission
+    form.addEventListener('submit', function(e) {
+      e.preventDefault();
+      modal.style.display = 'none';
+      successModal.style.display = 'block';
+      form.reset();
+    });
+
+    // Close success modal
+    closeSuccessModal.addEventListener('click', function() {
+      successModal.style.display = 'none';
+    });
+
+    // Password strength checker
+    const passwordInput = document.getElementById("regPassword");
+    const strengthText = document.getElementById("password-strength");
+
+    passwordInput.addEventListener("input", () => {
+      const val = passwordInput.value;
+      let strength = "weak";
+
+      if (val.length > 6 && /[A-Z]/.test(val) && /[0-9]/.test(val) && /[\W]/.test(val)) {
+        strength = "strong";
+      } else if (val.length > 4 && /[A-Z0-9]/.test(val)) {
+        strength = "medium";
+      }
+
+      strengthText.textContent = `Strength: ${strength}`;
+      strengthText.className = `password-strength ${strength}`;
+    });
+
+    // Robust password show/hide using event delegation
+    // Works even if IDs change or there are duplicate fields — it always targets the input in the same .password-wrapper
+    document.addEventListener('click', (e) => {
+      const btn = e.target.closest('.toggle-password');
+      if (!btn) return;
+
+      e.preventDefault();
+      const wrapper = btn.closest('.password-wrapper');
+      const input = wrapper ? wrapper.querySelector('input') : null;
+      if (!input) return;
+
+      input.type = (input.type === 'password') ? 'text' : 'password';
+
+      const icon = btn.querySelector('i');
+      if (icon) {
+        icon.classList.toggle('fa-eye');
+        icon.classList.toggle('fa-eye-slash');
+      }
+    });
+
+    // (Optional) simple password strength hint
+    const pwdInput = document.getElementById('regPassword');
+    const strength = document.getElementById('password-strength');
+    pwdInput.addEventListener('input', () => {
+      const v = pwdInput.value;
+      let score = 0;
+      if (v.length >= 8) score++;
+      if (/[A-Z]/.test(v)) score++;
+      if (/[a-z]/.test(v)) score++;
+      if (/\d/.test(v)) score++;
+      if (/[^A-Za-z0-9]/.test(v)) score++;
+
+      strength.className = 'password-strength';
+      if (!v) { strength.textContent = ''; return; }
+      if (score <= 2) { strength.textContent = 'Weak password'; strength.classList.add('weak'); }
+      else if (score === 3 || score === 4) { strength.textContent = 'Medium strength'; strength.classList.add('medium'); }
+      else { strength.textContent = 'Strong password'; strength.classList.add('strong'); }
+    });
+
+    // Demo submit handler
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      modal.style.display = 'none';
+      successModal.style.display = 'block';
+      form.reset();
+      strength.textContent = '';
+    });
+  </script>
+
+  <script src="program-and-course.js"></script>
+
+</body>
+</html>

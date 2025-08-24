@@ -1,0 +1,1101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manage Events | BulSU MSC Administrator</title>
+    <link href="https://fonts.googleapis.com/css2?family=Segoe+UI:wght@400;500;600;700&family=Orbitron:wght@400;700;900&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
+    <link rel="icon" href="./BulSU MSC Logo-02.png" type="image/png">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #080c24;
+            color: #ffffff;
+            overflow-x: hidden;
+        }
+
+        .container {
+            display: flex;
+            min-height: 100vh;
+        }
+
+        /* Sidebar */
+        .sidebar {
+            width: 280px;
+            background-color: #00071c;
+            padding: 20px 0;
+            position: fixed;
+            height: 100vh;
+            overflow-y: auto;
+            z-index: 1000;
+        }
+
+        .logo-section {
+            text-align: center;
+            padding: 0 20px 30px;
+            border-bottom: 1px solid #1a1f3a;
+            margin-bottom: 30px;
+        }
+
+        .logo-section img {
+            width: 60px;
+            height: 60px;
+            margin-bottom: 10px;
+        }
+
+        .logo-section h2 {
+            font-family: 'Orbitron', monospace;
+            font-size: 18px;
+            font-weight: 700;
+            color: #b9da05;
+            margin-bottom: 5px;
+        }
+
+        .logo-section p {
+            font-size: 12px;
+            color: #8892b0;
+        }
+
+        .nav-menu {
+            list-style: none;
+            padding: 0 15px;
+        }
+
+        .nav-menu li {
+            margin-bottom: 8px;
+        }
+
+        .nav-menu a {
+            display: flex;
+            align-items: center;
+            padding: 12px 15px;
+            color: #8892b0;
+            text-decoration: none;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+
+        .nav-menu a:hover,
+        .nav-menu a.active {
+            background-color: #011538;
+            color: #b9da05;
+            transform: translateX(5px);
+        }
+
+        .nav-menu a i {
+            margin-right: 12px;
+            font-size: 16px;
+            width: 20px;
+        }
+
+        .footer-section {
+            margin-top: auto;
+            padding: 20px;
+            text-align: center;
+            border-top: 1px solid #1a1f3a;
+        }
+
+        .footer-section p {
+            font-size: 10px;
+            color: #64748b;
+            line-height: 1.4;
+        }
+
+        /* Main Content */
+        .main-content {
+            margin-left: 280px;
+            flex: 1;
+            padding: 30px;
+            background-color: #080c24;
+        }
+
+        .header {
+            margin-bottom: 30px;
+        }
+
+        .header h1 {
+            font-family: 'Orbitron', monospace;
+            font-size: 28px;
+            font-weight: 700;
+            color: #b9da05;
+            margin-bottom: 5px;
+        }
+
+        .header p {
+            color: #8892b0;
+            font-size: 14px;
+        }
+
+        /* Alert Messages */
+        .alert {
+            padding: 15px 20px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            border-left: 4px solid;
+        }
+
+        .alert-success {
+            background-color: rgba(185, 218, 5, 0.1);
+            border-left-color: #b9da05;
+            color: #b9da05;
+        }
+
+        .alert-error {
+            background-color: rgba(239, 68, 68, 0.1);
+            border-left-color: #ef4444;
+            color: #ef4444;
+        }
+
+        /* Tabs */
+        .tabs {
+            display: flex;
+            margin-bottom: 30px;
+            border-bottom: 2px solid #1a1f3a;
+        }
+
+        .tab-button {
+            background: none;
+            border: none;
+            padding: 15px 25px;
+            color: #8892b0;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border-bottom: 2px solid transparent;
+        }
+
+        .tab-button:hover {
+            color: #b9da05;
+        }
+
+        .tab-button.active {
+            color: #b9da05;
+            border-bottom-color: #b9da05;
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        /* Cards */
+        .card {
+            background-color: #011538;
+            border-radius: 12px;
+            padding: 25px;
+            margin-bottom: 20px;
+            border: 1px solid #1a1f3a;
+        }
+
+        .card h3 {
+            font-family: 'Segoe UI', sans-serif;
+            font-size: 20px;
+            font-weight: 600;
+            color: #ffffff;
+            margin-bottom: 20px;
+        }
+
+        /* Event List Items */
+        .event-item {
+            display: flex;
+            gap: 20px;
+            padding: 20px;
+            background-color: #011538;
+            border-radius: 12px;
+            margin-bottom: 15px;
+            border: 1px solid #1a1f3a;
+            transition: all 0.3s ease;
+        }
+
+        .event-item:hover {
+            border-color: #b9da05;
+            transform: translateY(-2px);
+        }
+
+        .event-image {
+            width: 100px;
+            height: 100px;
+            border-radius: 8px;
+            object-fit: cover;
+            background-color: #1a1f3a;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #64748b;
+            font-size: 24px;
+        }
+
+        .event-details {
+            flex: 1;
+        }
+
+        .event-title {
+            font-size: 18px;
+            font-weight: 600;
+            color: #ffffff;
+            margin-bottom: 8px;
+        }
+
+        .event-description {
+            color: #8892b0;
+            font-size: 14px;
+            line-height: 1.5;
+            margin-bottom: 12px;
+        }
+
+        .event-meta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+
+        .event-meta span {
+            display: flex;
+            align-items: center;
+            font-size: 12px;
+            color: #64748b;
+        }
+
+        .event-meta i {
+            margin-right: 5px;
+            color: #b9da05;
+        }
+
+        .event-status {
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 11px;
+            font-weight: 500;
+            text-transform: uppercase;
+        }
+
+        .status-upcoming {
+            background-color: rgba(59, 130, 246, 0.2);
+            color: #3b82f6;
+        }
+
+        .status-ongoing {
+            background-color: rgba(245, 158, 11, 0.2);
+            color: #f59e0b;
+        }
+
+        .status-completed {
+            background-color: rgba(34, 197, 94, 0.2);
+            color: #22c55e;
+        }
+
+        .status-cancelled {
+            background-color: rgba(239, 68, 68, 0.2);
+            color: #ef4444;
+        }
+
+        .event-actions {
+            display: flex;
+            gap: 8px;
+            margin-top: 10px;
+        }
+
+        /* Buttons */
+        .btn {
+            padding: 8px 16px;
+            border: none;
+            border-radius: 6px;
+            font-size: 12px;
+            font-weight: 500;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary {
+            background-color: #b9da05;
+            color: #000000;
+        }
+
+        .btn-primary:hover {
+            background-color: #a8c905;
+            transform: translateY(-1px);
+        }
+
+        .btn-secondary {
+            background-color: #374151;
+            color: #ffffff;
+        }
+
+        .btn-secondary:hover {
+            background-color: #4b5563;
+        }
+
+        .btn-danger {
+            background-color: #ef4444;
+            color: #ffffff;
+        }
+
+        .btn-danger:hover {
+            background-color: #dc2626;
+        }
+
+        .btn-info {
+            background-color: #06b6d4;
+            color: #ffffff;
+        }
+
+        .btn-info:hover {
+            background-color: #0891b2;
+        }
+
+        /* Form Styles */
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: #ffffff;
+            font-weight: 500;
+            font-size: 14px;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 12px 15px;
+            background-color: #1a1f3a;
+            border: 1px solid #374151;
+            border-radius: 8px;
+            color: #ffffff;
+            font-size: 14px;
+            transition: border-color 0.3s ease;
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: #b9da05;
+        }
+
+        .form-control::placeholder {
+            color: #64748b;
+        }
+
+        textarea.form-control {
+            min-height: 120px;
+            resize: vertical;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .checkbox-group {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .checkbox-group input[type="checkbox"] {
+            width: 18px;
+            height: 18px;
+        }
+
+        /* File Upload */
+        .file-upload {
+            position: relative;
+            display: inline-block;
+            cursor: pointer;
+        }
+
+        .file-upload input[type="file"] {
+            position: absolute;
+            opacity: 0;
+            width: 100%;
+            height: 100%;
+            cursor: pointer;
+        }
+
+        .file-upload-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 15px;
+            background-color: #374151;
+            color: #ffffff;
+            border-radius: 6px;
+            font-size: 14px;
+            transition: background-color 0.3s ease;
+        }
+
+        .file-upload:hover .file-upload-btn {
+            background-color: #4b5563;
+        }
+
+        .file-name {
+            margin-left: 10px;
+            color: #8892b0;
+            font-size: 12px;
+        }
+
+        /* Event Dashboard */
+        .event-dashboard {
+            display: grid;
+            gap: 20px;
+        }
+
+        .event-header {
+            display: flex;
+            gap: 25px;
+            margin-bottom: 25px;
+        }
+
+        .event-image-large {
+            width: 250px;
+            height: 200px;
+            border-radius: 12px;
+            object-fit: cover;
+            background-color: #1a1f3a;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #64748b;
+            font-size: 48px;
+        }
+
+        .event-info {
+            flex: 1;
+        }
+
+        .event-info h2 {
+            font-size: 24px;
+            color: #ffffff;
+            margin-bottom: 15px;
+        }
+
+        .event-info p {
+            color: #8892b0;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .info-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: #8892b0;
+            font-size: 14px;
+        }
+
+        .info-item i {
+            color: #b9da05;
+            width: 16px;
+        }
+
+        /* Attendance Summary */
+        .attendance-card {
+            background-color: #011538;
+            border-radius: 12px;
+            overflow: hidden;
+            border: 1px solid #1a1f3a;
+        }
+
+        .attendance-header {
+            background-color: #06b6d4;
+            padding: 15px 20px;
+            color: #ffffff;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .attendance-body {
+            padding: 25px;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .stat-item {
+            text-align: center;
+            padding: 15px;
+            background-color: #1a1f3a;
+            border-radius: 8px;
+        }
+
+        .stat-value {
+            font-size: 24px;
+            font-weight: 700;
+            color: #b9da05;
+            margin-bottom: 5px;
+        }
+
+        .stat-label {
+            font-size: 11px;
+            color: #64748b;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 16px;
+            background-color: #1a1f3a;
+            border-radius: 8px;
+            overflow: hidden;
+            margin-top: 15px;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background-color: #22c55e;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #ffffff;
+            font-size: 11px;
+            font-weight: 500;
+            transition: width 0.3s ease;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .sidebar {
+                transform: translateX(-100%);
+                transition: transform 0.3s ease;
+            }
+
+            .sidebar.open {
+                transform: translateX(0);
+            }
+
+            .main-content {
+                margin-left: 0;
+                padding: 20px;
+            }
+
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+
+            .event-header {
+                flex-direction: column;
+            }
+
+            .event-image-large {
+                width: 100%;
+                max-width: 300px;
+                margin: 0 auto;
+            }
+
+            .event-item {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .event-actions {
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Sidebar -->
+        <nav class="sidebar">
+      <div class="logo-section">
+        <img src="./Logos/Bulsu MSC Logo-02.png" alt="BulSU MSC Logo" onerror="this.style.display='none'">
+        <h2>BulSU MSC</h2>
+        <p>ADMINISTRATOR</p>
+      </div>
+      
+      <ul class="nav-menu">
+        <li><a href="admin_dashboard.html"><i class="bi bi-speedometer2"></i>Dashboard</a></li>
+        <li><a href="admin_manage_members.html"><i class="bi bi-people"></i>Members</a></li>
+        <li><a href="admin_manage_committees.html"><i class="bi bi-diagram-3"></i>Committees</a></li>
+        <li><a href="admin_manage_announcements.html"><i class="bi bi-megaphone"></i>Announcements</a></li>
+        <li><a href="admin_manage_events.html" class="active"><i class="bi bi-calendar-event"></i>Events</a></li>
+        <li><a href="verify_attendance.html"><i class="bi bi-check2-square"></i>Attendance Verifier</a></li>
+        <li><a href="admin_event_calendar.html"><i class="bi bi-calendar3"></i>Calendar</a></li>
+      </ul>
+      
+      <div class="footer-section">
+        <p>&copy; 2024 Bulacan State University<br>Microsoft Student Community<br>All Rights Reserved.</p>
+      </div>
+    </nav>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <div class="header">
+                <h1>Manage Events</h1>
+                <p>Create, manage, and track events for the BulSU MSC community</p>
+            </div>
+
+            <!-- Success Alert (hidden by default) -->
+            <div class="alert alert-success" style="display: none;" id="successAlert">
+                <i class="bi bi-check-circle-fill"></i>
+                Event created successfully!
+            </div>
+
+            <!-- Tabs -->
+            <div class="tabs">
+                <button class="tab-button active" onclick="openTab(event, 'current-upcoming')">Current & Upcoming</button>
+                <button class="tab-button" onclick="openTab(event, 'past-events')">Past Events</button>
+                <button class="tab-button" onclick="openTab(event, 'cancelled-events')">Cancelled</button>
+                <button class="tab-button" onclick="openTab(event, 'add-event')">Add New Event</button>
+            </div>
+
+            <!-- Current & Upcoming Events Tab -->
+            <div id="current-upcoming" class="tab-content active">
+                <div class="event-item">
+                    <div class="event-image">
+                        <i class="bi bi-calendar-event"></i>
+                    </div>
+                    <div class="event-details">
+                        <h4 class="event-title">Microsoft Azure Workshop</h4>
+                        <p class="event-description">Learn the fundamentals of Microsoft Azure cloud computing platform. This hands-on workshop will cover Azure services, deployment strategies, and best practices for cloud development.</p>
+                        <div class="event-meta">
+                            <span><i class="bi bi-calendar"></i>Dec 15, 2024, 2:00 PM</span>
+                            <span><i class="bi bi-geo-alt"></i>Computer Laboratory 1</span>
+                            <span class="event-status status-upcoming">Upcoming</span>
+                        </div>
+                        <div class="event-actions">
+                            <a href="#" class="btn btn-primary" onclick="showEventDashboard()">Dashboard</a>
+                            <a href="#" class="btn btn-secondary">Edit</a>
+                            <a href="#" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this event?')">Delete</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="event-item">
+                    <div class="event-image">
+                        <i class="bi bi-code-slash"></i>
+                    </div>
+                    <div class="event-details">
+                        <h4 class="event-title">Web Development Bootcamp</h4>
+                        <p class="event-description">Intensive 3-day bootcamp covering HTML, CSS, JavaScript, and modern web frameworks. Perfect for beginners and intermediate developers looking to enhance their skills.</p>
+                        <div class="event-meta">
+                            <span><i class="bi bi-calendar"></i>Dec 20-22, 2024, 9:00 AM</span>
+                            <span><i class="bi bi-geo-alt"></i>Online via MS Teams</span>
+                            <span class="event-status status-upcoming">Upcoming</span>
+                        </div>
+                        <div class="event-actions">
+                            <a href="#" class="btn btn-primary" onclick="showEventDashboard()">Dashboard</a>
+                            <a href="#" class="btn btn-secondary">Edit</a>
+                            <a href="#" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this event?')">Delete</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="event-item">
+                    <div class="event-image">
+                        <i class="bi bi-people"></i>
+                    </div>
+                    <div class="event-details">
+                        <h4 class="event-title">MSC General Assembly</h4>
+                        <p class="event-description">Monthly general assembly meeting for all MSC members. We'll discuss upcoming projects, community updates, and member achievements.</p>
+                        <div class="event-meta">
+                            <span><i class="bi bi-calendar"></i>Dec 10, 2024, 3:00 PM</span>
+                            <span><i class="bi bi-geo-alt"></i>University Auditorium</span>
+                            <span class="event-status status-ongoing">Ongoing</span>
+                        </div>
+                        <div class="event-actions">
+                            <a href="#" class="btn btn-primary" onclick="showEventDashboard()">Dashboard</a>
+                            <a href="#" class="btn btn-secondary">Edit</a>
+                            <a href="#" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this event?')">Delete</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Past Events Tab -->
+            <div id="past-events" class="tab-content">
+                <div class="event-item">
+                    <div class="event-image">
+                        <i class="bi bi-trophy"></i>
+                    </div>
+                    <div class="event-details">
+                        <h4 class="event-title">Hackathon 2024</h4>
+                        <p class="event-description">48-hour coding competition where teams built innovative solutions using Microsoft technologies. Great participation and amazing projects were showcased.</p>
+                        <div class="event-meta">
+                            <span><i class="bi bi-calendar"></i>Nov 15-17, 2024</span>
+                            <span class="event-status status-completed">Completed</span>
+                        </div>
+                        <div class="event-actions">
+                            <a href="#" class="btn btn-primary" onclick="showEventDashboard()">Dashboard</a>
+                            <a href="#" class="btn btn-secondary">Edit Details</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="event-item">
+                    <div class="event-image">
+                        <i class="bi bi-mortarboard"></i>
+                    </div>
+                    <div class="event-details">
+                        <h4 class="event-title">AI & Machine Learning Seminar</h4>
+                        <p class="event-description">Introduction to artificial intelligence and machine learning concepts with practical examples using Microsoft Cognitive Services.</p>
+                        <div class="event-meta">
+                            <span><i class="bi bi-calendar"></i>Oct 28, 2024</span>
+                            <span class="event-status status-completed">Completed</span>
+                        </div>
+                        <div class="event-actions">
+                            <a href="#" class="btn btn-primary" onclick="showEventDashboard()">Dashboard</a>
+                            <a href="#" class="btn btn-secondary">Edit Details</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Cancelled Events Tab -->
+            <div id="cancelled-events" class="tab-content">
+                <div class="event-item">
+                    <div class="event-image">
+                        <i class="bi bi-x-octagon"></i>
+                    </div>
+                    <div class="event-details">
+                        <h4 class="event-title">Office 365 Training</h4>
+                        <p class="event-description">Comprehensive training on Office 365 applications and collaboration tools. Cancelled due to scheduling conflicts with university exams.</p>
+                        <div class="event-meta">
+                            <span><i class="bi bi-calendar"></i>Originally: Dec 5, 2024</span>
+                            <span class="event-status status-cancelled">Cancelled</span>
+                        </div>
+                        <div class="event-actions">
+                            <a href="#" class="btn btn-primary">View Details</a>
+                            <a href="#" class="btn btn-secondary">Edit</a>
+                            <a href="#" class="btn btn-danger" onclick="return confirm('Are you sure you want to permanently delete this cancelled event?')">Delete</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Add New Event Tab -->
+            <div id="add-event" class="tab-content">
+                <div class="card">
+                    <h3>Create New Event</h3>
+                    <form id="addEventForm" onsubmit="handleAddEvent(event)">
+                        <div class="form-group">
+                            <label for="title">Event Title *</label>
+                            <input type="text" id="title" name="title" class="form-control" placeholder="Enter event title" required>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="start_date">Start Date & Time</label>
+                                <input type="datetime-local" id="start_date" name="start_date" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label for="end_date">End Date & Time (Optional)</label>
+                                <input type="datetime-local" id="end_date" name="end_date" class="form-control">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="location">Location</label>
+                            <input type="text" id="location" name="location" class="form-control" placeholder="e.g. University Gym, Online via MS Teams">
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="capacity">Capacity (Optional)</label>
+                                <input type="number" id="capacity" name="capacity" class="form-control" placeholder="e.g. 100 (0 or empty for unlimited)" min="0">
+                            </div>
+                            <div class="form-group">
+                                <label for="status">Initial Status</label>
+                                <select id="status" name="status" class="form-control">
+                                    <option value="Scheduled" selected>Scheduled (Auto-determined by date)</option>
+                                    <option value="Cancelled">Mark as Cancelled</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="event_type">Event Type</label>
+                                <select id="event_type" name="event_type" class="form-control">
+                                    <option value="Onsite" selected>Onsite</option>
+                                    <option value="Online">Online</option>
+                                    <option value="Hybrid">Hybrid</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="event_restriction">Event Restriction</label>
+                                <select id="event_restriction" name="event_restriction" class="form-control">
+                                    <option value="Open for Public" selected>Open for Public</option>
+                                    <option value="Members Only">Members Only</option>
+                                    <option value="BulSUans Only">BulSUans Only</option>
+                                    <option value="Invite Only">Invite Only</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="checkbox-group">
+                                <input type="checkbox" id="registration_required" name="registration_required" checked>
+                                <label for="registration_required">Registration Required for this Event</label>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="event_image">Event Image (Poster/Logo - Optional)</label>
+                            <div class="file-upload">
+                                <input type="file" id="event_image" name="event_image" accept="image/jpeg,image/png,image/gif" onchange="updateFileName(this, 'event_image_name')">
+                                <div class="file-upload-btn">
+                                    <i class="bi bi-upload"></i>
+                                    Choose Event Image
+                                </div>
+                            </div>
+                            <span id="event_image_name" class="file-name">No file chosen</span>
+                            <small style="display: block; margin-top: 5px; color: #64748b;">Recommended: JPG, PNG, GIF (Max 5MB). Aspect ratio 16:9 or 4:3.</small>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="badge_image">Event Badge Image (Optional)</label>
+                            <div class="file-upload">
+                                <input type="file" id="badge_image" name="badge_image" accept="image/jpeg,image/png,image/gif" onchange="updateFileName(this, 'badge_image_name')">
+                                <div class="file-upload-btn">
+                                    <i class="bi bi-patch-check-fill"></i>
+                                    Choose Badge Image
+                                </div>
+                            </div>
+                            <span id="badge_image_name" class="file-name">No file chosen</span>
+                            <small style="display: block; margin-top: 5px; color: #64748b;">For participant profiles. Recommended: Square PNG (Max 2MB).</small>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="description">Description / Details</label>
+                            <textarea id="description" name="description" class="form-control" placeholder="Enter event details, objectives, program flow, speakers, etc." rows="6"></textarea>
+                        </div>
+
+                        <div style="text-align: right; margin-top: 30px;">
+                            <button type="submit" class="btn btn-primary">
+                                <i class="bi bi-calendar-plus-fill"></i>
+                                Create Event
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Event Dashboard (Hidden by default) -->
+            <div id="event-dashboard" class="tab-content" style="display: none;">
+                <div class="card">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+                        <h3>Event Overview</h3>
+                        <div style="display: flex; gap: 10px;">
+                            <a href="#" class="btn btn-secondary">Edit Event</a>
+                            <a href="#" class="btn btn-info">Participants</a>
+                            <a href="#" class="btn btn-secondary" onclick="hideEventDashboard()">Event List</a>
+                        </div>
+                    </div>
+
+                    <div class="event-header">
+                        <div class="event-image-large">
+                            <i class="bi bi-calendar-event"></i>
+                        </div>
+                        <div class="event-info">
+                            <h2>Microsoft Azure Workshop</h2>
+                            <p>Learn the fundamentals of Microsoft Azure cloud computing platform. This hands-on workshop will cover Azure services, deployment strategies, and best practices for cloud development. Participants will get hands-on experience with Azure portal, virtual machines, and cloud storage solutions.</p>
+                            
+                            <div class="info-grid">
+                                <div class="info-item">
+                                    <i class="bi bi-calendar-event"></i>
+                                    <span>Dec 15, 2024, 2:00 PM to 6:00 PM</span>
+                                </div>
+                                <div class="info-item">
+                                    <i class="bi bi-geo-alt-fill"></i>
+                                    <span>Computer Laboratory 1</span>
+                                </div>
+                                <div class="info-item">
+                                    <i class="bi bi-tag-fill"></i>
+                                    <span>Onsite</span>
+                                </div>
+                                <div class="info-item">
+                                    <i class="bi bi-people-fill"></i>
+                                    <span>Members Only</span>
+                                </div>
+                                <div class="info-item">
+                                    <i class="bi bi-bar-chart-steps"></i>
+                                    <span>Capacity: 50</span>
+                                </div>
+                                <div class="info-item">
+                                    <i class="bi bi-check2-circle"></i>
+                                    <span>Registration Required</span>
+                                </div>
+                                <div class="info-item">
+                                    <i class="bi bi-hourglass-split"></i>
+                                    <span class="event-status status-upcoming">Upcoming</span>
+                                </div>
+                                <div class="info-item">
+                                    <i class="bi bi-clock-history"></i>
+                                    <span>Created: Dec 1, 2024, 10:30</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Attendance Summary -->
+                <div class="attendance-card">
+                    <div class="attendance-header">
+                        <i class="bi bi-clipboard2-data-fill"></i>
+                        Attendance Summary
+                    </div>
+                    <div class="attendance-body">
+                        <div class="stats-grid">
+                            <div class="stat-item">
+                                <div class="stat-value">35</div>
+                                <div class="stat-label">Members Registered</div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-value">28</div>
+                                <div class="stat-label">Members Attended</div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-value">8</div>
+                                <div class="stat-label">Guests Registered</div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-value">6</div>
+                                <div class="stat-label">Guests Attended</div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-value">43</div>
+                                <div class="stat-label">Total Registered</div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-value">34</div>
+                                <div class="stat-label">Total Attended</div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-value">79%</div>
+                                <div class="stat-label">Overall Rate</div>
+                            </div>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 79%;">79%</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        function openTab(evt, tabName) {
+            var i, tabcontent, tablinks;
+            
+            // Hide all tab content
+            tabcontent = document.getElementsByClassName("tab-content");
+            for (i = 0; i < tabcontent.length; i++) {
+                tabcontent[i].classList.remove("active");
+            }
+            
+            // Remove active class from all tab buttons
+            tablinks = document.getElementsByClassName("tab-button");
+            for (i = 0; i < tablinks.length; i++) {
+                tablinks[i].classList.remove("active");
+            }
+            
+            // Show the selected tab and mark button as active
+            document.getElementById(tabName).classList.add("active");
+            evt.currentTarget.classList.add("active");
+        }
+
+        function showEventDashboard() {
+            // Hide all tab content
+            var tabcontent = document.getElementsByClassName("tab-content");
+            for (var i = 0; i < tabcontent.length; i++) {
+                tabcontent[i].classList.remove("active");
+            }
+            
+            // Remove active class from all tab buttons
+            var tablinks = document.getElementsByClassName("tab-button");
+            for (var i = 0; i < tablinks.length; i++) {
+                tablinks[i].classList.remove("active");
+            }
+            
+            // Show event dashboard
+            document.getElementById("event-dashboard").style.display = "block";
+            document.getElementById("event-dashboard").classList.add("active");
+        }
+
+        function hideEventDashboard() {
+            document.getElementById("event-dashboard").style.display = "none";
+            document.getElementById("event-dashboard").classList.remove("active");
+            
+            // Show current-upcoming tab by default
+            document.getElementById("current-upcoming").classList.add("active");
+            document.querySelector('.tab-button').classList.add("active");
+        }
+
+        function updateFileName(input, spanId) {
+            const span = document.getElementById(spanId);
+            if (input.files && input.files.length > 0) {
+                span.textContent = input.files[0].name;
+            } else {
+                span.textContent = "No file chosen";
+            }
+        }
+
+        function handleAddEvent(event) {
+            event.preventDefault();
+            
+            // Show success alert
+            const successAlert = document.getElementById('successAlert');
+            successAlert.style.display = 'block';
+            
+            // Reset form
+            document.getElementById('addEventForm').reset();
+            document.getElementById('event_image_name').textContent = 'No file chosen';
+            document.getElementById('badge_image_name').textContent = 'No file chosen';
+            
+            // Hide alert after 3 seconds
+            setTimeout(() => {
+                successAlert.style.display = 'none';
+            }, 3000);
+            
+            // Switch to current-upcoming tab
+            document.getElementById('add-event').classList.remove('active');
+            document.getElementById('current-upcoming').classList.add('active');
+            
+            // Update tab buttons
+            document.querySelectorAll('.tab-button').forEach(btn => btn.classList.remove('active'));
+            document.querySelector('.tab-button').classList.add('active');
+        }
+
+        // Initialize file name displays
+        document.addEventListener('DOMContentLoaded', function() {
+            updateFileName(document.getElementById('event_image'), 'event_image_name');
+            updateFileName(document.getElementById('badge_image'), 'badge_image_name');
+        });
+    </script>
+</body>
+</html>

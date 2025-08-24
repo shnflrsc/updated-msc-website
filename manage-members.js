@@ -11,11 +11,10 @@ document.addEventListener("DOMContentLoaded", () => {
       middle: "Santos",
       last: "Dela Cruz",
       suffix: "",
+      studentNo: "2021-12345",
       email: "juan@email.com",
       phone: "09123456789",
       gender: "Male",
-      position: "Member",
-      studentNo: "2021-12345",
       program: "BS Information Technology",
       year: "3",
       college: "College of ICT",
@@ -29,11 +28,10 @@ document.addEventListener("DOMContentLoaded", () => {
       middle: "Reyes",
       last: "Lopez",
       suffix: "",
+      studentNo: "2021-54321",
       email: "maria@email.com",
       phone: "09987654321",
       gender: "Female",
-      position: "Officer",
-      studentNo: "2021-54321",
       program: "BS Accountancy",
       year: "2",
       college: "College of Business Education and Accountancy",
@@ -55,11 +53,10 @@ document.addEventListener("DOMContentLoaded", () => {
         <td>${member.middle}</td>
         <td>${member.last}</td>
         <td>${member.suffix}</td>
+        <td>${member.studentNo}</td>
         <td>${member.email}</td>
         <td>${member.phone}</td>
         <td>${member.gender}</td>
-        <td>${member.position}</td>
-        <td>${member.studentNo}</td>
         <td>${member.program}</td>
         <td>${member.year}</td>
         <td>${member.college}</td>

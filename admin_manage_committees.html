@@ -1,0 +1,554 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Manage Committees | BulSU MSC</title>
+  <link href="./Logos/Bulsu MSC Logo-02.png" rel="icon" type="image/png" />
+
+  <!-- Updated font imports to match admin_manage_events -->
+  <link href="https://fonts.googleapis.com/css2?family=Segoe+UI:wght@400;500;600;700&family=Orbitron:wght@400;700;900&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+
+  <style>
+    /* Updated base styles to match admin_manage_events */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #080c24;
+      color: #ffffff;
+      overflow-x: hidden;
+    }
+
+    .container {
+      display: flex;
+      min-height: 100vh;
+    }
+
+    /* Updated sidebar styles to match admin_manage_events */
+    .sidebar {
+      width: 280px;
+      background-color: #00071c;
+      padding: 20px 0;
+      position: fixed;
+      height: 100vh;
+      overflow-y: auto;
+      z-index: 1000;
+    }
+
+    .logo-section {
+      text-align: center;
+      padding: 0 20px 30px;
+      border-bottom: 1px solid #1a1f3a;
+      margin-bottom: 30px;
+      /* Added display flex and flex-direction to ensure proper centering */
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .logo-section img {
+      width: 60px;
+      height: 60px;
+      margin-bottom: 10px;
+      /* Added margin auto for additional centering assurance */
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .logo-section h2 {
+      font-family: 'Orbitron', monospace;
+      font-size: 18px;
+      font-weight: 700;
+      color: #b9da05;
+      margin-bottom: 5px;
+    }
+
+    .logo-section p {
+      font-size: 12px;
+      color: #8892b0;
+    }
+
+    .nav-menu {
+      list-style: none;
+      padding: 0 15px;
+    }
+
+    .nav-menu li {
+      margin-bottom: 8px;
+    }
+
+    .nav-menu a {
+      display: flex;
+      align-items: center;
+      padding: 12px 15px;
+      color: #8892b0;
+      text-decoration: none;
+      border-radius: 8px;
+      transition: all 0.3s ease;
+      font-weight: 500;
+    }
+
+    .nav-menu a:hover,
+    .nav-menu a.active {
+      background-color: #011538;
+      color: #b9da05;
+      transform: translateX(5px);
+    }
+
+    .nav-menu a i {
+      margin-right: 12px;
+      font-size: 16px;
+      width: 20px;
+    }
+
+    .footer-section {
+      margin-top: auto;
+      padding: 20px;
+      text-align: center;
+      border-top: 1px solid #1a1f3a;
+    }
+
+    .footer-section p {
+      font-size: 10px;
+      color: #64748b;
+      line-height: 1.4;
+    }
+
+    /* Updated main content styles */
+    .main-content {
+      margin-left: 280px;
+      flex: 1;
+      padding: 30px;
+      background-color: #080c24;
+    }
+
+    .header {
+      margin-bottom: 30px;
+    }
+
+    .header h1 {
+      font-family: 'Orbitron', monospace;
+      font-size: 28px;
+      font-weight: 700;
+      color: #b9da05;
+      margin-bottom: 5px;
+    }
+
+    .header p {
+      color: #8892b0;
+      font-size: 14px;
+    }
+
+    /* Updated card styles */
+    .card {
+      background-color: #011538;
+      border-radius: 12px;
+      padding: 25px;
+      margin-bottom: 20px;
+      border: 1px solid #1a1f3a;
+    }
+
+    .card h3 {
+      font-family: 'Segoe UI', sans-serif;
+      font-size: 20px;
+      font-weight: 600;
+      color: #ffffff;
+      margin-bottom: 20px;
+    }
+
+    /* Updated committee card styles */
+    .committee-card {
+      background-color: #011538;
+      border: 1px solid #1a1f3a;
+      border-radius: 12px;
+      padding: 24px;
+      margin-bottom: 20px;
+      transition: all 0.3s ease;
+    }
+    
+    .committee-card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 25px rgba(185, 218, 5, 0.15);
+      border-color: #b9da05;
+    }
+    
+    .committee-title {
+      color: white;
+      font-size: 1.5rem;
+      font-weight: 600;
+      margin-bottom: 12px;
+    }
+    
+    .committee-description {
+      color: #8892b0;
+      font-size: 0.95rem;
+      line-height: 1.5;
+      margin-bottom: 20px;
+    }
+    
+    .committee-actions {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    /* Updated tabs styles */
+    .tabs {
+      display: flex;
+      margin-bottom: 30px;
+      border-bottom: 2px solid #1a1f3a;
+    }
+
+    .tab-button {
+      background: none;
+      border: none;
+      padding: 15px 25px;
+      color: #8892b0;
+      font-size: 14px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      border-bottom: 2px solid transparent;
+    }
+
+    .tab-button:hover {
+      color: #b9da05;
+    }
+
+    .tab-button.active {
+      color: #b9da05;
+      border-bottom-color: #b9da05;
+    }
+
+    .tab-content {
+      display: none;
+    }
+
+    .tab-content.active {
+      display: block;
+    }
+
+    /* Updated button styles */
+    .btn {
+      padding: 8px 16px;
+      border: none;
+      border-radius: 6px;
+      font-size: 12px;
+      font-weight: 500;
+      cursor: pointer;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      transition: all 0.3s ease;
+    }
+
+    .btn-primary {
+      background-color: #b9da05;
+      color: #000000;
+    }
+
+    .btn-primary:hover {
+      background-color: #a8c905;
+      transform: translateY(-1px);
+    }
+
+    .btn-secondary {
+      background-color: #374151;
+      color: #ffffff;
+    }
+
+    .btn-secondary:hover {
+      background-color: #4b5563;
+    }
+
+    .btn-danger {
+      background-color: #ef4444;
+      color: #ffffff;
+    }
+
+    .btn-danger:hover {
+      background-color: #dc2626;
+    }
+
+    .btn-info {
+      background-color: #06b6d4;
+      color: #ffffff;
+    }
+
+    .btn-info:hover {
+      background-color: #0891b2;
+    }
+
+    /* Updated form styles */
+    .form-group {
+      margin-bottom: 20px;
+    }
+
+    .form-group label {
+      display: block;
+      margin-bottom: 8px;
+      color: #ffffff;
+      font-weight: 500;
+      font-size: 14px;
+    }
+
+    .form-control {
+      width: 100%;
+      padding: 12px 15px;
+      background-color: #1a1f3a;
+      border: 1px solid #374151;
+      border-radius: 8px;
+      color: #ffffff;
+      font-size: 14px;
+      transition: border-color 0.3s ease;
+    }
+
+    .form-control:focus {
+      outline: none;
+      border-color: #b9da05;
+    }
+
+    .form-control::placeholder {
+      color: #64748b;
+    }
+
+    textarea.form-control {
+      min-height: 120px;
+      resize: vertical;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .sidebar {
+        transform: translateX(-100%);
+        transition: transform 0.3s ease;
+      }
+
+      .sidebar.open {
+        transform: translateX(0);
+      }
+
+      .main-content {
+        margin-left: 0;
+        padding: 20px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <!-- Updated sidebar structure to match admin_manage_events -->
+    <nav class="sidebar">
+      <div class="logo-section">
+        <img src="./Logos/Bulsu MSC Logo-02.png" alt="BulSU MSC Logo" onerror="this.style.display='none'">
+        <h2>BulSU MSC</h2>
+        <p>ADMINISTRATOR</p>
+      </div>
+      
+      <ul class="nav-menu">
+        <li><a href="admin_dashboard.html"><i class="bi bi-speedometer2"></i>Dashboard</a></li>
+        <li><a href="admin_manage_members.html"><i class="bi bi-people"></i>Members</a></li>
+        <li><a href="admin_manage_committees.html" class="active"><i class="bi bi-diagram-3"></i>Committees</a></li>
+        <li><a href="admin_manage_announcements.html"><i class="bi bi-megaphone"></i>Announcements</a></li>
+        <li><a href="admin_manage_events.html"><i class="bi bi-calendar-event"></i>Events</a></li>
+        <li><a href="verify_attendance.html"><i class="bi bi-check2-square"></i>Attendance Verifier</a></li>
+        <li><a href="admin_event_calendar.html"><i class="bi bi-calendar3"></i>Calendar</a></li>
+      </ul>
+      
+      <div class="footer-section">
+        <p>&copy; 2024 Bulacan State University<br>Microsoft Student Community<br>All Rights Reserved.</p>
+      </div>
+    </nav>
+
+    <button id="sidebarToggle" class="lg:hidden fixed top-4 left-4 z-50 bg-[#b9da05] text-[#011538] p-2 rounded-md">
+      <i class="fas fa-bars"></i>
+    </button>
+
+    <!-- Updated main content structure -->
+    <main class="main-content">
+      <div class="header">
+        <h1>Manage Committees</h1>
+        <p>Create and manage committees for the BulSU MSC community</p>
+      </div>
+
+      <!-- Updated tab navigation -->
+      <div class="tabs">
+        <button class="tab-button active" data-tab="committee-list">Committee List</button>
+        <button class="tab-button" data-tab="add-committee">Add New Committee</button>
+      </div>
+
+      <!-- Committee List Tab Content -->
+      <div id="committee-list" class="tab-content active">
+        <div class="committee-card">
+          <h3 class="committee-title">Relations Committee</h3>
+          <p class="committee-description">
+            Strengthens operations and connections by managing resources and building partnerships.
+          </p>
+          <div class="committee-actions">
+            <button class="btn btn-info">View</button>
+            <button class="btn btn-secondary">Manage Members</button>
+            <button class="btn btn-danger">Delete</button>
+          </div>
+        </div>
+
+        <div class="committee-card">
+          <h3 class="committee-title">Finance Committee</h3>
+          <p class="committee-description">
+             Responsible for the overall management of MSC's funds.
+          </p>
+          <div class="committee-actions">
+            <button class="btn btn-info">View</button>
+            <button class="btn btn-secondary">Manage Members</button>
+            <button class="btn btn-danger">Delete</button>
+          </div>
+        </div>
+
+        <div class="committee-card">
+          <h3 class="committee-title">Student Development Committee</h3>
+          <p class="committee-description">
+            Assesses the needs and interests of the student membership to develop relevant programs.
+          </p>
+          <div class="committee-actions">
+            <button class="btn btn-info">View</button>
+            <button class="btn btn-secondary">Manage Members</button>
+            <button class="btn btn-danger">Delete</button>
+          </div>
+        </div>
+
+        <div class="committee-card">
+          <h3 class="committee-title">Events Committee</h3>
+          <p class="committee-description">
+            Plans and organizes community events, hackathons, and social gatherings for MSC members.
+          </p>
+          <div class="committee-actions">
+            <button class="btn btn-info">View</button>
+            <button class="btn btn-secondary">Manage Members</button>
+            <button class="btn btn-danger">Delete</button>
+          </div>
+        </div>
+
+        <div class="committee-card">
+          <h3 class="committee-title">Creatives Committee</h3>
+          <p class="committee-description">
+            Handles social media presence, promotional materials, and MSC's visual identity.
+          </p>
+          <div class="committee-actions">
+            <button class="btn btn-info">View</button>
+            <button class="btn btn-secondary">Manage Members</button>
+            <button class="btn btn-danger">Delete</button>
+          </div>
+        </div>
+
+        <div class="committee-card">
+          <h3 class="committee-title">Media Committee</h3>
+          <p class="committee-description">
+            Manages social media accounts and oversees the creation of various media content.
+          </p>
+          <div class="committee-actions">
+            <button class="btn btn-info">View</button>
+            <button class="btn btn-secondary">Manage Members</button>
+            <button class="btn btn-danger">Delete</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Add New Committee Tab Content -->
+      <div id="add-committee" class="tab-content">
+        <div class="card">
+          <h3>Create New Committee</h3>
+          <form id="addCommitteeForm">
+            <div class="form-group">
+              <label for="committeeName">Committee Name:</label>
+              <input type="text" id="committeeName" name="committeeName" class="form-control" required>
+            </div>
+            
+            <div class="form-group">
+              <label for="committeeDescription">Description:</label>
+              <textarea id="committeeDescription" name="committeeDescription" class="form-control" required
+                placeholder="Describe the committee's purpose and responsibilities..."></textarea>
+            </div>
+            
+            <div class="form-group">
+              <label for="committeeHead">Committee Head:</label>
+              <select id="committeeHead" name="committeeHead" class="form-control" required>
+                <option value="">Select Committee Head</option>
+              </select>
+            </div>
+            
+            <button type="submit" class="btn btn-primary">
+              Create Committee
+            </button>
+          </form>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <script>
+    // Sidebar toggle
+    document.getElementById('sidebarToggle').addEventListener('click', function() {
+      const sidebar = document.querySelector('.sidebar');
+      sidebar.classList.toggle('open');
+    });
+
+    document.querySelectorAll('.tab-button').forEach(tab => {
+      tab.addEventListener('click', function() {
+        const targetTab = this.getAttribute('data-tab');
+        
+        // Remove active class from all tabs and content
+        document.querySelectorAll('.tab-button').forEach(t => t.classList.remove('active'));
+        document.querySelectorAll('.tab-content').forEach(content => content.classList.remove('active'));
+        
+        // Add active class to clicked tab and corresponding content
+        this.classList.add('active');
+        document.getElementById(targetTab).classList.add('active');
+      });
+    });
+
+    document.getElementById('addCommitteeForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      alert('Committee created successfully!');
+      this.reset();
+      
+      // Switch back to committee list tab
+      document.querySelectorAll('.tab-button').forEach(t => t.classList.remove('active'));
+      document.querySelectorAll('.tab-content').forEach(content => content.classList.remove('active'));
+      document.querySelector('[data-tab="committee-list"]').classList.add('active');
+      document.getElementById('committee-list').classList.add('active');
+    });
+
+    document.querySelectorAll('.btn-info').forEach(btn => {
+      btn.addEventListener('click', function() {
+        const committeeName = this.closest('.committee-card').querySelector('.committee-title').textContent;
+        alert(`Viewing ${committeeName} details`);
+      });
+    });
+
+    document.querySelectorAll('.btn-secondary').forEach(btn => {
+      btn.addEventListener('click', function() {
+        const committeeName = this.closest('.committee-card').querySelector('.committee-title').textContent;
+        alert(`Managing ${committeeName} members`);
+      });
+    });
+
+    document.querySelectorAll('.btn-danger').forEach(btn => {
+      btn.addEventListener('click', function() {
+        const committeeName = this.closest('.committee-card').querySelector('.committee-title').textContent;
+        if (confirm(`Are you sure you want to delete ${committeeName}?`)) {
+          this.closest('.committee-card').remove();
+        }
+      });
+    });
+  </script>
+</body>
+</html>

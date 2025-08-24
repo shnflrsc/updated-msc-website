@@ -1,0 +1,612 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Admin Dashboard</title>
+    <link href="./Logos/Bulsu MSC Logo-02.png" rel="icon" type="image/png" />
+
+    <!-- Updated font imports to match admin_manage_events -->
+    <link href="https://fonts.googleapis.com/css2?family=Segoe+UI:wght@400;500;600;700&family=Orbitron:wght@400;700;900&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        /* Updated base styles to match admin_manage_events */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #080c24;
+            color: #ffffff;
+            overflow-x: hidden;
+        }
+
+        .container {
+            display: flex;
+            min-height: 100vh;
+        }
+
+        /* Updated sidebar styles to match admin_manage_events */
+        .sidebar {
+            width: 280px;
+            background-color: #00071c;
+            padding: 20px 0;
+            position: fixed;
+            height: 100vh;
+            overflow-y: auto;
+            z-index: 1000;
+        }
+
+        .logo-section {
+            text-align: center;
+            padding: 0 20px 30px;
+            border-bottom: 1px solid #1a1f3a;
+            margin-bottom: 30px;
+            /* Added display flex and flex-direction to ensure proper centering */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .logo-section img {
+            width: 60px;
+            height: 60px;
+            margin-bottom: 10px;
+            /* Added margin auto for additional centering assurance */
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .logo-section h2 {
+            font-family: 'Orbitron', monospace;
+            font-size: 18px;
+            font-weight: 700;
+            color: #b9da05;
+            margin-bottom: 5px;
+        }
+
+        .logo-section p {
+            font-size: 12px;
+            color: #8892b0;
+        }
+
+        .nav-menu {
+            list-style: none;
+            padding: 0 15px;
+        }
+
+        .nav-menu li {
+            margin-bottom: 8px;
+        }
+
+        .nav-menu a {
+            display: flex;
+            align-items: center;
+            padding: 12px 15px;
+            color: #8892b0;
+            text-decoration: none;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+
+        .nav-menu a:hover,
+        .nav-menu a.active {
+            background-color: #011538;
+            color: #b9da05;
+            transform: translateX(5px);
+        }
+
+        .nav-menu a i {
+            margin-right: 12px;
+            font-size: 16px;
+            width: 20px;
+        }
+
+        .footer-section {
+            margin-top: auto;
+            padding: 20px;
+            text-align: center;
+            border-top: 1px solid #1a1f3a;
+        }
+
+        .footer-section p {
+            font-size: 10px;
+            color: #64748b;
+            line-height: 1.4;
+        }
+
+        /* Updated main content styles */
+        .main-content {
+            margin-left: 280px;
+            flex: 1;
+            padding: 30px;
+            background-color: #080c24;
+        }
+
+        .header {
+            margin-bottom: 30px;
+        }
+
+        .header h1 {
+            font-family: 'Orbitron', monospace;
+            font-size: 28px;
+            font-weight: 700;
+            color: #b9da05;
+            margin-bottom: 5px;
+        }
+
+        .header p {
+            color: #8892b0;
+            font-size: 14px;
+        }
+
+        /* Updated card styles */
+        .card {
+            background-color: #011538;
+            border-radius: 12px;
+            padding: 25px;
+            margin-bottom: 20px;
+        }
+
+        .card-border {
+            border: 1px solid #b9da05;
+        }
+
+        .card h3 {
+            font-family: 'Segoe UI', sans-serif;
+            font-size: 20px;
+            font-weight: 600;
+            color: #ffffff;
+            margin-bottom: 20px;
+        }
+        
+        /* Added styles for new containers */
+        .recent-container { 
+            display: grid; 
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); 
+            gap: 24px; 
+            margin-top: 24px; 
+        }
+        .recent-box { 
+            background: #011538; 
+            padding: 24px; 
+            border-radius: 12px; 
+            color: white; 
+            border: 1px solid #1a1f3a;
+        }
+        .recent-box h3, .mini-calendar-container h3 { 
+            margin-top: 0; 
+            margin-bottom: 16px; 
+            padding-bottom: 8px; 
+            border-bottom: 1px solid rgba(185, 218, 5, 0.3); 
+            font-size: 18px; 
+            font-weight: 600; 
+            color: white; 
+        }
+        .recent-item { 
+            padding: 12px 0; 
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1); 
+        }
+        .recent-item:last-child { 
+            border-bottom: none; 
+            padding-bottom: 0; 
+        }
+        .recent-item h4 { 
+            margin: 0 0 8px 0; 
+            color: white; 
+            font-size: 14px; 
+            font-weight: 500; 
+        }
+        .recent-item p { 
+            margin: 0 0 8px 0; 
+            color: #8892b0; 
+            font-size: 13px; 
+            line-height: 1.4; 
+        }
+        .recent-item .date { 
+            font-size: 11px; 
+            color: #64748b; 
+            text-transform: uppercase; 
+            letter-spacing: 0.5px; 
+        }
+        
+        .mini-calendar-container { 
+            background: #011538; 
+            padding: 24px; 
+            border-radius: 12px; 
+            color: white; 
+            border: 1px solid #1a1f3a;
+        }
+        .mini-calendar { 
+            width: 100%; 
+            border-collapse: collapse; 
+            table-layout: fixed; 
+        }
+        .mini-calendar th { 
+            background: rgba(185, 218, 5, 0.2); 
+            color: #b9da05; 
+            font-weight: 600; 
+            text-align: center; 
+            padding: 8px 4px; 
+            font-size: 12px; 
+            border-bottom: 1px solid rgba(185, 218, 5, 0.3); 
+        }
+        .mini-calendar td { 
+            border: 1px solid rgba(255, 255, 255, 0.1); 
+            text-align: center; 
+            padding: 8px 4px; 
+            font-size: 13px; 
+            cursor: pointer; 
+            transition: background-color 0.2s ease; 
+        }
+        .mini-calendar td.today { 
+            background-color: rgba(185, 218, 5, 0.3); 
+            font-weight: bold; 
+            color: #b9da05; 
+        }
+        .mini-calendar td:not(.empty):hover { 
+            background-color: rgba(255, 255, 255, 0.1); 
+        }
+        .mini-calendar td.event-day::after { 
+            content: ''; 
+            position: absolute; 
+            bottom: 2px; 
+            left: 50%; 
+            transform: translateX(-50%); 
+            width: 4px; 
+            height: 4px; 
+            background-color: #b9da05; 
+            border-radius: 50%; 
+        }
+        .mini-calendar td.empty { 
+            background-color: rgba(0, 0, 0, 0.2); 
+            cursor: default; 
+        }
+        
+        .clickable-container { 
+            cursor: pointer; 
+            transition: transform 0.2s ease, box-shadow 0.2s ease; 
+        }
+        .clickable-container:hover { 
+            transform: translateY(-2px); 
+            box-shadow: 0 4px 12px rgba(185, 218, 5, 0.2); 
+        }
+
+        /* Updated button styles */
+        .btn {
+            padding: 8px 16px;
+            border: none;
+            border-radius: 6px;
+            font-size: 12px;
+            font-weight: 500;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary {
+            background-color: #b9da05;
+            color: #000000;
+        }
+
+        .btn-primary:hover {
+            background-color: #a8c905;
+            transform: translateY(-1px);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .sidebar {
+                transform: translateX(-100%);
+                transition: transform 0.3s ease;
+            }
+
+            .sidebar.open {
+                transform: translateX(0);
+            }
+
+            .main-content {
+                margin-left: 0;
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <!-- Updated sidebar structure to match admin_manage_events -->
+        <nav class="sidebar">
+            <div class="logo-section">
+                <img src="./Logos/Bulsu MSC Logo-02.png" alt="BulSU MSC Logo" onerror="this.style.display='none'">
+                <h2>BulSU MSC</h2>
+                <p>ADMINISTRATOR</p>
+            </div>
+            
+            <ul class="nav-menu">
+                <li><a href="admin_dashboard.html" class="active"><i class="bi bi-speedometer2"></i>Dashboard</a></li>
+                <li><a href="admin_manage_members.html"><i class="bi bi-people"></i>Members</a></li>
+                <li><a href="admin_manage_committees.html"><i class="bi bi-diagram-3"></i>Committees</a></li>
+                <li><a href="admin_manage_announcements.html"><i class="bi bi-megaphone"></i>Announcements</a></li>
+                <li><a href="admin_manage_events.html"><i class="bi bi-calendar-event"></i>Events</a></li>
+                <li><a href="verify_attendance.html"><i class="bi bi-check2-square"></i>Attendance Verifier</a></li>
+                <li><a href="events_calendar.html"><i class="bi bi-calendar3"></i>Calendar</a></li>
+            </ul>
+            
+            <div class="footer-section">
+                <p>&copy; 2024 Bulacan State University<br>Microsoft Student Community<br>All Rights Reserved.</p>
+            </div>
+        </nav>
+
+        <!-- Updated main content structure -->
+        <main class="main-content">
+            <div class="header">
+                <h1>Welcome, Admin!</h1>
+                <p>Manage and oversee the BulSU MSC community</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div class="card card-border">
+                    <h3 class="text-xl font-semibold text-gray-200 mb-2">Total Members</h3>
+                    <p class="text-3xl font-bold text-[#b9da05]" id="student-cnt"></p>
+                    <!-- Added View All Members link -->
+                    <a href="admin_manage_members.html" class="text-blue-400 hover:text-blue-300 text-sm font-medium mt-2 inline-block">
+                        View All Members →
+                    </a>
+                </div>
+
+                <div class="card card-border">
+                    <h3 class="text-xl font-semibold text-gray-200 mb-2">Active Announcements</h3>
+                    <p class="text-3xl font-bold text-[#b9da05]" id="announcement-cnt"></p>
+                    <!-- Added View All Announcements link -->
+                    <a href="admin_manage_announcements.html" class="text-blue-400 hover:text-blue-300 text-sm font-medium mt-2 inline-block">
+                        View All Announcements →
+                    </a>
+                </div>
+
+                <div class="card card-border">
+                    <h3 class="text-xl font-semibold text-gray-200 mb-2">Upcoming Events</h3>
+                    <p class="text-3xl font-bold text-[#b9da05]" id="event-cnt"></p>
+                    <!-- Added View All Events link -->
+                    <a href="admin_manage_events.html" class="text-blue-400 hover:text-blue-300 text-sm font-medium mt-2 inline-block">
+                        View All Events →
+                    </a>
+                </div>
+            </div>
+
+            <!-- Added new containers section -->
+            <div class="recent-container">
+                <div class="mini-calendar-container">
+                    <h3>Events - <span id="current-month"></span></h3>
+                    <table class="mini-calendar">
+                        <thead>
+                            <tr>
+                                <th>Sun</th><th>Mon</th><th>Tue</th><th>Wed</th><th>Thu</th><th>Fri</th><th>Sat</th>
+                            </tr>
+                        </thead>
+                        <tbody id="calendar-body">
+                            <!-- Calendar will be populated by JavaScript -->
+                        </tbody>
+                    </table>
+                    <a href="admin_event_calendar.html" class="text-blue-400 hover:text-blue-300 text-sm font-medium mt-4 inline-block">
+                        View Full Calendar →
+                    </a>
+                </div>
+
+                <div class="recent-box clickable-container" onclick="window.location.href='admin_manage_announcements.html';">
+                    <h3>Recent Announcements</h3>
+                    <div id="recentAnnouncements">
+                        <!-- Recent announcements will be populated by JavaScript -->
+                    </div>
+                </div>
+
+                <div class="recent-box clickable-container" onclick="window.location.href='admin_manage_events.html';">
+                    <h3>Upcoming Events</h3>
+                    <div id="upcomingEvents">
+                        <!-- Upcoming events will be populated by JavaScript -->
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Keep existing chart containers -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6">
+                <div class="card">
+                    <h3 class="text-xl font-semibold text-gray-200 mb-4">Members per College</h3>
+                    <canvas id="studentsPerCollegeChart" class="w-full h-64"></canvas>
+                </div>
+
+                <div class="card">
+                    <h3 class="text-xl font-semibold text-gray-200 mb-4">Members per Year Level</h3>
+                    <canvas id="studentsPerYearLevelChart" class="w-full h-64"></canvas>
+                </div>
+            </div>
+        </main>
+    </div>
+    
+    <!-- Removed original footer since it's now in the sidebar -->
+    
+    <script>
+        const API_BASE = "/updated-msc-website/api";
+
+        async function apiCall(endpoint, method = "GET", body = null) {
+            try {
+                const res = await fetch(`${API_BASE}${endpoint}`, {
+                    method,
+                    credentials: "include",
+                    headers: { "Content-Type": "application/json" },
+                    body: body ? JSON.stringify(body) : null,
+                });
+                return await res.json();
+            } catch (err) {
+                console.error("API call failed:", err);
+                return { success: false, message: err.message };
+            }
+        }
+
+        async function getAllStudents() {
+            const data = await apiCall("/students/count", "GET");
+            document.getElementById("student-cnt").textContent = data?.success ? data.data : "0";
+            if (!data?.success) console.error("Failed to fetch student count:", data?.message);
+        }
+
+        async function getAllEvents() {
+            const data = await apiCall("/events/count", "GET");
+            document.getElementById("event-cnt").textContent = data?.success ? data.data : "0";
+            if (!data?.success) console.error("Failed to fetch event count:", data?.message);
+        }
+
+        async function getAllAnnouncements() {
+            const data = await apiCall("/announcements/count", "GET");
+            document.getElementById("announcement-cnt").textContent = data?.success ? data.data : "0";
+            if (!data?.success) console.error("Failed to fetch announcement count:", data?.message);
+        }
+
+        async function getUpcomingEvents() {
+            try {
+                const data = await apiCall("/events/upcoming", "GET");
+                const container = document.getElementById("upcomingEvents");
+                
+                if (data?.success && data.data && data.data.length > 0) {
+                    container.innerHTML = data.data.map(event => `
+                        <div class="recent-item">
+                            <h4>${event.title}</h4>
+                            ${event.description ? `<p>${event.description}</p>` : ''}
+                            ${event.event_date ? `<div class="date">${new Date(event.event_date).toLocaleDateString('en-US', { weekday: 'short', year: 'numeric', month: 'short', day: 'numeric' })}</div>` : ''}
+                        </div>
+                    `).join('');
+                } else {
+                    container.innerHTML = '<div class="recent-item"><p>No upcoming events found.</p></div>';
+                }
+            } catch (err) {
+                console.error("Failed to fetch upcoming events:", err);
+                document.getElementById("upcomingEvents").innerHTML = '<div class="recent-item"><p>Error loading events.</p></div>';
+            }
+        }
+
+        async function getRecentAnnouncements() {
+            try {
+                const data = await apiCall("/announcements/recent", "GET");
+                const container = document.getElementById("recentAnnouncements");
+                
+                if (data?.success && data.data && data.data.length > 0) {
+                    container.innerHTML = data.data.map(announcement => `
+                        <div class="recent-item">
+                            <h4>${announcement.title}</h4>
+                            ${announcement.content ? `<p>${announcement.content.substring(0, 100)}...</p>` : ''}
+                            ${announcement.created_at ? `<div class="date">Posted on ${new Date(announcement.created_at).toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' })}</div>` : ''}
+                        </div>
+                    `).join('');
+                } else {
+                    container.innerHTML = '<div class="recent-item"><p>No recent announcements found.</p></div>';
+                }
+            } catch (err) {
+                console.error("Failed to fetch recent announcements:", err);
+                document.getElementById("recentAnnouncements").innerHTML = '<div class="recent-item"><p>Error loading announcements.</p></div>';
+            }
+        }
+
+        async function getCurrentMonthEvents() {
+            try {
+                const data = await apiCall("/events/current-month", "GET");
+                const eventDates = {};
+                
+                if (data?.success && data.data) {
+                    data.data.forEach(event => {
+                        if (event.event_date) {
+                            const date = new Date(event.event_date);
+                            const day = date.getDate();
+                            eventDates[day] = true;
+                        }
+                    });
+                }
+                
+                generateCalendar(eventDates);
+            } catch (err) {
+                console.error("Failed to fetch current month events:", err);
+                generateCalendar({});
+            }
+        }
+
+        function generateCalendar(eventDates = {}) {
+            const now = new Date();
+            const currentMonth = now.getMonth();
+            const currentYear = now.getFullYear();
+            const today = now.getDate();
+            
+            // Set current month display
+            document.getElementById("current-month").textContent = now.toLocaleDateString('en-US', { month: 'long', year: 'numeric' });
+            
+            const firstDay = new Date(currentYear, currentMonth, 1);
+            const lastDay = new Date(currentYear, currentMonth + 1, 0);
+            const daysInMonth = lastDay.getDate();
+            const startingDayOfWeek = firstDay.getDay();
+            
+            const calendarBody = document.getElementById("calendar-body");
+            calendarBody.innerHTML = '';
+            
+            let date = 1;
+            for (let i = 0; i < 6; i++) {
+                const row = document.createElement('tr');
+                
+                for (let j = 0; j < 7; j++) {
+                    const cell = document.createElement('td');
+                    
+                    if (i === 0 && j < startingDayOfWeek) {
+                        cell.classList.add('empty');
+                    } else if (date > daysInMonth) {
+                        cell.classList.add('empty');
+                    } else {
+                        cell.textContent = date;
+                        cell.onclick = () => window.location.href = 'admin_event_calendar.html';
+                        
+                        if (date === today) {
+                            cell.classList.add('today');
+                        }
+                        
+                        if (eventDates[date]) {
+                            cell.classList.add('event-day');
+                            cell.style.position = 'relative';
+                        }
+                        
+                        date++;
+                    }
+                    
+                    row.appendChild(cell);
+                }
+                
+                calendarBody.appendChild(row);
+                
+                if (date > daysInMonth) {
+                    break;
+                }
+            }
+        }
+
+        document.addEventListener("DOMContentLoaded", () => {
+            getAllStudents();
+            getAllEvents();
+            getAllAnnouncements();
+            getUpcomingEvents();
+            getRecentAnnouncements();
+            getCurrentMonthEvents();
+        });
+    </script>
+
+    <script src="js/charts.js"></script>
+
+</body>
+
+</html>

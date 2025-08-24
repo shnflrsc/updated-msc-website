@@ -1,0 +1,567 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Attendance Verification - BulSU MSC</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Segoe+UI:wght@400;600;700&family=Orbitron:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #b9da05;
+            --secondary-color: #011538;
+            --background-color: #080c24;
+            --text-color: #ffffff;
+            --text-muted: #8892b0;
+            --border-color: #1a1f3a;
+        }
+
+        body {
+            background-color: var(--background-color);
+            color: var(--text-color);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            min-height: 100vh;
+        }
+
+        .page-header {
+            background-color: var(--secondary-color);
+            padding: 20px;
+            margin-bottom: 30px;
+            border-radius: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border: 1px solid var(--border-color);
+        }
+
+        .header-title-group {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .logo {
+            width: 50px;
+            height: 50px;
+            object-fit: contain;
+        }
+
+        .header-title {
+            font-family: 'Orbitron', monospace;
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            margin: 0;
+        }
+
+        .btn-dashboard {
+            background-color: var(--primary-color);
+            color: var(--secondary-color);
+            text-decoration: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .btn-dashboard:hover {
+            background-color: #a0c404;
+            color: var(--secondary-color);
+        }
+
+        .form-container {
+            background-color: var(--secondary-color);
+            padding: 30px;
+            border-radius: 15px;
+            border: 1px solid var(--border-color);
+        }
+
+        .form-label {
+            color: var(--text-color);
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .form-select, .form-control {
+            background-color: var(--background-color);
+            border: 1px solid var(--border-color);
+            color: var(--text-color);
+            border-radius: 8px;
+        }
+
+        .form-select:focus, .form-control:focus {
+            background-color: var(--background-color);
+            border-color: var(--primary-color);
+            color: var(--text-color);
+            box-shadow: 0 0 0 0.2rem rgba(185, 218, 5, 0.25);
+        }
+
+        .event-card {
+            background-color: var(--background-color);
+            border: 1px solid var(--border-color);
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+
+        .event-logo {
+            width: 60px;
+            height: 60px;
+            object-fit: contain;
+            margin-bottom: 15px;
+        }
+
+        .event-title {
+            color: var(--primary-color);
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .event-date, .event-location {
+            color: var(--text-muted);
+            margin-bottom: 5px;
+        }
+
+        .btn-primary {
+            background-color: var(--primary-color);
+            border-color: var(--primary-color);
+            color: var(--secondary-color);
+            font-weight: 600;
+        }
+
+        .btn-primary:hover {
+            background-color: #a0c404;
+            border-color: #a0c404;
+        }
+
+        .btn-secondary {
+            background-color: var(--secondary-color);
+            border-color: var(--border-color);
+            color: var(--text-color);
+        }
+
+        .camera-frame {
+            background-color: var(--secondary-color);
+            border: 2px solid var(--border-color);
+            border-radius: 15px;
+            padding: 20px;
+            min-height: 300px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        .frame-overlay {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            right: 20px;
+            bottom: 20px;
+            pointer-events: none;
+        }
+
+        .frame-corner {
+            position: absolute;
+            width: 30px;
+            height: 30px;
+            border: 3px solid var(--primary-color);
+        }
+
+        .frame-corner.top-left {
+            top: 0;
+            left: 0;
+            border-right: none;
+            border-bottom: none;
+        }
+
+        .frame-corner.top-right {
+            top: 0;
+            right: 0;
+            border-left: none;
+            border-bottom: none;
+        }
+
+        .frame-corner.bottom-left {
+            bottom: 0;
+            left: 0;
+            border-right: none;
+            border-top: none;
+        }
+
+        .frame-corner.bottom-right {
+            bottom: 0;
+            right: 0;
+            border-left: none;
+            border-top: none;
+        }
+
+        .result-card {
+            background-color: var(--secondary-color);
+            border: 1px solid var(--border-color);
+            border-radius: 10px;
+            margin-bottom: 20px;
+        }
+
+        .result-card-header {
+            background-color: var(--primary-color);
+            color: var(--secondary-color);
+            padding: 15px 20px;
+            font-weight: 700;
+            border-radius: 10px 10px 0 0;
+        }
+
+        .profile-image {
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-right: 20px;
+        }
+
+        .profile-placeholder {
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            background-color: var(--primary-color);
+            color: var(--secondary-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            font-weight: 700;
+            margin-right: 20px;
+        }
+
+        .guest-icon-placeholder {
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            background-color: var(--primary-color);
+            color: var(--secondary-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 30px;
+            margin-right: 20px;
+        }
+
+        .details-name {
+            color: var(--primary-color);
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .details-item {
+            color: var(--text-muted);
+            margin-bottom: 5px;
+        }
+
+        .badge-status, .badge-position {
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+            margin-right: 8px;
+        }
+
+        .badge-status[data-status="active"] {
+            background-color: #28a745;
+            color: white;
+        }
+
+        .badge-position[data-position="member"] {
+            background-color: var(--primary-color);
+            color: var(--secondary-color);
+        }
+
+        .attendance-card {
+            background-color: var(--secondary-color);
+            border: 1px solid var(--border-color);
+            border-radius: 10px;
+        }
+
+        .attendance-header {
+            background-color: var(--primary-color);
+            color: var(--secondary-color);
+            padding: 15px 20px;
+            font-weight: 700;
+            border-radius: 10px 10px 0 0;
+        }
+
+        .attendance-body {
+            padding: 20px;
+        }
+
+        .stats-container {
+            margin-bottom: 20px;
+        }
+
+        .stat-item-row-group {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 15px;
+        }
+
+        .stat-item {
+            text-align: center;
+            flex: 1;
+        }
+
+        .stat-value {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--primary-color);
+        }
+
+        .stat-label {
+            font-size: 12px;
+            color: var(--text-muted);
+            margin-top: 5px;
+        }
+
+        .progress {
+            height: 20px;
+            background-color: var(--background-color);
+            border-radius: 10px;
+        }
+
+        .progress-bar {
+            background-color: var(--primary-color);
+            border-radius: 10px;
+            color: var(--secondary-color);
+            font-weight: 600;
+        }
+
+        .alert {
+            border-radius: 10px;
+            border: none;
+        }
+
+        .alert-success {
+            background-color: rgba(40, 167, 69, 0.2);
+            color: #28a745;
+            border: 1px solid #28a745;
+        }
+
+        .alert-danger {
+            background-color: rgba(220, 53, 69, 0.2);
+            color: #dc3545;
+            border: 1px solid #dc3545;
+        }
+
+        .loading-spinner {
+            display: none;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .camera-placeholder {
+            color: var(--text-muted);
+            font-size: 18px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="container-fluid py-4">
+        <!-- Page Header -->
+        <div class="page-header">
+            <div class="header-title-group">
+                <img src="./Logos/Bulsu MSC Logo-02.png" alt="BulSU MSC Logo" class="logo">
+                <h1 class="header-title">Attendance Verification</h1>
+            </div>
+            <a href="admin_dashboard.html" class="btn-dashboard">
+                <i class="bi bi-arrow-left-circle me-2"></i>Back to Dashboard
+            </a>
+        </div>
+
+        <div class="row">
+            <!-- Left Column - Form -->
+            <div class="col-lg-6 form-container">
+                <form id="event-form">
+                    <!-- Event Selection -->
+                    <div class="mb-3">
+                        <label for="event_id" class="form-label">Select Event:</label>
+                        <select class="form-select form-select-lg" name="event_id" id="event_id" required>
+                            <option value="">-- Select an Event --</option>
+                            <option value="1" selected>Annual General Assembly (Dec 15, 2024)</option>
+                            <option value="2">Tech Workshop Series (Dec 20, 2024)</option>
+                            <option value="3">Community Outreach Program (Dec 25, 2024)</option>
+                        </select>
+                    </div>
+
+                    <!-- Event Details Card -->
+                    <div class="event-card">
+                        <img class="event-logo img-fluid" src="/placeholder.svg?height=60&width=60" alt="Event Logo">
+                        <h5 class="event-title">Annual General Assembly</h5>
+                        <div class="event-date">
+                            <i class="bi bi-calendar-event me-1"></i>
+                            December 15, 2024, 9:00 AM - 5:00 PM
+                        </div>
+                        <div class="event-location">
+                            <i class="bi bi-geo-alt me-1"></i>
+                            BulSU Main Auditorium
+                        </div>
+                    </div>
+
+                    <!-- QR Data Input -->
+                    <div class="mb-3">
+                        <label for="qr_data" class="form-label">QR Data (Scanned or Manual Entry):</label>
+                        <textarea class="form-control" id="qr_data" name="qr_data" rows="4" placeholder="Enter QR data here or use scanner"></textarea>
+                    </div>
+
+                    <!-- Action Buttons -->
+                    <div class="d-grid gap-2">
+                        <button type="submit" class="btn btn-primary btn-lg">
+                            <i class="bi bi-check-circle-fill me-2"></i>Process Attendance
+                        </button>
+                        <div id="scanner-buttons-container" class="d-grid gap-2 mb-3">
+                            <button type="button" id="start-scanner" class="btn btn-secondary">
+                                <i class="bi bi-qr-code-scan me-2"></i>Start QR Scanner
+                            </button>
+                            <button type="button" id="stop-scanner" class="btn btn-danger" style="display: none;">
+                                <i class="bi bi-x-circle me-2"></i>Stop Scanner
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Loading Spinner -->
+                    <div class="loading-spinner" id="loading-indicator">
+                        <div class="spinner-border text-primary" role="status">
+                            <span class="visually-hidden">Loading...</span>
+                        </div>
+                        <p class="mt-2 text-muted small">Initializing camera...</p>
+                    </div>
+                </form>
+            </div>
+
+            <!-- Right Column - Camera and Results -->
+            <div class="col-lg-6">
+                <!-- Camera Frame -->
+                <div class="camera-frame mb-3">
+                    <div class="camera-placeholder">
+                        <i class="bi bi-camera-video" style="font-size: 48px; margin-bottom: 10px;"></i>
+                        <p>Camera will appear here when QR scanner is activated</p>
+                    </div>
+                    <div class="frame-overlay" style="display: none;">
+                        <div class="frame-corner top-left"></div>
+                        <div class="frame-corner top-right"></div>
+                        <div class="frame-corner bottom-left"></div>
+                        <div class="frame-corner bottom-right"></div>
+                    </div>
+                </div>
+
+                <!-- Results Section -->
+                <div class="mt-3">
+                    <!-- Success Alert -->
+                    <div class="alert alert-success" role="alert">
+                        <i class="bi bi-check-circle-fill me-2"></i>
+                        Attendance verified successfully! Member has been marked as present.
+                    </div>
+
+                    <!-- Member Details Card -->
+                    <div class="card result-card member-card">
+                        <div class="result-card-header member-card-header">
+                            Verified Member Details
+                        </div>
+                        <div class="card-body result-card-body">
+                            <div class="d-flex align-items-center">
+                                <div class="profile-placeholder">
+                                    J
+                                </div>
+                                <div class="details-info">
+                                    <h5 class="details-name">Dela Cruz, Juan Carlos M.</h5>
+                                    <div class="details-item"><strong>Membership No:</strong> MSC-2024-001</div>
+                                    <div class="details-item"><strong>Student ID:</strong> 2021-12345</div>
+                                    <div class="details-item"><strong>Email:</strong> juan.delacruz@bulsu.edu.ph</div>
+                                    <div class="details-item"><strong>Program:</strong> BS Computer Science</div>
+                                    <div class="details-item"><strong>College:</strong> College of Information and Communications Technology</div>
+                                    <div class="mt-2">
+                                        <span class="badge-status" data-status="active">Active</span>
+                                        <span class="badge-position" data-position="member">Member</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Attendance Summary -->
+                    <div class="card attendance-card">
+                        <div class="attendance-header">
+                            <i class="bi bi-bar-chart-line-fill me-2"></i>Attendance Summary: Annual General Assembly
+                        </div>
+                        <div class="attendance-body">
+                            <div class="stats-container">
+                                <div class="stat-item-row-group">
+                                    <div class="stat-item">
+                                        <div class="stat-value">150</div>
+                                        <div class="stat-label">Members Registered</div>
+                                    </div>
+                                    <div class="stat-item">
+                                        <div class="stat-value">127</div>
+                                        <div class="stat-label">Members Attended</div>
+                                    </div>
+                                </div>
+                                <div class="stat-item-row-group">
+                                    <div class="stat-item">
+                                        <div class="stat-value">45</div>
+                                        <div class="stat-label">Guests Registered</div>
+                                    </div>
+                                    <div class="stat-item">
+                                        <div class="stat-value">38</div>
+                                        <div class="stat-label">Guests Attended</div>
+                                    </div>
+                                </div>
+                                <div class="stat-item-row-group">
+                                    <div class="stat-item">
+                                        <div class="stat-value">195</div>
+                                        <div class="stat-label">Total Registered</div>
+                                    </div>
+                                    <div class="stat-item">
+                                        <div class="stat-value">165</div>
+                                        <div class="stat-label">Total Attended</div>
+                                    </div>
+                                    <div class="stat-item">
+                                        <div class="stat-value">85%</div>
+                                        <div class="stat-label">Overall Rate</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="progress">
+                                <div class="progress-bar" role="progressbar" style="width: 85%;" aria-valuenow="85" aria-valuemin="0" aria-valuemax="100">
+                                    85%
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Simple demo interactions
+        document.getElementById('start-scanner').addEventListener('click', function() {
+            document.querySelector('.camera-placeholder').style.display = 'none';
+            document.querySelector('.frame-overlay').style.display = 'block';
+            document.getElementById('loading-indicator').style.display = 'block';
+            this.style.display = 'none';
+            document.getElementById('stop-scanner').style.display = 'block';
+            
+            setTimeout(() => {
+                document.getElementById('loading-indicator').style.display = 'none';
+            }, 2000);
+        });
+
+        document.getElementById('stop-scanner').addEventListener('click', function() {
+            document.querySelector('.camera-placeholder').style.display = 'block';
+            document.querySelector('.frame-overlay').style.display = 'none';
+            this.style.display = 'none';
+            document.getElementById('start-scanner').style.display = 'block';
+        });
+    </script>
+</body>
+</html>
