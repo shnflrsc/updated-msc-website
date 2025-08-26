@@ -21,7 +21,7 @@
 
     <script defer="" src="js/tabs.js"></script>
     <script src="js/calendar.js" defer></script>
-    <script src="js/msc_calendar.js" defer></script>
+    <script src="js/univ_calendar.js" defer></script>
 
     <style>
         html.loading body {
@@ -98,6 +98,26 @@
             color: #b9da05;
             transform: scale(1.1);
         }
+
+/* Add this to your <style> or Tailwind config */
+@keyframes fadeIn {
+  from { opacity: 0; transform: scale(0.95); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+@keyframes fadeOut {
+  from { opacity: 1; transform: scale(1); }
+  to { opacity: 0; transform: scale(0.95); }
+}
+
+.animate-fadeIn {
+  animation: fadeIn 0.3s ease-out forwards;
+}
+
+.animate-fadeOut {
+  animation: fadeOut 0.3s ease-in forwards;
+}
+
 
         /* Custom scrollbar styles */
         ::-webkit-scrollbar {
@@ -348,7 +368,8 @@
                         <h2 class="tab text-gray-200 font-semibold cursor-pointer hover:text-[#b9da05]"
                             data-tab="events">Events</h2>
                         <h2 class="tab text-gray-200 font-semibold cursor-pointer hover:text-[#b9da05]"
-                            data-tab="calendar">University Calendar</h2>
+                            data-tab="univ-calendar">University Calendar</h2>
+
                     </div>
 
                     <div
@@ -370,83 +391,55 @@
                         style="max-height: 35rem; overflow-y: auto; padding-right: .5rem;">
                         <p class="text-gray-300"></p>
                     </div>
-                    <div class="tab-content hidden" id="tab-calendar">
+
+                    <!-- <div class="tab-content hidden" id="tab-calendar">
                         <div class="relative max-w-4xl w-full mx-auto text-sm">
                             <div id="calendar-overlay" class="fixed inset-0 bg-black bg-opacity-50 z-40 hidden"></div>
+                        </div>
+                    </div> -->
 
-                            <!-- UNIV/MSC CALENDAR -->
-                            <div class="mt-4 h-[37rem] overflow-y-auto">
+                    <div class="tab-content hidden" id="tab-univ-calendar">
+                        <div class="relative max-w-5xl w-full mx-auto text-sm">
+                            <div id="univ-calendar" class="mt-4">
                                 <div class="flex justify-between items-center mb-4">
-                                    <button onclick="goToToday()"
-                                        class="bg-white/10 border border-white/20 text-white rounded px-3 py-1 hover:bg-[#b9da05] hover:text-[#011538]">Today</button>
-                                    <div class="flex items-center space-x-3">
-                                        <button onclick="navigateCalendar(-1)" class="text-lg">&larr;</button>
-                                        <h2 id="calendar-month-title" class="text-xl font-semibold"></h2>
-                                        <button onclick="navigateCalendar(1)" class="text-lg">&rarr;</button>
-                                    </div>
-                                    <div class="w-10"></div>
+                                    <button id="prevWeek"
+                                        class="bg-white/10 border border-white/20 text-white rounded px-3 py-1 hover:bg-[#b9da05] hover:text-[#011538] transition">
+                                        Previous Week
+                                    </button>
+
+                                    <h2 class="text-xl font-semibold text-gray-200" id="week-range"></h2>
+
+                                    <button id="nextWeek"
+                                        class="bg-white/10 border border-white/20 text-white rounded px-3 py-1 hover:bg-[#b9da05] hover:text-[#011538] transition">
+                                        Next Week
+                                    </button>
                                 </div>
 
-                                <!-- Calendar Grid -->
                                 <div class="border border-white/20 rounded-lg overflow-hidden">
-                                    <div
+                                    <!-- <div
                                         class="grid grid-cols-7 bg-white/10 text-center text-sm font-medium text-gray-300 border-b border-white/20">
-                                        <div>Sun</div>
                                         <div>Mon</div>
                                         <div>Tue</div>
                                         <div>Wed</div>
                                         <div>Thu</div>
                                         <div>Fri</div>
                                         <div>Sat</div>
-                                    </div>
-                                    <div id="calendar-grid" class="grid grid-cols-7 text-xs text-gray-200"></div>
-                                </div>
-                            </div>
+                                        <div>Sun</div>
+                                    </div> -->
 
-                            <!-- Calendar Sidebar -->
-                            <div id="calendar-sidebar"
-                                class="fixed top-0 left-0 h-full w-80 bg-[#011538] text-white transform -translate-x-full transition-transform duration-300 ease-in-out z-40 shadow-xl border border-white/20"
-                                style="overflow-y:auto;">
-                                <div class="p-6">
-                                    <div class="flex justify-between items-center mb-4">
-                                        <h2 class="text-xl font-semibold">Event Details</h2>
-                                        <button onclick="closeCalendarSidebar()"
-                                            class="text-gray-400 hover:text-red-500">&times;</button>
+                                    <!-- Dates Grid -->
+                                    <!-- <div id="univ-calendar-grid"
+                                        class="grid grid-cols-7 text-xs text-gray-200 h-[16rem] w-full">
+                                    </div> -->
+
+                                    <div id="univ-calendar-grid"
+                                        class="grid grid-rows-7 gap-2 text-xs text-gray-200 w-full">
                                     </div>
-                                    <div id="calendar-event-details" class="text-sm text-gray-300 space-y-4"></div>
                                 </div>
                             </div>
                         </div>
                     </div>
-
-                    <!-- Modal -->
-                    <div id="modal-overlay"
-                        class="fixed inset-0 bg-black bg-opacity-40 flex items-center justify-center z-50 hidden">
-                        <div
-                            class="bg-[#011538] border border-white/20 rounded-lg shadow-xl max-w-md w-full mx-4 p-6 relative animate-fadeIn text-white">
-                            <button onclick="closeCalendarModal()"
-                                class="absolute top-3 right-3 text-gray-400 hover:text-red-500">
-                                <i class="fas fa-times text-lg"></i>
-                            </button>
-
-                            <div class="space-y-4 text-sm text-gray-300">
-                                <h3 id="modal-title" class="text-xl font-semibold text-white"></h3>
-                                <div class="border-b border-white/20"></div>
-                                <div id="modal-content" class="space-y-3">
-                                    <div class="flex gap-3 items-start">
-                                        <i class="fa-solid fa-clock text-[#b9da05] pt-2 w-8 text-center"></i>
-                                        <p id="event-day-time" class="text-lg text-gray-200 mt-0.5"></p>
-                                    </div>
-                                    <div class="flex gap-3 items-start">
-                                        <i class="fa-solid fa-location-dot text-red-500 p-2 w-8 text-center"></i>
-                                        <p id="event-location" class="text-lg text-gray-200 mt-0.5"></p>
-                                    </div>
-                                    <button
-                                        class="w-full p-2 bg-[#b9da05] text-[#011538] text-lg font-semibold rounded-sm hover:bg-[#9abc04]">Register</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    <!-- END OF UNIV CALENDAR -->
                 </div>
             </div>
         </section>
@@ -463,37 +456,102 @@
                 </div>
 
                 <!-- Registered Events List -->
-                <div id="registered-events-list" class="space-y-4 overflow-y-auto pr-2 flex-grow">
+                <div id="registered-events-list" class="space-y-4 overflow-y-auto pr-2 pt-4 flex-grow">
                 </div>
             </div>
 
-            <!-- General Calendar -->
+            <!-- MSC Calendar: w/Events -->
             <div
-                class="w-full lg:w-8/12 h-auto lg:h-[37rem] p-4 shadow-lg rounded-lg bg-[#011538] border border-white/20 text-white">
-                <div class="flex justify-between items-center mb-4 border-b border-white/20 pb-2">
+                class="w-full lg:w-8/12 h-[37rem] p-4 shadow-lg rounded-lg bg-[#011538] border border-white/20 text-white flex flex-col">
+                <div class="flex items-center justify-between mb-4 border-b border-white/20 pb-2">
                     <h2 class="text-xl font-bold">Calendar</h2>
+                    <div class="p-2 bg-white/10 text-[#b9da05] rounded-full w-10 h-10 flex items-center justify-center">
+                        <i class="fa-solid fa-calendar"></i>
+                    </div>
+                </div>
+
+                <div class="flex justify-between items-center mb-4 pb-2">
+                    <button onclick="goToToday()"
+                        class="bg-white/10 border border-white/20 text-white rounded px-3 py-1 hover:bg-[#b9da05] hover:text-[#011538]">
+                        Today
+                    </button>
+
                     <div class="flex items-center space-x-3">
-                        <button onclick="navigateGeneralCalendar(-1)"
+                        <button onclick="navigateCalendar(-1)"
                             class="text-lg text-gray-300 hover:text-[#b9da05]">&larr;</button>
-                        <h2 id="general-calendar-month-title" class="text-lg font-semibold"></h2>
-                        <button onclick="navigateGeneralCalendar(1)"
+                        <h2 id="calendar-month-title" class="text-xl font-semibold"></h2>
+                        <button onclick="navigateCalendar(1)"
                             class="text-lg text-gray-300 hover:text-[#b9da05]">&rarr;</button>
                     </div>
                 </div>
 
-                <div
-                    class="grid grid-cols-7 bg-white/10 text-center text-sm font-medium text-gray-200 border-b border-white/20">
-                    <div>Sun</div>
-                    <div>Mon</div>
-                    <div>Tue</div>
-                    <div>Wed</div>
-                    <div>Thu</div>
-                    <div>Fri</div>
-                    <div>Sat</div>
+                <!-- Calendar Grid -->
+                <div class="border border-white/20 rounded-lg overflow-y-auto flex-grow">
+                    <div
+                        class="grid grid-cols-7 bg-white/10 text-center text-sm font-medium text-gray-300 border-b border-white/20">
+                        <div>Sun</div>
+                        <div>Mon</div>
+                        <div>Tue</div>
+                        <div>Wed</div>
+                        <div>Thu</div>
+                        <div>Fri</div>
+                        <div>Sat</div>
+                    </div>
+                    <div id="calendar-grid" class="grid grid-cols-7 text-xs text-gray-200"></div>
                 </div>
-
-                <div id="general-calendar-grid" class="grid grid-cols-7 text-xs"></div>
             </div>
+
+            <!-- Modal: MSC Calendar -->
+<div id="modal-overlay"
+    class="fixed inset-0 bg-black bg-opacity-40 flex items-center justify-center z-50 hidden">
+    <div
+        class="bg-[#011538] border border-white/20 rounded-lg shadow-xl max-w-md w-full mx-4 p-6 relative text-white">
+        <button onclick="closeCalendarModal()"
+            class="absolute top-3 right-3 text-gray-400 hover:text-red-500">
+            <i class="fas fa-times text-lg"></i>
+        </button>
+
+        <div class="space-y-4 text-sm text-gray-300">
+            <h3 id="modal-title" class="text-xl font-semibold text-white"></h3>
+            <div class="border-b border-white/20"></div>
+            <div id="modal-content" class="space-y-3">
+                <div class="flex gap-3 items-start">
+                    <i class="fa-solid fa-clock text-[#b9da05] pt-2 w-8 text-center"></i>
+                    <p id="event-day-time" class="text-lg text-gray-200 mt-0.5"></p>
+                </div>
+                <div class="flex gap-3 items-start">
+                    <i class="fa-solid fa-location-dot text-red-500 p-2 w-8 text-center"></i>
+                    <p id="event-location" class="text-lg text-gray-200 mt-0.5"></p>
+                </div>
+                <button
+                    class="w-full p-2 bg-[#b9da05] text-[#011538] text-lg font-semibold rounded-sm hover:bg-[#9abc04]">
+                    Register
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal: University Calendar -->
+<div id="univ-modal-overlay"
+    class="fixed inset-0 bg-black bg-opacity-40 flex items-center justify-center hidden z-50">
+    <div
+        class="bg-[#011538] border border-white/20 rounded-lg shadow-xl max-w-md w-full mx-4 p-6 relative text-white">
+        <!-- Close button -->
+        <button onclick="closeUnivCalendarModal()"
+            class="absolute top-3 right-3 text-gray-400 hover:text-red-500">
+            ✕
+        </button>
+
+        <!-- Modal Title -->
+        <h2 id="univ-modal-title" class="text-xl font-semibold text-white mb-4"></h2>
+
+        <!-- Modal Content -->
+        <div id="univ-modal-content" class="space-y-2 text-gray-200 text-sm"></div>
+    </div>
+</div>
+
+
         </section>
     </main>
 
@@ -692,15 +750,21 @@
                                 : "bg-gray-500 text-white";
 
                     const html = `
-        <div class="relative flex flex-col md:flex-row gap-4 p-5 bg-[#011538] border border-white/20 rounded-xl shadow-md hover:shadow-xl transition-all group text-white">
-          <div class="w-full md:w-16 h-16 md:h-auto bg-[#b9da05] text-[#011538] rounded-lg flex flex-col items-center justify-center md:flex-shrink-0 font-bold">
+        <div class="relative flex flex-col md:flex-row gap-4 p-5 bg-[#011538] border border-white/20 
+            rounded-xl shadow-md transition-all duration-300 ease-out group text-white
+            hover:shadow-2xl hover:-translate-y-1 hover:border-[#b9da05]/60">
+
+          <span class="absolute left-0 top-0 h-full w-1 bg-[#b9da05] scale-y-0 group-hover:scale-y-100 transition-transform duration-300 origin-top rounded-l-xl"></span>
+
+          <div class="w-full md:w-16 h-16 md:h-auto bg-[#b9da05] text-[#011538] rounded-lg 
+            flex flex-col items-center justify-center md:flex-shrink-0 font-bold shadow-md">
             <span class="text-xs uppercase">${month}</span>
             <span class="text-2xl">${day}</span>
           </div>
 
-          <div class="flex-grow">
+          <div class="flex-grow relative z-10">
             <div class="flex justify-between items-start">
-              <h3 class="text-lg md:text-xl font-semibold group-hover:text-[#b9da05] transition-colors">
+              <h3 class="text-lg md:text-xl font-semibold transition-colors duration-300 group-hover:text-[#b9da05]">
                 ${event.event_name}
               </h3>
               <span class="inline-block text-xs font-semibold px-2 py-1 rounded-full ${statusClass}">
@@ -725,6 +789,7 @@
                 console.error("Error loading registered events:", error);
             }
         }
+
 
         document.addEventListener("DOMContentLoaded", loadRegisteredEvents);
 
@@ -762,21 +827,26 @@
                         day: "numeric"
                     });
 
-                    // To fix: mobile view
                     const html = `
-                <div class="relative p-5 border border-white/20 bg-[#011538] rounded-lg shadow-sm hover:shadow-md transition-all group">
+                <div class="relative p-5 m-4 border border-white/20 bg-[#011538] 
+                    rounded-lg shadow-sm transition-all duration-300 ease-out 
+                    hover:shadow-xl hover:scale-[1.02] hover:bg-[#0a1d4a] group">
+
                     <div class="absolute top-3 right-3 text-white text-xs uppercase font-semibold">
                         ${date}
                     </div>
+
                     <div class="flex items-start gap-3">
-                        <div class="text-[#b9da05] text-xl mt-1">
+                        <div class="text-[#b9da05] text-xl mt-1 transition-transform duration-300 group-hover:scale-110">
                             <i class="fa-solid fa-bullhorn"></i>
                         </div>
                         <div>
-                            <h3 class="text-lg font-semibold text-white group-hover:text-[#b9da05] transition-colors">
+                            <h3 class="relative text-lg font-semibold text-white 
+                                transition-colors duration-300 group-hover:text-[#b9da05]">
                                 ${ann.title}
+                                <span class="absolute left-0 -bottom-1 w-0 h-[2px] bg-[#b9da05] transition-all duration-300 group-hover:w-full"></span>
                             </h3>
-                            <p class="text-sm text-gray-300 mt-1 leading-relaxed">
+                            <p class="text-sm text-gray-300 mt-2 leading-relaxed">
                                 ${ann.content}
                             </p>
                         </div>
@@ -810,18 +880,24 @@
                     const day = date.getDate();
 
                     const html = `
-        <div class="relative flex flex-col md:flex-row gap-4 p-5 m-4 bg-[#011538] border border-white/20 rounded-xl shadow-md hover:shadow-xl transition-all hover:-translate-y-1 group text-white">
-          
+        <div class="relative flex flex-col md:flex-row gap-4 p-5 m-4 bg-[#011538] border border-white/20 
+            rounded-xl shadow-md transition-all duration-300 ease-out group text-white
+            hover:shadow-2xl hover:-translate-y-1 hover:border-[#b9da05]/60">
+
+          <!-- Animated accent bar -->
+          <span class="absolute left-0 top-0 h-full w-1 bg-[#b9da05] scale-y-0 group-hover:scale-y-100 transition-transform duration-300 origin-top rounded-l-xl"></span>
+
           <!-- Date block -->
-          <div class="w-full md:w-16 h-16 md:h-auto bg-[#b9da05] text-[#011538] rounded-lg flex flex-col items-center justify-center md:flex-shrink-0 font-bold">
+          <div class="w-full md:w-16 h-16 md:h-auto bg-[#b9da05] text-[#011538] rounded-lg 
+            flex flex-col items-center justify-center md:flex-shrink-0 font-bold shadow-md">
             <span class="text-xs uppercase">${month}</span>
             <span class="text-2xl">${day}</span>
           </div>
           
           <!-- Event details -->
-          <div class="flex-grow">
+          <div class="flex-grow relative z-10">
             <div class="flex justify-between items-start">
-              <h3 class="text-lg md:text-xl font-semibold group-hover:text-[#b9da05] transition-colors">
+              <h3 class="text-lg md:text-xl font-semibold transition-colors duration-300 group-hover:text-[#b9da05]">
                 ${evt.event_name}
               </h3>
               <span class="inline-block text-xs font-semibold px-2 py-1 bg-[#b9da05] text-[#011538] rounded-full">
@@ -851,6 +927,7 @@
                 showEmptyState("tab-events", "fa-calendar-days", "Failed to load events.");
             }
         }
+
 
 
         document.addEventListener("DOMContentLoaded", () => {

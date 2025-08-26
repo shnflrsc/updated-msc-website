@@ -23,12 +23,9 @@ async function fetchCalendarEvents() {
   const endDate = new Date(year, month + 1, 0).toISOString().split('T')[0];
 
   try {
-    const res = await fetch(`${API_BASE}/events/calendar?start=${startDate}&end=${endDate}`, {
-      credentials: "include"
-    });
-    const data = await res.json();
+    const data = await apiCall(`/events/msc-calendar?start=${startDate}&end=${endDate}`, "GET");
 
-    if (data.success && Array.isArray(data.data)) {
+    if (data && data.success && Array.isArray(data.data)) {
       calendarEvents = data.data.map(event => ({
         title: event.event_name,
         date: event.event_date,
@@ -45,6 +42,8 @@ async function fetchCalendarEvents() {
     renderMSCCalendar();
   } catch (err) {
     console.error("Calendar fetch error:", err);
+    calendarEvents = [];
+    renderMSCCalendar();
   }
 }
 
@@ -77,6 +76,7 @@ function renderMSCCalendar() {
       "overflow-y-auto", "day-cell"
     );
 
+    // day number
     const dayLabel = document.createElement("div");
     dayLabel.textContent = day;
 
@@ -96,6 +96,7 @@ function renderMSCCalendar() {
 
     cell.appendChild(dayLabel);
 
+    // event badges
     events.forEach(e => {
       const badge = document.createElement("div");
       badge.className = `mt-1 text-white text-xs px-2 py-1 rounded ${e.color} cursor-pointer truncate`;
@@ -115,21 +116,27 @@ function goToToday() {
 }
 
 function openCalendarModal(event) {
+  const modal = document.getElementById("modal-overlay");
+  const inner = modal.querySelector("div");
+
+  modal.classList.remove("hidden");
+  inner.classList.remove("animate-fadeOut");
+  inner.classList.add("animate-fadeIn");
+
   document.getElementById("modal-title").textContent = event.title;
-  document.getElementById("modal-overlay").classList.remove("hidden");
 
   const dateTimeString = `${event.date}T${event.time}`;
   const date = new Date(dateTimeString);
 
-  const formattedDate = date.toLocaleDateString('en-US', {
-    weekday: 'long',
-    month: 'long',
-    day: 'numeric'
+  const formattedDate = date.toLocaleDateString("en-US", {
+    month: "long",
+    day: "numeric",
+    year: "numeric"
   });
 
-  const formattedTime = date.toLocaleTimeString('en-GB', {
-    hour: '2-digit',
-    minute: '2-digit',
+  const formattedTime = date.toLocaleTimeString("en-GB", {
+    hour: "2-digit",
+    minute: "2-digit",
     hour12: false
   });
 
@@ -138,11 +145,19 @@ function openCalendarModal(event) {
 }
 
 function closeCalendarModal() {
-  document.getElementById("modal-overlay").classList.add("hidden");
+  const modal = document.getElementById("modal-overlay");
+  const inner = modal.querySelector("div");
+
+  inner.classList.remove("animate-fadeIn");
+  inner.classList.add("animate-fadeOut");
+
+  inner.addEventListener("animationend", () => {
+    modal.classList.add("hidden");
+  }, { once: true });
 }
 
-document.addEventListener("DOMContentLoaded", fetchCalendarEvents);
 
+document.addEventListener("DOMContentLoaded", fetchCalendarEvents);
 
 
 
