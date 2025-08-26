@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Event Participants</title>
+    <title>Event Participants | BulSU MSC</title>
     <link href="./Logos/Bulsu MSC Logo-02.png" rel="icon" type="image/png" />
 
     <script src="https://cdn.tailwindcss.com"></script>
@@ -24,6 +24,24 @@
         h2,
         h3 {
             font-family: 'Orbitron', sans-serif;
+        }
+
+        /* Custom scrollbar styles */
+        ::-webkit-scrollbar {
+            width: 8px;
+            background-color: #1e293b;
+            /* bg-slate-800 */
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background-color: #b9da05;
+            /* green-400 */
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background-color: #d1d5db;
+            /* gray-300 */
         }
     </style>
 </head>
@@ -65,30 +83,31 @@
         <i class="fas fa-bars"></i>
     </button>
 
-    <main class="lg:ml-64 p-4 md:p-6 transition-all duration-300 flex flex-col min-h-screen">
-        <button onclick="history.back()"
-            class="mb-4 bg-[#b9da05] text-[#011538] px-4 py-2 rounded hover:bg-white hover:text-[#011538] w-32">
-            &larr; Back
+    <main class="lg:ml-64 p-6 transition-all duration-300 flex flex-col min-h-screen">
+        <button id="backButton"
+            class="w-36 px-5 py-2 mb-6 bg-[#b9da05] text-[#011538] font-semibold rounded-md hover:bg-[#9abc04] shadow-md flex items-center justify-center gap-2">
+            <i class="fa-solid fa-arrow-left"></i> Back
         </button>
 
-        <h1 id="event-title" class="text-2xl font-bold text-white mb-6"></h1>
+        <h2 id="event-title"
+            class="text-3xl md:text-4xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-[#b9da05] to-[#fef08a] mb-8">
+            Event Title
+        </h2>
 
-        <!-- Responsive Table Wrapper -->
-        <div class="overflow-x-auto w-full">
-            <table class="min-w-full text-left text-white border border-white/20 rounded-lg bg-[#011538]">
-                <thead class="bg-[#011538]">
-                    <tr class="border-b border-white/20">
-                        <th class="px-4 py-2 text-sm sm:text-base">#</th>
-                        <th class="px-4 py-2 text-sm sm:text-base">Name</th>
-                        <th class="px-4 py-2 text-sm sm:text-base">Email</th>
-                        <th class="px-4 py-2 text-sm sm:text-base">Student No</th>
-                        <th class="px-4 py-2 text-sm sm:text-base">MSC ID</th>
+        <div class="overflow-x-auto w-full rounded-xl shadow-md border border-[#b9da05]">
+            <table class="min-w-full text-left text-white bg-[#011538] rounded-lg">
+                <thead class="bg-[#011538] border-b border-white/20">
+                    <tr>
+                        <th class="px-5 py-3 text-sm sm:text-base">#</th>
+                        <th class="px-5 py-3 text-sm sm:text-base">Name</th>
+                        <th class="px-5 py-3 text-sm sm:text-base">Email</th>
+                        <th class="px-5 py-3 text-sm sm:text-base">Student No</th>
+                        <th class="px-5 py-3 text-sm sm:text-base">MSC ID</th>
                     </tr>
                 </thead>
                 <tbody id="participants-table-body" class="divide-y divide-white/10 text-sm sm:text-base">
                     <tr>
-                        <td colspan="5" class="text-center py-4 text-gray-400">
-                            No participants found.
+                        <td colspan="5" class="text-center py-6 text-gray-400">
                         </td>
                     </tr>
                 </tbody>
@@ -96,6 +115,36 @@
         </div>
     </main>
 
+    <!-- Added footer from dashboard.html -->
+    <footer class="bg-[#00071c] text-center p-6 border-t border-gray-800">
+        <div class="flex justify-center space-x-1 mb-1">
+            <a href="https://www.bulsu.edu.ph" target="_blank" rel="noopener noreferrer"><img src="./Logos/BulSU.png"
+                    alt="Bulacan State University Logo" class="h-10"></a>
+            <a href="https://www.facebook.com/osobulsu" target="_blank" rel="noopener noreferrer"><img
+                    src="./Logos/OSOA.png" alt="Bulacan State University OSOA Logo" class="h-10 w-10"></a>
+        </div>
+        <p class="text-gray-500 text-sm">&copy; 2025 BulSU Microsoft Student Community. All rights reserved.</p>
+        <div class="flex justify-center space-x-4 mt-2">
+            <a href="https://www.facebook.com/bulsu.officialmsc" target="_blank"
+                class="text-gray-400 hover:text-[#b9da05] transition-colors duration-300"><i
+                    class="fab fa-facebook-f"></i></a>
+            <a href="https://www.instagram.com/bulsumsc/" target="_blank"
+                class="text-gray-400 hover:text-[#b9da05] transition-colors duration-300"><i
+                    class="fab fa-instagram"></i></a>
+            <a href="https://www.threads.com/@bulsumsc" target="_blank"
+                class="text-gray-400 hover:text-[#b9da05] transition-colors duration-300"><i
+                    class="fab fa-threads"></i></a>
+            <a href="https://www.tiktok.com/@bulsumsc" target="_blank"
+                class="text-gray-400 hover:text-[#b9da05] transition-colors duration-300"><i
+                    class="fab fa-tiktok"></i></a>
+            <a href="https://www.linkedin.com/company/bulsumsc/" target="_blank"
+                class="text-gray-400 hover:text-[#b9da05] transition-colors duration-300"><i
+                    class="fab fa-linkedin"></i></a>
+            <a href="https://www.github.com/bulsumsc" target="_blank"
+                class="text-gray-400 hover:text-[#b9da05] transition-colors duration-300"><i
+                    class="fab fa-github"></i></a>
+        </div>
+    </footer>
 
     <script>
         const API_BASE = "/updated-msc-website/api";
@@ -163,6 +212,11 @@
         }
 
         document.addEventListener('DOMContentLoaded', fetchParticipants);
+
+        const backButton = document.getElementById('backButton');
+        backButton.addEventListener('click', () => {
+            history.back();
+        });
     </script>
 
 </body>

@@ -42,25 +42,13 @@ async function fetchCalendarEvents() {
       calendarEvents = [];
     }
 
-    // 🔑 Refresh both calendars after data is ready
-    renderUniversityCalendar();
     renderMSCCalendar();
-    // renderGeneralCalendar();
-
-    // // 🔑 Refresh University Calendar always
-    // renderUniversityCalendar();
-
-    // // 🔑 Only refresh General Calendar if script is loaded
-    // if (typeof renderMSCCalendar === "function") {
-    //   renderMSCCalendar;
-    // }
-
   } catch (err) {
     console.error("Calendar fetch error:", err);
   }
 }
 
-function renderUniversityCalendar() {
+function renderMSCCalendar() {
   const grid = document.getElementById("calendar-grid");
   const monthTitle = document.getElementById("calendar-month-title");
   const month = currentCalendarDate.getMonth();
@@ -121,6 +109,11 @@ function renderUniversityCalendar() {
   }
 }
 
+function goToToday() {
+  currentCalendarDate = new Date();
+  fetchCalendarEvents();
+}
+
 function openCalendarModal(event) {
   document.getElementById("modal-title").textContent = event.title;
   document.getElementById("modal-overlay").classList.remove("hidden");
@@ -146,12 +139,6 @@ function openCalendarModal(event) {
 
 function closeCalendarModal() {
   document.getElementById("modal-overlay").classList.add("hidden");
-}
-
-
-function goToToday() {
-  currentCalendarDate = new Date();
-  fetchCalendarEvents();
 }
 
 document.addEventListener("DOMContentLoaded", fetchCalendarEvents);
