@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>BulSU MSC | Add Members</title>
-  <link rel="stylesheet" href="/updated-msc-website/css/add-member.css">
+  <link rel="stylesheet" href="/updated-msc-website/css/edit-members.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
   <link rel="icon" href="./Logos/Bulsu MSC Logo-02.png" type="image/png">
 </head>
@@ -45,14 +45,14 @@
             <i class="fas fa-tachometer-alt"></i> Dashboard
         </a>
 
-        <a href="add-member.html" class="flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-[#b9da05] hover:text-[#011538] transition-colors">
+        <a href="admin_add_member.html" class="flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-[#b9da05] hover:text-[#011538] transition-colors">
             <i class="fas fa-user-graduate"></i> Students
         </a>
 
-        <a href="events.html" class="flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-[#b9da05] hover:text-[#011538] transition-colors">
+        <a href="admin_edit_event.html" class="flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-[#b9da05] hover:text-[#011538] transition-colors">
             <i class="fas fa-calendar-alt"></i> Events
         </a>
-        <a href="announcements.html" class="flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-[#b9da05] hover:text-[#011538] transition-colors">
+        <a href="admin_edit_announcement.html" class="flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-[#b9da05] hover:text-[#011538] transition-colors">
             <i class="fas fa-bullhorn"></i> Announcements
         </a>
 
@@ -68,7 +68,7 @@
     </aside>
 
     <div class="page-wrapper">
-        <h2>Add New Member</h2>
+        <h2>Edit Member</h2>
 
         <div class="card">
         <form id="addMemberForm">
@@ -238,15 +238,16 @@
             <!-- Error box -->
             <div id="error-box" class="error-box hidden"></div>
 
-            <!-- Add Member Button -->
+            <!-- Update Member/Cancel Button -->
             <div class="form-actions">
-            <button type="submit" class="btn">Add Member</button>
+            <button type="submit" class="btn">Update Member</button>
+            <button type="button" class="btn btn-secondary" onclick="window.location.href='/updated-msc-website/manage-members.html'">Cancel</button>
             </div>
         </form>
         </div>
     </div>
     </div>
-  <script src="add-member.js"></script>
+  <script src="edit-members.js"></script>
   <script>
     const passwordInput = document.getElementById("regPassword");
     const strengthText = document.getElementById("password-strength");
