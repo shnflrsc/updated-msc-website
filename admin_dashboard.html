@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Admin Dashboard</title>
+    <title>Admin Dashboard | BulSU MSC</title>
     <link href="./Logos/Bulsu MSC Logo-02.png" rel="icon" type="image/png" />
 
     <script src="https://cdn.tailwindcss.com"></script>
@@ -29,10 +29,44 @@
         }
 
         /* Use Orbitron for general headings on mobile, Veonika on desktop for some */
-        h2, h3 {
+        h2,
+        h3 {
             font-family: 'Orbitron', sans-serif;
         }
 
+        .fade-in {
+            animation: fadeIn 0.8s ease forwards;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(5px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Custom scrollbar styles */
+        ::-webkit-scrollbar {
+            width: 8px;
+            background-color: #1e293b;
+            /* bg-slate-800 */
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background-color: #b9da05;
+            /* green-400 */
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background-color: #d1d5db;
+            /* gray-300 */
+        }
     </style>
 </head>
 
@@ -81,52 +115,108 @@
         </div>
 
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            <div class="bg-[#011538] shadow-md rounded-xl border border-[#b9da05] p-6 text-white">
-                <h3 class="text-xl font-semibold text-gray-200 mb-2">Total Students</h3>
-                <p class="text-3xl font-bold text-[#b9da05]" id="student-cnt"></p>
+            <!-- Total Students Card -->
+            <div
+                class="bg-[#011538] border border-[#b9da05] rounded-xl p-6 text-white flex items-center gap-4 transform transition duration-300 hover:scale-105 hover:shadow-lg hover:border-[#b9da05]">
+                <div
+                    class="bg-[#b9da05]/20 text-[#b9da05] rounded-full w-16 h-16 flex items-center justify-center text-3xl">
+                    <!-- <i class="fas fa-users"></i> -->
+                    <i class="fa-solid fa-users"></i>
+                </div>
+                <div>
+                    <h3 class="text-lg font-semibold text-gray-200 mb-1">Total Students</h3>
+                    <p class="text-2xl md:text-3xl font-bold text-[#b9da05]" id="student-cnt"></p>
+                </div>
             </div>
 
-            <div class="bg-[#011538] shadow-md rounded-xl border border-[#b9da05] p-6 text-white">
-                <h3 class="text-xl font-semibold text-gray-200 mb-2">Total Events</h3>
-                <p class="text-3xl font-bold text-[#b9da05]" id="event-cnt"></p>
+            <!-- Total Events Card -->
+            <div
+                class="bg-[#011538] border border-[#b9da05] rounded-xl p-6 text-white flex items-center gap-4 transform transition duration-300 hover:scale-105 hover:shadow-lg hover:border-[#b9da05]">
+                <div
+                    class="bg-[#b9da05]/20 text-[#b9da05] rounded-full w-16 h-16 flex items-center justify-center text-3xl">
+                    <i class="fas fa-calendar-alt"></i>
+                </div>
+                <div>
+                    <h3 class="text-lg font-semibold text-gray-200 mb-1">Total Events</h3>
+                    <p class="text-2xl md:text-3xl font-bold text-[#b9da05]" id="event-cnt"></p>
+                </div>
             </div>
 
-            <div class="bg-[#011538] shadow-md rounded-xl border border-[#b9da05] p-6 text-white">
-                <h3 class="text-xl font-semibold text-gray-200 mb-2">Total Announcements</h3>
-                <p class="text-3xl font-bold text-[#b9da05]" id="announcement-cnt"></p>
+            <!-- Total Announcements Card -->
+            <div
+                class="bg-[#011538] border border-[#b9da05] rounded-xl p-6 text-white flex items-center gap-4 transform transition duration-300 hover:scale-105 hover:shadow-lg hover:border-[#b9da05]">
+                <div
+                    class="bg-[#b9da05]/20 text-[#b9da05] rounded-full w-16 h-16 flex items-center justify-center text-3xl">
+                    <i class="fas fa-bullhorn"></i>
+                </div>
+                <div>
+                    <h3 class="text-lg font-semibold text-gray-200 mb-1">Total Announcements</h3>
+                    <p class="text-2xl md:text-3xl font-bold text-[#b9da05]" id="announcement-cnt"></p>
+                </div>
             </div>
         </div>
 
         <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6">
-            <div class="bg-[#011538] shadow-md rounded-xl p-6 text-white">
+            <!-- Students per College -->
+            <div class="bg-[#011538] border border-[#b9da05] rounded-xl p-6 text-white">
                 <h3 class="text-xl font-semibold text-gray-200 mb-4">Students per College</h3>
                 <canvas id="studentsPerCollegeChart" class="w-full h-64"></canvas>
             </div>
 
-            <div class="bg-[#011538] shadow-md rounded-xl p-6 text-white">
+            <!-- Students per Year Level -->
+            <div class="bg-[#011538] border border-[#b9da05] rounded-xl p-6 text-white">
                 <h3 class="text-xl font-semibold text-gray-200 mb-4">Students per Year Level</h3>
                 <canvas id="studentsPerYearLevelChart" class="w-full h-64"></canvas>
             </div>
+
+            <div class="bg-[#011538] border border-[#b9da05] rounded-xl p-6 text-white">
+                <h3 class="text-xl font-semibold text-gray-200 mb-4">Events Status</h3>
+                <!-- <<canvas id="eventStatusChart" class="w-full h-64"></canvas> -->
+                <div class="h-64">
+                    <canvas id="eventStatusChart"></canvas>
+                </div>
+            </div>
+
+            <div class="bg-[#011538] border border-[#b9da05] rounded-xl p-6 text-white">
+                <h3 class="text-xl font-semibold text-gray-200 mb-4">Events per Month</h3>
+                <canvas id="eventsPerMonthChart" class="w-full h-64"></canvas>
+            </div>
         </div>
+
+
     </main>
-    
+
     <!-- Added footer from dashboard.html -->
     <footer class="bg-[#00071c] text-center p-6 border-t border-gray-800">
         <div class="flex justify-center space-x-1 mb-1">
-            <a href="https://www.bulsu.edu.ph" target="_blank" rel="noopener noreferrer"><img src="./Logos/BulSU.png" alt="Bulacan State University Logo" class="h-10"></a>
-            <a href="https://www.facebook.com/osobulsu" target="_blank" rel="noopener noreferrer"><img src="./Logos/OSOA.png" alt="Bulacan State University OSOA Logo" class="h-10 w-10"></a>
+            <a href="https://www.bulsu.edu.ph" target="_blank" rel="noopener noreferrer"><img src="./Logos/BulSU.png"
+                    alt="Bulacan State University Logo" class="h-10"></a>
+            <a href="https://www.facebook.com/osobulsu" target="_blank" rel="noopener noreferrer"><img
+                    src="./Logos/OSOA.png" alt="Bulacan State University OSOA Logo" class="h-10 w-10"></a>
         </div>
         <p class="text-gray-500 text-sm">&copy; 2025 BulSU Microsoft Student Community. All rights reserved.</p>
         <div class="flex justify-center space-x-4 mt-2">
-            <a href="https://www.facebook.com/bulsu.officialmsc" target="_blank" class="text-gray-400 hover:text-[#b9da05] transition-colors duration-300"><i class="fab fa-facebook-f"></i></a>
-            <a href="https://www.instagram.com/bulsumsc/" target="_blank" class="text-gray-400 hover:text-[#b9da05] transition-colors duration-300"><i class="fab fa-instagram"></i></a>
-            <a href="https://www.threads.com/@bulsumsc" target="_blank" class="text-gray-400 hover:text-[#b9da05] transition-colors duration-300"><i class="fab fa-threads"></i></a>
-            <a href="https://www.tiktok.com/@bulsumsc" target="_blank" class="text-gray-400 hover:text-[#b9da05] transition-colors duration-300"><i class="fab fa-tiktok"></i></a>
-            <a href="https://www.linkedin.com/company/bulsumsc/" target="_blank" class="text-gray-400 hover:text-[#b9da05] transition-colors duration-300"><i class="fab fa-linkedin"></i></a>
-            <a href="https://www.github.com/bulsumsc" target="_blank" class="text-gray-400 hover:text-[#b9da05] transition-colors duration-300"><i class="fab fa-github"></i></a>
+            <a href="https://www.facebook.com/bulsu.officialmsc" target="_blank"
+                class="text-gray-400 hover:text-[#b9da05] transition-colors duration-300"><i
+                    class="fab fa-facebook-f"></i></a>
+            <a href="https://www.instagram.com/bulsumsc/" target="_blank"
+                class="text-gray-400 hover:text-[#b9da05] transition-colors duration-300"><i
+                    class="fab fa-instagram"></i></a>
+            <a href="https://www.threads.com/@bulsumsc" target="_blank"
+                class="text-gray-400 hover:text-[#b9da05] transition-colors duration-300"><i
+                    class="fab fa-threads"></i></a>
+            <a href="https://www.tiktok.com/@bulsumsc" target="_blank"
+                class="text-gray-400 hover:text-[#b9da05] transition-colors duration-300"><i
+                    class="fab fa-tiktok"></i></a>
+            <a href="https://www.linkedin.com/company/bulsumsc/" target="_blank"
+                class="text-gray-400 hover:text-[#b9da05] transition-colors duration-300"><i
+                    class="fab fa-linkedin"></i></a>
+            <a href="https://www.github.com/bulsumsc" target="_blank"
+                class="text-gray-400 hover:text-[#b9da05] transition-colors duration-300"><i
+                    class="fab fa-github"></i></a>
         </div>
     </footer>
-    
+
     <script>
         const API_BASE = "/updated-msc-website/api";
 
@@ -145,22 +235,39 @@
             }
         }
 
+        function animateCounter(id, endValue, duration = 1200) {
+            const el = document.getElementById(id);
+            if (!el) return;
+
+            let start = 0;
+            const stepTime = Math.max(Math.floor(duration / endValue), 20);
+            el.style.opacity = "0";
+
+            let timer = setInterval(() => {
+                start++;
+                el.textContent = start.toLocaleString();
+                if (start >= endValue) {
+                    clearInterval(timer);
+                    el.textContent = endValue.toLocaleString();
+                }
+            }, stepTime);
+
+            el.classList.add("fade-in");
+        }
+
         async function getAllStudents() {
             const data = await apiCall("/students/count", "GET");
-            document.getElementById("student-cnt").textContent = data?.success ? data.data : "0";
-            if (!data?.success) console.error("Failed to fetch student count:", data?.message);
+            if (data?.success) animateCounter("student-cnt", data.data);
         }
 
         async function getAllEvents() {
             const data = await apiCall("/events/count", "GET");
-            document.getElementById("event-cnt").textContent = data?.success ? data.data : "0";
-            if (!data?.success) console.error("Failed to fetch event count:", data?.message);
+            if (data?.success) animateCounter("event-cnt", data.data);
         }
 
         async function getAllAnnouncements() {
             const data = await apiCall("/announcements/count", "GET");
-            document.getElementById("announcement-cnt").textContent = data?.success ? data.data : "0";
-            if (!data?.success) console.error("Failed to fetch announcement count:", data?.message);
+            if (data?.success) animateCounter("announcement-cnt", data.data);
         }
 
         document.addEventListener("DOMContentLoaded", () => {

@@ -304,4 +304,34 @@ class Event
         $result = $stmt->fetch(PDO::FETCH_ASSOC);
         return $result['total'] ?? 0;
     }
+
+    /**
+     * GET: Event Status counts 
+     */
+    public function getStatusCounts()
+    {
+        $stmt = $this->db->prepare("
+        SELECT event_status, COUNT(*) AS total
+        FROM events
+        GROUP BY event_status
+    ");
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    /**
+     * GET: Events per Month
+     */
+    public function getEventsPerMonth()
+    {
+        $sql = "SELECT MONTH(event_date) AS month, COUNT(*) AS total
+            FROM events
+            GROUP BY month
+            ORDER BY month ASC";
+
+        $stmt = $this->db->prepare($sql);
+        $stmt->execute();
+
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
 }

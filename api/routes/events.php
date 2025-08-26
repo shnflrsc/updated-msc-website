@@ -47,13 +47,15 @@ switch ($method) {
         } elseif ($endpoint === 'calendar') {
             $eventController->getCalendarEvents();
         } elseif ($endpoint && is_numeric($endpoint) && $id === 'registrations') {
-            // endpoint is actually the event ID, id is 'registrations'
             $eventController->getRegistrations($endpoint);
         } elseif ($endpoint && is_numeric($endpoint)) {
-            // endpoint is actually the ID
             $eventController->getById($endpoint);
         } elseif ($endpoint === 'count') {
-            $eventController->countEvents(); //eventCounter
+            $eventController->countEvents();
+        } elseif ($endpoint === 'status-count') {
+            $eventController->getStatusCounts();
+        } elseif ($endpoint === 'monthly-distribution') {
+            $eventController->getEventsPerMonth();
         } elseif ($endpoint === 'student' && is_numeric($id)) {
             $eventController->getEventsByStudent($id);
         } elseif ($endpoint === '' || $endpoint === 'all') {

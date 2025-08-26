@@ -58,6 +58,7 @@ function renderUniversityCalendar() {
   monthTitle.textContent = currentCalendarDate.toLocaleString("default", { month: "long", year: "numeric" });
   grid.innerHTML = "";
 
+  // Empty cells for first day
   for (let i = 0; i < firstDay; i++) {
     const cell = document.createElement("div");
     grid.appendChild(cell);
@@ -69,8 +70,9 @@ function renderUniversityCalendar() {
     const dateStr = date.toISOString().split('T')[0];
     const events = calendarEvents.filter(e => e.date === dateStr);
 
+    // Responsive padding
     cell.classList.add(
-      "p-4", "border", "border-white/10", "relative",
+      "p-2", "sm:p-4", "border", "border-white/10", "relative",
       "bg-[#011538]", "hover:bg-white/10", "transition-colors",
       "overflow-y-auto", "day-cell"
     );
@@ -82,7 +84,7 @@ function renderUniversityCalendar() {
     const isToday = date.toDateString() === today.toDateString();
 
     dayLabel.classList.add(
-      "w-7", "h-7", "flex", "items-center", "justify-center",
+      "w-6", "h-6", "flex", "items-center", "justify-center",
       "font-semibold", "text-sm", "mx-auto", "rounded-full"
     );
 
@@ -94,9 +96,10 @@ function renderUniversityCalendar() {
 
     cell.appendChild(dayLabel);
 
+    // Add events with wrap for mobile
     events.forEach(e => {
       const badge = document.createElement("div");
-      badge.className = `mt-1 text-white text-xs px-2 py-1 rounded ${e.color} cursor-pointer truncate`;
+      badge.className = `mt-1 text-white text-xs px-2 py-1 rounded ${e.color} cursor-pointer truncate sm:truncate break-words`;
       badge.textContent = e.title;
 
       badge.addEventListener("click", () => openCalendarModal(e));
@@ -106,6 +109,7 @@ function renderUniversityCalendar() {
     grid.appendChild(cell);
   }
 }
+
 
 function openCalendarModal(event) {
   document.getElementById("modal-title").textContent = `${event.title}`; //(ID: ${event.id})

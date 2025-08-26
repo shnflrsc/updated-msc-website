@@ -412,4 +412,32 @@ class EventController
             echo json_encode(['success' => false, 'message' => $e->getMessage()]);
         }
     }
+
+    /**
+     * GET: Event Status counts 
+     */
+    public function getStatusCounts()
+    {
+        try {
+            $statusCounts = $this->eventModel->getStatusCounts(); // create this in Event.php
+
+            Response::success($statusCounts);
+        } catch (Exception $e) {
+            Response::serverError($e->getMessage());
+        }
+    }
+
+    /**
+     * GET: Events per Month
+     */
+    public function getEventsPerMonth()
+    {
+        try {
+            $events = $this->eventModel->getEventsPerMonth();
+
+            Response::success($events);
+        } catch (Exception $e) {
+            Response::serverError($e->getMessage());
+        }
+    }
 }
