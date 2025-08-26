@@ -207,6 +207,24 @@ class Event
         return $stmt->fetchAll();
     }
 
+     /**
+     * Get university calendar events 
+     */
+    public function getUnivCalendarEvents($startDate, $endDate) {
+        $sql = "SELECT calendar_id, event_name, event_date, event_type, school_year
+                FROM university_calendar
+                WHERE event_date BETWEEN :start_date AND :end_date
+                ORDER BY event_date ASC";
+
+        $stmt = $this->db->prepare($sql);
+        $stmt->execute([
+            'start_date' => $startDate,
+            'end_date'   => $endDate
+        ]);
+
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
     /**
      * Register student for event
      */

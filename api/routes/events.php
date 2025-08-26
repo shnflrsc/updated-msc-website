@@ -44,8 +44,10 @@ switch ($method) {
     case 'GET':
         if ($endpoint === 'upcoming') {
             $eventController->getUpcoming();
-        } elseif ($endpoint === 'calendar') {
+        } elseif ($endpoint === 'msc-calendar') {
             $eventController->getCalendarEvents();
+        }  elseif ($endpoint === 'university-calendar') {
+            $eventController->getUnivCalendarEvents();
         } elseif ($endpoint && is_numeric($endpoint) && $id === 'registrations') {
             $eventController->getRegistrations($endpoint);
         } elseif ($endpoint && is_numeric($endpoint)) {
