@@ -127,18 +127,28 @@ body {
   top: 1rem;
   left: 1rem;
   z-index: 1100;
-  width: 30px;
-  height: 22px;
+  width: 38px;
+  height: 38px;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: center;
+  align-items: center;
   cursor: pointer;
+  background: #b9da05;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.12);
+  transition: box-shadow 0.3s;
+  gap: 3px; /* Increase vertical gap between spans */
+}
+
+.hamburger:hover {
+  box-shadow: 0 4px 16px rgba(0,0,0,0.18);
 }
 
 .hamburger span {
   display: block;
-  height: 3px;
-  width: 100%;
-  background: #b9da05;
+  height: 4px;
+  width: 22px;
+  background: #080c24;
   border-radius: 2px;
   transition: all 0.3s;
 }
@@ -153,20 +163,25 @@ body {
   position: fixed;
   top: 20px;
   left: 20px;
-  width: 30px;
-  height: 20px;
-  display: flex;
+  width: 38px;
+  height: 38px;
+  display: none;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: center;
+  align-items: center;
   cursor: pointer;
   z-index: 1100;
-  display: none;
+  background: #b9da05;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.12);
+  gap: 3px; /* Increase vertical gap between spans */
 }
 
 .hamburger span {
   display: block;
-  height: 3px;
-  background: #b9da05;
+  height: 4px;
+  width: 22px;
+  background: #080c24;
   border-radius: 2px;
   transition: 0.3s;
 }
@@ -185,9 +200,6 @@ body {
 .overlay.active {
   display: block;
 }
-
-
-
 
 /* Main */
 .main-content {
@@ -208,13 +220,13 @@ body {
 
 .left-controls select,
 .right-controls select {
-  padding: 5px;
+  padding: 6px 10px;
 }
 
 .left-controls button,
 .right-controls button {
-  margin-left: 8px;
-  padding: 5px 10px;
+  margin: 0; /* reset */
+  padding: 6px 12px;
   background: #0b1e39;
   color: white;
   border: none;
@@ -226,6 +238,37 @@ body {
 .right-controls button:hover {
   background: #b9da05;
   color: #000;
+}
+
+.left-controls {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 10px;
+}
+
+.left-controls select,
+.left-controls button {
+  display: inline-block;   /* stop block stacking */
+  width: auto;             /* don’t stretch full width */
+  padding: 6px 12px;
+  font-size: 14px;
+}
+
+.left-controls,
+.right-controls {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 10px; /* space between items */
+}
+
+.right-controls {
+  width: 300px;
+}
+
+.right-controls label {
+  width: 200px;
 }
 
 /* Table */
@@ -308,6 +351,172 @@ th, td {
   font-weight: 500;  /* makes it look cleaner */
 }
 
+/*Edit Button*/
+.editBtn {
+  background-color: #b9da05;
+  color: #080c24; 
+  border: 1px solid transparent; /* reserve space for border */
+  padding: 6px 12px;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s ease, color 0.2s ease, border 0.2s ease, box-shadow 0.2s ease;
+}
+
+.editBtn:hover {
+  background-color: #080c24;
+  color: #b9da05;
+  border: 1px solid #b9da05; /* no size jump */
+  box-shadow: 0px 3px 8px rgba(0,0,0,0.3);
+}
+
+
+
+/* Basic modal styling */
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+/* Make modal look like card */
+.modal-content {
+  position: relative; /* so children like .close-btn can anchor inside */
+  background: rgba(16, 24, 44, 0.95);
+  padding: 30px;
+  border-radius: 16px;
+  border: 2px solid #b9da05;
+  box-shadow: 0 0 20px rgba(185, 218, 5, 0.6);
+  max-width: 800px;
+  width: 100%;
+  text-align: left;
+  overflow-y: auto;
+  max-height: 90vh;
+}
+
+.modal-content h2 {
+  margin-bottom: 20px;
+  color: #b9da05;
+  font-weight: 700;
+  font-size: 1.8rem;
+}
+
+/* Base input & select styles */
+input[type="text"],
+input[type="email"],
+input[type="number"],
+input[type="password"],
+select,
+textarea {
+  width: 100%;
+  padding: 10px 14px;
+  border: 1.5px solid #ccc;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  background: #fff;
+  color: #080c24;
+  outline: none;
+  transition: all 0.25s ease;
+}
+
+/* Placeholder color */
+input::placeholder,
+textarea::placeholder {
+  color: #999;
+}
+
+/* Default focus state */
+input:focus,
+select:focus,
+textarea:focus {
+  border-color: #b9da05;
+  box-shadow: 0 0 6px rgba(185, 218, 5, 0.6);
+  background: #fdfef7; /* subtle off-white for focus */
+}
+
+/* Labels */
+label {
+  font-weight: 600;
+  color: #f1f1f1; /* keep labels readable on dark modal */
+  margin-bottom: 6px;
+  display: inline-block;
+  font-size: 0.9rem;
+}
+
+/* Buttons inside forms */
+form button[type="submit"],
+form button {
+  background-color: #b9da05;
+  color: #080c24;
+  font-weight: 600;
+  border: none;
+  padding: 10px 18px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+form button:hover {
+  background-color: #080c24;
+  color: #b9da05;
+  border: 1px solid #b9da05;
+}
+
+/* Ensure modal form uses grid rows */
+#editMemberForm {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+#editMemberForm .form-row {
+  display: grid;
+  gap: 20px 30px;
+}
+
+#editMemberForm .form-row.two-col {
+  grid-template-columns: repeat(2, 1fr);
+}
+
+#editMemberForm .form-row.three-col {
+  grid-template-columns: repeat(3, 1fr);
+}
+
+#editMemberForm .form-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 15px;
+}
+
+
+.close-btn {
+  position: absolute;
+  top: 12px;
+  right: 16px;
+  font-size: 28px;
+  font-weight: bold;
+  color: #fff;
+  cursor: pointer;
+  transition: color 0.2s ease-in-out;
+}
+
+.close-btn:hover {
+  color: #b9da05;
+}
+
+/* Hide modal by default */
+.hidden {
+  display: none;
+}
+
 /* Mobile Sidebar */
 @media (max-width: 768px) {
   .sidebar {
@@ -369,7 +578,7 @@ th, td {
 
   .header-buttons {
     position: relative;
-    right: 70%;
+    right: 68%;
   }
 
   .header-buttons button {
