@@ -686,13 +686,6 @@
       }
     });
 
-    form.addEventListener('submit', function(e) {
-      e.preventDefault();
-      modal.style.display = 'none';
-      successModal.style.display = 'block';
-      form.reset();
-    });
-
     closeSuccessModal.addEventListener('click', function() {
       successModal.style.display = 'none';
     });
@@ -749,14 +742,66 @@
       else if (score === 3 || score === 4) { strength.textContent = 'Medium strength'; strength.classList.add('medium'); }
       else { strength.textContent = 'Strong password'; strength.classList.add('strong'); }
     });
+    
+  </script>
+  <script>
+  const API_BASE = "/updated-msc-website/api";
 
-    form.addEventListener('submit', (e) => {
-      e.preventDefault();
-      modal.style.display = 'none';
-      successModal.style.display = 'block';
-      form.reset();
-      strength.textContent = '';
+  // 1️⃣ Define apiCall first
+  async function apiCall(endpoint, method = "GET", data = null) {
+    const options = { method, headers: { "Content-Type": "application/json" } };
+    if (data) options.body = JSON.stringify(data);
+    const res = await fetch(`${API_BASE}${endpoint}`, options);
+    return res.json();
+  }
+
+  // 2️⃣ Define fetchStudents
+async function fetchStudents() {
+  try {
+    const result = await apiCall("/students?page=1&limit=20", "GET");
+    console.log("API result:", result);
+
+    if (!result?.success) {
+      console.error("Failed to fetch students", result?.message);
+      return;
+    }
+
+    const students = result.data.students; // ✅ corrected path
+    const tbody = document.getElementById("membersTableBody");
+    tbody.innerHTML = "";
+
+    students.forEach(student => {
+      const tr = document.createElement("tr");
+      tr.innerHTML = `
+        <td class="px-2 py-3"><input type="checkbox" class="selectStudent" data-id="${student.id}"></td>
+        <td class="px-3 py-3">${student.msc_id}</td>
+        <td class="px-3 py-3">${student.first_name}</td>
+        <td class="px-3 py-3">${student.middle_name || ""}</td>
+        <td class="px-3 py-3">${student.last_name}</td>
+        <td class="px-3 py-3">${student.name_suffix || ""}</td>
+        <td class="px-3 py-3">${student.student_no}</td>
+        <td class="px-3 py-3">${student.email}</td>
+        <td class="px-3 py-3">${student.phone || ""}</td>
+        <td class="px-3 py-3">${student.gender}</td>
+        <td class="px-3 py-3">${student.program}</td>
+        <td class="px-3 py-3">${student.year_level}</td>
+        <td class="px-3 py-3">${student.college}</td>
+        <td class="px-3 py-3">${student.section || ""}</td>
+        <td class="px-3 py-3">${student.address || ""}</td>
+        <td class="px-3 py-3">${student.facebook_link || ""}</td>
+      `;
+      tbody.appendChild(tr);
     });
+
+  } catch (err) {
+    console.error(err);
+  }
+}
+
+
+    // Call on page load
+    fetchStudents();
+
   </script>
 
   <script src="program-and-course.js"></script>

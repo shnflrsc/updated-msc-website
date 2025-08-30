@@ -353,5 +353,32 @@ class StudentController
             Response::serverError($e->getMessage());
         }
     }
+
+        public function create()
+    {
+        try {
+            AuthMiddleware::requireOfficer(); // Only officers can create new students
+
+            $data = json_decode(file_get_contents("php://input"), true);
+            if (!$data) {
+                Response::validationError(['error' => 'Invalid JSON payload']);
+            }
+
+            $requiredFields = ['username', 'email', 'password', 'first_name', 'last_name', 'birthdate', 'gender', 'student_no', 'year_level', 'college', 'program'];
+            $errors = Validator::validateRequired($data, $requiredFields);
+
+            if (!empty($errors)) {
+                Response::validationError($errors);
+            }
+
+            $student = $this->studentModel->create($data);
+            unset($student['password']); // remove password from response
+
+            Response::success($student, 'Student created successfully');
+        } catch (Exception $e) {
+            Response::serverError($e->getMessage());
+        }
+    }
+
 }
 
