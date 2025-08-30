@@ -99,24 +99,37 @@
             transform: scale(1.1);
         }
 
-/* Add this to your <style> or Tailwind config */
-@keyframes fadeIn {
-  from { opacity: 0; transform: scale(0.95); }
-  to { opacity: 1; transform: scale(1); }
-}
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: scale(0.95);
+            }
 
-@keyframes fadeOut {
-  from { opacity: 1; transform: scale(1); }
-  to { opacity: 0; transform: scale(0.95); }
-}
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
 
-.animate-fadeIn {
-  animation: fadeIn 0.3s ease-out forwards;
-}
+        @keyframes fadeOut {
+            from {
+                opacity: 1;
+                transform: scale(1);
+            }
 
-.animate-fadeOut {
-  animation: fadeOut 0.3s ease-in forwards;
-}
+            to {
+                opacity: 0;
+                transform: scale(0.95);
+            }
+        }
+
+        .animate-fadeIn {
+            animation: fadeIn 0.3s ease-out forwards;
+        }
+
+        .animate-fadeOut {
+            animation: fadeOut 0.3s ease-in forwards;
+        }
 
 
         /* Custom scrollbar styles */
@@ -138,22 +151,17 @@
         }
 
         /* Calendar: day cell */
+        #calendar-grid {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            grid-auto-rows: 1fr;
+            height: 100%;
+        }
+
         .day-cell {
-            min-height: 6rem;
-            max-height: 7rem;
-        }
-
-        .day-cell::-webkit-scrollbar {
-            width: 6px;
-        }
-
-        .day-cell::-webkit-scrollbar-thumb {
-            background: #b9da05;
-            border-radius: 4px;
-        }
-
-        .day-cell::-webkit-scrollbar-track {
-            background: transparent;
+            height: 100%;
+            min-height: unset;
+            max-height: unset;
         }
     </style>
 </head>
@@ -392,46 +400,24 @@
                         <p class="text-gray-300"></p>
                     </div>
 
-                    <!-- <div class="tab-content hidden" id="tab-calendar">
-                        <div class="relative max-w-4xl w-full mx-auto text-sm">
-                            <div id="calendar-overlay" class="fixed inset-0 bg-black bg-opacity-50 z-40 hidden"></div>
-                        </div>
-                    </div> -->
-
                     <div class="tab-content hidden" id="tab-univ-calendar">
                         <div class="relative max-w-5xl w-full mx-auto text-sm">
                             <div id="univ-calendar" class="mt-4">
                                 <div class="flex justify-between items-center mb-4">
                                     <button id="prevWeek"
                                         class="bg-white/10 border border-white/20 text-white rounded px-3 py-1 hover:bg-[#b9da05] hover:text-[#011538] transition">
-                                        Previous Week
+                                        Previous
                                     </button>
 
                                     <h2 class="text-xl font-semibold text-gray-200" id="week-range"></h2>
 
                                     <button id="nextWeek"
                                         class="bg-white/10 border border-white/20 text-white rounded px-3 py-1 hover:bg-[#b9da05] hover:text-[#011538] transition">
-                                        Next Week
+                                        Next 
                                     </button>
                                 </div>
 
                                 <div class="border border-white/20 rounded-lg overflow-hidden">
-                                    <!-- <div
-                                        class="grid grid-cols-7 bg-white/10 text-center text-sm font-medium text-gray-300 border-b border-white/20">
-                                        <div>Mon</div>
-                                        <div>Tue</div>
-                                        <div>Wed</div>
-                                        <div>Thu</div>
-                                        <div>Fri</div>
-                                        <div>Sat</div>
-                                        <div>Sun</div>
-                                    </div> -->
-
-                                    <!-- Dates Grid -->
-                                    <!-- <div id="univ-calendar-grid"
-                                        class="grid grid-cols-7 text-xs text-gray-200 h-[16rem] w-full">
-                                    </div> -->
-
                                     <div id="univ-calendar-grid"
                                         class="grid grid-rows-7 gap-2 text-xs text-gray-200 w-full">
                                     </div>
@@ -439,7 +425,7 @@
                             </div>
                         </div>
                     </div>
-                    <!-- END OF UNIV CALENDAR -->
+                    <!-- End of Univ Calendar -->
                 </div>
             </div>
         </section>
@@ -460,16 +446,15 @@
                 </div>
             </div>
 
-            <!-- MSC Calendar: w/Events -->
+            <!-- General Calendar: Empty -->
             <div
-                class="w-full lg:w-8/12 h-[37rem] p-4 shadow-lg rounded-lg bg-[#011538] border border-white/20 text-white flex flex-col">
+                class="w-full lg:w-8/12 p-4 shadow-lg rounded-lg bg-[#011538] border border-white/20 text-white flex flex-col">
                 <div class="flex items-center justify-between mb-4 border-b border-white/20 pb-2">
                     <h2 class="text-xl font-bold">Calendar</h2>
                     <div class="p-2 bg-white/10 text-[#b9da05] rounded-full w-10 h-10 flex items-center justify-center">
                         <i class="fa-solid fa-calendar"></i>
                     </div>
                 </div>
-
                 <div class="flex justify-between items-center mb-4 pb-2">
                     <button onclick="goToToday()"
                         class="bg-white/10 border border-white/20 text-white rounded px-3 py-1 hover:bg-[#b9da05] hover:text-[#011538]">
@@ -486,7 +471,7 @@
                 </div>
 
                 <!-- Calendar Grid -->
-                <div class="border border-white/20 rounded-lg overflow-y-auto flex-grow">
+                <div class="border border-white/20 rounded-lg flex-grow flex flex-col">
                     <div
                         class="grid grid-cols-7 bg-white/10 text-center text-sm font-medium text-gray-300 border-b border-white/20">
                         <div>Sun</div>
@@ -497,61 +482,23 @@
                         <div>Fri</div>
                         <div>Sat</div>
                     </div>
-                    <div id="calendar-grid" class="grid grid-cols-7 text-xs text-gray-200"></div>
+                    <div id="calendar-grid" class="grid grid-cols-7 flex-1 h-full auto-rows-[1fr]"></div>
                 </div>
             </div>
 
-            <!-- Modal: MSC Calendar -->
-<div id="modal-overlay"
-    class="fixed inset-0 bg-black bg-opacity-40 flex items-center justify-center z-50 hidden">
-    <div
-        class="bg-[#011538] border border-white/20 rounded-lg shadow-xl max-w-md w-full mx-4 p-6 relative text-white">
-        <button onclick="closeCalendarModal()"
-            class="absolute top-3 right-3 text-gray-400 hover:text-red-500">
-            <i class="fas fa-times text-lg"></i>
-        </button>
-
-        <div class="space-y-4 text-sm text-gray-300">
-            <h3 id="modal-title" class="text-xl font-semibold text-white"></h3>
-            <div class="border-b border-white/20"></div>
-            <div id="modal-content" class="space-y-3">
-                <div class="flex gap-3 items-start">
-                    <i class="fa-solid fa-clock text-[#b9da05] pt-2 w-8 text-center"></i>
-                    <p id="event-day-time" class="text-lg text-gray-200 mt-0.5"></p>
+            <!-- Modal: University Calendar -->
+            <div id="univ-modal-overlay"
+                class="fixed inset-0 bg-black bg-opacity-40 flex items-center justify-center hidden z-50">
+                <div
+                    class="bg-[#011538] border border-white/20 rounded-lg shadow-xl max-w-md w-full mx-4 p-6 relative text-white">
+                    <button onclick="closeUnivCalendarModal()"
+                        class="absolute top-3 right-3 text-gray-400 hover:text-red-500">
+                        ✕
+                    </button>
+                    <h2 id="univ-modal-title" class="text-xl font-semibold text-white mb-4"></h2>
+                    <div id="univ-modal-content" class="space-y-2 text-gray-200 text-sm"></div>
                 </div>
-                <div class="flex gap-3 items-start">
-                    <i class="fa-solid fa-location-dot text-red-500 p-2 w-8 text-center"></i>
-                    <p id="event-location" class="text-lg text-gray-200 mt-0.5"></p>
-                </div>
-                <button
-                    class="w-full p-2 bg-[#b9da05] text-[#011538] text-lg font-semibold rounded-sm hover:bg-[#9abc04]">
-                    Register
-                </button>
             </div>
-        </div>
-    </div>
-</div>
-
-<!-- Modal: University Calendar -->
-<div id="univ-modal-overlay"
-    class="fixed inset-0 bg-black bg-opacity-40 flex items-center justify-center hidden z-50">
-    <div
-        class="bg-[#011538] border border-white/20 rounded-lg shadow-xl max-w-md w-full mx-4 p-6 relative text-white">
-        <!-- Close button -->
-        <button onclick="closeUnivCalendarModal()"
-            class="absolute top-3 right-3 text-gray-400 hover:text-red-500">
-            ✕
-        </button>
-
-        <!-- Modal Title -->
-        <h2 id="univ-modal-title" class="text-xl font-semibold text-white mb-4"></h2>
-
-        <!-- Modal Content -->
-        <div id="univ-modal-content" class="space-y-2 text-gray-200 text-sm"></div>
-    </div>
-</div>
-
-
         </section>
     </main>
 

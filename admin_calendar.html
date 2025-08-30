@@ -7,7 +7,9 @@
     <title>Event Calendar | BulSU MSC</title>
     <link href="./Logos/Bulsu MSC Logo-02.png" rel="icon" type="image/png" />
 
-    <link href="https://fonts.googleapis.com/css2?family=Segoe+UI:wght@400;500;600;700&family=Orbitron:wght@400;700;900&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Segoe+UI:wght@400;500;600;700&family=Orbitron:wght@400;700;900&display=swap"
+        rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
@@ -197,7 +199,7 @@
                 <h2>BulSU MSC</h2>
                 <p>ADMINISTRATOR</p>
             </div>
-            
+
             <ul class="nav-menu">
                 <li><a href="admin_dashboard.html"><i class="bi bi-speedometer2"></i>Dashboard</a></li>
                 <li><a href="admin_manage_members.html"><i class="bi bi-people"></i>Members</a></li>
@@ -207,164 +209,155 @@
                 <li><a href="verify_attendance.html"><i class="bi bi-check2-square"></i>Attendance Verifier</a></li>
                 <li><a href="admin_calendar.html" class="active"><i class="bi bi-calendar3"></i>Calendar</a></li>
             </ul>
-            
+
             <div class="footer-section">
                 <p>&copy; 2024 Bulacan State University<br>Microsoft Student Community<br>All Rights Reserved.</p>
             </div>
         </nav>
 
         <!-- main content -->
-        <main class="main-content">
-            <!-- event calendar -->
-            <div class="mb-6">
-                <h1 class="text-3xl font-bold text-[#b9da05] mb-2" style="font-family: 'Orbitron', monospace;">Event Calendar</h1>
-                <p class="text-[#8892b0] text-lg">Manage and oversee MSC events and reminders</p>
-            </div>
-            
-            <div class="flex flex-col flex-grow p-4 shadow-lg rounded-lg border border-[#b9da05] text-white">
-                <div class="flex justify-between items-center mb-4 border-b border-white/20 pb-2">
-                    <button onclick="goToToday()"
-                        class="bg-white/10 border border-white/20 text-white rounded px-3 py-1 hover:bg-[#b9da05] hover:text-[#011538]">
-                        Today
+        <main class="pl-[300px] flex flex-col min-h-screen space-y-4 w-11/12 m-2">
+            <div class="flex flex-col flex-grow shadow-lg rounded-lg border border-[#b9da05] text-white space-y-4">
+                <div class="flex justify-between items-center p-4 border-b border-white/20">
+                    <button id="prevWeek"
+                        class="bg-white/10 border border-white/20 text-white rounded px-3 py-1 hover:bg-[#b9da05] hover:text-[#011538] transition">
+                        Previous
                     </button>
 
-                    <div class="flex items-center space-x-3">
-                        <button onclick="navigateCalendar(-1)"
-                            class="text-white text-lg hover:text-[#b9da05]">&larr;</button>
-                        <h2 id="calendar-month-title" class="text-xl font-semibold text-white"></h2>
-                        <button onclick="navigateCalendar(1)"
-                            class="text-white text-lg hover:text-[#b9da05]">&rarr;</button>
-                    </div>
+                    <h2 class="text-xl font-semibold text-gray-200 text-center flex-1" id="week-range"></h2>
 
-                    <button onclick="openNewEventModal()"
-                        class="bg-[#b9da05] text-[#011538] px-3 py-1 rounded hover:bg-white hover:text-[#011538]">
-                        + Create
+                    <button id="nextWeek"
+                        class="bg-white/10 border border-white/20 text-white rounded px-3 py-1 hover:bg-[#b9da05] hover:text-[#011538] transition">
+                        Next
                     </button>
                 </div>
-
-                <div class="border border-white/20 rounded-lg overflow-y-auto flex-grow">
-                    <div
-                        class="grid grid-cols-7 bg-[#0b1035] text-center text-sm font-medium text-gray-300 border-b border-white/20">
-                        <div>Sun</div>
-                        <div>Mon</div>
-                        <div>Tue</div>
-                        <div>Wed</div>
-                        <div>Thu</div>
-                        <div>Fri</div>
-                        <div>Sat</div>
-                    </div>
-
-                    <div id="calendar-grid" class="grid grid-cols-7 text-xs text-gray-200 bg-[#0f133f]"></div>
-                </div>
-            </div>
-
-            <div id="modal-overlay"
-                class="fixed inset-0 bg-black bg-opacity-40 flex items-center justify-center z-50 hidden">
-                <div
-                    class="bg-[#011538] border border-white/20 rounded-lg shadow-xl max-w-md w-full mx-4 p-6 relative animate-fadeIn text-white">
-                    <button onclick="closeCalendarModal()" class="absolute top-3 right-3 text-gray-400 hover:text-red-500">
-                        <i class="fas fa-times text-lg"></i>
-                    </button>
-
-                    <div class="space-y-4 text-sm text-gray-300">
-                        <h3 id="modal-title" class="text-xl font-semibold text-white"></h3>
-                        <div class="border-b border-white/20"></div>
-                        <div id="modal-content" class="space-y-3">
-                            <div class="flex gap-3 items-start">
-                                <i class="fa-solid fa-clock text-[#b9da05] pt-2 w-8 text-center"></i>
-                                <p id="event-day-time" class="text-lg text-gray-200 mt-0.5"></p>
-                            </div>
-                            <div class="flex gap-3 items-start">
-                                <i class="fa-solid fa-location-dot text-red-500 p-2 w-8 text-center"></i>
-                                <p id="event-location" class="text-lg text-gray-200 mt-0.5"></p>
-                            </div>
-                            <button
-                                class="p-2 bg-[#b9da05] text-[#011538] w-full rounded-sm hover:bg-white hover:text-[#011538]">View
-                                Participants</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div id="toast" class="fixed bottom-6 right-6 z-50 hidden">
-                <div id="toast-content"
-                    class="flex items-center max-w-xs p-4 text-sm text-white bg-green-600 rounded-lg shadow-lg animate-slide-in"
-                    role="alert">
-                    <i class="fas fa-check-circle mr-2 text-white"></i>
-                    <div id="toast-message">Success message</div>
-                </div>
-            </div>
-
-            <!-- create event modal -->
-            <div id="new-event-modal"
-                class="flex fixed inset-0 bg-black/70 hidden items-center justify-center z-50 p-2 overflow-auto">
-                <div class="bg-[#0b1035] text-white p-4 sm:p-6 rounded-2xl shadow-xl w-full max-w-md border border-[#b9da05] ">
-                    <h2 class="text-lg sm:text-xl font-bold mb-4 text-center">Create New Event</h2>
-
-                    <form id="new-event-form" class="space-y-3 sm:space-y-4">
-                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
-                            <label class="block">
-                                <span class="text-gray-300 text-sm sm:text-base">Event Name</span>
-                                <input type="text" id="event-name" required
-                                    class="w-full px-2 sm:px-3 py-1.5 sm:py-2 rounded bg-[#0b1035] border border-white/20 text-white focus:outline-none focus:ring-2 focus:ring-[#b9da05] text-sm sm:text-base">
-                            </label>
-
-                            <label class="block">
-                                <span class="text-gray-300 text-sm sm:text-base">Event Date</span>
-                                <input type="date" id="event-date" required
-                                    class="w-full px-2 sm:px-3 py-1.5 sm:py-2 rounded bg-[#0b1035] border border-white/20 text-white focus:outline-none focus:ring-2 focus:ring-[#b9da05] text-sm sm:text-base">
-                            </label>
-
-                            <label class="block">
-                                <span class="text-gray-300 text-sm sm:text-base">Start Time</span>
-                                <input type="time" id="event-time-start" required
-                                    class="w-full px-2 sm:px-3 py-1.5 sm:py-2 rounded bg-[#0b1035] border border-white/20 text-white focus:outline-none focus:ring-2 focus:ring-[#b9da05] text-sm sm:text-base">
-                            </label>
-
-                            <label class="block">
-                                <span class="text-gray-300 text-sm sm:text-base">End Time</span>
-                                <input type="time" id="event-time-end" required
-                                    class="w-full px-2 sm:px-3 py-1.5 sm:py-2 rounded bg-[#0b1035] border border-white/20 text-white focus:outline-none focus:ring-2 focus:ring-[#b9da05] text-sm sm:text-base">
-                            </label>
-
-                            <label class="block">
-                                <span class="text-gray-300 text-sm sm:text-base">Location</span>
-                                <input type="text" id="location" name="location" required
-                                    class="w-full px-2 sm:px-3 py-1.5 sm:py-2 rounded bg-[#0b1035] border border-white/20 text-white focus:outline-none focus:ring-2 focus:ring-[#b9da05] text-sm sm:text-base">
-                            </label>
-
-                            <label class="block">
-                                <span class="text-gray-300 text-sm sm:text-base">Event Type</span>
-                                <select id="event-type"
-                                    class="w-full px-2 sm:px-3 py-1.5 sm:py-2 rounded bg-[#0b1035] border border-white/20 text-white focus:outline-none focus:ring-2 focus:ring-[#b9da05] text-sm sm:text-base">
-                                    <option value="onsite">Onsite</option>
-                                    <option value="online">Online</option>
-                                </select>
-                            </label>
-                        </div>
-
-                        <label class="block">
-                            <span class="text-gray-300 text-sm sm:text-base">Description</span>
-                            <textarea id="event-description" rows="3"
-                                class="w-full px-2 sm:px-3 py-1.5 sm:py-2 rounded bg-[#0b1035] border border-white/20 text-white focus:outline-none focus:ring-2 focus:ring-[#b9da05] text-sm sm:text-base"></textarea>
-                        </label>
-
-                        <div class="flex flex-col sm:flex-row justify-end gap-2 sm:gap-3 pt-3">
-                            <button type="button" id="cancel-event"
-                                class="w-full sm:w-auto px-3 py-1.5 sm:px-4 sm:py-2 rounded-lg bg-gray-600 hover:bg-gray-700 text-sm sm:text-base">Cancel</button>
-                            <button type="submit"
-                                class="w-full sm:w-auto px-3 py-1.5 sm:px-4 sm:py-2 rounded-lg bg-[#b9da05] hover:bg-[#9eba04] text-sm sm:text-base">Save</button>
-                        </div>
-                    </form>
+                <div class="w-full overflow-hidden">
+                    <div id="calendar-grid" class="grid grid-rows-7 gap-2 text-xs text-gray-200 w-full"></div>
                 </div>
             </div>
         </main>
-    </div>
 
-    <script>
-        const API_BASE = "/updated-msc-website/api/events";
-    </script>
-    <script src="js/admin_calendar.js" defer></script>
+        <!-- Modal: Single Event  -->
+        <div id="single-event-modal"
+            class="fixed inset-0 bg-black bg-opacity-40 flex items-center justify-center z-50 hidden">
+            <div
+                class="bg-[#011538] border border-white/20 rounded-lg shadow-xl max-w-md w-full mx-4 p-6 relative animate-fadeIn text-white">
+                <button onclick="closeSingleEventModal()"
+                    class="absolute top-3 right-3 text-gray-400 hover:text-red-500">
+                    <i class="fas fa-times text-lg"></i>
+                </button>
+                <div class="space-y-4 text-sm text-gray-300">
+                    <h3 id="single-modal-title" class="text-xl font-semibold text-white"></h3>
+                    <div class="border-b border-white/20"></div>
+                    <div id="single-modal-content" class="space-y-3">
+                        <div class="flex gap-3 items-start">
+                            <i class="fa-solid fa-clock text-[#b9da05] pt-2 w-8 text-center"></i>
+                            <p id="event-day-time" class="text-lg text-gray-200 mt-0.5"></p>
+                        </div>
+                        <div class="flex gap-3 items-start">
+                            <i class="fa-solid fa-location-dot text-red-500 p-2 w-8 text-center"></i>
+                            <p id="event-location" class="text-lg text-gray-200 mt-0.5"></p>
+                        </div>
+                        <button id="view-participants-btn"
+                            class="w-full p-2 bg-[#b9da05] text-[#011538] font-semibold rounded-sm hover:bg-[#9abc04]">
+                            View Participants
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Modal: Multiple Events -->
+        <div id="multiple-events-modal"
+            class="fixed inset-0 bg-black bg-opacity-40 flex items-center justify-center z-50 hidden">
+            <div
+                class="bg-[#011538] border border-white/20 rounded-lg shadow-xl max-w-md w-full mx-4 p-6 relative animate-fadeIn text-white overflow-y-auto max-h-[80vh]">
+                <button onclick="closeMultipleEventsModal()"
+                    class="absolute top-3 right-3 text-gray-400 hover:text-red-500">
+                    <i class="fas fa-times text-lg"></i>
+                </button>
+                <div class="space-y-4 text-sm text-gray-300">
+                    <h3 id="multiple-modal-title" class="text-xl font-semibold text-white"></h3>
+                    <div class="border-b border-white/20"></div>
+                    <div id="multiple-modal-content" class="space-y-3">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Toast -->
+        <div id="toast" class="fixed bottom-6 right-6 z-50 hidden">
+            <div id="toast-content"
+                class="flex items-center max-w-xs p-4 text-sm text-white bg-green-600 rounded-lg shadow-lg animate-slide-in"
+                role="alert">
+                <i class="fas fa-check-circle mr-2 text-white"></i>
+                <div id="toast-message">Success message</div>
+            </div>
+        </div>
+
+
+        <div id="new-event-modal" class="fixed inset-0 bg-black/70 hidden z-50 grid place-items-center p-4">
+            <div class="bg-[#0b1035] text-white rounded-2xl shadow-xl border border-[#b9da05]
+              w-full max-w-md sm:max-w-lg md:max-w-xl
+              max-h-[90vh] overflow-y-auto p-4 sm:p-6">
+                <h2 class="text-lg sm:text-xl font-bold mb-4 text-center">New Event</h2>
+                <form id="new-event-form" class="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                    <div class="sm:col-span-2">
+                        <label for="event-name" class="block text-sm font-semibold mb-1">Event Title</label>
+                        <input type="text" id="event-name" name="event_name" placeholder="Enter event title" required>
+                    </div>
+
+                    <div class="sm:col-span-2">
+                        <label for="event-date" class="block text-sm font-semibold mb-1">Date</label>
+                        <input type="date" id="event-date" name="event_date" required>
+                    </div>
+
+
+                    <div>
+                        <label for="event-time-start" class="block text-sm font-semibold mb-1">Start Time</label>
+                        <input type="time" id="event-time-start" name="event_time_start" value="07:00" required>
+                    </div>
+                    <div>
+                        <label for="event-time-end" class="block text-sm font-semibold mb-1">End Time</label>
+                        <input type="time" id="event-time-end" name="event_time_end" required>
+                    </div>
+
+                    <div>
+                        <label for="location" class="block text-sm font-semibold mb-1">Location</label>
+                        <input type="text" id="location" name="location" placeholder="Enter event location" required>
+                    </div>
+                    <div>
+                        <label for="event-type" class="block text-sm font-semibold mb-1">Type</label>
+                        <select id="event-type" name="event_type">
+                            <option value="Meeting">Meeting</option>
+                            <option value="Seminar">Seminar</option>
+                            <option value="Workshop">Workshop</option>
+                            <option value="Other">Other</option>
+                        </select>
+                    </div>
+
+                    <div class="sm:col-span-2">
+                        <label for="event-description" class="block text-sm font-semibold mb-1">Description</label>
+                        <textarea id="event-description" name="description" placeholder="Enter event description"
+                            required></textarea>
+                    </div>
+
+                    <div class="sm:col-span-2 flex justify-between gap-2">
+                        <button type="button" id="cancel-event"
+                            class="flex-1 p-2 bg-gray-600 text-white rounded hover:bg-gray-700 transition">Cancel</button>
+                        <button type="submit"
+                            class="flex-1 p-2 bg-[#b9da05] text-[#011538] font-semibold rounded hover:bg-[#9abc04] transition">Create
+                            Event</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+
+        <script>
+            const API_BASE = "/updated-msc-website/api/events";
+        </script>
+        <script src="js/admin_calendar.js" defer></script>
 
 </body>
 
