@@ -294,6 +294,27 @@ class EventController
     }
 
     /**
+     * Get univeristy calendar events
+     */
+    public function getUnivCalendarEvents()
+    {
+        try {
+            $startDate = $_GET['start'] ?? date('Y-m-01');
+            $endDate = $_GET['end'] ?? date('Y-m-t');
+
+            if (!Validator::validateDate($startDate) || !Validator::validateDate($endDate)) {
+                Response::validationError(['date' => 'Invalid date format. Use YYYY-MM-DD']);
+            }
+
+            $events = $this->eventModel->getUnivCalendarEvents($startDate, $endDate);
+
+            Response::success($events);
+        } catch (Exception $e) {
+            Response::serverError($e->getMessage());
+        }
+    }
+
+    /**
      * Register for event
      */
     public function register($id)
@@ -410,6 +431,34 @@ class EventController
             echo json_encode(['success' => true, 'data' => $count]);
         } catch (Exception $e) {
             echo json_encode(['success' => false, 'message' => $e->getMessage()]);
+        }
+    }
+
+    /**
+     * GET: Event Status counts 
+     */
+    public function getStatusCounts()
+    {
+        try {
+            $statusCounts = $this->eventModel->getStatusCounts(); // create this in Event.php
+
+            Response::success($statusCounts);
+        } catch (Exception $e) {
+            Response::serverError($e->getMessage());
+        }
+    }
+
+    /**
+     * GET: Events per Month
+     */
+    public function getEventsPerMonth()
+    {
+        try {
+            $events = $this->eventModel->getEventsPerMonth();
+
+            Response::success($events);
+        } catch (Exception $e) {
+            Response::serverError($e->getMessage());
         }
     }
 }

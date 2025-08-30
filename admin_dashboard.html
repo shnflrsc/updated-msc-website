@@ -342,7 +342,7 @@
                 <li><a href="admin_manage_announcements.html"><i class="bi bi-megaphone"></i>Announcements</a></li>
                 <li><a href="admin_manage_events.html"><i class="bi bi-calendar-event"></i>Events</a></li>
                 <li><a href="verify_attendance.html"><i class="bi bi-check2-square"></i>Attendance Verifier</a></li>
-                <li><a href="events_calendar.html"><i class="bi bi-calendar3"></i>Calendar</a></li>
+                <li><a href="admin_calendar.html"><i class="bi bi-calendar3"></i>Calendar</a></li>
             </ul>
             
             <div class="footer-section">
@@ -456,152 +456,45 @@
             }
         }
 
+        function animateCounter(id, endValue, duration = 1200) {
+            const el = document.getElementById(id);
+            if (!el) return;
+
+            let start = 0;
+            const stepTime = Math.max(Math.floor(duration / endValue), 20);
+            el.style.opacity = "0";
+
+            let timer = setInterval(() => {
+                start++;
+                el.textContent = start.toLocaleString();
+                if (start >= endValue) {
+                    clearInterval(timer);
+                    el.textContent = endValue.toLocaleString();
+                }
+            }, stepTime);
+
+            el.classList.add("fade-in");
+        }
+
         async function getAllStudents() {
             const data = await apiCall("/students/count", "GET");
-            document.getElementById("student-cnt").textContent = data?.success ? data.data : "0";
-            if (!data?.success) console.error("Failed to fetch student count:", data?.message);
+            if (data?.success) animateCounter("student-cnt", data.data);
         }
 
         async function getAllEvents() {
             const data = await apiCall("/events/count", "GET");
-            document.getElementById("event-cnt").textContent = data?.success ? data.data : "0";
-            if (!data?.success) console.error("Failed to fetch event count:", data?.message);
+            if (data?.success) animateCounter("event-cnt", data.data);
         }
 
         async function getAllAnnouncements() {
             const data = await apiCall("/announcements/count", "GET");
-            document.getElementById("announcement-cnt").textContent = data?.success ? data.data : "0";
-            if (!data?.success) console.error("Failed to fetch announcement count:", data?.message);
-        }
-
-        async function getUpcomingEvents() {
-            try {
-                const data = await apiCall("/events/upcoming", "GET");
-                const container = document.getElementById("upcomingEvents");
-                
-                if (data?.success && data.data && data.data.length > 0) {
-                    container.innerHTML = data.data.map(event => `
-                        <div class="recent-item">
-                            <h4>${event.title}</h4>
-                            ${event.description ? `<p>${event.description}</p>` : ''}
-                            ${event.event_date ? `<div class="date">${new Date(event.event_date).toLocaleDateString('en-US', { weekday: 'short', year: 'numeric', month: 'short', day: 'numeric' })}</div>` : ''}
-                        </div>
-                    `).join('');
-                } else {
-                    container.innerHTML = '<div class="recent-item"><p>No upcoming events found.</p></div>';
-                }
-            } catch (err) {
-                console.error("Failed to fetch upcoming events:", err);
-                document.getElementById("upcomingEvents").innerHTML = '<div class="recent-item"><p>Error loading events.</p></div>';
-            }
-        }
-
-        async function getRecentAnnouncements() {
-            try {
-                const data = await apiCall("/announcements/recent", "GET");
-                const container = document.getElementById("recentAnnouncements");
-                
-                if (data?.success && data.data && data.data.length > 0) {
-                    container.innerHTML = data.data.map(announcement => `
-                        <div class="recent-item">
-                            <h4>${announcement.title}</h4>
-                            ${announcement.content ? `<p>${announcement.content.substring(0, 100)}...</p>` : ''}
-                            ${announcement.created_at ? `<div class="date">Posted on ${new Date(announcement.created_at).toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' })}</div>` : ''}
-                        </div>
-                    `).join('');
-                } else {
-                    container.innerHTML = '<div class="recent-item"><p>No recent announcements found.</p></div>';
-                }
-            } catch (err) {
-                console.error("Failed to fetch recent announcements:", err);
-                document.getElementById("recentAnnouncements").innerHTML = '<div class="recent-item"><p>Error loading announcements.</p></div>';
-            }
-        }
-
-        async function getCurrentMonthEvents() {
-            try {
-                const data = await apiCall("/events/current-month", "GET");
-                const eventDates = {};
-                
-                if (data?.success && data.data) {
-                    data.data.forEach(event => {
-                        if (event.event_date) {
-                            const date = new Date(event.event_date);
-                            const day = date.getDate();
-                            eventDates[day] = true;
-                        }
-                    });
-                }
-                
-                generateCalendar(eventDates);
-            } catch (err) {
-                console.error("Failed to fetch current month events:", err);
-                generateCalendar({});
-            }
-        }
-
-        function generateCalendar(eventDates = {}) {
-            const now = new Date();
-            const currentMonth = now.getMonth();
-            const currentYear = now.getFullYear();
-            const today = now.getDate();
-            
-            // Set current month display
-            document.getElementById("current-month").textContent = now.toLocaleDateString('en-US', { month: 'long', year: 'numeric' });
-            
-            const firstDay = new Date(currentYear, currentMonth, 1);
-            const lastDay = new Date(currentYear, currentMonth + 1, 0);
-            const daysInMonth = lastDay.getDate();
-            const startingDayOfWeek = firstDay.getDay();
-            
-            const calendarBody = document.getElementById("calendar-body");
-            calendarBody.innerHTML = '';
-            
-            let date = 1;
-            for (let i = 0; i < 6; i++) {
-                const row = document.createElement('tr');
-                
-                for (let j = 0; j < 7; j++) {
-                    const cell = document.createElement('td');
-                    
-                    if (i === 0 && j < startingDayOfWeek) {
-                        cell.classList.add('empty');
-                    } else if (date > daysInMonth) {
-                        cell.classList.add('empty');
-                    } else {
-                        cell.textContent = date;
-                        cell.onclick = () => window.location.href = 'admin_event_calendar.html';
-                        
-                        if (date === today) {
-                            cell.classList.add('today');
-                        }
-                        
-                        if (eventDates[date]) {
-                            cell.classList.add('event-day');
-                            cell.style.position = 'relative';
-                        }
-                        
-                        date++;
-                    }
-                    
-                    row.appendChild(cell);
-                }
-                
-                calendarBody.appendChild(row);
-                
-                if (date > daysInMonth) {
-                    break;
-                }
-            }
+            if (data?.success) animateCounter("announcement-cnt", data.data);
         }
 
         document.addEventListener("DOMContentLoaded", () => {
             getAllStudents();
             getAllEvents();
             getAllAnnouncements();
-            getUpcomingEvents();
-            getRecentAnnouncements();
-            getCurrentMonthEvents();
         });
     </script>
 

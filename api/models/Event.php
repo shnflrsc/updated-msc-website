@@ -207,6 +207,24 @@ class Event
         return $stmt->fetchAll();
     }
 
+     /**
+     * Get university calendar events 
+     */
+    public function getUnivCalendarEvents($startDate, $endDate) {
+        $sql = "SELECT calendar_id, event_name, event_date, event_type, school_year
+                FROM university_calendar
+                WHERE event_date BETWEEN :start_date AND :end_date
+                ORDER BY event_date ASC";
+
+        $stmt = $this->db->prepare($sql);
+        $stmt->execute([
+            'start_date' => $startDate,
+            'end_date'   => $endDate
+        ]);
+
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
     /**
      * Register student for event
      */
@@ -303,5 +321,35 @@ class Event
         $stmt->execute();
         $result = $stmt->fetch(PDO::FETCH_ASSOC);
         return $result['total'] ?? 0;
+    }
+
+    /**
+     * GET: Event Status counts 
+     */
+    public function getStatusCounts()
+    {
+        $stmt = $this->db->prepare("
+        SELECT event_status, COUNT(*) AS total
+        FROM events
+        GROUP BY event_status
+    ");
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    /**
+     * GET: Events per Month
+     */
+    public function getEventsPerMonth()
+    {
+        $sql = "SELECT MONTH(event_date) AS month, COUNT(*) AS total
+            FROM events
+            GROUP BY month
+            ORDER BY month ASC";
+
+        $stmt = $this->db->prepare($sql);
+        $stmt->execute();
+
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 }
