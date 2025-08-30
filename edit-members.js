@@ -88,8 +88,8 @@ const programs = {
 };
 
 document.addEventListener("DOMContentLoaded", () => {
-  const collegeSelect = document.getElementById("regCollege");
-  const programSelect = document.getElementById("regProgram");
+  const collegeSelect = document.getElementById("editCollege");
+  const programSelect = document.getElementById("editProgram");
 
   // Populate colleges
   Object.keys(programs).forEach(college => {

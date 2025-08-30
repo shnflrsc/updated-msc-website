@@ -65,7 +65,7 @@
         <div class="header-buttons">
           <button id="filterBtn"><i class="fas fa-filter"></i> Filters (0 Members)</button>
           <button id="exportBtn"><i class="fas fa-file-excel"></i> Export to Excel</button>
-          <button id="addBtn"><i class="fas fa-user-plus"></i> Add New Member</button>
+          <button onclick="window.location.href='admin_add_member.html'" id="addBtn"><i class="fas fa-user-plus"></i> Add New Member</button>
         </div>
       </div>
       <!-- Top Controls -->
@@ -131,6 +131,82 @@
     
   </div>
 
+<div id="editMemberModal" class="modal hidden">
+  <div class="modal-content">
+    <span class="close-btn" id="closeEditModal">&times;</span>
+    <h2>Edit Member</h2>
+    <form id="editMemberForm">
+      
+      <div class="form-row three-col">
+        <div class="form-group">
+          <label for="editFirstName">First Name</label>
+          <input type="text" id="editFirstName" name="first_name" required>
+        </div>
+        <div class="form-group">
+          <label for="editMiddleName">Middle Name</label>
+          <input type="text" id="editMiddleName" name="middle_name">
+        </div>
+        <div class="form-group">
+          <label for="editLastName">Last Name</label>
+          <input type="text" id="editLastName" name="last_name" required>
+        </div>
+      </div>
+
+      <div class="form-row two-col">
+        <div class="form-group">
+          <label for="editEmail">Email</label>
+          <input type="email" id="editEmail" name="email" required>
+        </div>
+        <div class="form-group">
+          <label for="editGender">Gender</label>
+          <select id="editGender" name="gender" required>
+            <option value="">Select</option>
+            <option value="Male">Male</option>
+            <option value="Female">Female</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="form-row two-col">
+        <div class="form-group">
+          <label for="editPosition">Position</label>
+          <input type="text" id="editPosition" name="position" disabled>
+        </div>
+        <div class="form-group">
+          <label for="editStudentNo">Student No.</label>
+          <input type="text" id="editStudentNo" name="student_no" required>
+        </div>
+      </div>
+
+      <div class="form-row three-col">
+        <div class="form-group">
+          <label for="editCollege">College</label>
+          <select id="editCollege" name="college"></select>
+        </div>
+        <div class="form-group">
+          <label for="editProgram">Program</label>
+          <select id="editProgram" name="program"></select>
+        </div>
+        <div class="form-group">
+          <label for="editYear">Year</label>
+          <select id="editYear" name="year" required>
+                    <option value="">Select Year</option>
+                    <option value="1st Year">1st Year</option>
+                    <option value="2nd Year">2nd Year</option>
+                    <option value="3rd Year">3rd Year</option>
+                    <option value="4th Year">4th Year</option>
+                </select>
+        </div>
+      </div>
+
+      <div class="form-actions">
+        <button type="submit" class="btn">Save Changes</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+  <script src="edit-members.js"></script>
   <script src="manage-members.js"></script>
   <script>
   const hamburger = document.getElementById("hamburger");
