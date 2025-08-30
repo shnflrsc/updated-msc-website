@@ -25,8 +25,7 @@
             display: flex;
             min-height: 100vh;
         }
-
-        /* Sidebar */
+        
         .sidebar {
             width: 280px;
             background-color: #00071c;
@@ -109,7 +108,6 @@
             line-height: 1.4;
         }
 
-        /* Main Content */
         .main-content {
             margin-left: 280px;
             flex: 1;
@@ -134,7 +132,6 @@
             font-size: 14px;
         }
 
-        /* Alert Messages */
         .alert {
             padding: 15px 20px;
             border-radius: 8px;
@@ -154,7 +151,6 @@
             color: #ef4444;
         }
 
-        /* Tabs */
         .tabs {
             display: flex;
             margin-bottom: 30px;
@@ -190,7 +186,6 @@
             display: block;
         }
 
-        /* Cards */
         .card {
             background-color: #011538;
             border-radius: 12px;
@@ -207,7 +202,6 @@
             margin-bottom: 20px;
         }
 
-        /* Event List Items */
         .event-item {
             display: flex;
             gap: 20px;
@@ -308,7 +302,6 @@
             margin-top: 10px;
         }
 
-        /* Buttons */
         .btn {
             padding: 8px 16px;
             border: none;
@@ -360,7 +353,6 @@
             background-color: #0891b2;
         }
 
-        /* Form Styles */
         .form-group {
             margin-bottom: 20px;
         }
@@ -415,7 +407,6 @@
             height: 18px;
         }
 
-        /* File Upload */
         .file-upload {
             position: relative;
             display: inline-block;
@@ -452,7 +443,6 @@
             font-size: 12px;
         }
 
-        /* Event Dashboard */
         .event-dashboard {
             display: grid;
             gap: 20px;
@@ -513,7 +503,6 @@
             width: 16px;
         }
 
-        /* Attendance Summary */
         .attendance-card {
             background-color: #011538;
             border-radius: 12px;
@@ -628,7 +617,7 @@
 </head>
 <body>
     <div class="container">
-        <!-- Sidebar -->
+        <!-- sidebar -->
         <nav class="sidebar">
       <div class="logo-section">
         <img src="./Logos/Bulsu MSC Logo-02.png" alt="BulSU MSC Logo" onerror="this.style.display='none'">
@@ -651,20 +640,20 @@
       </div>
     </nav>
 
-        <!-- Main Content -->
+        <!-- main content -->
         <main class="main-content">
             <div class="header">
                 <h1>Manage Events</h1>
                 <p>Create, manage, and track events for the BulSU MSC community</p>
             </div>
 
-            <!-- Success Alert (hidden by default) -->
+            <!-- success alert -->
             <div class="alert alert-success" style="display: none;" id="successAlert">
                 <i class="bi bi-check-circle-fill"></i>
                 Event created successfully!
             </div>
 
-            <!-- Tabs -->
+            <!-- tabs -->
             <div class="tabs">
                 <button class="tab-button active" onclick="openTab(event, 'current-upcoming')">Current & Upcoming</button>
                 <button class="tab-button" onclick="openTab(event, 'past-events')">Past Events</button>
@@ -672,7 +661,7 @@
                 <button class="tab-button" onclick="openTab(event, 'add-event')">Add New Event</button>
             </div>
 
-            <!-- Current & Upcoming Events Tab -->
+            <!-- current & upcoming events tab -->
             <div id="current-upcoming" class="tab-content active">
                 <div class="event-item">
                     <div class="event-image">
@@ -735,7 +724,7 @@
                 </div>
             </div>
 
-            <!-- Past Events Tab -->
+            <!-- past events Tab -->
             <div id="past-events" class="tab-content">
                 <div class="event-item">
                     <div class="event-image">
@@ -774,7 +763,7 @@
                 </div>
             </div>
 
-            <!-- Cancelled Events Tab -->
+            <!-- cancelled events tab -->
             <div id="cancelled-events" class="tab-content">
                 <div class="event-item">
                     <div class="event-image">
@@ -796,7 +785,7 @@
                 </div>
             </div>
 
-            <!-- Add New Event Tab -->
+            <!-- add new event -->
             <div id="add-event" class="tab-content">
                 <div class="card">
                     <h3>Create New Event</h3>
@@ -904,13 +893,15 @@
                 </div>
             </div>
 
-            <!-- Event Dashboard (Hidden by default) -->
+            <!-- event dashboard -->
             <div id="event-dashboard" class="tab-content" style="display: none;">
                 <div class="card">
                     <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
                         <h3>Event Overview</h3>
                         <div style="display: flex; gap: 10px;">
+                            <!-- palagyan ng edit event modal-->
                             <a href="#" class="btn btn-secondary">Edit Event</a>
+                            <!-- palagyan ng event participants list -->
                             <a href="#" class="btn btn-info">Participants</a>
                             <a href="#" class="btn btn-secondary" onclick="hideEventDashboard()">Event List</a>
                         </div>
@@ -962,7 +953,7 @@
                     </div>
                 </div>
 
-                <!-- Attendance Summary -->
+                <!-- attendance summary -->
                 <div class="attendance-card">
                     <div class="attendance-header">
                         <i class="bi bi-clipboard2-data-fill"></i>
@@ -1012,37 +1003,31 @@
         function openTab(evt, tabName) {
             var i, tabcontent, tablinks;
             
-            // Hide all tab content
             tabcontent = document.getElementsByClassName("tab-content");
             for (i = 0; i < tabcontent.length; i++) {
                 tabcontent[i].classList.remove("active");
             }
             
-            // Remove active class from all tab buttons
             tablinks = document.getElementsByClassName("tab-button");
             for (i = 0; i < tablinks.length; i++) {
                 tablinks[i].classList.remove("active");
             }
             
-            // Show the selected tab and mark button as active
             document.getElementById(tabName).classList.add("active");
             evt.currentTarget.classList.add("active");
         }
 
         function showEventDashboard() {
-            // Hide all tab content
             var tabcontent = document.getElementsByClassName("tab-content");
             for (var i = 0; i < tabcontent.length; i++) {
                 tabcontent[i].classList.remove("active");
             }
             
-            // Remove active class from all tab buttons
             var tablinks = document.getElementsByClassName("tab-button");
             for (var i = 0; i < tablinks.length; i++) {
                 tablinks[i].classList.remove("active");
             }
             
-            // Show event dashboard
             document.getElementById("event-dashboard").style.display = "block";
             document.getElementById("event-dashboard").classList.add("active");
         }
@@ -1051,7 +1036,6 @@
             document.getElementById("event-dashboard").style.display = "none";
             document.getElementById("event-dashboard").classList.remove("active");
             
-            // Show current-upcoming tab by default
             document.getElementById("current-upcoming").classList.add("active");
             document.querySelector('.tab-button').classList.add("active");
         }
@@ -1068,30 +1052,24 @@
         function handleAddEvent(event) {
             event.preventDefault();
             
-            // Show success alert
             const successAlert = document.getElementById('successAlert');
             successAlert.style.display = 'block';
             
-            // Reset form
             document.getElementById('addEventForm').reset();
             document.getElementById('event_image_name').textContent = 'No file chosen';
             document.getElementById('badge_image_name').textContent = 'No file chosen';
             
-            // Hide alert after 3 seconds
             setTimeout(() => {
                 successAlert.style.display = 'none';
             }, 3000);
             
-            // Switch to current-upcoming tab
             document.getElementById('add-event').classList.remove('active');
             document.getElementById('current-upcoming').classList.add('active');
             
-            // Update tab buttons
             document.querySelectorAll('.tab-button').forEach(btn => btn.classList.remove('active'));
             document.querySelector('.tab-button').classList.add('active');
         }
 
-        // Initialize file name displays
         document.addEventListener('DOMContentLoaded', function() {
             updateFileName(document.getElementById('event_image'), 'event_image_name');
             updateFileName(document.getElementById('badge_image'), 'badge_image_name');

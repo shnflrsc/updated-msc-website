@@ -29589,6 +29589,7 @@
 
 [29-Aug-2025 15:34:50 Europe/Berlin] Student route - Endpoint: 
 [29-Aug-2025 15:34:50 Europe/Berlin] Student route - ID: null
+<<<<<<< HEAD
 [30-Aug-2025 07:29:52 Europe/Berlin] Request path: /updated-msc-website/api/students/count
 [30-Aug-2025 07:29:52 Europe/Berlin] Request path: /updated-msc-website/api/events/count
 [30-Aug-2025 07:29:52 Europe/Berlin] Request path: /updated-msc-website/api/students/college-distribution
@@ -31739,3 +31740,5 @@
 [30-Aug-2025 08:05:58 Europe/Berlin] Event route - Endpoint: 
 [30-Aug-2025 08:05:58 Europe/Berlin] Event route - ID: null
 [30-Aug-2025 08:05:58 Europe/Berlin] Event route - Action: null
+=======
+>>>>>>> 079c39be83ac90391f8eb1c27a1a1432b1cb66fb

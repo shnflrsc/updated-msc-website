@@ -7,7 +7,6 @@
     <title>Admin Dashboard</title>
     <link href="./Logos/Bulsu MSC Logo-02.png" rel="icon" type="image/png" />
 
-    <!-- Updated font imports to match admin_manage_events -->
     <link href="https://fonts.googleapis.com/css2?family=Segoe+UI:wght@400;500;600;700&family=Orbitron:wght@400;700;900&display=swap" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
@@ -15,7 +14,6 @@
 
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
-        /* Updated base styles to match admin_manage_events */
         * {
             margin: 0;
             padding: 0;
@@ -34,7 +32,6 @@
             min-height: 100vh;
         }
 
-        /* Updated sidebar styles to match admin_manage_events */
         .sidebar {
             width: 280px;
             background-color: #00071c;
@@ -50,7 +47,6 @@
             padding: 0 20px 30px;
             border-bottom: 1px solid #1a1f3a;
             margin-bottom: 30px;
-            /* Added display flex and flex-direction to ensure proper centering */
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -60,7 +56,6 @@
             width: 60px;
             height: 60px;
             margin-bottom: 10px;
-            /* Added margin auto for additional centering assurance */
             margin-left: auto;
             margin-right: auto;
         }
@@ -124,7 +119,6 @@
             line-height: 1.4;
         }
 
-        /* Updated main content styles */
         .main-content {
             margin-left: 280px;
             flex: 1;
@@ -149,7 +143,6 @@
             font-size: 14px;
         }
 
-        /* Updated card styles */
         .card {
             background-color: #011538;
             border-radius: 12px;
@@ -169,7 +162,6 @@
             margin-bottom: 20px;
         }
         
-        /* Added styles for new containers */
         .recent-container { 
             display: grid; 
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); 
@@ -281,7 +273,6 @@
             box-shadow: 0 4px 12px rgba(185, 218, 5, 0.2); 
         }
 
-        /* Updated button styles */
         .btn {
             padding: 8px 16px;
             border: none;
@@ -327,7 +318,7 @@
 
 <body>
     <div class="container">
-        <!-- Updated sidebar structure to match admin_manage_events -->
+        <!-- sidebar -->
         <nav class="sidebar">
             <div class="logo-section">
                 <img src="./Logos/Bulsu MSC Logo-02.png" alt="BulSU MSC Logo" onerror="this.style.display='none'">
@@ -350,7 +341,7 @@
             </div>
         </nav>
 
-        <!-- Updated main content structure -->
+        <!-- main content -->
         <main class="main-content">
             <div class="header">
                 <h1>Welcome, Admin!</h1>
@@ -361,7 +352,7 @@
                 <div class="card card-border">
                     <h3 class="text-xl font-semibold text-gray-200 mb-2">Total Members</h3>
                     <p class="text-3xl font-bold text-[#b9da05]" id="student-cnt"></p>
-                    <!-- Added View All Members link -->
+                    <!-- view all members -->
                     <a href="admin_manage_members.html" class="text-blue-400 hover:text-blue-300 text-sm font-medium mt-2 inline-block">
                         View All Members →
                     </a>
@@ -370,7 +361,7 @@
                 <div class="card card-border">
                     <h3 class="text-xl font-semibold text-gray-200 mb-2">Active Announcements</h3>
                     <p class="text-3xl font-bold text-[#b9da05]" id="announcement-cnt"></p>
-                    <!-- Added View All Announcements link -->
+                    <!-- view all announcements -->
                     <a href="admin_manage_announcements.html" class="text-blue-400 hover:text-blue-300 text-sm font-medium mt-2 inline-block">
                         View All Announcements →
                     </a>
@@ -379,14 +370,14 @@
                 <div class="card card-border">
                     <h3 class="text-xl font-semibold text-gray-200 mb-2">Upcoming Events</h3>
                     <p class="text-3xl font-bold text-[#b9da05]" id="event-cnt"></p>
-                    <!-- Added View All Events link -->
+                    <!-- view all events -->
                     <a href="admin_manage_events.html" class="text-blue-400 hover:text-blue-300 text-sm font-medium mt-2 inline-block">
                         View All Events →
                     </a>
                 </div>
             </div>
 
-            <!-- Added new containers section -->
+            <!-- section for calendar, announcements list, and events list -->
             <div class="recent-container">
                 <div class="mini-calendar-container">
                     <h3>Events - <span id="current-month"></span></h3>
@@ -397,10 +388,10 @@
                             </tr>
                         </thead>
                         <tbody id="calendar-body">
-                            <!-- Calendar will be populated by JavaScript -->
+                            <!-- calendar content once nalagyan na ng backend -->
                         </tbody>
                     </table>
-                    <a href="admin_event_calendar.html" class="text-blue-400 hover:text-blue-300 text-sm font-medium mt-4 inline-block">
+                    <a href="admin_calendar.html" class="text-blue-400 hover:text-blue-300 text-sm font-medium mt-4 inline-block">
                         View Full Calendar →
                     </a>
                 </div>
@@ -408,20 +399,20 @@
                 <div class="recent-box clickable-container" onclick="window.location.href='admin_manage_announcements.html';">
                     <h3>Recent Announcements</h3>
                     <div id="recentAnnouncements">
-                        <!-- Recent announcements will be populated by JavaScript -->
+                        <!-- recent announcements list -->
                     </div>
                 </div>
 
                 <div class="recent-box clickable-container" onclick="window.location.href='admin_manage_events.html';">
                     <h3>Upcoming Events</h3>
                     <div id="upcomingEvents">
-                        <!-- Upcoming events will be populated by JavaScript -->
+                        <!-- upcoming announcements list -->
                     </div>
                 </div>
 
             </div>
 
-            <!-- Keep existing chart containers -->
+            <!-- chart -->
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6">
                 <div class="card">
                     <h3 class="text-xl font-semibold text-gray-200 mb-4">Members per College</h3>
@@ -435,8 +426,6 @@
             </div>
         </main>
     </div>
-    
-    <!-- Removed original footer since it's now in the sidebar -->
     
     <script>
         const API_BASE = "/updated-msc-website/api";
