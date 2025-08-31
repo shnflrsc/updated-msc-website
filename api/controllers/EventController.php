@@ -332,6 +332,21 @@ class EventController
     }
 
     /**
+     * Get past/completed events
+     */
+    public function getPast()
+    {
+        try {
+            $limit = isset($_GET['limit']) ? (int)$_GET['limit'] : 10; //Default: 10
+            $events = $this->eventModel->getPast($limit);
+
+            Response::success($events);
+        } catch (Exception $e) {
+            Response::serverError($e->getMessage());
+        }
+    }
+
+    /**
      * Get calendar events
      */
     public function getCalendarEvents()

@@ -44,9 +44,11 @@ switch ($method) {
     case 'GET':
         if ($endpoint === 'upcoming') {
             $eventController->getUpcoming();
-        } else if($endpoint === 'canceled'){
+        } else if ($endpoint === 'canceled'){
             $eventController->getCanceled();
-        }elseif ($endpoint === 'msc-calendar') {
+        } else if ($endpoint === 'past'){
+            $eventController->getPast();
+        } elseif ($endpoint === 'msc-calendar') {
             $eventController->getCalendarEvents();
         } elseif ($endpoint === 'university-calendar') {
             $eventController->getUnivCalendarEvents();

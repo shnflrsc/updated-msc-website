@@ -748,7 +748,8 @@
 
             <!-- past events Tab -->
             <div id="past-events" class="tab-content">
-                <div class="event-item">
+
+                <!-- <div class="event-item">
                     <div class="event-image">
                         <i class="bi bi-trophy"></i>
                     </div>
@@ -765,9 +766,9 @@
                             <a href="#" class="btn btn-secondary">Edit Details</a>
                         </div>
                     </div>
-                </div>
+                </div> -->
 
-                <div class="event-item">
+                <!-- <div class="event-item">
                     <div class="event-image">
                         <i class="bi bi-mortarboard"></i>
                     </div>
@@ -784,7 +785,7 @@
                             <a href="#" class="btn btn-secondary">Edit Details</a>
                         </div>
                     </div>
-                </div>
+                </div> -->
             </div>
 
             <!-- cancelled events tab -->
@@ -1300,13 +1301,59 @@
                     container.appendChild(div);
                 });
             } else {
-                console.log("Failed to fetch upcoming events: ", data.message);
+                console.log("Failed to fetch canceled events: ", data.message);
+            }
+        }
+
+        async function getPastEvents() {
+            const data = await apiCall("/events/past", "GET");
+
+            if (data?.success) {
+                console.log("Past Events:");
+                console.log(data);
+
+                const container = document.getElementById("past-events");
+
+                data.data.forEach(evt => {
+                    const eventDate = new Date(evt.event_date);
+                    const formattedDate = eventDate.toLocaleString("en-US", {
+                        month: "short",
+                        day: "numeric",
+                        year: "numeric"
+                    });
+
+                    const div = document.createElement("div");
+                    div.innerHTML = `
+                        <div class="event-item"> 
+                            <div class="event-image"> 
+                                <i class="bi bi-trophy"></i>
+                            </div>
+                            <div class="event-details">
+                                <h4 class="event-title"> ${evt.event_name}</h4>
+                                <p class="event-description"> ${evt.description}</p>
+                                <div class="event-meta">
+                                    <span><i class="bi bi-calendar"></i> ${formattedDate}</span>
+                                    <span class="event-status status-completed"> ${evt.event_status} </span>
+                                </div>
+                                <div class="event-actions">
+                                    <a href="#" class="btn btn-primary" onclick="showEventDashboard()">Dashboard</a>
+                                    <a href="#" class="btn btn-secondary">Edit Details</a>
+                                </div>
+                            </div>
+                        </div>
+                        `
+                        ;
+                    container.appendChild(div);
+                });
+            } else {
+                console.log("Failed to fetch past events: ", data.message);
             }
         }
 
         document.addEventListener("DOMContentLoaded", () => {
             getUpcomingEvents();
             getCanceledEvents();
+            getPastEvents();
         });
     </script>
 </body>

@@ -225,6 +225,24 @@ class Event
     }
 
     /**
+     * Get past/completed events
+     */
+    public function getPast($limit = 10) //Default: 10
+    {
+        $sql = "SELECT * FROM events 
+                WHERE event_status = 'completed' 
+                AND event_date < CURDATE()
+                ORDER BY event_date ASC, event_time_start ASC 
+                LIMIT :limit";
+
+        $stmt = $this->db->prepare($sql);
+        $stmt->bindValue(':limit', $limit, PDO::PARAM_INT);
+        $stmt->execute();
+
+        return $stmt->fetchAll();
+    }
+
+    /**
      * Get events for calendar
      */
     public function getCalendarEvents($startDate, $endDate)
