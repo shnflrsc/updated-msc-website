@@ -96,6 +96,16 @@ switch ($method) {
             http_response_code(404);
             echo json_encode(['success' => false, 'message' => 'POST endpoint not found']);
         }
+    
+    case 'DELETE':
+    if (is_numeric($endpoint)) { // endpoint is the student ID
+        $studentController->delete($endpoint);
+    } else {
+        http_response_code(404);
+        echo json_encode(['success' => false, 'message' => 'DELETE endpoint not found']);
+    }
+    break;
+
 
 
     default:

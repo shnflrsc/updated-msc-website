@@ -325,4 +325,18 @@ class Student
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
+
+    /**
+     * Delete student
+     */
+    public function delete($id)
+    {
+        try {
+            $stmt = $this->db->prepare("DELETE FROM students WHERE id = :id");
+            return $stmt->execute(['id' => $id]);
+        } catch (Exception $e) {
+            throw new Exception("Failed to delete student: " . $e->getMessage());
+        }
+    }
+    
 }

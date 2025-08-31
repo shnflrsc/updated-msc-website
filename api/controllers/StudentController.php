@@ -379,6 +379,34 @@ class StudentController
             Response::serverError($e->getMessage());
         }
     }
+    
+    public function delete($id)
+    {
+        try {
+            // Optional: Only allow officers to delete
+            // AuthMiddleware::requireOfficer();
+
+            $student = $this->studentModel->findById($id);
+            if (!$student) {
+                http_response_code(404);
+                echo json_encode(['success' => false, 'message' => 'Student not found']);
+                return;
+            }
+
+            $result = $this->studentModel->delete($id);
+
+            if ($result) {
+                echo json_encode(['success' => true, 'message' => 'Student deleted successfully', 'data' => ['id' => $id]]);
+            } else {
+                http_response_code(500);
+                echo json_encode(['success' => false, 'message' => 'Failed to delete student']);
+            }
+        } catch (Exception $e) {
+            http_response_code(500);
+            echo json_encode(['success' => false, 'message' => $e->getMessage()]);
+        }
+    }
+    
 
 }
 
