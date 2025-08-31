@@ -44,9 +44,11 @@ switch ($method) {
     case 'GET':
         if ($endpoint === 'upcoming') {
             $eventController->getUpcoming();
-        } elseif ($endpoint === 'msc-calendar') {
+        } else if($endpoint === 'canceled'){
+            $eventController->getCanceled();
+        }elseif ($endpoint === 'msc-calendar') {
             $eventController->getCalendarEvents();
-        }  elseif ($endpoint === 'university-calendar') {
+        } elseif ($endpoint === 'university-calendar') {
             $eventController->getUnivCalendarEvents();
         } elseif ($endpoint && is_numeric($endpoint) && $id === 'registrations') {
             $eventController->getRegistrations($endpoint);
@@ -74,6 +76,10 @@ switch ($method) {
             $eventController->register($endpoint);
         } elseif ($endpoint === '' || $endpoint === 'create') {
             $eventController->create();
+        } elseif ($endpoint && is_numeric($endpoint) && $id === 'status') {
+            $eventController->updateStatus($endpoint);
+        } elseif ($endpoint && is_numeric($endpoint)) {
+            $eventController->update($endpoint);
         } else {
             http_response_code(404);
             echo json_encode(['success' => false, 'message' => 'POST endpoint not found: ' . $endpoint]);

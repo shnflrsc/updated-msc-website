@@ -156,6 +156,25 @@ class Event
         }
     }
 
+    public function updateStatus($id, $status)
+    {
+        try {
+            $sql = "UPDATE events 
+                SET event_status = :event_status,
+                    updated_at = CURRENT_TIMESTAMP
+                WHERE event_id = :id";
+
+            $stmt = $this->db->prepare($sql);
+            return $stmt->execute([
+                'event_status' => $status,
+                'id' => $id
+            ]);
+        } catch (Exception $e) {
+            throw new Exception("Failed to update event: " . $e->getMessage());
+        }
+    }
+
+
     /**
      * Delete event
      */
@@ -188,6 +207,24 @@ class Event
     }
 
     /**
+     * Get canceled events
+     */
+    public function getCanceled($limit = 10) //Default: 10
+    {
+        $sql = "SELECT * FROM events 
+                WHERE event_status = 'canceled' 
+                AND event_date >= CURDATE()
+                ORDER BY event_date ASC, event_time_start ASC 
+                LIMIT :limit";
+
+        $stmt = $this->db->prepare($sql);
+        $stmt->bindValue(':limit', $limit, PDO::PARAM_INT);
+        $stmt->execute();
+
+        return $stmt->fetchAll();
+    }
+
+    /**
      * Get events for calendar
      */
     public function getCalendarEvents($startDate, $endDate)
@@ -207,10 +244,11 @@ class Event
         return $stmt->fetchAll();
     }
 
-     /**
+    /**
      * Get university calendar events 
      */
-    public function getUnivCalendarEvents($startDate, $endDate) {
+    public function getUnivCalendarEvents($startDate, $endDate)
+    {
         $sql = "SELECT calendar_id, event_name, event_date, event_type, school_year
                 FROM university_calendar
                 WHERE event_date BETWEEN :start_date AND :end_date
