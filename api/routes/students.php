@@ -86,15 +86,27 @@ switch ($method) {
 
 
     case 'POST':
-        if ($endpoint && $id === 'toggle-active') {
+        if ($endpoint === 'create') {
+            $studentController->create();
+        } elseif ($endpoint && $id === 'toggle-active') {
             $studentController->toggleActive($endpoint);
-        } else if ($endpoint === 'upload-profile' && is_numeric($id)) {
+        } elseif ($endpoint === 'upload-profile' && is_numeric($id)) {
             $studentController->uploadProfilePicture($id);
         } else {
             http_response_code(404);
             echo json_encode(['success' => false, 'message' => 'POST endpoint not found']);
         }
-        break;
+    
+    case 'DELETE':
+    if (is_numeric($endpoint)) { // endpoint is the student ID
+        $studentController->delete($endpoint);
+    } else {
+        http_response_code(404);
+        echo json_encode(['success' => false, 'message' => 'DELETE endpoint not found']);
+    }
+    break;
+
+
 
     default:
         http_response_code(405);
