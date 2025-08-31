@@ -473,8 +473,14 @@
 
                 <div class="recent-box clickable-container" onclick="window.location.href='admin_manage_events.html';">
                     <h3>Upcoming Events</h3>
-                    <div id="upcomingEvents">
-                        <!-- upcoming announcements list -->
+                    <div class="flex flex-col h-full">
+                        <div id="upcomingEvents">
+                            <!-- upcoming events list -->
+                        </div>
+                        <a href="admin_manage_events.html"
+                            class="text-blue-400 hover:text-blue-300 text-sm font-medium mt-2 inline-block">
+                            View All Events →
+                        </a>
                     </div>
                 </div>
 
@@ -571,8 +577,8 @@
 
                 const container = document.getElementById("recentAnnouncements");
 
-                data.data.forEach(item => {
-                    const rawDate = new Date(item.date_posted);
+                data.data.forEach(ann => {
+                    const rawDate = new Date(ann.date_posted);
                     const formattedDate = rawDate.toLocaleDateString("en-US", {
                         year: "numeric",
                         month: "long",
@@ -584,10 +590,10 @@
                     <div class="relative p-5 mb-3 border border-white/10 bg-[#0b1035] rounded-xl shadow-md transition-all duration-300 ease-out hover:shadow-lg hover:scale-[1.02] hover:bg-[#122055] group">
                         <div class="absolute top-3 right-3 bg-[#b9da05]/20 text-[#b9da05] text-[10px] px-2 py-1 rounded-full uppercase tracking-wide    "> ${formattedDate}</div>
                         <div>
-                            <h4 class="relative text-base font-semibold text-white mb-2 transition-colors duration-300 group-hover:text-[#b9da05]">${item.title}
+                            <h4 class="relative text-base font-semibold text-white mb-2 transition-colors duration-300 group-hover:text-[#b9da05]">${ann.title}
                                 <span class="absolute left-0 -bottom-1 w-0 h-[2px] bg-[#b9da05] transition-all duration-300 group-hover:w-full"></span>
                             </h4>
-                            <p class="text-sm text-gray-300 leading-relaxed line-clamp-2">${item.content}</p>
+                            <p class="text-sm text-[#64748b] leading-relaxed line-clamp-2">${ann.content}</p>
                         </div>
                     </div>`
                         ;
@@ -598,11 +604,48 @@
             }
         }
 
+        async function getUpcomingEvents() {
+            const data = await apiCall("/events/upcoming", "GET");
+
+            if (data?.success) {
+                console.log(data);
+
+                const container = document.getElementById("upcomingEvents");
+
+                data.data.forEach(evt => {
+                    const eventDateTime = new Date(`${evt.event_date}T${evt.event_time_start}`);
+                    const formattedDateTime = eventDateTime.toLocaleString("en-US", {
+                        month: "short",   
+                        day: "numeric", 
+                        year: "numeric",  
+                        hour: "numeric",  
+                        minute: "2-digit", 
+                        hour12: true      
+                    });
+
+                    const div = document.createElement("div");
+                    div.innerHTML = `
+                        <div class="bg-[#0b1035] border border-[#1a1f3a] rounded-lg p-4 mb-2 transition-all duration-300 hover:border-[#b9da05] hover:-translate-y-1"> 
+                            <h4 class="text-white font-semibold text-sm mb-1"> ${evt.event_name} </h4> 
+                            <p class="text-gray-400 text-xs mb-2"> ${evt.description} </p>
+                            <span class="text-[11px] text-[#64748b] tracking-wide"> <i class="bi bi-calendar text-[#b9da05]"></i> ${formattedDateTime} </span> 
+                            <span class="text-[11px] text-[#64748b] tracking-wide"> <i class="bi bi-geo-alt text-[#b9da05]"></i>  ${evt.location} </span>
+                        </div>`
+                        ;
+                    container.appendChild(div);
+                });
+            } else {
+                console.log("Failed to fetch upcoming events: ", data.message);
+            }
+        }
+
         document.addEventListener("DOMContentLoaded", () => {
             getAllStudents();
             getAllEvents();
             getAllAnnouncements();
             getRecentAnnouncements();
+
+            getUpcomingEvents();
         });
     </script>
 
