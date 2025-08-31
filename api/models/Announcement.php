@@ -139,7 +139,7 @@ class Announcement
     /**
      * Get recent announcements
      */
-    public function getRecent($limit = 5)
+    public function getRecent($limit = 3)
     {
         $sql = "SELECT * FROM announcements 
                 WHERE is_archived = 0 

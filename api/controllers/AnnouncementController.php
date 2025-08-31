@@ -248,7 +248,7 @@ class AnnouncementController
     public function getRecent()
     {
         try {
-            $limit = isset($_GET['limit']) ? (int)$_GET['limit'] : 5;
+            $limit = isset($_GET['limit']) ? (int)$_GET['limit'] : 3;
             $announcements = $this->announcementModel->getRecent($limit);
             
             Response::success($announcements);

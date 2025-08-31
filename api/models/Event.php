@@ -172,7 +172,7 @@ class Event
     /**
      * Get upcoming events
      */
-    public function getUpcoming($limit = 10)
+    public function getUpcoming($limit = 3) //Default: 10
     {
         $sql = "SELECT * FROM events 
                 WHERE event_status = 'upcoming' 

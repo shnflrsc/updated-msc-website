@@ -296,6 +296,6 @@ async function renderEventsPerMonthChart() {
 document.addEventListener("DOMContentLoaded", () => {
     renderStudentsPerCollegeChart();
     renderStudentsPerYearLevelChart();
-    renderEventStatusChart();
-    renderEventsPerMonthChart();
+    //renderEventStatusChart();
+    //renderEventsPerMonthChart();
 });

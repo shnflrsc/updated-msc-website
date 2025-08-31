@@ -262,7 +262,7 @@ class EventController
     public function getUpcoming()
     {
         try {
-            $limit = isset($_GET['limit']) ? (int)$_GET['limit'] : 10;
+            $limit = isset($_GET['limit']) ? (int)$_GET['limit'] : 3; //Default: 10
             $events = $this->eventModel->getUpcoming($limit);
 
             Response::success($events);
