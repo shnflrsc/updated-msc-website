@@ -62,7 +62,8 @@ CREATE TABLE IF NOT EXISTS announcements (
     posted_by VARCHAR(100) DEFAULT 'Admin',
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-    is_archived BOOLEAN DEFAULT FALSE
+    is_archived BOOLEAN DEFAULT FALSE,
+    image_url VARCHAR(255) DEFAULT NULL
 );
 
 -- Create settings table for system configuration
