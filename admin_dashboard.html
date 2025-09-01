@@ -281,15 +281,6 @@
             cursor: default;
         }
 
-        .clickable-container {
-            cursor: pointer;
-            transition: transform 0.2s ease, box-shadow 0.2s ease;
-        }
-
-        .clickable-container:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(185, 218, 5, 0.2);
-        }
 
         .btn {
             padding: 8px 16px;
@@ -457,7 +448,7 @@
                     </a>
                 </div>
 
-                <div class="recent-box clickable-container"
+                <div class="recent-box"
                     onclick="window.location.href='admin_manage_announcements.html';">
                     <h3>Recent Announcements</h3>
                     <div class="flex flex-col h-full">
@@ -471,7 +462,7 @@
                     </div>
                 </div>
 
-                <div class="recent-box clickable-container" onclick="window.location.href='admin_manage_events.html';">
+                <div class="recent-box" onclick="window.location.href='admin_manage_events.html';">
                     <h3>Upcoming Events</h3>
                     <div class="flex flex-col h-full">
                         <div id="upcomingEvents">
