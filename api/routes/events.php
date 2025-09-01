@@ -44,7 +44,9 @@ switch ($method) {
     case 'GET':
         if ($endpoint === 'upcoming') {
             $eventController->getUpcoming();
-        } else if ($endpoint === 'canceled'){
+        } else if($endpoint === 'upcomingPreview'){
+            $eventController->getUpcomingPreview();
+        }else if ($endpoint === 'canceled'){
             $eventController->getCanceled();
         } else if ($endpoint === 'past'){
             $eventController->getPast();
@@ -58,6 +60,8 @@ switch ($method) {
             $eventController->getById($endpoint);
         } elseif ($endpoint === 'count') {
             $eventController->countEvents();
+        } else if($endpoint === 'countRecorded'){
+            $eventController->countUpcomingEvents();
         } elseif ($endpoint === 'status-count') {
             $eventController->getStatusCounts();
         } elseif ($endpoint === 'monthly-distribution') {

@@ -302,12 +302,26 @@ class EventController
     }
 
     /**
-     * Get upcoming events
+     * Get upcoming events: default
      */
     public function getUpcoming()
     {
         try {
-            $limit = isset($_GET['limit']) ? (int)$_GET['limit'] : 3; //Default: 10
+            $limit = isset($_GET['limit']) ? (int)$_GET['limit'] : 10; //Default: 10
+            $events = $this->eventModel->getUpcoming($limit);
+
+            Response::success($events);
+        } catch (Exception $e) {
+            Response::serverError($e->getMessage());
+        }
+    }
+
+    /**
+     * Get upcoming events: for Admin Dashoard
+     */
+    public function getUpcomingPreview(){
+        try {
+            $limit = isset($_GET['limit']) ? (int)$_GET['limit'] : 3; 
             $events = $this->eventModel->getUpcoming($limit);
 
             Response::success($events);
@@ -510,12 +524,27 @@ class EventController
     }
 
     /**
+     * COUNT: Events (Upcoming)
+     */
+    public function countUpcomingEvents()
+    {
+        $event = new Event();
+
+        try {
+            $count = $event->countUpcomingEvents();
+            echo json_encode(['success' => true, 'data' => $count]);
+        } catch (Exception $e) {
+            echo json_encode(['success' => false, 'message' => $e->getMessage()]);
+        }
+    }
+
+    /**
      * GET: Event Status counts 
      */
     public function getStatusCounts()
     {
         try {
-            $statusCounts = $this->eventModel->getStatusCounts(); // create this in Event.php
+            $statusCounts = $this->eventModel->getStatusCounts(); 
 
             Response::success($statusCounts);
         } catch (Exception $e) {

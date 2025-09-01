@@ -248,7 +248,8 @@
         .mini-calendar td {
             border: 1px solid rgba(255, 255, 255, 0.1);
             text-align: center;
-            padding: 8px 4px;
+            /* padding: 10px 4px; */
+            padding: 18px 4px;
             font-size: 13px;
             cursor: pointer;
             transition: background-color 0.2s ease;
@@ -439,7 +440,7 @@
                             </tr>
                         </thead>
                         <tbody id="calendar-body">
-                            <!-- calendar content once nalagyan na ng backend -->
+
                         </tbody>
                     </table>
                     <a href="admin_calendar.html"
@@ -447,6 +448,7 @@
                         View Full Calendar →
                     </a>
                 </div>
+                <!-- calendar content once nalagyan na ng backend -->
 
                 <div class="recent-box"
                     onclick="window.location.href='admin_manage_announcements.html';">
@@ -487,6 +489,18 @@
                 <div class="card">
                     <h3 class="text-xl font-semibold text-gray-200 mb-4">Members per Year Level</h3>
                     <canvas id="studentsPerYearLevelChart" class="w-full h-64"></canvas>
+                </div>
+
+                <div class="card">
+                    <h3 class="text-xl font-semibold text-gray-200 mb-4">Events Status</h3>
+                    <div class="h-64">
+                        <canvas id="eventStatusChart"></canvas>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h3 class="text-xl font-semibold text-gray-200 mb-4">Events per Month</h3>
+                    <canvas id="eventsPerMonthChart" class="w-full h-64"></canvas>
                 </div>
             </div>
         </main>
@@ -530,6 +544,77 @@
             el.classList.add("animate-fadeIn");
         }
 
+        let currentCalendarDate = new Date();
+        let upcomingEvents = [];
+
+        async function fetchUpcomingEvents() {
+            const data = await apiCall("/events/upcomingPreview", "GET");
+            if (data?.success) {
+                upcomingEvents = data.data.map(evt => evt.event_date); 
+            } else {
+                console.log("Failed to fetch upcoming events for calendar:", data?.message);
+                upcomingEvents = [];
+            }
+        }
+
+        function renderCalendar() {
+            const month = currentCalendarDate.getMonth();
+            const year = currentCalendarDate.getFullYear();
+            const firstDay = new Date(year, month, 1).getDay();
+            const daysInMonth = new Date(year, month + 1, 0).getDate();
+
+            document.getElementById("current-month").textContent =
+                currentCalendarDate.toLocaleString("default", { month: "long", year: "numeric" });
+
+            const calendarBody = document.getElementById("calendar-body");
+            calendarBody.innerHTML = "";
+
+            let date = 1;
+            for (let row = 0; row < 6; row++) {
+                const tr = document.createElement("tr");
+
+                for (let col = 0; col < 7; col++) {
+                    const td = document.createElement("td");
+
+                    if (row === 0 && col < firstDay) {
+                        td.classList.add("empty");
+                    } else if (date > daysInMonth) {
+                        td.classList.add("empty");
+                    } else {
+                        td.textContent = date;
+                        td.style.position = "relative"; 
+
+                        const today = new Date();
+                        if (
+                            date === today.getDate() &&
+                            year === today.getFullYear() &&
+                            month === today.getMonth()
+                        ) {
+                            td.classList.add("today");
+                        }
+
+                        const dateStr = new Date(year, month, date).toISOString().split("T")[0];
+                        if (upcomingEvents.includes(dateStr)) {
+                            td.classList.add("event-day");
+                        }
+
+                        date++;
+                    }
+
+                    tr.appendChild(td);
+                }
+
+                calendarBody.appendChild(tr);
+
+                if (date > daysInMonth) break;
+            }
+        }
+
+        async function loadCalendar() {
+            await fetchUpcomingEvents();
+            renderCalendar();
+        }
+
         async function getAllStudents() {
             const data = await apiCall("/students/count", "GET");
             if (data?.success) {
@@ -542,7 +627,7 @@
         }
 
         async function getAllEvents() {
-            const data = await apiCall("/events/count", "GET");
+            const data = await apiCall("/events/countRecorded", "GET");
             if (data?.success) {
                 animateCounter("event-cnt", Number(data.data));
             } else {
@@ -562,7 +647,7 @@
         }
 
         async function getRecentAnnouncements() {
-            const data = await apiCall("/announcements/recent", "GET");
+            const data = await apiCall("/announcements/recentPreview", "GET");
             if (data?.success) {
                 console.log(data);
 
@@ -595,8 +680,9 @@
             }
         }
 
+
         async function getUpcomingEvents() {
-            const data = await apiCall("/events/upcoming", "GET");
+            const data = await apiCall("/events/upcomingPreview", "GET");
 
             if (data?.success) {
                 console.log(data);
@@ -606,12 +692,12 @@
                 data.data.forEach(evt => {
                     const eventDateTime = new Date(`${evt.event_date}T${evt.event_time_start}`);
                     const formattedDateTime = eventDateTime.toLocaleString("en-US", {
-                        month: "short",   
-                        day: "numeric", 
-                        year: "numeric",  
-                        hour: "numeric",  
-                        minute: "2-digit", 
-                        hour12: true      
+                        month: "short",
+                        day: "numeric",
+                        year: "numeric",
+                        hour: "numeric",
+                        minute: "2-digit",
+                        hour12: true
                     });
 
                     const div = document.createElement("div");
@@ -631,11 +717,11 @@
         }
 
         document.addEventListener("DOMContentLoaded", () => {
+            loadCalendar();
             getAllStudents();
             getAllEvents();
             getAllAnnouncements();
             getRecentAnnouncements();
-
             getUpcomingEvents();
         });
     </script>
