@@ -205,19 +205,17 @@ async function renderEventStatusChart() {
                         titleColor: '#fbbf24',
                         bodyColor: '#fff',
                         callbacks: {
-                            // Remove default title
-                            title: () => null,
-                            label: function (context) {
-                                const dataset = context.dataset.data;
-                                const total = dataset.reduce((a, b) => a + b, 0);
+                            title: (context) => {
+                                const status = context[0].label;
+                                return `${status}`;
+                            },
+                            label: (context) => {
                                 const value = context.parsed;
-                                const percentage = ((value / total) * 100).toFixed(1);
-
-                                const status = context.chart.data.labels[context.dataIndex];
-                                return `No. of ${status} events: ${value}`; //(${percentage}%)
+                                return `No. of events: ${value}`;
                             }
                         }
                     }
+
                 },
                 animation: { duration: 1000, easing: 'easeOutQuart' }
             }
@@ -251,7 +249,7 @@ async function renderEventsPerMonthChart() {
             data: {
                 labels: monthLabels,
                 datasets: [{
-                    label: 'Events per Month',
+                    label: 'Events this month',
                     data: totals,
                     fill: true,
                     backgroundColor: 'rgba(185, 218, 5, 0.2)',
@@ -296,6 +294,6 @@ async function renderEventsPerMonthChart() {
 document.addEventListener("DOMContentLoaded", () => {
     renderStudentsPerCollegeChart();
     renderStudentsPerYearLevelChart();
-    //renderEventStatusChart();
-    //renderEventsPerMonthChart();
+    renderEventStatusChart();
+    renderEventsPerMonthChart();
 });

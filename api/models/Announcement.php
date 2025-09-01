@@ -139,7 +139,24 @@ class Announcement
     /**
      * Get recent announcements
      */
-    public function getRecent($limit = 3)
+    public function getRecent($limit = 10)
+    {
+        $sql = "SELECT * FROM announcements 
+                WHERE is_archived = 0 
+                ORDER BY date_posted DESC 
+                LIMIT :limit";
+        
+        $stmt = $this->db->prepare($sql);
+        $stmt->bindValue(':limit', $limit, PDO::PARAM_INT);
+        $stmt->execute();
+        
+        return $stmt->fetchAll();
+    }
+
+    /**
+     * Get recent announcements
+     */
+    public function getRecentPreview($limit = 3)
     {
         $sql = "SELECT * FROM announcements 
                 WHERE is_archived = 0 

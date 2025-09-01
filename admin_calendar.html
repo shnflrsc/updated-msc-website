@@ -242,10 +242,28 @@
         }
 
         /* Responsive */
+        /* @media (max-width: 768px) {
+            .sidebar {
+                transform: translateX(-100%);
+                transition: transform 0.3s ease;
+            }
+
+            .sidebar.open {
+                transform: translateX(0);
+            }
+
+            .main-content {
+                margin-left: 0;
+                padding: 20px;
+            }
+        } */
+
         @media (max-width: 768px) {
             .sidebar {
                 transform: translateX(-100%);
                 transition: transform 0.3s ease;
+                position: fixed;
+                z-index: 100;
             }
 
             .sidebar.open {
@@ -286,23 +304,22 @@
         </nav>
 
         <!-- main content -->
-        <main class="pl-[300px] flex flex-col min-h-screen space-y-4 w-11/12 m-2">
+        <!-- <main class="pl-[300px] flex flex-col min-h-screen space-y-4 w-full p-4"> -->
+        <main class="flex flex-col min-h-screen w-full p-4 md:pl-[300px]">
             <div class="flex flex-col flex-grow shadow-lg rounded-lg border border-[#b9da05] text-white space-y-4">
                 <div class="flex justify-between items-center p-4 border-b border-white/20">
                     <button id="prevWeek"
                         class="bg-white/10 border border-white/20 text-white rounded px-3 py-1 hover:bg-[#b9da05] hover:text-[#011538] transition">
                         Previous
                     </button>
-
                     <h2 class="text-xl font-semibold text-gray-200 text-center flex-1" id="week-range"></h2>
-
                     <button id="nextWeek"
                         class="bg-white/10 border border-white/20 text-white rounded px-3 py-1 hover:bg-[#b9da05] hover:text-[#011538] transition">
                         Next
                     </button>
                 </div>
-                <div class="w-full overflow-hidden">
-                    <div id="calendar-grid" class="grid grid-rows-7 gap-2 text-xs text-gray-200 w-full"></div>
+                <div class="w-full h-full overflow-hidden">
+                    <div id="calendar-grid" class="grid grid-rows-7 gap-2 text-xs text-gray-200 w-full h-full"></div>
                 </div>
             </div>
         </main>
@@ -355,80 +372,232 @@
             </div>
         </div>
 
-        <!-- Toast -->
-        <div id="toast" class="fixed bottom-6 right-6 z-50 hidden">
-            <div id="toast-content"
-                class="flex items-center max-w-xs p-4 text-sm text-white bg-green-600 rounded-lg shadow-lg animate-slide-in"
-                role="alert">
-                <i class="fas fa-check-circle mr-2 text-white"></i>
-                <div id="toast-message">Success message</div>
-            </div>
-        </div>
-
-
-        <div id="new-event-modal" class="fixed inset-0 bg-black/70 hidden z-50 grid place-items-center p-4">
-            <div class="bg-[#0b1035] text-white rounded-2xl shadow-xl border border-[#b9da05]
-              w-full max-w-md sm:max-w-lg md:max-w-xl
-              max-h-[90vh] overflow-y-auto p-4 sm:p-6">
-                <h2 class="text-lg sm:text-xl font-bold mb-4 text-center">New Event</h2>
-                <form id="new-event-form" class="grid grid-cols-1 sm:grid-cols-2 gap-2">
-                    <div class="sm:col-span-2">
-                        <label for="event-name" class="block text-sm font-semibold mb-1">Event Title</label>
-                        <input type="text" id="event-name" name="event_name" placeholder="Enter event title" required>
-                    </div>
-
-                    <div class="sm:col-span-2">
-                        <label for="event-date" class="block text-sm font-semibold mb-1">Date</label>
-                        <input type="date" id="event-date" name="event_date" required>
-                    </div>
-
-
-                    <div>
-                        <label for="event-time-start" class="block text-sm font-semibold mb-1">Start Time</label>
-                        <input type="time" id="event-time-start" name="event_time_start" value="07:00" required>
-                    </div>
-                    <div>
-                        <label for="event-time-end" class="block text-sm font-semibold mb-1">End Time</label>
-                        <input type="time" id="event-time-end" name="event_time_end" required>
-                    </div>
-
-                    <div>
-                        <label for="location" class="block text-sm font-semibold mb-1">Location</label>
-                        <input type="text" id="location" name="location" placeholder="Enter event location" required>
-                    </div>
-                    <div>
-                        <label for="event-type" class="block text-sm font-semibold mb-1">Type</label>
-                        <select id="event-type" name="event_type">
-                            <option value="Meeting">Meeting</option>
-                            <option value="Seminar">Seminar</option>
-                            <option value="Workshop">Workshop</option>
-                            <option value="Other">Other</option>
-                        </select>
-                    </div>
-
-                    <div class="sm:col-span-2">
-                        <label for="event-description" class="block text-sm font-semibold mb-1">Description</label>
-                        <textarea id="event-description" name="description" placeholder="Enter event description"
-                            required></textarea>
-                    </div>
-
-                    <div class="sm:col-span-2 flex justify-between gap-2">
-                        <button type="button" id="cancel-event"
-                            class="flex-1 p-2 bg-gray-600 text-white rounded hover:bg-gray-700 transition">Cancel</button>
-                        <button type="submit"
-                            class="flex-1 p-2 bg-[#b9da05] text-[#011538] font-semibold rounded hover:bg-[#9abc04] transition">Create
-                            Event</button>
-                    </div>
-                </form>
-            </div>
-        </div>
-
-
         <script>
             const API_BASE = "/updated-msc-website/api/events";
-        </script>
-        <script src="js/admin_calendar.js" defer></script>
 
+            function getEventColor(status) {
+                switch (status) {
+                    case "upcoming": return "bg-[#3b82f6] text-white";
+                    case "completed": return "bg[#22c55e] text-white";
+                    case "canceled": return "bg-[#ef4444] text-white";
+                    default: return "bg-white/20 text-white";
+                }
+            }
+
+            let currentCalendarDate = new Date();
+            let calendarEvents = [];
+
+            const prevBtn = document.getElementById("prevWeek");
+            const nextBtn = document.getElementById("nextWeek");
+            const weekRange = document.getElementById("week-range");
+
+            prevBtn.addEventListener("click", () => {
+                currentCalendarDate.setDate(currentCalendarDate.getDate() - 7);
+                fetchCalendarEvents();
+            });
+
+            nextBtn.addEventListener("click", () => {
+                currentCalendarDate.setDate(currentCalendarDate.getDate() + 7);
+                fetchCalendarEvents();
+            });
+
+            function getStartOfWeek(date) {
+                const day = date.getDay();
+                const diff = (day === 0 ? -6 : 1) - day;
+                const monday = new Date(date);
+                monday.setDate(date.getDate() + diff);
+                return monday;
+            }
+
+            function formatDate(date) {
+                return date.toISOString().split("T")[0]; 
+            }
+
+            async function fetchCalendarEvents() {
+                const start = getStartOfWeek(currentCalendarDate);
+                const end = new Date(start);
+                end.setDate(start.getDate() + 6);
+
+                weekRange.textContent = `${start.toLocaleDateString("en-US", { month: "short", day: "numeric" })} - ${end.toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" })}`;
+
+                const startDate = formatDate(start);
+                const endDate = formatDate(end);
+
+                try {
+
+                    const res = await fetch(`${API_BASE}/msc-calendar?start=${startDate}&end=${endDate}`,
+                        { credentials: "include" });
+                    const data = await res.json();
+
+                    if (data.success && Array.isArray(data.data)) {
+                        calendarEvents = data.data.map(event => ({
+                            id: event.id || event.event_id,
+                            title: event.event_name,
+                            date: formatDate(new Date(event.event_date)), 
+                            time: event.event_time_start || "00:00",
+                            status: event.event_status || "",
+                            location: event.location || "",
+                            color: getEventColor(event.event_status),
+                            description: event.description || ""
+                        }));
+                    } else {
+                        calendarEvents = [];
+                    }
+
+                    renderWeek();
+                } catch (err) {
+                    console.error("Calendar fetch error:", err);
+                }
+            }
+
+            function renderWeek() {
+                const grid = document.getElementById("calendar-grid");
+                grid.innerHTML = "";
+
+                const start = getStartOfWeek(currentCalendarDate);
+                const daysOfWeek = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
+
+                for (let i = 0; i < 7; i++) {
+                    const day = new Date(start);
+                    day.setDate(start.getDate() + i);
+                    const dateStr = formatDate(day);
+
+                    const dayEvents = calendarEvents.filter(e => e.date === dateStr);
+
+                    // Day cell
+                    const cell = document.createElement("div");
+                    cell.className = "flex flex-col sm:flex-row items-start sm:items-center gap-3 border border-white/20 rounded-md p-4 mb-2 bg-[#011538] hover:bg-[#132659] transition-colors duration-200 relative";
+
+                    // Left section: Day label | divider | date
+                    const header = document.createElement("div");
+                    header.className = "flex items-center gap-3 min-w-[120px]";
+
+                    const dayLabel = document.createElement("div");
+                    dayLabel.className = "text-base font-semibold text-gray-300 w-12";
+                    dayLabel.textContent = daysOfWeek[i];
+
+                    const divider = document.createElement("div");
+                    divider.className = "h-6 w-px bg-gray-500";
+
+                    const dateEl = document.createElement("div");
+                    dateEl.className = "text-lg font-bold text-white";
+                    dateEl.textContent = day.getDate();
+
+                    header.appendChild(dayLabel);
+                    header.appendChild(divider);
+                    header.appendChild(dateEl);
+
+                    cell.appendChild(header);
+
+                    // Right section: event badges
+                    const eventsContainer = document.createElement("div");
+                    //eventsContainer.className = "flex flex-wrap gap-2 items-center flex-1";
+                    eventsContainer.className = "flex flex-wrap gap-2 items-start sm:items-center flex-1";
+
+                    if (dayEvents.length > 0) {
+                        const maxVisible = 5; //
+                        dayEvents.slice(0, maxVisible).forEach(evt => {
+                            const badge = document.createElement("div");
+                            badge.className = `px-2 py-2 rounded text-xs font-semibold ${evt.color} flex-shrink-0 cursor-pointer`;
+                            badge.textContent = evt.title;
+
+                            badge.addEventListener("click", () => openSingleEventModal(evt));
+                            eventsContainer.appendChild(badge);
+                        });
+
+                        if (dayEvents.length > maxVisible) {
+                            const moreBadge = document.createElement("div");
+                            moreBadge.className =
+                                "px-2 py-2 rounded text-xs font-semibold bg-gray-600 text-white cursor-pointer";
+                            moreBadge.textContent = `+${dayEvents.length - maxVisible} more`;
+                            moreBadge.addEventListener("click", () =>
+                                openMultipleEventsModal(dayEvents, day)
+                            );
+
+                            eventsContainer.appendChild(moreBadge);
+                        }
+                    } else {
+                        const noEvent = document.createElement("div");
+                        noEvent.className = "text-xs text-gray-400 italic";
+                        noEvent.textContent = "—";
+                        eventsContainer.appendChild(noEvent);
+                    }
+
+                    cell.appendChild(eventsContainer);
+                    grid.appendChild(cell);
+                }
+            }
+
+            // Single event modal
+            function openSingleEventModal(event) {
+                const modal = document.getElementById("single-event-modal");
+                modal.classList.remove("hidden");
+
+                document.getElementById("single-modal-title").textContent = event.title;
+
+                const dateTimeString = `${event.date}T${event.time}`;
+                const date = new Date(dateTimeString);
+
+                const formattedDate = date.toLocaleDateString('en-US', {
+                    weekday: 'long',
+                    month: 'long',
+                    day: 'numeric'
+                });
+
+                document.getElementById("event-day-time").textContent = `${formattedDate}`;
+                document.getElementById("event-location").textContent = event.location;
+
+                const participantsBtn = document.querySelector("#single-event-modal #view-participants-btn");
+                const newBtn = participantsBtn.cloneNode(true);
+                participantsBtn.parentNode.replaceChild(newBtn, participantsBtn);
+
+                newBtn.addEventListener("click", () => {
+                    sessionStorage.setItem("selectedEventId", event.id);
+                    closeSingleEventModal();
+                    window.location.href = "admin_event_participants.html";
+                });
+            }
+
+            function openMultipleEventsModal(events, date) {
+                const modal = document.getElementById("multiple-events-modal");
+                modal.classList.remove("hidden");
+
+                const modalTitle = document.getElementById("multiple-modal-title");
+                modalTitle.textContent = date.toLocaleDateString("en-US", { month: "long", day: "numeric", year: "numeric" });
+
+                const modalContent = document.getElementById("multiple-modal-content");
+                modalContent.innerHTML = "";
+
+                events.forEach(e => {
+                    const div = document.createElement("div");
+                    div.className = `mb-2 p-2 rounded ${e.color} cursor-pointer`;
+                    div.textContent = `${e.title}`;
+
+                    div.addEventListener("click", () => {
+                        closeMultipleEventsModal();
+                        openSingleEventModal(e);
+                    });
+
+                    modalContent.appendChild(div);
+                });
+            }
+
+            function closeSingleEventModal() {
+                document.getElementById("single-event-modal").classList.add("hidden");
+            }
+
+            function closeMultipleEventsModal() {
+                document.getElementById("multiple-events-modal").classList.add("hidden");
+            }
+
+            function goToToday() {
+                currentCalendarDate = new Date();
+                fetchCalendarEvents();
+            }
+
+            document.addEventListener("DOMContentLoaded", fetchCalendarEvents);
+        </script>
+        <!-- <script src="js/admin_calendar.js" defer></script> -->
 </body>
 
 </html>

@@ -191,7 +191,25 @@ class Event
     /**
      * Get upcoming events
      */
-    public function getUpcoming($limit = 3) //Default: 10
+    public function getUpcoming($limit = 10) //Default: 10
+    {
+        $sql = "SELECT * FROM events 
+                WHERE event_status = 'upcoming' 
+                AND event_date >= CURDATE()
+                ORDER BY event_date ASC, event_time_start ASC 
+                LIMIT :limit";
+
+        $stmt = $this->db->prepare($sql);
+        $stmt->bindValue(':limit', $limit, PDO::PARAM_INT);
+        $stmt->execute();
+
+        return $stmt->fetchAll();
+    }
+
+    /**
+     * Get upcoming events: for Admin Dashoard
+     */
+    public function getUpcomingPreview($limit = 3) 
     {
         $sql = "SELECT * FROM events 
                 WHERE event_status = 'upcoming' 
@@ -374,6 +392,17 @@ class Event
     public function countAll()
     {
         $stmt = $this->db->prepare("SELECT COUNT(*) AS total FROM events");
+        $stmt->execute();
+        $result = $stmt->fetch(PDO::FETCH_ASSOC);
+        return $result['total'] ?? 0;
+    }
+
+    /**
+     * COUNT: Events (Upcoming)
+     */
+    public function countUpcomingEvents()
+    {
+        $stmt = $this->db->prepare("SELECT COUNT(*) AS total FROM events WHERE `event_status` = 'upcoming'");
         $stmt->execute();
         $result = $stmt->fetch(PDO::FETCH_ASSOC);
         return $result['total'] ?? 0;

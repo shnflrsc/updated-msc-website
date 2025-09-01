@@ -44,7 +44,9 @@ switch ($method) {
     case 'GET':
         if ($endpoint === 'recent') {
             $announcementController->getRecent();
-        } elseif ($endpoint === 'search') {
+        } else if($endpoint === 'recentPreview'){
+            $announcementController->getRecentPreview();
+        }elseif ($endpoint === 'search') {
             $announcementController->search();
         } elseif ($endpoint === 'count') {
             $announcementController->countAnnouncements(); //announcementCounter

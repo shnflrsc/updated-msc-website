@@ -248,6 +248,22 @@ class AnnouncementController
     public function getRecent()
     {
         try {
+            $limit = isset($_GET['limit']) ? (int)$_GET['limit'] : 10;
+            $announcements = $this->announcementModel->getRecent($limit);
+            
+            Response::success($announcements);
+            
+        } catch (Exception $e) {
+            Response::serverError($e->getMessage());
+        }
+    }
+
+    /**
+     * Get recentPreview announcements
+     */
+    public function getRecentPreview()
+    {
+        try {
             $limit = isset($_GET['limit']) ? (int)$_GET['limit'] : 3;
             $announcements = $this->announcementModel->getRecent($limit);
             
