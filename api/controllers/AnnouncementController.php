@@ -33,6 +33,12 @@ class AnnouncementController
             
             // Required fields for announcement creation
             $requiredFields = ['title', 'content'];
+            $sanitizedData = Validator::sanitize($data);
+
+            // Accept optional image_url
+            if (isset($data['image_url'])) {
+                $sanitizedData['image_url'] = $data['image_url'];
+            }
             
             // Validate required fields
             $errors = Validator::validateRequired($data, $requiredFields);
@@ -131,6 +137,11 @@ class AnnouncementController
             
             // Required fields for announcement update
             $requiredFields = ['title', 'content'];
+            $sanitizedData = Validator::sanitize($data);
+
+            if (isset($data['image_url'])) {
+                $sanitizedData['image_url'] = $data['image_url'];
+            }
             
             // Validate required fields
             $errors = Validator::validateRequired($data, $requiredFields);

@@ -397,6 +397,24 @@
     const menuButton = document.getElementById("mobile-menu-button");
     const mobileSidebar = document.getElementById("mobile-sidebar");
 
+    async function apiCall(endpoint, method = "GET", data = null) {
+    try {
+        const response = await fetch(API_BASE + endpoint, {
+            method,
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: data ? JSON.stringify(data) : null
+        });
+
+        if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+        return await response.json();
+    } catch (err) {
+        console.error("API call error:", err);
+        return null;
+    }
+}
+
     menuButton.addEventListener("click", () => {
         mobileSidebar.classList.toggle("-translate-x-full");
     });

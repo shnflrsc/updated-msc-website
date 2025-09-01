@@ -1054,8 +1054,9 @@ async function fetchStudents() {
       console.error("Failed to fetch students", result?.message);
       return;
     }
-
-    const students = result.data.students; // ✅ corrected path
+    
+        // 🔥 filter out officers
+    const students = result.data.students.filter(s => s.role !== "officer");
     const tbody = document.getElementById("membersTableBody");
     tbody.innerHTML = "";
 
