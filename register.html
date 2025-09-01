@@ -265,36 +265,38 @@
 
     <script src="program-and-course.js"></script>
     <script>
-        document.querySelectorAll('.toggle-password').forEach(button => {
-            button.addEventListener('click', function() {
-                const targetId = this.getAttribute('data-target');
-                const targetInput = document.getElementById(targetId);
-                
-                if (targetInput.type === 'password') {
-                    targetInput.type = 'text';
-                    this.textContent = '🙈';
-                } else {
-                    targetInput.type = 'password';
-                    this.textContent = '👁';
-                }
-            });
-        });
-
+        // Toggle Password Visibility
         document.addEventListener("DOMContentLoaded", () => {
-            const regPassword = document.getElementById("regPassword");
-            const hint = document.getElementById("passwordHint");
+            document.querySelectorAll('.toggle-password').forEach(button => {
+                button.addEventListener('click', function() {
+                    this.getAttribute('data-target');
+                    const input = document.getElementById(this.getAttribute('data-target'));
+                    if (!input) return;
 
-            regPassword.addEventListener("input", function () {
-                const password = this.value;
-                const valid = /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d).{8,}$/.test(password);
-
-                if (!valid && password.length > 0) {
-                    hint.style.display = "block";
-                } else {
-                    hint.style.display = "none";
-                }
+                    if (input.type === 'password') {
+                        this.textContent = "🙈"; // change icon
+                    } else {
+                        this.textContent = "👁"; // change icon back
+                    }
+                });
             });
         });
+
+        // password strength hint
+        const regPassword = document.getElementById("regPassword");
+        const hint = document.getElementById("passwordHint");
+
+        regPassword.addEventListener("input", function () {
+            const password = this.value;
+            const valid = /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d).{8,}$/.test(password);
+
+            if (!valid && password.length > 0) {
+                hint.style.display = "block";
+            } else {
+                hint.style.display = "none";
+            }
+        });
+
 
         const API_BASE = "/updated-msc-website/api";
 
