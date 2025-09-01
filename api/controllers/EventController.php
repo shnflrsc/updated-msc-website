@@ -231,6 +231,51 @@ class EventController
         }
     }
 
+    public function updateStatus($id)
+    {
+        try {
+            AuthMiddleware::requireOfficer();
+
+            $event = $this->eventModel->findById($id);
+            if (!$event) {
+                Response::notFound('Event not found');
+            }
+
+            $data = json_decode(file_get_contents("php://input"), true);
+
+            // Required fields for event update
+            $requiredField = [
+                'event_status'
+            ];
+
+            // Validate required fields
+            $errors = Validator::validateRequired($data, $requiredField);
+
+            if (isset($data['event_status']) && !Validator::validateEnum($data['event_status'], ['upcoming', 'canceled', 'completed'])) {
+                $errors['event_status'] = 'Invalid event status';
+            }
+
+            if (!empty($errors)) {
+                Response::validationError($errors);
+            }
+
+            // Sanitize input data
+            $sanitizedData = Validator::sanitize($data);
+
+            // Update event status
+            $result = $this->eventModel->updateStatus($id, $sanitizedData['event_status']);
+
+            if ($result) {
+                $updatedEvent = $this->eventModel->findById($id);
+                Response::success($updatedEvent, 'Event status updated successfully');
+            } else {
+                Response::serverError('Failed to update event status');
+            }
+        } catch (Exception $e) {
+            Response::serverError($e->getMessage());
+        }
+    }
+
     /**
      * Delete event (Officer only)
      */
@@ -262,8 +307,38 @@ class EventController
     public function getUpcoming()
     {
         try {
-            $limit = isset($_GET['limit']) ? (int)$_GET['limit'] : 10;
+            $limit = isset($_GET['limit']) ? (int)$_GET['limit'] : 3; //Default: 10
             $events = $this->eventModel->getUpcoming($limit);
+
+            Response::success($events);
+        } catch (Exception $e) {
+            Response::serverError($e->getMessage());
+        }
+    }
+
+    /**
+     * Get canceled events
+     */
+    public function getCanceled()
+    {
+        try {
+            $limit = isset($_GET['limit']) ? (int)$_GET['limit'] : 10; //Default: 10
+            $events = $this->eventModel->getCanceled($limit);
+
+            Response::success($events);
+        } catch (Exception $e) {
+            Response::serverError($e->getMessage());
+        }
+    }
+
+    /**
+     * Get past/completed events
+     */
+    public function getPast()
+    {
+        try {
+            $limit = isset($_GET['limit']) ? (int)$_GET['limit'] : 10; //Default: 10
+            $events = $this->eventModel->getPast($limit);
 
             Response::success($events);
         } catch (Exception $e) {

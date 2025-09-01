@@ -1,10 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Manage Events | BulSU MSC Administrator</title>
-    <link href="https://fonts.googleapis.com/css2?family=Segoe+UI:wght@400;500;600;700&family=Orbitron:wght@400;700;900&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Segoe+UI:wght@400;500;600;700&family=Orbitron:wght@400;700;900&display=swap"
+        rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
     <link rel="icon" href="./BulSU MSC Logo-02.png" type="image/png">
     <style>
@@ -25,7 +28,7 @@
             display: flex;
             min-height: 100vh;
         }
-        
+
         .sidebar {
             width: 280px;
             background-color: #00071c;
@@ -344,6 +347,7 @@
             background-color: #dc2626;
         }
 
+
         .btn-info {
             background-color: #06b6d4;
             color: #ffffff;
@@ -615,30 +619,32 @@
         }
     </style>
 </head>
+
 <body>
     <div class="container">
         <!-- sidebar -->
         <nav class="sidebar">
-      <div class="logo-section">
-        <img src="./Logos/Bulsu MSC Logo-02.png" alt="BulSU MSC Logo" onerror="this.style.display='none'">
-        <h2>BulSU MSC</h2>
-        <p>ADMINISTRATOR</p>
-      </div>
-      
-      <ul class="nav-menu">
-        <li><a href="admin_dashboard.html"><i class="bi bi-speedometer2"></i>Dashboard</a></li>
-        <li><a href="admin_manage_members.html"><i class="bi bi-people"></i>Members</a></li>
-        <li><a href="admin_manage_committees.html"><i class="bi bi-diagram-3"></i>Committees</a></li>
-        <li><a href="admin_manage_announcements.html"><i class="bi bi-megaphone"></i>Announcements</a></li>
-        <li><a href="admin_manage_events.html" class="active"><i class="bi bi-calendar-event"></i>Events</a></li>
-        <li><a href="verify_attendance.html"><i class="bi bi-check2-square"></i>Attendance Verifier</a></li>
-        <li><a href="admin_calendar.html"><i class="bi bi-calendar3"></i>Calendar</a></li>
-      </ul>
-      
-      <div class="footer-section">
-        <p>&copy; 2024 Bulacan State University<br>Microsoft Student Community<br>All Rights Reserved.</p>
-      </div>
-    </nav>
+            <div class="logo-section">
+                <img src="./Logos/Bulsu MSC Logo-02.png" alt="BulSU MSC Logo" onerror="this.style.display='none'">
+                <h2>BulSU MSC</h2>
+                <p>ADMINISTRATOR</p>
+            </div>
+
+            <ul class="nav-menu">
+                <li><a href="admin_dashboard.html"><i class="bi bi-speedometer2"></i>Dashboard</a></li>
+                <li><a href="admin_manage_members.html"><i class="bi bi-people"></i>Members</a></li>
+                <li><a href="admin_manage_committees.html"><i class="bi bi-diagram-3"></i>Committees</a></li>
+                <li><a href="admin_manage_announcements.html"><i class="bi bi-megaphone"></i>Announcements</a></li>
+                <li><a href="admin_manage_events.html" class="active"><i class="bi bi-calendar-event"></i>Events</a>
+                </li>
+                <li><a href="verify_attendance.html"><i class="bi bi-check2-square"></i>Attendance Verifier</a></li>
+                <li><a href="admin_calendar.html"><i class="bi bi-calendar3"></i>Calendar</a></li>
+            </ul>
+
+            <div class="footer-section">
+                <p>&copy; 2024 Bulacan State University<br>Microsoft Student Community<br>All Rights Reserved.</p>
+            </div>
+        </nav>
 
         <!-- main content -->
         <main class="main-content">
@@ -655,7 +661,8 @@
 
             <!-- tabs -->
             <div class="tabs">
-                <button class="tab-button active" onclick="openTab(event, 'current-upcoming')">Current & Upcoming</button>
+                <button class="tab-button active" onclick="openTab(event, 'current-upcoming')">Current &
+                    Upcoming</button>
                 <button class="tab-button" onclick="openTab(event, 'past-events')">Past Events</button>
                 <button class="tab-button" onclick="openTab(event, 'cancelled-events')">Cancelled</button>
                 <button class="tab-button" onclick="openTab(event, 'add-event')">Add New Event</button>
@@ -663,13 +670,16 @@
 
             <!-- current & upcoming events tab -->
             <div id="current-upcoming" class="tab-content active">
-                <div class="event-item">
+
+                <!-- <div class="event-item">
                     <div class="event-image">
                         <i class="bi bi-calendar-event"></i>
                     </div>
                     <div class="event-details">
                         <h4 class="event-title">Microsoft Azure Workshop</h4>
-                        <p class="event-description">Learn the fundamentals of Microsoft Azure cloud computing platform. This hands-on workshop will cover Azure services, deployment strategies, and best practices for cloud development.</p>
+                        <p class="event-description">Learn the fundamentals of Microsoft Azure cloud computing platform.
+                            This hands-on workshop will cover Azure services, deployment strategies, and best practices
+                            for cloud development.</p>
                         <div class="event-meta">
                             <span><i class="bi bi-calendar"></i>Dec 15, 2024, 2:00 PM</span>
                             <span><i class="bi bi-geo-alt"></i>Computer Laboratory 1</span>
@@ -677,19 +687,28 @@
                         </div>
                         <div class="event-actions">
                             <a href="#" class="btn btn-primary" onclick="showEventDashboard()">Dashboard</a>
-                            <a href="#" class="btn btn-secondary">Edit</a>
-                            <a href="#" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this event?')">Delete</a>
+                            <a href="#" class="btn btn-info">Edit</a>
+                            <a href="#" class="btn btn-secondary"
+                                onclick="return confirm('Are you sure you want to cancel this event?')">
+                                Cancel
+                            </a>
+                            <a href="#" class="btn btn-danger"
+                                onclick="return confirm('Are you sure you want to delete this event?')"><i
+                                    class="bi bi-trash-fill"></i>
+                            </a>
                         </div>
                     </div>
-                </div>
+                </div> -->
 
-                <div class="event-item">
+                <!-- <div class="event-item">
                     <div class="event-image">
                         <i class="bi bi-code-slash"></i>
                     </div>
                     <div class="event-details">
                         <h4 class="event-title">Web Development Bootcamp</h4>
-                        <p class="event-description">Intensive 3-day bootcamp covering HTML, CSS, JavaScript, and modern web frameworks. Perfect for beginners and intermediate developers looking to enhance their skills.</p>
+                        <p class="event-description">Intensive 3-day bootcamp covering HTML, CSS, JavaScript, and modern
+                            web frameworks. Perfect for beginners and intermediate developers looking to enhance their
+                            skills.</p>
                         <div class="event-meta">
                             <span><i class="bi bi-calendar"></i>Dec 20-22, 2024, 9:00 AM</span>
                             <span><i class="bi bi-geo-alt"></i>Online via MS Teams</span>
@@ -698,18 +717,20 @@
                         <div class="event-actions">
                             <a href="#" class="btn btn-primary" onclick="showEventDashboard()">Dashboard</a>
                             <a href="#" class="btn btn-secondary">Edit</a>
-                            <a href="#" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this event?')">Delete</a>
+                            <a href="#" class="btn btn-danger"
+                                onclick="return confirm('Are you sure you want to delete this event?')">Delete</a>
                         </div>
                     </div>
-                </div>
+                </div> -->
 
-                <div class="event-item">
+                <!-- <div class="event-item">
                     <div class="event-image">
                         <i class="bi bi-people"></i>
                     </div>
                     <div class="event-details">
                         <h4 class="event-title">MSC General Assembly</h4>
-                        <p class="event-description">Monthly general assembly meeting for all MSC members. We'll discuss upcoming projects, community updates, and member achievements.</p>
+                        <p class="event-description">Monthly general assembly meeting for all MSC members. We'll discuss
+                            upcoming projects, community updates, and member achievements.</p>
                         <div class="event-meta">
                             <span><i class="bi bi-calendar"></i>Dec 10, 2024, 3:00 PM</span>
                             <span><i class="bi bi-geo-alt"></i>University Auditorium</span>
@@ -718,21 +739,24 @@
                         <div class="event-actions">
                             <a href="#" class="btn btn-primary" onclick="showEventDashboard()">Dashboard</a>
                             <a href="#" class="btn btn-secondary">Edit</a>
-                            <a href="#" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this event?')">Delete</a>
+                            <a href="#" class="btn btn-danger"
+                                onclick="return confirm('Are you sure you want to delete this event?')">Delete</a>
                         </div>
                     </div>
-                </div>
+                </div> -->
             </div>
 
             <!-- past events Tab -->
             <div id="past-events" class="tab-content">
-                <div class="event-item">
+
+                <!-- <div class="event-item">
                     <div class="event-image">
                         <i class="bi bi-trophy"></i>
                     </div>
                     <div class="event-details">
                         <h4 class="event-title">Hackathon 2024</h4>
-                        <p class="event-description">48-hour coding competition where teams built innovative solutions using Microsoft technologies. Great participation and amazing projects were showcased.</p>
+                        <p class="event-description">48-hour coding competition where teams built innovative solutions
+                            using Microsoft technologies. Great participation and amazing projects were showcased.</p>
                         <div class="event-meta">
                             <span><i class="bi bi-calendar"></i>Nov 15-17, 2024</span>
                             <span class="event-status status-completed">Completed</span>
@@ -742,15 +766,16 @@
                             <a href="#" class="btn btn-secondary">Edit Details</a>
                         </div>
                     </div>
-                </div>
+                </div> -->
 
-                <div class="event-item">
+                <!-- <div class="event-item">
                     <div class="event-image">
                         <i class="bi bi-mortarboard"></i>
                     </div>
                     <div class="event-details">
                         <h4 class="event-title">AI & Machine Learning Seminar</h4>
-                        <p class="event-description">Introduction to artificial intelligence and machine learning concepts with practical examples using Microsoft Cognitive Services.</p>
+                        <p class="event-description">Introduction to artificial intelligence and machine learning
+                            concepts with practical examples using Microsoft Cognitive Services.</p>
                         <div class="event-meta">
                             <span><i class="bi bi-calendar"></i>Oct 28, 2024</span>
                             <span class="event-status status-completed">Completed</span>
@@ -760,18 +785,20 @@
                             <a href="#" class="btn btn-secondary">Edit Details</a>
                         </div>
                     </div>
-                </div>
+                </div> -->
             </div>
 
             <!-- cancelled events tab -->
             <div id="cancelled-events" class="tab-content">
-                <div class="event-item">
+
+                <!-- <div class="event-item">
                     <div class="event-image">
                         <i class="bi bi-x-octagon"></i>
                     </div>
                     <div class="event-details">
                         <h4 class="event-title">Office 365 Training</h4>
-                        <p class="event-description">Comprehensive training on Office 365 applications and collaboration tools. Cancelled due to scheduling conflicts with university exams.</p>
+                        <p class="event-description">Comprehensive training on Office 365 applications and collaboration
+                            tools. Cancelled due to scheduling conflicts with university exams.</p>
                         <div class="event-meta">
                             <span><i class="bi bi-calendar"></i>Originally: Dec 5, 2024</span>
                             <span class="event-status status-cancelled">Cancelled</span>
@@ -779,10 +806,11 @@
                         <div class="event-actions">
                             <a href="#" class="btn btn-primary">View Details</a>
                             <a href="#" class="btn btn-secondary">Edit</a>
-                            <a href="#" class="btn btn-danger" onclick="return confirm('Are you sure you want to permanently delete this cancelled event?')">Delete</a>
+                            <a href="#" class="btn btn-danger"
+                                onclick="return confirm('Are you sure you want to permanently delete this cancelled event?')">Delete</a>
                         </div>
                     </div>
-                </div>
+                </div> -->
             </div>
 
             <!-- add new event -->
@@ -792,7 +820,8 @@
                     <form id="addEventForm" onsubmit="handleAddEvent(event)">
                         <div class="form-group">
                             <label for="title">Event Title *</label>
-                            <input type="text" id="title" name="title" class="form-control" placeholder="Enter event title" required>
+                            <input type="text" id="title" name="title" class="form-control"
+                                placeholder="Enter event title" required>
                         </div>
 
                         <div class="form-row">
@@ -808,13 +837,15 @@
 
                         <div class="form-group">
                             <label for="location">Location</label>
-                            <input type="text" id="location" name="location" class="form-control" placeholder="e.g. University Gym, Online via MS Teams">
+                            <input type="text" id="location" name="location" class="form-control"
+                                placeholder="e.g. University Gym, Online via MS Teams">
                         </div>
 
                         <div class="form-row">
                             <div class="form-group">
                                 <label for="capacity">Capacity (Optional)</label>
-                                <input type="number" id="capacity" name="capacity" class="form-control" placeholder="e.g. 100 (0 or empty for unlimited)" min="0">
+                                <input type="number" id="capacity" name="capacity" class="form-control"
+                                    placeholder="e.g. 100 (0 or empty for unlimited)" min="0">
                             </div>
                             <div class="form-group">
                                 <label for="status">Initial Status</label>
@@ -829,18 +860,20 @@
                             <div class="form-group">
                                 <label for="event_type">Event Type</label>
                                 <select id="event_type" name="event_type" class="form-control">
-                                    <option value="Onsite" selected>Onsite</option>
-                                    <option value="Online">Online</option>
-                                    <option value="Hybrid">Hybrid</option>
+                                    <option value="onsite" selected>Onsite</option>
+                                    <option value="online">Online</option>
+                                    <!-- <option value="Hybrid">Hybrid</option> -->
                                 </select>
                             </div>
                             <div class="form-group">
                                 <label for="event_restriction">Event Restriction</label>
                                 <select id="event_restriction" name="event_restriction" class="form-control">
-                                    <option value="Open for Public" selected>Open for Public</option>
-                                    <option value="Members Only">Members Only</option>
-                                    <option value="BulSUans Only">BulSUans Only</option>
-                                    <option value="Invite Only">Invite Only</option>
+                                    <!-- To Change: Backend Validation -->
+                                    <option value="public" selected>Open for Public</option>
+                                    <!-- Open for Public, Members Only -->
+                                    <option value="members">Members Only</option>
+                                    <!-- <option value="BulSUans Only">BulSUans Only</option> -->
+                                    <!-- <option value="Invite Only">Invite Only</option> -->
                                 </select>
                             </div>
                         </div>
@@ -855,32 +888,40 @@
                         <div class="form-group">
                             <label for="event_image">Event Image (Poster/Logo - Optional)</label>
                             <div class="file-upload">
-                                <input type="file" id="event_image" name="event_image" accept="image/jpeg,image/png,image/gif" onchange="updateFileName(this, 'event_image_name')">
+                                <input type="file" id="event_image" name="event_image"
+                                    accept="image/jpeg,image/png,image/gif"
+                                    onchange="updateFileName(this, 'event_image_name')">
                                 <div class="file-upload-btn">
                                     <i class="bi bi-upload"></i>
                                     Choose Event Image
                                 </div>
                             </div>
                             <span id="event_image_name" class="file-name">No file chosen</span>
-                            <small style="display: block; margin-top: 5px; color: #64748b;">Recommended: JPG, PNG, GIF (Max 5MB). Aspect ratio 16:9 or 4:3.</small>
+                            <small style="display: block; margin-top: 5px; color: #64748b;">Recommended: JPG, PNG, GIF
+                                (Max 5MB). Aspect ratio 16:9 or 4:3.</small>
                         </div>
 
                         <div class="form-group">
                             <label for="badge_image">Event Badge Image (Optional)</label>
                             <div class="file-upload">
-                                <input type="file" id="badge_image" name="badge_image" accept="image/jpeg,image/png,image/gif" onchange="updateFileName(this, 'badge_image_name')">
+                                <input type="file" id="badge_image" name="badge_image"
+                                    accept="image/jpeg,image/png,image/gif"
+                                    onchange="updateFileName(this, 'badge_image_name')">
                                 <div class="file-upload-btn">
                                     <i class="bi bi-patch-check-fill"></i>
                                     Choose Badge Image
                                 </div>
                             </div>
                             <span id="badge_image_name" class="file-name">No file chosen</span>
-                            <small style="display: block; margin-top: 5px; color: #64748b;">For participant profiles. Recommended: Square PNG (Max 2MB).</small>
+                            <small style="display: block; margin-top: 5px; color: #64748b;">For participant profiles.
+                                Recommended: Square PNG (Max 2MB).</small>
                         </div>
 
                         <div class="form-group">
                             <label for="description">Description / Details</label>
-                            <textarea id="description" name="description" class="form-control" placeholder="Enter event details, objectives, program flow, speakers, etc." rows="6"></textarea>
+                            <textarea id="description" name="description" class="form-control"
+                                placeholder="Enter event details, objectives, program flow, speakers, etc."
+                                rows="6"></textarea>
                         </div>
 
                         <div style="text-align: right; margin-top: 30px;">
@@ -896,7 +937,8 @@
             <!-- event dashboard -->
             <div id="event-dashboard" class="tab-content" style="display: none;">
                 <div class="card">
-                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+                    <div
+                        style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
                         <h3>Event Overview</h3>
                         <div style="display: flex; gap: 10px;">
                             <!-- palagyan ng edit event modal-->
@@ -913,8 +955,11 @@
                         </div>
                         <div class="event-info">
                             <h2>Microsoft Azure Workshop</h2>
-                            <p>Learn the fundamentals of Microsoft Azure cloud computing platform. This hands-on workshop will cover Azure services, deployment strategies, and best practices for cloud development. Participants will get hands-on experience with Azure portal, virtual machines, and cloud storage solutions.</p>
-                            
+                            <p>Learn the fundamentals of Microsoft Azure cloud computing platform. This hands-on
+                                workshop will cover Azure services, deployment strategies, and best practices for cloud
+                                development. Participants will get hands-on experience with Azure portal, virtual
+                                machines, and cloud storage solutions.</p>
+
                             <div class="info-grid">
                                 <div class="info-item">
                                     <i class="bi bi-calendar-event"></i>
@@ -1000,19 +1045,21 @@
     </div>
 
     <script>
+        const API_BASE = "/updated-msc-website/api";
+
         function openTab(evt, tabName) {
             var i, tabcontent, tablinks;
-            
+
             tabcontent = document.getElementsByClassName("tab-content");
             for (i = 0; i < tabcontent.length; i++) {
                 tabcontent[i].classList.remove("active");
             }
-            
+
             tablinks = document.getElementsByClassName("tab-button");
             for (i = 0; i < tablinks.length; i++) {
                 tablinks[i].classList.remove("active");
             }
-            
+
             document.getElementById(tabName).classList.add("active");
             evt.currentTarget.classList.add("active");
         }
@@ -1022,12 +1069,12 @@
             for (var i = 0; i < tabcontent.length; i++) {
                 tabcontent[i].classList.remove("active");
             }
-            
+
             var tablinks = document.getElementsByClassName("tab-button");
             for (var i = 0; i < tablinks.length; i++) {
                 tablinks[i].classList.remove("active");
             }
-            
+
             document.getElementById("event-dashboard").style.display = "block";
             document.getElementById("event-dashboard").classList.add("active");
         }
@@ -1035,7 +1082,7 @@
         function hideEventDashboard() {
             document.getElementById("event-dashboard").style.display = "none";
             document.getElementById("event-dashboard").classList.remove("active");
-            
+
             document.getElementById("current-upcoming").classList.add("active");
             document.querySelector('.tab-button').classList.add("active");
         }
@@ -1049,31 +1096,266 @@
             }
         }
 
-        function handleAddEvent(event) {
-            event.preventDefault();
-            
-            const successAlert = document.getElementById('successAlert');
-            successAlert.style.display = 'block';
-            
-            document.getElementById('addEventForm').reset();
-            document.getElementById('event_image_name').textContent = 'No file chosen';
-            document.getElementById('badge_image_name').textContent = 'No file chosen';
-            
-            setTimeout(() => {
-                successAlert.style.display = 'none';
-            }, 3000);
-            
-            document.getElementById('add-event').classList.remove('active');
-            document.getElementById('current-upcoming').classList.add('active');
-            
-            document.querySelectorAll('.tab-button').forEach(btn => btn.classList.remove('active'));
-            document.querySelector('.tab-button').classList.add('active');
+        async function apiCall(endpoint, method = "GET", data = null, title = "", redirect = null) {
+            try {
+                const options = {
+                    method,
+                    headers: { "Content-Type": "application/json" },
+                    credentials: "include",
+                };
+
+                if (data) {
+                    options.body = JSON.stringify(data);
+                }
+
+                console.log(`${method} ${endpoint}:`, data);
+
+                const response = await fetch(`${API_BASE}${endpoint}`, options);
+                const result = await response.json();
+                console.log(result);
+
+                if (!response.ok) {
+                     console.log(`Request failed: ${response.status} ${response.statusText}`);
+                } else {
+                    if (redirect) {
+                        window.location.href = redirect;
+                    }
+                }
+
+                return result;
+            } catch (error) {
+                console.error("API Error:", error);
+                return null;
+            }
         }
 
-        document.addEventListener('DOMContentLoaded', function() {
+        function handleAddEvent(event) {
+            event.preventDefault();
+            createEvent();
+        }
+
+        document.addEventListener('DOMContentLoaded', function () {
             updateFileName(document.getElementById('event_image'), 'event_image_name');
             updateFileName(document.getElementById('badge_image'), 'badge_image_name');
         });
+
+        async function createEvent() {
+            const startDateTime = document.getElementById("start_date").value;
+            const endDateTime = document.getElementById("end_date").value;
+
+            const [event_date, event_time_start] = startDateTime ? startDateTime.split("T") : ["", ""];
+            const [, event_time_end] = endDateTime ? endDateTime.split("T") : ["", ""];
+
+            const newEvent = {
+                event_name: document.getElementById("title").value,
+                event_date: event_date,
+                event_time_start: event_time_start,
+                event_time_end: event_time_end,
+                event_type: document.getElementById("event_type").value,
+                event_restriction: document.getElementById("registration_required").checked ? 1 : 0,
+                event_restriction: document.getElementById("event_restriction").value,
+                location: document.getElementById("location").value,
+                description: document.getElementById("description").value,
+                event_status: "upcoming",
+            };
+
+            console.log("📌 New Event Object:", newEvent);
+
+            const result = await apiCall("/events", "POST", newEvent, "Create Event");
+
+            if (result && result.success) {
+                const successAlert = document.getElementById('successAlert');
+                successAlert.style.display = 'block';
+
+                document.getElementById('addEventForm').reset();
+                document.getElementById('event_image_name').textContent = 'No file chosen';
+                document.getElementById('badge_image_name').textContent = 'No file chosen';
+
+                setTimeout(() => {
+                    successAlert.style.display = 'none';
+                }, 3000);
+
+                document.querySelectorAll('.tab-button').forEach(btn => btn.classList.remove('active'));
+                document.querySelector('.tab-button[onclick*="current-upcoming"]').classList.add('active');
+                document.getElementById('add-event').classList.remove('active');
+                document.getElementById('current-upcoming').classList.add('active');
+            } else {
+                alert("Failed to create event. " + (result?.message || "Unknown error"));
+                console.error(result?.errors || result);
+            }
+        }
+
+        async function getUpcomingEvents() {
+            const data = await apiCall("/events/upcoming", "GET");
+
+            if (data?.success) {
+                console.log(data);
+
+                const container = document.getElementById("current-upcoming");
+
+                data.data.forEach(evt => {
+                    const eventDateTime = new Date(`${evt.event_date}T${evt.event_time_start}`);
+                    const formattedDateTime = eventDateTime.toLocaleString("en-US", {
+                        month: "short",
+                        day: "numeric",
+                        year: "numeric",
+                        hour: "numeric",
+                        minute: "2-digit",
+                        hour12: true
+                    });
+
+                    const div = document.createElement("div");
+                    div.innerHTML = `
+                        <div class="event-item"> 
+                            <div class="event-image"> 
+                                <i class="bi bi-calendar-event"></i>
+                            </div>
+                            <div class="event-details">
+                                <h4 class="event-title"> ${evt.event_name}</h4>
+                                <p class="event-description"> ${evt.description}</p>
+                                <div class="event-meta">
+                                    <span><i class="bi bi-calendar"></i>Dec 15, 2024, 2:00 PM</span>
+                                    <span><i class="bi bi-geo-alt"></i> ${evt.location} </span>
+                                    <span class="event-status status-upcoming"> ${evt.event_status} </span>
+                                </div>
+                                <div class="event-actions">
+                                    <a href="#" class="btn btn-primary" onclick="showEventDashboard()">Dashboard</a>
+                                    <a href="#" class="btn btn-info">Edit</a>
+                                    <a href="#" class="btn btn-secondary"
+                                        onclick="cancelEvent(${evt.event_id})">
+                                    Cancel
+                                    </a>
+                                    <a href="#" class="btn btn-danger"
+                                        onclick="return confirm('Are you sure you want to delete this event?')"><i
+                                            class="bi bi-trash-fill"></i>
+                                    </a>
+                                    </div>
+                            </div>
+                        </div>
+                        `
+                        ;
+                    container.appendChild(div);
+                });
+            } else {
+                console.log("Failed to fetch upcoming events: ", data.message);
+            }
+        }
+
+        async function cancelEvent(eventId) {
+            if (!confirm("Are you sure you want to cancel this event?")) return;
+
+            const payload = { event_status: "canceled" };
+            const result = await apiCall(`/events/${eventId}/status`, "POST", payload, "Cancel Event");
+
+            if (result?.success) {
+                alert("Event canceled successfully!");
+                document.getElementById("current-upcoming").innerHTML = "";
+                getUpcomingEvents();
+            } else {
+                console.error("Failed to cancel event:", result?.message);
+            }
+        }
+
+        async function getCanceledEvents() {
+            const data = await apiCall("/events/canceled", "GET");
+
+            if (data?.success) {
+                console.log("Canceled Events:");
+                console.log(data);
+
+                const container = document.getElementById("cancelled-events");
+
+                data.data.forEach(evt => {
+                    const eventDate = new Date(evt.event_date);
+                    const formattedDate = eventDate.toLocaleString("en-US", {
+                        month: "short",
+                        day: "numeric",
+                        year: "numeric"
+                    });
+
+                    const div = document.createElement("div");
+                    div.innerHTML = `
+                        <div class="event-item"> 
+                            <div class="event-image"> 
+                                <i class="bi bi-x-octagon"></i>
+                            </div>
+                            <div class="event-details">
+                                <h4 class="event-title"> ${evt.event_name}</h4>
+                                <p class="event-description"> ${evt.description}</p>
+                                <div class="event-meta">
+                                    <span><i class="bi bi-calendar"></i> Originally: ${formattedDate}</span>
+                                    <span class="event-status status-cancelled"> ${evt.event_status} </span>
+                                </div>
+                                <div class="event-actions">
+                                    <a href="#" class="btn btn-primary">View Details</a>
+                                    <a href="#" class="btn btn-secondary">Edit</a>
+                                    <a href="#" class="btn btn-danger"
+                                        onclick="return confirm('Are you sure you want to delete this event?')"><i
+                                            class="bi bi-trash-fill"></i>
+                                    </a>
+                                    </div>
+                            </div>
+                        </div>
+                        `
+                        ;
+                    container.appendChild(div);
+                });
+            } else {
+                console.log("Failed to fetch canceled events: ", data.message);
+            }
+        }
+
+        async function getPastEvents() {
+            const data = await apiCall("/events/past", "GET");
+
+            if (data?.success) {
+                console.log("Past Events:");
+                console.log(data);
+
+                const container = document.getElementById("past-events");
+
+                data.data.forEach(evt => {
+                    const eventDate = new Date(evt.event_date);
+                    const formattedDate = eventDate.toLocaleString("en-US", {
+                        month: "short",
+                        day: "numeric",
+                        year: "numeric"
+                    });
+
+                    const div = document.createElement("div");
+                    div.innerHTML = `
+                        <div class="event-item"> 
+                            <div class="event-image"> 
+                                <i class="bi bi-trophy"></i>
+                            </div>
+                            <div class="event-details">
+                                <h4 class="event-title"> ${evt.event_name}</h4>
+                                <p class="event-description"> ${evt.description}</p>
+                                <div class="event-meta">
+                                    <span><i class="bi bi-calendar"></i> ${formattedDate}</span>
+                                    <span class="event-status status-completed"> ${evt.event_status} </span>
+                                </div>
+                                <div class="event-actions">
+                                    <a href="#" class="btn btn-primary" onclick="showEventDashboard()">Dashboard</a>
+                                    <a href="#" class="btn btn-secondary">Edit Details</a>
+                                </div>
+                            </div>
+                        </div>
+                        `
+                        ;
+                    container.appendChild(div);
+                });
+            } else {
+                console.log("Failed to fetch past events: ", data.message);
+            }
+        }
+
+        document.addEventListener("DOMContentLoaded", () => {
+            getUpcomingEvents();
+            getCanceledEvents();
+            getPastEvents();
+        });
     </script>
 </body>
+
 </html>

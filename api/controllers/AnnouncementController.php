@@ -248,7 +248,7 @@ class AnnouncementController
     public function getRecent()
     {
         try {
-            $limit = isset($_GET['limit']) ? (int)$_GET['limit'] : 5;
+            $limit = isset($_GET['limit']) ? (int)$_GET['limit'] : 3;
             $announcements = $this->announcementModel->getRecent($limit);
             
             Response::success($announcements);
@@ -303,3 +303,20 @@ class AnnouncementController
         }
     }
 }
+
+// Example: Announcement routes
+$controller = new AnnouncementController();
+
+$method = $_SERVER['REQUEST_METHOD'];
+$url = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
+
+// Archive
+if ($method === 'POST' && preg_match('#^/api/announcements/(\d+)/archive$#', $url, $matches)) {
+    $controller->archive($matches[1]);
+
+// Unarchive
+} elseif ($method === 'POST' && preg_match('#^/api/announcements/(\d+)/unarchive$#', $url, $matches)) {
+    $controller->unarchive($matches[1]);
+}
+
+

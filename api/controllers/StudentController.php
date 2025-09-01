@@ -353,5 +353,60 @@ class StudentController
             Response::serverError($e->getMessage());
         }
     }
+
+        public function create()
+    {
+        try {
+            AuthMiddleware::requireOfficer(); // Only officers can create new students
+
+            $data = json_decode(file_get_contents("php://input"), true);
+            if (!$data) {
+                Response::validationError(['error' => 'Invalid JSON payload']);
+            }
+
+            $requiredFields = ['username', 'email', 'password', 'first_name', 'last_name', 'birthdate', 'gender', 'student_no', 'year_level', 'college', 'program'];
+            $errors = Validator::validateRequired($data, $requiredFields);
+
+            if (!empty($errors)) {
+                Response::validationError($errors);
+            }
+
+            $student = $this->studentModel->create($data);
+            unset($student['password']); // remove password from response
+
+            Response::success($student, 'Student created successfully');
+        } catch (Exception $e) {
+            Response::serverError($e->getMessage());
+        }
+    }
+    
+    public function delete($id)
+    {
+        try {
+            // Optional: Only allow officers to delete
+            // AuthMiddleware::requireOfficer();
+
+            $student = $this->studentModel->findById($id);
+            if (!$student) {
+                http_response_code(404);
+                echo json_encode(['success' => false, 'message' => 'Student not found']);
+                return;
+            }
+
+            $result = $this->studentModel->delete($id);
+
+            if ($result) {
+                echo json_encode(['success' => true, 'message' => 'Student deleted successfully', 'data' => ['id' => $id]]);
+            } else {
+                http_response_code(500);
+                echo json_encode(['success' => false, 'message' => 'Failed to delete student']);
+            }
+        } catch (Exception $e) {
+            http_response_code(500);
+            echo json_encode(['success' => false, 'message' => $e->getMessage()]);
+        }
+    }
+    
+
 }
 
