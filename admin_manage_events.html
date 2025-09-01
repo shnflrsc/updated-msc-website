@@ -617,6 +617,73 @@
                 justify-content: center;
             }
         }
+
+        /* Testing: Edit Modal */
+        .modal-backdrop {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 1040;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 1050;
+        }
+
+        .modal-content {
+            background: #011538;
+            padding: 20px;
+            border-radius: 10px;
+            max-width: 700px;
+            width: 90%;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .modal-dialog {
+            margin: 2rem auto;
+            max-height: calc(100vh - 4rem);
+        }
+
+        .modal-body {
+            overflow-y: auto;
+            max-height: calc(100vh - 200px);
+        }
+
+        .modal.show {
+            display: block;
+        }
+
+        .modal-xl {
+            max-width: 1200px;
+        }
+
+        .form-row.grid-cols-3 {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+
+        .form-row.grid-cols-2 {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+        }
+
+        @media (max-width: 992px) {
+
+            .form-row.grid-cols-3,
+            .form-row.grid-cols-2 {
+                grid-template-columns: 1fr;
+            }
+        }
     </style>
 </head>
 
@@ -670,6 +737,10 @@
 
             <!-- current & upcoming events tab -->
             <div id="current-upcoming" class="tab-content active">
+                <button type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#editEventModal"
+                    style="margin-bottom: 20px;">
+                    Open Edit Event Modal
+                </button>
 
                 <!-- <div class="event-item">
                     <div class="event-image">
@@ -829,9 +900,14 @@
                                 <label for="start_date">Start Date & Time</label>
                                 <input type="datetime-local" id="start_date" name="start_date" class="form-control">
                             </div>
-                            <div class="form-group">
+                            <!-- <div class="form-group">
                                 <label for="end_date">End Date & Time (Optional)</label>
                                 <input type="datetime-local" id="end_date" name="end_date" class="form-control">
+                            </div> -->
+
+                            <div class="form-group">
+                                <label for="end_date">End Time</label>
+                                <input type="time" id="end_date" name="end_date" class="form-control">
                             </div>
                         </div>
 
@@ -940,12 +1016,15 @@
                     <div
                         style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
                         <h3>Event Overview</h3>
-                        <div style="display: flex; gap: 10px;">
-                            <!-- palagyan ng edit event modal-->
+                        <!-- palagyan ng edit event modal-->
+                        <!-- palagyan ng event participants list -->
+                        <!-- <div style="display: flex; gap: 10px;">
                             <a href="#" class="btn btn-secondary">Edit Event</a>
-                            <!-- palagyan ng event participants list -->
                             <a href="#" class="btn btn-info">Participants</a>
                             <a href="#" class="btn btn-secondary" onclick="hideEventDashboard()">Event List</a>
+                        </div> -->
+                        <div id="dashboard-buttons" style="display: flex; gap: 10px;">
+                            <!-- TEST: Load buttons thru JS instead-->
                         </div>
                     </div>
 
@@ -1041,6 +1120,131 @@
                     </div>
                 </div>
             </div>
+
+            <div class="modal fade" id="editEventModal" tabindex="-1" aria-labelledby="editEventModalLabel"
+                aria-hidden="true">
+                <div class="modal-dialog modal-xl modal-dialog-centered">
+                    <div class="modal-content">
+                        <div class="modal-header" style="position: relative;">
+                            <h3 class="modal-title" id="editEventModalLabel">Edit Event</h3>
+                            <!-- <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button> -->
+                            <!-- <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" style="filter: invert(1);"></button> -->
+                            <button type="button" onclick="closeModal()"
+                                style="position: absolute; top: 1px; right: 8px; font-size: 1.4rem; font-weight: bold; color: white; background: none; border: none; cursor: pointer;">
+                                &times;
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <form id="editEventForm" onsubmit="handleEditEvent(event)">
+                                <div class="form-group">
+                                    <label for="event_name">Event Title *</label>
+                                    <input type="text" id="event_name" name="event_name" class="form-control"
+                                        placeholder="Enter event title" required>
+                                </div>
+
+                                <div class="form-row grid-cols-3">
+                                    <div class="form-group">
+                                        <label for="event_time_start">Start Date & Time</label>
+                                        <input type="datetime-local" id="event_time_start" name="event_time_start"
+                                            class="form-control">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="event_time_end">End Time</label>
+                                        <input type="time" id="event_time_end" name="event_time_end"
+                                            class="form-control">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="edit_capacity">Capacity (Optional)</label>
+                                        <input type="number" id="edit_capacity" name="capacity" class="form-control"
+                                            placeholder="e.g. 100" min="0">
+                                    </div>
+                                </div>
+
+                                <div class="form-row">
+                                    <div class="form-group">
+                                        <label for="event_status">Event Status</label>
+                                        <select id="event_status" name="event_status" class="form-control">
+                                            <option value="upcoming">Upcoming</option>
+                                            <option value="completed">Completed</option>
+                                            <option value="cancelled">Cancelled</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="event_type">Event Type</label>
+                                        <select id="event_type" name="event_type" class="form-control">
+                                            <option value="onsite">Onsite</option>
+                                            <option value="online">Online</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="form-row">
+                                    <div class="form-group">
+                                        <label for="event_restriction">Event Restriction</label>
+                                        <select id="event_restriction" name="event_restriction" class="form-control">
+                                            <option value="public">Open for Public</option>
+                                            <option value="members">Members Only</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="form-check-label" for="edit_registration_required">Registration
+                                            Required</label>
+                                        <input type="checkbox" class="form-check-input" id="registration_required"
+                                            name="registration_required">
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="location">Location</label>
+                                    <input type="text" id="location" name="location" class="form-control"
+                                        placeholder="e.g. University Gym, Online via MS Teams">
+                                </div>
+
+                                <div class="form-row grid-cols-2">
+                                    <div class="form-group">
+                                        <label for="edit_event_image">Event Image (Optional)</label>
+                                        <div class="file-upload">
+                                            <input type="file" id="edit_event_image" name="event_image"
+                                                accept="image/jpeg,image/png,image/gif"
+                                                onchange="updateFileName(this, 'edit_event_image_name')">
+                                            <div class="file-upload-btn">
+                                                <i class="bi bi-upload"></i> Choose Event Image
+                                            </div>
+                                        </div>
+                                        <span id="edit_event_image_name" class="file-name">No file chosen</span>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="edit_badge_image">Event Badge Image (Optional)</label>
+                                        <div class="file-upload">
+                                            <input type="file" id="edit_badge_image" name="badge_image"
+                                                accept="image/jpeg,image/png,image/gif"
+                                                onchange="updateFileName(this, 'edit_badge_image_name')">
+                                            <div class="file-upload-btn">
+                                                <i class="bi bi-patch-check-fill"></i> Choose Badge Image
+                                            </div>
+                                        </div>
+                                        <span id="edit_badge_image_name" class="file-name">No file chosen</span>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="description">Description / Details</label>
+                                    <textarea id="description" name="description" class="form-control" rows="6"
+                                        placeholder="Enter event details, objectives, program flow, speakers, etc."></textarea>
+                                </div>
+
+                                <div class="text-end mt-3">
+                                    <button type="submit" class="btn btn-success">
+                                        <i class="bi bi-pencil-square"></i> Save Changes
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
         </main>
     </div>
 
@@ -1064,6 +1268,7 @@
             evt.currentTarget.classList.add("active");
         }
 
+        /*
         function showEventDashboard() {
             var tabcontent = document.getElementsByClassName("tab-content");
             for (var i = 0; i < tabcontent.length; i++) {
@@ -1075,8 +1280,124 @@
                 tablinks[i].classList.remove("active");
             }
 
-            document.getElementById("event-dashboard").style.display = "block";
-            document.getElementById("event-dashboard").classList.add("active");
+            //document.getElementById("event-dashboard").style.display = "block";
+            //document.getElementById("event-dashboard").classList.add("active");
+
+            var dashboard = document.getElementById("event-dashboard");
+            dashboard.style.display = "block";
+            dashboard.classList.add("active");
+        }
+        */
+
+        function renderDashboardButtons(evt) {
+            const buttonContainer = document.getElementById("dashboard-buttons");
+            buttonContainer.innerHTML = "";
+
+            const editBtn = document.createElement("a");
+            editBtn.href = "#";
+            editBtn.className = "btn btn-secondary";
+            editBtn.textContent = "Edit Event";
+            editBtn.addEventListener("click", function (e) {
+                e.preventDefault();
+                editEvent(evt.event_id);
+            });
+
+            const participantsBtn = document.createElement("a");
+            participantsBtn.href = "#";
+            participantsBtn.className = "btn btn-info";
+            participantsBtn.textContent = "Participants";
+            participantsBtn.addEventListener("click", function (e) {
+                e.preventDefault();
+                sessionStorage.setItem("selectedEventId", evt.event_id);
+                window.location.href = "admin_event_participants1.html";
+            });
+
+            const eventListBtn = document.createElement("a");
+            eventListBtn.href = "#";
+            eventListBtn.className = "btn btn-secondary";
+            eventListBtn.textContent = "Event List";
+            eventListBtn.addEventListener("click", function (e) {
+                e.preventDefault();
+                hideEventDashboard();
+            });
+
+            buttonContainer.appendChild(editBtn);
+            buttonContainer.appendChild(participantsBtn);
+            buttonContainer.appendChild(eventListBtn);
+        }
+
+        async function showEventDashboard(eventId) {
+            var tabcontent = document.getElementsByClassName("tab-content");
+            for (var i = 0; i < tabcontent.length; i++) {
+                tabcontent[i].classList.remove("active");
+                tabcontent[i].style.display = "none";
+            }
+
+            var tablinks = document.getElementsByClassName("tab-button");
+            for (var i = 0; i < tablinks.length; i++) {
+                tablinks[i].classList.remove("active");
+            }
+
+            var dashboard = document.getElementById("event-dashboard");
+            dashboard.style.display = "block";
+            dashboard.classList.add("active");
+
+            const response = await apiCall(`/events/${eventId}`, "GET");
+            if (!response?.success) {
+                console.error("Failed to fetch event details:", response.message);
+                return;
+            }
+
+            const evt = response.data;
+            renderDashboardButtons(evt);
+
+            //Temp: To load button dynamically here 
+            const editBtn = dashboard.querySelector(".btn.btn-secondary");
+
+            editBtn.replaceWith(editBtn.cloneNode(true));
+            const newEditBtn = dashboard.querySelector(".btn.btn-secondary");
+
+            newEditBtn.addEventListener("click", function (e) {
+                e.preventDefault();
+                editEvent(evt.event_id);
+            });
+
+            // Fetch dashboard fields
+            dashboard.querySelector("h2").textContent = evt.event_name;
+            dashboard.querySelector(".event-info > p").textContent = evt.description;
+
+            dashboard.querySelector(".info-grid .info-item:nth-child(1) span").textContent =
+                `${new Date(evt.event_date + "T" + evt.event_time_start).toLocaleString("en-US", {
+                    month: "short",
+                    day: "numeric",
+                    year: "numeric",
+                    hour: "numeric",
+                    minute: "2-digit",
+                    hour12: true
+                })} to ${evt.event_time_end}`;
+
+            //Temp way: to be changed
+            dashboard.querySelector(".info-grid .info-item:nth-child(2) span").textContent = evt.location;
+            dashboard.querySelector(".info-grid .info-item:nth-child(3) span").textContent = evt.event_type;
+            dashboard.querySelector(".info-grid .info-item:nth-child(4) span").textContent = evt.event_restriction;
+            dashboard.querySelector(".info-grid .info-item:nth-child(5) span").textContent = `-`;
+            dashboard.querySelector(".info-grid .info-item:nth-child(6) span").textContent =
+                evt.registration_required ? "Registration Required" : "No Registration";
+            dashboard.querySelector(".info-grid .info-item:nth-child(7) .event-status").textContent = evt.event_status;
+            dashboard.querySelector(".info-grid .info-item:nth-child(8) span").textContent =
+                `Created: ${new Date(evt.created_at).toLocaleString()}`;
+
+            // Attendance summary: set all to 0
+            dashboard.querySelector(".attendance-card .stat-item:nth-child(1) .stat-value").textContent = evt.attendants || '0';
+            dashboard.querySelector(".attendance-card .stat-item:nth-child(2) .stat-value").textContent = evt.attendants || '0';
+            dashboard.querySelector(".attendance-card .stat-item:nth-child(3) .stat-value").textContent = evt.attendants || '0';
+            dashboard.querySelector(".attendance-card .stat-item:nth-child(4) .stat-value").textContent = evt.attendants || '0';
+            dashboard.querySelector(".attendance-card .stat-item:nth-child(5) .stat-value").textContent = evt.attendants || '0';
+            dashboard.querySelector(".attendance-card .stat-item:nth-child(6) .stat-value").textContent = evt.attendants || '0';
+
+            // Update progress bar
+            //dashboard.querySelector(".progress-bar .progress-fill").style.width = "-";
+            //dashboard.querySelector(".progress-bar .progress-fill").textContent = "-";
         }
 
         function hideEventDashboard() {
@@ -1115,7 +1436,7 @@
                 console.log(result);
 
                 if (!response.ok) {
-                     console.log(`Request failed: ${response.status} ${response.statusText}`);
+                    console.log(`Request failed: ${response.status} ${response.statusText}`);
                 } else {
                     if (redirect) {
                         window.location.href = redirect;
@@ -1141,18 +1462,18 @@
 
         async function createEvent() {
             const startDateTime = document.getElementById("start_date").value;
-            const endDateTime = document.getElementById("end_date").value;
+            //const endDateTime = document.getElementById("end_date").value;
 
             const [event_date, event_time_start] = startDateTime ? startDateTime.split("T") : ["", ""];
-            const [, event_time_end] = endDateTime ? endDateTime.split("T") : ["", ""];
+            //const [, event_time_end] = endDateTime ? endDateTime.split("T") : ["", ""];
 
             const newEvent = {
                 event_name: document.getElementById("title").value,
                 event_date: event_date,
                 event_time_start: event_time_start,
-                event_time_end: event_time_end,
+                event_time_end: document.getElementById("end_date").value, //event_time_end
                 event_type: document.getElementById("event_type").value,
-                event_restriction: document.getElementById("registration_required").checked ? 1 : 0,
+                registration_required: document.getElementById("registration_required").checked ? 1 : 0,
                 event_restriction: document.getElementById("event_restriction").value,
                 location: document.getElementById("location").value,
                 description: document.getElementById("description").value,
@@ -1167,21 +1488,144 @@
                 const successAlert = document.getElementById('successAlert');
                 successAlert.style.display = 'block';
 
+                const newEventDate = newEvent.event_date;  //Remove this line: just used to see the newly added event
+
                 document.getElementById('addEventForm').reset();
                 document.getElementById('event_image_name').textContent = 'No file chosen';
                 document.getElementById('badge_image_name').textContent = 'No file chosen';
 
                 setTimeout(() => {
                     successAlert.style.display = 'none';
+                    window.location.href = `admin_calendar.html?date=${newEventDate}`; //Remove this line: just used to see the newly added event
                 }, 3000);
 
                 document.querySelectorAll('.tab-button').forEach(btn => btn.classList.remove('active'));
                 document.querySelector('.tab-button[onclick*="current-upcoming"]').classList.add('active');
                 document.getElementById('add-event').classList.remove('active');
                 document.getElementById('current-upcoming').classList.add('active');
+
+                document.getElementById("current-upcoming").innerHTML = "";
+                getUpcomingEvents();
             } else {
                 alert("Failed to create event. " + (result?.message || "Unknown error"));
                 console.error(result?.errors || result);
+            }
+        }
+
+        async function handleDeleteEvent(eventId) {
+            const confirmed = confirm(`[${eventId}]: Are you sure you want to delete this event?`);
+
+            if (confirmed) {
+                console.log("Deleting event with ID:", eventId);
+                deleteEvent(eventId)
+            } else {
+                console.log("Event deletion canceled.")
+            }
+
+        }
+
+        async function deleteEvent(eventId) {
+            try {
+                const response = await apiCall(`/events/${eventId}`, "DELETE");
+                if (response.success) {
+                    alert("Event deleted successfully!");
+                    document.getElementById("current-upcoming").innerHTML = "";
+                    getUpcomingEvents();
+                } else {
+                    alert("Failed to delete event: " + response.message)
+                }
+
+            } catch (error) {
+                console.log(error);
+                alert("Error: " + error.message);
+            }
+        }
+
+        //TEST: for removal
+        function closeModal() {
+            const modal = document.getElementById('editEventModal');
+            modal.classList.remove('show');  
+            modal.style.display = 'none';    
+            modal.setAttribute('aria-hidden', 'true');
+
+            // Remove backdrop
+            const backdrop = document.querySelector('.modal-backdrop');
+            if (backdrop) backdrop.remove();
+        }
+
+        //TEST: Edit Event 
+        async function editEvent(eventId) {
+            const response = await apiCall(`/events/${eventId}`, "GET");
+
+            if (!response?.success) {
+                console.error("Failed to fetch event details:", response.message);
+                return;
+            }
+
+            const evt = response.data;
+
+            const [event_date, event_time_start] = evt.event_date && evt.event_time_start
+                ? [evt.event_date, evt.event_time_start]
+                : ["", ""];
+
+            document.getElementById("event_name").value = evt.event_name;
+            document.getElementById("event_time_start").value = event_date + "T" + event_time_start;
+            document.getElementById("event_time_end").value = evt.event_time_end || '';
+            //document.getElementById("event_capacity").value = evt.capacity || '';
+            document.getElementById("event_status").value = evt.event_status;
+            document.getElementById("event_type").value = evt.event_type;
+            document.getElementById("event_restriction").value = evt.event_restriction;
+            document.getElementById("registration_required").checked = evt.registration_required === 1;
+            document.getElementById("location").value = evt.location;
+            document.getElementById("description").value = evt.description;
+
+            const editModal = new bootstrap.Modal(document.getElementById('editEventModal'));
+            editModal.show();
+
+            document.getElementById("editEventForm").dataset.eventId = eventId;
+        }
+
+        async function handleEditEvent(e) {
+            e.preventDefault();
+            const form = e.target;
+            const eventId = form.dataset.eventId;
+
+            const [event_date, event_time_start] = document.getElementById("event_time_start").value.split("T");
+            //const event_time_end = document.getElementById("event_time_end").value;
+
+            let event_time_end = document.getElementById("event_time_end").value;
+            if (event_time_end) {
+                event_time_end = event_time_end.slice(0, 5); // ensures HH:MM
+            } else {
+                event_time_end = null;
+            }
+
+            const payload = {
+                event_name: document.getElementById("event_name").value,
+                event_date,
+                event_time_start,
+                event_time_end,
+                location: document.getElementById("location").value,
+                event_status: document.getElementById("event_status").value,
+                event_type: document.getElementById("event_type").value,
+                event_restriction: document.getElementById("event_restriction").value,
+                registration_required: document.getElementById("registration_required").checked ? 1 : 0,
+                description: document.getElementById("description").value,
+                capacity: document.getElementById("edit_capacity")?.value || ''
+            };
+
+            console.log("📌 Update Event:", payload);
+
+            const response = await apiCall(`/events/${eventId}`, "PUT", payload, true); // true = JSON
+
+            if (response?.success) {
+                alert("Event updated successfully!");
+                bootstrap.Modal.getInstance(document.getElementById('editEventModal')).hide();
+                document.getElementById("current-upcoming").innerHTML = "";
+                getUpcomingEvents();
+            } else {
+                console.error("Request failed:", response);
+                alert("Failed to update event: " + response.message);
             }
         }
 
@@ -1214,19 +1658,20 @@
                                 <h4 class="event-title"> ${evt.event_name}</h4>
                                 <p class="event-description"> ${evt.description}</p>
                                 <div class="event-meta">
-                                    <span><i class="bi bi-calendar"></i>Dec 15, 2024, 2:00 PM</span>
+                                    <span><i class="bi bi-calendar"></i> ${formattedDateTime}</span>
                                     <span><i class="bi bi-geo-alt"></i> ${evt.location} </span>
                                     <span class="event-status status-upcoming"> ${evt.event_status} </span>
                                 </div>
                                 <div class="event-actions">
-                                    <a href="#" class="btn btn-primary" onclick="showEventDashboard()">Dashboard</a>
-                                    <a href="#" class="btn btn-info">Edit</a>
+                                    <a href="#" class="btn btn-primary" onclick="showEventDashboard(${evt.event_id})">Dashboard</a>
+                                    <a href="#" class="btn btn-info" onclick="editEvent(${evt.event_id})">Edit</a>
                                     <a href="#" class="btn btn-secondary"
                                         onclick="cancelEvent(${evt.event_id})">
                                     Cancel
                                     </a>
                                     <a href="#" class="btn btn-danger"
-                                        onclick="return confirm('Are you sure you want to delete this event?')"><i
+                                        onclick="handleDeleteEvent(${evt.event_id})">
+                                        <i
                                             class="bi bi-trash-fill"></i>
                                     </a>
                                     </div>
@@ -1336,7 +1781,7 @@
                                     <span class="event-status status-completed"> ${evt.event_status} </span>
                                 </div>
                                 <div class="event-actions">
-                                    <a href="#" class="btn btn-primary" onclick="showEventDashboard()">Dashboard</a>
+                                    <a href="#" class="btn btn-primary" onclick="showEventDashboard(${evt.event_id})">Dashboard</a>
                                     <a href="#" class="btn btn-secondary">Edit Details</a>
                                 </div>
                             </div>
@@ -1356,6 +1801,7 @@
             getPastEvents();
         });
     </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 
 </html>

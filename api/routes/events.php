@@ -61,7 +61,7 @@ switch ($method) {
         } elseif ($endpoint === 'count') {
             $eventController->countEvents();
         } else if($endpoint === 'countRecorded'){
-            $eventController->countRecordedEvents();
+            $eventController->countUpcomingEvents();
         } elseif ($endpoint === 'status-count') {
             $eventController->getStatusCounts();
         } elseif ($endpoint === 'monthly-distribution') {
