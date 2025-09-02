@@ -616,7 +616,7 @@
         }
 
         async function getAllStudents() {
-            const data = await apiCall("/students/count", "GET");
+            const data = await apiCall("/students/countMembers", "GET");
             if (data?.success) {
                 animateCounter("student-cnt", Number(data.data));
             } else {
