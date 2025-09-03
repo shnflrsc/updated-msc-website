@@ -64,7 +64,10 @@ switch ($method) {
     case 'POST':
         if ($endpoint === '' || $endpoint === 'create') {
             $announcementController->create();
-        } else {
+        } elseif ($endpoint && is_numeric($endpoint)) {
+            // Treat POST with ID as update (method override)
+            $announcementController->update($endpoint);
+        }else {
             http_response_code(404);
             echo json_encode(['success' => false, 'message' => 'POST endpoint not found: ' . $endpoint]);
         }

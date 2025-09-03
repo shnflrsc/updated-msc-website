@@ -48576,3 +48576,4656 @@
 
 [01-Sep-2025 14:32:18 Europe/Berlin] Student route - Endpoint: 
 [01-Sep-2025 14:32:18 Europe/Berlin] Student route - ID: null
+[01-Sep-2025 17:16:48 Europe/Berlin] Request path: /updated-msc-website/api/students
+[01-Sep-2025 17:16:48 Europe/Berlin] Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => students
+)
+
+[01-Sep-2025 17:16:48 Europe/Berlin] Original REQUEST_URI: /updated-msc-website/api/students?page=1&limit=20
+[01-Sep-2025 17:16:48 Europe/Berlin] Found API index, resource: students
+[01-Sep-2025 17:16:48 Europe/Berlin] Student route - Path: /updated-msc-website/api/students
+[01-Sep-2025 17:16:48 Europe/Berlin] Student route - Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => students
+)
+
+[01-Sep-2025 17:16:48 Europe/Berlin] Student route - Endpoint: 
+[01-Sep-2025 17:16:48 Europe/Berlin] Student route - ID: null
+[01-Sep-2025 17:17:11 Europe/Berlin] Request path: /updated-msc-website/api/students
+[01-Sep-2025 17:17:11 Europe/Berlin] Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => students
+)
+
+[01-Sep-2025 17:17:11 Europe/Berlin] Original REQUEST_URI: /updated-msc-website/api/students?page=1&limit=20
+[01-Sep-2025 17:17:11 Europe/Berlin] Found API index, resource: students
+[01-Sep-2025 17:17:11 Europe/Berlin] Student route - Path: /updated-msc-website/api/students
+[01-Sep-2025 17:17:11 Europe/Berlin] Student route - Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => students
+)
+
+[01-Sep-2025 17:17:11 Europe/Berlin] Student route - Endpoint: 
+[01-Sep-2025 17:17:11 Europe/Berlin] Student route - ID: null
+[02-Sep-2025 15:00:59 Europe/Berlin] Request path: /updated-msc-website/api/announcements
+[02-Sep-2025 15:00:59 Europe/Berlin] Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => announcements
+)
+
+[02-Sep-2025 15:00:59 Europe/Berlin] Original REQUEST_URI: /updated-msc-website/api/announcements?page=1&limit=10&include_archived=false
+[02-Sep-2025 15:00:59 Europe/Berlin] Found API index, resource: announcements
+[02-Sep-2025 15:00:59 Europe/Berlin] Announcement route - Path: /updated-msc-website/api/announcements
+[02-Sep-2025 15:00:59 Europe/Berlin] Announcement route - Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => announcements
+)
+
+[02-Sep-2025 15:00:59 Europe/Berlin] Announcement route - Endpoint: 
+[02-Sep-2025 15:00:59 Europe/Berlin] Announcement route - ID: null
+[02-Sep-2025 15:00:59 Europe/Berlin] Announcement route - Action: null
+[02-Sep-2025 16:39:29 Europe/Berlin] Request path: /updated-msc-website/api/
+[02-Sep-2025 16:39:29 Europe/Berlin] Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+)
+
+[02-Sep-2025 16:39:29 Europe/Berlin] Original REQUEST_URI: /updated-msc-website/api/
+[02-Sep-2025 16:39:29 Europe/Berlin] Found API index, resource: 
+[02-Sep-2025 16:39:29 Europe/Berlin] Request path: /updated-msc-website/api/
+[02-Sep-2025 16:39:29 Europe/Berlin] Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+)
+
+[02-Sep-2025 16:39:29 Europe/Berlin] Original REQUEST_URI: /updated-msc-website/api/
+[02-Sep-2025 16:39:29 Europe/Berlin] Found API index, resource: 
+[02-Sep-2025 16:39:29 Europe/Berlin] Request path: /updated-msc-website/api/
+[02-Sep-2025 16:39:29 Europe/Berlin] Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+)
+
+[02-Sep-2025 16:39:29 Europe/Berlin] Original REQUEST_URI: /updated-msc-website/api/
+[02-Sep-2025 16:39:29 Europe/Berlin] Found API index, resource: 
+[02-Sep-2025 16:39:35 Europe/Berlin] Request path: /updated-msc-website/api/announcements
+[02-Sep-2025 16:39:35 Europe/Berlin] Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => announcements
+)
+
+[02-Sep-2025 16:39:35 Europe/Berlin] Original REQUEST_URI: /updated-msc-website/api/announcements?page=1&limit=10&include_archived=false
+[02-Sep-2025 16:39:35 Europe/Berlin] Found API index, resource: announcements
+[02-Sep-2025 16:39:35 Europe/Berlin] Announcement route - Path: /updated-msc-website/api/announcements
+[02-Sep-2025 16:39:35 Europe/Berlin] Announcement route - Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => announcements
+)
+
+[02-Sep-2025 16:39:35 Europe/Berlin] Announcement route - Endpoint: 
+[02-Sep-2025 16:39:35 Europe/Berlin] Announcement route - ID: null
+[02-Sep-2025 16:39:35 Europe/Berlin] Announcement route - Action: null
+[02-Sep-2025 16:50:12 Europe/Berlin] Request path: /updated-msc-website/api/announcements
+[02-Sep-2025 16:50:12 Europe/Berlin] Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => announcements
+)
+
+[02-Sep-2025 16:50:12 Europe/Berlin] Original REQUEST_URI: /updated-msc-website/api/announcements?page=1&limit=10&include_archived=false
+[02-Sep-2025 16:50:12 Europe/Berlin] Found API index, resource: announcements
+[02-Sep-2025 16:50:12 Europe/Berlin] Announcement route - Path: /updated-msc-website/api/announcements
+[02-Sep-2025 16:50:12 Europe/Berlin] Announcement route - Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => announcements
+)
+
+[02-Sep-2025 16:50:12 Europe/Berlin] Announcement route - Endpoint: 
+[02-Sep-2025 16:50:12 Europe/Berlin] Announcement route - ID: null
+[02-Sep-2025 16:50:12 Europe/Berlin] Announcement route - Action: null
+[02-Sep-2025 16:51:07 Europe/Berlin] Request path: /updated-msc-website/api/announcements
+[02-Sep-2025 16:51:07 Europe/Berlin] Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => announcements
+)
+
+[02-Sep-2025 16:51:07 Europe/Berlin] Original REQUEST_URI: /updated-msc-website/api/announcements?page=1&limit=10&include_archived=false
+[02-Sep-2025 16:51:07 Europe/Berlin] Found API index, resource: announcements
+[02-Sep-2025 16:51:07 Europe/Berlin] Announcement route - Path: /updated-msc-website/api/announcements
+[02-Sep-2025 16:51:07 Europe/Berlin] Announcement route - Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => announcements
+)
+
+[02-Sep-2025 16:51:07 Europe/Berlin] Announcement route - Endpoint: 
+[02-Sep-2025 16:51:07 Europe/Berlin] Announcement route - ID: null
+[02-Sep-2025 16:51:07 Europe/Berlin] Announcement route - Action: null
+[02-Sep-2025 16:51:08 Europe/Berlin] Request path: /updated-msc-website/api/announcements
+[02-Sep-2025 16:51:08 Europe/Berlin] Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => announcements
+)
+
+[02-Sep-2025 16:51:08 Europe/Berlin] Original REQUEST_URI: /updated-msc-website/api/announcements?page=1&limit=10&include_archived=false
+[02-Sep-2025 16:51:08 Europe/Berlin] Found API index, resource: announcements
+[02-Sep-2025 16:51:08 Europe/Berlin] Announcement route - Path: /updated-msc-website/api/announcements
+[02-Sep-2025 16:51:08 Europe/Berlin] Announcement route - Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => announcements
+)
+
+[02-Sep-2025 16:51:08 Europe/Berlin] Announcement route - Endpoint: 
+[02-Sep-2025 16:51:08 Europe/Berlin] Announcement route - ID: null
+[02-Sep-2025 16:51:08 Europe/Berlin] Announcement route - Action: null
+[02-Sep-2025 16:53:55 Europe/Berlin] Request path: /updated-msc-website/api/announcements
+[02-Sep-2025 16:53:55 Europe/Berlin] Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => announcements
+)
+
+[02-Sep-2025 16:53:55 Europe/Berlin] Original REQUEST_URI: /updated-msc-website/api/announcements?page=1&limit=10&include_archived=false
+[02-Sep-2025 16:53:55 Europe/Berlin] Found API index, resource: announcements
+[02-Sep-2025 16:53:55 Europe/Berlin] Announcement route - Path: /updated-msc-website/api/announcements
+[02-Sep-2025 16:53:55 Europe/Berlin] Announcement route - Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => announcements
+)
+
+[02-Sep-2025 16:53:55 Europe/Berlin] Announcement route - Endpoint: 
+[02-Sep-2025 16:53:55 Europe/Berlin] Announcement route - ID: null
+[02-Sep-2025 16:53:55 Europe/Berlin] Announcement route - Action: null
+[02-Sep-2025 16:54:24 Europe/Berlin] Request path: /updated-msc-website/api/announcements/24
+[02-Sep-2025 16:54:24 Europe/Berlin] Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => announcements
+    [3] => 24
+)
+
+[02-Sep-2025 16:54:24 Europe/Berlin] Original REQUEST_URI: /updated-msc-website/api/announcements/24
+[02-Sep-2025 16:54:24 Europe/Berlin] Found API index, resource: announcements
+[02-Sep-2025 16:54:24 Europe/Berlin] Announcement route - Path: /updated-msc-website/api/announcements/24
+[02-Sep-2025 16:54:24 Europe/Berlin] Announcement route - Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => announcements
+    [3] => 24
+)
+
+[02-Sep-2025 16:54:24 Europe/Berlin] Announcement route - Endpoint: 24
+[02-Sep-2025 16:54:24 Europe/Berlin] Announcement route - ID: null
+[02-Sep-2025 16:54:24 Europe/Berlin] Announcement route - Action: null
+[02-Sep-2025 16:54:33 Europe/Berlin] Request path: /updated-msc-website/api/announcements/24
+[02-Sep-2025 16:54:33 Europe/Berlin] Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => announcements
+    [3] => 24
+)
+
+[02-Sep-2025 16:54:33 Europe/Berlin] Original REQUEST_URI: /updated-msc-website/api/announcements/24
+[02-Sep-2025 16:54:33 Europe/Berlin] Found API index, resource: announcements
+[02-Sep-2025 16:54:33 Europe/Berlin] Announcement route - Path: /updated-msc-website/api/announcements/24
+[02-Sep-2025 16:54:33 Europe/Berlin] Announcement route - Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => announcements
+    [3] => 24
+)
+
+[02-Sep-2025 16:54:33 Europe/Berlin] Announcement route - Endpoint: 24
+[02-Sep-2025 16:54:33 Europe/Berlin] Announcement route - ID: null
+[02-Sep-2025 16:54:33 Europe/Berlin] Announcement route - Action: null
+[02-Sep-2025 16:56:04 Europe/Berlin] Request path: /updated-msc-website/api/announcements
+[02-Sep-2025 16:56:04 Europe/Berlin] Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => announcements
+)
+
+[02-Sep-2025 16:56:04 Europe/Berlin] Original REQUEST_URI: /updated-msc-website/api/announcements?page=1&limit=10&include_archived=false
+[02-Sep-2025 16:56:04 Europe/Berlin] Found API index, resource: announcements
+[02-Sep-2025 16:56:04 Europe/Berlin] Announcement route - Path: /updated-msc-website/api/announcements
+[02-Sep-2025 16:56:04 Europe/Berlin] Announcement route - Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => announcements
+)
+
+[02-Sep-2025 16:56:04 Europe/Berlin] Announcement route - Endpoint: 
+[02-Sep-2025 16:56:04 Europe/Berlin] Announcement route - ID: null
+[02-Sep-2025 16:56:04 Europe/Berlin] Announcement route - Action: null
+[02-Sep-2025 16:56:11 Europe/Berlin] Request path: /updated-msc-website/api/announcements/24
+[02-Sep-2025 16:56:11 Europe/Berlin] Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => announcements
+    [3] => 24
+)
+
+[02-Sep-2025 16:56:11 Europe/Berlin] Original REQUEST_URI: /updated-msc-website/api/announcements/24
+[02-Sep-2025 16:56:11 Europe/Berlin] Found API index, resource: announcements
+[02-Sep-2025 16:56:11 Europe/Berlin] Request path: /updated-msc-website/api/announcements/24
+[02-Sep-2025 16:56:11 Europe/Berlin] Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => announcements
+    [3] => 24
+)
+
+[02-Sep-2025 16:56:11 Europe/Berlin] Original REQUEST_URI: /updated-msc-website/api/announcements/24
+[02-Sep-2025 16:56:11 Europe/Berlin] Found API index, resource: announcements
+[02-Sep-2025 16:56:11 Europe/Berlin] Announcement route - Path: /updated-msc-website/api/announcements/24
+[02-Sep-2025 16:56:11 Europe/Berlin] Announcement route - Path: /updated-msc-website/api/announcements/24
+[02-Sep-2025 16:56:11 Europe/Berlin] Announcement route - Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => announcements
+    [3] => 24
+)
+
+[02-Sep-2025 16:56:11 Europe/Berlin] Announcement route - Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => announcements
+    [3] => 24
+)
+
+[02-Sep-2025 16:56:11 Europe/Berlin] Announcement route - Endpoint: 24
+[02-Sep-2025 16:56:11 Europe/Berlin] Announcement route - Endpoint: 24
+[02-Sep-2025 16:56:11 Europe/Berlin] Announcement route - ID: null
+[02-Sep-2025 16:56:11 Europe/Berlin] Announcement route - ID: null
+[02-Sep-2025 16:56:11 Europe/Berlin] Announcement route - Action: null
+[02-Sep-2025 16:56:11 Europe/Berlin] Announcement route - Action: null
+[03-Sep-2025 15:20:35 Europe/Berlin] Request path: /updated-msc-website/api/announcements
+[03-Sep-2025 15:20:35 Europe/Berlin] Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => announcements
+)
+
+[03-Sep-2025 15:20:35 Europe/Berlin] Original REQUEST_URI: /updated-msc-website/api/announcements?page=1&limit=10&include_archived=false
+[03-Sep-2025 15:20:35 Europe/Berlin] Found API index, resource: announcements
+[03-Sep-2025 15:20:36 Europe/Berlin] Announcement route - Path: /updated-msc-website/api/announcements
+[03-Sep-2025 15:20:36 Europe/Berlin] Announcement route - Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => announcements
+)
+
+[03-Sep-2025 15:20:36 Europe/Berlin] Announcement route - Endpoint: 
+[03-Sep-2025 15:20:36 Europe/Berlin] Announcement route - ID: null
+[03-Sep-2025 15:20:36 Europe/Berlin] Announcement route - Action: null
+[03-Sep-2025 15:30:10 Europe/Berlin] Request path: /updated-msc-website/api/announcements
+[03-Sep-2025 15:30:10 Europe/Berlin] Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => announcements
+)
+
+[03-Sep-2025 15:30:10 Europe/Berlin] Original REQUEST_URI: /updated-msc-website/api/announcements?page=1&limit=10&include_archived=false
+[03-Sep-2025 15:30:10 Europe/Berlin] Found API index, resource: announcements
+[03-Sep-2025 15:30:10 Europe/Berlin] Announcement route - Path: /updated-msc-website/api/announcements
+[03-Sep-2025 15:30:10 Europe/Berlin] Announcement route - Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => announcements
+)
+
+[03-Sep-2025 15:30:10 Europe/Berlin] Announcement route - Endpoint: 
+[03-Sep-2025 15:30:10 Europe/Berlin] Announcement route - ID: null
+[03-Sep-2025 15:30:10 Europe/Berlin] Announcement route - Action: null
+[03-Sep-2025 15:31:53 Europe/Berlin] Request path: /updated-msc-website/api/announcements
+[03-Sep-2025 15:31:53 Europe/Berlin] Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => announcements
+)
+
+[03-Sep-2025 15:31:53 Europe/Berlin] Original REQUEST_URI: /updated-msc-website/api/announcements?page=1&limit=10&include_archived=false
+[03-Sep-2025 15:31:53 Europe/Berlin] Found API index, resource: announcements
+[03-Sep-2025 15:31:53 Europe/Berlin] Announcement route - Path: /updated-msc-website/api/announcements
+[03-Sep-2025 15:31:53 Europe/Berlin] Announcement route - Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => announcements
+)
+
+[03-Sep-2025 15:31:53 Europe/Berlin] Announcement route - Endpoint: 
+[03-Sep-2025 15:31:53 Europe/Berlin] Announcement route - ID: null
+[03-Sep-2025 15:31:53 Europe/Berlin] Announcement route - Action: null
+[03-Sep-2025 15:35:27 Europe/Berlin] Request path: /updated-msc-website/api/announcements
+[03-Sep-2025 15:35:27 Europe/Berlin] Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => announcements
+)
+
+[03-Sep-2025 15:35:27 Europe/Berlin] Original REQUEST_URI: /updated-msc-website/api/announcements
+[03-Sep-2025 15:35:27 Europe/Berlin] Found API index, resource: announcements
+[03-Sep-2025 15:35:27 Europe/Berlin] Announcement route - Path: /updated-msc-website/api/announcements
+[03-Sep-2025 15:35:27 Europe/Berlin] Announcement route - Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => announcements
+)
+
+[03-Sep-2025 15:35:27 Europe/Berlin] Announcement route - Endpoint: 
+[03-Sep-2025 15:35:27 Europe/Berlin] Announcement route - ID: null
+[03-Sep-2025 15:35:27 Europe/Berlin] Announcement route - Action: null
+[03-Sep-2025 15:35:27 Europe/Berlin] PHP Notice:  session_start(): Ignoring session_start() because a session is already active in C:\xampp\htdocs\updated-msc-website\api\middleware\AuthMiddleware.php on line 56
+[03-Sep-2025 15:35:27 Europe/Berlin] Request path: /updated-msc-website/api/announcements
+[03-Sep-2025 15:35:27 Europe/Berlin] Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => announcements
+)
+
+[03-Sep-2025 15:35:27 Europe/Berlin] Original REQUEST_URI: /updated-msc-website/api/announcements?page=1&limit=10&include_archived=false
+[03-Sep-2025 15:35:27 Europe/Berlin] Found API index, resource: announcements
+[03-Sep-2025 15:35:27 Europe/Berlin] Announcement route - Path: /updated-msc-website/api/announcements
+[03-Sep-2025 15:35:27 Europe/Berlin] Announcement route - Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => announcements
+)
+
+[03-Sep-2025 15:35:27 Europe/Berlin] Announcement route - Endpoint: 
+[03-Sep-2025 15:35:27 Europe/Berlin] Announcement route - ID: null
+[03-Sep-2025 15:35:27 Europe/Berlin] Announcement route - Action: null
+[03-Sep-2025 15:35:39 Europe/Berlin] Request path: /updated-msc-website/api/announcements/25
+[03-Sep-2025 15:35:39 Europe/Berlin] Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => announcements
+    [3] => 25
+)
+
+[03-Sep-2025 15:35:39 Europe/Berlin] Original REQUEST_URI: /updated-msc-website/api/announcements/25
+[03-Sep-2025 15:35:39 Europe/Berlin] Found API index, resource: announcements
+[03-Sep-2025 15:35:39 Europe/Berlin] Announcement route - Path: /updated-msc-website/api/announcements/25
+[03-Sep-2025 15:35:39 Europe/Berlin] Announcement route - Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => announcements
+    [3] => 25
+)
+
+[03-Sep-2025 15:35:39 Europe/Berlin] Announcement route - Endpoint: 25
+[03-Sep-2025 15:35:39 Europe/Berlin] Announcement route - ID: null
+[03-Sep-2025 15:35:39 Europe/Berlin] Announcement route - Action: null
+[03-Sep-2025 15:35:39 Europe/Berlin] Request path: /updated-msc-website/api/announcements
+[03-Sep-2025 15:35:39 Europe/Berlin] Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => announcements
+)
+
+[03-Sep-2025 15:35:39 Europe/Berlin] Original REQUEST_URI: /updated-msc-website/api/announcements?page=1&limit=10&include_archived=false
+[03-Sep-2025 15:35:39 Europe/Berlin] Found API index, resource: announcements
+[03-Sep-2025 15:35:39 Europe/Berlin] Announcement route - Path: /updated-msc-website/api/announcements
+[03-Sep-2025 15:35:39 Europe/Berlin] Announcement route - Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => announcements
+)
+
+[03-Sep-2025 15:35:39 Europe/Berlin] Announcement route - Endpoint: 
+[03-Sep-2025 15:35:39 Europe/Berlin] Announcement route - ID: null
+[03-Sep-2025 15:35:39 Europe/Berlin] Announcement route - Action: null
+[03-Sep-2025 15:40:47 Europe/Berlin] Request path: /updated-msc-website/api/announcements
+[03-Sep-2025 15:40:47 Europe/Berlin] Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => announcements
+)
+
+[03-Sep-2025 15:40:47 Europe/Berlin] Original REQUEST_URI: /updated-msc-website/api/announcements?page=1&limit=10&include_archived=false
+[03-Sep-2025 15:40:47 Europe/Berlin] Found API index, resource: announcements
+[03-Sep-2025 15:40:47 Europe/Berlin] Announcement route - Path: /updated-msc-website/api/announcements
+[03-Sep-2025 15:40:47 Europe/Berlin] Announcement route - Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => announcements
+)
+
+[03-Sep-2025 15:40:47 Europe/Berlin] Announcement route - Endpoint: 
+[03-Sep-2025 15:40:47 Europe/Berlin] Announcement route - ID: null
+[03-Sep-2025 15:40:47 Europe/Berlin] Announcement route - Action: null
+[03-Sep-2025 15:40:48 Europe/Berlin] Request path: /updated-msc-website/api/announcements
+[03-Sep-2025 15:40:48 Europe/Berlin] Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => announcements
+)
+
+[03-Sep-2025 15:40:48 Europe/Berlin] Original REQUEST_URI: /updated-msc-website/api/announcements?page=1&limit=10&include_archived=false
+[03-Sep-2025 15:40:48 Europe/Berlin] Found API index, resource: announcements
+[03-Sep-2025 15:40:48 Europe/Berlin] Announcement route - Path: /updated-msc-website/api/announcements
+[03-Sep-2025 15:40:48 Europe/Berlin] Announcement route - Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => announcements
+)
+
+[03-Sep-2025 15:40:48 Europe/Berlin] Announcement route - Endpoint: 
+[03-Sep-2025 15:40:48 Europe/Berlin] Announcement route - ID: null
+[03-Sep-2025 15:40:48 Europe/Berlin] Announcement route - Action: null
+[03-Sep-2025 15:40:49 Europe/Berlin] Request path: /updated-msc-website/api/announcements
+[03-Sep-2025 15:40:49 Europe/Berlin] Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => announcements
+)
+
+[03-Sep-2025 15:40:49 Europe/Berlin] Original REQUEST_URI: /updated-msc-website/api/announcements?page=1&limit=10&include_archived=false
+[03-Sep-2025 15:40:49 Europe/Berlin] Found API index, resource: announcements
+[03-Sep-2025 15:40:49 Europe/Berlin] Announcement route - Path: /updated-msc-website/api/announcements
+[03-Sep-2025 15:40:49 Europe/Berlin] Announcement route - Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => announcements
+)
+
+[03-Sep-2025 15:40:49 Europe/Berlin] Announcement route - Endpoint: 
+[03-Sep-2025 15:40:49 Europe/Berlin] Announcement route - ID: null
+[03-Sep-2025 15:40:49 Europe/Berlin] Announcement route - Action: null
+[03-Sep-2025 15:41:25 Europe/Berlin] Request path: /updated-msc-website/api/announcements
+[03-Sep-2025 15:41:25 Europe/Berlin] Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => announcements
+)
+
+[03-Sep-2025 15:41:25 Europe/Berlin] Original REQUEST_URI: /updated-msc-website/api/announcements?page=1&limit=10&include_archived=false
+[03-Sep-2025 15:41:25 Europe/Berlin] Found API index, resource: announcements
+[03-Sep-2025 15:41:25 Europe/Berlin] Announcement route - Path: /updated-msc-website/api/announcements
+[03-Sep-2025 15:41:25 Europe/Berlin] Announcement route - Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => announcements
+)
+
+[03-Sep-2025 15:41:25 Europe/Berlin] Announcement route - Endpoint: 
+[03-Sep-2025 15:41:25 Europe/Berlin] Announcement route - ID: null
+[03-Sep-2025 15:41:25 Europe/Berlin] Announcement route - Action: null
+[03-Sep-2025 15:41:29 Europe/Berlin] Request path: /updated-msc-website/api/announcements
+[03-Sep-2025 15:41:29 Europe/Berlin] Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => announcements
+)
+
+[03-Sep-2025 15:41:29 Europe/Berlin] Original REQUEST_URI: /updated-msc-website/api/announcements?page=1&limit=10&include_archived=false
+[03-Sep-2025 15:41:29 Europe/Berlin] Found API index, resource: announcements
+[03-Sep-2025 15:41:29 Europe/Berlin] Announcement route - Path: /updated-msc-website/api/announcements
+[03-Sep-2025 15:41:29 Europe/Berlin] Announcement route - Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => announcements
+)
+
+[03-Sep-2025 15:41:29 Europe/Berlin] Announcement route - Endpoint: 
+[03-Sep-2025 15:41:29 Europe/Berlin] Announcement route - ID: null
+[03-Sep-2025 15:41:29 Europe/Berlin] Announcement route - Action: null
+[03-Sep-2025 15:46:47 Europe/Berlin] Request path: /updated-msc-website/api/announcements
+[03-Sep-2025 15:46:47 Europe/Berlin] Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => announcements
+)
+
+[03-Sep-2025 15:46:47 Europe/Berlin] Original REQUEST_URI: /updated-msc-website/api/announcements?page=1&limit=10&include_archived=false
+[03-Sep-2025 15:46:47 Europe/Berlin] Found API index, resource: announcements
+[03-Sep-2025 15:46:47 Europe/Berlin] Announcement route - Path: /updated-msc-website/api/announcements
+[03-Sep-2025 15:46:47 Europe/Berlin] Announcement route - Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => announcements
+)
+
+[03-Sep-2025 15:46:47 Europe/Berlin] Announcement route - Endpoint: 
+[03-Sep-2025 15:46:47 Europe/Berlin] Announcement route - ID: null
+[03-Sep-2025 15:46:47 Europe/Berlin] Announcement route - Action: null
+[03-Sep-2025 15:47:12 Europe/Berlin] Request path: /updated-msc-website/api/announcements
+[03-Sep-2025 15:47:12 Europe/Berlin] Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => announcements
+)
+
+[03-Sep-2025 15:47:12 Europe/Berlin] Original REQUEST_URI: /updated-msc-website/api/announcements
+[03-Sep-2025 15:47:12 Europe/Berlin] Found API index, resource: announcements
+[03-Sep-2025 15:47:12 Europe/Berlin] Announcement route - Path: /updated-msc-website/api/announcements
+[03-Sep-2025 15:47:12 Europe/Berlin] Announcement route - Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => announcements
+)
+
+[03-Sep-2025 15:47:12 Europe/Berlin] Announcement route - Endpoint: 
+[03-Sep-2025 15:47:12 Europe/Berlin] Announcement route - ID: null
+[03-Sep-2025 15:47:12 Europe/Berlin] Announcement route - Action: null
+[03-Sep-2025 15:47:12 Europe/Berlin] PHP Notice:  session_start(): Ignoring session_start() because a session is already active in C:\xampp\htdocs\updated-msc-website\api\middleware\AuthMiddleware.php on line 56
+[03-Sep-2025 15:47:12 Europe/Berlin] Request path: /updated-msc-website/api/announcements
+[03-Sep-2025 15:47:12 Europe/Berlin] Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => announcements
+)
+
+[03-Sep-2025 15:47:12 Europe/Berlin] Original REQUEST_URI: /updated-msc-website/api/announcements?page=1&limit=10&include_archived=false
+[03-Sep-2025 15:47:12 Europe/Berlin] Found API index, resource: announcements
+[03-Sep-2025 15:47:12 Europe/Berlin] Announcement route - Path: /updated-msc-website/api/announcements
+[03-Sep-2025 15:47:12 Europe/Berlin] Announcement route - Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => announcements
+)
+
+[03-Sep-2025 15:47:12 Europe/Berlin] Announcement route - Endpoint: 
+[03-Sep-2025 15:47:12 Europe/Berlin] Announcement route - ID: null
+[03-Sep-2025 15:47:12 Europe/Berlin] Announcement route - Action: null
+[03-Sep-2025 15:49:15 Europe/Berlin] Request path: /updated-msc-website/api/announcements/26
+[03-Sep-2025 15:49:15 Europe/Berlin] Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => announcements
+    [3] => 26
+)
+
+[03-Sep-2025 15:49:15 Europe/Berlin] Original REQUEST_URI: /updated-msc-website/api/announcements/26
+[03-Sep-2025 15:49:15 Europe/Berlin] Found API index, resource: announcements
+[03-Sep-2025 15:49:15 Europe/Berlin] Announcement route - Path: /updated-msc-website/api/announcements/26
+[03-Sep-2025 15:49:15 Europe/Berlin] Announcement route - Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => announcements
+    [3] => 26
+)
+
+[03-Sep-2025 15:49:15 Europe/Berlin] Announcement route - Endpoint: 26
+[03-Sep-2025 15:49:15 Europe/Berlin] Announcement route - ID: null
+[03-Sep-2025 15:49:15 Europe/Berlin] Announcement route - Action: null
+[03-Sep-2025 15:49:15 Europe/Berlin] Request path: /updated-msc-website/api/announcements/26
+[03-Sep-2025 15:49:15 Europe/Berlin] Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => announcements
+    [3] => 26
+)
+
+[03-Sep-2025 15:49:16 Europe/Berlin] Original REQUEST_URI: /updated-msc-website/api/announcements/26
+[03-Sep-2025 15:49:16 Europe/Berlin] Found API index, resource: announcements
+[03-Sep-2025 15:49:16 Europe/Berlin] Announcement route - Path: /updated-msc-website/api/announcements/26
+[03-Sep-2025 15:49:16 Europe/Berlin] Announcement route - Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => announcements
+    [3] => 26
+)
+
+[03-Sep-2025 15:49:16 Europe/Berlin] Announcement route - Endpoint: 26
+[03-Sep-2025 15:49:16 Europe/Berlin] Announcement route - ID: null
+[03-Sep-2025 15:49:16 Europe/Berlin] Announcement route - Action: null
+[03-Sep-2025 15:49:48 Europe/Berlin] Request path: /updated-msc-website/api/announcements/26
+[03-Sep-2025 15:49:48 Europe/Berlin] Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => announcements
+    [3] => 26
+)
+
+[03-Sep-2025 15:49:48 Europe/Berlin] Original REQUEST_URI: /updated-msc-website/api/announcements/26
+[03-Sep-2025 15:49:48 Europe/Berlin] Found API index, resource: announcements
+[03-Sep-2025 15:49:48 Europe/Berlin] Announcement route - Path: /updated-msc-website/api/announcements/26
+[03-Sep-2025 15:49:48 Europe/Berlin] Announcement route - Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => announcements
+    [3] => 26
+)
+
+[03-Sep-2025 15:49:48 Europe/Berlin] Announcement route - Endpoint: 26
+[03-Sep-2025 15:49:48 Europe/Berlin] Announcement route - ID: null
+[03-Sep-2025 15:49:48 Europe/Berlin] Announcement route - Action: null
+[03-Sep-2025 15:51:40 Europe/Berlin] Request path: /updated-msc-website/api/announcements
+[03-Sep-2025 15:51:40 Europe/Berlin] Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => announcements
+)
+
+[03-Sep-2025 15:51:40 Europe/Berlin] Original REQUEST_URI: /updated-msc-website/api/announcements?page=1&limit=10&include_archived=false
+[03-Sep-2025 15:51:40 Europe/Berlin] Found API index, resource: announcements
+[03-Sep-2025 15:51:40 Europe/Berlin] Announcement route - Path: /updated-msc-website/api/announcements
+[03-Sep-2025 15:51:40 Europe/Berlin] Announcement route - Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => announcements
+)
+
+[03-Sep-2025 15:51:40 Europe/Berlin] Announcement route - Endpoint: 
+[03-Sep-2025 15:51:40 Europe/Berlin] Announcement route - ID: null
+[03-Sep-2025 15:51:40 Europe/Berlin] Announcement route - Action: null
+[03-Sep-2025 15:51:55 Europe/Berlin] Request path: /updated-msc-website/api/announcements/26
+[03-Sep-2025 15:51:55 Europe/Berlin] Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => announcements
+    [3] => 26
+)
+
+[03-Sep-2025 15:51:55 Europe/Berlin] Original REQUEST_URI: /updated-msc-website/api/announcements/26
+[03-Sep-2025 15:51:55 Europe/Berlin] Found API index, resource: announcements
+[03-Sep-2025 15:51:55 Europe/Berlin] Announcement route - Path: /updated-msc-website/api/announcements/26
+[03-Sep-2025 15:51:55 Europe/Berlin] Announcement route - Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => announcements
+    [3] => 26
+)
+
+[03-Sep-2025 15:51:55 Europe/Berlin] Announcement route - Endpoint: 26
+[03-Sep-2025 15:51:55 Europe/Berlin] Announcement route - ID: null
+[03-Sep-2025 15:51:55 Europe/Berlin] Announcement route - Action: null
+[03-Sep-2025 15:51:55 Europe/Berlin] Request path: /updated-msc-website/api/announcements
+[03-Sep-2025 15:51:55 Europe/Berlin] Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => announcements
+)
+
+[03-Sep-2025 15:51:55 Europe/Berlin] Original REQUEST_URI: /updated-msc-website/api/announcements?page=1&limit=10&include_archived=false
+[03-Sep-2025 15:51:55 Europe/Berlin] Found API index, resource: announcements
+[03-Sep-2025 15:51:55 Europe/Berlin] Announcement route - Path: /updated-msc-website/api/announcements
+[03-Sep-2025 15:51:55 Europe/Berlin] Announcement route - Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => announcements
+)
+
+[03-Sep-2025 15:51:55 Europe/Berlin] Announcement route - Endpoint: 
+[03-Sep-2025 15:51:55 Europe/Berlin] Announcement route - ID: null
+[03-Sep-2025 15:51:55 Europe/Berlin] Announcement route - Action: null
+[03-Sep-2025 15:52:05 Europe/Berlin] Request path: /updated-msc-website/api/announcements
+[03-Sep-2025 15:52:05 Europe/Berlin] Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => announcements
+)
+
+[03-Sep-2025 15:52:05 Europe/Berlin] Original REQUEST_URI: /updated-msc-website/api/announcements
+[03-Sep-2025 15:52:05 Europe/Berlin] Found API index, resource: announcements
+[03-Sep-2025 15:52:05 Europe/Berlin] Announcement route - Path: /updated-msc-website/api/announcements
+[03-Sep-2025 15:52:05 Europe/Berlin] Announcement route - Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => announcements
+)
+
+[03-Sep-2025 15:52:05 Europe/Berlin] Announcement route - Endpoint: 
+[03-Sep-2025 15:52:05 Europe/Berlin] Announcement route - ID: null
+[03-Sep-2025 15:52:05 Europe/Berlin] Announcement route - Action: null
+[03-Sep-2025 15:52:05 Europe/Berlin] PHP Notice:  session_start(): Ignoring session_start() because a session is already active in C:\xampp\htdocs\updated-msc-website\api\middleware\AuthMiddleware.php on line 56
+[03-Sep-2025 15:52:05 Europe/Berlin] Request path: /updated-msc-website/api/announcements
+[03-Sep-2025 15:52:05 Europe/Berlin] Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => announcements
+)
+
+[03-Sep-2025 15:52:05 Europe/Berlin] Original REQUEST_URI: /updated-msc-website/api/announcements?page=1&limit=10&include_archived=false
+[03-Sep-2025 15:52:05 Europe/Berlin] Found API index, resource: announcements
+[03-Sep-2025 15:52:05 Europe/Berlin] Announcement route - Path: /updated-msc-website/api/announcements
+[03-Sep-2025 15:52:05 Europe/Berlin] Announcement route - Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => announcements
+)
+
+[03-Sep-2025 15:52:05 Europe/Berlin] Announcement route - Endpoint: 
+[03-Sep-2025 15:52:05 Europe/Berlin] Announcement route - ID: null
+[03-Sep-2025 15:52:05 Europe/Berlin] Announcement route - Action: null
+[03-Sep-2025 15:52:12 Europe/Berlin] Request path: /updated-msc-website/api/announcements/27
+[03-Sep-2025 15:52:12 Europe/Berlin] Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => announcements
+    [3] => 27
+)
+
+[03-Sep-2025 15:52:12 Europe/Berlin] Original REQUEST_URI: /updated-msc-website/api/announcements/27
+[03-Sep-2025 15:52:12 Europe/Berlin] Found API index, resource: announcements
+[03-Sep-2025 15:52:12 Europe/Berlin] Announcement route - Path: /updated-msc-website/api/announcements/27
+[03-Sep-2025 15:52:12 Europe/Berlin] Announcement route - Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => announcements
+    [3] => 27
+)
+
+[03-Sep-2025 15:52:12 Europe/Berlin] Announcement route - Endpoint: 27
+[03-Sep-2025 15:52:12 Europe/Berlin] Announcement route - ID: null
+[03-Sep-2025 15:52:12 Europe/Berlin] Announcement route - Action: null
+[03-Sep-2025 15:52:12 Europe/Berlin] Request path: /updated-msc-website/api/announcements
+[03-Sep-2025 15:52:12 Europe/Berlin] Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => announcements
+)
+
+[03-Sep-2025 15:52:12 Europe/Berlin] Original REQUEST_URI: /updated-msc-website/api/announcements?page=1&limit=10&include_archived=false
+[03-Sep-2025 15:52:12 Europe/Berlin] Found API index, resource: announcements
+[03-Sep-2025 15:52:12 Europe/Berlin] Announcement route - Path: /updated-msc-website/api/announcements
+[03-Sep-2025 15:52:12 Europe/Berlin] Announcement route - Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => announcements
+)
+
+[03-Sep-2025 15:52:12 Europe/Berlin] Announcement route - Endpoint: 
+[03-Sep-2025 15:52:12 Europe/Berlin] Announcement route - ID: null
+[03-Sep-2025 15:52:12 Europe/Berlin] Announcement route - Action: null
+[03-Sep-2025 15:52:38 Europe/Berlin] Request path: /updated-msc-website/api/announcements
+[03-Sep-2025 15:52:38 Europe/Berlin] Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => announcements
+)
+
+[03-Sep-2025 15:52:38 Europe/Berlin] Original REQUEST_URI: /updated-msc-website/api/announcements
+[03-Sep-2025 15:52:38 Europe/Berlin] Found API index, resource: announcements
+[03-Sep-2025 15:52:38 Europe/Berlin] Announcement route - Path: /updated-msc-website/api/announcements
+[03-Sep-2025 15:52:38 Europe/Berlin] Announcement route - Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => announcements
+)
+
+[03-Sep-2025 15:52:38 Europe/Berlin] Announcement route - Endpoint: 
+[03-Sep-2025 15:52:38 Europe/Berlin] Announcement route - ID: null
+[03-Sep-2025 15:52:38 Europe/Berlin] Announcement route - Action: null
+[03-Sep-2025 15:52:38 Europe/Berlin] PHP Notice:  session_start(): Ignoring session_start() because a session is already active in C:\xampp\htdocs\updated-msc-website\api\middleware\AuthMiddleware.php on line 56
+[03-Sep-2025 15:52:38 Europe/Berlin] Request path: /updated-msc-website/api/announcements
+[03-Sep-2025 15:52:38 Europe/Berlin] Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => announcements
+)
+
+[03-Sep-2025 15:52:38 Europe/Berlin] Original REQUEST_URI: /updated-msc-website/api/announcements?page=1&limit=10&include_archived=false
+[03-Sep-2025 15:52:38 Europe/Berlin] Found API index, resource: announcements
+[03-Sep-2025 15:52:38 Europe/Berlin] Announcement route - Path: /updated-msc-website/api/announcements
+[03-Sep-2025 15:52:38 Europe/Berlin] Announcement route - Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => announcements
+)
+
+[03-Sep-2025 15:52:38 Europe/Berlin] Announcement route - Endpoint: 
+[03-Sep-2025 15:52:38 Europe/Berlin] Announcement route - ID: null
+[03-Sep-2025 15:52:38 Europe/Berlin] Announcement route - Action: null
+[03-Sep-2025 15:52:45 Europe/Berlin] Request path: /updated-msc-website/api/announcements/28
+[03-Sep-2025 15:52:45 Europe/Berlin] Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => announcements
+    [3] => 28
+)
+
+[03-Sep-2025 15:52:45 Europe/Berlin] Original REQUEST_URI: /updated-msc-website/api/announcements/28
+[03-Sep-2025 15:52:45 Europe/Berlin] Found API index, resource: announcements
+[03-Sep-2025 15:52:45 Europe/Berlin] Announcement route - Path: /updated-msc-website/api/announcements/28
+[03-Sep-2025 15:52:45 Europe/Berlin] Announcement route - Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => announcements
+    [3] => 28
+)
+
+[03-Sep-2025 15:52:45 Europe/Berlin] Announcement route - Endpoint: 28
+[03-Sep-2025 15:52:45 Europe/Berlin] Announcement route - ID: null
+[03-Sep-2025 15:52:45 Europe/Berlin] Announcement route - Action: null
+[03-Sep-2025 16:04:54 Europe/Berlin] Request path: /updated-msc-website/api/announcements
+[03-Sep-2025 16:04:54 Europe/Berlin] Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => announcements
+)
+
+[03-Sep-2025 16:04:54 Europe/Berlin] Original REQUEST_URI: /updated-msc-website/api/announcements?page=1&limit=10&include_archived=false
+[03-Sep-2025 16:04:54 Europe/Berlin] Found API index, resource: announcements
+[03-Sep-2025 16:04:54 Europe/Berlin] Announcement route - Path: /updated-msc-website/api/announcements
+[03-Sep-2025 16:04:54 Europe/Berlin] Announcement route - Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => announcements
+)
+
+[03-Sep-2025 16:04:54 Europe/Berlin] Announcement route - Endpoint: 
+[03-Sep-2025 16:04:54 Europe/Berlin] Announcement route - ID: null
+[03-Sep-2025 16:04:54 Europe/Berlin] Announcement route - Action: null
+[03-Sep-2025 16:04:58 Europe/Berlin] Request path: /updated-msc-website/api/announcements/28
+[03-Sep-2025 16:04:58 Europe/Berlin] Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => announcements
+    [3] => 28
+)
+
+[03-Sep-2025 16:04:58 Europe/Berlin] Original REQUEST_URI: /updated-msc-website/api/announcements/28
+[03-Sep-2025 16:04:58 Europe/Berlin] Found API index, resource: announcements
+[03-Sep-2025 16:04:58 Europe/Berlin] Announcement route - Path: /updated-msc-website/api/announcements/28
+[03-Sep-2025 16:04:58 Europe/Berlin] Announcement route - Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => announcements
+    [3] => 28
+)
+
+[03-Sep-2025 16:04:58 Europe/Berlin] Announcement route - Endpoint: 28
+[03-Sep-2025 16:04:58 Europe/Berlin] Announcement route - ID: null
+[03-Sep-2025 16:04:58 Europe/Berlin] Announcement route - Action: null
+[03-Sep-2025 16:05:07 Europe/Berlin] Request path: /updated-msc-website/api/announcements/28
+[03-Sep-2025 16:05:07 Europe/Berlin] Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => announcements
+    [3] => 28
+)
+
+[03-Sep-2025 16:05:07 Europe/Berlin] Original REQUEST_URI: /updated-msc-website/api/announcements/28
+[03-Sep-2025 16:05:07 Europe/Berlin] Found API index, resource: announcements
+[03-Sep-2025 16:05:07 Europe/Berlin] Announcement route - Path: /updated-msc-website/api/announcements/28
+[03-Sep-2025 16:05:07 Europe/Berlin] Announcement route - Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => announcements
+    [3] => 28
+)
+
+[03-Sep-2025 16:05:07 Europe/Berlin] Announcement route - Endpoint: 28
+[03-Sep-2025 16:05:07 Europe/Berlin] Announcement route - ID: null
+[03-Sep-2025 16:05:07 Europe/Berlin] Announcement route - Action: null
+[03-Sep-2025 16:10:54 Europe/Berlin] Request path: /updated-msc-website/api/announcements
+[03-Sep-2025 16:10:54 Europe/Berlin] Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => announcements
+)
+
+[03-Sep-2025 16:10:54 Europe/Berlin] Original REQUEST_URI: /updated-msc-website/api/announcements?page=1&limit=10&include_archived=false
+[03-Sep-2025 16:10:54 Europe/Berlin] Found API index, resource: announcements
+[03-Sep-2025 16:10:54 Europe/Berlin] Announcement route - Path: /updated-msc-website/api/announcements
+[03-Sep-2025 16:10:54 Europe/Berlin] Announcement route - Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => announcements
+)
+
+[03-Sep-2025 16:10:54 Europe/Berlin] Announcement route - Endpoint: 
+[03-Sep-2025 16:10:54 Europe/Berlin] Announcement route - ID: null
+[03-Sep-2025 16:10:54 Europe/Berlin] Announcement route - Action: null
+[03-Sep-2025 16:11:02 Europe/Berlin] Request path: /updated-msc-website/api/announcements/28
+[03-Sep-2025 16:11:02 Europe/Berlin] Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => announcements
+    [3] => 28
+)
+
+[03-Sep-2025 16:11:02 Europe/Berlin] Original REQUEST_URI: /updated-msc-website/api/announcements/28
+[03-Sep-2025 16:11:02 Europe/Berlin] Found API index, resource: announcements
+[03-Sep-2025 16:11:02 Europe/Berlin] Announcement route - Path: /updated-msc-website/api/announcements/28
+[03-Sep-2025 16:11:02 Europe/Berlin] Announcement route - Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => announcements
+    [3] => 28
+)
+
+[03-Sep-2025 16:11:02 Europe/Berlin] Announcement route - Endpoint: 28
+[03-Sep-2025 16:11:02 Europe/Berlin] Announcement route - ID: null
+[03-Sep-2025 16:11:02 Europe/Berlin] Announcement route - Action: null
+[03-Sep-2025 16:11:13 Europe/Berlin] Request path: /updated-msc-website/api/announcements/28
+[03-Sep-2025 16:11:13 Europe/Berlin] Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => announcements
+    [3] => 28
+)
+
+[03-Sep-2025 16:11:13 Europe/Berlin] Original REQUEST_URI: /updated-msc-website/api/announcements/28
+[03-Sep-2025 16:11:13 Europe/Berlin] Found API index, resource: announcements
+[03-Sep-2025 16:11:13 Europe/Berlin] Announcement route - Path: /updated-msc-website/api/announcements/28
+[03-Sep-2025 16:11:13 Europe/Berlin] Announcement route - Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => announcements
+    [3] => 28
+)
+
+[03-Sep-2025 16:11:13 Europe/Berlin] Announcement route - Endpoint: 28
+[03-Sep-2025 16:11:13 Europe/Berlin] Announcement route - ID: null
+[03-Sep-2025 16:11:13 Europe/Berlin] Announcement route - Action: null
+[03-Sep-2025 16:55:46 Europe/Berlin] Request path: /updated-msc-website/api/announcements
+[03-Sep-2025 16:55:46 Europe/Berlin] Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => announcements
+)
+
+[03-Sep-2025 16:55:46 Europe/Berlin] Original REQUEST_URI: /updated-msc-website/api/announcements?page=1&limit=10&include_archived=false
+[03-Sep-2025 16:55:46 Europe/Berlin] Found API index, resource: announcements
+[03-Sep-2025 16:55:46 Europe/Berlin] Announcement route - Path: /updated-msc-website/api/announcements
+[03-Sep-2025 16:55:46 Europe/Berlin] Announcement route - Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => announcements
+)
+
+[03-Sep-2025 16:55:46 Europe/Berlin] Announcement route - Endpoint: 
+[03-Sep-2025 16:55:46 Europe/Berlin] Announcement route - ID: null
+[03-Sep-2025 16:55:46 Europe/Berlin] Announcement route - Action: null
+[03-Sep-2025 16:55:51 Europe/Berlin] Request path: /updated-msc-website/api/announcements/28
+[03-Sep-2025 16:55:51 Europe/Berlin] Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => announcements
+    [3] => 28
+)
+
+[03-Sep-2025 16:55:51 Europe/Berlin] Original REQUEST_URI: /updated-msc-website/api/announcements/28
+[03-Sep-2025 16:55:51 Europe/Berlin] Found API index, resource: announcements
+[03-Sep-2025 16:55:51 Europe/Berlin] Announcement route - Path: /updated-msc-website/api/announcements/28
+[03-Sep-2025 16:55:51 Europe/Berlin] Announcement route - Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => announcements
+    [3] => 28
+)
+
+[03-Sep-2025 16:55:51 Europe/Berlin] Announcement route - Endpoint: 28
+[03-Sep-2025 16:55:51 Europe/Berlin] Announcement route - ID: null
+[03-Sep-2025 16:55:51 Europe/Berlin] Announcement route - Action: null
+[03-Sep-2025 16:56:41 Europe/Berlin] Request path: /updated-msc-website/api/announcements
+[03-Sep-2025 16:56:41 Europe/Berlin] Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => announcements
+)
+
+[03-Sep-2025 16:56:41 Europe/Berlin] Original REQUEST_URI: /updated-msc-website/api/announcements?page=1&limit=10&include_archived=false
+[03-Sep-2025 16:56:41 Europe/Berlin] Found API index, resource: announcements
+[03-Sep-2025 16:56:41 Europe/Berlin] Announcement route - Path: /updated-msc-website/api/announcements
+[03-Sep-2025 16:56:41 Europe/Berlin] Announcement route - Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => announcements
+)
+
+[03-Sep-2025 16:56:41 Europe/Berlin] Announcement route - Endpoint: 
+[03-Sep-2025 16:56:41 Europe/Berlin] Announcement route - ID: null
+[03-Sep-2025 16:56:41 Europe/Berlin] Announcement route - Action: null
+[03-Sep-2025 16:56:47 Europe/Berlin] Request path: /updated-msc-website/api/announcements/28
+[03-Sep-2025 16:56:47 Europe/Berlin] Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => announcements
+    [3] => 28
+)
+
+[03-Sep-2025 16:56:47 Europe/Berlin] Original REQUEST_URI: /updated-msc-website/api/announcements/28
+[03-Sep-2025 16:56:47 Europe/Berlin] Found API index, resource: announcements
+[03-Sep-2025 16:56:47 Europe/Berlin] Announcement route - Path: /updated-msc-website/api/announcements/28
+[03-Sep-2025 16:56:47 Europe/Berlin] Announcement route - Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => announcements
+    [3] => 28
+)
+
+[03-Sep-2025 16:56:47 Europe/Berlin] Announcement route - Endpoint: 28
+[03-Sep-2025 16:56:47 Europe/Berlin] Announcement route - ID: null
+[03-Sep-2025 16:56:47 Europe/Berlin] Announcement route - Action: null
+[03-Sep-2025 17:00:38 Europe/Berlin] Request path: /updated-msc-website/api/announcements
+[03-Sep-2025 17:00:38 Europe/Berlin] Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => announcements
+)
+
+[03-Sep-2025 17:00:38 Europe/Berlin] Original REQUEST_URI: /updated-msc-website/api/announcements?page=1&limit=10&include_archived=false
+[03-Sep-2025 17:00:38 Europe/Berlin] Found API index, resource: announcements
+[03-Sep-2025 17:00:38 Europe/Berlin] Announcement route - Path: /updated-msc-website/api/announcements
+[03-Sep-2025 17:00:38 Europe/Berlin] Announcement route - Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => announcements
+)
+
+[03-Sep-2025 17:00:38 Europe/Berlin] Announcement route - Endpoint: 
+[03-Sep-2025 17:00:38 Europe/Berlin] Announcement route - ID: null
+[03-Sep-2025 17:00:38 Europe/Berlin] Announcement route - Action: null
+[03-Sep-2025 17:00:43 Europe/Berlin] Request path: /updated-msc-website/api/announcements/28
+[03-Sep-2025 17:00:43 Europe/Berlin] Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => announcements
+    [3] => 28
+)
+
+[03-Sep-2025 17:00:43 Europe/Berlin] Original REQUEST_URI: /updated-msc-website/api/announcements/28
+[03-Sep-2025 17:00:43 Europe/Berlin] Found API index, resource: announcements
+[03-Sep-2025 17:00:43 Europe/Berlin] Announcement route - Path: /updated-msc-website/api/announcements/28
+[03-Sep-2025 17:00:43 Europe/Berlin] Announcement route - Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => announcements
+    [3] => 28
+)
+
+[03-Sep-2025 17:00:43 Europe/Berlin] Announcement route - Endpoint: 28
+[03-Sep-2025 17:00:43 Europe/Berlin] Announcement route - ID: null
+[03-Sep-2025 17:00:43 Europe/Berlin] Announcement route - Action: null
+[03-Sep-2025 17:00:49 Europe/Berlin] Request path: /updated-msc-website/api/announcements/28
+[03-Sep-2025 17:00:49 Europe/Berlin] Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => announcements
+    [3] => 28
+)
+
+[03-Sep-2025 17:00:49 Europe/Berlin] Original REQUEST_URI: /updated-msc-website/api/announcements/28
+[03-Sep-2025 17:00:49 Europe/Berlin] Found API index, resource: announcements
+[03-Sep-2025 17:00:49 Europe/Berlin] Announcement route - Path: /updated-msc-website/api/announcements/28
+[03-Sep-2025 17:00:49 Europe/Berlin] Announcement route - Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => announcements
+    [3] => 28
+)
+
+[03-Sep-2025 17:00:49 Europe/Berlin] Announcement route - Endpoint: 28
+[03-Sep-2025 17:00:49 Europe/Berlin] Announcement route - ID: null
+[03-Sep-2025 17:00:49 Europe/Berlin] Announcement route - Action: null
+[03-Sep-2025 17:05:23 Europe/Berlin] Request path: /updated-msc-website/api/announcements
+[03-Sep-2025 17:05:23 Europe/Berlin] Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => announcements
+)
+
+[03-Sep-2025 17:05:23 Europe/Berlin] Original REQUEST_URI: /updated-msc-website/api/announcements?page=1&limit=10&include_archived=false
+[03-Sep-2025 17:05:23 Europe/Berlin] Found API index, resource: announcements
+[03-Sep-2025 17:05:23 Europe/Berlin] Announcement route - Path: /updated-msc-website/api/announcements
+[03-Sep-2025 17:05:23 Europe/Berlin] Announcement route - Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => announcements
+)
+
+[03-Sep-2025 17:05:23 Europe/Berlin] Announcement route - Endpoint: 
+[03-Sep-2025 17:05:23 Europe/Berlin] Announcement route - ID: null
+[03-Sep-2025 17:05:23 Europe/Berlin] Announcement route - Action: null
+[03-Sep-2025 17:05:27 Europe/Berlin] Request path: /updated-msc-website/api/announcements/28
+[03-Sep-2025 17:05:27 Europe/Berlin] Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => announcements
+    [3] => 28
+)
+
+[03-Sep-2025 17:05:27 Europe/Berlin] Original REQUEST_URI: /updated-msc-website/api/announcements/28
+[03-Sep-2025 17:05:27 Europe/Berlin] Found API index, resource: announcements
+[03-Sep-2025 17:05:27 Europe/Berlin] Announcement route - Path: /updated-msc-website/api/announcements/28
+[03-Sep-2025 17:05:27 Europe/Berlin] Announcement route - Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => announcements
+    [3] => 28
+)
+
+[03-Sep-2025 17:05:27 Europe/Berlin] Announcement route - Endpoint: 28
+[03-Sep-2025 17:05:27 Europe/Berlin] Announcement route - ID: null
+[03-Sep-2025 17:05:27 Europe/Berlin] Announcement route - Action: null
+[03-Sep-2025 17:06:08 Europe/Berlin] Request path: /updated-msc-website/api/announcements
+[03-Sep-2025 17:06:08 Europe/Berlin] Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => announcements
+)
+
+[03-Sep-2025 17:06:08 Europe/Berlin] Original REQUEST_URI: /updated-msc-website/api/announcements?page=1&limit=10&include_archived=false
+[03-Sep-2025 17:06:08 Europe/Berlin] Found API index, resource: announcements
+[03-Sep-2025 17:06:08 Europe/Berlin] Announcement route - Path: /updated-msc-website/api/announcements
+[03-Sep-2025 17:06:08 Europe/Berlin] Announcement route - Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => announcements
+)
+
+[03-Sep-2025 17:06:08 Europe/Berlin] Announcement route - Endpoint: 
+[03-Sep-2025 17:06:08 Europe/Berlin] Announcement route - ID: null
+[03-Sep-2025 17:06:08 Europe/Berlin] Announcement route - Action: null
+[03-Sep-2025 17:06:12 Europe/Berlin] Request path: /updated-msc-website/api/announcements/28
+[03-Sep-2025 17:06:12 Europe/Berlin] Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => announcements
+    [3] => 28
+)
+
+[03-Sep-2025 17:06:12 Europe/Berlin] Original REQUEST_URI: /updated-msc-website/api/announcements/28
+[03-Sep-2025 17:06:12 Europe/Berlin] Found API index, resource: announcements
+[03-Sep-2025 17:06:12 Europe/Berlin] Announcement route - Path: /updated-msc-website/api/announcements/28
+[03-Sep-2025 17:06:12 Europe/Berlin] Announcement route - Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => announcements
+    [3] => 28
+)
+
+[03-Sep-2025 17:06:12 Europe/Berlin] Announcement route - Endpoint: 28
+[03-Sep-2025 17:06:12 Europe/Berlin] Announcement route - ID: null
+[03-Sep-2025 17:06:12 Europe/Berlin] Announcement route - Action: null
+[03-Sep-2025 17:10:24 Europe/Berlin] Request path: /updated-msc-website/api/announcements
+[03-Sep-2025 17:10:24 Europe/Berlin] Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => announcements
+)
+
+[03-Sep-2025 17:10:24 Europe/Berlin] Original REQUEST_URI: /updated-msc-website/api/announcements?page=1&limit=10&include_archived=false
+[03-Sep-2025 17:10:24 Europe/Berlin] Found API index, resource: announcements
+[03-Sep-2025 17:10:24 Europe/Berlin] Announcement route - Path: /updated-msc-website/api/announcements
+[03-Sep-2025 17:10:24 Europe/Berlin] Announcement route - Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => announcements
+)
+
+[03-Sep-2025 17:10:24 Europe/Berlin] Announcement route - Endpoint: 
+[03-Sep-2025 17:10:24 Europe/Berlin] Announcement route - ID: null
+[03-Sep-2025 17:10:24 Europe/Berlin] Announcement route - Action: null
+[03-Sep-2025 17:10:27 Europe/Berlin] Request path: /updated-msc-website/api/announcements/28
+[03-Sep-2025 17:10:27 Europe/Berlin] Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => announcements
+    [3] => 28
+)
+
+[03-Sep-2025 17:10:27 Europe/Berlin] Original REQUEST_URI: /updated-msc-website/api/announcements/28?_method=PUT
+[03-Sep-2025 17:10:27 Europe/Berlin] Found API index, resource: announcements
+[03-Sep-2025 17:10:27 Europe/Berlin] Announcement route - Path: /updated-msc-website/api/announcements/28
+[03-Sep-2025 17:10:27 Europe/Berlin] Announcement route - Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => announcements
+    [3] => 28
+)
+
+[03-Sep-2025 17:10:27 Europe/Berlin] Announcement route - Endpoint: 28
+[03-Sep-2025 17:10:27 Europe/Berlin] Announcement route - ID: null
+[03-Sep-2025 17:10:27 Europe/Berlin] Announcement route - Action: null
+[03-Sep-2025 17:10:38 Europe/Berlin] Request path: /updated-msc-website/api/announcements/28
+[03-Sep-2025 17:10:38 Europe/Berlin] Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => announcements
+    [3] => 28
+)
+
+[03-Sep-2025 17:10:38 Europe/Berlin] Original REQUEST_URI: /updated-msc-website/api/announcements/28?_method=PUT
+[03-Sep-2025 17:10:38 Europe/Berlin] Found API index, resource: announcements
+[03-Sep-2025 17:10:38 Europe/Berlin] Announcement route - Path: /updated-msc-website/api/announcements/28
+[03-Sep-2025 17:10:38 Europe/Berlin] Announcement route - Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => announcements
+    [3] => 28
+)
+
+[03-Sep-2025 17:10:38 Europe/Berlin] Announcement route - Endpoint: 28
+[03-Sep-2025 17:10:38 Europe/Berlin] Announcement route - ID: null
+[03-Sep-2025 17:10:38 Europe/Berlin] Announcement route - Action: null
+[03-Sep-2025 17:12:57 Europe/Berlin] Request path: /updated-msc-website/api/announcements/28
+[03-Sep-2025 17:12:57 Europe/Berlin] Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => announcements
+    [3] => 28
+)
+
+[03-Sep-2025 17:12:57 Europe/Berlin] Original REQUEST_URI: /updated-msc-website/api/announcements/28?_method=PUT
+[03-Sep-2025 17:12:57 Europe/Berlin] Found API index, resource: announcements
+[03-Sep-2025 17:12:57 Europe/Berlin] Announcement route - Path: /updated-msc-website/api/announcements/28
+[03-Sep-2025 17:12:57 Europe/Berlin] Announcement route - Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => announcements
+    [3] => 28
+)
+
+[03-Sep-2025 17:12:57 Europe/Berlin] Announcement route - Endpoint: 28
+[03-Sep-2025 17:12:57 Europe/Berlin] Announcement route - ID: null
+[03-Sep-2025 17:12:57 Europe/Berlin] Announcement route - Action: null
+[03-Sep-2025 17:13:21 Europe/Berlin] Request path: /updated-msc-website/api/announcements
+[03-Sep-2025 17:13:21 Europe/Berlin] Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => announcements
+)
+
+[03-Sep-2025 17:13:21 Europe/Berlin] Original REQUEST_URI: /updated-msc-website/api/announcements?page=1&limit=10&include_archived=false
+[03-Sep-2025 17:13:21 Europe/Berlin] Found API index, resource: announcements
+[03-Sep-2025 17:13:21 Europe/Berlin] Announcement route - Path: /updated-msc-website/api/announcements
+[03-Sep-2025 17:13:21 Europe/Berlin] Announcement route - Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => announcements
+)
+
+[03-Sep-2025 17:13:21 Europe/Berlin] Announcement route - Endpoint: 
+[03-Sep-2025 17:13:21 Europe/Berlin] Announcement route - ID: null
+[03-Sep-2025 17:13:21 Europe/Berlin] Announcement route - Action: null
+[03-Sep-2025 17:17:19 Europe/Berlin] Request path: /updated-msc-website/api/announcements/28
+[03-Sep-2025 17:17:19 Europe/Berlin] Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => announcements
+    [3] => 28
+)
+
+[03-Sep-2025 17:17:19 Europe/Berlin] Original REQUEST_URI: /updated-msc-website/api/announcements/28?_method=PUT
+[03-Sep-2025 17:17:19 Europe/Berlin] Found API index, resource: announcements
+[03-Sep-2025 17:17:19 Europe/Berlin] Announcement route - Path: /updated-msc-website/api/announcements/28
+[03-Sep-2025 17:17:19 Europe/Berlin] Announcement route - Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => announcements
+    [3] => 28
+)
+
+[03-Sep-2025 17:17:19 Europe/Berlin] Announcement route - Endpoint: 28
+[03-Sep-2025 17:17:19 Europe/Berlin] Announcement route - ID: null
+[03-Sep-2025 17:17:19 Europe/Berlin] Announcement route - Action: null
+[03-Sep-2025 17:17:23 Europe/Berlin] Request path: /updated-msc-website/api/announcements
+[03-Sep-2025 17:17:23 Europe/Berlin] Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => announcements
+)
+
+[03-Sep-2025 17:17:23 Europe/Berlin] Original REQUEST_URI: /updated-msc-website/api/announcements?page=1&limit=10&include_archived=false
+[03-Sep-2025 17:17:23 Europe/Berlin] Found API index, resource: announcements
+[03-Sep-2025 17:17:23 Europe/Berlin] Announcement route - Path: /updated-msc-website/api/announcements
+[03-Sep-2025 17:17:23 Europe/Berlin] Announcement route - Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => announcements
+)
+
+[03-Sep-2025 17:17:23 Europe/Berlin] Announcement route - Endpoint: 
+[03-Sep-2025 17:17:23 Europe/Berlin] Announcement route - ID: null
+[03-Sep-2025 17:17:23 Europe/Berlin] Announcement route - Action: null
+[03-Sep-2025 17:26:04 Europe/Berlin] Request path: /updated-msc-website/api/announcements
+[03-Sep-2025 17:26:04 Europe/Berlin] Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => announcements
+)
+
+[03-Sep-2025 17:26:04 Europe/Berlin] Original REQUEST_URI: /updated-msc-website/api/announcements?page=1&limit=10&include_archived=false&t=1756913164749
+[03-Sep-2025 17:26:04 Europe/Berlin] Found API index, resource: announcements
+[03-Sep-2025 17:26:04 Europe/Berlin] Announcement route - Path: /updated-msc-website/api/announcements
+[03-Sep-2025 17:26:04 Europe/Berlin] Announcement route - Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => announcements
+)
+
+[03-Sep-2025 17:26:04 Europe/Berlin] Announcement route - Endpoint: 
+[03-Sep-2025 17:26:04 Europe/Berlin] Announcement route - ID: null
+[03-Sep-2025 17:26:04 Europe/Berlin] Announcement route - Action: null
+[03-Sep-2025 17:26:09 Europe/Berlin] Request path: /updated-msc-website/api/announcements/28
+[03-Sep-2025 17:26:09 Europe/Berlin] Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => announcements
+    [3] => 28
+)
+
+[03-Sep-2025 17:26:09 Europe/Berlin] Original REQUEST_URI: /updated-msc-website/api/announcements/28?_method=PUT
+[03-Sep-2025 17:26:09 Europe/Berlin] Found API index, resource: announcements
+[03-Sep-2025 17:26:09 Europe/Berlin] Announcement route - Path: /updated-msc-website/api/announcements/28
+[03-Sep-2025 17:26:09 Europe/Berlin] Announcement route - Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => announcements
+    [3] => 28
+)
+
+[03-Sep-2025 17:26:09 Europe/Berlin] Announcement route - Endpoint: 28
+[03-Sep-2025 17:26:09 Europe/Berlin] Announcement route - ID: null
+[03-Sep-2025 17:26:09 Europe/Berlin] Announcement route - Action: null
+[03-Sep-2025 17:26:12 Europe/Berlin] Request path: /updated-msc-website/api/announcements
+[03-Sep-2025 17:26:12 Europe/Berlin] Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => announcements
+)
+
+[03-Sep-2025 17:26:12 Europe/Berlin] Original REQUEST_URI: /updated-msc-website/api/announcements?page=1&limit=10&include_archived=false&t=1756913172698
+[03-Sep-2025 17:26:12 Europe/Berlin] Found API index, resource: announcements
+[03-Sep-2025 17:26:12 Europe/Berlin] Announcement route - Path: /updated-msc-website/api/announcements
+[03-Sep-2025 17:26:12 Europe/Berlin] Announcement route - Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => announcements
+)
+
+[03-Sep-2025 17:26:12 Europe/Berlin] Announcement route - Endpoint: 
+[03-Sep-2025 17:26:12 Europe/Berlin] Announcement route - ID: null
+[03-Sep-2025 17:26:12 Europe/Berlin] Announcement route - Action: null
+[03-Sep-2025 17:26:56 Europe/Berlin] Request path: /updated-msc-website/api/announcements
+[03-Sep-2025 17:26:56 Europe/Berlin] Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => announcements
+)
+
+[03-Sep-2025 17:26:56 Europe/Berlin] Original REQUEST_URI: /updated-msc-website/api/announcements?page=1&limit=10&include_archived=false
+[03-Sep-2025 17:26:56 Europe/Berlin] Found API index, resource: announcements
+[03-Sep-2025 17:26:56 Europe/Berlin] Announcement route - Path: /updated-msc-website/api/announcements
+[03-Sep-2025 17:26:56 Europe/Berlin] Announcement route - Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => announcements
+)
+
+[03-Sep-2025 17:26:56 Europe/Berlin] Announcement route - Endpoint: 
+[03-Sep-2025 17:26:56 Europe/Berlin] Announcement route - ID: null
+[03-Sep-2025 17:26:56 Europe/Berlin] Announcement route - Action: null
+[03-Sep-2025 17:26:58 Europe/Berlin] Request path: /updated-msc-website/api/announcements/28
+[03-Sep-2025 17:26:58 Europe/Berlin] Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => announcements
+    [3] => 28
+)
+
+[03-Sep-2025 17:26:58 Europe/Berlin] Original REQUEST_URI: /updated-msc-website/api/announcements/28?_method=PUT
+[03-Sep-2025 17:26:58 Europe/Berlin] Found API index, resource: announcements
+[03-Sep-2025 17:26:58 Europe/Berlin] Announcement route - Path: /updated-msc-website/api/announcements/28
+[03-Sep-2025 17:26:58 Europe/Berlin] Announcement route - Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => announcements
+    [3] => 28
+)
+
+[03-Sep-2025 17:26:58 Europe/Berlin] Announcement route - Endpoint: 28
+[03-Sep-2025 17:26:58 Europe/Berlin] Announcement route - ID: null
+[03-Sep-2025 17:26:58 Europe/Berlin] Announcement route - Action: null
+[03-Sep-2025 17:27:00 Europe/Berlin] Request path: /updated-msc-website/api/announcements/28
+[03-Sep-2025 17:27:00 Europe/Berlin] Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => announcements
+    [3] => 28
+)
+
+[03-Sep-2025 17:27:00 Europe/Berlin] Original REQUEST_URI: /updated-msc-website/api/announcements/28?_method=PUT
+[03-Sep-2025 17:27:00 Europe/Berlin] Found API index, resource: announcements
+[03-Sep-2025 17:27:00 Europe/Berlin] Announcement route - Path: /updated-msc-website/api/announcements/28
+[03-Sep-2025 17:27:00 Europe/Berlin] Announcement route - Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => announcements
+    [3] => 28
+)
+
+[03-Sep-2025 17:27:00 Europe/Berlin] Announcement route - Endpoint: 28
+[03-Sep-2025 17:27:00 Europe/Berlin] Announcement route - ID: null
+[03-Sep-2025 17:27:00 Europe/Berlin] Announcement route - Action: null
+[03-Sep-2025 17:27:00 Europe/Berlin] Request path: /updated-msc-website/api/announcements/28
+[03-Sep-2025 17:27:00 Europe/Berlin] Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => announcements
+    [3] => 28
+)
+
+[03-Sep-2025 17:27:00 Europe/Berlin] Original REQUEST_URI: /updated-msc-website/api/announcements/28?_method=PUT
+[03-Sep-2025 17:27:00 Europe/Berlin] Found API index, resource: announcements
+[03-Sep-2025 17:27:00 Europe/Berlin] Announcement route - Path: /updated-msc-website/api/announcements/28
+[03-Sep-2025 17:27:00 Europe/Berlin] Announcement route - Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => announcements
+    [3] => 28
+)
+
+[03-Sep-2025 17:27:00 Europe/Berlin] Announcement route - Endpoint: 28
+[03-Sep-2025 17:27:00 Europe/Berlin] Announcement route - ID: null
+[03-Sep-2025 17:27:00 Europe/Berlin] Announcement route - Action: null
+[03-Sep-2025 17:27:00 Europe/Berlin] Request path: /updated-msc-website/api/announcements/28
+[03-Sep-2025 17:27:00 Europe/Berlin] Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => announcements
+    [3] => 28
+)
+
+[03-Sep-2025 17:27:00 Europe/Berlin] Original REQUEST_URI: /updated-msc-website/api/announcements/28?_method=PUT
+[03-Sep-2025 17:27:00 Europe/Berlin] Found API index, resource: announcements
+[03-Sep-2025 17:27:00 Europe/Berlin] Announcement route - Path: /updated-msc-website/api/announcements/28
+[03-Sep-2025 17:27:00 Europe/Berlin] Announcement route - Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => announcements
+    [3] => 28
+)
+
+[03-Sep-2025 17:27:00 Europe/Berlin] Announcement route - Endpoint: 28
+[03-Sep-2025 17:27:00 Europe/Berlin] Announcement route - ID: null
+[03-Sep-2025 17:27:00 Europe/Berlin] Announcement route - Action: null
+[03-Sep-2025 17:27:00 Europe/Berlin] Request path: /updated-msc-website/api/announcements/28
+[03-Sep-2025 17:27:00 Europe/Berlin] Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => announcements
+    [3] => 28
+)
+
+[03-Sep-2025 17:27:00 Europe/Berlin] Original REQUEST_URI: /updated-msc-website/api/announcements/28?_method=PUT
+[03-Sep-2025 17:27:00 Europe/Berlin] Found API index, resource: announcements
+[03-Sep-2025 17:27:00 Europe/Berlin] Announcement route - Path: /updated-msc-website/api/announcements/28
+[03-Sep-2025 17:27:00 Europe/Berlin] Announcement route - Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => announcements
+    [3] => 28
+)
+
+[03-Sep-2025 17:27:00 Europe/Berlin] Announcement route - Endpoint: 28
+[03-Sep-2025 17:27:00 Europe/Berlin] Announcement route - ID: null
+[03-Sep-2025 17:27:00 Europe/Berlin] Announcement route - Action: null
+[03-Sep-2025 17:27:00 Europe/Berlin] Request path: /updated-msc-website/api/announcements/28
+[03-Sep-2025 17:27:00 Europe/Berlin] Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => announcements
+    [3] => 28
+)
+
+[03-Sep-2025 17:27:00 Europe/Berlin] Original REQUEST_URI: /updated-msc-website/api/announcements/28?_method=PUT
+[03-Sep-2025 17:27:00 Europe/Berlin] Found API index, resource: announcements
+[03-Sep-2025 17:27:00 Europe/Berlin] Announcement route - Path: /updated-msc-website/api/announcements/28
+[03-Sep-2025 17:27:00 Europe/Berlin] Announcement route - Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => announcements
+    [3] => 28
+)
+
+[03-Sep-2025 17:27:00 Europe/Berlin] Announcement route - Endpoint: 28
+[03-Sep-2025 17:27:00 Europe/Berlin] Announcement route - ID: null
+[03-Sep-2025 17:27:00 Europe/Berlin] Announcement route - Action: null
+[03-Sep-2025 17:27:09 Europe/Berlin] Request path: /updated-msc-website/api/announcements
+[03-Sep-2025 17:27:09 Europe/Berlin] Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => announcements
+)
+
+[03-Sep-2025 17:27:09 Europe/Berlin] Original REQUEST_URI: /updated-msc-website/api/announcements?page=1&limit=10&include_archived=false
+[03-Sep-2025 17:27:09 Europe/Berlin] Found API index, resource: announcements
+[03-Sep-2025 17:27:09 Europe/Berlin] Announcement route - Path: /updated-msc-website/api/announcements
+[03-Sep-2025 17:27:09 Europe/Berlin] Announcement route - Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => announcements
+)
+
+[03-Sep-2025 17:27:09 Europe/Berlin] Announcement route - Endpoint: 
+[03-Sep-2025 17:27:09 Europe/Berlin] Announcement route - ID: null
+[03-Sep-2025 17:27:09 Europe/Berlin] Announcement route - Action: null
+[03-Sep-2025 17:27:23 Europe/Berlin] Request path: /updated-msc-website/api/announcements/28
+[03-Sep-2025 17:27:23 Europe/Berlin] Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => announcements
+    [3] => 28
+)
+
+[03-Sep-2025 17:27:23 Europe/Berlin] Original REQUEST_URI: /updated-msc-website/api/announcements/28?_method=PUT
+[03-Sep-2025 17:27:23 Europe/Berlin] Found API index, resource: announcements
+[03-Sep-2025 17:27:23 Europe/Berlin] Announcement route - Path: /updated-msc-website/api/announcements/28
+[03-Sep-2025 17:27:23 Europe/Berlin] Announcement route - Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => announcements
+    [3] => 28
+)
+
+[03-Sep-2025 17:27:23 Europe/Berlin] Announcement route - Endpoint: 28
+[03-Sep-2025 17:27:23 Europe/Berlin] Announcement route - ID: null
+[03-Sep-2025 17:27:23 Europe/Berlin] Announcement route - Action: null
+[03-Sep-2025 17:27:28 Europe/Berlin] Request path: /updated-msc-website/api/announcements
+[03-Sep-2025 17:27:28 Europe/Berlin] Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => announcements
+)
+
+[03-Sep-2025 17:27:28 Europe/Berlin] Original REQUEST_URI: /updated-msc-website/api/announcements?page=1&limit=10&include_archived=false
+[03-Sep-2025 17:27:28 Europe/Berlin] Found API index, resource: announcements
+[03-Sep-2025 17:27:28 Europe/Berlin] Announcement route - Path: /updated-msc-website/api/announcements
+[03-Sep-2025 17:27:28 Europe/Berlin] Announcement route - Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => announcements
+)
+
+[03-Sep-2025 17:27:28 Europe/Berlin] Announcement route - Endpoint: 
+[03-Sep-2025 17:27:28 Europe/Berlin] Announcement route - ID: null
+[03-Sep-2025 17:27:28 Europe/Berlin] Announcement route - Action: null
+[03-Sep-2025 17:28:07 Europe/Berlin] Request path: /updated-msc-website/api/announcements/24
+[03-Sep-2025 17:28:07 Europe/Berlin] Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => announcements
+    [3] => 24
+)
+
+[03-Sep-2025 17:28:07 Europe/Berlin] Original REQUEST_URI: /updated-msc-website/api/announcements/24?_method=PUT
+[03-Sep-2025 17:28:07 Europe/Berlin] Found API index, resource: announcements
+[03-Sep-2025 17:28:07 Europe/Berlin] Announcement route - Path: /updated-msc-website/api/announcements/24
+[03-Sep-2025 17:28:07 Europe/Berlin] Announcement route - Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => announcements
+    [3] => 24
+)
+
+[03-Sep-2025 17:28:07 Europe/Berlin] Announcement route - Endpoint: 24
+[03-Sep-2025 17:28:07 Europe/Berlin] Announcement route - ID: null
+[03-Sep-2025 17:28:07 Europe/Berlin] Announcement route - Action: null
+[03-Sep-2025 17:28:10 Europe/Berlin] Request path: /updated-msc-website/api/announcements
+[03-Sep-2025 17:28:10 Europe/Berlin] Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => announcements
+)
+
+[03-Sep-2025 17:28:10 Europe/Berlin] Original REQUEST_URI: /updated-msc-website/api/announcements?page=1&limit=10&include_archived=false
+[03-Sep-2025 17:28:10 Europe/Berlin] Found API index, resource: announcements
+[03-Sep-2025 17:28:10 Europe/Berlin] Announcement route - Path: /updated-msc-website/api/announcements
+[03-Sep-2025 17:28:10 Europe/Berlin] Announcement route - Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => announcements
+)
+
+[03-Sep-2025 17:28:10 Europe/Berlin] Announcement route - Endpoint: 
+[03-Sep-2025 17:28:10 Europe/Berlin] Announcement route - ID: null
+[03-Sep-2025 17:28:10 Europe/Berlin] Announcement route - Action: null
+[03-Sep-2025 17:31:17 Europe/Berlin] Request path: /updated-msc-website/api/announcements
+[03-Sep-2025 17:31:17 Europe/Berlin] Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => announcements
+)
+
+[03-Sep-2025 17:31:17 Europe/Berlin] Original REQUEST_URI: /updated-msc-website/api/announcements?page=1&limit=10&include_archived=false
+[03-Sep-2025 17:31:17 Europe/Berlin] Found API index, resource: announcements
+[03-Sep-2025 17:31:17 Europe/Berlin] Announcement route - Path: /updated-msc-website/api/announcements
+[03-Sep-2025 17:31:17 Europe/Berlin] Announcement route - Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => announcements
+)
+
+[03-Sep-2025 17:31:17 Europe/Berlin] Announcement route - Endpoint: 
+[03-Sep-2025 17:31:17 Europe/Berlin] Announcement route - ID: null
+[03-Sep-2025 17:31:17 Europe/Berlin] Announcement route - Action: null
+[03-Sep-2025 17:31:24 Europe/Berlin] Request path: /updated-msc-website/api/announcements/23
+[03-Sep-2025 17:31:24 Europe/Berlin] Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => announcements
+    [3] => 23
+)
+
+[03-Sep-2025 17:31:24 Europe/Berlin] Original REQUEST_URI: /updated-msc-website/api/announcements/23?_method=PUT
+[03-Sep-2025 17:31:24 Europe/Berlin] Found API index, resource: announcements
+[03-Sep-2025 17:31:24 Europe/Berlin] Announcement route - Path: /updated-msc-website/api/announcements/23
+[03-Sep-2025 17:31:24 Europe/Berlin] Announcement route - Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => announcements
+    [3] => 23
+)
+
+[03-Sep-2025 17:31:24 Europe/Berlin] Announcement route - Endpoint: 23
+[03-Sep-2025 17:31:24 Europe/Berlin] Announcement route - ID: null
+[03-Sep-2025 17:31:24 Europe/Berlin] Announcement route - Action: null
+[03-Sep-2025 17:31:26 Europe/Berlin] Request path: /updated-msc-website/api/announcements
+[03-Sep-2025 17:31:26 Europe/Berlin] Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => announcements
+)
+
+[03-Sep-2025 17:31:26 Europe/Berlin] Original REQUEST_URI: /updated-msc-website/api/announcements?page=1&limit=10&include_archived=false
+[03-Sep-2025 17:31:26 Europe/Berlin] Found API index, resource: announcements
+[03-Sep-2025 17:31:26 Europe/Berlin] Announcement route - Path: /updated-msc-website/api/announcements
+[03-Sep-2025 17:31:26 Europe/Berlin] Announcement route - Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => announcements
+)
+
+[03-Sep-2025 17:31:26 Europe/Berlin] Announcement route - Endpoint: 
+[03-Sep-2025 17:31:26 Europe/Berlin] Announcement route - ID: null
+[03-Sep-2025 17:31:26 Europe/Berlin] Announcement route - Action: null
+[03-Sep-2025 17:31:36 Europe/Berlin] Request path: /updated-msc-website/api/announcements
+[03-Sep-2025 17:31:36 Europe/Berlin] Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => announcements
+)
+
+[03-Sep-2025 17:31:36 Europe/Berlin] Original REQUEST_URI: /updated-msc-website/api/announcements?page=1&limit=10&include_archived=false
+[03-Sep-2025 17:31:36 Europe/Berlin] Found API index, resource: announcements
+[03-Sep-2025 17:31:36 Europe/Berlin] Announcement route - Path: /updated-msc-website/api/announcements
+[03-Sep-2025 17:31:36 Europe/Berlin] Announcement route - Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => announcements
+)
+
+[03-Sep-2025 17:31:36 Europe/Berlin] Announcement route - Endpoint: 
+[03-Sep-2025 17:31:36 Europe/Berlin] Announcement route - ID: null
+[03-Sep-2025 17:31:36 Europe/Berlin] Announcement route - Action: null
+[03-Sep-2025 17:31:42 Europe/Berlin] Request path: /updated-msc-website/api/announcements/24
+[03-Sep-2025 17:31:42 Europe/Berlin] Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => announcements
+    [3] => 24
+)
+
+[03-Sep-2025 17:31:42 Europe/Berlin] Original REQUEST_URI: /updated-msc-website/api/announcements/24?_method=PUT
+[03-Sep-2025 17:31:42 Europe/Berlin] Found API index, resource: announcements
+[03-Sep-2025 17:31:42 Europe/Berlin] Announcement route - Path: /updated-msc-website/api/announcements/24
+[03-Sep-2025 17:31:42 Europe/Berlin] Announcement route - Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => announcements
+    [3] => 24
+)
+
+[03-Sep-2025 17:31:42 Europe/Berlin] Announcement route - Endpoint: 24
+[03-Sep-2025 17:31:42 Europe/Berlin] Announcement route - ID: null
+[03-Sep-2025 17:31:42 Europe/Berlin] Announcement route - Action: null
+[03-Sep-2025 17:32:06 Europe/Berlin] Request path: /updated-msc-website/api/announcements
+[03-Sep-2025 17:32:06 Europe/Berlin] Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => announcements
+)
+
+[03-Sep-2025 17:32:06 Europe/Berlin] Original REQUEST_URI: /updated-msc-website/api/announcements?page=1&limit=10&include_archived=false
+[03-Sep-2025 17:32:06 Europe/Berlin] Found API index, resource: announcements
+[03-Sep-2025 17:32:06 Europe/Berlin] Announcement route - Path: /updated-msc-website/api/announcements
+[03-Sep-2025 17:32:06 Europe/Berlin] Announcement route - Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => announcements
+)
+
+[03-Sep-2025 17:32:06 Europe/Berlin] Announcement route - Endpoint: 
+[03-Sep-2025 17:32:06 Europe/Berlin] Announcement route - ID: null
+[03-Sep-2025 17:32:06 Europe/Berlin] Announcement route - Action: null
+[03-Sep-2025 17:35:10 Europe/Berlin] Request path: /updated-msc-website/api/announcements
+[03-Sep-2025 17:35:10 Europe/Berlin] Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => announcements
+)
+
+[03-Sep-2025 17:35:10 Europe/Berlin] Original REQUEST_URI: /updated-msc-website/api/announcements?page=1&limit=10&include_archived=false
+[03-Sep-2025 17:35:10 Europe/Berlin] Found API index, resource: announcements
+[03-Sep-2025 17:35:10 Europe/Berlin] Announcement route - Path: /updated-msc-website/api/announcements
+[03-Sep-2025 17:35:10 Europe/Berlin] Announcement route - Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => announcements
+)
+
+[03-Sep-2025 17:35:10 Europe/Berlin] Announcement route - Endpoint: 
+[03-Sep-2025 17:35:10 Europe/Berlin] Announcement route - ID: null
+[03-Sep-2025 17:35:10 Europe/Berlin] Announcement route - Action: null
+[03-Sep-2025 17:35:17 Europe/Berlin] Request path: /updated-msc-website/api/announcements/28
+[03-Sep-2025 17:35:17 Europe/Berlin] Request path: /updated-msc-website/api/announcements/28
+[03-Sep-2025 17:35:17 Europe/Berlin] Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => announcements
+    [3] => 28
+)
+
+[03-Sep-2025 17:35:17 Europe/Berlin] Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => announcements
+    [3] => 28
+)
+
+[03-Sep-2025 17:35:17 Europe/Berlin] Original REQUEST_URI: /updated-msc-website/api/announcements/28?_method=PUT
+[03-Sep-2025 17:35:17 Europe/Berlin] Original REQUEST_URI: /updated-msc-website/api/announcements/28?_method=PUT
+[03-Sep-2025 17:35:17 Europe/Berlin] Found API index, resource: announcements
+[03-Sep-2025 17:35:17 Europe/Berlin] Found API index, resource: announcements
+[03-Sep-2025 17:35:17 Europe/Berlin] Announcement route - Path: /updated-msc-website/api/announcements/28
+[03-Sep-2025 17:35:17 Europe/Berlin] Announcement route - Path: /updated-msc-website/api/announcements/28
+[03-Sep-2025 17:35:17 Europe/Berlin] Announcement route - Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => announcements
+    [3] => 28
+)
+
+[03-Sep-2025 17:35:17 Europe/Berlin] Announcement route - Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => announcements
+    [3] => 28
+)
+
+[03-Sep-2025 17:35:17 Europe/Berlin] Announcement route - Endpoint: 28
+[03-Sep-2025 17:35:17 Europe/Berlin] Announcement route - Endpoint: 28
+[03-Sep-2025 17:35:17 Europe/Berlin] Announcement route - ID: null
+[03-Sep-2025 17:35:17 Europe/Berlin] Announcement route - ID: null
+[03-Sep-2025 17:35:17 Europe/Berlin] Announcement route - Action: null
+[03-Sep-2025 17:35:17 Europe/Berlin] Announcement route - Action: null
+[03-Sep-2025 17:35:17 Europe/Berlin] Request path: /updated-msc-website/api/announcements
+[03-Sep-2025 17:35:17 Europe/Berlin] Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => announcements
+)
+
+[03-Sep-2025 17:35:17 Europe/Berlin] Original REQUEST_URI: /updated-msc-website/api/announcements?page=1&limit=10&include_archived=false
+[03-Sep-2025 17:35:17 Europe/Berlin] Found API index, resource: announcements
+[03-Sep-2025 17:35:17 Europe/Berlin] Announcement route - Path: /updated-msc-website/api/announcements
+[03-Sep-2025 17:35:17 Europe/Berlin] Announcement route - Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => announcements
+)
+
+[03-Sep-2025 17:35:17 Europe/Berlin] Announcement route - Endpoint: 
+[03-Sep-2025 17:35:17 Europe/Berlin] Announcement route - ID: null
+[03-Sep-2025 17:35:17 Europe/Berlin] Announcement route - Action: null
+[03-Sep-2025 17:35:41 Europe/Berlin] Request path: /updated-msc-website/api/announcements
+[03-Sep-2025 17:35:41 Europe/Berlin] Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => announcements
+)
+
+[03-Sep-2025 17:35:41 Europe/Berlin] Original REQUEST_URI: /updated-msc-website/api/announcements
+[03-Sep-2025 17:35:41 Europe/Berlin] Found API index, resource: announcements
+[03-Sep-2025 17:35:41 Europe/Berlin] Announcement route - Path: /updated-msc-website/api/announcements
+[03-Sep-2025 17:35:41 Europe/Berlin] Announcement route - Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => announcements
+)
+
+[03-Sep-2025 17:35:41 Europe/Berlin] Announcement route - Endpoint: 
+[03-Sep-2025 17:35:41 Europe/Berlin] Announcement route - ID: null
+[03-Sep-2025 17:35:41 Europe/Berlin] Announcement route - Action: null
+[03-Sep-2025 17:35:41 Europe/Berlin] PHP Notice:  session_start(): Ignoring session_start() because a session is already active in C:\xampp\htdocs\updated-msc-website\api\middleware\AuthMiddleware.php on line 56
+[03-Sep-2025 17:35:41 Europe/Berlin] Request path: /updated-msc-website/api/announcements
+[03-Sep-2025 17:35:41 Europe/Berlin] Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => announcements
+)
+
+[03-Sep-2025 17:35:41 Europe/Berlin] Original REQUEST_URI: /updated-msc-website/api/announcements?page=1&limit=10&include_archived=false
+[03-Sep-2025 17:35:41 Europe/Berlin] Found API index, resource: announcements
+[03-Sep-2025 17:35:41 Europe/Berlin] Announcement route - Path: /updated-msc-website/api/announcements
+[03-Sep-2025 17:35:41 Europe/Berlin] Announcement route - Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => announcements
+)
+
+[03-Sep-2025 17:35:41 Europe/Berlin] Announcement route - Endpoint: 
+[03-Sep-2025 17:35:41 Europe/Berlin] Announcement route - ID: null
+[03-Sep-2025 17:35:41 Europe/Berlin] Announcement route - Action: null
+[03-Sep-2025 17:39:45 Europe/Berlin] Request path: /updated-msc-website/api/
+[03-Sep-2025 17:39:45 Europe/Berlin] Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+)
+
+[03-Sep-2025 17:39:45 Europe/Berlin] Original REQUEST_URI: /updated-msc-website/api/
+[03-Sep-2025 17:39:45 Europe/Berlin] Found API index, resource: 
+[03-Sep-2025 17:39:45 Europe/Berlin] Request path: /updated-msc-website/api/
+[03-Sep-2025 17:39:45 Europe/Berlin] Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+)
+
+[03-Sep-2025 17:39:45 Europe/Berlin] Original REQUEST_URI: /updated-msc-website/api/
+[03-Sep-2025 17:39:45 Europe/Berlin] Found API index, resource: 
+[03-Sep-2025 17:39:45 Europe/Berlin] Request path: /updated-msc-website/api/
+[03-Sep-2025 17:39:45 Europe/Berlin] Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+)
+
+[03-Sep-2025 17:39:45 Europe/Berlin] Original REQUEST_URI: /updated-msc-website/api/
+[03-Sep-2025 17:39:45 Europe/Berlin] Found API index, resource: 
+[03-Sep-2025 17:40:05 Europe/Berlin] Request path: /updated-msc-website/api/announcements
+[03-Sep-2025 17:40:05 Europe/Berlin] Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => announcements
+)
+
+[03-Sep-2025 17:40:05 Europe/Berlin] Original REQUEST_URI: /updated-msc-website/api/announcements?page=1&limit=10&include_archived=true
+[03-Sep-2025 17:40:05 Europe/Berlin] Found API index, resource: announcements
+[03-Sep-2025 17:40:05 Europe/Berlin] Announcement route - Path: /updated-msc-website/api/announcements
+[03-Sep-2025 17:40:05 Europe/Berlin] Announcement route - Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => announcements
+)
+
+[03-Sep-2025 17:40:05 Europe/Berlin] Announcement route - Endpoint: 
+[03-Sep-2025 17:40:05 Europe/Berlin] Announcement route - ID: null
+[03-Sep-2025 17:40:05 Europe/Berlin] Announcement route - Action: null
+[03-Sep-2025 17:40:26 Europe/Berlin] Request path: /updated-msc-website/api/announcements/23
+[03-Sep-2025 17:40:26 Europe/Berlin] Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => announcements
+    [3] => 23
+)
+
+[03-Sep-2025 17:40:26 Europe/Berlin] Original REQUEST_URI: /updated-msc-website/api/announcements/23
+[03-Sep-2025 17:40:26 Europe/Berlin] Found API index, resource: announcements
+[03-Sep-2025 17:40:26 Europe/Berlin] Announcement route - Path: /updated-msc-website/api/announcements/23
+[03-Sep-2025 17:40:26 Europe/Berlin] Announcement route - Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => announcements
+    [3] => 23
+)
+
+[03-Sep-2025 17:40:26 Europe/Berlin] Announcement route - Endpoint: 23
+[03-Sep-2025 17:40:26 Europe/Berlin] Announcement route - ID: null
+[03-Sep-2025 17:40:26 Europe/Berlin] Announcement route - Action: null
+[03-Sep-2025 17:40:26 Europe/Berlin] Request path: /updated-msc-website/api/announcements
+[03-Sep-2025 17:40:26 Europe/Berlin] Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => announcements
+)
+
+[03-Sep-2025 17:40:26 Europe/Berlin] Original REQUEST_URI: /updated-msc-website/api/announcements?page=1&limit=10&include_archived=false
+[03-Sep-2025 17:40:26 Europe/Berlin] Found API index, resource: announcements
+[03-Sep-2025 17:40:26 Europe/Berlin] Announcement route - Path: /updated-msc-website/api/announcements
+[03-Sep-2025 17:40:26 Europe/Berlin] Announcement route - Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => announcements
+)
+
+[03-Sep-2025 17:40:26 Europe/Berlin] Announcement route - Endpoint: 
+[03-Sep-2025 17:40:26 Europe/Berlin] Announcement route - ID: null
+[03-Sep-2025 17:40:26 Europe/Berlin] Announcement route - Action: null
+[03-Sep-2025 17:40:31 Europe/Berlin] Request path: /updated-msc-website/api/announcements/24
+[03-Sep-2025 17:40:31 Europe/Berlin] Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => announcements
+    [3] => 24
+)
+
+[03-Sep-2025 17:40:31 Europe/Berlin] Original REQUEST_URI: /updated-msc-website/api/announcements/24
+[03-Sep-2025 17:40:31 Europe/Berlin] Found API index, resource: announcements
+[03-Sep-2025 17:40:31 Europe/Berlin] Announcement route - Path: /updated-msc-website/api/announcements/24
+[03-Sep-2025 17:40:31 Europe/Berlin] Announcement route - Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => announcements
+    [3] => 24
+)
+
+[03-Sep-2025 17:40:31 Europe/Berlin] Announcement route - Endpoint: 24
+[03-Sep-2025 17:40:31 Europe/Berlin] Announcement route - ID: null
+[03-Sep-2025 17:40:31 Europe/Berlin] Announcement route - Action: null
+[03-Sep-2025 17:40:31 Europe/Berlin] Request path: /updated-msc-website/api/announcements
+[03-Sep-2025 17:40:31 Europe/Berlin] Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => announcements
+)
+
+[03-Sep-2025 17:40:31 Europe/Berlin] Original REQUEST_URI: /updated-msc-website/api/announcements?page=1&limit=10&include_archived=false
+[03-Sep-2025 17:40:31 Europe/Berlin] Found API index, resource: announcements
+[03-Sep-2025 17:40:31 Europe/Berlin] Announcement route - Path: /updated-msc-website/api/announcements
+[03-Sep-2025 17:40:31 Europe/Berlin] Announcement route - Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => announcements
+)
+
+[03-Sep-2025 17:40:31 Europe/Berlin] Announcement route - Endpoint: 
+[03-Sep-2025 17:40:31 Europe/Berlin] Announcement route - ID: null
+[03-Sep-2025 17:40:31 Europe/Berlin] Announcement route - Action: null
+[03-Sep-2025 17:55:54 Europe/Berlin] Request path: /updated-msc-website/api/announcements
+[03-Sep-2025 17:55:54 Europe/Berlin] Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => announcements
+)
+
+[03-Sep-2025 17:55:54 Europe/Berlin] Original REQUEST_URI: /updated-msc-website/api/announcements?page=1&limit=10&include_archived=false
+[03-Sep-2025 17:55:54 Europe/Berlin] Found API index, resource: announcements
+[03-Sep-2025 17:55:54 Europe/Berlin] Announcement route - Path: /updated-msc-website/api/announcements
+[03-Sep-2025 17:55:54 Europe/Berlin] Announcement route - Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => announcements
+)
+
+[03-Sep-2025 17:55:54 Europe/Berlin] Announcement route - Endpoint: 
+[03-Sep-2025 17:55:54 Europe/Berlin] Announcement route - ID: null
+[03-Sep-2025 17:55:54 Europe/Berlin] Announcement route - Action: null
+[03-Sep-2025 17:56:18 Europe/Berlin] Request path: /updated-msc-website/api/announcements
+[03-Sep-2025 17:56:18 Europe/Berlin] Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => announcements
+)
+
+[03-Sep-2025 17:56:18 Europe/Berlin] Original REQUEST_URI: /updated-msc-website/api/announcements?page=1&limit=10&include_archived=false
+[03-Sep-2025 17:56:18 Europe/Berlin] Found API index, resource: announcements
+[03-Sep-2025 17:56:18 Europe/Berlin] Announcement route - Path: /updated-msc-website/api/announcements
+[03-Sep-2025 17:56:18 Europe/Berlin] Announcement route - Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => announcements
+)
+
+[03-Sep-2025 17:56:18 Europe/Berlin] Announcement route - Endpoint: 
+[03-Sep-2025 17:56:18 Europe/Berlin] Announcement route - ID: null
+[03-Sep-2025 17:56:18 Europe/Berlin] Announcement route - Action: null
+[03-Sep-2025 18:01:39 Europe/Berlin] Request path: /updated-msc-website/api/announcements
+[03-Sep-2025 18:01:39 Europe/Berlin] Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => announcements
+)
+
+[03-Sep-2025 18:01:39 Europe/Berlin] Original REQUEST_URI: /updated-msc-website/api/announcements?page=1&limit=10&include_archived=true
+[03-Sep-2025 18:01:39 Europe/Berlin] Found API index, resource: announcements
+[03-Sep-2025 18:01:39 Europe/Berlin] Announcement route - Path: /updated-msc-website/api/announcements
+[03-Sep-2025 18:01:39 Europe/Berlin] Announcement route - Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => announcements
+)
+
+[03-Sep-2025 18:01:39 Europe/Berlin] Announcement route - Endpoint: 
+[03-Sep-2025 18:01:39 Europe/Berlin] Announcement route - ID: null
+[03-Sep-2025 18:01:39 Europe/Berlin] Announcement route - Action: null
+[03-Sep-2025 18:02:15 Europe/Berlin] Request path: /updated-msc-website/api/announcements
+[03-Sep-2025 18:02:15 Europe/Berlin] Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => announcements
+)
+
+[03-Sep-2025 18:02:15 Europe/Berlin] Original REQUEST_URI: /updated-msc-website/api/announcements?page=1&limit=10&include_archived=true
+[03-Sep-2025 18:02:15 Europe/Berlin] Found API index, resource: announcements
+[03-Sep-2025 18:02:15 Europe/Berlin] Announcement route - Path: /updated-msc-website/api/announcements
+[03-Sep-2025 18:02:15 Europe/Berlin] Announcement route - Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => announcements
+)
+
+[03-Sep-2025 18:02:15 Europe/Berlin] Announcement route - Endpoint: 
+[03-Sep-2025 18:02:15 Europe/Berlin] Announcement route - ID: null
+[03-Sep-2025 18:02:15 Europe/Berlin] Announcement route - Action: null
+[03-Sep-2025 18:06:41 Europe/Berlin] Request path: /updated-msc-website/api/announcements
+[03-Sep-2025 18:06:41 Europe/Berlin] Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => announcements
+)
+
+[03-Sep-2025 18:06:41 Europe/Berlin] Original REQUEST_URI: /updated-msc-website/api/announcements?page=1&limit=10&include_archived=true
+[03-Sep-2025 18:06:41 Europe/Berlin] Found API index, resource: announcements
+[03-Sep-2025 18:06:41 Europe/Berlin] Announcement route - Path: /updated-msc-website/api/announcements
+[03-Sep-2025 18:06:41 Europe/Berlin] Announcement route - Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => announcements
+)
+
+[03-Sep-2025 18:06:41 Europe/Berlin] Announcement route - Endpoint: 
+[03-Sep-2025 18:06:41 Europe/Berlin] Announcement route - ID: null
+[03-Sep-2025 18:06:41 Europe/Berlin] Announcement route - Action: null
+[03-Sep-2025 18:09:36 Europe/Berlin] Request path: /updated-msc-website/api/announcements
+[03-Sep-2025 18:09:36 Europe/Berlin] Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => announcements
+)
+
+[03-Sep-2025 18:09:36 Europe/Berlin] Original REQUEST_URI: /updated-msc-website/api/announcements?page=1&limit=10&include_archived=true
+[03-Sep-2025 18:09:36 Europe/Berlin] Found API index, resource: announcements
+[03-Sep-2025 18:09:36 Europe/Berlin] Announcement route - Path: /updated-msc-website/api/announcements
+[03-Sep-2025 18:09:36 Europe/Berlin] Announcement route - Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => announcements
+)
+
+[03-Sep-2025 18:09:36 Europe/Berlin] Announcement route - Endpoint: 
+[03-Sep-2025 18:09:36 Europe/Berlin] Announcement route - ID: null
+[03-Sep-2025 18:09:36 Europe/Berlin] Announcement route - Action: null
+[03-Sep-2025 18:11:25 Europe/Berlin] Request path: /updated-msc-website/api/announcements/2/unarchive
+[03-Sep-2025 18:11:25 Europe/Berlin] Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => announcements
+    [3] => 2
+    [4] => unarchive
+)
+
+[03-Sep-2025 18:11:25 Europe/Berlin] Original REQUEST_URI: /updated-msc-website/api/announcements/2/unarchive
+[03-Sep-2025 18:11:25 Europe/Berlin] Found API index, resource: announcements
+[03-Sep-2025 18:11:25 Europe/Berlin] Announcement route - Path: /updated-msc-website/api/announcements/2/unarchive
+[03-Sep-2025 18:11:25 Europe/Berlin] Announcement route - Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => announcements
+    [3] => 2
+    [4] => unarchive
+)
+
+[03-Sep-2025 18:11:25 Europe/Berlin] Announcement route - Endpoint: 2
+[03-Sep-2025 18:11:25 Europe/Berlin] Announcement route - ID: unarchive
+[03-Sep-2025 18:11:25 Europe/Berlin] Announcement route - Action: null
+[03-Sep-2025 18:12:08 Europe/Berlin] Request path: /updated-msc-website/api/announcements/2/unarchive
+[03-Sep-2025 18:12:08 Europe/Berlin] Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => announcements
+    [3] => 2
+    [4] => unarchive
+)
+
+[03-Sep-2025 18:12:08 Europe/Berlin] Original REQUEST_URI: /updated-msc-website/api/announcements/2/unarchive
+[03-Sep-2025 18:12:08 Europe/Berlin] Found API index, resource: announcements
+[03-Sep-2025 18:12:08 Europe/Berlin] Announcement route - Path: /updated-msc-website/api/announcements/2/unarchive
+[03-Sep-2025 18:12:08 Europe/Berlin] Announcement route - Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => announcements
+    [3] => 2
+    [4] => unarchive
+)
+
+[03-Sep-2025 18:12:08 Europe/Berlin] Announcement route - Endpoint: 2
+[03-Sep-2025 18:12:08 Europe/Berlin] Announcement route - ID: unarchive
+[03-Sep-2025 18:12:08 Europe/Berlin] Announcement route - Action: null
+[03-Sep-2025 18:12:45 Europe/Berlin] Request path: /updated-msc-website/api/
+[03-Sep-2025 18:12:45 Europe/Berlin] Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+)
+
+[03-Sep-2025 18:12:45 Europe/Berlin] Original REQUEST_URI: /updated-msc-website/api/
+[03-Sep-2025 18:12:45 Europe/Berlin] Found API index, resource: 
+[03-Sep-2025 18:12:45 Europe/Berlin] Request path: /updated-msc-website/api/
+[03-Sep-2025 18:12:45 Europe/Berlin] Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+)
+
+[03-Sep-2025 18:12:45 Europe/Berlin] Original REQUEST_URI: /updated-msc-website/api/
+[03-Sep-2025 18:12:45 Europe/Berlin] Found API index, resource: 
+[03-Sep-2025 18:12:45 Europe/Berlin] Request path: /updated-msc-website/api/
+[03-Sep-2025 18:12:45 Europe/Berlin] Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+)
+
+[03-Sep-2025 18:12:45 Europe/Berlin] Original REQUEST_URI: /updated-msc-website/api/
+[03-Sep-2025 18:12:45 Europe/Berlin] Found API index, resource: 
+[03-Sep-2025 18:12:52 Europe/Berlin] Request path: /updated-msc-website/api/announcements/2/unarchive
+[03-Sep-2025 18:12:52 Europe/Berlin] Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => announcements
+    [3] => 2
+    [4] => unarchive
+)
+
+[03-Sep-2025 18:12:52 Europe/Berlin] Original REQUEST_URI: /updated-msc-website/api/announcements/2/unarchive
+[03-Sep-2025 18:12:52 Europe/Berlin] Found API index, resource: announcements
+[03-Sep-2025 18:12:52 Europe/Berlin] Announcement route - Path: /updated-msc-website/api/announcements/2/unarchive
+[03-Sep-2025 18:12:52 Europe/Berlin] Announcement route - Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => announcements
+    [3] => 2
+    [4] => unarchive
+)
+
+[03-Sep-2025 18:12:52 Europe/Berlin] Announcement route - Endpoint: 2
+[03-Sep-2025 18:12:52 Europe/Berlin] Announcement route - ID: unarchive
+[03-Sep-2025 18:12:52 Europe/Berlin] Announcement route - Action: null
+[03-Sep-2025 18:12:59 Europe/Berlin] Request path: /updated-msc-website/api/announcements
+[03-Sep-2025 18:12:59 Europe/Berlin] Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => announcements
+)
+
+[03-Sep-2025 18:12:59 Europe/Berlin] Original REQUEST_URI: /updated-msc-website/api/announcements?page=1&limit=10&include_archived=true
+[03-Sep-2025 18:12:59 Europe/Berlin] Found API index, resource: announcements
+[03-Sep-2025 18:12:59 Europe/Berlin] Announcement route - Path: /updated-msc-website/api/announcements
+[03-Sep-2025 18:12:59 Europe/Berlin] Announcement route - Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => announcements
+)
+
+[03-Sep-2025 18:12:59 Europe/Berlin] Announcement route - Endpoint: 
+[03-Sep-2025 18:12:59 Europe/Berlin] Announcement route - ID: null
+[03-Sep-2025 18:12:59 Europe/Berlin] Announcement route - Action: null
+[03-Sep-2025 18:13:06 Europe/Berlin] Request path: /updated-msc-website/api/announcements/2/archive
+[03-Sep-2025 18:13:06 Europe/Berlin] Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => announcements
+    [3] => 2
+    [4] => archive
+)
+
+[03-Sep-2025 18:13:06 Europe/Berlin] Original REQUEST_URI: /updated-msc-website/api/announcements/2/archive?_method=PUT
+[03-Sep-2025 18:13:06 Europe/Berlin] Found API index, resource: announcements
+[03-Sep-2025 18:13:06 Europe/Berlin] Announcement route - Path: /updated-msc-website/api/announcements/2/archive
+[03-Sep-2025 18:13:06 Europe/Berlin] Announcement route - Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => announcements
+    [3] => 2
+    [4] => archive
+)
+
+[03-Sep-2025 18:13:06 Europe/Berlin] Announcement route - Endpoint: 2
+[03-Sep-2025 18:13:06 Europe/Berlin] Announcement route - ID: archive
+[03-Sep-2025 18:13:06 Europe/Berlin] Announcement route - Action: null
+[03-Sep-2025 18:13:06 Europe/Berlin] Request path: /updated-msc-website/api/announcements
+[03-Sep-2025 18:13:06 Europe/Berlin] Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => announcements
+)
+
+[03-Sep-2025 18:13:06 Europe/Berlin] Original REQUEST_URI: /updated-msc-website/api/announcements?page=1&limit=10&include_archived=true
+[03-Sep-2025 18:13:06 Europe/Berlin] Found API index, resource: announcements
+[03-Sep-2025 18:13:06 Europe/Berlin] Announcement route - Path: /updated-msc-website/api/announcements
+[03-Sep-2025 18:13:06 Europe/Berlin] Announcement route - Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => announcements
+)
+
+[03-Sep-2025 18:13:06 Europe/Berlin] Announcement route - Endpoint: 
+[03-Sep-2025 18:13:06 Europe/Berlin] Announcement route - ID: null
+[03-Sep-2025 18:13:06 Europe/Berlin] Announcement route - Action: null
+[03-Sep-2025 18:13:09 Europe/Berlin] Request path: /updated-msc-website/api/announcements/3/archive
+[03-Sep-2025 18:13:09 Europe/Berlin] Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => announcements
+    [3] => 3
+    [4] => archive
+)
+
+[03-Sep-2025 18:13:09 Europe/Berlin] Original REQUEST_URI: /updated-msc-website/api/announcements/3/archive?_method=PUT
+[03-Sep-2025 18:13:09 Europe/Berlin] Found API index, resource: announcements
+[03-Sep-2025 18:13:09 Europe/Berlin] Announcement route - Path: /updated-msc-website/api/announcements/3/archive
+[03-Sep-2025 18:13:09 Europe/Berlin] Announcement route - Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => announcements
+    [3] => 3
+    [4] => archive
+)
+
+[03-Sep-2025 18:13:09 Europe/Berlin] Announcement route - Endpoint: 3
+[03-Sep-2025 18:13:09 Europe/Berlin] Announcement route - ID: archive
+[03-Sep-2025 18:13:09 Europe/Berlin] Announcement route - Action: null
+[03-Sep-2025 18:13:09 Europe/Berlin] Request path: /updated-msc-website/api/announcements
+[03-Sep-2025 18:13:09 Europe/Berlin] Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => announcements
+)
+
+[03-Sep-2025 18:13:09 Europe/Berlin] Original REQUEST_URI: /updated-msc-website/api/announcements?page=1&limit=10&include_archived=true
+[03-Sep-2025 18:13:09 Europe/Berlin] Found API index, resource: announcements
+[03-Sep-2025 18:13:09 Europe/Berlin] Announcement route - Path: /updated-msc-website/api/announcements
+[03-Sep-2025 18:13:09 Europe/Berlin] Announcement route - Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => announcements
+)
+
+[03-Sep-2025 18:13:09 Europe/Berlin] Announcement route - Endpoint: 
+[03-Sep-2025 18:13:09 Europe/Berlin] Announcement route - ID: null
+[03-Sep-2025 18:13:09 Europe/Berlin] Announcement route - Action: null
+[03-Sep-2025 18:13:10 Europe/Berlin] Request path: /updated-msc-website/api/announcements
+[03-Sep-2025 18:13:10 Europe/Berlin] Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => announcements
+)
+
+[03-Sep-2025 18:13:10 Europe/Berlin] Original REQUEST_URI: /updated-msc-website/api/announcements?page=1&limit=10&include_archived=true
+[03-Sep-2025 18:13:10 Europe/Berlin] Found API index, resource: announcements
+[03-Sep-2025 18:13:10 Europe/Berlin] Announcement route - Path: /updated-msc-website/api/announcements
+[03-Sep-2025 18:13:10 Europe/Berlin] Announcement route - Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => announcements
+)
+
+[03-Sep-2025 18:13:10 Europe/Berlin] Announcement route - Endpoint: 
+[03-Sep-2025 18:13:10 Europe/Berlin] Announcement route - ID: null
+[03-Sep-2025 18:13:10 Europe/Berlin] Announcement route - Action: null
+[03-Sep-2025 18:13:48 Europe/Berlin] Request path: /updated-msc-website/api/announcements/2/archive
+[03-Sep-2025 18:13:48 Europe/Berlin] Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => announcements
+    [3] => 2
+    [4] => archive
+)
+
+[03-Sep-2025 18:13:48 Europe/Berlin] Original REQUEST_URI: /updated-msc-website/api/announcements/2/archive?_method=PUT
+[03-Sep-2025 18:13:48 Europe/Berlin] Found API index, resource: announcements
+[03-Sep-2025 18:13:48 Europe/Berlin] Announcement route - Path: /updated-msc-website/api/announcements/2/archive
+[03-Sep-2025 18:13:48 Europe/Berlin] Announcement route - Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => announcements
+    [3] => 2
+    [4] => archive
+)
+
+[03-Sep-2025 18:13:48 Europe/Berlin] Announcement route - Endpoint: 2
+[03-Sep-2025 18:13:48 Europe/Berlin] Announcement route - ID: archive
+[03-Sep-2025 18:13:48 Europe/Berlin] Announcement route - Action: null
+[03-Sep-2025 18:13:48 Europe/Berlin] Request path: /updated-msc-website/api/announcements
+[03-Sep-2025 18:13:48 Europe/Berlin] Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => announcements
+)
+
+[03-Sep-2025 18:13:48 Europe/Berlin] Original REQUEST_URI: /updated-msc-website/api/announcements?page=1&limit=10&include_archived=true
+[03-Sep-2025 18:13:48 Europe/Berlin] Found API index, resource: announcements
+[03-Sep-2025 18:13:48 Europe/Berlin] Announcement route - Path: /updated-msc-website/api/announcements
+[03-Sep-2025 18:13:48 Europe/Berlin] Announcement route - Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => announcements
+)
+
+[03-Sep-2025 18:13:48 Europe/Berlin] Announcement route - Endpoint: 
+[03-Sep-2025 18:13:48 Europe/Berlin] Announcement route - ID: null
+[03-Sep-2025 18:13:48 Europe/Berlin] Announcement route - Action: null
+[03-Sep-2025 18:15:19 Europe/Berlin] Request path: /updated-msc-website/api/announcements/2/archive
+[03-Sep-2025 18:15:19 Europe/Berlin] Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => announcements
+    [3] => 2
+    [4] => archive
+)
+
+[03-Sep-2025 18:15:19 Europe/Berlin] Original REQUEST_URI: /updated-msc-website/api/announcements/2/archive?_method=PUT
+[03-Sep-2025 18:15:19 Europe/Berlin] Found API index, resource: announcements
+[03-Sep-2025 18:15:19 Europe/Berlin] Announcement route - Path: /updated-msc-website/api/announcements/2/archive
+[03-Sep-2025 18:15:19 Europe/Berlin] Announcement route - Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => announcements
+    [3] => 2
+    [4] => archive
+)
+
+[03-Sep-2025 18:15:19 Europe/Berlin] Announcement route - Endpoint: 2
+[03-Sep-2025 18:15:19 Europe/Berlin] Announcement route - ID: archive
+[03-Sep-2025 18:15:19 Europe/Berlin] Announcement route - Action: null
+[03-Sep-2025 18:15:56 Europe/Berlin] Request path: /updated-msc-website/api/announcements/2/archive
+[03-Sep-2025 18:15:56 Europe/Berlin] Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => announcements
+    [3] => 2
+    [4] => archive
+)
+
+[03-Sep-2025 18:15:56 Europe/Berlin] Original REQUEST_URI: /updated-msc-website/api/announcements/2/archive?_method=PUT
+[03-Sep-2025 18:15:56 Europe/Berlin] Found API index, resource: announcements
+[03-Sep-2025 18:15:56 Europe/Berlin] Announcement route - Path: /updated-msc-website/api/announcements/2/archive
+[03-Sep-2025 18:15:56 Europe/Berlin] Announcement route - Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => announcements
+    [3] => 2
+    [4] => archive
+)
+
+[03-Sep-2025 18:15:56 Europe/Berlin] Announcement route - Endpoint: 2
+[03-Sep-2025 18:15:56 Europe/Berlin] Announcement route - ID: archive
+[03-Sep-2025 18:15:56 Europe/Berlin] Announcement route - Action: null
+[03-Sep-2025 18:15:56 Europe/Berlin] Request path: /updated-msc-website/api/announcements
+[03-Sep-2025 18:15:56 Europe/Berlin] Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => announcements
+)
+
+[03-Sep-2025 18:15:56 Europe/Berlin] Original REQUEST_URI: /updated-msc-website/api/announcements?page=1&limit=10&include_archived=true
+[03-Sep-2025 18:15:56 Europe/Berlin] Found API index, resource: announcements
+[03-Sep-2025 18:15:56 Europe/Berlin] Announcement route - Path: /updated-msc-website/api/announcements
+[03-Sep-2025 18:15:56 Europe/Berlin] Announcement route - Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => announcements
+)
+
+[03-Sep-2025 18:15:56 Europe/Berlin] Announcement route - Endpoint: 
+[03-Sep-2025 18:15:56 Europe/Berlin] Announcement route - ID: null
+[03-Sep-2025 18:15:56 Europe/Berlin] Announcement route - Action: null
+[03-Sep-2025 18:16:04 Europe/Berlin] Request path: /updated-msc-website/api/announcements
+[03-Sep-2025 18:16:04 Europe/Berlin] Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => announcements
+)
+
+[03-Sep-2025 18:16:04 Europe/Berlin] Original REQUEST_URI: /updated-msc-website/api/announcements?page=1&limit=10&include_archived=true
+[03-Sep-2025 18:16:04 Europe/Berlin] Found API index, resource: announcements
+[03-Sep-2025 18:16:04 Europe/Berlin] Announcement route - Path: /updated-msc-website/api/announcements
+[03-Sep-2025 18:16:04 Europe/Berlin] Announcement route - Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => announcements
+)
+
+[03-Sep-2025 18:16:04 Europe/Berlin] Announcement route - Endpoint: 
+[03-Sep-2025 18:16:04 Europe/Berlin] Announcement route - ID: null
+[03-Sep-2025 18:16:04 Europe/Berlin] Announcement route - Action: null
+[03-Sep-2025 18:16:10 Europe/Berlin] Request path: /updated-msc-website/api/announcements/2/archive
+[03-Sep-2025 18:16:10 Europe/Berlin] Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => announcements
+    [3] => 2
+    [4] => archive
+)
+
+[03-Sep-2025 18:16:10 Europe/Berlin] Original REQUEST_URI: /updated-msc-website/api/announcements/2/archive
+[03-Sep-2025 18:16:10 Europe/Berlin] Found API index, resource: announcements
+[03-Sep-2025 18:16:10 Europe/Berlin] Announcement route - Path: /updated-msc-website/api/announcements/2/archive
+[03-Sep-2025 18:16:10 Europe/Berlin] Announcement route - Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => announcements
+    [3] => 2
+    [4] => archive
+)
+
+[03-Sep-2025 18:16:10 Europe/Berlin] Announcement route - Endpoint: 2
+[03-Sep-2025 18:16:10 Europe/Berlin] Announcement route - ID: archive
+[03-Sep-2025 18:16:10 Europe/Berlin] Announcement route - Action: null
+[03-Sep-2025 18:16:26 Europe/Berlin] Request path: /updated-msc-website/api/
+[03-Sep-2025 18:16:26 Europe/Berlin] Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+)
+
+[03-Sep-2025 18:16:26 Europe/Berlin] Original REQUEST_URI: /updated-msc-website/api/
+[03-Sep-2025 18:16:26 Europe/Berlin] Found API index, resource: 
+[03-Sep-2025 18:16:26 Europe/Berlin] Request path: /updated-msc-website/api/
+[03-Sep-2025 18:16:26 Europe/Berlin] Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+)
+
+[03-Sep-2025 18:16:26 Europe/Berlin] Original REQUEST_URI: /updated-msc-website/api/
+[03-Sep-2025 18:16:26 Europe/Berlin] Found API index, resource: 
+[03-Sep-2025 18:16:27 Europe/Berlin] Request path: /updated-msc-website/api/
+[03-Sep-2025 18:16:27 Europe/Berlin] Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+)
+
+[03-Sep-2025 18:16:27 Europe/Berlin] Original REQUEST_URI: /updated-msc-website/api/
+[03-Sep-2025 18:16:27 Europe/Berlin] Found API index, resource: 
+[03-Sep-2025 18:16:41 Europe/Berlin] Request path: /updated-msc-website/api/announcements/2/archive
+[03-Sep-2025 18:16:41 Europe/Berlin] Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => announcements
+    [3] => 2
+    [4] => archive
+)
+
+[03-Sep-2025 18:16:41 Europe/Berlin] Original REQUEST_URI: /updated-msc-website/api/announcements/2/archive
+[03-Sep-2025 18:16:41 Europe/Berlin] Found API index, resource: announcements
+[03-Sep-2025 18:16:41 Europe/Berlin] Announcement route - Path: /updated-msc-website/api/announcements/2/archive
+[03-Sep-2025 18:16:41 Europe/Berlin] Announcement route - Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => announcements
+    [3] => 2
+    [4] => archive
+)
+
+[03-Sep-2025 18:16:41 Europe/Berlin] Announcement route - Endpoint: 2
+[03-Sep-2025 18:16:41 Europe/Berlin] Announcement route - ID: archive
+[03-Sep-2025 18:16:41 Europe/Berlin] Announcement route - Action: null
+[03-Sep-2025 18:16:45 Europe/Berlin] Request path: /updated-msc-website/api/announcements
+[03-Sep-2025 18:16:45 Europe/Berlin] Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => announcements
+)
+
+[03-Sep-2025 18:16:45 Europe/Berlin] Original REQUEST_URI: /updated-msc-website/api/announcements?page=1&limit=10&include_archived=true
+[03-Sep-2025 18:16:45 Europe/Berlin] Found API index, resource: announcements
+[03-Sep-2025 18:16:45 Europe/Berlin] Announcement route - Path: /updated-msc-website/api/announcements
+[03-Sep-2025 18:16:45 Europe/Berlin] Announcement route - Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => announcements
+)
+
+[03-Sep-2025 18:16:45 Europe/Berlin] Announcement route - Endpoint: 
+[03-Sep-2025 18:16:45 Europe/Berlin] Announcement route - ID: null
+[03-Sep-2025 18:16:45 Europe/Berlin] Announcement route - Action: null
+[03-Sep-2025 18:17:03 Europe/Berlin] Request path: /updated-msc-website/api/announcements/2/archive
+[03-Sep-2025 18:17:03 Europe/Berlin] Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => announcements
+    [3] => 2
+    [4] => archive
+)
+
+[03-Sep-2025 18:17:03 Europe/Berlin] Original REQUEST_URI: /updated-msc-website/api/announcements/2/archive?_method=PUT
+[03-Sep-2025 18:17:03 Europe/Berlin] Found API index, resource: announcements
+[03-Sep-2025 18:17:03 Europe/Berlin] Announcement route - Path: /updated-msc-website/api/announcements/2/archive
+[03-Sep-2025 18:17:03 Europe/Berlin] Announcement route - Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => announcements
+    [3] => 2
+    [4] => archive
+)
+
+[03-Sep-2025 18:17:03 Europe/Berlin] Announcement route - Endpoint: 2
+[03-Sep-2025 18:17:03 Europe/Berlin] Announcement route - ID: archive
+[03-Sep-2025 18:17:03 Europe/Berlin] Announcement route - Action: null
+[03-Sep-2025 18:17:03 Europe/Berlin] Request path: /updated-msc-website/api/announcements
+[03-Sep-2025 18:17:03 Europe/Berlin] Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => announcements
+)
+
+[03-Sep-2025 18:17:03 Europe/Berlin] Original REQUEST_URI: /updated-msc-website/api/announcements?page=1&limit=10&include_archived=true
+[03-Sep-2025 18:17:03 Europe/Berlin] Found API index, resource: announcements
+[03-Sep-2025 18:17:03 Europe/Berlin] Announcement route - Path: /updated-msc-website/api/announcements
+[03-Sep-2025 18:17:03 Europe/Berlin] Announcement route - Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => announcements
+)
+
+[03-Sep-2025 18:17:03 Europe/Berlin] Announcement route - Endpoint: 
+[03-Sep-2025 18:17:03 Europe/Berlin] Announcement route - ID: null
+[03-Sep-2025 18:17:03 Europe/Berlin] Announcement route - Action: null
+[03-Sep-2025 18:17:33 Europe/Berlin] Request path: /updated-msc-website/api/announcements
+[03-Sep-2025 18:17:33 Europe/Berlin] Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => announcements
+)
+
+[03-Sep-2025 18:17:33 Europe/Berlin] Original REQUEST_URI: /updated-msc-website/api/announcements?page=1&limit=10&include_archived=true
+[03-Sep-2025 18:17:33 Europe/Berlin] Found API index, resource: announcements
+[03-Sep-2025 18:17:33 Europe/Berlin] Announcement route - Path: /updated-msc-website/api/announcements
+[03-Sep-2025 18:17:33 Europe/Berlin] Announcement route - Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => announcements
+)
+
+[03-Sep-2025 18:17:33 Europe/Berlin] Announcement route - Endpoint: 
+[03-Sep-2025 18:17:33 Europe/Berlin] Announcement route - ID: null
+[03-Sep-2025 18:17:33 Europe/Berlin] Announcement route - Action: null
+[03-Sep-2025 18:17:39 Europe/Berlin] Request path: /updated-msc-website/api/announcements
+[03-Sep-2025 18:17:39 Europe/Berlin] Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => announcements
+)
+
+[03-Sep-2025 18:17:39 Europe/Berlin] Original REQUEST_URI: /updated-msc-website/api/announcements?page=1&limit=10&include_archived=true
+[03-Sep-2025 18:17:39 Europe/Berlin] Found API index, resource: announcements
+[03-Sep-2025 18:17:39 Europe/Berlin] Announcement route - Path: /updated-msc-website/api/announcements
+[03-Sep-2025 18:17:39 Europe/Berlin] Announcement route - Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => announcements
+)
+
+[03-Sep-2025 18:17:39 Europe/Berlin] Announcement route - Endpoint: 
+[03-Sep-2025 18:17:39 Europe/Berlin] Announcement route - ID: null
+[03-Sep-2025 18:17:39 Europe/Berlin] Announcement route - Action: null
+[03-Sep-2025 18:18:15 Europe/Berlin] Request path: /updated-msc-website/api/announcements
+[03-Sep-2025 18:18:15 Europe/Berlin] Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => announcements
+)
+
+[03-Sep-2025 18:18:15 Europe/Berlin] Original REQUEST_URI: /updated-msc-website/api/announcements?page=1&limit=10&include_archived=true
+[03-Sep-2025 18:18:15 Europe/Berlin] Found API index, resource: announcements
+[03-Sep-2025 18:18:15 Europe/Berlin] Announcement route - Path: /updated-msc-website/api/announcements
+[03-Sep-2025 18:18:15 Europe/Berlin] Announcement route - Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => announcements
+)
+
+[03-Sep-2025 18:18:15 Europe/Berlin] Announcement route - Endpoint: 
+[03-Sep-2025 18:18:15 Europe/Berlin] Announcement route - ID: null
+[03-Sep-2025 18:18:15 Europe/Berlin] Announcement route - Action: null
+[03-Sep-2025 18:18:23 Europe/Berlin] Request path: /updated-msc-website/api/announcements
+[03-Sep-2025 18:18:23 Europe/Berlin] Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => announcements
+)
+
+[03-Sep-2025 18:18:23 Europe/Berlin] Original REQUEST_URI: /updated-msc-website/api/announcements?page=1&limit=10&include_archived=true
+[03-Sep-2025 18:18:23 Europe/Berlin] Found API index, resource: announcements
+[03-Sep-2025 18:18:23 Europe/Berlin] Announcement route - Path: /updated-msc-website/api/announcements
+[03-Sep-2025 18:18:23 Europe/Berlin] Announcement route - Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => announcements
+)
+
+[03-Sep-2025 18:18:23 Europe/Berlin] Announcement route - Endpoint: 
+[03-Sep-2025 18:18:23 Europe/Berlin] Announcement route - ID: null
+[03-Sep-2025 18:18:23 Europe/Berlin] Announcement route - Action: null
+[03-Sep-2025 18:18:51 Europe/Berlin] Request path: /updated-msc-website/api/announcements
+[03-Sep-2025 18:18:51 Europe/Berlin] Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => announcements
+)
+
+[03-Sep-2025 18:18:51 Europe/Berlin] Original REQUEST_URI: /updated-msc-website/api/announcements?page=1&limit=10&include_archived=true
+[03-Sep-2025 18:18:51 Europe/Berlin] Found API index, resource: announcements
+[03-Sep-2025 18:18:51 Europe/Berlin] Announcement route - Path: /updated-msc-website/api/announcements
+[03-Sep-2025 18:18:51 Europe/Berlin] Announcement route - Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => announcements
+)
+
+[03-Sep-2025 18:18:51 Europe/Berlin] Announcement route - Endpoint: 
+[03-Sep-2025 18:18:51 Europe/Berlin] Announcement route - ID: null
+[03-Sep-2025 18:18:51 Europe/Berlin] Announcement route - Action: null
+[03-Sep-2025 18:21:41 Europe/Berlin] Request path: /updated-msc-website/api/announcements
+[03-Sep-2025 18:21:41 Europe/Berlin] Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => announcements
+)
+
+[03-Sep-2025 18:21:41 Europe/Berlin] Original REQUEST_URI: /updated-msc-website/api/announcements?page=1&limit=10&include_archived=true
+[03-Sep-2025 18:21:41 Europe/Berlin] Found API index, resource: announcements
+[03-Sep-2025 18:21:41 Europe/Berlin] Announcement route - Path: /updated-msc-website/api/announcements
+[03-Sep-2025 18:21:41 Europe/Berlin] Announcement route - Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => announcements
+)
+
+[03-Sep-2025 18:21:41 Europe/Berlin] Announcement route - Endpoint: 
+[03-Sep-2025 18:21:41 Europe/Berlin] Announcement route - ID: null
+[03-Sep-2025 18:21:41 Europe/Berlin] Announcement route - Action: null
+[03-Sep-2025 18:21:44 Europe/Berlin] Request path: /updated-msc-website/api/announcements/2/unarchive
+[03-Sep-2025 18:21:44 Europe/Berlin] Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => announcements
+    [3] => 2
+    [4] => unarchive
+)
+
+[03-Sep-2025 18:21:44 Europe/Berlin] Original REQUEST_URI: /updated-msc-website/api/announcements/2/unarchive
+[03-Sep-2025 18:21:44 Europe/Berlin] Found API index, resource: announcements
+[03-Sep-2025 18:21:44 Europe/Berlin] Announcement route - Path: /updated-msc-website/api/announcements/2/unarchive
+[03-Sep-2025 18:21:44 Europe/Berlin] Announcement route - Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => announcements
+    [3] => 2
+    [4] => unarchive
+)
+
+[03-Sep-2025 18:21:44 Europe/Berlin] Announcement route - Endpoint: 2
+[03-Sep-2025 18:21:44 Europe/Berlin] Announcement route - ID: unarchive
+[03-Sep-2025 18:21:44 Europe/Berlin] Announcement route - Action: null
+[03-Sep-2025 18:21:44 Europe/Berlin] Request path: /updated-msc-website/api/announcements
+[03-Sep-2025 18:21:44 Europe/Berlin] Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => announcements
+)
+
+[03-Sep-2025 18:21:44 Europe/Berlin] Original REQUEST_URI: /updated-msc-website/api/announcements?page=1&limit=10&include_archived=true
+[03-Sep-2025 18:21:44 Europe/Berlin] Found API index, resource: announcements
+[03-Sep-2025 18:21:44 Europe/Berlin] Announcement route - Path: /updated-msc-website/api/announcements
+[03-Sep-2025 18:21:44 Europe/Berlin] Announcement route - Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => announcements
+)
+
+[03-Sep-2025 18:21:44 Europe/Berlin] Announcement route - Endpoint: 
+[03-Sep-2025 18:21:44 Europe/Berlin] Announcement route - ID: null
+[03-Sep-2025 18:21:44 Europe/Berlin] Announcement route - Action: null
+[03-Sep-2025 18:22:15 Europe/Berlin] Request path: /updated-msc-website/api/announcements
+[03-Sep-2025 18:22:15 Europe/Berlin] Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => announcements
+)
+
+[03-Sep-2025 18:22:15 Europe/Berlin] Original REQUEST_URI: /updated-msc-website/api/announcements?page=1&limit=10&include_archived=true
+[03-Sep-2025 18:22:15 Europe/Berlin] Found API index, resource: announcements
+[03-Sep-2025 18:22:15 Europe/Berlin] Announcement route - Path: /updated-msc-website/api/announcements
+[03-Sep-2025 18:22:15 Europe/Berlin] Announcement route - Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => announcements
+)
+
+[03-Sep-2025 18:22:15 Europe/Berlin] Announcement route - Endpoint: 
+[03-Sep-2025 18:22:15 Europe/Berlin] Announcement route - ID: null
+[03-Sep-2025 18:22:15 Europe/Berlin] Announcement route - Action: null
+[03-Sep-2025 18:24:20 Europe/Berlin] Request path: /updated-msc-website/api/announcements
+[03-Sep-2025 18:24:20 Europe/Berlin] Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => announcements
+)
+
+[03-Sep-2025 18:24:20 Europe/Berlin] Original REQUEST_URI: /updated-msc-website/api/announcements?page=1&limit=10&include_archived=true
+[03-Sep-2025 18:24:20 Europe/Berlin] Found API index, resource: announcements
+[03-Sep-2025 18:24:20 Europe/Berlin] Announcement route - Path: /updated-msc-website/api/announcements
+[03-Sep-2025 18:24:20 Europe/Berlin] Announcement route - Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => announcements
+)
+
+[03-Sep-2025 18:24:20 Europe/Berlin] Announcement route - Endpoint: 
+[03-Sep-2025 18:24:20 Europe/Berlin] Announcement route - ID: null
+[03-Sep-2025 18:24:20 Europe/Berlin] Announcement route - Action: null
+[03-Sep-2025 18:24:23 Europe/Berlin] Request path: /updated-msc-website/api/announcements/28/archive
+[03-Sep-2025 18:24:23 Europe/Berlin] Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => announcements
+    [3] => 28
+    [4] => archive
+)
+
+[03-Sep-2025 18:24:23 Europe/Berlin] Original REQUEST_URI: /updated-msc-website/api/announcements/28/archive?_method=PUT
+[03-Sep-2025 18:24:23 Europe/Berlin] Found API index, resource: announcements
+[03-Sep-2025 18:24:23 Europe/Berlin] Announcement route - Path: /updated-msc-website/api/announcements/28/archive
+[03-Sep-2025 18:24:23 Europe/Berlin] Announcement route - Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => announcements
+    [3] => 28
+    [4] => archive
+)
+
+[03-Sep-2025 18:24:23 Europe/Berlin] Announcement route - Endpoint: 28
+[03-Sep-2025 18:24:23 Europe/Berlin] Announcement route - ID: archive
+[03-Sep-2025 18:24:23 Europe/Berlin] Announcement route - Action: null
+[03-Sep-2025 18:25:35 Europe/Berlin] Request path: /updated-msc-website/api/announcements
+[03-Sep-2025 18:25:35 Europe/Berlin] Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => announcements
+)
+
+[03-Sep-2025 18:25:35 Europe/Berlin] Original REQUEST_URI: /updated-msc-website/api/announcements?page=1&limit=10&include_archived=true
+[03-Sep-2025 18:25:35 Europe/Berlin] Found API index, resource: announcements
+[03-Sep-2025 18:25:35 Europe/Berlin] Announcement route - Path: /updated-msc-website/api/announcements
+[03-Sep-2025 18:25:35 Europe/Berlin] Announcement route - Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => announcements
+)
+
+[03-Sep-2025 18:25:35 Europe/Berlin] Announcement route - Endpoint: 
+[03-Sep-2025 18:25:35 Europe/Berlin] Announcement route - ID: null
+[03-Sep-2025 18:25:35 Europe/Berlin] Announcement route - Action: null
+[03-Sep-2025 18:25:38 Europe/Berlin] Request path: /updated-msc-website/api/announcements/28/archive
+[03-Sep-2025 18:25:38 Europe/Berlin] Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => announcements
+    [3] => 28
+    [4] => archive
+)
+
+[03-Sep-2025 18:25:38 Europe/Berlin] Original REQUEST_URI: /updated-msc-website/api/announcements/28/archive?_method=PUT
+[03-Sep-2025 18:25:38 Europe/Berlin] Found API index, resource: announcements
+[03-Sep-2025 18:25:38 Europe/Berlin] Announcement route - Path: /updated-msc-website/api/announcements/28/archive
+[03-Sep-2025 18:25:38 Europe/Berlin] Announcement route - Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => announcements
+    [3] => 28
+    [4] => archive
+)
+
+[03-Sep-2025 18:25:38 Europe/Berlin] Announcement route - Endpoint: 28
+[03-Sep-2025 18:25:38 Europe/Berlin] Announcement route - ID: archive
+[03-Sep-2025 18:25:38 Europe/Berlin] Announcement route - Action: null
+[03-Sep-2025 18:25:41 Europe/Berlin] Request path: /updated-msc-website/api/announcements
+[03-Sep-2025 18:25:41 Europe/Berlin] Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => announcements
+)
+
+[03-Sep-2025 18:25:41 Europe/Berlin] Original REQUEST_URI: /updated-msc-website/api/announcements?page=1&limit=10&include_archived=true
+[03-Sep-2025 18:25:41 Europe/Berlin] Found API index, resource: announcements
+[03-Sep-2025 18:25:41 Europe/Berlin] Announcement route - Path: /updated-msc-website/api/announcements
+[03-Sep-2025 18:25:41 Europe/Berlin] Announcement route - Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => announcements
+)
+
+[03-Sep-2025 18:25:41 Europe/Berlin] Announcement route - Endpoint: 
+[03-Sep-2025 18:25:41 Europe/Berlin] Announcement route - ID: null
+[03-Sep-2025 18:25:41 Europe/Berlin] Announcement route - Action: null
+[03-Sep-2025 18:25:44 Europe/Berlin] Request path: /updated-msc-website/api/announcements/28/archive
+[03-Sep-2025 18:25:44 Europe/Berlin] Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => announcements
+    [3] => 28
+    [4] => archive
+)
+
+[03-Sep-2025 18:25:44 Europe/Berlin] Original REQUEST_URI: /updated-msc-website/api/announcements/28/archive?_method=PUT
+[03-Sep-2025 18:25:44 Europe/Berlin] Found API index, resource: announcements
+[03-Sep-2025 18:25:44 Europe/Berlin] Announcement route - Path: /updated-msc-website/api/announcements/28/archive
+[03-Sep-2025 18:25:44 Europe/Berlin] Announcement route - Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => announcements
+    [3] => 28
+    [4] => archive
+)
+
+[03-Sep-2025 18:25:44 Europe/Berlin] Announcement route - Endpoint: 28
+[03-Sep-2025 18:25:44 Europe/Berlin] Announcement route - ID: archive
+[03-Sep-2025 18:25:44 Europe/Berlin] Announcement route - Action: null
+[03-Sep-2025 18:26:49 Europe/Berlin] Request path: /updated-msc-website/api/announcements/28/archive
+[03-Sep-2025 18:26:49 Europe/Berlin] Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => announcements
+    [3] => 28
+    [4] => archive
+)
+
+[03-Sep-2025 18:26:49 Europe/Berlin] Original REQUEST_URI: /updated-msc-website/api/announcements/28/archive
+[03-Sep-2025 18:26:49 Europe/Berlin] Found API index, resource: announcements
+[03-Sep-2025 18:26:49 Europe/Berlin] Announcement route - Path: /updated-msc-website/api/announcements/28/archive
+[03-Sep-2025 18:26:49 Europe/Berlin] Announcement route - Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => announcements
+    [3] => 28
+    [4] => archive
+)
+
+[03-Sep-2025 18:26:49 Europe/Berlin] Announcement route - Endpoint: 28
+[03-Sep-2025 18:26:49 Europe/Berlin] Announcement route - ID: archive
+[03-Sep-2025 18:26:49 Europe/Berlin] Announcement route - Action: null
+[03-Sep-2025 18:26:53 Europe/Berlin] Request path: /updated-msc-website/api/announcements
+[03-Sep-2025 18:26:53 Europe/Berlin] Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => announcements
+)
+
+[03-Sep-2025 18:26:53 Europe/Berlin] Original REQUEST_URI: /updated-msc-website/api/announcements?page=1&limit=10&include_archived=true
+[03-Sep-2025 18:26:53 Europe/Berlin] Found API index, resource: announcements
+[03-Sep-2025 18:26:53 Europe/Berlin] Announcement route - Path: /updated-msc-website/api/announcements
+[03-Sep-2025 18:26:53 Europe/Berlin] Announcement route - Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => announcements
+)
+
+[03-Sep-2025 18:26:53 Europe/Berlin] Announcement route - Endpoint: 
+[03-Sep-2025 18:26:53 Europe/Berlin] Announcement route - ID: null
+[03-Sep-2025 18:26:53 Europe/Berlin] Announcement route - Action: null
+[03-Sep-2025 18:30:18 Europe/Berlin] Request path: /updated-msc-website/api/announcements
+[03-Sep-2025 18:30:18 Europe/Berlin] Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => announcements
+)
+
+[03-Sep-2025 18:30:18 Europe/Berlin] Original REQUEST_URI: /updated-msc-website/api/announcements?page=1&limit=10&include_archived=true
+[03-Sep-2025 18:30:18 Europe/Berlin] Found API index, resource: announcements
+[03-Sep-2025 18:30:18 Europe/Berlin] Announcement route - Path: /updated-msc-website/api/announcements
+[03-Sep-2025 18:30:18 Europe/Berlin] Announcement route - Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => announcements
+)
+
+[03-Sep-2025 18:30:18 Europe/Berlin] Announcement route - Endpoint: 
+[03-Sep-2025 18:30:18 Europe/Berlin] Announcement route - ID: null
+[03-Sep-2025 18:30:18 Europe/Berlin] Announcement route - Action: null
+[03-Sep-2025 18:30:21 Europe/Berlin] Request path: /updated-msc-website/api/announcements/28/unarchive
+[03-Sep-2025 18:30:21 Europe/Berlin] Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => announcements
+    [3] => 28
+    [4] => unarchive
+)
+
+[03-Sep-2025 18:30:21 Europe/Berlin] Original REQUEST_URI: /updated-msc-website/api/announcements/28/unarchive
+[03-Sep-2025 18:30:21 Europe/Berlin] Found API index, resource: announcements
+[03-Sep-2025 18:30:21 Europe/Berlin] Announcement route - Path: /updated-msc-website/api/announcements/28/unarchive
+[03-Sep-2025 18:30:21 Europe/Berlin] Announcement route - Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => announcements
+    [3] => 28
+    [4] => unarchive
+)
+
+[03-Sep-2025 18:30:21 Europe/Berlin] Announcement route - Endpoint: 28
+[03-Sep-2025 18:30:21 Europe/Berlin] Announcement route - ID: unarchive
+[03-Sep-2025 18:30:21 Europe/Berlin] Announcement route - Action: null
+[03-Sep-2025 18:30:21 Europe/Berlin] Request path: /updated-msc-website/api/announcements
+[03-Sep-2025 18:30:21 Europe/Berlin] Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => announcements
+)
+
+[03-Sep-2025 18:30:21 Europe/Berlin] Original REQUEST_URI: /updated-msc-website/api/announcements?page=1&limit=10&include_archived=true
+[03-Sep-2025 18:30:21 Europe/Berlin] Found API index, resource: announcements
+[03-Sep-2025 18:30:21 Europe/Berlin] Announcement route - Path: /updated-msc-website/api/announcements
+[03-Sep-2025 18:30:21 Europe/Berlin] Announcement route - Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => announcements
+)
+
+[03-Sep-2025 18:30:21 Europe/Berlin] Announcement route - Endpoint: 
+[03-Sep-2025 18:30:21 Europe/Berlin] Announcement route - ID: null
+[03-Sep-2025 18:30:21 Europe/Berlin] Announcement route - Action: null
+[03-Sep-2025 18:30:25 Europe/Berlin] Request path: /updated-msc-website/api/announcements/28/archive
+[03-Sep-2025 18:30:25 Europe/Berlin] Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => announcements
+    [3] => 28
+    [4] => archive
+)
+
+[03-Sep-2025 18:30:25 Europe/Berlin] Original REQUEST_URI: /updated-msc-website/api/announcements/28/archive
+[03-Sep-2025 18:30:25 Europe/Berlin] Found API index, resource: announcements
+[03-Sep-2025 18:30:25 Europe/Berlin] Announcement route - Path: /updated-msc-website/api/announcements/28/archive
+[03-Sep-2025 18:30:25 Europe/Berlin] Announcement route - Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => announcements
+    [3] => 28
+    [4] => archive
+)
+
+[03-Sep-2025 18:30:25 Europe/Berlin] Announcement route - Endpoint: 28
+[03-Sep-2025 18:30:25 Europe/Berlin] Announcement route - ID: archive
+[03-Sep-2025 18:30:25 Europe/Berlin] Announcement route - Action: null
+[03-Sep-2025 18:30:25 Europe/Berlin] Request path: /updated-msc-website/api/announcements
+[03-Sep-2025 18:30:25 Europe/Berlin] Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => announcements
+)
+
+[03-Sep-2025 18:30:25 Europe/Berlin] Original REQUEST_URI: /updated-msc-website/api/announcements?page=1&limit=10&include_archived=true
+[03-Sep-2025 18:30:25 Europe/Berlin] Found API index, resource: announcements
+[03-Sep-2025 18:30:25 Europe/Berlin] Announcement route - Path: /updated-msc-website/api/announcements
+[03-Sep-2025 18:30:25 Europe/Berlin] Announcement route - Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => announcements
+)
+
+[03-Sep-2025 18:30:25 Europe/Berlin] Announcement route - Endpoint: 
+[03-Sep-2025 18:30:25 Europe/Berlin] Announcement route - ID: null
+[03-Sep-2025 18:30:25 Europe/Berlin] Announcement route - Action: null
+[03-Sep-2025 18:36:34 Europe/Berlin] Request path: /updated-msc-website/api/announcements/3
+[03-Sep-2025 18:36:34 Europe/Berlin] Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => announcements
+    [3] => 3
+)
+
+[03-Sep-2025 18:36:34 Europe/Berlin] Original REQUEST_URI: /updated-msc-website/api/announcements/3
+[03-Sep-2025 18:36:34 Europe/Berlin] Found API index, resource: announcements
+[03-Sep-2025 18:36:34 Europe/Berlin] Announcement route - Path: /updated-msc-website/api/announcements/3
+[03-Sep-2025 18:36:34 Europe/Berlin] Announcement route - Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => announcements
+    [3] => 3
+)
+
+[03-Sep-2025 18:36:34 Europe/Berlin] Announcement route - Endpoint: 3
+[03-Sep-2025 18:36:34 Europe/Berlin] Announcement route - ID: null
+[03-Sep-2025 18:36:34 Europe/Berlin] Announcement route - Action: null
+[03-Sep-2025 18:36:34 Europe/Berlin] Request path: /updated-msc-website/api/announcements
+[03-Sep-2025 18:36:34 Europe/Berlin] Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => announcements
+)
+
+[03-Sep-2025 18:36:34 Europe/Berlin] Original REQUEST_URI: /updated-msc-website/api/announcements?page=1&limit=10&include_archived=true
+[03-Sep-2025 18:36:34 Europe/Berlin] Found API index, resource: announcements
+[03-Sep-2025 18:36:34 Europe/Berlin] Announcement route - Path: /updated-msc-website/api/announcements
+[03-Sep-2025 18:36:34 Europe/Berlin] Announcement route - Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => announcements
+)
+
+[03-Sep-2025 18:36:34 Europe/Berlin] Announcement route - Endpoint: 
+[03-Sep-2025 18:36:34 Europe/Berlin] Announcement route - ID: null
+[03-Sep-2025 18:36:34 Europe/Berlin] Announcement route - Action: null
+[03-Sep-2025 18:36:37 Europe/Berlin] Request path: /updated-msc-website/api/announcements
+[03-Sep-2025 18:36:37 Europe/Berlin] Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => announcements
+)
+
+[03-Sep-2025 18:36:37 Europe/Berlin] Original REQUEST_URI: /updated-msc-website/api/announcements?page=1&limit=10&include_archived=true
+[03-Sep-2025 18:36:37 Europe/Berlin] Found API index, resource: announcements
+[03-Sep-2025 18:36:37 Europe/Berlin] Announcement route - Path: /updated-msc-website/api/announcements
+[03-Sep-2025 18:36:37 Europe/Berlin] Announcement route - Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => announcements
+)
+
+[03-Sep-2025 18:36:37 Europe/Berlin] Announcement route - Endpoint: 
+[03-Sep-2025 18:36:37 Europe/Berlin] Announcement route - ID: null
+[03-Sep-2025 18:36:37 Europe/Berlin] Announcement route - Action: null
+[03-Sep-2025 18:42:36 Europe/Berlin] Request path: /updated-msc-website/api/announcements
+[03-Sep-2025 18:42:36 Europe/Berlin] Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => announcements
+)
+
+[03-Sep-2025 18:42:36 Europe/Berlin] Original REQUEST_URI: /updated-msc-website/api/announcements?page=1&limit=10&include_archived=true
+[03-Sep-2025 18:42:36 Europe/Berlin] Found API index, resource: announcements
+[03-Sep-2025 18:42:36 Europe/Berlin] Announcement route - Path: /updated-msc-website/api/announcements
+[03-Sep-2025 18:42:36 Europe/Berlin] Announcement route - Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => announcements
+)
+
+[03-Sep-2025 18:42:36 Europe/Berlin] Announcement route - Endpoint: 
+[03-Sep-2025 18:42:36 Europe/Berlin] Announcement route - ID: null
+[03-Sep-2025 18:42:36 Europe/Berlin] Announcement route - Action: null
+[03-Sep-2025 18:42:49 Europe/Berlin] Request path: /updated-msc-website/api/announcements
+[03-Sep-2025 18:42:49 Europe/Berlin] Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => announcements
+)
+
+[03-Sep-2025 18:42:49 Europe/Berlin] Original REQUEST_URI: /updated-msc-website/api/announcements
+[03-Sep-2025 18:42:49 Europe/Berlin] Found API index, resource: announcements
+[03-Sep-2025 18:42:49 Europe/Berlin] Announcement route - Path: /updated-msc-website/api/announcements
+[03-Sep-2025 18:42:49 Europe/Berlin] Announcement route - Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => announcements
+)
+
+[03-Sep-2025 18:42:49 Europe/Berlin] Announcement route - Endpoint: 
+[03-Sep-2025 18:42:49 Europe/Berlin] Announcement route - ID: null
+[03-Sep-2025 18:42:49 Europe/Berlin] Announcement route - Action: null
+[03-Sep-2025 18:42:49 Europe/Berlin] PHP Notice:  session_start(): Ignoring session_start() because a session is already active in C:\xampp\htdocs\updated-msc-website\api\middleware\AuthMiddleware.php on line 56
+[03-Sep-2025 18:42:49 Europe/Berlin] Request path: /updated-msc-website/api/announcements
+[03-Sep-2025 18:42:49 Europe/Berlin] Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => announcements
+)
+
+[03-Sep-2025 18:42:49 Europe/Berlin] Original REQUEST_URI: /updated-msc-website/api/announcements?page=1&limit=10&include_archived=true
+[03-Sep-2025 18:42:49 Europe/Berlin] Found API index, resource: announcements
+[03-Sep-2025 18:42:49 Europe/Berlin] Announcement route - Path: /updated-msc-website/api/announcements
+[03-Sep-2025 18:42:49 Europe/Berlin] Announcement route - Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => announcements
+)
+
+[03-Sep-2025 18:42:49 Europe/Berlin] Announcement route - Endpoint: 
+[03-Sep-2025 18:42:49 Europe/Berlin] Announcement route - ID: null
+[03-Sep-2025 18:42:49 Europe/Berlin] Announcement route - Action: null
+[03-Sep-2025 18:48:54 Europe/Berlin] Request path: /updated-msc-website/api/announcements
+[03-Sep-2025 18:48:54 Europe/Berlin] Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => announcements
+)
+
+[03-Sep-2025 18:48:54 Europe/Berlin] Original REQUEST_URI: /updated-msc-website/api/announcements?page=1&limit=10&include_archived=true
+[03-Sep-2025 18:48:54 Europe/Berlin] Found API index, resource: announcements
+[03-Sep-2025 18:48:54 Europe/Berlin] Announcement route - Path: /updated-msc-website/api/announcements
+[03-Sep-2025 18:48:54 Europe/Berlin] Announcement route - Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => announcements
+)
+
+[03-Sep-2025 18:48:54 Europe/Berlin] Announcement route - Endpoint: 
+[03-Sep-2025 18:48:54 Europe/Berlin] Announcement route - ID: null
+[03-Sep-2025 18:48:54 Europe/Berlin] Announcement route - Action: null
+[03-Sep-2025 18:56:56 Europe/Berlin] Request path: /updated-msc-website/api/announcements
+[03-Sep-2025 18:56:56 Europe/Berlin] Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => announcements
+)
+
+[03-Sep-2025 18:56:56 Europe/Berlin] Original REQUEST_URI: /updated-msc-website/api/announcements?page=1&limit=10&include_archived=true
+[03-Sep-2025 18:56:56 Europe/Berlin] Found API index, resource: announcements
+[03-Sep-2025 18:56:56 Europe/Berlin] Announcement route - Path: /updated-msc-website/api/announcements
+[03-Sep-2025 18:56:56 Europe/Berlin] Announcement route - Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => announcements
+)
+
+[03-Sep-2025 18:56:56 Europe/Berlin] Announcement route - Endpoint: 
+[03-Sep-2025 18:56:56 Europe/Berlin] Announcement route - ID: null
+[03-Sep-2025 18:56:56 Europe/Berlin] Announcement route - Action: null
+[03-Sep-2025 18:57:19 Europe/Berlin] Request path: /updated-msc-website/api/announcements/30/archive
+[03-Sep-2025 18:57:19 Europe/Berlin] Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => announcements
+    [3] => 30
+    [4] => archive
+)
+
+[03-Sep-2025 18:57:19 Europe/Berlin] Original REQUEST_URI: /updated-msc-website/api/announcements/30/archive
+[03-Sep-2025 18:57:19 Europe/Berlin] Found API index, resource: announcements
+[03-Sep-2025 18:57:19 Europe/Berlin] Announcement route - Path: /updated-msc-website/api/announcements/30/archive
+[03-Sep-2025 18:57:19 Europe/Berlin] Announcement route - Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => announcements
+    [3] => 30
+    [4] => archive
+)
+
+[03-Sep-2025 18:57:19 Europe/Berlin] Announcement route - Endpoint: 30
+[03-Sep-2025 18:57:19 Europe/Berlin] Announcement route - ID: archive
+[03-Sep-2025 18:57:19 Europe/Berlin] Announcement route - Action: null
+[03-Sep-2025 18:57:19 Europe/Berlin] Request path: /updated-msc-website/api/announcements
+[03-Sep-2025 18:57:19 Europe/Berlin] Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => announcements
+)
+
+[03-Sep-2025 18:57:19 Europe/Berlin] Original REQUEST_URI: /updated-msc-website/api/announcements?page=1&limit=10&include_archived=true
+[03-Sep-2025 18:57:19 Europe/Berlin] Found API index, resource: announcements
+[03-Sep-2025 18:57:19 Europe/Berlin] Announcement route - Path: /updated-msc-website/api/announcements
+[03-Sep-2025 18:57:19 Europe/Berlin] Announcement route - Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => announcements
+)
+
+[03-Sep-2025 18:57:19 Europe/Berlin] Announcement route - Endpoint: 
+[03-Sep-2025 18:57:19 Europe/Berlin] Announcement route - ID: null
+[03-Sep-2025 18:57:19 Europe/Berlin] Announcement route - Action: null
+[03-Sep-2025 18:57:19 Europe/Berlin] Request path: /updated-msc-website/api/announcements
+[03-Sep-2025 18:57:19 Europe/Berlin] Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => announcements
+)
+
+[03-Sep-2025 18:57:19 Europe/Berlin] Original REQUEST_URI: /updated-msc-website/api/announcements?page=1&limit=10&include_archived=true
+[03-Sep-2025 18:57:19 Europe/Berlin] Found API index, resource: announcements
+[03-Sep-2025 18:57:19 Europe/Berlin] Announcement route - Path: /updated-msc-website/api/announcements
+[03-Sep-2025 18:57:19 Europe/Berlin] Announcement route - Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => announcements
+)
+
+[03-Sep-2025 18:57:19 Europe/Berlin] Announcement route - Endpoint: 
+[03-Sep-2025 18:57:19 Europe/Berlin] Announcement route - ID: null
+[03-Sep-2025 18:57:19 Europe/Berlin] Announcement route - Action: null
+[03-Sep-2025 18:57:49 Europe/Berlin] Request path: /updated-msc-website/api/announcements/30/unarchive
+[03-Sep-2025 18:57:49 Europe/Berlin] Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => announcements
+    [3] => 30
+    [4] => unarchive
+)
+
+[03-Sep-2025 18:57:49 Europe/Berlin] Original REQUEST_URI: /updated-msc-website/api/announcements/30/unarchive
+[03-Sep-2025 18:57:49 Europe/Berlin] Found API index, resource: announcements
+[03-Sep-2025 18:57:49 Europe/Berlin] Announcement route - Path: /updated-msc-website/api/announcements/30/unarchive
+[03-Sep-2025 18:57:49 Europe/Berlin] Announcement route - Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => announcements
+    [3] => 30
+    [4] => unarchive
+)
+
+[03-Sep-2025 18:57:49 Europe/Berlin] Announcement route - Endpoint: 30
+[03-Sep-2025 18:57:49 Europe/Berlin] Announcement route - ID: unarchive
+[03-Sep-2025 18:57:49 Europe/Berlin] Announcement route - Action: null
+[03-Sep-2025 18:57:49 Europe/Berlin] Request path: /updated-msc-website/api/announcements
+[03-Sep-2025 18:57:49 Europe/Berlin] Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => announcements
+)
+
+[03-Sep-2025 18:57:49 Europe/Berlin] Original REQUEST_URI: /updated-msc-website/api/announcements?page=1&limit=10&include_archived=true
+[03-Sep-2025 18:57:49 Europe/Berlin] Found API index, resource: announcements
+[03-Sep-2025 18:57:49 Europe/Berlin] Announcement route - Path: /updated-msc-website/api/announcements
+[03-Sep-2025 18:57:49 Europe/Berlin] Announcement route - Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => announcements
+)
+
+[03-Sep-2025 18:57:49 Europe/Berlin] Announcement route - Endpoint: 
+[03-Sep-2025 18:57:49 Europe/Berlin] Announcement route - ID: null
+[03-Sep-2025 18:57:49 Europe/Berlin] Announcement route - Action: null
+[03-Sep-2025 18:57:50 Europe/Berlin] Request path: /updated-msc-website/api/announcements/28/unarchive
+[03-Sep-2025 18:57:50 Europe/Berlin] Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => announcements
+    [3] => 28
+    [4] => unarchive
+)
+
+[03-Sep-2025 18:57:50 Europe/Berlin] Original REQUEST_URI: /updated-msc-website/api/announcements/28/unarchive
+[03-Sep-2025 18:57:50 Europe/Berlin] Found API index, resource: announcements
+[03-Sep-2025 18:57:50 Europe/Berlin] Announcement route - Path: /updated-msc-website/api/announcements/28/unarchive
+[03-Sep-2025 18:57:50 Europe/Berlin] Announcement route - Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => announcements
+    [3] => 28
+    [4] => unarchive
+)
+
+[03-Sep-2025 18:57:50 Europe/Berlin] Announcement route - Endpoint: 28
+[03-Sep-2025 18:57:50 Europe/Berlin] Announcement route - ID: unarchive
+[03-Sep-2025 18:57:50 Europe/Berlin] Announcement route - Action: null
+[03-Sep-2025 18:57:50 Europe/Berlin] Request path: /updated-msc-website/api/announcements
+[03-Sep-2025 18:57:50 Europe/Berlin] Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => announcements
+)
+
+[03-Sep-2025 18:57:50 Europe/Berlin] Original REQUEST_URI: /updated-msc-website/api/announcements?page=1&limit=10&include_archived=true
+[03-Sep-2025 18:57:50 Europe/Berlin] Found API index, resource: announcements
+[03-Sep-2025 18:57:50 Europe/Berlin] Announcement route - Path: /updated-msc-website/api/announcements
+[03-Sep-2025 18:57:50 Europe/Berlin] Announcement route - Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => announcements
+)
+
+[03-Sep-2025 18:57:50 Europe/Berlin] Announcement route - Endpoint: 
+[03-Sep-2025 18:57:50 Europe/Berlin] Announcement route - ID: null
+[03-Sep-2025 18:57:50 Europe/Berlin] Announcement route - Action: null
+[03-Sep-2025 18:57:50 Europe/Berlin] Request path: /updated-msc-website/api/announcements
+[03-Sep-2025 18:57:50 Europe/Berlin] Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => announcements
+)
+
+[03-Sep-2025 18:57:50 Europe/Berlin] Original REQUEST_URI: /updated-msc-website/api/announcements?page=1&limit=10&include_archived=true
+[03-Sep-2025 18:57:50 Europe/Berlin] Found API index, resource: announcements
+[03-Sep-2025 18:57:50 Europe/Berlin] Announcement route - Path: /updated-msc-website/api/announcements
+[03-Sep-2025 18:57:50 Europe/Berlin] Announcement route - Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => announcements
+)
+
+[03-Sep-2025 18:57:50 Europe/Berlin] Announcement route - Endpoint: 
+[03-Sep-2025 18:57:50 Europe/Berlin] Announcement route - ID: null
+[03-Sep-2025 18:57:50 Europe/Berlin] Announcement route - Action: null
+[03-Sep-2025 18:59:01 Europe/Berlin] Request path: /updated-msc-website/api/announcements/30
+[03-Sep-2025 18:59:01 Europe/Berlin] Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => announcements
+    [3] => 30
+)
+
+[03-Sep-2025 18:59:01 Europe/Berlin] Original REQUEST_URI: /updated-msc-website/api/announcements/30
+[03-Sep-2025 18:59:01 Europe/Berlin] Found API index, resource: announcements
+[03-Sep-2025 18:59:01 Europe/Berlin] Announcement route - Path: /updated-msc-website/api/announcements/30
+[03-Sep-2025 18:59:01 Europe/Berlin] Announcement route - Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => announcements
+    [3] => 30
+)
+
+[03-Sep-2025 18:59:01 Europe/Berlin] Announcement route - Endpoint: 30
+[03-Sep-2025 18:59:01 Europe/Berlin] Announcement route - ID: null
+[03-Sep-2025 18:59:01 Europe/Berlin] Announcement route - Action: null
+[03-Sep-2025 18:59:01 Europe/Berlin] Request path: /updated-msc-website/api/announcements
+[03-Sep-2025 18:59:01 Europe/Berlin] Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => announcements
+)
+
+[03-Sep-2025 18:59:01 Europe/Berlin] Original REQUEST_URI: /updated-msc-website/api/announcements?page=1&limit=10&include_archived=true
+[03-Sep-2025 18:59:01 Europe/Berlin] Found API index, resource: announcements
+[03-Sep-2025 18:59:01 Europe/Berlin] Announcement route - Path: /updated-msc-website/api/announcements
+[03-Sep-2025 18:59:01 Europe/Berlin] Announcement route - Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => announcements
+)
+
+[03-Sep-2025 18:59:01 Europe/Berlin] Announcement route - Endpoint: 
+[03-Sep-2025 18:59:01 Europe/Berlin] Announcement route - ID: null
+[03-Sep-2025 18:59:01 Europe/Berlin] Announcement route - Action: null
+[03-Sep-2025 18:59:02 Europe/Berlin] Request path: /updated-msc-website/api/announcements/28
+[03-Sep-2025 18:59:02 Europe/Berlin] Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => announcements
+    [3] => 28
+)
+
+[03-Sep-2025 18:59:02 Europe/Berlin] Original REQUEST_URI: /updated-msc-website/api/announcements/28
+[03-Sep-2025 18:59:02 Europe/Berlin] Found API index, resource: announcements
+[03-Sep-2025 18:59:02 Europe/Berlin] Announcement route - Path: /updated-msc-website/api/announcements/28
+[03-Sep-2025 18:59:02 Europe/Berlin] Announcement route - Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => announcements
+    [3] => 28
+)
+
+[03-Sep-2025 18:59:02 Europe/Berlin] Announcement route - Endpoint: 28
+[03-Sep-2025 18:59:02 Europe/Berlin] Announcement route - ID: null
+[03-Sep-2025 18:59:02 Europe/Berlin] Announcement route - Action: null
+[03-Sep-2025 18:59:02 Europe/Berlin] Request path: /updated-msc-website/api/announcements
+[03-Sep-2025 18:59:02 Europe/Berlin] Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => announcements
+)
+
+[03-Sep-2025 18:59:02 Europe/Berlin] Original REQUEST_URI: /updated-msc-website/api/announcements?page=1&limit=10&include_archived=true
+[03-Sep-2025 18:59:02 Europe/Berlin] Found API index, resource: announcements
+[03-Sep-2025 18:59:02 Europe/Berlin] Announcement route - Path: /updated-msc-website/api/announcements
+[03-Sep-2025 18:59:02 Europe/Berlin] Announcement route - Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => announcements
+)
+
+[03-Sep-2025 18:59:02 Europe/Berlin] Announcement route - Endpoint: 
+[03-Sep-2025 18:59:02 Europe/Berlin] Announcement route - ID: null
+[03-Sep-2025 18:59:02 Europe/Berlin] Announcement route - Action: null
+[03-Sep-2025 18:59:02 Europe/Berlin] Request path: /updated-msc-website/api/announcements
+[03-Sep-2025 18:59:02 Europe/Berlin] Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => announcements
+)
+
+[03-Sep-2025 18:59:02 Europe/Berlin] Original REQUEST_URI: /updated-msc-website/api/announcements?page=1&limit=10&include_archived=true
+[03-Sep-2025 18:59:02 Europe/Berlin] Found API index, resource: announcements
+[03-Sep-2025 18:59:02 Europe/Berlin] Announcement route - Path: /updated-msc-website/api/announcements
+[03-Sep-2025 18:59:02 Europe/Berlin] Announcement route - Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => announcements
+)
+
+[03-Sep-2025 18:59:02 Europe/Berlin] Announcement route - Endpoint: 
+[03-Sep-2025 18:59:02 Europe/Berlin] Announcement route - ID: null
+[03-Sep-2025 18:59:02 Europe/Berlin] Announcement route - Action: null
+[03-Sep-2025 18:59:16 Europe/Berlin] Request path: /updated-msc-website/api/announcements/2/archive
+[03-Sep-2025 18:59:16 Europe/Berlin] Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => announcements
+    [3] => 2
+    [4] => archive
+)
+
+[03-Sep-2025 18:59:16 Europe/Berlin] Original REQUEST_URI: /updated-msc-website/api/announcements/2/archive
+[03-Sep-2025 18:59:16 Europe/Berlin] Found API index, resource: announcements
+[03-Sep-2025 18:59:16 Europe/Berlin] Announcement route - Path: /updated-msc-website/api/announcements/2/archive
+[03-Sep-2025 18:59:16 Europe/Berlin] Announcement route - Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => announcements
+    [3] => 2
+    [4] => archive
+)
+
+[03-Sep-2025 18:59:16 Europe/Berlin] Announcement route - Endpoint: 2
+[03-Sep-2025 18:59:16 Europe/Berlin] Announcement route - ID: archive
+[03-Sep-2025 18:59:16 Europe/Berlin] Announcement route - Action: null
+[03-Sep-2025 18:59:16 Europe/Berlin] Request path: /updated-msc-website/api/announcements
+[03-Sep-2025 18:59:16 Europe/Berlin] Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => announcements
+)
+
+[03-Sep-2025 18:59:16 Europe/Berlin] Original REQUEST_URI: /updated-msc-website/api/announcements?page=1&limit=10&include_archived=true
+[03-Sep-2025 18:59:16 Europe/Berlin] Found API index, resource: announcements
+[03-Sep-2025 18:59:16 Europe/Berlin] Announcement route - Path: /updated-msc-website/api/announcements
+[03-Sep-2025 18:59:16 Europe/Berlin] Announcement route - Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => announcements
+)
+
+[03-Sep-2025 18:59:16 Europe/Berlin] Announcement route - Endpoint: 
+[03-Sep-2025 18:59:16 Europe/Berlin] Announcement route - ID: null
+[03-Sep-2025 18:59:16 Europe/Berlin] Announcement route - Action: null
+[03-Sep-2025 18:59:16 Europe/Berlin] Request path: /updated-msc-website/api/announcements
+[03-Sep-2025 18:59:16 Europe/Berlin] Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => announcements
+)
+
+[03-Sep-2025 18:59:16 Europe/Berlin] Original REQUEST_URI: /updated-msc-website/api/announcements?page=1&limit=10&include_archived=true
+[03-Sep-2025 18:59:16 Europe/Berlin] Found API index, resource: announcements
+[03-Sep-2025 18:59:16 Europe/Berlin] Announcement route - Path: /updated-msc-website/api/announcements
+[03-Sep-2025 18:59:16 Europe/Berlin] Announcement route - Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => announcements
+)
+
+[03-Sep-2025 18:59:16 Europe/Berlin] Announcement route - Endpoint: 
+[03-Sep-2025 18:59:16 Europe/Berlin] Announcement route - ID: null
+[03-Sep-2025 18:59:16 Europe/Berlin] Announcement route - Action: null
+[03-Sep-2025 18:59:26 Europe/Berlin] Request path: /updated-msc-website/api/announcements/2
+[03-Sep-2025 18:59:26 Europe/Berlin] Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => announcements
+    [3] => 2
+)
+
+[03-Sep-2025 18:59:26 Europe/Berlin] Original REQUEST_URI: /updated-msc-website/api/announcements/2
+[03-Sep-2025 18:59:26 Europe/Berlin] Found API index, resource: announcements
+[03-Sep-2025 18:59:26 Europe/Berlin] Announcement route - Path: /updated-msc-website/api/announcements/2
+[03-Sep-2025 18:59:26 Europe/Berlin] Announcement route - Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => announcements
+    [3] => 2
+)
+
+[03-Sep-2025 18:59:26 Europe/Berlin] Announcement route - Endpoint: 2
+[03-Sep-2025 18:59:26 Europe/Berlin] Announcement route - ID: null
+[03-Sep-2025 18:59:26 Europe/Berlin] Announcement route - Action: null
+[03-Sep-2025 18:59:26 Europe/Berlin] Request path: /updated-msc-website/api/announcements
+[03-Sep-2025 18:59:26 Europe/Berlin] Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => announcements
+)
+
+[03-Sep-2025 18:59:26 Europe/Berlin] Original REQUEST_URI: /updated-msc-website/api/announcements?page=1&limit=10&include_archived=true
+[03-Sep-2025 18:59:26 Europe/Berlin] Found API index, resource: announcements
+[03-Sep-2025 18:59:26 Europe/Berlin] Announcement route - Path: /updated-msc-website/api/announcements
+[03-Sep-2025 18:59:26 Europe/Berlin] Announcement route - Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => announcements
+)
+
+[03-Sep-2025 18:59:26 Europe/Berlin] Announcement route - Endpoint: 
+[03-Sep-2025 18:59:26 Europe/Berlin] Announcement route - ID: null
+[03-Sep-2025 18:59:26 Europe/Berlin] Announcement route - Action: null
+[03-Sep-2025 18:59:26 Europe/Berlin] Request path: /updated-msc-website/api/announcements
+[03-Sep-2025 18:59:26 Europe/Berlin] Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => announcements
+)
+
+[03-Sep-2025 18:59:26 Europe/Berlin] Original REQUEST_URI: /updated-msc-website/api/announcements?page=1&limit=10&include_archived=true
+[03-Sep-2025 18:59:26 Europe/Berlin] Found API index, resource: announcements
+[03-Sep-2025 18:59:26 Europe/Berlin] Announcement route - Path: /updated-msc-website/api/announcements
+[03-Sep-2025 18:59:26 Europe/Berlin] Announcement route - Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => announcements
+)
+
+[03-Sep-2025 18:59:26 Europe/Berlin] Announcement route - Endpoint: 
+[03-Sep-2025 18:59:26 Europe/Berlin] Announcement route - ID: null
+[03-Sep-2025 18:59:26 Europe/Berlin] Announcement route - Action: null
+[03-Sep-2025 19:05:01 Europe/Berlin] Request path: /updated-msc-website/api/announcements
+[03-Sep-2025 19:05:01 Europe/Berlin] Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => announcements
+)
+
+[03-Sep-2025 19:05:01 Europe/Berlin] Original REQUEST_URI: /updated-msc-website/api/announcements?page=1&limit=10&include_archived=true
+[03-Sep-2025 19:05:01 Europe/Berlin] Found API index, resource: announcements
+[03-Sep-2025 19:05:01 Europe/Berlin] Announcement route - Path: /updated-msc-website/api/announcements
+[03-Sep-2025 19:05:01 Europe/Berlin] Announcement route - Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => announcements
+)
+
+[03-Sep-2025 19:05:01 Europe/Berlin] Announcement route - Endpoint: 
+[03-Sep-2025 19:05:01 Europe/Berlin] Announcement route - ID: null
+[03-Sep-2025 19:05:01 Europe/Berlin] Announcement route - Action: null
+[03-Sep-2025 19:05:15 Europe/Berlin] Request path: /updated-msc-website/api/announcements
+[03-Sep-2025 19:05:15 Europe/Berlin] Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => announcements
+)
+
+[03-Sep-2025 19:05:15 Europe/Berlin] Original REQUEST_URI: /updated-msc-website/api/announcements
+[03-Sep-2025 19:05:15 Europe/Berlin] Found API index, resource: announcements
+[03-Sep-2025 19:05:15 Europe/Berlin] Announcement route - Path: /updated-msc-website/api/announcements
+[03-Sep-2025 19:05:15 Europe/Berlin] Announcement route - Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => announcements
+)
+
+[03-Sep-2025 19:05:15 Europe/Berlin] Announcement route - Endpoint: 
+[03-Sep-2025 19:05:15 Europe/Berlin] Announcement route - ID: null
+[03-Sep-2025 19:05:15 Europe/Berlin] Announcement route - Action: null
+[03-Sep-2025 19:05:15 Europe/Berlin] PHP Notice:  session_start(): Ignoring session_start() because a session is already active in C:\xampp\htdocs\updated-msc-website\api\middleware\AuthMiddleware.php on line 56
+[03-Sep-2025 19:05:15 Europe/Berlin] Request path: /updated-msc-website/api/announcements
+[03-Sep-2025 19:05:15 Europe/Berlin] Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => announcements
+)
+
+[03-Sep-2025 19:05:15 Europe/Berlin] Original REQUEST_URI: /updated-msc-website/api/announcements?page=1&limit=10&include_archived=true
+[03-Sep-2025 19:05:15 Europe/Berlin] Found API index, resource: announcements
+[03-Sep-2025 19:05:15 Europe/Berlin] Announcement route - Path: /updated-msc-website/api/announcements
+[03-Sep-2025 19:05:15 Europe/Berlin] Announcement route - Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => announcements
+)
+
+[03-Sep-2025 19:05:15 Europe/Berlin] Announcement route - Endpoint: 
+[03-Sep-2025 19:05:15 Europe/Berlin] Announcement route - ID: null
+[03-Sep-2025 19:05:15 Europe/Berlin] Announcement route - Action: null
+[03-Sep-2025 19:05:27 Europe/Berlin] Request path: /updated-msc-website/api/announcements
+[03-Sep-2025 19:05:27 Europe/Berlin] Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => announcements
+)
+
+[03-Sep-2025 19:05:27 Europe/Berlin] Original REQUEST_URI: /updated-msc-website/api/announcements
+[03-Sep-2025 19:05:27 Europe/Berlin] Found API index, resource: announcements
+[03-Sep-2025 19:05:27 Europe/Berlin] Announcement route - Path: /updated-msc-website/api/announcements
+[03-Sep-2025 19:05:27 Europe/Berlin] Announcement route - Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => announcements
+)
+
+[03-Sep-2025 19:05:27 Europe/Berlin] Announcement route - Endpoint: 
+[03-Sep-2025 19:05:27 Europe/Berlin] Announcement route - ID: null
+[03-Sep-2025 19:05:27 Europe/Berlin] Announcement route - Action: null
+[03-Sep-2025 19:05:27 Europe/Berlin] PHP Notice:  session_start(): Ignoring session_start() because a session is already active in C:\xampp\htdocs\updated-msc-website\api\middleware\AuthMiddleware.php on line 56
+[03-Sep-2025 19:05:27 Europe/Berlin] Request path: /updated-msc-website/api/announcements
+[03-Sep-2025 19:05:27 Europe/Berlin] Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => announcements
+)
+
+[03-Sep-2025 19:05:27 Europe/Berlin] Original REQUEST_URI: /updated-msc-website/api/announcements?page=1&limit=10&include_archived=true
+[03-Sep-2025 19:05:27 Europe/Berlin] Found API index, resource: announcements
+[03-Sep-2025 19:05:27 Europe/Berlin] Announcement route - Path: /updated-msc-website/api/announcements
+[03-Sep-2025 19:05:27 Europe/Berlin] Announcement route - Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => announcements
+)
+
+[03-Sep-2025 19:05:27 Europe/Berlin] Announcement route - Endpoint: 
+[03-Sep-2025 19:05:27 Europe/Berlin] Announcement route - ID: null
+[03-Sep-2025 19:05:27 Europe/Berlin] Announcement route - Action: null
+[03-Sep-2025 19:05:48 Europe/Berlin] Request path: /updated-msc-website/api/announcements
+[03-Sep-2025 19:05:48 Europe/Berlin] Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => announcements
+)
+
+[03-Sep-2025 19:05:48 Europe/Berlin] Original REQUEST_URI: /updated-msc-website/api/announcements
+[03-Sep-2025 19:05:48 Europe/Berlin] Found API index, resource: announcements
+[03-Sep-2025 19:05:48 Europe/Berlin] Announcement route - Path: /updated-msc-website/api/announcements
+[03-Sep-2025 19:05:48 Europe/Berlin] Announcement route - Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => announcements
+)
+
+[03-Sep-2025 19:05:48 Europe/Berlin] Announcement route - Endpoint: 
+[03-Sep-2025 19:05:48 Europe/Berlin] Announcement route - ID: null
+[03-Sep-2025 19:05:48 Europe/Berlin] Announcement route - Action: null
+[03-Sep-2025 19:05:48 Europe/Berlin] PHP Notice:  session_start(): Ignoring session_start() because a session is already active in C:\xampp\htdocs\updated-msc-website\api\middleware\AuthMiddleware.php on line 56
+[03-Sep-2025 19:05:48 Europe/Berlin] Request path: /updated-msc-website/api/announcements
+[03-Sep-2025 19:05:48 Europe/Berlin] Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => announcements
+)
+
+[03-Sep-2025 19:05:48 Europe/Berlin] Original REQUEST_URI: /updated-msc-website/api/announcements?page=1&limit=10&include_archived=true
+[03-Sep-2025 19:05:48 Europe/Berlin] Found API index, resource: announcements
+[03-Sep-2025 19:05:48 Europe/Berlin] Announcement route - Path: /updated-msc-website/api/announcements
+[03-Sep-2025 19:05:48 Europe/Berlin] Announcement route - Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => announcements
+)
+
+[03-Sep-2025 19:05:48 Europe/Berlin] Announcement route - Endpoint: 
+[03-Sep-2025 19:05:48 Europe/Berlin] Announcement route - ID: null
+[03-Sep-2025 19:05:48 Europe/Berlin] Announcement route - Action: null
+[03-Sep-2025 19:06:00 Europe/Berlin] Request path: /updated-msc-website/api/announcements/33/archive
+[03-Sep-2025 19:06:00 Europe/Berlin] Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => announcements
+    [3] => 33
+    [4] => archive
+)
+
+[03-Sep-2025 19:06:00 Europe/Berlin] Original REQUEST_URI: /updated-msc-website/api/announcements/33/archive
+[03-Sep-2025 19:06:00 Europe/Berlin] Found API index, resource: announcements
+[03-Sep-2025 19:06:00 Europe/Berlin] Announcement route - Path: /updated-msc-website/api/announcements/33/archive
+[03-Sep-2025 19:06:00 Europe/Berlin] Announcement route - Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => announcements
+    [3] => 33
+    [4] => archive
+)
+
+[03-Sep-2025 19:06:00 Europe/Berlin] Announcement route - Endpoint: 33
+[03-Sep-2025 19:06:00 Europe/Berlin] Announcement route - ID: archive
+[03-Sep-2025 19:06:00 Europe/Berlin] Announcement route - Action: null
+[03-Sep-2025 19:06:00 Europe/Berlin] Request path: /updated-msc-website/api/announcements
+[03-Sep-2025 19:06:00 Europe/Berlin] Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => announcements
+)
+
+[03-Sep-2025 19:06:00 Europe/Berlin] Request path: /updated-msc-website/api/announcements/32/archive
+[03-Sep-2025 19:06:00 Europe/Berlin] Original REQUEST_URI: /updated-msc-website/api/announcements?page=1&limit=10&include_archived=true
+[03-Sep-2025 19:06:00 Europe/Berlin] Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => announcements
+    [3] => 32
+    [4] => archive
+)
+
+[03-Sep-2025 19:06:00 Europe/Berlin] Found API index, resource: announcements
+[03-Sep-2025 19:06:00 Europe/Berlin] Original REQUEST_URI: /updated-msc-website/api/announcements/32/archive
+[03-Sep-2025 19:06:00 Europe/Berlin] Found API index, resource: announcements
+[03-Sep-2025 19:06:00 Europe/Berlin] Announcement route - Path: /updated-msc-website/api/announcements
+[03-Sep-2025 19:06:00 Europe/Berlin] Announcement route - Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => announcements
+)
+
+[03-Sep-2025 19:06:00 Europe/Berlin] Announcement route - Path: /updated-msc-website/api/announcements/32/archive
+[03-Sep-2025 19:06:00 Europe/Berlin] Announcement route - Endpoint: 
+[03-Sep-2025 19:06:00 Europe/Berlin] Announcement route - Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => announcements
+    [3] => 32
+    [4] => archive
+)
+
+[03-Sep-2025 19:06:00 Europe/Berlin] Announcement route - ID: null
+[03-Sep-2025 19:06:00 Europe/Berlin] Announcement route - Endpoint: 32
+[03-Sep-2025 19:06:00 Europe/Berlin] Announcement route - Action: null
+[03-Sep-2025 19:06:00 Europe/Berlin] Announcement route - ID: archive
+[03-Sep-2025 19:06:00 Europe/Berlin] Announcement route - Action: null
+[03-Sep-2025 19:06:00 Europe/Berlin] Request path: /updated-msc-website/api/announcements
+[03-Sep-2025 19:06:00 Europe/Berlin] Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => announcements
+)
+
+[03-Sep-2025 19:06:00 Europe/Berlin] Original REQUEST_URI: /updated-msc-website/api/announcements?page=1&limit=10&include_archived=true
+[03-Sep-2025 19:06:00 Europe/Berlin] Found API index, resource: announcements
+[03-Sep-2025 19:06:00 Europe/Berlin] Announcement route - Path: /updated-msc-website/api/announcements
+[03-Sep-2025 19:06:00 Europe/Berlin] Announcement route - Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => announcements
+)
+
+[03-Sep-2025 19:06:00 Europe/Berlin] Announcement route - Endpoint: 
+[03-Sep-2025 19:06:00 Europe/Berlin] Announcement route - ID: null
+[03-Sep-2025 19:06:00 Europe/Berlin] Announcement route - Action: null
+[03-Sep-2025 19:06:00 Europe/Berlin] Request path: /updated-msc-website/api/announcements
+[03-Sep-2025 19:06:00 Europe/Berlin] Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => announcements
+)
+
+[03-Sep-2025 19:06:00 Europe/Berlin] Original REQUEST_URI: /updated-msc-website/api/announcements?page=1&limit=10&include_archived=true
+[03-Sep-2025 19:06:00 Europe/Berlin] Found API index, resource: announcements
+[03-Sep-2025 19:06:00 Europe/Berlin] Announcement route - Path: /updated-msc-website/api/announcements
+[03-Sep-2025 19:06:00 Europe/Berlin] Announcement route - Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => announcements
+)
+
+[03-Sep-2025 19:06:00 Europe/Berlin] Announcement route - Endpoint: 
+[03-Sep-2025 19:06:00 Europe/Berlin] Announcement route - ID: null
+[03-Sep-2025 19:06:00 Europe/Berlin] Announcement route - Action: null
+[03-Sep-2025 19:06:12 Europe/Berlin] Request path: /updated-msc-website/api/announcements/33/unarchive
+[03-Sep-2025 19:06:12 Europe/Berlin] Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => announcements
+    [3] => 33
+    [4] => unarchive
+)
+
+[03-Sep-2025 19:06:12 Europe/Berlin] Original REQUEST_URI: /updated-msc-website/api/announcements/33/unarchive
+[03-Sep-2025 19:06:12 Europe/Berlin] Found API index, resource: announcements
+[03-Sep-2025 19:06:12 Europe/Berlin] Announcement route - Path: /updated-msc-website/api/announcements/33/unarchive
+[03-Sep-2025 19:06:12 Europe/Berlin] Announcement route - Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => announcements
+    [3] => 33
+    [4] => unarchive
+)
+
+[03-Sep-2025 19:06:12 Europe/Berlin] Announcement route - Endpoint: 33
+[03-Sep-2025 19:06:12 Europe/Berlin] Announcement route - ID: unarchive
+[03-Sep-2025 19:06:12 Europe/Berlin] Announcement route - Action: null
+[03-Sep-2025 19:06:12 Europe/Berlin] Request path: /updated-msc-website/api/announcements
+[03-Sep-2025 19:06:12 Europe/Berlin] Request path: /updated-msc-website/api/announcements/32/unarchive
+[03-Sep-2025 19:06:12 Europe/Berlin] Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => announcements
+)
+
+[03-Sep-2025 19:06:12 Europe/Berlin] Original REQUEST_URI: /updated-msc-website/api/announcements?page=1&limit=10&include_archived=true
+[03-Sep-2025 19:06:12 Europe/Berlin] Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => announcements
+    [3] => 32
+    [4] => unarchive
+)
+
+[03-Sep-2025 19:06:12 Europe/Berlin] Found API index, resource: announcements
+[03-Sep-2025 19:06:12 Europe/Berlin] Original REQUEST_URI: /updated-msc-website/api/announcements/32/unarchive
+[03-Sep-2025 19:06:12 Europe/Berlin] Found API index, resource: announcements
+[03-Sep-2025 19:06:12 Europe/Berlin] Announcement route - Path: /updated-msc-website/api/announcements
+[03-Sep-2025 19:06:12 Europe/Berlin] Announcement route - Path: /updated-msc-website/api/announcements/32/unarchive
+[03-Sep-2025 19:06:12 Europe/Berlin] Announcement route - Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => announcements
+)
+
+[03-Sep-2025 19:06:12 Europe/Berlin] Announcement route - Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => announcements
+    [3] => 32
+    [4] => unarchive
+)
+
+[03-Sep-2025 19:06:12 Europe/Berlin] Announcement route - Endpoint: 32
+[03-Sep-2025 19:06:12 Europe/Berlin] Announcement route - Endpoint: 
+[03-Sep-2025 19:06:12 Europe/Berlin] Announcement route - ID: unarchive
+[03-Sep-2025 19:06:12 Europe/Berlin] Announcement route - ID: null
+[03-Sep-2025 19:06:12 Europe/Berlin] Announcement route - Action: null
+[03-Sep-2025 19:06:12 Europe/Berlin] Announcement route - Action: null
+[03-Sep-2025 19:06:12 Europe/Berlin] Request path: /updated-msc-website/api/announcements
+[03-Sep-2025 19:06:12 Europe/Berlin] Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => announcements
+)
+
+[03-Sep-2025 19:06:12 Europe/Berlin] Original REQUEST_URI: /updated-msc-website/api/announcements?page=1&limit=10&include_archived=true
+[03-Sep-2025 19:06:12 Europe/Berlin] Found API index, resource: announcements
+[03-Sep-2025 19:06:12 Europe/Berlin] Announcement route - Path: /updated-msc-website/api/announcements
+[03-Sep-2025 19:06:12 Europe/Berlin] Announcement route - Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => announcements
+)
+
+[03-Sep-2025 19:06:12 Europe/Berlin] Announcement route - Endpoint: 
+[03-Sep-2025 19:06:12 Europe/Berlin] Announcement route - ID: null
+[03-Sep-2025 19:06:12 Europe/Berlin] Announcement route - Action: null
+[03-Sep-2025 19:06:12 Europe/Berlin] Request path: /updated-msc-website/api/announcements
+[03-Sep-2025 19:06:12 Europe/Berlin] Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => announcements
+)
+
+[03-Sep-2025 19:06:12 Europe/Berlin] Original REQUEST_URI: /updated-msc-website/api/announcements?page=1&limit=10&include_archived=true
+[03-Sep-2025 19:06:12 Europe/Berlin] Found API index, resource: announcements
+[03-Sep-2025 19:06:12 Europe/Berlin] Announcement route - Path: /updated-msc-website/api/announcements
+[03-Sep-2025 19:06:12 Europe/Berlin] Announcement route - Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => announcements
+)
+
+[03-Sep-2025 19:06:12 Europe/Berlin] Announcement route - Endpoint: 
+[03-Sep-2025 19:06:12 Europe/Berlin] Announcement route - ID: null
+[03-Sep-2025 19:06:12 Europe/Berlin] Announcement route - Action: null
+[03-Sep-2025 19:06:22 Europe/Berlin] Request path: /updated-msc-website/api/announcements/33
+[03-Sep-2025 19:06:22 Europe/Berlin] Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => announcements
+    [3] => 33
+)
+
+[03-Sep-2025 19:06:22 Europe/Berlin] Original REQUEST_URI: /updated-msc-website/api/announcements/33
+[03-Sep-2025 19:06:22 Europe/Berlin] Found API index, resource: announcements
+[03-Sep-2025 19:06:22 Europe/Berlin] Announcement route - Path: /updated-msc-website/api/announcements/33
+[03-Sep-2025 19:06:22 Europe/Berlin] Announcement route - Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => announcements
+    [3] => 33
+)
+
+[03-Sep-2025 19:06:22 Europe/Berlin] Announcement route - Endpoint: 33
+[03-Sep-2025 19:06:22 Europe/Berlin] Announcement route - ID: null
+[03-Sep-2025 19:06:22 Europe/Berlin] Announcement route - Action: null
+[03-Sep-2025 19:06:22 Europe/Berlin] Request path: /updated-msc-website/api/announcements
+[03-Sep-2025 19:06:22 Europe/Berlin] Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => announcements
+)
+
+[03-Sep-2025 19:06:22 Europe/Berlin] Original REQUEST_URI: /updated-msc-website/api/announcements?page=1&limit=10&include_archived=true
+[03-Sep-2025 19:06:22 Europe/Berlin] Found API index, resource: announcements
+[03-Sep-2025 19:06:22 Europe/Berlin] Announcement route - Path: /updated-msc-website/api/announcements
+[03-Sep-2025 19:06:22 Europe/Berlin] Announcement route - Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => announcements
+)
+
+[03-Sep-2025 19:06:22 Europe/Berlin] Announcement route - Endpoint: 
+[03-Sep-2025 19:06:22 Europe/Berlin] Announcement route - ID: null
+[03-Sep-2025 19:06:22 Europe/Berlin] Announcement route - Action: null
+[03-Sep-2025 19:06:22 Europe/Berlin] Request path: /updated-msc-website/api/announcements
+[03-Sep-2025 19:06:22 Europe/Berlin] Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => announcements
+)
+
+[03-Sep-2025 19:06:22 Europe/Berlin] Original REQUEST_URI: /updated-msc-website/api/announcements?page=1&limit=10&include_archived=true
+[03-Sep-2025 19:06:22 Europe/Berlin] Found API index, resource: announcements
+[03-Sep-2025 19:06:22 Europe/Berlin] Announcement route - Path: /updated-msc-website/api/announcements
+[03-Sep-2025 19:06:22 Europe/Berlin] Announcement route - Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => announcements
+)
+
+[03-Sep-2025 19:06:22 Europe/Berlin] Announcement route - Endpoint: 
+[03-Sep-2025 19:06:22 Europe/Berlin] Announcement route - ID: null
+[03-Sep-2025 19:06:22 Europe/Berlin] Announcement route - Action: null
+[03-Sep-2025 19:06:37 Europe/Berlin] Request path: /updated-msc-website/api/announcements/32/archive
+[03-Sep-2025 19:06:37 Europe/Berlin] Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => announcements
+    [3] => 32
+    [4] => archive
+)
+
+[03-Sep-2025 19:06:37 Europe/Berlin] Original REQUEST_URI: /updated-msc-website/api/announcements/32/archive
+[03-Sep-2025 19:06:37 Europe/Berlin] Found API index, resource: announcements
+[03-Sep-2025 19:06:37 Europe/Berlin] Announcement route - Path: /updated-msc-website/api/announcements/32/archive
+[03-Sep-2025 19:06:37 Europe/Berlin] Announcement route - Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => announcements
+    [3] => 32
+    [4] => archive
+)
+
+[03-Sep-2025 19:06:37 Europe/Berlin] Announcement route - Endpoint: 32
+[03-Sep-2025 19:06:37 Europe/Berlin] Announcement route - ID: archive
+[03-Sep-2025 19:06:37 Europe/Berlin] Announcement route - Action: null
+[03-Sep-2025 19:06:37 Europe/Berlin] Request path: /updated-msc-website/api/announcements
+[03-Sep-2025 19:06:37 Europe/Berlin] Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => announcements
+)
+
+[03-Sep-2025 19:06:37 Europe/Berlin] Request path: /updated-msc-website/api/announcements/31/archive
+[03-Sep-2025 19:06:37 Europe/Berlin] Original REQUEST_URI: /updated-msc-website/api/announcements?page=1&limit=10&include_archived=true
+[03-Sep-2025 19:06:37 Europe/Berlin] Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => announcements
+    [3] => 31
+    [4] => archive
+)
+
+[03-Sep-2025 19:06:37 Europe/Berlin] Original REQUEST_URI: /updated-msc-website/api/announcements/31/archive
+[03-Sep-2025 19:06:37 Europe/Berlin] Found API index, resource: announcements
+[03-Sep-2025 19:06:37 Europe/Berlin] Found API index, resource: announcements
+[03-Sep-2025 19:06:37 Europe/Berlin] Announcement route - Path: /updated-msc-website/api/announcements
+[03-Sep-2025 19:06:37 Europe/Berlin] Announcement route - Path: /updated-msc-website/api/announcements/31/archive
+[03-Sep-2025 19:06:37 Europe/Berlin] Announcement route - Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => announcements
+)
+
+[03-Sep-2025 19:06:37 Europe/Berlin] Announcement route - Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => announcements
+    [3] => 31
+    [4] => archive
+)
+
+[03-Sep-2025 19:06:37 Europe/Berlin] Announcement route - Endpoint: 
+[03-Sep-2025 19:06:37 Europe/Berlin] Announcement route - Endpoint: 31
+[03-Sep-2025 19:06:37 Europe/Berlin] Announcement route - ID: null
+[03-Sep-2025 19:06:37 Europe/Berlin] Announcement route - ID: archive
+[03-Sep-2025 19:06:37 Europe/Berlin] Announcement route - Action: null
+[03-Sep-2025 19:06:37 Europe/Berlin] Announcement route - Action: null
+[03-Sep-2025 19:06:37 Europe/Berlin] Request path: /updated-msc-website/api/announcements
+[03-Sep-2025 19:06:37 Europe/Berlin] Request path: /updated-msc-website/api/announcements/29/archive
+[03-Sep-2025 19:06:37 Europe/Berlin] Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => announcements
+)
+
+[03-Sep-2025 19:06:37 Europe/Berlin] Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => announcements
+    [3] => 29
+    [4] => archive
+)
+
+[03-Sep-2025 19:06:37 Europe/Berlin] Original REQUEST_URI: /updated-msc-website/api/announcements/29/archive
+[03-Sep-2025 19:06:37 Europe/Berlin] Original REQUEST_URI: /updated-msc-website/api/announcements?page=1&limit=10&include_archived=true
+[03-Sep-2025 19:06:37 Europe/Berlin] Found API index, resource: announcements
+[03-Sep-2025 19:06:37 Europe/Berlin] Found API index, resource: announcements
+[03-Sep-2025 19:06:37 Europe/Berlin] Announcement route - Path: /updated-msc-website/api/announcements/29/archive
+[03-Sep-2025 19:06:37 Europe/Berlin] Announcement route - Path: /updated-msc-website/api/announcements
+[03-Sep-2025 19:06:37 Europe/Berlin] Announcement route - Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => announcements
+    [3] => 29
+    [4] => archive
+)
+
+[03-Sep-2025 19:06:37 Europe/Berlin] Announcement route - Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => announcements
+)
+
+[03-Sep-2025 19:06:37 Europe/Berlin] Announcement route - Endpoint: 29
+[03-Sep-2025 19:06:37 Europe/Berlin] Announcement route - Endpoint: 
+[03-Sep-2025 19:06:37 Europe/Berlin] Announcement route - ID: archive
+[03-Sep-2025 19:06:37 Europe/Berlin] Announcement route - ID: null
+[03-Sep-2025 19:06:37 Europe/Berlin] Announcement route - Action: null
+[03-Sep-2025 19:06:37 Europe/Berlin] Announcement route - Action: null
+[03-Sep-2025 19:06:37 Europe/Berlin] Request path: /updated-msc-website/api/announcements
+[03-Sep-2025 19:06:37 Europe/Berlin] Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => announcements
+)
+
+[03-Sep-2025 19:06:37 Europe/Berlin] Original REQUEST_URI: /updated-msc-website/api/announcements?page=1&limit=10&include_archived=true
+[03-Sep-2025 19:06:37 Europe/Berlin] Found API index, resource: announcements
+[03-Sep-2025 19:06:37 Europe/Berlin] Announcement route - Path: /updated-msc-website/api/announcements
+[03-Sep-2025 19:06:37 Europe/Berlin] Announcement route - Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => announcements
+)
+
+[03-Sep-2025 19:06:37 Europe/Berlin] Announcement route - Endpoint: 
+[03-Sep-2025 19:06:37 Europe/Berlin] Announcement route - ID: null
+[03-Sep-2025 19:06:37 Europe/Berlin] Announcement route - Action: null
+[03-Sep-2025 19:06:37 Europe/Berlin] Request path: /updated-msc-website/api/announcements
+[03-Sep-2025 19:06:37 Europe/Berlin] Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => announcements
+)
+
+[03-Sep-2025 19:06:37 Europe/Berlin] Original REQUEST_URI: /updated-msc-website/api/announcements?page=1&limit=10&include_archived=true
+[03-Sep-2025 19:06:37 Europe/Berlin] Found API index, resource: announcements
+[03-Sep-2025 19:06:37 Europe/Berlin] Announcement route - Path: /updated-msc-website/api/announcements
+[03-Sep-2025 19:06:37 Europe/Berlin] Announcement route - Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => announcements
+)
+
+[03-Sep-2025 19:06:37 Europe/Berlin] Announcement route - Endpoint: 
+[03-Sep-2025 19:06:37 Europe/Berlin] Announcement route - ID: null
+[03-Sep-2025 19:06:37 Europe/Berlin] Announcement route - Action: null
+[03-Sep-2025 19:06:46 Europe/Berlin] Request path: /updated-msc-website/api/announcements/32
+[03-Sep-2025 19:06:46 Europe/Berlin] Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => announcements
+    [3] => 32
+)
+
+[03-Sep-2025 19:06:46 Europe/Berlin] Original REQUEST_URI: /updated-msc-website/api/announcements/32
+[03-Sep-2025 19:06:46 Europe/Berlin] Found API index, resource: announcements
+[03-Sep-2025 19:06:46 Europe/Berlin] Announcement route - Path: /updated-msc-website/api/announcements/32
+[03-Sep-2025 19:06:46 Europe/Berlin] Announcement route - Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => announcements
+    [3] => 32
+)
+
+[03-Sep-2025 19:06:46 Europe/Berlin] Announcement route - Endpoint: 32
+[03-Sep-2025 19:06:46 Europe/Berlin] Announcement route - ID: null
+[03-Sep-2025 19:06:46 Europe/Berlin] Announcement route - Action: null
+[03-Sep-2025 19:06:46 Europe/Berlin] Request path: /updated-msc-website/api/announcements
+[03-Sep-2025 19:06:46 Europe/Berlin] Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => announcements
+)
+
+[03-Sep-2025 19:06:46 Europe/Berlin] Request path: /updated-msc-website/api/announcements/31
+[03-Sep-2025 19:06:46 Europe/Berlin] Original REQUEST_URI: /updated-msc-website/api/announcements?page=1&limit=10&include_archived=true
+[03-Sep-2025 19:06:46 Europe/Berlin] Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => announcements
+    [3] => 31
+)
+
+[03-Sep-2025 19:06:46 Europe/Berlin] Found API index, resource: announcements
+[03-Sep-2025 19:06:46 Europe/Berlin] Original REQUEST_URI: /updated-msc-website/api/announcements/31
+[03-Sep-2025 19:06:46 Europe/Berlin] Found API index, resource: announcements
+[03-Sep-2025 19:06:46 Europe/Berlin] Announcement route - Path: /updated-msc-website/api/announcements
+[03-Sep-2025 19:06:46 Europe/Berlin] Announcement route - Path: /updated-msc-website/api/announcements/31
+[03-Sep-2025 19:06:46 Europe/Berlin] Announcement route - Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => announcements
+)
+
+[03-Sep-2025 19:06:46 Europe/Berlin] Announcement route - Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => announcements
+    [3] => 31
+)
+
+[03-Sep-2025 19:06:46 Europe/Berlin] Announcement route - Endpoint: 
+[03-Sep-2025 19:06:46 Europe/Berlin] Announcement route - Endpoint: 31
+[03-Sep-2025 19:06:46 Europe/Berlin] Announcement route - ID: null
+[03-Sep-2025 19:06:46 Europe/Berlin] Announcement route - ID: null
+[03-Sep-2025 19:06:46 Europe/Berlin] Announcement route - Action: null
+[03-Sep-2025 19:06:46 Europe/Berlin] Announcement route - Action: null
+[03-Sep-2025 19:06:46 Europe/Berlin] Request path: /updated-msc-website/api/announcements/29
+[03-Sep-2025 19:06:46 Europe/Berlin] Request path: /updated-msc-website/api/announcements
+[03-Sep-2025 19:06:46 Europe/Berlin] Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => announcements
+    [3] => 29
+)
+
+[03-Sep-2025 19:06:46 Europe/Berlin] Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => announcements
+)
+
+[03-Sep-2025 19:06:46 Europe/Berlin] Original REQUEST_URI: /updated-msc-website/api/announcements?page=1&limit=10&include_archived=true
+[03-Sep-2025 19:06:46 Europe/Berlin] Original REQUEST_URI: /updated-msc-website/api/announcements/29
+[03-Sep-2025 19:06:46 Europe/Berlin] Found API index, resource: announcements
+[03-Sep-2025 19:06:46 Europe/Berlin] Found API index, resource: announcements
+[03-Sep-2025 19:06:46 Europe/Berlin] Announcement route - Path: /updated-msc-website/api/announcements
+[03-Sep-2025 19:06:46 Europe/Berlin] Announcement route - Path: /updated-msc-website/api/announcements/29
+[03-Sep-2025 19:06:46 Europe/Berlin] Announcement route - Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => announcements
+)
+
+[03-Sep-2025 19:06:46 Europe/Berlin] Announcement route - Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => announcements
+    [3] => 29
+)
+
+[03-Sep-2025 19:06:46 Europe/Berlin] Announcement route - Endpoint: 29
+[03-Sep-2025 19:06:46 Europe/Berlin] Announcement route - Endpoint: 
+[03-Sep-2025 19:06:46 Europe/Berlin] Announcement route - ID: null
+[03-Sep-2025 19:06:46 Europe/Berlin] Announcement route - ID: null
+[03-Sep-2025 19:06:46 Europe/Berlin] Announcement route - Action: null
+[03-Sep-2025 19:06:46 Europe/Berlin] Announcement route - Action: null
+[03-Sep-2025 19:06:46 Europe/Berlin] Request path: /updated-msc-website/api/announcements
+[03-Sep-2025 19:06:46 Europe/Berlin] Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => announcements
+)
+
+[03-Sep-2025 19:06:46 Europe/Berlin] Original REQUEST_URI: /updated-msc-website/api/announcements?page=1&limit=10&include_archived=true
+[03-Sep-2025 19:06:46 Europe/Berlin] Found API index, resource: announcements
+[03-Sep-2025 19:06:46 Europe/Berlin] Announcement route - Path: /updated-msc-website/api/announcements
+[03-Sep-2025 19:06:46 Europe/Berlin] Announcement route - Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => announcements
+)
+
+[03-Sep-2025 19:06:46 Europe/Berlin] Announcement route - Endpoint: 
+[03-Sep-2025 19:06:46 Europe/Berlin] Announcement route - ID: null
+[03-Sep-2025 19:06:46 Europe/Berlin] Announcement route - Action: null
+[03-Sep-2025 19:06:46 Europe/Berlin] Request path: /updated-msc-website/api/announcements
+[03-Sep-2025 19:06:46 Europe/Berlin] Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => announcements
+)
+
+[03-Sep-2025 19:06:46 Europe/Berlin] Original REQUEST_URI: /updated-msc-website/api/announcements?page=1&limit=10&include_archived=true
+[03-Sep-2025 19:06:46 Europe/Berlin] Found API index, resource: announcements
+[03-Sep-2025 19:06:46 Europe/Berlin] Announcement route - Path: /updated-msc-website/api/announcements
+[03-Sep-2025 19:06:46 Europe/Berlin] Announcement route - Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => announcements
+)
+
+[03-Sep-2025 19:06:46 Europe/Berlin] Announcement route - Endpoint: 
+[03-Sep-2025 19:06:46 Europe/Berlin] Announcement route - ID: null
+[03-Sep-2025 19:06:46 Europe/Berlin] Announcement route - Action: null

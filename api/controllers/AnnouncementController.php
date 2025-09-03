@@ -28,40 +28,72 @@ class AnnouncementController
     {
         try {
             AuthMiddleware::requireOfficer();
-            
-            $data = json_decode(file_get_contents("php://input"), true);
-            
-            // Required fields for announcement creation
-            $requiredFields = ['title', 'content'];
-            $sanitizedData = Validator::sanitize($data);
 
-            // Accept optional image_url
-            if (isset($data['image_url'])) {
-                $sanitizedData['image_url'] = $data['image_url'];
+            $data = [];
+            $image_url = null;
+
+            // Detect if request is multipart (file upload) or JSON
+            if (!empty($_FILES) || isset($_POST['title'])) {
+                // Handle multipart/form-data
+                $data['title'] = $_POST['title'] ?? '';
+                $data['content'] = $_POST['content'] ?? '';
+
+                // Handle file upload if provided
+                if (isset($_FILES['image']) && $_FILES['image']['error'] === UPLOAD_ERR_OK) {
+                    $uploadDir = __DIR__ . '/../uploads/';
+                    if (!file_exists($uploadDir)) {
+                        mkdir($uploadDir, 0777, true);
+                    }
+
+                    $filename = time() . '_' . preg_replace('/[^a-zA-Z0-9\._-]/', '_', basename($_FILES['image']['name']));
+                    $targetPath = $uploadDir . $filename;
+
+                    if (move_uploaded_file($_FILES['image']['tmp_name'], $targetPath)) {
+                        $image_url = "/uploads/" . $filename;
+                    }
+                }
+
+            } else {
+                // Handle JSON (API clients)
+                $data = json_decode(file_get_contents("php://input"), true);
+                if (!$data) {
+                    Response::validationError(['request' => 'Invalid JSON or empty request body']);
+                }
+
+                if (isset($data['image_url'])) {
+                    $image_url = $data['image_url'];
+                }
             }
-            
+
             // Validate required fields
+            $requiredFields = ['title', 'content'];
             $errors = Validator::validateRequired($data, $requiredFields);
             if (!empty($errors)) {
                 Response::validationError($errors);
             }
-            
-            // Get current user info for posted_by
+
+            // Add posted_by
             $currentUser = AuthMiddleware::getCurrentUser();
             $data['posted_by'] = $currentUser['username'] ?? 'Admin';
-            
-            // Sanitize input data
+
+            // Add image_url if available
+            if ($image_url) {
+                $data['image_url'] = $image_url;
+            }
+
+            // Sanitize
             $sanitizedData = Validator::sanitize($data);
-            
+
             // Create announcement
             $announcement = $this->announcementModel->create($sanitizedData);
-            
+
             Response::success($announcement, 'Announcement created successfully', 201);
-            
+
         } catch (Exception $e) {
             Response::serverError($e->getMessage());
         }
     }
+
     
     /**
      * Get all announcements
@@ -127,45 +159,82 @@ class AnnouncementController
     {
         try {
             AuthMiddleware::requireOfficer();
-            
+
             $announcement = $this->announcementModel->findById($id);
             if (!$announcement) {
                 Response::notFound('Announcement not found');
             }
-            
-            $data = json_decode(file_get_contents("php://input"), true);
-            
-            // Required fields for announcement update
-            $requiredFields = ['title', 'content'];
-            $sanitizedData = Validator::sanitize($data);
 
-            if (isset($data['image_url'])) {
-                $sanitizedData['image_url'] = $data['image_url'];
+            $data = [];
+            $image_url = $announcement['image_url']; // keep existing image unless replaced
+
+            // --- Try FormData first ---
+            if (!empty($_POST) || !empty($_FILES)) {
+                $data['title'] = $_POST['title'] ?? $announcement['title'];
+                $data['content'] = $_POST['content'] ?? $announcement['content'];
+
+                if (isset($_FILES['image']) && $_FILES['image']['error'] === UPLOAD_ERR_OK) {
+                    $uploadDir = __DIR__ . '/../uploads/';
+                    if (!file_exists($uploadDir)) {
+                        mkdir($uploadDir, 0777, true);
+                    }
+
+                    $filename = time() . '_' . preg_replace('/[^a-zA-Z0-9\._-]/', '_', basename($_FILES['image']['name']));
+                    $targetPath = $uploadDir . $filename;
+
+                    if (move_uploaded_file($_FILES['image']['tmp_name'], $targetPath)) {
+                        $image_url = "/uploads/" . $filename;
+                    }
+                }
             }
-            
+
+            // --- If FormData is empty, try JSON ---
+            if (empty($data)) {
+                $jsonData = json_decode(file_get_contents("php://input"), true);
+
+                if (!empty($jsonData)) {
+                    $data['title'] = $jsonData['title'] ?? $announcement['title'];
+                    $data['content'] = $jsonData['content'] ?? $announcement['content'];
+
+                    if (isset($jsonData['image_url'])) {
+                        $image_url = $jsonData['image_url'];
+                    }
+                }
+            }
+
+            // Still nothing? Then reject
+            if (empty($data)) {
+                Response::validationError(['request' => 'No valid data provided (FormData or JSON)']);
+            }
+
             // Validate required fields
+            $requiredFields = ['title', 'content'];
             $errors = Validator::validateRequired($data, $requiredFields);
             if (!empty($errors)) {
                 Response::validationError($errors);
             }
-            
-            // Sanitize input data
+
+            // Add image_url
+            $data['image_url'] = $image_url;
+
+            // Sanitize
             $sanitizedData = Validator::sanitize($data);
-            
+
             // Update announcement
             $result = $this->announcementModel->update($id, $sanitizedData);
-            
+
             if ($result) {
                 $updatedAnnouncement = $this->announcementModel->findById($id);
                 Response::success($updatedAnnouncement, 'Announcement updated successfully');
             } else {
                 Response::serverError('Failed to update announcement');
             }
-            
+
         } catch (Exception $e) {
             Response::serverError($e->getMessage());
         }
     }
+
     
     /**
      * Archive announcement (Officer only)

@@ -1355,7 +1355,7 @@ This is a test announcement content.</textarea
         const id = document.getElementById("announcementId").value;
         await apiCall(
           `/announcements/${id}/archive`,
-          "POST",
+          "PUT",
           null,
           `📦 Archive Announcement #${id}`
         );
@@ -1365,7 +1365,7 @@ This is a test announcement content.</textarea
         const id = document.getElementById("announcementId").value;
         await apiCall(
           `/announcements/${id}/unarchive`,
-          "POST",
+          "PUT",
           null,
           `📤 Unarchive Announcement #${id}`
         );
