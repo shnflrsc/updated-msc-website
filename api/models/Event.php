@@ -225,6 +225,30 @@ class Event
     }
 
     /**
+     * Get upcoming events: for student calendar
+     */
+    public function getUpcomingEventsCalendar($limit = null)
+    {
+        $sql = "SELECT * FROM events 
+            WHERE event_status = 'upcoming' 
+            AND event_date >= CURDATE()
+            ORDER BY event_date ASC, event_time_start ASC";
+
+        if ($limit !== null) {
+            $sql .= " LIMIT :limit";
+        }
+
+        $stmt = $this->db->prepare($sql);
+
+        if ($limit !== null) {
+            $stmt->bindValue(':limit', (int)$limit, PDO::PARAM_INT);
+        }
+
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    /**
      * Get canceled events
      */
     public function getCanceled($limit = 10) //Default: 10
@@ -370,14 +394,32 @@ class Event
     }
 
     /**
-     * Get: Registered Events by a Student
+     * Get: Registered Events by a Student (on Dashboard)
      */
-    public function getEventsByStudent($studentId)
+    public function getEventsByStudent($studentId) 
     {
         $sql = "SELECT e.event_id, e.event_name, e.event_date, e.event_time_start, e.location, er.attendance_status
             FROM event_registrations er
             JOIN events e ON er.event_id = e.event_id
             WHERE er.student_id = :student_id
+            ORDER BY e.event_date DESC";
+
+        $stmt = $this->db->prepare($sql);
+        $stmt->execute(['student_id' => $studentId]);
+
+        return $stmt->fetchAll();
+    }
+
+    /**
+     * GET: Attended Events by a Student (on Event Badges)
+     */
+    public function getAttendedEventsByStudent($studentId)
+    {
+        $sql = "SELECT e.event_id, e.event_name, e.event_date, e.event_time_start, e.location, er.attendance_status
+            FROM event_registrations er
+            JOIN events e ON er.event_id = e.event_id
+            WHERE er.student_id = :student_id
+            AND event_status = 'attended'
             ORDER BY e.event_date DESC";
 
         $stmt = $this->db->prepare($sql);

@@ -330,6 +330,19 @@ class EventController
         }
     }
 
+     public function getUpcomingEventsCalendar() {
+        try {
+            AuthMiddleware::authenticate();
+
+            $limit = isset($_GET['limit']) ? (int)$_GET['limit'] : null;
+            $events = $this->eventModel->getUpcomingEventsCalendar($limit);
+
+            Response::success($events);
+        } catch (Exception $e) {
+            Response::serverError($e->getMessage());
+        }
+    }
+
     /**
      * Get canceled events
      */
@@ -500,6 +513,24 @@ class EventController
 
             if (!$events) {
                 Response::success([], 'No registered events found');
+            } else {
+                Response::success($events);
+            }
+        } catch (Exception $e) {
+            Response::serverError($e->getMessage());
+        }
+    }
+
+    /**
+     * Get: Attended Events
+     */
+    public function getAttendedEventsByStudent($studentId)
+    {
+        try {
+            $events = $this->eventModel->getAttendedEventsByStudent($studentId);
+
+            if (!$events) {
+                Response::success([], 'No attended events found');
             } else {
                 Response::success($events);
             }

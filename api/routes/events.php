@@ -46,7 +46,9 @@ switch ($method) {
             $eventController->getUpcoming();
         } else if($endpoint === 'upcomingPreview'){
             $eventController->getUpcomingPreview();
-        }else if ($endpoint === 'canceled'){
+        } else if($endpoint === 'upcomingCalendar'){
+            $eventController->getUpcomingEventsCalendar();
+        } else if ($endpoint === 'canceled'){
             $eventController->getCanceled();
         } else if ($endpoint === 'past'){
             $eventController->getPast();
@@ -68,6 +70,8 @@ switch ($method) {
             $eventController->getEventsPerMonth();
         } elseif ($endpoint === 'student' && is_numeric($id)) {
             $eventController->getEventsByStudent($id);
+        } else if($endpoint === 'student' && is_numeric($id)){
+            $eventController->getAttendedEventsByStudent($id);
         } elseif ($endpoint === '' || $endpoint === 'all') {
             $eventController->getAll();
         } else {

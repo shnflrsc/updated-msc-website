@@ -1038,7 +1038,7 @@
             badgeContainer.removeChild(badgeContainer.lastChild);
           }
 
-          const attendedEvents = events.filter(ev => ev.attendance_status === "registered");
+          const attendedEvents = events.filter(ev => ev.attendance_status === "attended");
 
           const badgeIcons = [
             { icon: "fa-certificate", color: "text-green-500", bg: "bg-green-100" },
