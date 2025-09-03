@@ -44,6 +44,8 @@ switch ($method) {
             $studentController->search();
         } elseif ($endpoint === 'count') {
             $studentController->countStudents(); //studCounter
+        } else if($endpoint === 'countMembers'){
+            $studentController->countMembers();
         } elseif ($endpoint === 'college-distribution') {
             $studentController->countByCollege(); //chart by College
         } elseif ($endpoint === 'yearLevel-distribution') {
@@ -51,6 +53,8 @@ switch ($method) {
         } elseif ($endpoint && is_numeric($endpoint)) {
             // endpoint is actually the ID
             $studentController->getById($endpoint);
+        } else if($endpoint === 'membership-status'){
+            $studentController->getMembershipStatus();
         } elseif ($endpoint === '' || $endpoint === 'all') {
             $studentController->getAll();
         } else {

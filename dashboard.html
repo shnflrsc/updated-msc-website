@@ -261,8 +261,8 @@
             id="dashboard-header">
             <div class="absolute inset-0 bg-gradient-to-r from-custom-primary via-custom-secondary to-custom-primary-light rounded-2xl opacity-70 animate-glowing"
                 style="filter: blur(15px); background-size: 400% 400%; z-index: -1;"></div>
-            <h2 class="text-2xl sm:text-3xl font-bold mb-1" id="welcome-msg"></h2>
-            <p class="text-base sm:text-lg text-gray-300 mb-6">
+            <h2 class="text-xl sm:text-xl md:text-2xl lg:text-3xl font-bold mb-1" id="welcome-msg"></h2>
+            <p class="text-base sm:text-md md:text-lg lg:text-xl text-gray-300 mb-6">
                 Here's what's happening with your membership and upcoming events.
             </p>
             <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
@@ -271,7 +271,7 @@
                     <h4 class="text-xs sm:text-sm font-semibold text-gray-300 mb-1">
                         Membership
                     </h4>
-                    <div class="text-xl sm:text-2xl font-bold text-white">Active</div>
+                    <div class="text-xl sm:text-2xl font-bold text-white" id="membershipStatus"></div>
                 </div>
                 <div
                     class="bg-white/10 backdrop-blur-sm border border-white/50 p-4 rounded-lg text-center hover:bg-white/20 transition-all">
@@ -413,7 +413,7 @@
 
                                     <button id="nextWeek"
                                         class="bg-white/10 border border-white/20 text-white rounded px-3 py-1 hover:bg-[#b9da05] hover:text-[#011538] transition">
-                                        Next 
+                                        Next
                                     </button>
                                 </div>
 
@@ -435,7 +435,7 @@
             <div
                 class="w-full lg:w-5/12 h-auto max-h-[37rem] p-4 shadow-lg rounded-lg bg-[#011538] border border-white/20 flex flex-col text-white">
                 <div class="flex items-center justify-between mb-4 pb-3 border-b border-white/20">
-                    <h2 class="text-xl font-semibold">My Registered Events</h2>
+                    <h2 class="text-md sm:text-base md:text-lg lg:text-xl font-bold">My Registered Events</h2>
                     <div class="p-2 bg-white/10 text-[#b9da05] rounded-full w-10 h-10 flex items-center justify-center">
                         <i class="fa-solid fa-calendar-check"></i>
                     </div>
@@ -446,34 +446,43 @@
                 </div>
             </div>
 
-            <!-- General Calendar: Empty -->
+            <!-- General Calendar: with Event dots -->
             <div
                 class="w-full lg:w-8/12 p-4 shadow-lg rounded-lg bg-[#011538] border border-white/20 text-white flex flex-col">
                 <div class="flex items-center justify-between mb-4 border-b border-white/20 pb-2">
-                    <h2 class="text-xl font-bold">Calendar</h2>
-                    <div class="p-2 bg-white/10 text-[#b9da05] rounded-full w-10 h-10 flex items-center justify-center">
-                        <i class="fa-solid fa-calendar"></i>
+                    <h2 class="text-lg sm:text-base md:text-lg lg:text-xl font-bold">Calendar</h2>
+                    <div
+                        class="p-1.5 sm:p-2 bg-white/10 text-[#b9da05] rounded-full w-8 h-8 sm:w-10 sm:h-10 flex items-center justify-center">
+                        <i class="fa-solid fa-calendar text-sm sm:text-base md:text-lg"></i>
                     </div>
                 </div>
+
                 <div class="flex justify-between items-center mb-4 pb-2">
                     <button onclick="goToToday()"
-                        class="bg-white/10 border border-white/20 text-white rounded px-3 py-1 hover:bg-[#b9da05] hover:text-[#011538]">
+                        class="px-2.5 py-1 text-xs sm:px-3 sm:py-1.5 sm:text-sm md:px-4 md:py-2 md:text-base 
+                        bg-white/10 border border-white/20 text-white rounded-lg hover:bg-[#b9da05] hover:text-[#011538] transition">
                         Today
                     </button>
-
-                    <div class="flex items-center space-x-3">
+                    <div class="flex items-center space-x-2">
                         <button onclick="navigateCalendar(-1)"
-                            class="text-lg text-gray-300 hover:text-[#b9da05]">&larr;</button>
-                        <h2 id="calendar-month-title" class="text-xl font-semibold"></h2>
+                            class="p-1.5 rounded-full bg-white/10 border border-white/20 text-gray-300 hover:bg-[#b9da05] hover:text-[#011538] transition text-sm">
+                            <i class="fa-solid fa-chevron-left text-xs"></i>
+                        </button>
+                        <p id="calendar-month-title"
+                            class="text-sm sm:text-base md:text-lg lg:text-xl font-semibold text-center truncate max-w-[120px] sm:max-w-none">
+                        </p>
                         <button onclick="navigateCalendar(1)"
-                            class="text-lg text-gray-300 hover:text-[#b9da05]">&rarr;</button>
+                            class="p-1.5 rounded-full bg-white/10 border border-white/20 text-gray-300 hover:bg-[#b9da05] hover:text-[#011538] transition text-sm">
+                            <i class="fa-solid fa-chevron-right text-xs"></i>
+                        </button>
                     </div>
+
                 </div>
 
                 <!-- Calendar Grid -->
                 <div class="border border-white/20 rounded-lg flex-grow flex flex-col">
                     <div
-                        class="grid grid-cols-7 bg-white/10 text-center text-sm font-medium text-gray-300 border-b border-white/20">
+                        class="grid grid-cols-7 p-2 bg-[#b9da05]/20 text-[#b9da05] text-center text-sm font-medium border-b border-white/20">
                         <div>Sun</div>
                         <div>Mon</div>
                         <div>Tue</div>
@@ -563,6 +572,8 @@
 
             const user = data.data;
             fetchStudentEventStats(user.id);
+            loadRegisteredEvents(user.id);
+            fetchMembershipStatus();
 
             document.getElementById("welcome-msg").innerHTML = `Welcome back, <span class="text-[#b9da05]">${user.first_name} ${user.last_name}!</span>`;
             document.getElementById("lastName").textContent = `${user.last_name},`;
@@ -581,6 +592,23 @@
             document.documentElement.classList.remove("loading");
         }
 
+        // MEMBERSHIP STATUS
+        async function fetchMembershipStatus() {
+            try {
+                const response = await apiCall(`/students/membership-status`, "GET");
+
+                if (response && response.success && response.data) {
+                    document.getElementById("membershipStatus").textContent = response.data.status;
+                } else {
+                    document.getElementById("membershipStatus").textContent = "-";
+                }
+            } catch (error) {
+                console.error("Error fetching membership status:", error);
+                document.getElementById("membershipStatus").textContent = "Error";
+            }
+        }
+
+
         // COUNT: Events Joined & Pre-Registered
         async function fetchStudentEventStats(user_id) {
             const response = await apiCall(`/events/student/${user_id}`, "GET");
@@ -592,7 +620,7 @@
                 let registeredCount = 0;
 
                 events.forEach(ev => {
-                    if (ev.attendance_status === "registered") attendedCount++;
+                    if (ev.attendance_status === "attended") attendedCount++;
                     if (ev.attendance_status === "registered") registeredCount++;
                 });
 
@@ -676,7 +704,7 @@
                     list.innerHTML = `
         <div class="flex flex-col py-8 items-center justify-center text-center text-gray-400 text-sm gap-2">
             <i class="fa-solid fa-calendar-xmark text-2xl"></i>
-            <p class='text-lg'>No registered events found.</p>
+            <p class='text-lg'>No registered events.</p>
         </div>
       `;
                     return;

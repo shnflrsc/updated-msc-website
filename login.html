@@ -381,7 +381,7 @@
                         responseEl.classList.remove("hidden");
                     }
                 } else {
-                    responseEl.textContent = "Invalid username or password.";
+                    responseEl.textContent = `${data.message}`;
                     responseEl.classList.remove("hidden");
                 }
             } catch (err) {

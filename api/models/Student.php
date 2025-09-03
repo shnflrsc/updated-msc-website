@@ -338,5 +338,37 @@ class Student
             throw new Exception("Failed to delete student: " . $e->getMessage());
         }
     }
-    
+
+    /**
+     * Get membership status of a student by ID
+     */
+    public function getMembershipStatus($id)
+    {
+        $stmt = $this->db->prepare("
+        SELECT 
+            id, is_active,
+            CASE 
+                WHEN is_active = 1 THEN 'Active'
+                ELSE 'Inactive'
+            END AS status
+        FROM students
+        WHERE id = :id
+        LIMIT 1
+    ");
+        $stmt->bindParam(':id', $id, PDO::PARAM_INT);
+        $stmt->execute();
+
+        return $stmt->fetch(PDO::FETCH_ASSOC);
+    }
+
+     /*
+     * COUNT: All Student (Members)
+    */
+    public function countMembers()
+    {
+        $stmt = $this->db->prepare("SELECT COUNT(*) AS total FROM students WHERE `role` = 'member'");
+        $stmt->execute();
+        $result = $stmt->fetch(PDO::FETCH_ASSOC);
+        return $result['total'] ?? 0;
+    }
 }

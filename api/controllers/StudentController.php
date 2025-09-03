@@ -354,7 +354,7 @@ class StudentController
         }
     }
 
-        public function create()
+    public function create()
     {
         try {
             AuthMiddleware::requireOfficer(); // Only officers can create new students
@@ -379,7 +379,7 @@ class StudentController
             Response::serverError($e->getMessage());
         }
     }
-    
+
     public function delete($id)
     {
         try {
@@ -406,7 +406,40 @@ class StudentController
             echo json_encode(['success' => false, 'message' => $e->getMessage()]);
         }
     }
-    
 
+    /**
+     * GET: current student's membership status: Active/Inactive 
+     */
+    public function getMembershipStatus()
+    {
+        try {
+            $currentUserId = AuthMiddleware::authenticate();
+            $student = $this->studentModel->findById($currentUserId);
+
+            if (!$student) {
+                Response::notFound('Student not found');
+            }
+
+            $status = ($student['is_active'] == 1) ? 'Active' : 'Inactive';
+
+            Response::success(['status' => $status]);
+        } catch (Exception $e) {
+            Response::serverError($e->getMessage());
+        }
+    }
+
+    /*
+     * COUNT: All Student (Members)
+    */
+    public function countMembers()
+    {
+        $student = new Student();
+
+        try {
+            $count = $student->countMembers();
+            echo json_encode(['success' => true, 'data' => $count]);
+        } catch (Exception $e) {
+            echo json_encode(['success' => false, 'message' => $e->getMessage()]);
+        }
+    }
 }
-
