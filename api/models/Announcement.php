@@ -21,15 +21,15 @@ class Announcement
     public function create($data)
     {
         try {
-            $sql = "INSERT INTO announcements (title, content, posted_by) 
-                    VALUES (:title, :content, :posted_by)";
-            
+            $sql = "INSERT INTO announcements (title, content, posted_by, image_url) 
+                    VALUES (:title, :content, :posted_by, :image_url)";
             $stmt = $this->db->prepare($sql);
-            $stmt->execute([
-                'title' => $data['title'],
-                'content' => $data['content'],
-                'posted_by' => $data['posted_by'] ?? 'Admin'
-            ]);
+            $stmt->bindParam(':title', $data['title']);
+            $stmt->bindParam(':content', $data['content']);
+            $stmt->bindParam(':posted_by', $data['posted_by']);
+            $stmt->bindParam(':image_url', $data['image_url']);
+
+            $stmt->execute();
             
             return $this->findById($this->db->lastInsertId());
         } catch (Exception $e) {
@@ -80,18 +80,17 @@ class Announcement
     public function update($id, $data)
     {
         try {
-            $sql = "UPDATE announcements SET 
-                    title = :title,
-                    content = :content,
-                    updated_at = CURRENT_TIMESTAMP
+        $sql = "UPDATE announcements 
+                    SET title = :title, content = :content, image_url = :image_url 
                     WHERE id = :id";
-            
-            $stmt = $this->db->prepare($sql);
-            return $stmt->execute([
-                'id' => $id,
-                'title' => $data['title'],
-                'content' => $data['content']
-            ]);
+        $stmt = $this->db->prepare($sql);
+        $stmt->bindParam(':title', $data['title']);
+        $stmt->bindParam(':content', $data['content']);
+        $stmt->bindParam(':image_url', $data['image_url']);
+        $stmt->bindParam(':id', $id);
+
+        return $stmt->execute();
+        
         } catch (Exception $e) {
             throw new Exception("Failed to update announcement: " . $e->getMessage());
         }
