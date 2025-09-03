@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Manage Events | BulSU MSC Administrator</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
     <link
         href="https://fonts.googleapis.com/css2?family=Segoe+UI:wght@400;500;600;700&family=Orbitron:wght@400;700;900&display=swap"
         rel="stylesheet">
@@ -618,71 +619,158 @@
             }
         }
 
-        /* Testing: Edit Modal */
-        .modal-backdrop {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background-color: rgba(0, 0, 0, 0.5);
-            z-index: 1040;
-        }
-
+        /* Edit Event modal */
         .modal {
             display: none;
             position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            z-index: 1050;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.5);
+            /* Black w/ opacity */
+            /* display: flex; */
+            justify-content: center;
+            align-items: center;
         }
 
         .modal-content {
-            background: #011538;
+            background-color: #1a1f33;
+            margin: auto;
             padding: 20px;
-            border-radius: 10px;
-            max-width: 700px;
-            width: 90%;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-        }
-
-        .modal-dialog {
-            margin: 2rem auto;
-            max-height: calc(100vh - 4rem);
-        }
-
-        .modal-body {
+            border: 1px solid #888;
+            width: 80%;
+            max-width: 500px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+            position: relative;
+            color: #ffffff;
+            max-height: 90vh;
             overflow-y: auto;
-            max-height: calc(100vh - 200px);
         }
 
-        .modal.show {
-            display: block;
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #444;
+            margin-bottom: 15px;
         }
 
-        .modal-xl {
-            max-width: 1200px;
+        .modal-header h5 {
+            margin: 0;
         }
 
-        .form-row.grid-cols-3 {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 20px;
+        .close-btn {
+            color: #aaa;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+            background: none;
+            border: none;
+            padding: 0;
         }
 
-        .form-row.grid-cols-2 {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 20px;
+        .close-btn:hover,
+        .close-btn:focus {
+            color: #fff;
+            text-decoration: none;
         }
 
-        @media (max-width: 992px) {
+        .modal-footer {
+            gap: 4px;
+            display: flex;
+            justify-content: flex-end;
+            padding-top: 10px;
+            border-top: 1px solid #444;
+            margin-top: 15px;
+        }
 
-            .form-row.grid-cols-3,
-            .form-row.grid-cols-2 {
-                grid-template-columns: 1fr;
+        /* Custom scrollbar for modal only */
+        .modal-content::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        .modal-content::-webkit-scrollbar-track {
+            background: #080c24;
+            border-radius: 10px;
+        }
+
+        .modal-content::-webkit-scrollbar-thumb {
+            background: #4b5563;
+            border-radius: 10px;
+        }
+
+        .modal-content::-webkit-scrollbar-thumb:hover {
+            background: #64748b;
+        }
+
+        /* Date * time picker colors */
+        input[type="datetime-local"]::-webkit-calendar-picker-indicator,
+        input[type="time"]::-webkit-calendar-picker-indicator {
+            filter: invert(1);
+            cursor: pointer;
+        }
+
+        input[type="datetime-local"]::-webkit-inner-spin-button,
+        input[type="time"]::-webkit-inner-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+
+        /* Toast notification*/
+        @keyframes slide-in {
+            0% {
+                opacity: 0;
+                transform: translateY(20px);
             }
+
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .animate-slide-in {
+            animation: slide-in 0.4s ease-out;
+        }
+
+        /* Toast Container */
+        .toast-container {
+            position: fixed;
+            bottom: 1.5rem;
+            right: 1.5rem;
+            z-index: 50;
+            opacity: 0;
+            transform: translateY(200%);
+            transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
+        }
+
+        .toast-container.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .toast-content {
+            display: flex;
+            align-items: center;
+            max-width: 20rem;
+            padding: 1rem;
+            font-size: 0.875rem;
+            color: white;
+            border-radius: 0.5rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.08);
+        }
+
+        .toast-content-success {
+            background-color: #16a34a;
+        }
+
+        .toast-content-error {
+            background-color: #dc2626;
         }
     </style>
 </head>
@@ -737,10 +825,17 @@
 
             <!-- current & upcoming events tab -->
             <div id="current-upcoming" class="tab-content active">
-                <button type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#editEventModal"
+                <!-- <button type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#editEventModal"
                     style="margin-bottom: 20px;">
                     Open Edit Event Modal
-                </button>
+                </button> -->
+
+                <a href="#" class="btn btn-secondary" onclick="openEditModal()">Edit Details</a>
+
+                <!-- <button type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#editEventModal"
+                    style="margin-bottom: 20px;">
+                    Open Edit Event Modal
+                </button> -->
 
                 <!-- <div class="event-item">
                     <div class="event-image">
@@ -890,7 +985,7 @@
                     <h3>Create New Event</h3>
                     <form id="addEventForm" onsubmit="handleAddEvent(event)">
                         <div class="form-group">
-                            <label for="title">Event Title *</label>
+                            <label for="title">Event Title</label>
                             <input type="text" id="title" name="title" class="form-control"
                                 placeholder="Enter event title" required>
                         </div>
@@ -1086,27 +1181,27 @@
                     <div class="attendance-body">
                         <div class="stats-grid">
                             <div class="stat-item">
-                                <div class="stat-value">35</div>
+                                <div class="stat-value"></div>
                                 <div class="stat-label">Members Registered</div>
                             </div>
                             <div class="stat-item">
-                                <div class="stat-value">28</div>
+                                <div class="stat-value"></div>
                                 <div class="stat-label">Members Attended</div>
                             </div>
                             <div class="stat-item">
-                                <div class="stat-value">8</div>
+                                <div class="stat-value"></div>
                                 <div class="stat-label">Guests Registered</div>
                             </div>
                             <div class="stat-item">
-                                <div class="stat-value">6</div>
+                                <div class="stat-value"></div>
                                 <div class="stat-label">Guests Attended</div>
                             </div>
                             <div class="stat-item">
-                                <div class="stat-value">43</div>
+                                <div class="stat-value"></div>
                                 <div class="stat-label">Total Registered</div>
                             </div>
                             <div class="stat-item">
-                                <div class="stat-value">34</div>
+                                <div class="stat-value"></div>
                                 <div class="stat-label">Total Attended</div>
                             </div>
                             <div class="stat-item">
@@ -1121,127 +1216,156 @@
                 </div>
             </div>
 
-            <div class="modal fade" id="editEventModal" tabindex="-1" aria-labelledby="editEventModalLabel"
-                aria-hidden="true">
-                <div class="modal-dialog modal-xl modal-dialog-centered">
-                    <div class="modal-content">
-                        <div class="modal-header" style="position: relative;">
-                            <h3 class="modal-title" id="editEventModalLabel">Edit Event</h3>
-                            <!-- <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button> -->
-                            <!-- <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" style="filter: invert(1);"></button> -->
-                            <button type="button" onclick="closeModal()"
-                                style="position: absolute; top: 1px; right: 8px; font-size: 1.4rem; font-weight: bold; color: white; background: none; border: none; cursor: pointer;">
-                                &times;
-                            </button>
-                        </div>
-                        <div class="modal-body">
-                            <form id="editEventForm" onsubmit="handleEditEvent(event)">
-                                <div class="form-group">
-                                    <label for="event_name">Event Title *</label>
-                                    <input type="text" id="event_name" name="event_name" class="form-control"
-                                        placeholder="Enter event title" required>
-                                </div>
-
-                                <div class="form-row grid-cols-3">
-                                    <div class="form-group">
-                                        <label for="event_time_start">Start Date & Time</label>
-                                        <input type="datetime-local" id="event_time_start" name="event_time_start"
-                                            class="form-control">
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="event_time_end">End Time</label>
-                                        <input type="time" id="event_time_end" name="event_time_end"
-                                            class="form-control">
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="edit_capacity">Capacity (Optional)</label>
-                                        <input type="number" id="edit_capacity" name="capacity" class="form-control"
-                                            placeholder="e.g. 100" min="0">
-                                    </div>
-                                </div>
-
-                                <div class="form-row">
-                                    <div class="form-group">
-                                        <label for="event_status">Event Status</label>
-                                        <select id="event_status" name="event_status" class="form-control">
-                                            <option value="upcoming">Upcoming</option>
-                                            <option value="completed">Completed</option>
-                                            <option value="cancelled">Cancelled</option>
-                                        </select>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="event_type">Event Type</label>
-                                        <select id="event_type" name="event_type" class="form-control">
-                                            <option value="onsite">Onsite</option>
-                                            <option value="online">Online</option>
-                                        </select>
-                                    </div>
-                                </div>
-
-                                <div class="form-row">
-                                    <div class="form-group">
-                                        <label for="event_restriction">Event Restriction</label>
-                                        <select id="event_restriction" name="event_restriction" class="form-control">
-                                            <option value="public">Open for Public</option>
-                                            <option value="members">Members Only</option>
-                                        </select>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="form-check-label" for="edit_registration_required">Registration
-                                            Required</label>
-                                        <input type="checkbox" class="form-check-input" id="registration_required"
-                                            name="registration_required">
-                                    </div>
-                                </div>
-
-                                <div class="form-group">
-                                    <label for="location">Location</label>
-                                    <input type="text" id="location" name="location" class="form-control"
-                                        placeholder="e.g. University Gym, Online via MS Teams">
-                                </div>
-
-                                <div class="form-row grid-cols-2">
-                                    <div class="form-group">
-                                        <label for="edit_event_image">Event Image (Optional)</label>
-                                        <div class="file-upload">
-                                            <input type="file" id="edit_event_image" name="event_image"
-                                                accept="image/jpeg,image/png,image/gif"
-                                                onchange="updateFileName(this, 'edit_event_image_name')">
-                                            <div class="file-upload-btn">
-                                                <i class="bi bi-upload"></i> Choose Event Image
-                                            </div>
-                                        </div>
-                                        <span id="edit_event_image_name" class="file-name">No file chosen</span>
-                                    </div>
-
-                                    <div class="form-group">
-                                        <label for="edit_badge_image">Event Badge Image (Optional)</label>
-                                        <div class="file-upload">
-                                            <input type="file" id="edit_badge_image" name="badge_image"
-                                                accept="image/jpeg,image/png,image/gif"
-                                                onchange="updateFileName(this, 'edit_badge_image_name')">
-                                            <div class="file-upload-btn">
-                                                <i class="bi bi-patch-check-fill"></i> Choose Badge Image
-                                            </div>
-                                        </div>
-                                        <span id="edit_badge_image_name" class="file-name">No file chosen</span>
-                                    </div>
-                                </div>
-
-                                <div class="form-group">
-                                    <label for="description">Description / Details</label>
-                                    <textarea id="description" name="description" class="form-control" rows="6"
-                                        placeholder="Enter event details, objectives, program flow, speakers, etc."></textarea>
-                                </div>
-
-                                <div class="text-end mt-3">
-                                    <button type="submit" class="btn btn-success">
-                                        <i class="bi bi-pencil-square"></i> Save Changes
-                                    </button>
-                                </div>
-                            </form>
-                        </div>
+            <div id="editEventModal" class="modal">
+                <div class="modal-content" style="max-width: 700px;">
+                    <div class="modal-header">
+                        <h3 class="modal-title">Edit Event Details</h3>
+                        <!-- <button type="button" class="close-btn" id="closeEditModalBtn">&times;</button> -->
                     </div>
+                    <div class="modal-body">
+                        <form id="editEventForm">
+                            <!-- onsubmit="handleEditEvent(event)" -->
+                            <div class="form-group">
+                                <label for="event_name">Event Title *</label>
+                                <input type="text" id="event_name" name="event_name" class="form-control"
+                                    placeholder="Enter event title" required>
+                            </div>
+
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="event_time_start">Start Date & Time</label>
+                                    <input type="datetime-local" id="event_time_start" name="event_time_start"
+                                        class="form-control">
+                                </div>
+                                <div class="form-group">
+                                    <label for="event_time_end">End Time</label>
+                                    <input type="time" id="event_time_end" name="event_time_end" class="form-control">
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="location">Location</label>
+                                <input type="text" id="location" name="location" class="form-control"
+                                    placeholder="e.g. University Gym, Online via MS Teams">
+                            </div>
+
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="edit_capacity">Capacity (Optional)</label>
+                                    <input type="number" id="edit_capacity" name="capacity" class="form-control"
+                                        placeholder="e.g. 100" min="0">
+                                </div>
+                                <div class="form-group">
+                                    <label for="event_status">Event Status</label>
+                                    <select id="event_status" name="event_status" class="form-control">
+                                        <option value="upcoming">Upcoming</option>
+                                        <option value="completed">Completed</option>
+                                        <option value="cancelled">Cancelled</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="event_type">Event Type</label>
+                                    <select id="event_type" name="event_type" class="form-control">
+                                        <option value="onsite">Onsite</option>
+                                        <option value="online">Online</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="event_restriction">Event Restriction</label>
+                                    <select id="event_restriction" name="event_restriction" class="form-control">
+                                        <option value="public">Open for Public</option>
+                                        <option value="members">Members Only</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="form-group checkbox-group">
+                                <input type="checkbox" id="registration_required" name="registration_required">
+                                <label for="registration_required">Registration Required</label>
+                            </div>
+
+
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="edit_event_image">Event Image (Poster/Logo - Optional)</label>
+                                    <div class="file-upload">
+                                        <input type="file" id="edit_event_image" name="event_image"
+                                            accept="image/jpeg,image/png,image/gif"
+                                            onchange="updateFileName(this, 'edit_event_image_name')">
+                                        <div class="file-upload-btn">
+                                            <i class="bi bi-upload"></i> Choose Event Image
+                                        </div>
+                                    </div>
+                                    <span id="edit_event_image_name" class="file-name">No file chosen</span>
+                                </div>
+                                <div class="form-group">
+                                    <label for="edit_badge_image">Event Badge Image (Optional)</label>
+                                    <div class="file-upload">
+                                        <input type="file" id="edit_badge_image" name="badge_image"
+                                            accept="image/jpeg,image/png,image/gif"
+                                            onchange="updateFileName(this, 'edit_badge_image_name')">
+                                        <div class="file-upload-btn">
+                                            <i class="bi bi-patch-check-fill"></i> Choose Badge Image
+                                        </div>
+                                    </div>
+                                    <span id="edit_badge_image_name" class="file-name">No file chosen</span>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="description">Description / Details</label>
+                                <textarea id="description" name="description" class="form-control" rows="6"
+                                    placeholder="Enter event details, objectives, program flow, speakers, etc."></textarea>
+                            </div>
+                            <div class="modal-footer">
+                                <!-- <button type="button" class="btn btn-secondary" id="cancelEditBtn">Cancel</button> -->
+                                <button type="button" class="btn btn-secondary" id="cancelEditBtn"
+                                    onclick="closeEditModal()">Cancel</button>
+                                <button type="submit" class="btn btn-primary" id="saveEditBtn"><i
+                                        class="bi bi-pencil-square"></i> Save Changes</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <div id="deleteEventModal" class="modal" style="display: none;">
+                <div class="modal-content" style="max-width: 400px;">
+                    <div class="modal-header">
+                        <h3 class="modal-title">Confirm Delete</h3>
+                    </div>
+                    <div class="modal-body">
+                        <p id="deleteEventMessage"></p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" id="cancelDeleteBtn">Cancel</button>
+                        <button type="button" class="btn btn-danger" id="confirmDeleteBtn">Delete</button>
+                    </div>
+                </div>
+            </div>
+
+            <div id="cancelEventModal" class="modal" style="display: none;">
+                <div class="modal-content" style="max-width: 400px;">
+                    <div class="modal-header">
+                        <h3 class="modal-title">Confirm Cancellation</h3>
+                    </div>
+                    <div class="modal-body">
+                        <p id="cancelEventMessage"></p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" id="cancelEventBtn">Cancel</button>
+                        <button type="button" class="btn btn-danger" id="confirmCancelBtn">Yes</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Toast Notification: Updated/Failed -->
+            <div id="toast" class="toast-container hidden">
+                <div id="toast-content" class="toast-content">
+                    <div id="toast-message"></div>
                 </div>
             </div>
 
@@ -1249,6 +1373,7 @@
     </div>
 
     <script>
+        let upcoming_events_data = [];
         const API_BASE = "/updated-msc-website/api";
 
         function openTab(evt, tabName) {
@@ -1319,6 +1444,8 @@
             eventListBtn.addEventListener("click", function (e) {
                 e.preventDefault();
                 hideEventDashboard();
+                //issue: upcoming event list won't show up
+                getUpcomingEvents();
             });
 
             buttonContainer.appendChild(editBtn);
@@ -1510,92 +1637,164 @@
                 alert("Failed to create event. " + (result?.message || "Unknown error"));
                 console.error(result?.errors || result);
             }
+        };
+
+        function closeEditModal() {
+            const editModal = document.getElementById("editEventModal");
+            editModal.style.display = "none";
         }
 
-        async function handleDeleteEvent(eventId) {
-            const confirmed = confirm(`[${eventId}]: Are you sure you want to delete this event?`);
+        document.addEventListener("DOMContentLoaded", () => {
+            const deleteModal = document.getElementById("deleteEventModal");
+            const closeDeleteBtn = document.getElementById("closeDeleteModalBtn");
+            const cancelDeleteBtn = document.getElementById("cancelDeleteBtn");
+            const confirmDeleteBtn = document.getElementById("confirmDeleteBtn");
+            let eventIdToDelete = null;
 
-            if (confirmed) {
-                console.log("Deleting event with ID:", eventId);
-                deleteEvent(eventId)
-            } else {
-                console.log("Event deletion canceled.")
+            function openDeleteModal(eventId, eventName = "") {
+                eventIdToDelete = eventId;
+                const msg = document.getElementById("deleteEventMessage");
+                msg.textContent = `Are you sure you want to delete this event?`;
+                deleteModal.style.display = "flex";
             }
 
-        }
+            function closeDeleteModal() {
+                deleteModal.style.display = "none";
+                eventIdToDelete = null;
+            }
 
-        async function deleteEvent(eventId) {
-            try {
-                const response = await apiCall(`/events/${eventId}`, "DELETE");
-                if (response.success) {
-                    alert("Event deleted successfully!");
-                    document.getElementById("current-upcoming").innerHTML = "";
-                    getUpcomingEvents();
-                } else {
-                    alert("Failed to delete event: " + response.message)
+            if (closeDeleteBtn) closeDeleteBtn.onclick = closeDeleteModal;
+            if (cancelDeleteBtn) cancelDeleteBtn.onclick = closeDeleteModal;
+            if (confirmDeleteBtn) {
+                confirmDeleteBtn.onclick = async function () {
+                    if (!eventIdToDelete) return;
+                    const response = await apiCall(`/events/${eventIdToDelete}`, "DELETE");
+                    if (response?.success) {
+                        showToast("Event deleted successfully!", "success");
+                        document.getElementById("current-upcoming").innerHTML = "";
+                        getUpcomingEvents();
+                    } else {
+                        showToast("Failed to delete event.", "error");
+                    }
+                    closeDeleteModal();
+                };
+            }
+
+            window.addEventListener("click", (event) => {
+                if (event.target === deleteModal) {
+                    //closeDeleteModal();
                 }
+            });
 
-            } catch (error) {
-                console.log(error);
-                alert("Error: " + error.message);
+            window.openDeleteModal = openDeleteModal;
+        });
+
+        document.addEventListener("DOMContentLoaded", () => {
+            const cancelModal = document.getElementById("cancelEventModal");
+            const cancelEventBtn = document.getElementById("cancelEventBtn"); // cancel button inside modal
+            const confirmCancelBtn = document.getElementById("confirmCancelBtn");
+            let eventIdToCancel = null;
+
+            function openCancelModal(eventId) {
+                eventIdToCancel = eventId;
+                const msg = document.getElementById("cancelEventMessage");
+                msg.textContent = `Are you sure you want to cancel this event?`;
+                cancelModal.style.display = "flex";
             }
-        }
+
+            function closeCancelEventModal() {
+                cancelModal.style.display = "none";
+                eventIdToCancel = null;
+            }
+
+            if (cancelEventBtn) cancelEventBtn.onclick = closeCancelEventModal; 
+            if (confirmCancelBtn) {
+                confirmCancelBtn.onclick = async function () {
+                    if (!eventIdToCancel) return;
+                    const response = await apiCall(`/events/${eventIdToCancel}`, "CANCEL");
+                    if (response?.success) {
+                        showToast("Event cancelled successfully!", "success");
+                        document.getElementById("current-upcoming").innerHTML = "";
+                        getUpcomingEvents();
+                    } else {
+                        showToast("Failed to cancel event.", "error");
+                    }
+                    closeCancelEventModal(); 
+                };
+            }
+
+            window.addEventListener("click", (event) => {
+                if (event.target === cancelModal) {
+                    //closeCancelEventModal();
+                }
+            });
+
+            window.openCancelModal = openCancelModal;
+        });
+
 
         //TEST: for removal
-        function closeModal() {
-            const modal = document.getElementById('editEventModal');
-            modal.classList.remove('show');  
-            modal.style.display = 'none';    
-            modal.setAttribute('aria-hidden', 'true');
+        // function closeModal() {
+        //     const modal = document.getElementById('editEventModal');
+        //     modal.classList.remove('show');
+        //     modal.style.display = 'none';
+        //     modal.setAttribute('aria-hidden', 'true');
 
-            // Remove backdrop
-            const backdrop = document.querySelector('.modal-backdrop');
-            if (backdrop) backdrop.remove();
-        }
+        //     // Remove backdrop
+        //     const backdrop = document.querySelector('.modal-backdrop');
+        //     if (backdrop) backdrop.remove();
+        // }
 
         //TEST: Edit Event 
         async function editEvent(eventId) {
             const response = await apiCall(`/events/${eventId}`, "GET");
 
             if (!response?.success) {
-                console.error("Failed to fetch event details:", response.message);
+                console.error("Failed to fetch event details:", response?.message);
+                alert("Failed to load event details.");
                 return;
             }
 
             const evt = response.data;
 
-            const [event_date, event_time_start] = evt.event_date && evt.event_time_start
-                ? [evt.event_date, evt.event_time_start]
-                : ["", ""];
-
-            document.getElementById("event_name").value = evt.event_name;
-            document.getElementById("event_time_start").value = event_date + "T" + event_time_start;
-            document.getElementById("event_time_end").value = evt.event_time_end || '';
-            //document.getElementById("event_capacity").value = evt.capacity || '';
-            document.getElementById("event_status").value = evt.event_status;
-            document.getElementById("event_type").value = evt.event_type;
-            document.getElementById("event_restriction").value = evt.event_restriction;
+            // Fill in form fields
+            document.getElementById("event_name").value = evt.event_name || "";
+            document.getElementById("event_time_start").value = evt.event_date && evt.event_time_start
+                ? `${evt.event_date}T${evt.event_time_start}`
+                : "";
+            document.getElementById("event_time_end").value = evt.event_time_end || "";
+            document.getElementById("edit_capacity").value = evt.capacity || "";
+            document.getElementById("event_status").value = evt.event_status || "upcoming";
+            document.getElementById("event_type").value = evt.event_type || "onsite";
+            document.getElementById("event_restriction").value = evt.event_restriction || "public";
             document.getElementById("registration_required").checked = evt.registration_required === 1;
-            document.getElementById("location").value = evt.location;
-            document.getElementById("description").value = evt.description;
+            document.getElementById("location").value = evt.location || "";
+            document.getElementById("description").value = evt.description || "";
 
-            const editModal = new bootstrap.Modal(document.getElementById('editEventModal'));
-            editModal.show();
-
+            // Store event ID for saving later
             document.getElementById("editEventForm").dataset.eventId = eventId;
+            editModal.style.display = "flex";
         }
+
+        document.addEventListener("DOMContentLoaded", () => {
+            const editForm = document.getElementById("editEventForm");
+            if (editForm) {
+                editForm.addEventListener("submit", handleEditEvent);
+            }
+        });
 
         async function handleEditEvent(e) {
             e.preventDefault();
+
             const form = e.target;
             const eventId = form.dataset.eventId;
 
-            const [event_date, event_time_start] = document.getElementById("event_time_start").value.split("T");
-            //const event_time_end = document.getElementById("event_time_end").value;
+            const [event_date, event_time_start] =
+                document.getElementById("event_time_start").value.split("T");
 
             let event_time_end = document.getElementById("event_time_end").value;
             if (event_time_end) {
-                event_time_end = event_time_end.slice(0, 5); // ensures HH:MM
+                event_time_end = event_time_end.slice(0, 5); // HH:MM
             } else {
                 event_time_end = null;
             }
@@ -1616,16 +1815,18 @@
 
             console.log("📌 Update Event:", payload);
 
-            const response = await apiCall(`/events/${eventId}`, "PUT", payload, true); // true = JSON
+            const response = await apiCall(`/events/${eventId}`, "PUT", payload);
 
             if (response?.success) {
-                alert("Event updated successfully!");
-                bootstrap.Modal.getInstance(document.getElementById('editEventModal')).hide();
+                //alert("Event updated successfully!");
+                showToast("Event updated successfully!", "success");
+                closeEditModal();
                 document.getElementById("current-upcoming").innerHTML = "";
                 getUpcomingEvents();
             } else {
                 console.error("Request failed:", response);
-                alert("Failed to update event: " + response.message);
+                //alert("Failed to update event: " + response?.message);
+                showToast("Failed to update event.", response?.message);
             }
         }
 
@@ -1636,6 +1837,7 @@
                 console.log(data);
 
                 const container = document.getElementById("current-upcoming");
+                container.innerHTML = "";
 
                 data.data.forEach(evt => {
                     const eventDateTime = new Date(`${evt.event_date}T${evt.event_time_start}`);
@@ -1666,11 +1868,11 @@
                                     <a href="#" class="btn btn-primary" onclick="showEventDashboard(${evt.event_id})">Dashboard</a>
                                     <a href="#" class="btn btn-info" onclick="editEvent(${evt.event_id})">Edit</a>
                                     <a href="#" class="btn btn-secondary"
-                                        onclick="cancelEvent(${evt.event_id})">
+                                        onclick="openCancelModal(${evt.event_id})">
                                     Cancel
                                     </a>
                                     <a href="#" class="btn btn-danger"
-                                        onclick="handleDeleteEvent(${evt.event_id})">
+                                        onclick="openDeleteModal(${evt.event_id})">
                                         <i
                                             class="bi bi-trash-fill"></i>
                                     </a>
@@ -1679,6 +1881,7 @@
                         </div>
                         `
                         ;
+                    //cancelEvent
                     container.appendChild(div);
                 });
             } else {
@@ -1686,20 +1889,20 @@
             }
         }
 
-        async function cancelEvent(eventId) {
-            if (!confirm("Are you sure you want to cancel this event?")) return;
+        // async function cancelEvent(eventId) {
+        //     if (!confirm("Are you sure you want to cancel this event?")) return;
 
-            const payload = { event_status: "canceled" };
-            const result = await apiCall(`/events/${eventId}/status`, "POST", payload, "Cancel Event");
+        //     const payload = { event_status: "canceled" };
+        //     const result = await apiCall(`/events/${eventId}/status`, "POST", payload, "Cancel Event");
 
-            if (result?.success) {
-                alert("Event canceled successfully!");
-                document.getElementById("current-upcoming").innerHTML = "";
-                getUpcomingEvents();
-            } else {
-                console.error("Failed to cancel event:", result?.message);
-            }
-        }
+        //     if (result?.success) {
+        //         alert("Event canceled successfully!");
+        //         document.getElementById("current-upcoming").innerHTML = "";
+        //         getUpcomingEvents();
+        //     } else {
+        //         console.error("Failed to cancel event:", result?.message);
+        //     }
+        // }
 
         async function getCanceledEvents() {
             const data = await apiCall("/events/canceled", "GET");
@@ -1800,8 +2003,51 @@
             getCanceledEvents();
             getPastEvents();
         });
+
+        //Edit event modal
+        const editModal = document.getElementById('editEventModal');
+        const closeBtn = document.getElementById('closeEditModalBtn');
+        const cancelBtn = document.getElementById('cancelEditBtn');
+
+        function openEditModal() {
+            editModal.style.display = 'flex';
+        }
+
+        function closeEditModal() {
+            editModal.style.display = 'none';
+        }
+
+        closeBtn.onclick = closeEditModal;
+        cancelBtn.onclick = closeEditModal;
+
+        window.onclick = function (event) {
+            if (event.target === editModal) {
+                //prevent the modal from closing
+            }
+        }
+
+        function showToast(message, type = "success") {
+            const toast = document.getElementById("toast");
+            const toastMessage = document.getElementById("toast-message");
+            const toastContent = document.getElementById("toast-content");
+
+            toastContent.className = 'toast-content';
+
+            toastMessage.textContent = message;
+
+            if (type === "success") {
+                toastContent.classList.add("toast-content-success");
+            } else if (type === "error") {
+                toastContent.classList.add("toast-content-error");
+            }
+            toast.classList.add("is-visible");
+
+            setTimeout(() => {
+
+                toast.classList.remove("is-visible");
+            }, 3000);
+        }
     </script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 
 </html>
