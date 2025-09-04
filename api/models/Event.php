@@ -398,10 +398,11 @@ class Event
      */
     public function getEventsByStudent($studentId) 
     {
-        $sql = "SELECT e.event_id, e.event_name, e.event_date, e.event_time_start, e.location, er.attendance_status
+        $sql = "SELECT e.event_id, e.event_name, e.event_date, e.event_time_start, e.location, e.description, e.event_status, er.attendance_status
             FROM event_registrations er
             JOIN events e ON er.event_id = e.event_id
             WHERE er.student_id = :student_id
+            AND e.event_status = 'upcoming'
             ORDER BY e.event_date DESC";
 
         $stmt = $this->db->prepare($sql);

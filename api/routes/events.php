@@ -44,13 +44,13 @@ switch ($method) {
     case 'GET':
         if ($endpoint === 'upcoming') {
             $eventController->getUpcoming();
-        } else if($endpoint === 'upcomingPreview'){
+        } else if ($endpoint === 'upcomingPreview') {
             $eventController->getUpcomingPreview();
-        } else if($endpoint === 'upcomingCalendar'){
+        } else if ($endpoint === 'upcomingCalendar') {
             $eventController->getUpcomingEventsCalendar();
-        } else if ($endpoint === 'canceled'){
+        } else if ($endpoint === 'canceled') {
             $eventController->getCanceled();
-        } else if ($endpoint === 'past'){
+        } else if ($endpoint === 'past') {
             $eventController->getPast();
         } elseif ($endpoint === 'msc-calendar') {
             $eventController->getCalendarEvents();
@@ -62,7 +62,7 @@ switch ($method) {
             $eventController->getById($endpoint);
         } elseif ($endpoint === 'count') {
             $eventController->countEvents();
-        } else if($endpoint === 'countRecorded'){
+        } else if ($endpoint === 'countRecorded') {
             $eventController->countUpcomingEvents();
         } elseif ($endpoint === 'status-count') {
             $eventController->getStatusCounts();
@@ -70,7 +70,7 @@ switch ($method) {
             $eventController->getEventsPerMonth();
         } elseif ($endpoint === 'student' && is_numeric($id)) {
             $eventController->getEventsByStudent($id);
-        } else if($endpoint === 'student' && is_numeric($id)){
+        } else if ($endpoint === 'student' && is_numeric($id)) {
             $eventController->getAttendedEventsByStudent($id);
         } elseif ($endpoint === '' || $endpoint === 'all') {
             $eventController->getAll();
@@ -80,12 +80,31 @@ switch ($method) {
         }
         break;
 
+
+    // case 'POST':
+    //     if ($endpoint && is_numeric($endpoint) && $id === 'register') {
+    //         // endpoint is actually the event ID, id is 'register'
+    //         $eventController->register($endpoint);
+    //     } elseif ($endpoint === '' || $endpoint === 'create') {
+    //         $eventController->create();
+    //     } elseif ($endpoint && is_numeric($endpoint) && $id === 'status') {
+    //         $eventController->updateStatus($endpoint);
+    //     } elseif ($endpoint && is_numeric($endpoint)) {
+    //         $eventController->update($endpoint);
+    //     } else {
+    //         http_response_code(404);
+    //         echo json_encode(['success' => false, 'message' => 'POST endpoint not found: ' . $endpoint]);
+    //     }
+    //     break;
     case 'POST':
         if ($endpoint && is_numeric($endpoint) && $id === 'register') {
-            // endpoint is actually the event ID, id is 'register'
             $eventController->register($endpoint);
         } elseif ($endpoint === '' || $endpoint === 'create') {
             $eventController->create();
+        } elseif ($endpoint === 'upload-image') {
+            $eventController->uploadEventImage('event');
+        } elseif ($endpoint === 'upload-badge') {
+            $eventController->uploadEventImage('badge');
         } elseif ($endpoint && is_numeric($endpoint) && $id === 'status') {
             $eventController->updateStatus($endpoint);
         } elseif ($endpoint && is_numeric($endpoint)) {
@@ -95,6 +114,7 @@ switch ($method) {
             echo json_encode(['success' => false, 'message' => 'POST endpoint not found: ' . $endpoint]);
         }
         break;
+
 
     case 'PUT':
         if ($endpoint && is_numeric($endpoint) && $id === 'attendance' && $action) {
