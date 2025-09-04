@@ -993,6 +993,7 @@
       if (response.success) {
         closeEditModal();
         await loadAnnouncements(); // refresh announcements dynamically
+        await renderAnnouncements(window.lastAnnouncements); // ensure UI is updated
         showAlert("Announcement updated successfully!", "success");
       } else {
         alert(response.message || "Failed to update announcement.");
@@ -1072,6 +1073,7 @@
       if (res.success) {
         showAlert("Announcement created successfully!", "success");
         loadAnnouncements();
+        renderAnnouncements(window.lastAnnouncements); // refresh list
         e.target.reset();
         document.getElementById("fileName").textContent = "No file chosen";
         openTab(e, "activeAnnouncements");
