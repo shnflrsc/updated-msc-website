@@ -95,6 +95,51 @@ class EventController
     }
 
     /**
+    * Upload Event Image (poster or badge)
+     */
+    public function uploadEventImage($type = 'event')
+    {
+        try {
+            AuthMiddleware::requireOfficer();
+
+            if (!isset($_FILES['image']) || $_FILES['image']['error'] !== UPLOAD_ERR_OK) {
+                Response::error('No file uploaded or upload error', 400);
+            }
+
+            $file = $_FILES['image'];
+            $allowedExtensions = ['jpg', 'jpeg', 'png']; // ❌ Removed GIF for consistency
+            $maxSize = 5 * 1024 * 1024; // 5MB limit (larger than profile’s 2MB since posters may be bigger)
+
+            $ext = strtolower(pathinfo($file['name'], PATHINFO_EXTENSION));
+            if (!in_array($ext, $allowedExtensions)) {
+                Response::error('Invalid file type. Only JPG and PNG allowed.', 400);
+            }
+
+            if ($file['size'] > $maxSize) {
+                Response::error('File size exceeds 5MB limit.', 400);
+            }
+
+            $uploadDir = __DIR__ . '/../../uploads/events/';
+            if (!is_dir($uploadDir)) {
+                mkdir($uploadDir, 0777, true);
+            }
+
+            $fileName = $type . '_' . time() . '_' . uniqid() . '.' . $ext;
+            $filePath = $uploadDir . $fileName;
+
+            $relativePath = '/updated-msc-website/uploads/events/' . $fileName;
+
+            if (!move_uploaded_file($file['tmp_name'], $filePath)) {
+                Response::error('Failed to move uploaded file.', 500);
+            }
+
+            Response::success(['path' => $relativePath], ucfirst($type) . ' image uploaded successfully.');
+        } catch (Exception $e) {
+            Response::serverError($e->getMessage());
+        }
+    }
+
+    /**
      * Get all events
      */
     public function getAll()
@@ -319,9 +364,10 @@ class EventController
     /**
      * Get upcoming events: for Admin Dashoard
      */
-    public function getUpcomingPreview(){
+    public function getUpcomingPreview()
+    {
         try {
-            $limit = isset($_GET['limit']) ? (int)$_GET['limit'] : 3; 
+            $limit = isset($_GET['limit']) ? (int)$_GET['limit'] : 3;
             $events = $this->eventModel->getUpcoming($limit);
 
             Response::success($events);
@@ -330,7 +376,8 @@ class EventController
         }
     }
 
-     public function getUpcomingEventsCalendar() {
+    public function getUpcomingEventsCalendar()
+    {
         try {
             AuthMiddleware::authenticate();
 
@@ -575,7 +622,7 @@ class EventController
     public function getStatusCounts()
     {
         try {
-            $statusCounts = $this->eventModel->getStatusCounts(); 
+            $statusCounts = $this->eventModel->getStatusCounts();
 
             Response::success($statusCounts);
         } catch (Exception $e) {

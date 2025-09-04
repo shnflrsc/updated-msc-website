@@ -311,7 +311,7 @@ class Student
     */
     public function countByCollege()
     {
-        $stmt = $this->db->prepare("SELECT college, COUNT(*) AS total FROM students GROUP BY college");
+        $stmt = $this->db->prepare("SELECT college, COUNT(*) AS total FROM students WHERE `role` = 'member' GROUP BY college");
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
@@ -321,7 +321,7 @@ class Student
     */
     public function countByYearLevel()
     {
-        $stmt = $this->db->prepare("SELECT year_level, COUNT(*) AS total FROM students GROUP BY year_level");
+        $stmt = $this->db->prepare("SELECT year_level, COUNT(*) AS total FROM students WHERE `role` = 'member' GROUP BY year_level");
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
