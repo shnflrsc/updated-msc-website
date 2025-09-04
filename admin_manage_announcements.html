@@ -845,9 +845,18 @@
       renderAnnouncements(announcements);
 
       if (announcements.length === 0) {
-        document.getElementById("activeAnnouncements").innerHTML = `<p class="text-gray-400">No announcements found.</p>`;
-        document.getElementById("archived").innerHTML = `<p class="text-gray-400">No archived announcements found.</p>`;
+        const activeList = document.getElementById("activeAnnouncementsList");
+        const archivedList = document.getElementById("archivedAnnouncementsList");
+
+        if (activeList) {
+          activeList.innerHTML = `<p class="text-gray-400">No announcements found.</p>`;
+        }
+        if (archivedList) {
+          archivedList.innerHTML = `<p class="text-gray-400">No archived announcements found.</p>`;
+        }
+        return; // stop here so renderAnnouncements doesn’t try to render on null
       }
+
     }
 
 
@@ -992,10 +1001,10 @@
 
       if (response.success) {
         closeEditModal();
-        await loadAnnouncements(); // refresh announcements dynamically
+        await loadAnnouncements(); // refresh announcements
         showAlert("Announcement updated successfully!", "success");
       } else {
-        alert(response.message || "Failed to update announcement.");
+        showAlert(response.message || "Failed to update announcement.", "error");
       }
     }
 
@@ -1071,7 +1080,8 @@
       const res = await response.json();
       if (res.success) {
         showAlert("Announcement created successfully!", "success");
-        loadAnnouncements();
+        await loadAnnouncements(); // refresh list
+
         e.target.reset();
         document.getElementById("fileName").textContent = "No file chosen";
         openTab(e, "activeAnnouncements");
@@ -1129,7 +1139,9 @@
     });
 
 
-    loadAnnouncements(); // initial load
+    document.addEventListener("DOMContentLoaded", () => {
+      loadAnnouncements(); // initial load
+    });
     </script>
 </body>
 </html>
