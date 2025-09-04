@@ -1,11 +1,8 @@
 <!DOCTYPE html>
-
 <html lang="en">
-
 <script>
     document.documentElement.classList.add('loading');
 </script>
-
 <head>
     <meta charset="utf-8" />
     <meta content="width=device-width, initial-scale=1.0" name="viewport" />
@@ -16,6 +13,7 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400..900&family=Segoe+UI:wght@400;700&display=swap"
         rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
     <script src="https://cdn.tailwindcss.com"></script>
 
@@ -24,6 +22,13 @@
     <script src="js/univ_calendar.js" defer></script>
 
     <style>
+        /* body.loading #main-body,
+        body.loading main,
+        body.loading nav,
+        body.loading footer {
+            display: none;
+        } */
+
         html.loading body {
             display: none;
         }
@@ -65,7 +70,6 @@
 
         .nav-link {
             color: #d1d5db;
-            /* Tailwind gray‑300 */
             transition: color 0.3s;
         }
 
@@ -131,23 +135,19 @@
             animation: fadeOut 0.3s ease-in forwards;
         }
 
-
         /* Custom scrollbar styles */
         ::-webkit-scrollbar {
             width: 8px;
             background-color: #1e293b;
-            /* bg-slate-800 */
         }
 
         ::-webkit-scrollbar-thumb {
             background-color: #b9da05;
-            /* green-400 */
             border-radius: 4px;
         }
 
         ::-webkit-scrollbar-thumb:hover {
             background-color: #d1d5db;
-            /* gray-300 */
         }
 
         /* Calendar: day cell */
@@ -163,9 +163,49 @@
             min-height: unset;
             max-height: unset;
         }
+
+        /* Loading screen */
+        /* #loading-screen {
+            position: fixed;
+            inset: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background-color: black;
+            z-index: 50;
+            transition: opacity 2.2s ease;
+        }
+
+        @keyframes bounce-delay {
+
+            0%,
+            80%,
+            100% {
+                transform: scale(0);
+            }
+
+            40% {
+                transform: scale(1);
+            }
+        }
+
+        .animate-bounce-delay {
+            animation: bounce-delay 1.4s infinite ease-in-out;
+        }
+
+        .delay-150 {
+            animation-delay: 0.15s;
+        }
+
+        .delay-300 {
+            animation-delay: 0.3s;
+        } */
     </style>
 </head>
 
+<!-- bg-[#080c24] -->
+<!-- loading -->
 <body class="" id="main-body">
     <nav class="fixed top-0 left-0 right-0 z-50 transition-all duration-300 ease-in-out py-4" id="main-header">
         <div class="max-w-7xl mx-auto px-4 flex justify-between items-center">
@@ -185,7 +225,7 @@
                     <i class="fa-solid fa-circle-user nav-icon"></i>
                 </a>
 
-                <a href="calendar.html" class="nav-icon-wrapper">
+                <a href="calendar.html" onclick="sessionStorage.setItem('fromInternal', 'true')" class="nav-icon-wrapper">
                     <i class="fa-solid fa-calendar-days nav-icon"></i>
                 </a>
 
@@ -268,26 +308,18 @@
             <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
                 <div
                     class="bg-white/10 backdrop-blur-sm border border-white/50 p-4 rounded-lg text-center hover:bg-white/20 transition-all">
-                    <h4 class="text-xs sm:text-sm font-semibold text-gray-300 mb-1">
-                        Membership
-                    </h4>
+                    <p class="text-xs sm:text-sm font-semibold text-gray-300 mb-1">Membership</p>
                     <div class="text-xl sm:text-2xl font-bold text-white" id="membershipStatus"></div>
                 </div>
                 <div
                     class="bg-white/10 backdrop-blur-sm border border-white/50 p-4 rounded-lg text-center hover:bg-white/20 transition-all">
-                    <h4 class="text-xs sm:text-sm font-semibold text-gray-300 mb-1">
-                        Events Joined
-                    </h4>
-                    <!-- To fix -->
-                    <div class="text-xl sm:text-2xl font-bold text-white" id="attendedCount">...</div>
+                    <p class="text-xs sm:text-sm font-semibold text-gray-300 mb-1">Events Joined</p>
+                    <div class="text-xl sm:text-2xl font-bold text-white" id="attendedCount"></div>
                 </div>
                 <div
                     class="bg-white/10 backdrop-blur-sm border border-white/50 p-4 rounded-lg text-center hover:bg-white/20 transition-all">
-                    <h4 class="text-xs sm:text-sm font-semibold text-gray-300 mb-1">
-                        Pre-Registered
-                    </h4>
-                    <!-- To fix -->
-                    <div class="text-xl sm:text-2xl font-bold text-white" id="registeredCount">...</div>
+                    <p class="text-xs sm:text-sm font-semibold text-gray-300 mb-1">Pre-Registered</hp>
+                    <div class="text-xl sm:text-2xl font-bold text-white" id="registeredCount"></div>
                 </div>
             </div>
         </section>
@@ -298,7 +330,7 @@
                 class="w-full lg:w-5/12 h-fit p-6 py-4 shadow-xl rounded-lg bg-[#011538] border border-white/20 text-white">
 
                 <div class="flex items-center justify-between mb-4 pb-3 border-b border-white/20">
-                    <h2 class="text-xl font-semibold text-gray-200">Member Profile</h2>
+                    <h3 class="text-base sm:text-lg font-semibold text-gray-200">Member Profile</h3>
                     <div class="p-2 bg-white/10 text-[#b9da05] rounded-full w-10 h-10 flex items-center justify-center">
                         <i class="fa-solid fa-user"></i>
                     </div>
@@ -313,7 +345,7 @@
 
                 <div class="flex flex-col items-center justify-center text-center">
                     <div>
-                        <h2 class="text-2xl font-bold" id="lastName"></h2>
+                        <h2 class="text-xl sm:text-2xl font-bold" id="lastName"></h2>
                         <h2 class="text-xl text-gray-300" id="firstName"></h2>
                         <p class="text-l text-gray-300" id="studentNo"></p>
                         <p class="text-m font-medium text-white" id="program"></p>
@@ -371,13 +403,12 @@
                 class="w-full lg:w-8/12 h-auto p-4 shadow-lg rounded-lg mx-auto bg-[#011538] border border-white/20 text-white">
                 <div class="flex justify-between items-center border-b border-white/20 pb-2">
                     <div class="flex flex-wrap gap-4 sm:gap-6" id="tabs">
-                        <h2 class="tab text-gray-200 font-semibold cursor-pointer hover:text-[#b9da05] active-tab"
-                            data-tab="announcements">Announcements</h2>
-                        <h2 class="tab text-gray-200 font-semibold cursor-pointer hover:text-[#b9da05]"
-                            data-tab="events">Events</h2>
-                        <h2 class="tab text-gray-200 font-semibold cursor-pointer hover:text-[#b9da05]"
-                            data-tab="univ-calendar">University Calendar</h2>
-
+                        <h3 class="tab text-sm sm:text-base text-gray-200 font-semibold cursor-pointer hover:text-[#b9da05] active-tab"
+                            data-tab="announcements">Announcements</h3>
+                        <h3 class="tab text-sm sm:text-base text-gray-200 font-semibold cursor-pointer hover:text-[#b9da05]"
+                            data-tab="events">Events</h3>
+                        <h3 class="tab text-sm sm:text-base text-gray-200 font-semibold cursor-pointer hover:text-[#b9da05]"
+                            data-tab="univ-calendar">University Calendar</h3>
                     </div>
 
                     <div
@@ -435,7 +466,7 @@
             <div
                 class="w-full lg:w-5/12 h-auto max-h-[37rem] p-4 shadow-lg rounded-lg bg-[#011538] border border-white/20 flex flex-col text-white">
                 <div class="flex items-center justify-between mb-4 pb-3 border-b border-white/20">
-                    <h2 class="text-md sm:text-base md:text-lg lg:text-xl font-bold">My Registered Events</h2>
+                    <h3 class="text-base sm:text-lg font-bold">My Registered Events</h3>
                     <div class="p-2 bg-white/10 text-[#b9da05] rounded-full w-10 h-10 flex items-center justify-center">
                         <i class="fa-solid fa-calendar-check"></i>
                     </div>
@@ -450,7 +481,7 @@
             <div
                 class="w-full lg:w-8/12 p-4 shadow-lg rounded-lg bg-[#011538] border border-white/20 text-white flex flex-col">
                 <div class="flex items-center justify-between mb-4 border-b border-white/20 pb-2">
-                    <h2 class="text-lg sm:text-base md:text-lg lg:text-xl font-bold">Calendar</h2>
+                    <h3 class="text-base sm:text-lg font-bold">Calendar</h3>
                     <div
                         class="p-1.5 sm:p-2 bg-white/10 text-[#b9da05] rounded-full w-8 h-8 sm:w-10 sm:h-10 flex items-center justify-center">
                         <i class="fa-solid fa-calendar text-sm sm:text-base md:text-lg"></i>
@@ -511,6 +542,17 @@
         </section>
     </main>
 
+    <!-- <div id="loading-screen"
+        class="fixed inset-0 flex flex-col items-center justify-center bg-black z-50 transition-opacity duration-500">
+        <img src="./Logos/Bulsu MSC Logo-02.png" alt="Logo" class="h-20 mb-6 animate-bounce">
+        <div class="flex space-x-2">
+            <span class="dot w-4 h-4 bg-[#b9da05] rounded-full animate-bounce-delay"></span>
+            <span class="dot w-4 h-4 bg-[#b9da05] rounded-full animate-bounce-delay delay-150"></span>
+            <span class="dot w-4 h-4 bg-[#b9da05] rounded-full animate-bounce-delay delay-300"></span>
+        </div>
+        <p class="mt-4 text-white text-lg font-semibold tracking-wide">Loading</p>
+    </div> -->
+
     <!-- Footer -->
     <footer class="bg-[#00071c] text-center p-6 border-t border-gray-800">
         <div class="flex justify-center space-x-1 mb-1">
@@ -545,6 +587,30 @@
     <script>
         const API_BASE = "/updated-msc-website/api";
 
+        async function apiCall(endpoint, method = "GET", data = null, title = "") {
+            try {
+                const options = {
+                    method: method,
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                    credentials: "include",
+                };
+
+                if (data) {
+                    options.body = JSON.stringify(data);
+                }
+
+                const response = await fetch(`${API_BASE}${endpoint}`, options);
+                const result = await response.json();
+
+                return result;
+            } catch (error) {
+                console.error("API Error:", error);
+                return null;
+            }
+        }
+
         //Mobile View: Sidebar
         const menuButton = document.getElementById("mobile-menu-button");
         const mobileSidebar = document.getElementById("mobile-sidebar");
@@ -562,19 +628,55 @@
             }
         });
 
-        async function fetchProfile() {
-            const data = await apiCall("/auth/profile", "GET");
+        // const loadingScreen = document.getElementById("loading-screen");
+        // async function fetchProfile() {
+        //     const data = await apiCall("/auth/profile", "GET");
 
-            if (!data || !data.success) {
-                window.location.href = "login.html";
+        //     if (!data || !data.success) {
+        //         window.location.href = "login.html";
+        //         loadingScreen.classList.add("opacity-0");
+        //         setTimeout(() => window.location.href = "login.html", 800);
+        //         return;
+        //     }
+
+        //     const user = data.data;
+        //     fetchStudentEventStats(user.id);
+        //     loadRegisteredEvents(user.id);
+        //     fetchMembershipStatus();
+
+        //     document.getElementById("welcome-msg").innerHTML = `Welcome back, <span class="text-[#b9da05]">${user.first_name} ${user.last_name}!</span>`;
+        //     document.getElementById("lastName").textContent = `${user.last_name},`;
+        //     document.getElementById("firstName").textContent = user.first_name;
+        //     document.getElementById("studentNo").textContent = user.student_no;
+        //     document.getElementById("program").textContent = user.program;
+        //     document.getElementById("role").textContent = user.role;
+        //     document.getElementById("user-college").textContent = user.college;
+        //     document.getElementById("user-year-level").textContent = user.year_level;
+        //     document.getElementById("user-msc-id").textContent = user.msc_id;
+        //     document.getElementById("user-last-login").textContent = new Date().toLocaleString();
+
+        //     const initials = `${user.first_name?.charAt(0) || ""}${user.last_name?.charAt(0) || ""}`.toUpperCase();
+        //     renderProfilePicture(user.profile_image_path, initials);
+
+        //     //document.documentElement.classList.remove("loading");
+        //     // After rendering all user data and stats
+        //     document.body.classList.remove("loading"); // <-- Add this
+        //     loadingScreen.classList.add("opacity-0");
+        //     setTimeout(() => loadingScreen.remove(), 800);
+        // };
+
+        document.addEventListener("DOMContentLoaded", async () => {
+            const loadingScreen = document.getElementById("loading-screen");
+            const profileData = await apiCall("/auth/profile", "GET");
+
+            if (!profileData || !profileData.success) {
+                loadingScreen.classList.add("opacity-0");
+                setTimeout(() => window.location.href = "login.html", 800);
                 return;
             }
 
-            const user = data.data;
-            fetchStudentEventStats(user.id);
-            loadRegisteredEvents(user.id);
-            fetchMembershipStatus();
-
+            const user = profileData.data;
+            // Render profile info
             document.getElementById("welcome-msg").innerHTML = `Welcome back, <span class="text-[#b9da05]">${user.first_name} ${user.last_name}!</span>`;
             document.getElementById("lastName").textContent = `${user.last_name},`;
             document.getElementById("firstName").textContent = user.first_name;
@@ -589,8 +691,19 @@
             const initials = `${user.first_name?.charAt(0) || ""}${user.last_name?.charAt(0) || ""}`.toUpperCase();
             renderProfilePicture(user.profile_image_path, initials);
 
+            fetchStudentEventStats(user.id);       
+            loadRegisteredEvents(user.id);         
+            fetchMembershipStatus();              
+            loadAnnouncements();                   
+            loadEvents();
+
+            // Remove loading screen
+            // document.body.classList.remove("loading"); 
+            // loadingScreen.classList.add("opacity-0");
+            // setTimeout(() => loadingScreen.remove(), 800);
             document.documentElement.classList.remove("loading");
-        }
+        });
+
 
         // MEMBERSHIP STATUS
         async function fetchMembershipStatus() {
@@ -659,20 +772,17 @@
             }
         }
 
-        document.addEventListener("DOMContentLoaded", fetchProfile);
+        //document.addEventListener("DOMContentLoaded", fetchProfile);
 
         async function fetchEventStats(studentId) {
             try {
-                const res = await fetch(`${API_BASE}/events/stats/${studentId}`, {
-                    credentials: 'include'
-                });
-                const data = await res.json();
+                const data = await apiCall(`/events/stats/${studentId}`);
 
-                if (res.ok && data.success) {
+                if (data && data.success) {
                     document.getElementById('registeredCount').innerText = data.data.registered_count;
                     document.getElementById('attendedCount').innerText = data.data.attended_count;
                 } else {
-                    console.error("Failed to load event stats:", data.message);
+                    console.error("Failed to load event stats:", data?.message || "Unknown error");
                 }
             } catch (error) {
                 console.error("Error fetching event stats:", error);
@@ -681,83 +791,76 @@
 
         async function loadRegisteredEvents() {
             try {
-                const profileRes = await fetch(`${API_BASE}/auth/profile`, {
-                    method: "GET",
-                    credentials: "include"
-                });
-
-                const profileData = await profileRes.json();
-                if (!profileRes.ok || !profileData.success) {
-                    console.error("Not logged in.");
+                const profileData = await apiCall("/auth/profile");
+                if (!profileData || !profileData.success) {
+                    console.error("Student is not logged in.");
                     return;
                 }
 
                 const studentId = profileData.data.id;
-                const res = await fetch(`${API_BASE}/events/student/${studentId}`, {
-                    credentials: "include"
-                });
 
-                const data = await res.json();
+                const eventsData = await apiCall(`/events/student/${studentId}`);
                 const list = document.getElementById("registered-events-list");
 
-                if (!data.success || !Array.isArray(data.data) || data.data.length === 0) {
+                if (!eventsData || !eventsData.success || !Array.isArray(eventsData.data) || eventsData.data.length === 0) {
                     list.innerHTML = `
-        <div class="flex flex-col py-8 items-center justify-center text-center text-gray-400 text-sm gap-2">
-            <i class="fa-solid fa-calendar-xmark text-2xl"></i>
-            <p class='text-lg'>No registered events.</p>
-        </div>
-      `;
+    <div class="flex flex-col py-8 items-center justify-center text-center text-gray-400 text-sm gap-2">
+        <i class="fa-solid fa-calendar-xmark text-2xl"></i>
+        <p class='text-lg'>No registered events.</p>
+    </div>
+    `;
                     return;
                 }
 
                 list.innerHTML = "";
 
-                data.data.forEach(event => {
-                    const date = new Date(event.event_date);
-                    const month = date.toLocaleString("default", { month: "short" });
-                    const day = date.getDate();
-
-                    const statusClass =
-                        event.attendance_status === "attended"
-                            ? "bg-green-500 text-white"
-                            : event.attendance_status === "registered"
-                                ? "bg-[#b9da05] text-[#011538]"
-                                : "bg-gray-500 text-white";
+                eventsData.data.forEach(evt => {
+                    const eventDateTime = new Date(`${evt.event_date}T${evt.event_time_start}`);
+                    const formattedDateTime = eventDateTime.toLocaleString("en-US", {
+                        month: "short",
+                        day: "numeric",
+                        year: "numeric",
+                        hour: "numeric",
+                        minute: "2-digit",
+                        hour12: true
+                    });
 
                     const html = `
-        <div class="relative flex flex-col md:flex-row gap-4 p-5 bg-[#011538] border border-white/20 
-            rounded-xl shadow-md transition-all duration-300 ease-out group text-white
-            hover:shadow-2xl hover:-translate-y-1 hover:border-[#b9da05]/60">
+    <div class="relative flex flex-col md:flex-row gap-4 p-5 m-4 bg-[#011538] border border-white/20 
+                            rounded-xl shadow-md transition-all duration-300 ease-out group text-white
+                            hover:shadow-2xl hover:-translate-y-1 hover:border-[#b9da05]/60 overflow-hidden">
+        <span class="absolute left-0 top-0 h-full w-1 bg-[#b9da05] scale-y-0 group-hover:scale-y-100 
+                            transition-transform duration-300 origin-top"></span>
 
-          <span class="absolute left-0 top-0 h-full w-1 bg-[#b9da05] scale-y-0 group-hover:scale-y-100 transition-transform duration-300 origin-top rounded-l-xl"></span>
-
-          <div class="w-full md:w-16 h-16 md:h-auto bg-[#b9da05] text-[#011538] rounded-lg 
-            flex flex-col items-center justify-center md:flex-shrink-0 font-bold shadow-md">
-            <span class="text-xs uppercase">${month}</span>
-            <span class="text-2xl">${day}</span>
-          </div>
-
-          <div class="flex-grow relative z-10">
-            <div class="flex justify-between items-start">
-              <h3 class="text-lg md:text-xl font-semibold transition-colors duration-300 group-hover:text-[#b9da05]">
-                ${event.event_name}
-              </h3>
-              <span class="inline-block text-xs font-semibold px-2 py-1 rounded-full ${statusClass}">
-                ${event.attendance_status.charAt(0).toUpperCase() + event.attendance_status.slice(1)}
-              </span>
-            </div>
-
-            <p class="text-sm text-gray-200 mt-2 flex items-center gap-2">
-              <i class="fa-solid fa-clock text-[#b9da05]"></i> ${event.event_time_start || "TBA"}
-            </p>
-
-            <p class="text-sm text-gray-200 mt-1 flex items-center gap-2">
-              <i class="fa-solid fa-location-dot text-red-400"></i> ${event.location || "TBA"}
-            </p>
-          </div>
+        <div
+            class="w-24 h-24 rounded-md bg-[#1a1f3a] text-[#64748b] text-sm flex items-center justify-center overflow-hidden">
+            ${evt.event_batch_image
+                            ? `<img src="${evt.event_batch_image}" alt="Event Badge" class="rounded-md object-fill" />`
+                            : `<i class="bi bi-calendar-event"></i>`}
         </div>
-      `;
 
+        <div class="flex-grow">
+            <div class="flex justify-between items-start">
+                <h4 class="text-md md:text-xl font-semibold transition-colors duration-300">
+                    ${evt.event_name}
+                </h4>
+            </div>
+            <p class="text-sm text-gray-300 mt-2">${evt.description}</p>
+            <div class="flex flex-wrap gap-3 mt-2 items-center">
+                <span class="text-xs text-[#64748b]">
+                    <i class="bi bi-calendar text-[#b9da05]"></i> ${formattedDateTime}
+                </span>
+                <span class="text-xs text-[#64748b]">
+                    <i class="bi bi-geo-alt text-[#b9da05]"></i> ${evt.location}
+                </span>
+                <span
+                    class="text-xs text-[#3b82f6] bg-[#3b82f6]/20 px-2 py-2 mb-1 rounded-full font-semibold uppercase flex items-center">
+                    ${evt.event_status}
+                </span>
+            </div>
+        </div>
+    </div>
+    `;
                     list.insertAdjacentHTML("beforeend", html);
                 });
             } catch (error) {
@@ -765,30 +868,27 @@
             }
         }
 
-
-        document.addEventListener("DOMContentLoaded", loadRegisteredEvents);
+        //document.addEventListener("DOMContentLoaded", loadRegisteredEvents);
 
         function showEmptyState(targetId, iconClass, message) {
             const container = document.getElementById(targetId);
             if (!container) return;
 
             container.innerHTML = `
-    <div class="flex flex-col py-8 items-center justify-center text-center text-gray-400 text-sm gap-2">
-      <i class="fa-solid ${iconClass} text-2xl"></i>
-      <p class='text-lg'>${message}</p>
-    </div>
-  `;
+            <div class="flex flex-col py-8 items-center justify-center text-center text-gray-400 text-sm gap-2">
+                <i class="fa-solid ${iconClass} text-2xl"></i>
+                <p class='text-lg'>${message}</p>
+            </div>
+            `;
         }
-
 
         async function loadAnnouncements() {
             try {
-                const res = await fetch(`${API_BASE}/announcements`, { credentials: "include" });
-                const data = await res.json();
+                const data = await apiCall("/announcements");
 
                 const container = document.getElementById("tab-announcements");
 
-                if (!data.success || !Array.isArray(data.data.announcements) || data.data.announcements.length === 0) {
+                if (!data || !data.success || !Array.isArray(data.data.announcements) || data.data.announcements.length === 0) {
                     showEmptyState("tab-announcements", "fa-bullhorn", "No announcements available.");
                     return;
                 }
@@ -796,38 +896,37 @@
                 container.innerHTML = "";
 
                 data.data.announcements.forEach(ann => {
-                    const date = new Date(ann.created_at).toLocaleDateString(undefined, {
-                        year: "numeric",
-                        month: "short",
-                        day: "numeric"
-                    });
+                    // const announcementDateTime = new Date(ann.created_at);
+                    // const formattedDateTime = announcementDateTime.toLocaleString("en-US", {
+                    // month: "numeric",
+                    // day: "numeric",
+                    // year: "numeric",
+                    // });
+
+                    const announcementDateTime = new Date(ann.created_at);
+
+                    const pad = (n) => n.toString().padStart(2, "0");
+                    const formattedDateTime = `${pad(announcementDateTime.getMonth() +
+                        1)}-${pad(announcementDateTime.getDate())}-${announcementDateTime.getFullYear()}`;
 
                     const html = `
-                <div class="relative p-5 m-4 border border-white/20 bg-[#011538] 
-                    rounded-lg shadow-sm transition-all duration-300 ease-out 
-                    hover:shadow-xl hover:scale-[1.02] hover:bg-[#0a1d4a] group">
-
-                    <div class="absolute top-3 right-3 text-white text-xs uppercase font-semibold">
-                        ${date}
-                    </div>
-
-                    <div class="flex items-start gap-3">
-                        <div class="text-[#b9da05] text-xl mt-1 transition-transform duration-300 group-hover:scale-110">
-                            <i class="fa-solid fa-bullhorn"></i>
-                        </div>
-                        <div>
-                            <h3 class="relative text-lg font-semibold text-white 
-                                transition-colors duration-300 group-hover:text-[#b9da05]">
-                                ${ann.title}
-                                <span class="absolute left-0 -bottom-1 w-0 h-[2px] bg-[#b9da05] transition-all duration-300 group-hover:w-full"></span>
-                            </h3>
-                            <p class="text-sm text-gray-300 mt-2 leading-relaxed">
-                                ${ann.content}
-                            </p>
-                        </div>
-                    </div>
-                </div>
-            `;
+    <div
+        class="relative p-5 m-4 border border-white/20 bg-[#011538] rounded-lg shadow-sm transition-all duration-300 ease-out hover:shadow-xl hover:scale-[1.02] hover:bg-[#0a1d4a] group">
+        <div class="flex items-start gap-3">
+            <div
+                class="w-24 h-24 rounded-md bg-[#1a1f3a] text-[#64748b] text-sm flex items-center justify-center overflow-hidden">
+                <i class="bi bi-megaphone"></i>
+            </div>
+            <div class="flex-grow">
+                <h4 class="text-sm sm:text-base md:text-base lg:text-lg text-white font-semibold">
+                    ${ann.title}
+                </h4>
+                <p class="text-sm text-gray-300 mt-2">${ann.content}</p>
+                <p class="text-xs text-gray-500 mt-2 tracking-wide">${formattedDateTime}</p>
+            </div>
+        </div>
+    </div>
+    `;
                     container.insertAdjacentHTML("beforeend", html);
                 });
             } catch (err) {
@@ -838,11 +937,11 @@
 
         async function loadEvents() {
             try {
-                const res = await fetch(`${API_BASE}/events/upcoming`, { credentials: "include" });
-                const data = await res.json();
+                const data = await apiCall("/events/upcoming");
 
                 const container = document.getElementById("tab-events");
-                if (!data.success || !Array.isArray(data.data) || data.data.length === 0) {
+
+                if (!data || !data.success || !Array.isArray(data.data) || data.data.length === 0) {
                     showEmptyState("tab-events", "fa-calendar-days", "No events available.");
                     return;
                 }
@@ -850,51 +949,64 @@
                 container.innerHTML = "";
 
                 data.data.forEach(evt => {
-                    const date = new Date(evt.event_date);
-                    const month = date.toLocaleString("default", { month: "short" });
-                    const day = date.getDate();
+                    const eventDateTime = new Date(`${evt.event_date}T${evt.event_time_start}`);
+                    const formattedDateTime = eventDateTime.toLocaleString("en-US", {
+                        month: "short",
+                        day: "numeric",
+                        year: "numeric",
+                        hour: "numeric",
+                        minute: "2-digit",
+                        hour12: true
+                    });
+
+                    let statusClass = "";
+
+                    if (evt.event_status.toLowerCase() === "ongoing") {
+                        statusClass = "text-[#3b82f6] bg-[#3b82f6]/20"; // blue
+                    } else if (evt.event_status.toLowerCase() === "completed") {
+                        statusClass = "text-green-500 bg-green-200"; // green
+                    } else if (evt.event_status.toLowerCase() === "cancelled") {
+                        statusClass = "text-red-500 bg-red-200"; // red
+                    } else {
+                        statusClass = "text-gray-400 bg-gray-200"; // default
+                    }
 
                     const html = `
-        <div class="relative flex flex-col md:flex-row gap-4 p-5 m-4 bg-[#011538] border border-white/20 
-            rounded-xl shadow-md transition-all duration-300 ease-out group text-white
-            hover:shadow-2xl hover:-translate-y-1 hover:border-[#b9da05]/60">
+    <div class="relative flex flex-col md:flex-row gap-4 p-5 m-4 bg-[#011538] border border-white/20 
+                            rounded-xl shadow-md transition-all duration-300 ease-out group text-white
+                            hover:shadow-2xl hover:-translate-y-1 hover:border-[#b9da05]/60 overflow-hidden">
+        <span class="absolute left-0 top-0 h-full w-1 bg-[#b9da05] scale-y-0 group-hover:scale-y-100 
+                            transition-transform duration-300 origin-top"></span>
 
-          <!-- Animated accent bar -->
-          <span class="absolute left-0 top-0 h-full w-1 bg-[#b9da05] scale-y-0 group-hover:scale-y-100 transition-transform duration-300 origin-top rounded-l-xl"></span>
-
-          <!-- Date block -->
-          <div class="w-full md:w-16 h-16 md:h-auto bg-[#b9da05] text-[#011538] rounded-lg 
-            flex flex-col items-center justify-center md:flex-shrink-0 font-bold shadow-md">
-            <span class="text-xs uppercase">${month}</span>
-            <span class="text-2xl">${day}</span>
-          </div>
-          
-          <!-- Event details -->
-          <div class="flex-grow relative z-10">
-            <div class="flex justify-between items-start">
-              <h3 class="text-lg md:text-xl font-semibold transition-colors duration-300 group-hover:text-[#b9da05]">
-                ${evt.event_name}
-              </h3>
-              <span class="inline-block text-xs font-semibold px-2 py-1 bg-[#b9da05] text-[#011538] rounded-full">
-                ${evt.event_type}
-              </span>
-            </div>
-            
-            <p class="text-sm text-gray-200 mt-2 flex items-center gap-2">
-              <i class="fa-solid fa-clock text-[#b9da05]"></i> ${evt.event_time_start || "TBA"}
-            </p>
-            
-            <p class="text-sm text-gray-200 mt-1 flex items-center gap-2">
-              <i class="fa-solid fa-location-dot text-red-400"></i> ${evt.location || "Location TBA"}
-            </p>
-            
-            <p class="text-xs text-gray-400 mt-3 italic">
-              Description: ${evt.description || "BulSU MSC - Test Only"}
-            </p>
-          </div>
+        <div
+            class="w-24 h-24 rounded-md bg-[#1a1f3a] text-[#64748b] text-sm flex items-center justify-center overflow-hidden">
+            ${evt.event_batch_image
+                            ? `<img src="${evt.event_batch_image}" alt="Event Badge" class="rounded-md object-fill" />`
+                            : `<i class="bi bi-calendar-event"></i>`}
         </div>
-      `;
 
+        <div class="flex-grow">
+            <div class="flex justify-between items-start">
+                <h4 class="text-md md:text-xl font-semibold">
+                    ${evt.event_name}
+                </h4>
+            </div>
+            <p class="text-sm text-gray-300 mt-2">${evt.description}</p>
+            <div class="flex flex-wrap gap-3 mt-2 items-center">
+                <span class="text-xs text-[#64748b]">
+                    <i class="bi bi-calendar text-[#b9da05]"></i> ${formattedDateTime}
+                </span>
+                <span class="text-xs text-[#64748b]">
+                    <i class="bi bi-geo-alt text-[#b9da05]"></i> ${evt.location}
+                </span>
+                <span
+                    class="text-xs text-[#3b82f6] bg-[#3b82f6]/20 px-2 py-2 mb-1 rounded-full font-semibold uppercase flex items-center status-ongoing">
+                    ${evt.event_status}
+                </span>
+            </div>
+        </div>
+    </div>
+    `;
                     container.insertAdjacentHTML("beforeend", html);
                 });
             } catch (err) {
@@ -903,38 +1015,10 @@
             }
         }
 
-
-
-        document.addEventListener("DOMContentLoaded", () => {
-            loadAnnouncements();
-            loadEvents();
-        });
-
-        async function apiCall(endpoint, method = "GET", data = null, title = "") {
-            try {
-                const options = {
-                    method: method,
-                    headers: {
-                        "Content-Type": "application/json",
-                    },
-                    credentials: "include",
-                };
-
-                if (data) {
-                    options.body = JSON.stringify(data);
-                }
-
-                //console.log(`🚀 ${method} ${endpoint}:`, data);
-
-                const response = await fetch(`${API_BASE}${endpoint}`, options);
-                const result = await response.json();
-
-                return result;
-            } catch (error) {
-                console.error("API Error:", error);
-                return null;
-            }
-        }
+        // document.addEventListener("DOMContentLoaded", () => {
+        //     loadAnnouncements();
+        //     loadEvents();
+        // });
 
         async function logout() {
             const result = await apiCall("/auth/logout", "POST");
