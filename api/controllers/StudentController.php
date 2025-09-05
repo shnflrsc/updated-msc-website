@@ -130,9 +130,19 @@ class StudentController
             }
 
             // Validate phone if provided
-            if (!empty($data['phone']) && !Validator::validatePhone($data['phone'])) {
-                $errors['phone'] = 'Invalid phone number format';
+            // if (!empty($data['phone']) && !Validator::validatePhone($data['phone'])) {
+            //     $errors['phone'] = 'Invalid phone number format';
+            // }
+
+            if (!empty($data['phone'])) {
+                if (!Validator::validatePhone($data['phone'])) {
+                    $errors['phone'] = 'Invalid Philippine phone number';
+                } else {
+                    // Sanitize for consistent storage
+                    $data['phone'] = Validator::validatePhone($data['phone']);
+                }
             }
+
 
             if (!empty($errors)) {
                 Response::validationError($errors);
@@ -315,7 +325,7 @@ class StudentController
             }
 
             if (!isset($_FILES['profile']) || $_FILES['profile']['error'] !== UPLOAD_ERR_OK) {
-                Response::error('No file uploaded or upload error', 400);
+                Response::error('No file uploaded', 400);
             }
 
             $file = $_FILES['profile'];
@@ -331,7 +341,7 @@ class StudentController
                 Response::error('File size exceeds 2MB limit.', 400);
             }
 
-            // Auto-create upload folder if it doesn't exist
+            // Auto-create upload folder 
             $uploadDir = __DIR__ . '/../../uploads/profiles/';
             if (!is_dir($uploadDir)) {
                 mkdir($uploadDir, 0777, true);

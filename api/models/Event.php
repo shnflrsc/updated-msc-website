@@ -289,10 +289,11 @@ class Event
      */
     public function getCalendarEvents($startDate, $endDate)
     {
-        $sql = "SELECT event_id, event_name, event_date, event_time_start, event_time_end, 
+        $sql = "SELECT event_id, event_name, event_date, event_time_start, event_time_end, event_status
                        event_type, event_status, location
                 FROM events 
                 WHERE event_date BETWEEN :start_date AND :end_date
+                AND event_status = 'upcoming'
                 ORDER BY event_date ASC, event_time_start ASC";
 
         $stmt = $this->db->prepare($sql);
@@ -398,7 +399,7 @@ class Event
      */
     public function getEventsByStudent($studentId) 
     {
-        $sql = "SELECT e.event_id, e.event_name, e.event_date, e.event_time_start, e.location, e.description, e.event_status, er.attendance_status
+        $sql = "SELECT e.event_id, e.event_name, e.event_date, e.event_time_start, e.location, e.description, e.event_status, e.event_batch_image, er.attendance_status
             FROM event_registrations er
             JOIN events e ON er.event_id = e.event_id
             WHERE er.student_id = :student_id
@@ -416,11 +417,11 @@ class Event
      */
     public function getAttendedEventsByStudent($studentId)
     {
-        $sql = "SELECT e.event_id, e.event_name, e.event_date, e.event_time_start, e.location, er.attendance_status
+        $sql = "SELECT e.event_id, e.event_name, e.event_date, e.event_time_start, e.location, e.event_batch_image, er.attendance_status
             FROM event_registrations er
             JOIN events e ON er.event_id = e.event_id
             WHERE er.student_id = :student_id
-            AND event_status = 'attended'
+            AND er.attendance_status = 'attended'
             ORDER BY e.event_date DESC";
 
         $stmt = $this->db->prepare($sql);

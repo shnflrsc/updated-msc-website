@@ -65,7 +65,6 @@ switch ($method) {
 
     /*ORIGINAL BACKEND CODE: Endpoint
     */
-
     // case 'PUT':
     //     if ($endpoint && $id === 'profile') {
     //         $studentController->updateProfile($endpoint);
@@ -100,6 +99,7 @@ switch ($method) {
             http_response_code(404);
             echo json_encode(['success' => false, 'message' => 'POST endpoint not found']);
         }
+        break;
     
     case 'DELETE':
     if (is_numeric($endpoint)) { // endpoint is the student ID

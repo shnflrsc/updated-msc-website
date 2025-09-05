@@ -70,7 +70,7 @@ switch ($method) {
             $eventController->getEventsPerMonth();
         } elseif ($endpoint === 'student' && is_numeric($id)) {
             $eventController->getEventsByStudent($id);
-        } else if ($endpoint === 'student' && is_numeric($id)) {
+        } else if ($endpoint === 'attended' && is_numeric($id)) {
             $eventController->getAttendedEventsByStudent($id);
         } elseif ($endpoint === '' || $endpoint === 'all') {
             $eventController->getAll();
