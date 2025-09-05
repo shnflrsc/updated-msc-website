@@ -8,11 +8,25 @@
     <link href="./Logos/Bulsu MSC Logo-02.png" rel="icon" type="image/png" />
 
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" rel="stylesheet" />
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400..900&family=Segoe+UI:wght@400;700&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400..900&family=Segoe+UI:wght@400;700&display=swap"
+        rel="stylesheet">
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
     <script src="https://cdn.tailwindcss.com"></script>
 
     <style>
+        body.loading main {
+            display: none;
+        }
+
+        #page-content {
+            display: none;
+        }
+
+        body.loading #page-content {
+            display: none;
+        }
+
         @font-face {
             font-family: 'Veonika';
             src: url('https://fonts.cdnfonts.com/s/72818/veonika_free.woff') format('woff');
@@ -27,7 +41,7 @@
             font-family: 'Orbitron', sans-serif;
         }
 
-        main{
+        main {
             background-color: #080c24;
         }
 
@@ -90,220 +104,331 @@
         ::-webkit-scrollbar-thumb:hover {
             background-color: #d1d5db;
         }
+
+        /* Loading screen */
+        #loading-screen {
+            position: fixed;
+            inset: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background-color: black;
+            z-index: 50;
+            transition: opacity 0.5s ease;
+        }
+
+        @keyframes bounce-delay {
+
+            0%,
+            80%,
+            100% {
+                transform: scale(0);
+            }
+
+            40% {
+                transform: scale(1);
+            }
+        }
+
+        .animate-bounce-delay {
+            animation: bounce-delay 1.4s infinite ease-in-out;
+        }
+
+        .delay-150 {
+            animation-delay: 0.15s;
+        }
+
+        .delay-300 {
+            animation-delay: 0.3s;
+        }
     </style>
 </head>
 
-<body class="bg-gray-100" id="main-body">
-    <nav class="fixed top-0 left-0 right-0 z-50 transition-all duration-300 ease-in-out py-4" id="main-header">
-        <div class="max-w-7xl mx-auto px-4 flex justify-between items-center">
-            <a class="flex items-center space-x-2 text-white transition-colors duration-300 hover:text-[#b9da05]"
-                href="index.html">
-                <img alt="BULSU MSC Logo" class="h-12" src="./Logos/Bulsu MSC Logo-02.png" />
-            </a>
-            <div class="hidden md:flex items-center space-x-8">
-                <a href="dashboard.html"
-                    class="text-gray-400 font-semibold transition-colors duration-300 hover:text-[#b9da05] cursor-pointer">Home</a>
-                <a href="announcements.html"
-                    class="text-gray-400 font-semibold transition-colors duration-300 hover:text-[#b9da05] cursor-pointer">Announcements</a>
-                <a href="events-and-register-events.html"
-                    class="text-gray-400 font-semibold transition-colors duration-300 hover:text-[#b9da05] cursor-pointer">Events</a>
+<body class="bg-[#080c24] loading" id="main-body">
 
-                <a href="edit_profile.html" class="nav-icon-wrapper">
-                    <i class="fa-solid fa-circle-user nav-icon"></i>
-                </a>
-
-                <a href="calendar.html" class="nav-icon-wrapper">
-                    <i class="fa-solid fa-calendar-days nav-icon"></i>
-                </a>
-
-                <a href="settings.html" class="nav-icon-wrapper">
-                    <i class="fa-solid fa-gear nav-icon"></i>
-                </a>
-            </div>
-            <div class="md:hidden flex items-center space-x-4">
-                <button class="text-gray-300 hover:text-[#b9da05] focus:outline-none" id="mobile-menu-button">
-                    <i class="fas fa-bars text-2xl transition-transform duration-300" id="mobile-menu-icon"></i>
-                </button>
-            </div>
+    <!-- Loading Screen -->
+    <div id="loading-screen">
+        <img src="./Logos/Bulsu MSC Logo-02.png" alt="Logo" class="h-20 mb-6 animate-bounce">
+        <div class="flex space-x-2">
+            <span class="dot w-4 h-4 bg-[#b9da05] rounded-full animate-bounce-delay"></span>
+            <span class="dot w-4 h-4 bg-[#b9da05] rounded-full animate-bounce-delay delay-150"></span>
+            <span class="dot w-4 h-4 bg-[#b9da05] rounded-full animate-bounce-delay delay-300"></span>
         </div>
-    </nav>
-
-    <!-- Mobile Sidebar -->
-    <div id="mobile-sidebar"
-        class="fixed top-[64px] left-0 w-64 h-[calc(100%-64px)] bg-[#00071c] bg-opacity-100 backdrop-blur-md z-40 transform -translate-x-full transition-transform duration-300 ease-in-out md:hidden">
-        <div class="p-6 space-y-4 text-white font-semibold">
-            <a href="dashboard.html"
-                class="flex items-center space-x-4 p-2 rounded-md group hover:bg-white/10 transition-colors duration-300 cursor-pointer">
-                <i
-                    class="fa-solid fa-circle-info text-xl w-6 text-center group-hover:text-[#b9da05] group-hover:scale-110 transition-all duration-300">
-                </i>
-                <span>Home</span>
-            </a>
-
-            <a href="announcements.html"
-                class="flex items-center space-x-4 p-2 rounded-md group hover:bg-white/10 transition-colors duration-300 cursor-pointer">
-                <i
-                    class="fa-solid fa-bell text-xl w-6 text-center group-hover:text-[#b9da05] group-hover:scale-110 transition-all duration-300">
-                </i>
-                <span>Announcements</span>
-            </a>
-
-            <a href="events-and-register-events.html"
-                class="flex items-center space-x-4 p-2 rounded-md group hover:bg-white/10 transition-colors duration-300 cursor-pointer">
-                <i
-                    class="fa-solid fa-calendar-alt text-xl w-6 text-center group-hover:text-[#b9da05] group-hover:scale-110 transition-all duration-300">
-                </i>
-                <span>Events</span>
-            </a>
-
-            <a href="edit_profile.html"
-                class="flex items-center space-x-4 p-2 rounded-md group hover:bg-white/10 transition-colors duration-300 cursor-pointer">
-                <i
-                    class="fa-solid fa-user-circle text-xl w-6 text-center group-hover:text-[#b9da05] group-hover:scale-110 transition-all duration-300">
-                </i>
-                <span>Edit Profile</span>
-            </a>
-
-            <a href="calendar.html"
-                class="flex items-center space-x-4 p-2 rounded-md group hover:bg-white/10 transition-colors duration-300 cursor-pointer">
-                <i
-                    class="fa-solid fa-calendar-days text-xl w-6 text-center group-hover:text-[#b9da05] group-hover:scale-110 transition-all duration-300">
-                </i>
-                <span>Calendar</span>
-            </a>
-
-            <a href="settings.html"
-                class="flex items-center space-x-4 p-2 rounded-md group hover:bg-white/10 transition-colors duration-300 cursor-pointer">
-                <i
-                    class="fa-solid fa-gear text-xl w-6 text-center group-hover:text-[#b9da05] group-hover:scale-110 transition-all duration-300">
-                </i>
-                <span>Settings</span>
-            </a>
-        </div>
+        <p class="mt-4 text-white text-lg font-semibold tracking-wide">Loading</p>
     </div>
 
-    <main class="min-h-screen flex pt-[100px] flex-col items-center md:justify-center">
-        <div class="bg-[#011538] border border-[#b9da05] rounded-lg shadow-md p-6 w-11/12 max-w-5xl text-white">
-            <h2 class="text-2xl font-bold mb-6 text-white">Settings</h2>
+    <div id="page-content">
+        <nav class="fixed top-0 left-0 right-0 z-50 transition-all duration-300 ease-in-out py-4" id="main-header">
+            <div class="max-w-7xl mx-auto px-4 flex justify-between items-center">
+                <a class="flex items-center space-x-2 text-white transition-colors duration-300 hover:text-[#b9da05]"
+                    href="index.html">
+                    <img alt="BULSU MSC Logo" class="h-12" src="./Logos/Bulsu MSC Logo-02.png" />
+                </a>
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="dashboard.html"
+                        class="text-gray-400 font-semibold transition-colors duration-300 hover:text-[#b9da05] cursor-pointer">Home</a>
+                    <a href="announcements.html"
+                        class="text-gray-400 font-semibold transition-colors duration-300 hover:text-[#b9da05] cursor-pointer">Announcements</a>
+                    <a href="events-and-register-events.html"
+                        class="text-gray-400 font-semibold transition-colors duration-300 hover:text-[#b9da05] cursor-pointer">Events</a>
 
-            <div class="space-y-6">
-                <!-- Edit Personal Information -->
-                <div class="bg-[#011538] border border-white/20 p-4 rounded shadow-sm">
-                    <a href="edit_profile.html" class="text-xl font-semibold mb-2 text-[#b9da05] hover:underline block">
-                        Edit Personal Information
+                    <a href="edit_profile.html" class="nav-icon-wrapper">
+                        <i class="fa-solid fa-circle-user nav-icon"></i>
                     </a>
-                    <p class="text-base text-gray-200">
-                        Update your name, birthday, contact info, and academic info.
-                    </p>
-                </div>
 
-                <!-- Change Password -->
-                <div class="bg-[#011538] border border-white/20 p-4 rounded shadow-sm">
-                    <a href="change_passwordform.html"
-                        class="text-xl font-semibold mb-2 text-[#b9da05] hover:underline block">
-                        Change Password
+                    <a href="calendar.html" class="nav-icon-wrapper">
+                        <i class="fa-solid fa-calendar-days nav-icon"></i>
                     </a>
-                    <p class="text-base text-gray-200">
-                        Update your account password for security.
-                    </p>
-                </div>
 
-                <!-- Logout -->
-                <div class="bg-[#011538] border border-white/20 p-4 rounded shadow-sm">
-                    <button onclick="logout()"
-                        class="text-xl font-semibold mb-2 text-red-400 hover:underline block">
-                        Log Out
+                    <a href="settings.html" class="nav-icon-wrapper">
+                        <i class="fa-solid fa-gear nav-icon"></i>
+                    </a>
+                </div>
+                <div class="md:hidden flex items-center space-x-4">
+                    <button class="text-gray-300 hover:text-[#b9da05] focus:outline-none" id="mobile-menu-button">
+                        <i class="fas fa-bars text-2xl transition-transform duration-300" id="mobile-menu-icon"></i>
                     </button>
-                    <p class="text-base text-gray-200">
-                        Sign out of your account.
-                    </p>
                 </div>
             </div>
+        </nav>
+
+        <!-- Mobile Sidebar -->
+        <div id="mobile-sidebar"
+            class="fixed top-[64px] left-0 w-64 h-[calc(100%-64px)] bg-[#00071c] bg-opacity-100 backdrop-blur-md z-40 transform -translate-x-full transition-transform duration-300 ease-in-out md:hidden">
+            <div class="p-6 space-y-4 text-white font-semibold">
+                <a href="dashboard.html"
+                    class="flex items-center space-x-4 p-2 rounded-md group hover:bg-white/10 transition-colors duration-300 cursor-pointer">
+                    <i
+                        class="fa-solid fa-circle-info text-xl w-6 text-center group-hover:text-[#b9da05] group-hover:scale-110 transition-all duration-300">
+                    </i>
+                    <span>Home</span>
+                </a>
+
+                <a href="announcements.html"
+                    class="flex items-center space-x-4 p-2 rounded-md group hover:bg-white/10 transition-colors duration-300 cursor-pointer">
+                    <i
+                        class="fa-solid fa-bell text-xl w-6 text-center group-hover:text-[#b9da05] group-hover:scale-110 transition-all duration-300">
+                    </i>
+                    <span>Announcements</span>
+                </a>
+
+                <a href="events-and-register-events.html"
+                    class="flex items-center space-x-4 p-2 rounded-md group hover:bg-white/10 transition-colors duration-300 cursor-pointer">
+                    <i
+                        class="fa-solid fa-calendar-alt text-xl w-6 text-center group-hover:text-[#b9da05] group-hover:scale-110 transition-all duration-300">
+                    </i>
+                    <span>Events</span>
+                </a>
+
+                <a href="edit_profile.html"
+                    class="flex items-center space-x-4 p-2 rounded-md group hover:bg-white/10 transition-colors duration-300 cursor-pointer">
+                    <i
+                        class="fa-solid fa-user-circle text-xl w-6 text-center group-hover:text-[#b9da05] group-hover:scale-110 transition-all duration-300">
+                    </i>
+                    <span>Edit Profile</span>
+                </a>
+
+                <a href="calendar.html"
+                    class="flex items-center space-x-4 p-2 rounded-md group hover:bg-white/10 transition-colors duration-300 cursor-pointer">
+                    <i
+                        class="fa-solid fa-calendar-days text-xl w-6 text-center group-hover:text-[#b9da05] group-hover:scale-110 transition-all duration-300">
+                    </i>
+                    <span>Calendar</span>
+                </a>
+
+                <a href="settings.html"
+                    class="flex items-center space-x-4 p-2 rounded-md group hover:bg-white/10 transition-colors duration-300 cursor-pointer">
+                    <i
+                        class="fa-solid fa-gear text-xl w-6 text-center group-hover:text-[#b9da05] group-hover:scale-110 transition-all duration-300">
+                    </i>
+                    <span>Settings</span>
+                </a>
+            </div>
         </div>
-    </main>
 
-    <!-- Mobile Sidebar -->
-    <div id="mobile-sidebar"
-        class="fixed top-[64px] left-0 w-64 h-[calc(100%-64px)] bg-[#00071c] bg-opacity-90 backdrop-blur-md z-40 transform -translate-x-full transition-transform duration-300 ease-in-out md:hidden">
-        <div class="p-6 space-y-4 text-white font-semibold">
-            <a href="dashboard.html"
-                class="flex items-center space-x-4 p-2 rounded-md group hover:bg-white/10 transition-colors duration-300 cursor-pointer">
-                <i
-                    class="fa-solid fa-house text-xl w-6 text-center group-hover:text-[#b9da05] group-hover:scale-110 transition-all duration-300">
-                </i>
-                <span>Home</span>
-            </a>
+        div>
+        <main class="min-h-screen flex pt-[100px] flex-col items-center md:justify-center">
+            <div class="bg-[#011538] border border-[#b9da05] rounded-lg shadow-md p-6 w-11/12 max-w-5xl text-white">
+                <h2 class="text-2xl font-bold mb-6 text-white">Settings</h2>
 
-            <a href="announcements.html"
-                class="flex items-center space-x-4 p-2 rounded-md group hover:bg-white/10 transition-colors duration-300 cursor-pointer">
-                <i
-                    class="fa-solid fa-bell text-xl w-6 text-center group-hover:text-[#b9da05] group-hover:scale-110 transition-all duration-300"></i>
-                <span>Announcements</span>
-            </a>
+                <div class="space-y-6">
+                    <!-- Edit Personal Information -->
+                    <div class="bg-[#011538] border border-white/20 p-4 rounded shadow-sm">
+                        <a href="edit_profile.html"
+                            class="text-xl font-semibold mb-2 text-[#b9da05] hover:underline block">
+                            Edit Personal Information
+                        </a>
+                        <p class="text-base text-gray-200">
+                            Update your name, birthday, contact info, and academic info.
+                        </p>
+                    </div>
 
-            <a href="events-and-register-events.html"
-                class="flex items-center space-x-4 p-2 rounded-md group hover:bg-white/10 transition-colors duration-300 cursor-pointer">
-                <i
-                    class="fa-solid fa-calendar-alt text-xl w-6 text-center group-hover:text-[#b9da05] group-hover:scale-110 transition-all duration-300"></i>
-                <span>Events</span>
-            </a>
+                    <!-- Change Password -->
+                    <div class="bg-[#011538] border border-white/20 p-4 rounded shadow-sm">
+                        <a href="change_passwordform.html"
+                            class="text-xl font-semibold mb-2 text-[#b9da05] hover:underline block">
+                            Change Password
+                        </a>
+                        <p class="text-base text-gray-200">
+                            Update your account password for security.
+                        </p>
+                    </div>
 
-            <a href="edit_profile.html"
-                class="flex items-center space-x-4 p-2 rounded-md group hover:bg-white/10 transition-colors duration-300 cursor-pointer">
-                <i
-                    class="fa-solid fa-user-circle text-xl w-6 text-center group-hover:text-[#b9da05] group-hover:scale-110 transition-all duration-300"></i>
-                <span>Edit Profile</span>
-            </a>
+                    <!-- Logout -->
+                    <div class="bg-[#011538] border border-white/20 p-4 rounded shadow-sm">
+                        <button onclick="logout()"
+                            class="text-xl font-semibold mb-2 text-red-400 hover:underline block">
+                            Log Out
+                        </button>
+                        <p class="text-base text-gray-200">
+                            Sign out of your account.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </main>
 
-            <a href="calendar.html"
-                class="flex items-center space-x-4 p-2 rounded-md group hover:bg-white/10 transition-colors duration-300 cursor-pointer">
-                <i
-                    class="fa-solid fa-calendar-days text-xl w-6 text-center group-hover:text-[#b9da05] group-hover:scale-110 transition-all duration-300"></i>
-                <span>Calendar</span>
-            </a>
+        <!-- Mobile Sidebar -->
+        <div id="mobile-sidebar"
+            class="fixed top-[64px] left-0 w-64 h-[calc(100%-64px)] bg-[#00071c] bg-opacity-90 backdrop-blur-md z-40 transform -translate-x-full transition-transform duration-300 ease-in-out md:hidden">
+            <div class="p-6 space-y-4 text-white font-semibold">
+                <a href="dashboard.html"
+                    class="flex items-center space-x-4 p-2 rounded-md group hover:bg-white/10 transition-colors duration-300 cursor-pointer">
+                    <i
+                        class="fa-solid fa-house text-xl w-6 text-center group-hover:text-[#b9da05] group-hover:scale-110 transition-all duration-300">
+                    </i>
+                    <span>Home</span>
+                </a>
 
-            <a href="settings.html"
-                class="flex items-center space-x-4 p-2 rounded-md group hover:bg-white/10 transition-colors duration-300 cursor-pointer">
-                <i
-                    class="fa-solid fa-gear text-xl w-6 text-center group-hover:text-[#b9da05] group-hover:scale-110 transition-all duration-300"></i>
-                <span>Settings</span>
-            </a>
+                <a href="announcements.html"
+                    class="flex items-center space-x-4 p-2 rounded-md group hover:bg-white/10 transition-colors duration-300 cursor-pointer">
+                    <i
+                        class="fa-solid fa-bell text-xl w-6 text-center group-hover:text-[#b9da05] group-hover:scale-110 transition-all duration-300"></i>
+                    <span>Announcements</span>
+                </a>
+
+                <a href="events-and-register-events.html"
+                    class="flex items-center space-x-4 p-2 rounded-md group hover:bg-white/10 transition-colors duration-300 cursor-pointer">
+                    <i
+                        class="fa-solid fa-calendar-alt text-xl w-6 text-center group-hover:text-[#b9da05] group-hover:scale-110 transition-all duration-300"></i>
+                    <span>Events</span>
+                </a>
+
+                <a href="edit_profile.html"
+                    class="flex items-center space-x-4 p-2 rounded-md group hover:bg-white/10 transition-colors duration-300 cursor-pointer">
+                    <i
+                        class="fa-solid fa-user-circle text-xl w-6 text-center group-hover:text-[#b9da05] group-hover:scale-110 transition-all duration-300"></i>
+                    <span>Edit Profile</span>
+                </a>
+
+                <a href="calendar.html"
+                    class="flex items-center space-x-4 p-2 rounded-md group hover:bg-white/10 transition-colors duration-300 cursor-pointer">
+                    <i
+                        class="fa-solid fa-calendar-days text-xl w-6 text-center group-hover:text-[#b9da05] group-hover:scale-110 transition-all duration-300"></i>
+                    <span>Calendar</span>
+                </a>
+
+                <a href="settings.html"
+                    class="flex items-center space-x-4 p-2 rounded-md group hover:bg-white/10 transition-colors duration-300 cursor-pointer">
+                    <i
+                        class="fa-solid fa-gear text-xl w-6 text-center group-hover:text-[#b9da05] group-hover:scale-110 transition-all duration-300"></i>
+                    <span>Settings</span>
+                </a>
+            </div>
         </div>
+
+        <!-- <div id="loading-screen"
+        class="fixed inset-0 flex flex-col items-center justify-center bg-black z-50 transition-opacity duration-500">
+        <img src="./Logos/Bulsu MSC Logo-02.png" alt="Logo" class="h-20 mb-6 animate-bounce">
+        <div class="flex space-x-2">
+            <span class="dot w-4 h-4 bg-[#b9da05] rounded-full animate-bounce-delay"></span>
+            <span class="dot w-4 h-4 bg-[#b9da05] rounded-full animate-bounce-delay delay-150"></span>
+            <span class="dot w-4 h-4 bg-[#b9da05] rounded-full animate-bounce-delay delay-300"></span>
+        </div>
+        <p class="mt-4 text-white text-lg font-semibold tracking-wide">Loading</p>
+    </div> -->
+
+        <!-- Footer -->
+        <footer class="bg-[#00071c] text-center p-6 border-t border-gray-800">
+            <div class="flex justify-center space-x-1 mb-1">
+                <a href="https://www.bulsu.edu.ph" target="_blank" rel="noopener noreferrer"><img
+                        src="./Logos/BulSU.png" alt="Bulacan State University Logo" class="h-10"></a>
+                <a href="https://www.facebook.com/osobulsu" target="_blank" rel="noopener noreferrer"><img
+                        src="./Logos/OSOA.png" alt="Bulacan State University OSOA Logo" class="h-10 w-10"></a>
+            </div>
+            <p class="text-gray-500 text-sm">&copy; 2025 BulSU Microsoft Student Community. All rights reserved.</p>
+            <div class="flex justify-center space-x-4 mt-2">
+                <a href="https://www.facebook.com/bulsu.officialmsc" target="_blank"
+                    class="text-gray-400 hover:text-[#b9da05] transition-colors duration-300"><i
+                        class="fab fa-facebook-f"></i></a>
+                <a href="https://www.instagram.com/bulsumsc/" target="_blank"
+                    class="text-gray-400 hover:text-[#b9da05] transition-colors duration-300"><i
+                        class="fab fa-instagram"></i></a>
+                <a href="https://www.threads.com/@bulsumsc" target="_blank"
+                    class="text-gray-400 hover:text-[#b9da05] transition-colors duration-300"><i
+                        class="fab fa-threads"></i></a>
+                <a href="https://www.tiktok.com/@bulsumsc" target="_blank"
+                    class="text-gray-400 hover:text-[#b9da05] transition-colors duration-300"><i
+                        class="fab fa-tiktok"></i></a>
+                <a href="https://www.linkedin.com/company/bulsumsc/" target="_blank"
+                    class="text-gray-400 hover:text-[#b9da05] transition-colors duration-300"><i
+                        class="fab fa-linkedin"></i></a>
+                <a href="https://www.github.com/bulsumsc" target="_blank"
+                    class="text-gray-400 hover:text-[#b9da05] transition-colors duration-300"><i
+                        class="fab fa-github"></i></a>
+            </div>
+        </footer>
     </div>
 
-    <!-- Footer -->
-    <footer class="bg-[#00071c] text-center p-6 border-t border-gray-800">
-        <div class="flex justify-center space-x-1 mb-1">
-            <a href="https://www.bulsu.edu.ph" target="_blank" rel="noopener noreferrer"><img src="./Logos/BulSU.png"
-                    alt="Bulacan State University Logo" class="h-10"></a>
-            <a href="https://www.facebook.com/osobulsu" target="_blank" rel="noopener noreferrer"><img
-                    src="./Logos/OSOA.png" alt="Bulacan State University OSOA Logo" class="h-10 w-10"></a>
-        </div>
-        <p class="text-gray-500 text-sm">&copy; 2025 BulSU Microsoft Student Community. All rights reserved.</p>
-        <div class="flex justify-center space-x-4 mt-2">
-            <a href="https://www.facebook.com/bulsu.officialmsc" target="_blank"
-                class="text-gray-400 hover:text-[#b9da05] transition-colors duration-300"><i
-                    class="fab fa-facebook-f"></i></a>
-            <a href="https://www.instagram.com/bulsumsc/" target="_blank"
-                class="text-gray-400 hover:text-[#b9da05] transition-colors duration-300"><i
-                    class="fab fa-instagram"></i></a>
-            <a href="https://www.threads.com/@bulsumsc" target="_blank"
-                class="text-gray-400 hover:text-[#b9da05] transition-colors duration-300"><i
-                    class="fab fa-threads"></i></a>
-            <a href="https://www.tiktok.com/@bulsumsc" target="_blank"
-                class="text-gray-400 hover:text-[#b9da05] transition-colors duration-300"><i
-                    class="fab fa-tiktok"></i></a>
-            <a href="https://www.linkedin.com/company/bulsumsc/" target="_blank"
-                class="text-gray-400 hover:text-[#b9da05] transition-colors duration-300"><i
-                    class="fab fa-linkedin"></i></a>
-            <a href="https://www.github.com/bulsumsc" target="_blank"
-                class="text-gray-400 hover:text-[#b9da05] transition-colors duration-300"><i
-                    class="fab fa-github"></i></a>
-        </div>
-    </footer>
 
     <script>
-        //Mobile View: Sidebar
+        const API_BASE = "/updated-msc-website/api";
+
+        async function apiCall(endpoint, method = "GET", data = null) {
+            try {
+                const options = {
+                    method: method,
+                    headers: { "Content-Type": "application/json" },
+                    credentials: "include"
+                };
+                if (data) options.body = JSON.stringify(data);
+
+                const res = await fetch(`${API_BASE}${endpoint}`, options);
+                return await res.json();
+            } catch (error) {
+                console.error("API Error:", error);
+                return null;
+            }
+        }
+
+        // Authentication check
+        (async function checkAuth() {
+            const data = await apiCall("/auth/profile");
+            const loadingScreen = document.getElementById("loading-screen");
+            const pageContent = document.getElementById("page-content"); 
+            const mainBody = document.getElementById("main-body");
+
+            if (!data || !data.success) {
+                loadingScreen.classList.add("opacity-0");
+                setTimeout(() => {
+                    window.location.href = "login.html";
+                }, 800);
+            } else {
+                loadingScreen.classList.add("opacity-0");
+                setTimeout(() => {
+                    if (loadingScreen) {
+                        loadingScreen.remove();
+                    }
+                    if (pageContent) {
+                        pageContent.style.display = 'block';
+                    }
+                    mainBody.classList.remove("loading");
+                }, 1500);
+            }
+        })();
+
+        // Mobile sidebar toggle
         const menuButton = document.getElementById("mobile-menu-button");
         const mobileSidebar = document.getElementById("mobile-sidebar");
 
@@ -311,35 +436,27 @@
             mobileSidebar.classList.toggle("-translate-x-full");
         });
 
-        document.addEventListener("click", function (event) {
-            const isClickInsideSidebar = mobileSidebar.contains(event.target);
-            const isClickOnMenu = menuButton.contains(event.target);
-
-            if (!isClickInsideSidebar && !isClickOnMenu) {
+        document.addEventListener("click", (event) => {
+            if (!mobileSidebar.contains(event.target) && !menuButton.contains(event.target)) {
                 mobileSidebar.classList.add("-translate-x-full");
             }
         });
 
+        // Logout function
         async function logout() {
             try {
-                // Clear any stored session data
                 localStorage.clear();
                 sessionStorage.clear();
-                
-                // Clear any cookies (if needed)
-                document.cookie.split(";").forEach(function(c) { 
-                    document.cookie = c.replace(/^ +/, "").replace(/=.*/, "=;expires=" + new Date().toUTCString() + ";path=/"); 
+                document.cookie.split(";").forEach(c => {
+                    document.cookie = c.replace(/^ +/, "").replace(/=.*/, "=;expires=" + new Date().toUTCString() + ";path=/");
                 });
-                
-                console.log("✅ Logout successful");
-                window.location.href = "login.html"; // Redirect after logout
-            } catch (error) {
-                console.error("❌ Logout failed:", error);
-                // Still redirect even if cleanup fails
+                window.location.href = "login.html";
+            } catch {
                 window.location.href = "login.html";
             }
         }
     </script>
+
 
 </body>
 
