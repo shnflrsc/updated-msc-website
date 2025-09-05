@@ -95,7 +95,7 @@ class EventController
     }
 
     /**
-    * Upload Event Image (poster or badge)
+     * Upload Event Image (poster or badge)
      */
     public function uploadEventImage($type = 'event')
     {
@@ -107,8 +107,8 @@ class EventController
             }
 
             $file = $_FILES['image'];
-            $allowedExtensions = ['jpg', 'jpeg', 'png']; // ❌ Removed GIF for consistency
-            $maxSize = 5 * 1024 * 1024; // 5MB limit (larger than profile’s 2MB since posters may be bigger)
+            $allowedExtensions = ['jpg', 'jpeg', 'png']; // 
+            $maxSize = 5 * 1024 * 1024; // 5MB limit
 
             $ext = strtolower(pathinfo($file['name'], PATHINFO_EXTENSION));
             if (!in_array($ext, $allowedExtensions)) {
@@ -202,6 +202,7 @@ class EventController
     /**
      * Update event (Officer only)
      */
+    /*
     public function update($id)
     {
         try {
@@ -263,6 +264,74 @@ class EventController
             $sanitizedData = Validator::sanitize($data);
 
             // Update event
+            $result = $this->eventModel->update($id, $sanitizedData);
+
+            if ($result) {
+                $updatedEvent = $this->eventModel->findById($id);
+                Response::success($updatedEvent, 'Event updated successfully');
+            } else {
+                Response::serverError('Failed to update event');
+            }
+        } catch (Exception $e) {
+            Response::serverError($e->getMessage());
+        }
+    }
+    */
+
+    /**
+     * Update event (Officer only)
+     */
+    public function update($id)
+    {
+        try {
+            AuthMiddleware::requireOfficer();
+
+            $event = $this->eventModel->findById($id);
+            if (!$event) {
+                Response::notFound('Event not found');
+            }
+
+            $data = json_decode(file_get_contents("php://input"), true);
+
+            if (!$data || !is_array($data)) {
+                Response::validationError(['message' => 'Invalid or empty JSON data']);
+            }
+
+            $errors = [];
+
+            // Optional validation for fields that are present
+            if (isset($data['event_date']) && !Validator::validateDate($data['event_date'])) {
+                $errors['event_date'] = 'Invalid date format. Use YYYY-MM-DD';
+            }
+
+            if (isset($data['event_time_start']) && !Validator::validateTime($data['event_time_start'])) {
+                $errors['event_time_start'] = 'Invalid time format. Use HH:MM';
+            }
+
+            if (isset($data['event_time_end']) && !Validator::validateTime($data['event_time_end'])) {
+                $errors['event_time_end'] = 'Invalid time format. Use HH:MM';
+            }
+
+            if (isset($data['event_type']) && !Validator::validateEnum($data['event_type'], ['onsite', 'online', 'hybrid'])) {
+                $errors['event_type'] = 'Invalid event type';
+            }
+
+            if (isset($data['event_status']) && !Validator::validateEnum($data['event_status'], ['upcoming', 'canceled', 'completed'])) {
+                $errors['event_status'] = 'Invalid event status';
+            }
+
+            if (isset($data['event_restriction']) && !Validator::validateEnum($data['event_restriction'], ['public', 'members', 'officers'])) {
+                $errors['event_restriction'] = 'Invalid event restriction';
+            }
+
+            if (!empty($errors)) {
+                Response::validationError($errors);
+            }
+
+            // Sanitize the data
+            $sanitizedData = Validator::sanitize($data);
+
+            // Update event (partial updates handled in model)
             $result = $this->eventModel->update($id, $sanitizedData);
 
             if ($result) {
