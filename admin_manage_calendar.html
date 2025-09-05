@@ -295,7 +295,7 @@
                 <li><a href="admin_manage_announcements.html"><i class="bi bi-megaphone"></i>Announcements</a></li>
                 <li><a href="admin_manage_events.html"><i class="bi bi-calendar-event"></i>Events</a></li>
                 <li><a href="verify_attendance.html"><i class="bi bi-check2-square"></i>Attendance Verifier</a></li>
-                <li><a href="admin_calendar.html" class="active"><i class="bi bi-calendar3"></i>Calendar</a></li>
+                <li><a href="admin_manage_calendar.html" class="active"><i class="bi bi-calendar3"></i>Calendar</a></li>
             </ul>
 
             <div class="footer-section">
@@ -410,7 +410,7 @@
             }
 
             function formatDate(date) {
-                return date.toISOString().split("T")[0]; 
+                return date.toISOString().split("T")[0];
             }
 
             async function fetchCalendarEvents() {
@@ -424,7 +424,6 @@
                 const endDate = formatDate(end);
 
                 try {
-
                     const res = await fetch(`${API_BASE}/msc-calendar?start=${startDate}&end=${endDate}`,
                         { credentials: "include" });
                     const data = await res.json();
@@ -433,7 +432,7 @@
                         calendarEvents = data.data.map(event => ({
                             id: event.id || event.event_id,
                             title: event.event_name,
-                            date: formatDate(new Date(event.event_date)), 
+                            date: formatDate(new Date(event.event_date)),
                             time: event.event_time_start || "00:00",
                             status: event.event_status || "",
                             location: event.location || "",
@@ -552,9 +551,11 @@
                 participantsBtn.parentNode.replaceChild(newBtn, participantsBtn);
 
                 newBtn.addEventListener("click", () => {
-                    sessionStorage.setItem("selectedEventId", event.id);
+                    //sessionStorage.setItem("selectedEventId", event.id);
                     closeSingleEventModal();
-                    window.location.href = "admin_event_participants1.html";
+                    sessionStorage.setItem('fromPage', 'calendar'); 
+                    sessionStorage.setItem('selectedEventId', event.id);
+                    window.location.href = "admin_manage_participants.html";
                 });
             }
 

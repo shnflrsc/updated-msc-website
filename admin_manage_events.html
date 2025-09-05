@@ -820,7 +820,7 @@
                 <li><a href="admin_manage_events.html" class="active"><i class="bi bi-calendar-event"></i>Events</a>
                 </li>
                 <li><a href="verify_attendance.html"><i class="bi bi-check2-square"></i>Attendance Verifier</a></li>
-                <li><a href="admin_calendar.html"><i class="bi bi-calendar3"></i>Calendar</a></li>
+                <li><a href="admin_manage_calendar.html"><i class="bi bi-calendar3"></i>Calendar</a></li>
             </ul>
 
             <div class="footer-section">
@@ -961,7 +961,6 @@
                             <div class="form-group">
                                 <label for="event_restriction">Event Restriction</label>
                                 <select id="event_restriction" name="event_restriction" class="form-control">
-                                    <!-- To Change: Backend Validation -->
                                     <option value="public" selected>Open for Public</option>
                                     <!-- Open for Public, Members Only -->
                                     <option value="members">Members Only</option>
@@ -1237,7 +1236,6 @@
                     </div>
                     <div class="modal-body">
                         <form id="editEventForm">
-                            <!-- onsubmit="handleEditEvent(event)" -->
                             <div class="form-group">
                                 <label for="event_name">Event Title *</label>
                                 <input type="text" id="event_name" name="event_name" class="form-control"
@@ -1389,21 +1387,86 @@
         let upcoming_events_data = [];
         const API_BASE = "/updated-msc-website/api";
 
+        // function openTab(evt, tabName) {
+        //     var i, tabcontent, tablinks;
+
+        //     tabcontent = document.getElementsByClassName("tab-content");
+        //     for (i = 0; i < tabcontent.length; i++) {
+        //         tabcontent[i].classList.remove("active");
+        //     }
+
+        //     tablinks = document.getElementsByClassName("tab-button");
+        //     for (i = 0; i < tablinks.length; i++) {
+        //         tablinks[i].classList.remove("active");
+        //     }
+
+        //     document.getElementById(tabName).classList.add("active");
+        //     evt.currentTarget.classList.add("active");
+        // }
+
+        async function apiCall(endpoint, method = "GET", data = null, title = "", redirect = null) {
+            try {
+                const options = {
+                    method,
+                    headers: { "Content-Type": "application/json" },
+                    credentials: "include",
+                };
+
+                if (data) {
+                    options.body = JSON.stringify(data);
+                }
+
+                //console.log(`${method} ${endpoint}:`, data);
+
+                const response = await fetch(`${API_BASE}${endpoint}`, options);
+                const result = await response.json();
+                //console.log(result);
+
+                if (!response.ok) {
+                    console.log(`Request failed: ${response.status} ${response.statusText}`);
+                } else {
+                    if (redirect) {
+                        window.location.href = redirect;
+                    }
+                }
+
+                return result;
+            } catch (error) {
+                console.error("API Error:", error);
+                return null;
+            }
+        }
+
         function openTab(evt, tabName) {
             var i, tabcontent, tablinks;
 
+            // Hide all tab contents
             tabcontent = document.getElementsByClassName("tab-content");
             for (i = 0; i < tabcontent.length; i++) {
                 tabcontent[i].classList.remove("active");
+                tabcontent[i].style.display = "none"; // ensure hidden
             }
 
+            // Remove 'active' from all tab buttons
             tablinks = document.getElementsByClassName("tab-button");
             for (i = 0; i < tablinks.length; i++) {
                 tablinks[i].classList.remove("active");
             }
 
-            document.getElementById(tabName).classList.add("active");
+            // Show the selected tab
+            var selectedTab = document.getElementById(tabName);
+            selectedTab.classList.add("active");
+            selectedTab.style.display = "block";
+
+            // Set clicked button as active
             evt.currentTarget.classList.add("active");
+
+            // Hide event dashboard if it's open
+            var dashboard = document.getElementById("event-dashboard");
+            if (dashboard && dashboard.style.display === "block") {
+                dashboard.style.display = "none";
+                dashboard.classList.remove("active");
+            }
         }
 
         function renderDashboardButtons(evt) {
@@ -1425,8 +1488,10 @@
             participantsBtn.textContent = "Participants";
             participantsBtn.addEventListener("click", function (e) {
                 e.preventDefault();
-                sessionStorage.setItem("selectedEventId", evt.event_id);
-                window.location.href = "admin_event_participants1.html";
+                //sessionStorage.setItem("selectedEventId", evt.event_id);
+                sessionStorage.setItem('fromPage', 'events'); // or 'events'
+                sessionStorage.setItem('selectedEventId', evt.event_id);
+                window.location.href = "admin_manage_participants.html";
             });
 
             const eventListBtn = document.createElement("a");
@@ -1436,8 +1501,7 @@
             eventListBtn.addEventListener("click", function (e) {
                 e.preventDefault();
                 hideEventDashboard();
-                //issue: upcoming event list won't show up
-                getUpcomingEvents();
+                //getUpcomingEvents();
             });
 
             buttonContainer.appendChild(editBtn);
@@ -1470,9 +1534,7 @@
             const evt = response.data;
             renderDashboardButtons(evt);
 
-            //Temp: To load button dynamically here 
             const editBtn = dashboard.querySelector(".btn.btn-secondary");
-
             editBtn.replaceWith(editBtn.cloneNode(true));
             const newEditBtn = dashboard.querySelector(".btn.btn-secondary");
 
@@ -1481,18 +1543,20 @@
                 editEvent(evt.event_id);
             });
 
+            const imgContainer = dashboard.querySelector(".event-image-large");
+            imgContainer.innerHTML = ""; 
             let newElement;
-
             if (evt.event_image_url) {
                 newElement = document.createElement("img");
-                newElement.src = evt.event_batch_image;
-                newElement.alt = "Event Badge";
+                newElement.src = evt.event_image_url;
+                newElement.alt = "Event Poster";
                 newElement.classList.add("event-img");
             } else {
                 newElement = document.createElement("i");
                 newElement.classList.add("bi", "bi-calendar-event", "no-badge-icon");
             }
-            dashboard.querySelector(".event-image-large").appendChild(newElement);
+            imgContainer.appendChild(newElement);
+
             // Fetch dashboard fields
             dashboard.querySelector("h2").textContent = evt.event_name;
             dashboard.querySelector(".event-info > p").textContent = evt.description;
@@ -1531,13 +1595,32 @@
             //dashboard.querySelector(".progress-bar .progress-fill").textContent = "-";
         }
 
-        function hideEventDashboard() {
-            document.getElementById("event-dashboard").style.display = "none";
-            document.getElementById("event-dashboard").classList.remove("active");
+        // function hideEventDashboard() {
+        //     document.getElementById("event-dashboard").style.display = "none";
+        //     document.getElementById("event-dashboard").classList.remove("active");
 
-            document.getElementById("current-upcoming").classList.add("active");
-            document.querySelector('.tab-button').classList.add("active");
+        //     // document.getElementById("current-upcoming").classList.add("active");
+        //     // document.querySelector('.tab-button').classList.add("active");
+        // }
+
+        function hideEventDashboard() {
+            const dashboard = document.getElementById("event-dashboard");
+            dashboard.style.display = "none";
+            dashboard.classList.remove("active");
+
+            document.querySelectorAll('.tab-content').forEach(tab => {
+                tab.style.display = "none";
+                tab.classList.remove("active");
+            });
+
+            const upcomingTab = document.getElementById("current-upcoming");
+            upcomingTab.style.display = "block";
+            upcomingTab.classList.add("active");
+
+            document.querySelectorAll('.tab-button').forEach(btn => btn.classList.remove('active'));
+            document.querySelector('.tab-button[onclick*="current-upcoming"]').classList.add('active');
         }
+
 
         function updateFileName(input, spanId) {
             const span = document.getElementById(spanId);
@@ -1545,39 +1628,6 @@
                 span.textContent = input.files[0].name;
             } else {
                 span.textContent = "No file chosen";
-            }
-        }
-
-        async function apiCall(endpoint, method = "GET", data = null, title = "", redirect = null) {
-            try {
-                const options = {
-                    method,
-                    headers: { "Content-Type": "application/json" },
-                    credentials: "include",
-                };
-
-                if (data) {
-                    options.body = JSON.stringify(data);
-                }
-
-                console.log(`${method} ${endpoint}:`, data);
-
-                const response = await fetch(`${API_BASE}${endpoint}`, options);
-                const result = await response.json();
-                console.log(result);
-
-                if (!response.ok) {
-                    console.log(`Request failed: ${response.status} ${response.statusText}`);
-                } else {
-                    if (redirect) {
-                        window.location.href = redirect;
-                    }
-                }
-
-                return result;
-            } catch (error) {
-                console.error("API Error:", error);
-                return null;
             }
         }
 
@@ -1641,7 +1691,7 @@
                 event_batch_image: badgeImagePath
             };
 
-            console.log("New Event:", newEvent);
+            //console.log("New Event:", newEvent);
 
             const result = await apiCall("/events", "POST", newEvent, "Create Event");
 
@@ -1655,7 +1705,7 @@
 
                 setTimeout(() => {
                     successAlert.style.display = 'none';
-                    window.location.href = `admin_calendar.html?date=${newEvent.event_date}`;
+                    window.location.href = `admin_manage_calendar.html.html?date=${newEvent.event_date}`;
                 }, 3000);
 
                 document.querySelectorAll('.tab-button').forEach(btn => btn.classList.remove('active'));
@@ -1786,10 +1836,8 @@
             document.getElementById("event_type").value = evt.event_type;
             document.getElementById("event_restriction").value = evt.event_restriction || "public";
             //document.getElementById("registration_required").checked = evt.registration_required === 1;
-            //document.getElementById("registration_required").checked = Boolean(Number(evt.registration_required));
-            console.log("registration_required value:", evt.registration_required, typeof evt.registration_required);
             document.getElementById("edit_registration_required").checked = evt.registration_required === 1;
-            console.log(evt.location);
+            //console.log(evt.location);
             document.getElementById("edit_location").value = evt.location || "";
             document.getElementById("description").value = evt.description || "";
             document.getElementById("editEventForm").dataset.eventId = eventId;
@@ -1867,7 +1915,7 @@
             if (eventImagePath) payload.event_image_url = eventImagePath;
             if (badgeImagePath) payload.event_batch_image = badgeImagePath;
 
-            console.log("Update Event:", payload);
+            //console.log("Update Event:", payload);
 
             const response = await apiCall(`/events/${eventId}`, "PUT", payload);
 
@@ -1886,8 +1934,7 @@
             const data = await apiCall("/events/upcoming", "GET");
 
             if (data?.success) {
-                console.log(data);
-
+                //console.log(data);
                 const container = document.getElementById("current-upcoming");
                 container.innerHTML = "";
 
@@ -1947,8 +1994,8 @@
             const data = await apiCall("/events/canceled", "GET");
 
             if (data?.success) {
-                console.log("Canceled Events:");
-                console.log(data);
+                //console.log("Canceled Events:");
+                //console.log(data);
 
                 const container = document.getElementById("cancelled-events");
 
@@ -1966,7 +2013,7 @@
                             <div class="event-image"> 
                                 ${evt.event_batch_image
                             ? `<img src="${evt.event_batch_image}" alt="Event Badge" class="event-img" />`
-                            : `No Badge`}
+                            : `<i class="bi bi-calendar-event"></i>`}
                             </div>
                             <div class="event-details">
                                 <h4 class="event-title"> ${evt.event_name}</h4>
@@ -1998,8 +2045,8 @@
             const data = await apiCall("/events/past", "GET");
 
             if (data?.success) {
-                console.log("Past Events:");
-                console.log(data);
+                //console.log("Past Events:");
+                //console.log(data);
 
                 const container = document.getElementById("past-events");
 
@@ -2017,7 +2064,7 @@
                             <div class="event-image"> 
                                 ${evt.event_batch_image
                             ? `<img src="${evt.event_batch_image}" alt="Event Badge" class="event-img" />`
-                            : `No Badge`}
+                            : `<i class="bi bi-calendar-event"></i>`}
                             </div>
                             <div class="event-details">
                                 <h4 class="event-title"> ${evt.event_name}</h4>
