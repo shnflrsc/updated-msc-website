@@ -116,7 +116,7 @@ class Student
     }
 
     /**
-     * Update student profile
+     * Update student profile: [ORIGINAL CODE]
      */
     /*
     public function updateProfile($id, $data)
@@ -164,6 +164,9 @@ class Student
         }
     }
         */
+
+    /* Update Student Profile: [Allow partial updates]
+    */
     public function updateProfile($id, $data)
     {
         try {
@@ -191,7 +194,7 @@ class Student
             foreach ($fields as $field) {
                 if (array_key_exists($field, $data)) {
                     $setParts[] = "$field = :$field";
-                    $params[$field] = $data[$field];
+                    $params[$field] = $data[$field] === "" ? null : $data[$field]; // convert empty strings to NULL
                 }
             }
 
@@ -206,6 +209,7 @@ class Student
             throw new Exception("Failed to update profile: " . $e->getMessage());
         }
     }
+
 
     /**
      * Change password
@@ -361,7 +365,7 @@ class Student
         return $stmt->fetch(PDO::FETCH_ASSOC);
     }
 
-     /*
+    /*
      * COUNT: All Student (Members)
     */
     public function countMembers()

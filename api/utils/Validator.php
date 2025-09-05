@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Validator Utility Class
  * Input validation and sanitization
@@ -12,16 +13,16 @@ class Validator
     public static function validateRequired($data, $requiredFields)
     {
         $errors = [];
-        
+
         foreach ($requiredFields as $field) {
             if (!isset($data[$field]) || trim($data[$field]) === '') {
                 $errors[$field] = "The {$field} field is required.";
             }
         }
-        
+
         return $errors;
     }
-    
+
     /**
      * Validate email format
      */
@@ -29,33 +30,33 @@ class Validator
     {
         return filter_var($email, FILTER_VALIDATE_EMAIL) !== false;
     }
-    
+
     /**
      * Validate password strength
      */
     public static function validatePassword($password)
     {
         $errors = [];
-        
+
         if (strlen($password) < 8) {
             $errors[] = "Password must be at least 8 characters long.";
         }
-        
+
         if (!preg_match('/[A-Z]/', $password)) {
             $errors[] = "Password must contain at least one uppercase letter.";
         }
-        
+
         if (!preg_match('/[a-z]/', $password)) {
             $errors[] = "Password must contain at least one lowercase letter.";
         }
-        
+
         if (!preg_match('/[0-9]/', $password)) {
             $errors[] = "Password must contain at least one number.";
         }
-        
+
         return $errors;
     }
-    
+
     /**
      * Validate date format
      */
@@ -64,7 +65,7 @@ class Validator
         $d = DateTime::createFromFormat($format, $date);
         return $d && $d->format($format) === $date;
     }
-    
+
     /**
      * Validate time format
      */
@@ -73,7 +74,7 @@ class Validator
         $t = DateTime::createFromFormat($format, $time);
         return $t && $t->format($format) === $time;
     }
-    
+
     /**
      * Sanitize input data
      */
@@ -82,10 +83,10 @@ class Validator
         if (is_array($data)) {
             return array_map([self::class, 'sanitize'], $data);
         }
-        
+
         return htmlspecialchars(trim($data), ENT_QUOTES, 'UTF-8');
     }
-    
+
     /**
      * Validate enum values
      */
@@ -93,13 +94,27 @@ class Validator
     {
         return in_array($value, $allowedValues);
     }
-    
+
     /**
      * Validate phone number
      */
+    // public static function validatePhone($phone)
+    // {
+    //     // Basic phone validation - adjust pattern as needed
+    //     return preg_match('/^[\+]?[0-9\-\(\)\s]+$/', $phone);
+    // }
+
     public static function validatePhone($phone)
     {
-        // Basic phone validation - adjust pattern as needed
-        return preg_match('/^[\+]?[0-9\-\(\)\s]+$/', $phone);
+        // Remove spaces, dashes, and parentheses
+        $clean = preg_replace('/[\s\-()]/', '', $phone);
+
+        // Optional: Convert local mobile format to standard +639
+        if (preg_match('/^09\d{9}$/', $clean)) {
+            // Convert 09XXXXXXXXX → +639XXXXXXXXX
+            $clean = '+63' . substr($clean, 1);
+        }
+
+        return $clean;
     }
 }
