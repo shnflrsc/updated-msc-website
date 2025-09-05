@@ -566,26 +566,43 @@
         }
     }
 
-    function renderEvents(eventsArray, sectionId) {
-        const section = document.getElementById(sectionId).querySelector(".event-list");
-        section.innerHTML = "";
-        eventsArray.forEach(event => {
-            const card = document.createElement("div");
-            card.classList.add("event-card");
-            card.dataset.id = event.event_id;
-            card.dataset.title = event.event_name;
-            card.dataset.date = event.event_date;
-            card.dataset.status = event.event_status;
-            card.dataset.content = event.description;
+function renderEvents(eventsArray, sectionId) {
+    const section = document.getElementById(sectionId).querySelector(".event-list");
+    section.innerHTML = "";
+    eventsArray.forEach(event => {
+        const card = document.createElement("div");
+        card.classList.add("event-card");
+        card.dataset.id = event.event_id;
+        card.dataset.title = event.event_name;
+        card.dataset.date = event.event_date;
+        card.dataset.status = event.event_status;
+        card.dataset.content = event.description;
 
-            card.innerHTML = `
-                <h3>${event.event_name}</h3>
-                <p class="date">${event.event_date}</p>
-                <p class="excerpt">${event.description.substring(0, 50)}...</p>
-            `;
-            section.appendChild(card);
+        card.innerHTML = `
+            <h3>${event.event_name}</h3>
+            <p class="date">${event.event_date}</p>
+            <p class="excerpt">${event.description.substring(0, 50)}...</p>
+        `;
+
+        // ✅ Attach click listener here
+        card.addEventListener("click", () => {
+            document.getElementById("modalTitle").textContent = card.dataset.title;
+            document.getElementById("modalDate").textContent = card.dataset.date;
+            document.getElementById("modalContent").textContent = card.dataset.content;
+
+            const registerBtn = document.getElementById("registerBtn");
+            registerBtn.dataset.eventId = card.dataset.id;
+            registerBtn.style.display = (card.dataset.status.toLowerCase() === "upcoming") 
+                ? "inline-block" 
+                : "none";
+
+            document.getElementById("eventModal").style.display = "flex";
         });
-    }
+
+        section.appendChild(card);
+    });
+}
+
 
     window.addEventListener("DOMContentLoaded", loadEvents);
     </script>
