@@ -1,0 +1,23 @@
+{
+  "name": "updated-msc-website",
+  "version": "1.0.0",
+  "description": "",
+  "main": "admin_edit_program-course.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/eyronjohn/updated-msc-website.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/eyronjohn/updated-msc-website/issues"
+  },
+  "homepage": "https://github.com/eyronjohn/updated-msc-website#readme",
+  "dependencies": {
+    "@tailwindcss/cli": "^4.1.13",
+    "tailwindcss": "^4.1.13"
+  }
+}
