@@ -1,6 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
 
+<script>
+  document.documentElement.classList.add('loading');
+</script>
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -10,19 +14,23 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400..900&family=Segoe+UI:wght@400;700&display=swap"
     rel="stylesheet">
-
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
+  <link href="src/output.css" rel="stylesheet">
   <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-  <script src="https://cdn.tailwindcss.com"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
   <script defer="" src="js/tabs.js"></script>
 
   <style>
-    /* body.loading #main-body,
-    body.loading main,
-    body.loading nav,
-    body.loading footer {
+    html,
+    body {
+      background-color: #00071c;
+      margin: 0;
+      height: 100%;
+    }
+
+    html.loading body {
       display: none;
-    } */
+    }
 
     @font-face {
       font-family: "Veonika";
@@ -202,49 +210,8 @@
       -webkit-appearance: none;
       margin: 0;
     }
-
-    /* Loading screen */
-    /* #loading-screen {
-      position: fixed;
-      inset: 0;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      background-color: black;
-      z-index: 50;
-      transition: opacity 2.2s ease;
-    }
-
-    @keyframes bounce-delay {
-
-      0%,
-      80%,
-      100% {
-        transform: scale(0);
-      }
-
-      40% {
-        transform: scale(1);
-      }
-    }
-
-    .animate-bounce-delay {
-      animation: bounce-delay 1.4s infinite ease-in-out;
-    }
-
-    .delay-150 {
-      animation-delay: 0.15s;
-    }
-
-    .delay-300 {
-      animation-delay: 0.3s;
-    } */
   </style>
 </head>
-
-<!-- bg-[#080c24] -->
-<!-- loading -->
 
 <body class="">
   <nav class="fixed top-0 left-0 right-0 z-50 transition-all duration-300 ease-in-out py-4" id="main-header">
@@ -385,49 +352,39 @@
         </div>
       </div>
 
-      <!-- Right Section: Edit Profile -->
-      <div class="w-full lg:w-4/5 flex flex-col self-stretch h-full">
-
+      <!-- Right Section -->
+      <section id="rightSection" class="w-full h-full lg:w-4/5 flex flex-col self-stretch rounded-lg">
         <!-- Personal Info -->
-        <div
-          class="w-full rounded-lg shadow-md bg-[#011538] border border-[#b9da05] text-white overflow-hidden flex-shrink-0">
-          <div class="bg-[#011538] flex flex-row flex-wrap items-center justify-between px-4 sm:px-6 pt-6 gap-2">
-            <h2 class="text-base sm:text-xl font-bold text-white">
-              Personal Information
-            </h2>
-
-            <!-- Save Button: disabled (default) -->
-            <div class="flex gap-2 mt-2 sm:mt-0">
+        <section id="editContainer" class="w-full h-full rounded-lg border border-[#b9da05]">
+          <div class="bg-[#011538] pt-4 px-4 sm:px-6 pb-6 rounded-lg relative">
+            <h2 class="mb-4 text-lg sm:text-xl font-bold text-white">Personal Information</h2>
+            <div class="absolute top-4 right-4">
               <button id="saveBtn"
-                class="text-gray-400 hover:text-[#b9da05] transition-colors pointer-events-none opacity-50"
+                class="px-2 text-gray-400 hover:text-[#b9da05] transition-colors pointer-events-none opacity-50"
                 onclick="updateProfile()" title="Save changes">
-                <i class="fas fa-save w-4 h-4"></i>
+                <i class="fas fa-save w-4 h-4 text-xl"></i>
               </button>
             </div>
-
-          </div>
-
-          <div class="bg-[#011538] pt-4 px-4 sm:px-6 pb-6">
             <div class="grid grid-cols-1 md:grid-cols-2 gap-y-4 gap-x-6">
-
               <div class="md:col-span-2">
                 <p class="text-lg text-[#b9da05] font-semibold mb-2">Personal Details</p>
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-y-4 gap-x-6">
                   <div>
                     <label for="firstName" class="text-white text-sm mb-1 font-semibold">First Name</label>
-                    <input type="text" id="firstName" name="firstName" />
+                    <input type="text" id="firstName" name="firstName" placeholder="Enter first name" />
                   </div>
                   <div>
                     <label for="middleName" class="text-white text-sm mb-1 font-semibold">Middle Name</label>
-                    <input type="text" id="middleName" name="middleName" />
+                    <input type="text" id="middleName" name="middleName" placeholder="Enter middle name" />
                   </div>
                   <div>
                     <label for="lastName" class="text-white text-sm mb-1 font-semibold">Last Name</label>
-                    <input type="text" id="lastName" name="lastName" />
+                    <input type="text" id="lastName" name="lastName" placeholder="Enter last name" />
                   </div>
                   <div>
                     <label for="name_suffix" class="text-white text-sm mb-1 font-semibold">Name Suffix</label>
-                    <select id="name_suffix" name="name_suffix" class="w-full p-2 mt-1 rounded border border-gray-700 text-white">
+                    <select id="name_suffix" name="name_suffix"
+                      class="w-full p-2 mt-1 rounded border border-gray-700 text-white">
                       <option value="">None</option>
                       <option value="Jr.">Jr.</option>
                       <option value="Sr.">Sr.</option>
@@ -462,7 +419,6 @@
               </div>
 
               <div class="md:col-span-2 border-t border-gray-200 my-1"></div>
-
               <div class="md:col-span-2">
                 <p class="text-lg text-[#b9da05] font-semibold mb-2">Contact Information</p>
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-y-4 gap-x-6">
@@ -475,21 +431,20 @@
                   </div>
                   <div>
                     <label for="phone" class="text-white text-sm mb-1 font-semibold">Phone</label>
-                    <input type="tel" id="phone" name="phone" />
+                    <input type="tel" id="phone" name="phone" placeholder="09171234567" />
                   </div>
                   <div class="md:col-span-2">
                     <label for="address" class="text-white text-sm mb-1 font-semibold">Address</label>
-                    <input type="text" id="address" />
+                    <input type="text" id="address" placeholder="123 Xof St., Barangay Guinhawa, Malolos City" />
                   </div>
                   <div>
                     <label for="facebook_link" class="text-white text-sm mb-1 font-semibold">Facebook Username</label>
-                    <input type="text" id="facebook_link" name="facebook_link" />
+                    <input type="text" id="facebook_link" name="facebook_link" placeholder="xof.delacruz" />
                   </div>
                 </div>
               </div>
 
               <div class="md:col-span-2 border-t border-gray-200 my-1"></div>
-
               <div class="md:col-span-2">
                 <p class="text-lg text-[#b9da05] font-semibold mb-2">Academic Information</p>
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-y-4 gap-x-6">
@@ -511,16 +466,17 @@
 
                   <div>
                     <label for="section" class="text-white text-sm mb-1 font-semibold">Section</label>
-                    <input type="text" id="section" name="section" />
+                    <input type="text" id="section" name="section" placeholder="BSCpE 1A" />
                   </div>
                   <div>
-                    <label for="student_no" class="text-white text-sm mb-1 font-semibold">Student No.</label>
+                    <label for="show_student_no" class="text-white text-sm mb-1 font-semibold">Student No.</label>
                     <!-- <input type="text" value=""
                       class="w-full p-2 rounded-md bg-[#27272a] border border-gray-600 text-white placeholder-gray-400 mb-4 cursor-not-allowed"
                       disabled id="student_no" name="student_no" /> -->
-                    <p id="student_no"
+                    <p id="show_student_no"
                       class="w-full py-2 px-3 rounded border border-[#334155] text-gray-400 bg-[#0b1c3a] text-sm mt-1 cursor-not-allowed">
                     </p>
+                    <input type="hidden" id="student_no_hidden" />
                   </div>
                 </div>
               </div>
@@ -546,7 +502,7 @@
                   </div>
 
                   <div class="space-y-2">
-                    <label for="profile" class="text-white text-sm mb-1 font-semibold mb-1 block">
+                    <label for="profile" class="text-white text-sm font-semibold mb-1 block">
                       Change Profile Picture:
                     </label>
                     <input type="file" id="profile" accept="image/*" />
@@ -556,65 +512,36 @@
               </div>
             </div>
           </div>
-        </div>
+        </section>
 
-        <!-- Toast Notification: Updated/Failed -->
-        <div id="toast" class="fixed bottom-6 right-6 z-50 hidden">
-          <div id="toast-content"
-            class="flex items-center max-w-xs p-4 text-sm text-white bg-green-600 rounded-lg shadow-lg animate-slide-in"
-            role="alert">
-            <i class="fas fa-check-circle mr-2 text-white"></i>
-            <div id="toast-message"></div>
-          </div>
-        </div>
+        <section id="badgesContainer" class="w-full h-full mt-4 rounded-lg border border-[#b9da05] flex flex-col">
+          <div class="bg-[#011538] h-full pt-4 px-4 sm:px-6 pb-6 rounded-lg flex flex-col">
+            <div class="flex items-center justify-between mb-4">
+              <h2 class="text-base sm:text-lg font-bold text-white">
+                Attended Events & Badges
+              </h2>
+            </div>
 
-        <div class="bg-[#011538] border border-[#b9da05] rounded-xl my-6 shadow-lg max-w-full flex-grow flex flex-col">
-
-          <div class="pb-2 pt-6 px-4 sm:px-6">
-            <h2 class="text-base sm:text-lg font-bold text-white flex items-center justify-between">
-              <span>Attended Events & Badges</span>
-            </h2>
-          </div>
-
-          <!-- Scrollable container -->
-          <div class="pt-2 px-4 sm:px-6 pb-4 overflow-y-auto flex-grow">
-            <div class="text-center">
-              <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 py-2" id="badgeContainer">
-                <div
-                  class="flex flex-col items-center p-4 sm:p-6 bg-[#00112F] border border-white/50 rounded-2xl shadow-md hover:shadow-lg transition-shadow duration-300">
-                  <div class="w-14 h-14 flex items-center justify-center bg-yellow-100 rounded-full mb-3">
-                    <i class="fas fa-medal text-yellow-500 text-xl"></i>
-                  </div>
-                  <p class="text-base sm:lg font-semibold text-white">Exclusive Member</p>
-                  <p class="text-sm text-white mt-1" id="member_since2"></p>
-                </div>
-                <!-- Dynamic badges append here -->
+            <div class="overflow-y-auto flex-grow">
+              <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 p-4" id="badgeContainer">
               </div>
             </div>
           </div>
+        </section>
+        <!-- End of Right Secion -->
+      </section>
+
+      <!-- Toast Notification: Updated/Failed -->
+      <div id="toast" class="fixed bottom-6 right-6 z-50 hidden">
+        <div id="toast-content"
+          class="flex items-center max-w-xs p-4 text-sm text-white bg-green-600 rounded-lg shadow-lg animate-slide-in"
+          role="alert">
+          <i class="fas fa-check-circle mr-2 text-white"></i>
+          <div id="toast-message"></div>
         </div>
-        <!-- <div class="pt-2 pb-6 flex justify-center">
-                <button
-                  class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded flex items-center"
-                >
-                  <i class="fas fa-wallet mr-2 h-4 w-4"></i>
-                  View Badge Wallet
-                </button>
-              </div> -->
       </div>
     </section>
   </main>
-
-  <!-- <div id="loading-screen"
-    class="fixed inset-0 flex flex-col items-center justify-center bg-black z-50 transition-opacity duration-500">
-    <img src="./Logos/Bulsu MSC Logo-02.png" alt="Logo" class="h-20 mb-6 animate-bounce">
-    <div class="flex space-x-2">
-      <span class="dot w-4 h-4 bg-[#b9da05] rounded-full animate-bounce-delay"></span>
-      <span class="dot w-4 h-4 bg-[#b9da05] rounded-full animate-bounce-delay delay-150"></span>
-      <span class="dot w-4 h-4 bg-[#b9da05] rounded-full animate-bounce-delay delay-300"></span>
-    </div>
-    <p class="mt-4 text-white text-lg font-semibold tracking-wide">Loading</p>
-  </div> -->
 
   <footer class="bg-[#00071c] text-center p-6 border-t border-gray-800">
     <div class="flex justify-center space-x-1 mb-1">
@@ -666,20 +593,6 @@
         return null;
       }
     }
-
-    // const loadingScreen = document.getElementById("loading-screen");
-    // (async function fetchProfile() {
-    //   const data = await apiCall("/auth/profile", "GET");
-
-    //   if (!data || !data.success) {
-    //     loadingScreen.classList.add("opacity-0");
-    //     setTimeout(() => window.location.href = "login.html", 800);
-    //     return;
-    //   }
-
-    //   loadingScreen.classList.add("opacity-0");
-    //   setTimeout(() => loadingScreen.remove(), 800);
-    // })();
 
     // Mobile View: Sidebar
     const menuButton = document.getElementById("mobile-menu-button");
@@ -823,59 +736,70 @@
     });
 
     async function fetchProfile() {
-      try {
-        const data = await apiCall("/auth/profile");
-        if (!data || !data.success) throw new Error("Failed to fetch profile");
+      //try {
+      const data = await apiCall("/auth/profile");
 
-        const user = data.data;
-        originalProfile = { ...user };
-
-        fetchAndDisplayEventBadges(user.id);
-
-        // Text fields
-        document.getElementById("msc_id").textContent = user.msc_id;
-        generateQRCode(user.msc_id || user.student_no || "UNKNOWN");
-        document.getElementById("fullName").textContent = `${user.first_name} ${user.last_name}`;
-        document.getElementById("studentID").textContent = user.student_no;
-        document.getElementById("program").textContent = user.program;
-        document.getElementById("college").textContent = user.college;
-        document.getElementById("year_level").textContent = user.year_level;
-        document.getElementById("role").textContent = user.role;
-
-        document.getElementById("firstName").value = user.first_name || "";
-        document.getElementById("middleName").value = user.middle_name || "";
-        document.getElementById("lastName").value = user.last_name || "";
-        document.getElementById("name_suffix").value = user.name_suffix || "";
-        document.getElementById("birthdate").value = formatDateInput(user.birthdate);
-        document.getElementById("gender").value = user.gender || "";
-        document.getElementById("student_no").textContent = user.student_no || "";
-        document.getElementById("section").value = user.section || "";
-        document.getElementById("address").value = user.address || "";
-        document.getElementById("phone").value = user.phone || "";
-        document.getElementById("facebook_link").value = user.facebook_link || "";
-        document.getElementById("username").textContent = user.username || "";
-        document.getElementById("email").textContent = user.email || "";
-
-        // Populate and pre-select college + program
-        populateColleges(user.college || "");
-        populatePrograms(user.college || "", user.program || "");
-
-        // Member since
-        const createdDate = new Date(user.created_at);
-        document.getElementById("member_since").textContent = createdDate.toLocaleDateString("en-US", {
-          year: "numeric", month: "long", day: "numeric"
-        });
-        document.getElementById("member_since2").textContent = createdDate.toLocaleDateString("en-US");
-
-        // Profile picture initials
-        const initials = `${user.first_name?.charAt(0) || ""}${user.last_name?.charAt(0) || ""}`.toUpperCase();
-        renderProfilePicture(user.profile_image_path, initials);
-
-        attachChangeListeners();
-        document.documentElement.classList.remove("loading");
-      } catch (err) {
-        console.error("Failed to fetch user profile:", err);
+      if (!data || !data.success) {
+        window.location.href = "login.html";
+        loadingScreen.classList.add("opacity-0");
+        setTimeout(() => window.location.href = "login.html", 800);
+        return;
       }
+
+      const user = data.data;
+      originalProfile = { ...user };
+
+      fetchAndDisplayEventBadges(user.id);
+
+      // Text fields
+      document.getElementById("msc_id").textContent = user.msc_id;
+      generateQRCode(user.msc_id || user.student_no);
+      document.getElementById("fullName").textContent = `${user.first_name} ${user.last_name}`;
+      document.getElementById("studentID").textContent = user.student_no;
+      document.getElementById("program").textContent = user.program;
+      document.getElementById("college").textContent = user.college;
+      document.getElementById("year_level").textContent = user.year_level;
+      document.getElementById("role").textContent = user.role;
+
+      document.getElementById("firstName").value = user.first_name || "";
+      document.getElementById("middleName").value = user.middle_name || "";
+      document.getElementById("lastName").value = user.last_name || "";
+      document.getElementById("name_suffix").value = user.name_suffix || "";
+      document.getElementById("birthdate").value = user.birthdate || "";
+      document.getElementById("gender").value = user.gender || "";
+      document.getElementById("student_no_hidden").value = user.student_no || "";
+      document.getElementById("show_student_no").textContent = user.student_no;
+
+      document.getElementById("student_college").value = user.college || "";
+      document.getElementById("student_program").value = user.program || "";
+      document.getElementById("section").value = user.section || "";
+      document.getElementById("address").value = user.address || "";
+      document.getElementById("phone").value = user.phone || "";
+      document.getElementById("facebook_link").value = user.facebook_link || "";
+      //document.getElementById("username").value = user.username || "";
+      document.getElementById("username").textContent = user.username || "";
+      document.getElementById("email").textContent = user.email || "";
+
+      // Populate and pre-select college + program
+      populateColleges(user.college || "");
+      populatePrograms(user.college || "", user.program || "");
+
+      // Member since
+      const createdDate = new Date(user.created_at);
+      document.getElementById("member_since").textContent = createdDate.toLocaleDateString("en-US", {
+        year: "numeric", month: "long", day: "numeric"
+      });
+      //document.getElementById("member_since2").textContent = createdDate.toLocaleDateString("en-US");
+
+      // Profile picture initials
+      const initials = `${user.first_name?.charAt(0) || ""}${user.last_name?.charAt(0) || ""}`.toUpperCase();
+      renderProfilePicture(user.profile_image_path, initials);
+
+      attachChangeListeners();
+      document.documentElement.classList.remove("loading");
+      // } catch (err) {
+      //   console.error("Failed to fetch user profile:", err);
+      // }
     }
 
     function formatDateInput(dateStr) {
@@ -911,7 +835,6 @@
       return fieldChanged || imageChanged;
     }
 
-    /*
     function attachChangeListeners() {
       const fields = document.querySelectorAll("input, select");
       const saveBtn = document.getElementById("saveBtn");
@@ -947,59 +870,6 @@
         });
       }
     }
-    */
-
-    function attachChangeListeners() {
-      const fields = document.querySelectorAll("input, select");
-      const saveBtn = document.getElementById("saveBtn");
-
-      fields.forEach(input => {
-        input.addEventListener("input", () => {
-          if (hasProfileChanged()) {
-            saveBtn.classList.remove("pointer-events-none", "opacity-50");
-          } else {
-            saveBtn.classList.add("pointer-events-none", "opacity-50");
-          }
-        });
-      });
-
-      const fileInput = document.getElementById("profile");
-      if (fileInput) {
-        fileInput.addEventListener("change", () => {
-          const file = fileInput.files[0];
-
-          if (file) {
-            const allowedTypes = ["image/jpeg", "image/png"];
-            const maxSize = 5 * 1024 * 1024; // 5MB
-
-            if (!allowedTypes.includes(file.type)) {
-              showToast("Invalid file type. Only JPG and PNG allowed.", "error");
-              fileInput.value = "";
-              return;
-            }
-
-            if (file.size > maxSize) {
-              showToast("File too large. Max size is 5MB.", "error");
-              fileInput.value = "";
-              return;
-            }
-
-            const reader = new FileReader();
-            reader.onload = function (e) {
-              const container = document.getElementById("profile-picture-container");
-              container.innerHTML = `<img src="${e.target.result}" class="w-full h-full object-cover" />`;
-            };
-            reader.readAsDataURL(file);
-          }
-
-          if (hasProfileChanged()) {
-            saveBtn.classList.remove("pointer-events-none", "opacity-50");
-          } else {
-            saveBtn.classList.add("pointer-events-none", "opacity-50");
-          }
-        });
-      }
-    } XMLDocument
 
     async function updateProfile() {
       const saveBtn = document.getElementById("saveBtn");
@@ -1032,6 +902,7 @@
           }
         }
 
+        /*
         const payload = {
           first_name: document.getElementById("firstName").value.trim(),
           middle_name: document.getElementById("middleName").value.trim(),
@@ -1039,7 +910,8 @@
           name_suffix: document.getElementById("name_suffix").value.trim(),
           birthdate: document.getElementById("birthdate").value,
           gender: document.getElementById("gender").value,
-          student_no: document.getElementById("student_no").value.trim(),
+          //student_no: document.getElementById("student_no").value.trim(),
+          student_no: document.getElementById("student_no_hidden").value || user.student_no,
           year_level: user.year_level,
           college: document.getElementById("student_college").value.trim(),
           program: document.getElementById("student_program").value.trim(),
@@ -1049,6 +921,27 @@
           facebook_link: document.getElementById("facebook_link").value.trim(),
           profile_image_path: uploadedImagePath || null
         };
+        */
+       
+        const payload = {
+          first_name: document.getElementById("firstName").value.trim() || null,
+          middle_name: document.getElementById("middleName").value.trim() || null,
+          last_name: document.getElementById("lastName").value.trim() || null,
+          name_suffix: document.getElementById("name_suffix").value.trim() || null,
+          birthdate: document.getElementById("birthdate").value || null,
+          gender: document.getElementById("gender").value || null,
+          student_no: document.getElementById("student_no_hidden").value || user.student_no,
+          year_level: user.year_level,
+          college: document.getElementById("student_college").value.trim() || null,
+          program: document.getElementById("student_program").value.trim() || null,
+          section: document.getElementById("section").value.trim() || null,
+          address: document.getElementById("address").value.trim() || null,
+          phone: document.getElementById("phone").value.trim() || null,
+          facebook_link: document.getElementById("facebook_link").value.trim() || null,
+          profile_image_path: uploadedImagePath || null
+        };
+
+        console.log("Payload being sent:", payload);
 
         const updateResult = await apiCall(`/students/profile/${studentId}`, "PUT", payload);
 
@@ -1061,7 +954,7 @@
             location.reload();
           }, 1500);
         } else {
-          console.error(updateResult?.message || "Unknown error");
+          console.error(updateResult?.message);
           showToast("Failed to update profile.", "error");
         }
 
@@ -1117,44 +1010,43 @@
 
     async function fetchAndDisplayEventBadges(studentId) {
       try {
-        const data = await apiCall(`/events/student/${studentId}`);
+        const data = await apiCall(`/events/attended/${studentId}`);
 
         if (data && data.success && Array.isArray(data.data)) {
           const events = data.data;
           const badgeContainer = document.getElementById("badgeContainer");
-
-          const staticBadge = badgeContainer.firstElementChild;
-
-          while (badgeContainer.children.length > 1) {
-            badgeContainer.removeChild(badgeContainer.lastChild);
-          }
-
+          badgeContainer.innerHTML = "";
           const attendedEvents = events.filter(ev => ev.attendance_status === "attended");
 
-          const badgeIcons = [
-            { icon: "fa-certificate", color: "text-green-500", bg: "bg-green-100" },
-            { icon: "fa-trophy", color: "text-yellow-500", bg: "bg-yellow-100" },
-            { icon: "fa-star", color: "text-blue-500", bg: "bg-blue-100" },
-            { icon: "fa-medal", color: "text-purple-500", bg: "bg-purple-100" },
-          ];
+          if (attendedEvents.length === 0) {
+            badgeContainer.className = "flex justify-center items-center h-full col-span-full p-4";
+            badgeContainer.innerHTML = `
+                    <div class="text-center text-white/50">
+                        <i class="fas fa-certificate text-4xl mb-4"></i>
+                        <p class="text-lg">No badges available.</p>
+                    </div>
+                `;
+          } else {
+            badgeContainer.className = "grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 p-4"; // 'p-4' added here
 
-          attendedEvents.forEach(ev => {
-            const randomIcon = badgeIcons[Math.floor(Math.random() * badgeIcons.length)];
+            attendedEvents.forEach(ev => {
+              console.log(ev.event_batch_image);
+              const card = document.createElement("div");
+              card.className = "group relative flex flex-col items-center p-6 bg-[#011538] border border-white/20 rounded-2xl shadow-xl hover:border-[#b9da05] transition-all duration-300 cursor-pointer overflow-hidden";
 
-            const card = document.createElement("div");
-            card.className =
-              "flex flex-col items-center p-6 bg-[#011538] border border-white/20 rounded-2xl shadow-md hover:shadow-lg transition-shadow duration-300";
-
-            card.innerHTML = `
-            <div class="w-14 h-14 flex items-center justify-center ${randomIcon.bg} rounded-full mb-3">
-              <i class="fas ${randomIcon.icon} ${randomIcon.color} text-xl"></i>
-            </div>
-            <h3 class="text-base font-semibold text-white truncate">${ev.event_name}</h3>
-            <p class="text-sm text-white mt-1">${formatDate(ev.event_date)}</p>
-          `;
-            badgeContainer.appendChild(card);
-          });
-
+              card.innerHTML = `
+                        <div class="absolute inset-0 bg-gradient-to-br from-[#011538] to-[#1a2f57] opacity-80 rounded-2xl transition-opacity duration-300 group-hover:opacity-90"></div>
+                        <div class="relative z-10 w-20 h-20 mb-4 flex items-center justify-center rounded-full bg-white/10 p-2 border-2 border-white/30 transition-all duration-300 group-hover:bg-[#b9da05]/20 group-hover:border-[#b9da05]">
+                            ${ev.event_batch_image
+                  ? `<img src="${ev.event_batch_image}" alt="Event Badge" class="rounded-full object-cover w-full h-full transform transition-transform duration-300 group-hover:scale-110" />`
+                  : `<i class="bi bi-calendar-event text-blue-500 text-3xl"></i>`}
+                        </div>
+                        <h3 class="relative z-10 text-lg font-semibold text-white text-center truncate w-full px-2 transition-colors duration-300 group-hover:text-[#b9da05]">${ev.event_name}</h3>
+                        <p class="relative z-10 text-sm text-white/70 mt-1 transition-colors duration-300 group-hover:text-white">${formatDate(ev.event_date)}</p>
+                    `;
+              badgeContainer.appendChild(card);
+            });
+          }
         }
       } catch (err) {
         console.error("Error loading event badges:", err);

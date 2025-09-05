@@ -470,7 +470,7 @@
                 <li><a href="admin_manage_announcements.html"><i class="bi bi-megaphone"></i>Announcements</a></li>
                 <li><a href="admin_manage_events.html"><i class="bi bi-calendar-event"></i>Events</a></li>
                 <li><a href="verify_attendance.html"><i class="bi bi-check2-square"></i>Attendance Verifier</a></li>
-                <li><a href="admin_calendar.html" class="active"><i class="bi bi-calendar3"></i>Calendar</a></li>
+                <li><a href="admin_calendar.html"><i class="bi bi-calendar3"></i>Calendar</a></li>
             </ul>
 
             <div class="footer-section">
@@ -485,9 +485,7 @@
                     <h1>Manage Participants</h1>
                     <p>Manage, and track events participants for the BulSU MSC community</p>
                 </div>
-                <button id="backButton" class="btn-back">
-                    <i class="bi bi-arrow-left-circle me-2"></i>Back to Calendar
-                </button>
+                <button id="backButton" class="btn-back"></button>
             </div>
 
             <div class="event-card">
@@ -522,9 +520,6 @@
                     </div>
                 </div>
             </div>
-
-
-
         </main>
 
         <script>
@@ -549,8 +544,7 @@
             }
 
             const eventId = sessionStorage.getItem("selectedEventId");
-            console.log("Loaded Event ID:", eventId);
-
+            //console.log("Loaded Event ID:", eventId);
             async function fetchParticipants() {
                 if (!eventId) return;
 
@@ -593,12 +587,29 @@
                 }
             }
 
-            document.addEventListener('DOMContentLoaded', fetchParticipants);
+            document.addEventListener('DOMContentLoaded', () => {
+                fetchParticipants();
 
-            const backButton = document.getElementById('backButton');
-            backButton.addEventListener('click', () => {
-                history.back();
+                const fromPage = sessionStorage.getItem('fromPage') || 'calendar';
+                document.querySelectorAll('.nav-menu a').forEach(link => link.classList.remove('active'));
+                if (fromPage === 'calendar') {
+                    const calendarLink = document.querySelector('.nav-menu a[href="admin_calendar.html"]');
+                    if (calendarLink) calendarLink.classList.add('active');
+                } else if (fromPage === 'events') {
+                    const eventsLink = document.querySelector('.nav-menu a[href="admin_manage_events.html"]');
+                    if (eventsLink) eventsLink.classList.add('active');
+                }
+
+                const backButton = document.getElementById('backButton');
+                if (fromPage === 'calendar') backButton.innerHTML = '<i class="bi bi-arrow-left-circle me-2"></i>Back to Calendar';
+                else if (fromPage === 'events') backButton.innerHTML = '<i class="bi bi-arrow-left-circle me-2"></i>Back to Events';
+
+                backButton.addEventListener('click', () => {
+                    if (fromPage === 'calendar') window.location.href = 'admin_manage_calendar.html';
+                    else if (fromPage === 'events') window.location.href = 'admin_manage_events.html';
+                });
             });
+
         </script>
 </body>
 

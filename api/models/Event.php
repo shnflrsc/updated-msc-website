@@ -116,6 +116,7 @@ class Event
     /**
      * Update event
      */
+    /*
     public function update($id, $data)
     {
         try {
@@ -155,6 +156,52 @@ class Event
             throw new Exception("Failed to update event: " . $e->getMessage());
         }
     }
+    */
+    
+    /**
+     * Update Event [Allow partial updates]
+     */
+    public function update($id, $data)
+    {
+        try {
+            $fields = [
+                'event_name',
+                'event_date',
+                'event_time_start',
+                'event_time_end',
+                'location',
+                'event_type',
+                'registration_required',
+                'event_status',
+                'description',
+                'event_image_url',
+                'event_batch_image',
+                'event_restriction'
+            ];
+
+            $setParts = [];
+            $params = ['id' => $id];
+
+            foreach ($fields as $field) {
+                if (array_key_exists($field, $data)) {
+                    $setParts[] = "$field = :$field";
+                    // Convert empty strings to null for optional fields
+                    $params[$field] = $data[$field] === "" ? null : $data[$field];
+                }
+            }
+
+            if (empty($setParts)) {
+                throw new Exception("No data provided for update.");
+            }
+
+            $sql = "UPDATE events SET " . implode(", ", $setParts) . ", updated_at = CURRENT_TIMESTAMP WHERE event_id = :id";
+            $stmt = $this->db->prepare($sql);
+            return $stmt->execute($params);
+        } catch (Exception $e) {
+            throw new Exception("Failed to update event: " . $e->getMessage());
+        }
+    }
+
 
     public function updateStatus($id, $status)
     {
@@ -209,7 +256,7 @@ class Event
     /**
      * Get upcoming events: for Admin Dashoard
      */
-    public function getUpcomingPreview($limit = 3) 
+    public function getUpcomingPreview($limit = 3)
     {
         $sql = "SELECT * FROM events 
                 WHERE event_status = 'upcoming' 
@@ -289,10 +336,11 @@ class Event
      */
     public function getCalendarEvents($startDate, $endDate)
     {
-        $sql = "SELECT event_id, event_name, event_date, event_time_start, event_time_end, 
+        $sql = "SELECT event_id, event_name, event_date, event_time_start, event_time_end, event_status
                        event_type, event_status, location
                 FROM events 
                 WHERE event_date BETWEEN :start_date AND :end_date
+                AND event_status = 'upcoming'
                 ORDER BY event_date ASC, event_time_start ASC";
 
         $stmt = $this->db->prepare($sql);
@@ -396,9 +444,9 @@ class Event
     /**
      * Get: Registered Events by a Student (on Dashboard)
      */
-    public function getEventsByStudent($studentId) 
+    public function getEventsByStudent($studentId)
     {
-        $sql = "SELECT e.event_id, e.event_name, e.event_date, e.event_time_start, e.location, e.description, e.event_status, er.attendance_status
+        $sql = "SELECT e.event_id, e.event_name, e.event_date, e.event_time_start, e.location, e.description, e.event_status, e.event_batch_image, er.attendance_status
             FROM event_registrations er
             JOIN events e ON er.event_id = e.event_id
             WHERE er.student_id = :student_id
@@ -416,11 +464,11 @@ class Event
      */
     public function getAttendedEventsByStudent($studentId)
     {
-        $sql = "SELECT e.event_id, e.event_name, e.event_date, e.event_time_start, e.location, er.attendance_status
+        $sql = "SELECT e.event_id, e.event_name, e.event_date, e.event_time_start, e.location, e.event_batch_image, er.attendance_status
             FROM event_registrations er
             JOIN events e ON er.event_id = e.event_id
             WHERE er.student_id = :student_id
-            AND event_status = 'attended'
+            AND er.attendance_status = 'attended'
             ORDER BY e.event_date DESC";
 
         $stmt = $this->db->prepare($sql);

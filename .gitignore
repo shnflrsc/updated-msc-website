@@ -1,1 +1,5 @@
-# echo "api/error.log" >> .gitignore
+#echo "api/error.log" >> .gitignore
+#echo "node_modules/" >> .gitignore
+
+node_modules/
+#api/error.log

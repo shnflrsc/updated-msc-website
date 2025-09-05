@@ -83,24 +83,43 @@ function renderWeek(date) {
         const dateStr = formatDate(day);
         const dayEvents = universityEvents.filter(e => e.date === dateStr);
 
+        const today = new Date();
+        const isToday = dateStr === formatDate(today);
+
         const cell = document.createElement("div");
-        cell.className =
-            "flex items-center gap-3 border border-white/20 rounded-md p-4 mb-2 bg-[#0b1a3d] hover:bg-[#132659] transition-colors duration-200";
+        //cell.className = "flex items-center gap-3 border border-white/20 rounded-md p-4 mb-2 bg-[#0b1a3d] hover:bg-[#132659] transition-colors duration-200";
+        cell.className = "flex items-center gap-3 border border-white/20 rounded-md p-4 mb-2 hover:bg-[#132659] transition-colors duration-200";
+
+        // apply highlight: if active day
+        if (isToday) {
+            cell.classList.add("bg-[#b9da05]/30", "font-bold", "text-[#b9da05]");
+        } else {
+            cell.classList.add("bg-[#0b1a3d]");
+        }
 
         // Left section: day + divider + date
         const header = document.createElement("div");
-        header.className = "flex items-center gap-3 min-w-[120px]";
+        //header.className = "flex items-center gap-3 min-w-[120px]";
+        header.className = "flex items-center gap-3 flex-shrink-0";
 
         const dayLabel = document.createElement("div");
-        dayLabel.className = "text-base font-semibold text-gray-300 w-12";
+        dayLabel.className = "text-sm sm:text-base font-semibold w-12";
         dayLabel.textContent = daysOfWeek[i];
 
         const divider = document.createElement("div");
         divider.className = "h-6 w-px bg-gray-500";
 
         const dateEl = document.createElement("div");
-        dateEl.className = "text-lg font-bold text-white";
+        dateEl.className = "text-sm sm:text-base font-bold";
         dateEl.textContent = day.getDate();
+
+        if (isToday) {
+            dayLabel.classList.add("text-[#b9da05]");
+            dateEl.classList.add("text-[#b9da05]");
+        } else {
+            dayLabel.classList.add("text-gray-300");
+            dateEl.classList.add("text-white");
+        }
 
         header.appendChild(dayLabel);
         header.appendChild(divider);
@@ -138,7 +157,7 @@ function renderWeek(date) {
 
             if (dayEvents.length > maxVisible) {
                 const moreBadge = document.createElement("div");
-                moreBadge.className = "px-2 py-1 rounded text-xs font-semibold bg-gray-600 text-white cursor-pointer";
+                moreBadge.className = "px-2 py-1 text-sm rounded font-semibold bg-gray-600 text-white cursor-pointer";
                 moreBadge.textContent = `+${dayEvents.length - maxVisible} more`;
 
                 // moreBadge.addEventListener("click", () => {
@@ -194,40 +213,40 @@ function openUnivEventsModal(events) {
 */
 
 function openUnivEventsModal(events, date) {
-  const modal = document.getElementById("univ-modal-overlay");
-  const inner = modal.querySelector("div");
+    const modal = document.getElementById("univ-modal-overlay");
+    const inner = modal.querySelector("div");
 
-  modal.classList.remove("hidden");
-  inner.classList.remove("animate-fadeOut");
-  inner.classList.add("animate-fadeIn");
+    modal.classList.remove("hidden");
+    inner.classList.remove("animate-fadeOut");
+    inner.classList.add("animate-fadeIn");
 
-  const formattedDate = date.toLocaleDateString("en-US", {
-    month: "long",
-    day: "numeric",
-    year: "numeric"
-  });
-  document.getElementById("univ-modal-title").textContent = formattedDate;
+    const formattedDate = date.toLocaleDateString("en-US", {
+        month: "long",
+        day: "numeric",
+        year: "numeric"
+    });
+    document.getElementById("univ-modal-title").textContent = formattedDate;
 
-  const content = document.getElementById("univ-modal-content");
-  content.innerHTML = "";
-  events.forEach(evt => {
-    const item = document.createElement("div");
-    item.className = `mb-2 p-2 rounded ${evt.color}`;
-    item.textContent = `${evt.title} (${evt.type})`;
-    content.appendChild(item);
-  });
+    const content = document.getElementById("univ-modal-content");
+    content.innerHTML = "";
+    events.forEach(evt => {
+        const item = document.createElement("div");
+        item.className = `mb-2 p-2 rounded ${evt.color}`;
+        item.textContent = `${evt.title} (${evt.type})`;
+        content.appendChild(item);
+    });
 }
 
 function closeUnivCalendarModal() {
-  const modal = document.getElementById("univ-modal-overlay");
-  const inner = modal.querySelector("div");
+    const modal = document.getElementById("univ-modal-overlay");
+    const inner = modal.querySelector("div");
 
-  inner.classList.remove("animate-fadeIn");
-  inner.classList.add("animate-fadeOut");
+    inner.classList.remove("animate-fadeIn");
+    inner.classList.add("animate-fadeOut");
 
-  inner.addEventListener("animationend", () => {
-    modal.classList.add("hidden");
-  }, { once: true });
+    inner.addEventListener("animationend", () => {
+        modal.classList.add("hidden");
+    }, { once: true });
 }
 
 

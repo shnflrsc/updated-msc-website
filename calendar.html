@@ -1,20 +1,33 @@
 <!DOCTYPE html>
 <html lang="en">
 
+<script>
+    document.documentElement.classList.add('loading');
+</script>
+
 <head>
     <meta charset="UTF-8">
     <meta content="width=device-width, initial-scale=1.0" name="viewport" />
     <title>Calendar | BulSU MSC</title>
     <link href="./Logos/Bulsu MSC Logo-02.png" rel="icon" type="image/png" />
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" rel="stylesheet" />
-    <link
-        href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400..900&family=Segoe+UI:wght@400;700&display=swap"
-        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400..900&family=Segoe+UI:wght@400;700&display=swap" rel="stylesheet">
+    <link href="src/output.css" rel="stylesheet">
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-    <script src="https://cdn.tailwindcss.com"></script>
     <script src="js/calendar.js" defer></script>
-    
+
     <style>
+        html,
+        body {
+            background-color: #00071c;
+            margin: 0;
+            height: 100%;
+        }
+
+        html.loading body {
+            display: none;
+        }
+
         @font-face {
             font-family: 'Veonika';
             src: url('https://fonts.cdnfonts.com/s/72818/veonika_free.woff') format('woff');
@@ -129,6 +142,8 @@
     </style>
 </head>
 
+<!-- loading -->
+
 <body class="min-h-screen">
     <nav class="fixed top-0 left-0 right-0 z-50 transition-all duration-300 ease-in-out py-4" id="main-header">
         <div class="max-w-7xl mx-auto px-4 flex justify-between items-center">
@@ -221,28 +236,44 @@
     <!-- Main -->
     <main class="pt-28 flex flex-col items-center w-full mb-4">
         <section
-            class="w-11/12 max-w-6xl p-6 bg-[#011538] border border-[#b9da05] rounded-2xl shadow-2xl flex flex-col "
+            class="w-11/12 p-2 sm:p-4 md:p-6 bg-[#011538] border border-[#b9da05] rounded-2xl shadow-2xl flex flex-col"
             style="height: calc(100vh - 7rem);">
             <div class="flex justify-between items-center mb-4">
                 <button onclick="goToToday()"
-                    class="bg-white/10 border border-white/20 text-white rounded px-3 py-1 hover:bg-[#b9da05] hover:text-[#011538]">
+                    class="px-3 py-1 text-xs sm:px-3 sm:py-1.5 sm:text-sm md:px-4 md:py-2 md:text-base 
+                        bg-white/10 border border-white/20 text-white rounded-lg hover:bg-[#b9da05] hover:text-[#011538] transition">
                     Today
                 </button>
 
                 <div class="flex-1"></div>
 
-                <div class="flex items-center space-x-4 text-white">
+                <!-- <div class="flex items-center space-x-4 text-white">
                     <button onclick="navigateCalendar(-1)"
                         class="text-2xl hover:text-[#b9da05] transition">&larr;</button>
                     <h2 id="calendar-month-title" class="text-xl font-bold font-orbitron"></h2>
                     <button onclick="navigateCalendar(1)"
                         class="text-2xl hover:text-[#b9da05] transition">&rarr;</button>
+                </div> -->
+
+                <div class="flex items-center space-x-2">
+                    <button onclick="navigateCalendar(-1)"
+                        class="p-1.5 rounded-full bg-white/10 border border-white/20 text-gray-300 hover:bg-[#b9da05] hover:text-[#011538] transition text-sm">
+                        <i class="fa-solid fa-chevron-left text-xs"></i>
+                    </button>
+                    <p id="calendar-month-title"
+                        class="text-xs sm:text-sm md:text-lg lg:text-xl text-white font-semibold text-center truncate max-w-[120px] sm:max-w-none">
+                    </p>
+                    <button onclick="navigateCalendar(1)"
+                        class="p-1.5 rounded-full bg-white/10 border border-white/20 text-gray-300 hover:bg-[#b9da05] hover:text-[#011538] transition text-sm">
+                        <i class="fa-solid fa-chevron-right text-xs"></i>
+                    </button>
                 </div>
             </div>
 
+            <!-- class="grid grid-cols-7 bg-[#02205c] text-center text-xs sm:text-xs md:text-base font-semibold text-white border-b border-white/10"> -->
             <div class="border border-white/10 rounded-lg flex flex-col flex-1 overflow-hidden">
                 <div
-                    class="grid grid-cols-7 bg-[#02205c] text-center text-sm font-semibold text-white border-b border-white/10">
+                    class="grid grid-cols-7 p-2 bg-[#b9da05]/20 text-[#b9da05] text-center text-xs sm:text-xs md:text-base font-medium border-b border-white/20">
                     <div>Sun</div>
                     <div>Mon</div>
                     <div>Tue</div>
@@ -251,7 +282,7 @@
                     <div>Fri</div>
                     <div>Sat</div>
                 </div>
-                <div id="calendar-grid" class="grid grid-cols-7 flex-1 auto-rows-fr text-sm"></div>
+                <div id="calendar-grid" class="grid grid-cols-7 flex-1 auto-rows-fr"></div>
             </div>
         </section>
     </main>
@@ -289,6 +320,44 @@
 
     <script>
         const API_BASE = "/updated-msc-website/api";
+
+        async function apiCall(endpoint, method = "GET", data = null) {
+            try {
+                const options = {
+                    method: method,
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                    credentials: "include",
+                };
+
+                if (data) {
+                    options.body = JSON.stringify(data);
+                }
+
+                const response = await fetch(`${API_BASE}${endpoint}`, options);
+                const result = await response.json();
+
+                return result;
+            } catch (error) {
+                console.error("API Error:", error);
+                return null;
+            }
+        }
+
+        (async function fetchProfile() {
+            document.documentElement.classList.add('loading'); // keep body hidden while checking
+            const data = await apiCall("/auth/profile", "GET");
+
+            if (!data || !data.success) {
+                // Not logged in → redirect
+                window.location.href = "login.html";
+                return;
+            }
+
+            // Logged in → remove loading state
+            document.documentElement.classList.remove('loading');
+        })();
 
         //Mobile View: Sidebar
         const menuButton = document.getElementById("mobile-menu-button");
