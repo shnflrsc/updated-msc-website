@@ -445,6 +445,21 @@ class EventController
         }
     }
 
+    /**
+     * Get upcoming events: for Member's view
+     */
+    public function getUpcomingPreview2()
+    {
+        try {
+            $limit = isset($_GET['limit']) ? (int)$_GET['limit'] : 4;
+            $events = $this->eventModel->getUpcomingPreview2($limit);
+
+            Response::success($events);
+        } catch (Exception $e) {
+            Response::serverError($e->getMessage());
+        }
+    }
+
     public function getUpcomingEventsCalendar()
     {
         try {

@@ -272,6 +272,24 @@ class Event
     }
 
     /**
+     * Get upcoming events: for Member's view
+     */
+    public function getUpcomingPreview2($limit = 4)
+    {
+        $sql = "SELECT * FROM events 
+                WHERE event_status = 'upcoming' 
+                AND event_date >= CURDATE()
+                ORDER BY event_date ASC, event_time_start ASC 
+                LIMIT :limit";
+
+        $stmt = $this->db->prepare($sql);
+        $stmt->bindValue(':limit', $limit, PDO::PARAM_INT);
+        $stmt->execute();
+
+        return $stmt->fetchAll();
+    }
+
+    /**
      * Get upcoming events: for student calendar
      */
     public function getUpcomingEventsCalendar($limit = null)

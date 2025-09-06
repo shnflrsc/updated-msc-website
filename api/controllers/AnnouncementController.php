@@ -353,6 +353,22 @@ class AnnouncementController
             Response::serverError($e->getMessage());
         }
     }
+
+    /**
+     * Get recentPreview2 announcements
+     */
+    public function getRecentPreview2()
+    {
+        try {
+            $limit = isset($_GET['limit']) ? (int)$_GET['limit'] : 4;
+            $announcements = $this->announcementModel->getRecent($limit);
+            
+            Response::success($announcements);
+            
+        } catch (Exception $e) {
+            Response::serverError($e->getMessage());
+        }
+    }
     
     /**
      * Search announcements
