@@ -25,7 +25,7 @@
     <style>
         html,
         body {
-            background-color: #00071c;
+            background-color: #080c24;
             margin: 0;
             height: 100%;
         }
@@ -259,7 +259,7 @@
 
     <main class="pt-28 flex-row justify-center">
         <section
-            class="relative w-11/12 max-w-6xl mx-auto p-6 md:p-8 bg-[#011538] border border-[#b9da05] text-white rounded-2xl shadow-2xl cursor-pointer transition transform hover:-translate-y-1"
+            class="relative w-11/12 max-w-7xl mx-auto p-6 md:p-8 bg-[#011538] border border-[#b9da05] text-white rounded-2xl shadow-2xl cursor-pointer transition transform hover:-translate-y-1"
             id="dashboard-header">
             <div class="absolute inset-0 bg-gradient-to-r from-custom-primary via-custom-secondary to-custom-primary-light rounded-2xl opacity-70 animate-glowing"
                 style="filter: blur(15px); background-size: 400% 400%; z-index: -1;"></div>
@@ -287,7 +287,7 @@
         </section>
 
         <!-- Member Profile -->
-        <section class="flex flex-col lg:flex-row items-stretch w-11/12 max-w-6xl mx-auto my-8 gap-5">
+        <section id="memberProfile" class="flex flex-col lg:flex-row items-stretch w-11/12 max-w-7xl mx-auto my-8 gap-5">
             <div
                 class="w-full lg:w-5/12 p-6 py-4 shadow-xl rounded-lg bg-[#011538] border border-white/20 text-white flex flex-col">
                 <div class="flex items-center justify-between mb-4 pb-3 border-b border-white/20">
@@ -298,7 +298,7 @@
                     </div>
                 </div>
 
-                <div>
+                <div class="">
                     <div class="w-28 h-28 mx-auto mb-4 rounded-full border-4 border-[#b9da05] shadow-md overflow-hidden"
                         id="profile-picture-container">
                         <!-- Default: Profile pic thru user's initials -->
@@ -320,19 +320,19 @@
                 </div>
 
                 <section class="grid grid-cols-1 sm:grid-cols-2 w-full gap-4 rounded-lg">
-                    <div class="bg-white/10 p-3 rounded-lg">
+                    <div class="bg-white/10 p-6 rounded-lg">
                         <label class="block text-xs text-gray-300">College</label>
                         <p id="user-college" class="font-medium text-white"></p>
                     </div>
-                    <div class="bg-white/10 p-3 rounded-lg">
+                    <div class="bg-white/10 p-6 rounded-lg">
                         <label class="block text-xs text-gray-300">Year Level</label>
                         <p id="user-year-level" class="font-medium text-white"></p>
                     </div>
-                    <div class="bg-white/10 p-3 rounded-lg">
+                    <div class="bg-white/10 sm:p-6 md:p-8 rounded-lg">
                         <label class="block text-xs text-gray-300">Membership ID</label>
                         <p id="user-msc-id" class="font-medium text-white"></p>
                     </div>
-                    <div class="bg-white/10 p-3 rounded-lg">
+                    <div class="bg-white/10 sm:p-6 md:p-8 rounded-lg">
                         <label class="block text-xs text-gray-300">Last Login</label>
                         <p id="user-last-login" class="font-medium text-white"></p>
                     </div>
@@ -422,9 +422,9 @@
         </section>
 
         <!-- Registered Events -->
-        <section class="flex flex-col lg:flex-row w-11/12 max-w-6xl mx-auto my-8 gap-5">
+        <section class="flex flex-col lg:flex-row w-11/12 max-w-7xl mx-auto my-8 gap-5">
             <div
-                class="w-full lg:w-5/12 h-auto max-h-[37rem] p-4 shadow-lg rounded-lg bg-[#011538] border border-white/20 flex flex-col text-white">
+                class="lg:w-5/12 max-h-[37rem] p-4 shadow-lg rounded-lg bg-[#011538] border border-white/20 flex flex-col text-white">
                 <div class="flex items-center justify-between mb-4 pb-3 border-b border-white/20">
                     <h3 class="text-base sm:text-lg font-bold">My Registered Events</h3>
                     <div
@@ -808,41 +808,6 @@
                 }
 
                 container.innerHTML = "";
-
-                // data.data.announcements.forEach(ann => {
-                //     // const announcementDateTime = new Date(ann.created_at);
-                //     // const formattedDateTime = announcementDateTime.toLocaleString("en-US", {
-                //     // month: "numeric",
-                //     // day: "numeric",
-                //     // year: "numeric",
-                //     // });
-
-                //     const announcementDateTime = new Date(ann.created_at);
-
-                //     const pad = (n) => n.toString().padStart(2, "0");
-                //     const formattedDateTime = `${pad(announcementDateTime.getMonth() +
-                //         1)}-${pad(announcementDateTime.getDate())}-${announcementDateTime.getFullYear()}`;
-
-                //     const html = `
-                //     <div
-                //         class="relative p-5 m-4 border border-white/20 bg-[#011538] rounded-lg shadow-sm transition-all duration-300 ease-out hover:shadow-xl hover:scale-[1.02] hover:bg-[#0a1d4a] group">
-                //         <div class="flex items-start gap-3">
-                //             <div
-                //                 class="w-24 h-24 rounded-md bg-[#1a1f3a] text-[#64748b] text-sm flex items-center justify-center overflow-hidden">
-                //                 <i class="bi bi-megaphone"></i>
-                //             </div>
-                //             <div class="flex-grow">
-                //                 <h4 class="text-sm sm:text-base md:text-base lg:text-lg text-white font-semibold">
-                //                     ${ann.title}
-                //                 </h4>
-                //                 <p class="text-sm text-gray-300 mt-2">${ann.content}</p>
-                //                 <p class="text-xs text-gray-500 mt-2 tracking-wide">${formattedDateTime}</p>
-                //             </div>
-                //         </div>
-                //     </div>
-                //     `;
-                //     container.insertAdjacentHTML("beforeend", html);
-                // });
                 data.data.forEach(ann => {
                     const announcementDateTime = new Date(ann.date_posted); // use date_posted, not created_at
 
@@ -885,11 +850,6 @@
                 const data = await apiCall("/events/upcomingPreview2");
 
                 const container = document.getElementById("tab-events");
-
-                // if (!data || !data.success || !Array.isArray(data.data) || data.data.length === 0) {
-                //     showEmptyState("tab-events", "fa-calendar-days", "No events available.");
-                //     return;
-                // }
                 if (!data || !data.success || !Array.isArray(data.data) || data.data.length === 0) {
                     showEmptyState("tab-events", "fa-calendar-days", "No events available.");
                     return;
