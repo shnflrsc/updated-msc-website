@@ -103,6 +103,8 @@ switch ($method) {
             $eventController->register($endpoint);
         } elseif ($endpoint === '' || $endpoint === 'create') {
             $eventController->create();
+        } else if($endpoint && is_numeric($endpoint) && $id === 'cancel'){
+            $eventController->cancelEvent($endpoint);
         } elseif ($endpoint === 'upload-image') {
             $eventController->uploadEventImage('event');
         } elseif ($endpoint === 'upload-badge') {

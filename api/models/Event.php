@@ -221,6 +221,19 @@ class Event
         }
     }
 
+    /*
+     * Cancel event
+    */
+    public function cancelEvent($id)
+    {
+        try {
+            $stmt = $this->db->prepare("UPDATE events SET `event_status` = 'canceled' WHERE event_id = :id");
+            //UPDATE events SET `event_status` = 'canceled' WHERE event_id = 63
+            return $stmt->execute(['id' => $id]);
+        } catch (Exception $e) {
+            throw new Exception("Failed to delete event: " . $e->getMessage());
+        }
+    }
 
     /**
      * Delete event

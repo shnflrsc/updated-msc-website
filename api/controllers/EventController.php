@@ -391,6 +391,33 @@ class EventController
     }
 
     /**
+     * Cancel event
+     */
+    public function cancelEvent($id)
+    {
+        try {
+            // Optional: require authentication/role if needed
+            AuthMiddleware::requireOfficer(); // Uncomment if only officers can cancel
+
+            $event = $this->eventModel->findById($id);
+            if (!$event) {
+                Response::notFound('Event not found');
+                return;
+            }
+
+            $result = $this->eventModel->cancelEvent($id);
+
+            if ($result) {
+                Response::success(null, 'Event cancelled successfully');
+            } else {
+                Response::serverError('Failed to cancel event');
+            }
+        } catch (Exception $e) {
+            Response::serverError($e->getMessage());
+        }
+    }
+
+    /**
      * Delete event (Officer only)
      */
     public function delete($id)
