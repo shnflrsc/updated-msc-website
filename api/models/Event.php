@@ -221,6 +221,19 @@ class Event
         }
     }
 
+    /*
+     * Cancel event
+    */
+    public function cancelEvent($id)
+    {
+        try {
+            $stmt = $this->db->prepare("UPDATE events SET `event_status` = 'canceled' WHERE event_id = :id");
+            //UPDATE events SET `event_status` = 'canceled' WHERE event_id = 63
+            return $stmt->execute(['id' => $id]);
+        } catch (Exception $e) {
+            throw new Exception("Failed to delete event: " . $e->getMessage());
+        }
+    }
 
     /**
      * Delete event
@@ -257,6 +270,24 @@ class Event
      * Get upcoming events: for Admin Dashoard
      */
     public function getUpcomingPreview($limit = 3)
+    {
+        $sql = "SELECT * FROM events 
+                WHERE event_status = 'upcoming' 
+                AND event_date >= CURDATE()
+                ORDER BY event_date ASC, event_time_start ASC 
+                LIMIT :limit";
+
+        $stmt = $this->db->prepare($sql);
+        $stmt->bindValue(':limit', $limit, PDO::PARAM_INT);
+        $stmt->execute();
+
+        return $stmt->fetchAll();
+    }
+
+    /**
+     * Get upcoming events: for Member's view
+     */
+    public function getUpcomingPreview2($limit = 4)
     {
         $sql = "SELECT * FROM events 
                 WHERE event_status = 'upcoming' 

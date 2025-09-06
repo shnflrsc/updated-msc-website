@@ -46,6 +46,8 @@ switch ($method) {
             $eventController->getUpcoming();
         } else if ($endpoint === 'upcomingPreview') {
             $eventController->getUpcomingPreview();
+        } else if($endpoint === 'upcomingPreview2'){
+            $eventController->getUpcomingPreview2();
         } else if ($endpoint === 'upcomingCalendar') {
             $eventController->getUpcomingEventsCalendar();
         } else if ($endpoint === 'canceled') {
@@ -101,6 +103,8 @@ switch ($method) {
             $eventController->register($endpoint);
         } elseif ($endpoint === '' || $endpoint === 'create') {
             $eventController->create();
+        } else if($endpoint && is_numeric($endpoint) && $id === 'cancel'){
+            $eventController->cancelEvent($endpoint);
         } elseif ($endpoint === 'upload-image') {
             $eventController->uploadEventImage('event');
         } elseif ($endpoint === 'upload-badge') {

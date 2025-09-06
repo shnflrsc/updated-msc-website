@@ -25,7 +25,7 @@
     <style>
         html,
         body {
-            background-color: #00071c;
+            background-color: #080c24;
             margin: 0;
             height: 100%;
         }
@@ -259,7 +259,7 @@
 
     <main class="pt-28 flex-row justify-center">
         <section
-            class="relative w-11/12 max-w-6xl mx-auto p-6 md:p-8 bg-[#011538] border border-[#b9da05] text-white rounded-2xl shadow-2xl cursor-pointer transition transform hover:-translate-y-1"
+            class="relative w-11/12 max-w-7xl mx-auto p-6 md:p-8 bg-[#011538] border border-[#b9da05] text-white rounded-2xl shadow-2xl cursor-pointer transition transform hover:-translate-y-1"
             id="dashboard-header">
             <div class="absolute inset-0 bg-gradient-to-r from-custom-primary via-custom-secondary to-custom-primary-light rounded-2xl opacity-70 animate-glowing"
                 style="filter: blur(15px); background-size: 400% 400%; z-index: -1;"></div>
@@ -287,7 +287,7 @@
         </section>
 
         <!-- Member Profile -->
-        <section class="flex flex-col lg:flex-row items-stretch w-11/12 max-w-6xl mx-auto my-8 gap-5">
+        <section id="memberProfile" class="flex flex-col lg:flex-row items-stretch w-11/12 max-w-7xl mx-auto my-8 gap-5">
             <div
                 class="w-full lg:w-5/12 p-6 py-4 shadow-xl rounded-lg bg-[#011538] border border-white/20 text-white flex flex-col">
                 <div class="flex items-center justify-between mb-4 pb-3 border-b border-white/20">
@@ -298,7 +298,7 @@
                     </div>
                 </div>
 
-                <div>
+                <div class="">
                     <div class="w-28 h-28 mx-auto mb-4 rounded-full border-4 border-[#b9da05] shadow-md overflow-hidden"
                         id="profile-picture-container">
                         <!-- Default: Profile pic thru user's initials -->
@@ -316,24 +316,23 @@
 
                 <div class="flex justify-center gap-4 m-4">
                     <span class="w-5/12 bg-[#03850a] text-m text-white py-1 px-2 rounded-full text-center">Active</span>
-                    <span class="w-5/12 bg-[#03378f]  text-white py-1 px-2 rounded-full text-center"
-                        id="role"></span>
+                    <span class="w-5/12 bg-[#03378f]  text-white py-1 px-2 rounded-full text-center" id="role"></span>
                 </div>
 
                 <section class="grid grid-cols-1 sm:grid-cols-2 w-full gap-4 rounded-lg">
-                    <div class="bg-white/10 p-3 rounded-lg">
+                    <div class="bg-white/10 p-6 rounded-lg">
                         <label class="block text-xs text-gray-300">College</label>
                         <p id="user-college" class="font-medium text-white"></p>
                     </div>
-                    <div class="bg-white/10 p-3 rounded-lg">
+                    <div class="bg-white/10 p-6 rounded-lg">
                         <label class="block text-xs text-gray-300">Year Level</label>
                         <p id="user-year-level" class="font-medium text-white"></p>
                     </div>
-                    <div class="bg-white/10 p-3 rounded-lg">
+                    <div class="bg-white/10 sm:p-6 md:p-8 rounded-lg">
                         <label class="block text-xs text-gray-300">Membership ID</label>
                         <p id="user-msc-id" class="font-medium text-white"></p>
                     </div>
-                    <div class="bg-white/10 p-3 rounded-lg">
+                    <div class="bg-white/10 sm:p-6 md:p-8 rounded-lg">
                         <label class="block text-xs text-gray-300">Last Login</label>
                         <p id="user-last-login" class="font-medium text-white"></p>
                     </div>
@@ -383,17 +382,18 @@
 
                 <!-- Tab Contents -->
                 <div class="mt-6 space-y-2">
-                    <div class="tab-content max-h-[35rem] overflow-y-auto" id="tab-announcements">
+                    <div class="tab-content max-h-[38rem] overflow-y-auto" id="tab-announcements">
+                        <p class="text-gray-300"></p>
+                
+                    </div>
+                    <div class="tab-content hidden max-h-[38rem] overflow-y-auto" id="tab-events">
                         <p class="text-gray-300"></p>
                     </div>
 
-                    <div class="tab-content hidden max-h-[35rem] overflow-y-auto pr-2" id="tab-events">
-                        <p class="text-gray-300"></p>
-                    </div>
-
+                    <!-- relative max-w-5xl w-full mx-auto text-sm -->
                     <div class="tab-content hidden" id="tab-univ-calendar">
-                        <div class="relative max-w-5xl w-full mx-auto text-sm">
-                            <div id="univ-calendar" class="mt-4">
+                        <div class="">
+                            <div id="univ-calendar" class="mt-2 px-4">
                                 <div class="flex justify-between items-center mb-4">
                                     <button id="prevWeek"
                                         class="px-2.5 py-1 text-xs sm:px-3 sm:py-1.5 sm:text-sm md:px-4 md:py-2 md:text-base 
@@ -422,9 +422,9 @@
         </section>
 
         <!-- Registered Events -->
-        <section class="flex flex-col lg:flex-row w-11/12 max-w-6xl mx-auto my-8 gap-5">
+        <section class="flex flex-col lg:flex-row w-11/12 max-w-7xl mx-auto my-8 gap-5">
             <div
-                class="w-full lg:w-5/12 h-auto max-h-[37rem] p-4 shadow-lg rounded-lg bg-[#011538] border border-white/20 flex flex-col text-white">
+                class="lg:w-5/12 max-h-[37rem] p-4 shadow-lg rounded-lg bg-[#011538] border border-white/20 flex flex-col text-white">
                 <div class="flex items-center justify-between mb-4 pb-3 border-b border-white/20">
                     <h3 class="text-base sm:text-lg font-bold">My Registered Events</h3>
                     <div
@@ -501,8 +501,6 @@
             </div>
         </section>
     </main>
-
- 
 
     <!-- Footer -->
     <footer class="bg-[#00071c] text-center p-6 border-t border-gray-800">
@@ -795,37 +793,31 @@
 
         async function loadAnnouncements() {
             try {
-                const data = await apiCall("/announcements");
+                const data = await apiCall("/announcements/recentPreview2");
 
                 const container = document.getElementById("tab-announcements");
 
-                if (!data || !data.success || !Array.isArray(data.data.announcements) || data.data.announcements.length === 0) {
+                // if (!data || !data.success || !Array.isArray(data.data.announcements) || data.data.announcements.length === 0) {
+                //     showEmptyState("tab-announcements", "fa-bullhorn", "No announcements available.");
+                //     return;
+                // }
+
+                if (!data || !data.success || !Array.isArray(data.data) || data.data.length === 0) {
                     showEmptyState("tab-announcements", "fa-bullhorn", "No announcements available.");
                     return;
                 }
 
                 container.innerHTML = "";
-
-                data.data.announcements.forEach(ann => {
-                    // const announcementDateTime = new Date(ann.created_at);
-                    // const formattedDateTime = announcementDateTime.toLocaleString("en-US", {
-                    // month: "numeric",
-                    // day: "numeric",
-                    // year: "numeric",
-                    // });
-
-                    const announcementDateTime = new Date(ann.created_at);
+                data.data.forEach(ann => {
+                    const announcementDateTime = new Date(ann.date_posted); // use date_posted, not created_at
 
                     const pad = (n) => n.toString().padStart(2, "0");
-                    const formattedDateTime = `${pad(announcementDateTime.getMonth() +
-                        1)}-${pad(announcementDateTime.getDate())}-${announcementDateTime.getFullYear()}`;
+                    const formattedDateTime = `${pad(announcementDateTime.getMonth() + 1)}-${pad(announcementDateTime.getDate())}-${announcementDateTime.getFullYear()}`;
 
                     const html = `
-                    <div
-                        class="relative p-5 m-4 border border-white/20 bg-[#011538] rounded-lg shadow-sm transition-all duration-300 ease-out hover:shadow-xl hover:scale-[1.02] hover:bg-[#0a1d4a] group">
+                    <div class="relative p-5 m-4 border border-white/20 bg-[#011538] rounded-lg shadow-sm transition-all duration-300 ease-out hover:shadow-xl hover:scale-[1.02] hover:bg-[#0a1d4a] group">
                         <div class="flex items-start gap-3">
-                            <div
-                                class="w-24 h-24 rounded-md bg-[#1a1f3a] text-[#64748b] text-sm flex items-center justify-center overflow-hidden">
+                            <div class="w-24 h-24 rounded-md bg-[#1a1f3a] text-[#64748b] text-sm flex items-center justify-center overflow-hidden">
                                 <i class="bi bi-megaphone"></i>
                             </div>
                             <div class="flex-grow">
@@ -839,7 +831,13 @@
                     </div>
                     `;
                     container.insertAdjacentHTML("beforeend", html);
-                });
+                    });
+                    container.insertAdjacentHTML("beforeend", `
+                    <a href="announcements.html"
+                        class="text-blue-400 hover:text-blue-300 text-sm font-medium px-4 mt-2 inline-block">
+                        View All Announcements →
+                    </a>
+                    `);
             } catch (err) {
                 console.error("Announcement load error:", err);
                 showEmptyState("tab-announcements", "fa-bullhorn", "Failed to load announcements.");
@@ -848,10 +846,10 @@
 
         async function loadEvents() {
             try {
-                const data = await apiCall("/events/upcoming");
+                //const data = await apiCall("/events/upcoming");
+                const data = await apiCall("/events/upcomingPreview2");
 
                 const container = document.getElementById("tab-events");
-
                 if (!data || !data.success || !Array.isArray(data.data) || data.data.length === 0) {
                     showEmptyState("tab-events", "fa-calendar-days", "No events available.");
                     return;
@@ -869,18 +867,6 @@
                         minute: "2-digit",
                         hour12: true
                     });
-
-                    let statusClass = "";
-
-                    if (evt.event_status.toLowerCase() === "ongoing") {
-                        statusClass = "text-[#3b82f6] bg-[#3b82f6]/20"; // blue
-                    } else if (evt.event_status.toLowerCase() === "completed") {
-                        statusClass = "text-green-500 bg-green-200"; // green
-                    } else if (evt.event_status.toLowerCase() === "cancelled") {
-                        statusClass = "text-red-500 bg-red-200"; // red
-                    } else {
-                        statusClass = "text-gray-400 bg-gray-200"; // default
-                    }
 
                     const html = `
                     <div class="relative flex flex-row gap-4 p-5 m-4 bg-[#011538] border border-white/20 
@@ -919,6 +905,12 @@
                     `;
                     container.insertAdjacentHTML("beforeend", html);
                 });
+                container.insertAdjacentHTML("beforeend", `
+                    <a href="events-and-register-events.html"
+                        class="text-blue-400 hover:text-blue-300 text-sm font-medium px-6 mt-2 inline-block">
+                        View All Events →
+                    </a>
+                `);
             } catch (err) {
                 console.error("Events tab error:", err);
                 showEmptyState("tab-events", "fa-calendar-days", "Failed to load events.");

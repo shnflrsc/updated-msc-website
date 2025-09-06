@@ -1705,7 +1705,7 @@
 
                 setTimeout(() => {
                     successAlert.style.display = 'none';
-                    window.location.href = `admin_manage_calendar.html.html?date=${newEvent.event_date}`;
+                    window.location.href = `admin_manage_calendar.html?date=${newEvent.event_date}`;
                 }, 3000);
 
                 document.querySelectorAll('.tab-button').forEach(btn => btn.classList.remove('active'));
@@ -1793,13 +1793,14 @@
             if (confirmCancelBtn) {
                 confirmCancelBtn.onclick = async function () {
                     if (!eventIdToCancel) return;
-                    const response = await apiCall(`/events/${eventIdToCancel}`, "CANCEL");
+                    //const response = await apiCall(`/events/${eventIdToCancel}`, "CANCEL");
+                    const response = await apiCall(`/events/${eventIdToCancel}/cancel`, "POST");
                     if (response?.success) {
                         showToast("Event cancelled successfully!", "success");
                         document.getElementById("current-upcoming").innerHTML = "";
                         getUpcomingEvents();
                     } else {
-                        showToast("Failed to cancel event.", "error");
+                        showToast(response.message, "error");
                     }
                     closeCancelEventModal();
                 };
