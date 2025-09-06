@@ -23,7 +23,7 @@
   <style>
     html,
     body {
-      background-color: #00071c;
+      background-color: #080c24;
       margin: 0;
       height: 100%;
     }
@@ -68,7 +68,6 @@
 
     .nav-link {
       color: #d1d5db;
-      /* Tailwind gray‑300 */
       transition: color 0.3s;
     }
 
@@ -94,7 +93,6 @@
     .nav-icon {
       color: white;
       font-size: 1.25rem;
-      /* text-xl */
       transition: transform 0.3s, color 0.3s;
     }
 
@@ -124,18 +122,15 @@
     ::-webkit-scrollbar {
       width: 8px;
       background-color: #1e293b;
-      /* bg-slate-800 */
     }
 
     ::-webkit-scrollbar-thumb {
       background-color: #b9da05;
-      /* green-400 */
       border-radius: 4px;
     }
 
     ::-webkit-scrollbar-thumb:hover {
       background-color: #d1d5db;
-      /* gray-300 */
     }
 
     /* Base input, select, and textarea styling */
@@ -302,18 +297,16 @@
     </div>
   </div>
 
-  <main class="pt-28 flex justify-center">
+  <main class="pt-28 p-3 flex justify-center">
     <section id="header"
-      class="w-[96%] mx-auto mb-8 bg-transparent flex flex-col lg:flex-row gap-5 items-stretch rounded min-h-[calc(100vh-7rem)]">
-
+      class="w-11/12 max-w-7xl mx-auto mb-8 bg-transparent flex flex-col lg:flex-row gap-5 items-stretch rounded-md">
       <!-- Left Section: Profile -->
-      <div class="w-full lg:w-2/6 rounded-lg bg-[#011538] border border-[#b9da05] self-stretch">
+      <div class="w-full lg:w-2/6 rounded-md bg-[#011538] border border-[#b9da05] self-stretch">
         <div class="px-4 sm:px-6 py-4">
           <div class="mb-4 text-right w-full">
             <h4 class="text-white py-2 px-2 text-sm font-semibold uppercase tracking-wider" id="msc_id">
             </h4>
           </div>
-
           <div>
             <div class="w-28 h-28 mx-auto mb-4 rounded-full shadow-md overflow-hidden" id="profile-picture-container">
               <!-- Default: Profile pic thru user's initials -->
@@ -322,11 +315,10 @@
 
           <div class="flex flex-col items-center justify-center text-center">
             <h2 class="text-3xl text-white font-bold mb-1" id="fullName"></h2>
-            <p class="text-sm text-white mb-6" id="studentID"></p>
+            <p class="text-sm text-white mb-4" id="student_no"></p>
           </div>
 
-          <div class="w-full h-px bg-white my-4"></div>
-
+          <div class="w-full h-px bg-white mb-2"></div>
           <div class="text-center mb-6 w-full">
             <h3 class="text-white text-lg font-bold" id="program"></h3>
             <p class="text-white" id="college"></p>
@@ -338,24 +330,22 @@
               <!-- Dyamic QR Code -->
               <div id="qr-code" class="w-full h-full"></div>
             </div>
-
-            <!-- <p class="text-sm text-blue-200 mb-6">ID No. </p> -->
-
             <div class="flex gap-2 mt-4">
-              <span class="bg-[#03850a] text-white px-4 py-1 rounded-full text-xs">
+              <span class="bg-[#03850a] text-white px-4 py-1 rounded-2xl text-base hidden">
                 Active
               </span>
-              <span class="bg-[#03378f] text-white px-4 py-1 rounded-full text-xs" id="role">
+              <span class="bg-[#03378f] text-white px-4 py-1 rounded-full text-base hidden" id="role">
               </span>
             </div>
           </div>
+
         </div>
       </div>
 
       <!-- Right Section -->
-      <section id="rightSection" class="w-full h-full lg:w-4/5 flex flex-col self-stretch rounded-lg">
+      <section id="rightSection" class="w-full h-full lg:w-4/5 flex flex-col self-stretch rounded-md">
         <!-- Personal Info -->
-        <section id="editContainer" class="w-full h-full rounded-lg border border-[#b9da05]">
+        <section id="editContainer" class="w-full h-full rounded-md border border-[#b9da05]">
           <div class="bg-[#011538] pt-4 px-4 sm:px-6 pb-6 rounded-lg relative">
             <h2 class="mb-4 text-lg sm:text-xl font-bold text-white">Personal Information</h2>
             <div class="absolute top-4 right-4">
@@ -372,6 +362,7 @@
                   <div>
                     <label for="firstName" class="text-white text-sm mb-1 font-semibold">First Name</label>
                     <input type="text" id="firstName" name="firstName" placeholder="Enter first name" />
+                    <p id="firstNameError" class="text-red-500 text-xs mt-1 hidden"></p>
                   </div>
                   <div>
                     <label for="middleName" class="text-white text-sm mb-1 font-semibold">Middle Name</label>
@@ -380,6 +371,7 @@
                   <div>
                     <label for="lastName" class="text-white text-sm mb-1 font-semibold">Last Name</label>
                     <input type="text" id="lastName" name="lastName" placeholder="Enter last name" />
+                    <p id="lastNameError" class="text-red-500 text-xs mt-1 hidden"></p>
                   </div>
                   <div>
                     <label for="name_suffix" class="text-white text-sm mb-1 font-semibold">Name Suffix</label>
@@ -406,6 +398,7 @@
                   <div>
                     <label for="birthdate" class="text-white text-sm mb-1 font-semibold">Date of Birth:</label>
                     <input type="date" id="birthdate" />
+                    <p id="birthdateError" class="text-red-500 text-xs mt-1 hidden"></p>
                   </div>
                   <div>
                     <label for="gender" class="text-white text-sm mb-1 font-semibold">Gender:</label>
@@ -414,6 +407,7 @@
                       <option value="Male">Male</option>
                       <option value="Female">Female</option>
                     </select>
+                    <p id="genderError" class="text-red-500 text-xs mt-1 hidden"></p>
                   </div>
                 </div>
               </div>
@@ -454,6 +448,7 @@
                       class="w-full p-2 mt-1 rounded border border-gray-700 text-white">
                       <option value="">Select College</option>
                     </select>
+                    <p id="collegeError" class="text-red-500 text-xs mt-1 hidden"></p>
                   </div>
 
                   <div>
@@ -462,6 +457,7 @@
                       class="w-full p-2 mt-1 rounded border border-gray-700 text-white">
                       <option value="">Select Program</option>
                     </select>
+                    <p id="programError" class="text-red-500 text-xs mt-1 hidden"></p>
                   </div>
 
                   <div>
@@ -476,7 +472,7 @@
                     <p id="show_student_no"
                       class="w-full py-2 px-3 rounded border border-[#334155] text-gray-400 bg-[#0b1c3a] text-sm mt-1 cursor-not-allowed">
                     </p>
-                    <input type="hidden" id="student_no_hidden" />
+                    <!-- <input type="hidden" id="hidden_student_no" /> -->
                   </div>
                 </div>
               </div>
@@ -514,15 +510,17 @@
           </div>
         </section>
 
-        <section id="badgesContainer" class="w-full h-full mt-4 rounded-lg border border-[#b9da05] flex flex-col">
-          <div class="bg-[#011538] h-full pt-4 px-4 sm:px-6 pb-6 rounded-lg flex flex-col">
+        <section id="badgesContainer" class="w-full mt-4 rounded-lg border border-[#b9da05]">
+
+          <div class="bg-[#011538] pt-4 px-4 sm:px-6 pb-6 rounded-lg flex flex-col">
+
             <div class="flex items-center justify-between mb-4">
               <h2 class="text-base sm:text-lg font-bold text-white">
                 Attended Events & Badges
               </h2>
             </div>
 
-            <div class="overflow-y-auto flex-grow">
+            <div class="overflow-y-auto" style="max-height: 20rem;">
               <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 p-4" id="badgeContainer">
               </div>
             </div>
@@ -613,7 +611,6 @@
       });
     }
 
-    let originalProfile = {};
     const collegeProgramMap = {
       "College of Architecture and Fine Arts (CAFA)": [
         "BS Architecture",
@@ -735,8 +732,8 @@
       populatePrograms(e.target.value);
     });
 
+    let originalProfile = {};
     async function fetchProfile() {
-      //try {
       const data = await apiCall("/auth/profile");
 
       if (!data || !data.success) {
@@ -748,37 +745,37 @@
 
       const user = data.data;
       originalProfile = { ...user };
-
-      fetchAndDisplayEventBadges(user.id);
+      fetchEventBadges(user.id);
 
       // Text fields
-      document.getElementById("msc_id").textContent = user.msc_id;
       generateQRCode(user.msc_id || user.student_no);
+      document.getElementById("msc_id").textContent = user.msc_id;
       document.getElementById("fullName").textContent = `${user.first_name} ${user.last_name}`;
-      document.getElementById("studentID").textContent = user.student_no;
+      document.getElementById("student_no").textContent = user.student_no;
       document.getElementById("program").textContent = user.program;
       document.getElementById("college").textContent = user.college;
       document.getElementById("year_level").textContent = user.year_level;
       document.getElementById("role").textContent = user.role;
 
+      //Input fields, text fields (for display)
       document.getElementById("firstName").value = user.first_name || "";
       document.getElementById("middleName").value = user.middle_name || "";
       document.getElementById("lastName").value = user.last_name || "";
       document.getElementById("name_suffix").value = user.name_suffix || "";
+
       document.getElementById("birthdate").value = user.birthdate || "";
       document.getElementById("gender").value = user.gender || "";
-      document.getElementById("student_no_hidden").value = user.student_no || "";
-      document.getElementById("show_student_no").textContent = user.student_no;
+
+      document.getElementById("email").textContent = user.email || "";
+      document.getElementById("phone").value = user.phone || "";
+      document.getElementById("address").value = user.address || "";
+      document.getElementById("facebook_link").value = user.facebook_link || "";
 
       document.getElementById("student_college").value = user.college || "";
       document.getElementById("student_program").value = user.program || "";
       document.getElementById("section").value = user.section || "";
-      document.getElementById("address").value = user.address || "";
-      document.getElementById("phone").value = user.phone || "";
-      document.getElementById("facebook_link").value = user.facebook_link || "";
-      //document.getElementById("username").value = user.username || "";
+      document.getElementById("show_student_no").textContent = user.student_no;
       document.getElementById("username").textContent = user.username || "";
-      document.getElementById("email").textContent = user.email || "";
 
       // Populate and pre-select college + program
       populateColleges(user.college || "");
@@ -789,7 +786,6 @@
       document.getElementById("member_since").textContent = createdDate.toLocaleDateString("en-US", {
         year: "numeric", month: "long", day: "numeric"
       });
-      //document.getElementById("member_since2").textContent = createdDate.toLocaleDateString("en-US");
 
       // Profile picture initials
       const initials = `${user.first_name?.charAt(0) || ""}${user.last_name?.charAt(0) || ""}`.toUpperCase();
@@ -797,9 +793,6 @@
 
       attachChangeListeners();
       document.documentElement.classList.remove("loading");
-      // } catch (err) {
-      //   console.error("Failed to fetch user profile:", err);
-      // }
     }
 
     function formatDateInput(dateStr) {
@@ -808,73 +801,154 @@
       return date.toISOString().split("T")[0];
     }
 
-    function hasProfileChanged() {
-      const imageChanged = document.getElementById("profile")?.files.length > 0;
+    // Required fields for profile updates
+    const requiredFields = ["firstName", "lastName", "birthdate", "gender", "student_college", "student_program"];
 
-      const fieldChanged = [
-        ["firstName", "first_name"],
-        ["middleName", "middle_name"],
-        ["lastName", "last_name"],
-        ["name_suffix", "name_suffix"],
-        ["birthdate", "birthdate"],
-        ["gender", "gender"],
-        ["student_no", "student_no"],
-        ["student_college", "college"],
-        ["student_program", "program"],
-        ["section", "section"],
-        ["address", "address"],
-        ["phone", "phone"],
-        ["facebook_link", "facebook_link"]
-      ].some(([id, field]) => {
-        const element = document.getElementById(id);
-        const currentValue = (element?.value || "").trim();
-        const originalValue = (originalProfile[field] || "").trim();
-        return currentValue !== originalValue;
+    // optional fields for profile updates
+    const optionalFields = ["middleName", "name_suffix", "section", "address", "phone", "facebook_link"];
+
+    const fieldMapping = { firstName: "first_name", lastName: "last_name", birthdate: "birthdate", gender: "gender", student_college: "college", student_program: "program" };
+
+    //Field names for real-time error handling
+    const fieldNames = {
+      firstName: "First name",
+      lastName: "Last name",
+      birthdate: "Birthdate",
+      gender: "Gender",
+      student_college: "College",
+      student_program: "Program"
+    };
+
+    function validateRequiredFields() {
+      let allFilled = true;
+
+      requiredFields.forEach(id => {
+        const el = document.getElementById(id);
+        const error = document.getElementById(`${id}Error`) || document.getElementById(`${id.replace('student_', '')}Error`);
+
+        if (!el.value.trim()) {
+          if (error) {
+            error.textContent = `${fieldNames[id]} is required.`;
+            error.classList.remove("hidden");
+          }
+          allFilled = false;
+        } else {
+          if (error) {
+            error.textContent = "";
+            error.classList.add("hidden");
+          }
+        }
       });
-
-      return fieldChanged || imageChanged;
+      return allFilled;
     }
 
     function attachChangeListeners() {
       const fields = document.querySelectorAll("input, select");
       const saveBtn = document.getElementById("saveBtn");
 
-      fields.forEach(input => {
-        input.addEventListener("input", () => {
-          if (hasProfileChanged()) {
-            saveBtn.classList.remove("pointer-events-none", "opacity-50");
-          } else {
-            saveBtn.classList.add("pointer-events-none", "opacity-50");
-          }
+      function checkChanges() {
+        const requiredFilled = validateRequiredFields();
+
+        const requiredChanged = requiredFields.some(id => {
+          const el = document.getElementById(id);
+          const originalValue = originalProfile[fieldMapping[id]] || "";
+          return (el?.value || "").trim() !== originalValue.trim();
         });
+
+        const optionalChanged = optionalFields.some(id => {
+          const el = document.getElementById(id);
+          const originalValue = originalProfile[id] || "";
+          return (el?.value || "").trim() !== originalValue.trim();
+        });
+
+        const fileInput = document.getElementById("profile");
+        const validPictureSelected = fileInput?.dataset.valid === "true";
+
+        if ((requiredChanged && requiredFilled) || optionalChanged || validPictureSelected) {
+          saveBtn.classList.remove("pointer-events-none", "opacity-50");
+        } else {
+          saveBtn.classList.add("pointer-events-none", "opacity-50");
+        }
+      }
+
+      fields.forEach(input => {
+        input.addEventListener("input", checkChanges);
+        input.addEventListener("change", checkChanges);
       });
 
       const fileInput = document.getElementById("profile");
+      const initials = `${originalProfile.first_name?.charAt(0) || ""}${originalProfile.last_name?.charAt(0) || ""}`.toUpperCase();
+
       if (fileInput) {
         fileInput.addEventListener("change", () => {
-          if (hasProfileChanged()) {
-            saveBtn.classList.remove("pointer-events-none", "opacity-50");
-          } else {
-            saveBtn.classList.add("pointer-events-none", "opacity-50");
+          const file = fileInput.files[0];
+          const container = document.getElementById("profile-picture-container");
+
+          // Reset valid flag
+          fileInput.dataset.valid = "false";
+
+          if (!file) {
+            renderProfilePicture(originalProfile.profile_image_path, initials);
+            checkChanges();
+            return;
           }
 
-          const file = fileInput.files[0];
-          if (file) {
-            const reader = new FileReader();
-            reader.onload = function (e) {
-              const container = document.getElementById("profile-picture-container");
-              container.innerHTML = `<img src="${e.target.result}" class="w-full h-full object-cover" />`;
-            };
-            reader.readAsDataURL(file);
+          const allowedTypes = ["image/jpeg", "image/png"];
+          const maxSize = 5 * 1024 * 1024; // 5MB
+
+          if (!allowedTypes.includes(file.type)) {
+            showToast("Invalid file format. Please upload a JPG or PNG image.", "error");
+            fileInput.value = "";
+            renderProfilePicture(originalProfile.profile_image_path, initials);
+            checkChanges();
+            return;
           }
+
+          if (file.size > maxSize) {
+            showToast("File is too large. Maximum size is 5MB.", "error");
+            fileInput.value = "";
+            renderProfilePicture(originalProfile.profile_image_path, initials);
+            checkChanges();
+            return;
+          }
+
+          // Preview valid file
+          const reader = new FileReader();
+          reader.onload = (e) => {
+            const img = document.createElement("img");
+            img.src = e.target.result;
+            img.alt = "Profile Picture";
+            img.className = "w-full h-full object-cover rounded-full";
+
+            container.innerHTML = "";
+            container.appendChild(img);
+
+            // Mark picture as valid
+            fileInput.dataset.valid = "true";
+
+            checkChanges();
+          };
+          reader.readAsDataURL(file);
         });
       }
     }
 
+    function areRequiredFieldsFilled() {
+      return requiredFields.every(id => {
+        const el = document.getElementById(id);
+        return el && el.value.trim() !== "";
+      });
+    }
+
+    // updateProfile, renderProfilePicture, generateQRCode, fetchAndDisplayEventBadges, showToast, uploadProfilePicture 
     async function updateProfile() {
       const saveBtn = document.getElementById("saveBtn");
+      // allow update if optional fields changes
+      const changesExist = requiredFields.some(id => (document.getElementById(id).value || "").trim() !== (originalProfile[fieldMapping[id]] || "").trim())
+        || optionalFields.some(id => (document.getElementById(id).value || "").trim() !== (originalProfile[id] || "").trim())
+        || (document.getElementById("profile")?.files.length > 0);
 
-      if (!hasProfileChanged()) {
+      if (!changesExist) {
         showToast("No changes made to profile.", "error");
         return;
       }
@@ -882,77 +956,55 @@
       try {
         const profileData = await apiCall("/auth/profile");
         if (!profileData || !profileData.success) {
-          alert("Session expired. Please login again.");
+          //console.log("Session expired. Please login again.");
           window.location.href = "login.html";
           return;
         }
 
         const user = profileData.data;
-        const studentId = user.id;
+        const student_id = user.id;
 
-        // Upload profile picture separately (if changed)
-        const fileInput = document.getElementById("profile");
         let uploadedImagePath = user.profile_image_path;
+        const fileInput = document.getElementById("profile");
 
-        if (fileInput && fileInput.files.length > 0) {
-          uploadedImagePath = await uploadProfilePicture(studentId);
+        if (fileInput && fileInput.files.length > 0 && fileInput.dataset.valid === "true") {
+          uploadedImagePath = await uploadProfilePicture(student_id);
           if (!uploadedImagePath) {
-            showToast("Failed to upload image", "error");
+            showToast("Failed to upload profile", "error");
             return;
           }
+        } else if (fileInput?.files.length > 0 && fileInput.dataset.valid !== "true") {
+          showToast("Please choose a valid image.", "error");
+          return;
         }
 
-        /*
+        // Build payload: use input value if present : fallback to original DB value
         const payload = {
-          first_name: document.getElementById("firstName").value.trim(),
-          middle_name: document.getElementById("middleName").value.trim(),
-          last_name: document.getElementById("lastName").value.trim(),
-          name_suffix: document.getElementById("name_suffix").value.trim(),
-          birthdate: document.getElementById("birthdate").value,
-          gender: document.getElementById("gender").value,
-          //student_no: document.getElementById("student_no").value.trim(),
-          student_no: document.getElementById("student_no_hidden").value || user.student_no,
-          year_level: user.year_level,
-          college: document.getElementById("student_college").value.trim(),
-          program: document.getElementById("student_program").value.trim(),
-          section: document.getElementById("section").value.trim(),
-          address: document.getElementById("address").value.trim(),
-          phone: document.getElementById("phone").value.trim(),
-          facebook_link: document.getElementById("facebook_link").value.trim(),
-          profile_image_path: uploadedImagePath || null
-        };
-        */
-       
-        const payload = {
-          first_name: document.getElementById("firstName").value.trim() || null,
-          middle_name: document.getElementById("middleName").value.trim() || null,
-          last_name: document.getElementById("lastName").value.trim() || null,
-          name_suffix: document.getElementById("name_suffix").value.trim() || null,
-          birthdate: document.getElementById("birthdate").value || null,
-          gender: document.getElementById("gender").value || null,
-          student_no: document.getElementById("student_no_hidden").value || user.student_no,
-          year_level: user.year_level,
-          college: document.getElementById("student_college").value.trim() || null,
-          program: document.getElementById("student_program").value.trim() || null,
-          section: document.getElementById("section").value.trim() || null,
-          address: document.getElementById("address").value.trim() || null,
-          phone: document.getElementById("phone").value.trim() || null,
-          facebook_link: document.getElementById("facebook_link").value.trim() || null,
-          profile_image_path: uploadedImagePath || null
+          first_name: document.getElementById("firstName").value.trim() || originalProfile.first_name,
+          //middle_name: document.getElementById("middleName").value.trim() || originalProfile.middle_name,
+          middle_name: document.getElementById("middleName").value.trim() === "" ? null : document.getElementById("middleName").value.trim(),
+          last_name: document.getElementById("lastName").value.trim() || originalProfile.last_name,
+          name_suffix: document.getElementById("name_suffix").value.trim() === "" ? null : document.getElementById("name_suffix").value.trim(),
+          birthdate: document.getElementById("birthdate").value || originalProfile.birthdate,
+          gender: document.getElementById("gender").value || originalProfile.gender,
+          student_no: originalProfile.student_no,
+          year_level: originalProfile.year_level,
+          college: document.getElementById("student_college").value.trim() || originalProfile.college,
+          program: document.getElementById("student_program").value.trim() || originalProfile.program,
+          section: document.getElementById("section").value.trim() === "" ? null : document.getElementById("section").value.trim(),
+          address: document.getElementById("address").value.trim() === "" ? null : document.getElementById("address").value.trim(),
+          phone: document.getElementById("phone").value.trim() === "" ? null : document.getElementById("phone").value.trim(),
+          facebook_link: document.getElementById("facebook_link").value.trim() === "" ? null : document.getElementById("phone").value.trim(),
+          profile_image_path: uploadedImagePath || originalProfile.profile_image_path
         };
 
-        console.log("Payload being sent:", payload);
-
-        const updateResult = await apiCall(`/students/profile/${studentId}`, "PUT", payload);
+        const updateResult = await apiCall(`/students/profile/${student_id}`, "PUT", payload);
 
         if (updateResult && updateResult.success) {
           showToast("Profile updated successfully!", "success");
-
           originalProfile = { ...originalProfile, ...payload };
           saveBtn.classList.add("pointer-events-none", "opacity-50");
-          setTimeout(() => {
-            location.reload();
-          }, 1500);
+          setTimeout(() => location.reload(), 1500);
         } else {
           console.error(updateResult?.message);
           showToast("Failed to update profile.", "error");
@@ -964,7 +1016,6 @@
       }
     }
 
-    //Profile Pic Generator
     function renderProfilePicture(profilePictureUrl, initials) {
       const container = document.getElementById("profile-picture-container");
       if (!container) return;
@@ -994,8 +1045,7 @@
 
     function generateQRCode(data) {
       const qrContainer = document.getElementById("qr-code");
-      qrContainer.innerHTML = ""; // Clear previous QR
-
+      qrContainer.innerHTML = "";
       new QRCode(qrContainer, {
         text: data,
         width: 120,
@@ -1006,11 +1056,9 @@
       });
     }
 
-    document.addEventListener("DOMContentLoaded", fetchProfile);
-
-    async function fetchAndDisplayEventBadges(studentId) {
+    async function fetchEventBadges(student_id) {
       try {
-        const data = await apiCall(`/events/attended/${studentId}`);
+        const data = await apiCall(`/events/attended/${student_id}`);
 
         if (data && data.success && Array.isArray(data.data)) {
           const events = data.data;
@@ -1019,15 +1067,15 @@
           const attendedEvents = events.filter(ev => ev.attendance_status === "attended");
 
           if (attendedEvents.length === 0) {
-            badgeContainer.className = "flex justify-center items-center h-full col-span-full p-4";
+            badgeContainer.className = "flex justify-center items-center w-28 h-full col-span-full p-4";
             badgeContainer.innerHTML = `
-                    <div class="text-center text-white/50">
-                        <i class="fas fa-certificate text-4xl mb-4"></i>
-                        <p class="text-lg">No badges available.</p>
-                    </div>
-                `;
+            <div class="text-center text-white/50">
+                <i class="fas fa-certificate text-4xl mb-4"></i>
+                <p class="text-base sm:text-lg">No badges available.</p>
+            </div>
+            `;
           } else {
-            badgeContainer.className = "grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 p-4"; // 'p-4' added here
+            badgeContainer.className = "grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 p-4";
 
             attendedEvents.forEach(ev => {
               console.log(ev.event_batch_image);
@@ -1035,13 +1083,13 @@
               card.className = "group relative flex flex-col items-center p-6 bg-[#011538] border border-white/20 rounded-2xl shadow-xl hover:border-[#b9da05] transition-all duration-300 cursor-pointer overflow-hidden";
 
               card.innerHTML = `
-                        <div class="absolute inset-0 bg-gradient-to-br from-[#011538] to-[#1a2f57] opacity-80 rounded-2xl transition-opacity duration-300 group-hover:opacity-90"></div>
+                        <div class="absolute inset-0 bg-gradient-to-br from-[#011538] to-[#1a2f57] opacity-80 rounded-md transition-opacity duration-300 group-hover:opacity-90"></div>
                         <div class="relative z-10 w-20 h-20 mb-4 flex items-center justify-center rounded-full bg-white/10 p-2 border-2 border-white/30 transition-all duration-300 group-hover:bg-[#b9da05]/20 group-hover:border-[#b9da05]">
                             ${ev.event_batch_image
                   ? `<img src="${ev.event_batch_image}" alt="Event Badge" class="rounded-full object-cover w-full h-full transform transition-transform duration-300 group-hover:scale-110" />`
                   : `<i class="bi bi-calendar-event text-blue-500 text-3xl"></i>`}
                         </div>
-                        <h3 class="relative z-10 text-lg font-semibold text-white text-center truncate w-full px-2 transition-colors duration-300 group-hover:text-[#b9da05]">${ev.event_name}</h3>
+                        <h3 class="relative z-10 text-base font-semibold text-white text-center w-full px-2 transition-colors duration-300 group-hover:text-[#b9da05]">${ev.event_name}</h3>
                         <p class="relative z-10 text-sm text-white/70 mt-1 transition-colors duration-300 group-hover:text-white">${formatDate(ev.event_date)}</p>
                     `;
               badgeContainer.appendChild(card);
@@ -1060,6 +1108,49 @@
         month: "short",
         day: "numeric"
       });
+    }
+
+    async function uploadProfilePicture(student_id) {
+      const fileInput = document.getElementById("profile");
+      const file = fileInput?.files?.[0];
+      if (!file) return null;
+
+      const allowedTypes = ["image/jpeg", "image/png"];
+      const maxSize = 5 * 1024 * 1024; // 5MB
+
+      if (!allowedTypes.includes(file.type)) {
+        showToast("Invalid file format. Please upload a JPG or PNG image.", "error");
+        return null;
+      }
+
+      if (file.size > maxSize) {
+        showToast("File is too large. The maximum allowed size is 5MB.", "error");
+        return null;
+      }
+
+      const formData = new FormData();
+      formData.append("profile", file);
+
+      try {
+        const res = await fetch(`${API_BASE}/students/upload-profile/${student_id}`, {
+          method: "POST",
+          credentials: "include",
+          body: formData
+        });
+
+        const result = await res.json();
+
+        if (res.ok && result.success) {
+          return result.data.path;
+        } else {
+          showToast(result.message || "Profile image upload failed.", "error");
+          return null;
+        }
+      } catch (error) {
+        console.error("Error uploading profile picture:", error);
+        showToast("Error uploading profile picture.", "error");
+        return null;
+      }
     }
 
     function showToast(message, type = "success") {
@@ -1082,50 +1173,10 @@
         toast.classList.add("hidden");
       }, 5000);
     }
+    document.addEventListener("DOMContentLoaded", fetchProfile);
 
-    async function uploadProfilePicture(studentId) {
-      const fileInput = document.getElementById("profile");
-      const file = fileInput?.files?.[0];
-      if (!file) return null;
-
-      const allowedTypes = ["image/jpeg", "image/png"];
-      const maxSize = 5 * 1024 * 1024; // 5MB
-
-      if (!allowedTypes.includes(file.type)) {
-        showToast("Invalid file format. Please upload a JPG or PNG image.", "error");
-        return null;
-      }
-
-      if (file.size > maxSize) {
-        showToast("File is too large. The maximum allowed size is 5MB.", "error");
-        return null;
-      }
-
-      const formData = new FormData();
-      formData.append("profile", file);
-
-      try {
-        const res = await fetch(`${API_BASE}/students/upload-profile/${studentId}`, {
-          method: "POST",
-          credentials: "include",
-          body: formData
-        });
-
-        const result = await res.json();
-
-        if (res.ok && result.success) {
-          return result.data.path;
-        } else {
-          showToast(result.message || "Profile image upload failed.", "error");
-          return null;
-        }
-      } catch (error) {
-        console.error("Error uploading profile picture:", error);
-        showToast("Error uploading profile picture.", "error");
-        return null;
-      }
-    }
   </script>
+
 
 </body>
 
