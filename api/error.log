@@ -55537,3 +55537,198 @@
 [05-Sep-2025 14:31:14 Europe/Berlin] Event route - Endpoint: student
 [05-Sep-2025 14:31:14 Europe/Berlin] Event route - ID: 4
 [05-Sep-2025 14:31:14 Europe/Berlin] Event route - Action: null
+[07-Sep-2025 15:31:04 Europe/Berlin] Request path: /updated-msc-website/api/students
+[07-Sep-2025 15:31:04 Europe/Berlin] Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => students
+)
+
+[07-Sep-2025 15:31:04 Europe/Berlin] Original REQUEST_URI: /updated-msc-website/api/students
+[07-Sep-2025 15:31:04 Europe/Berlin] Found API index, resource: students
+[07-Sep-2025 15:31:04 Europe/Berlin] Student route - Path: /updated-msc-website/api/students
+[07-Sep-2025 15:31:04 Europe/Berlin] Student route - Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => students
+)
+
+[07-Sep-2025 15:31:04 Europe/Berlin] Student route - Endpoint: 
+[07-Sep-2025 15:31:04 Europe/Berlin] Student route - ID: null
+[07-Sep-2025 15:31:05 Europe/Berlin] Request path: /updated-msc-website/api/committees
+[07-Sep-2025 15:31:05 Europe/Berlin] Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => committees
+)
+
+[07-Sep-2025 15:31:05 Europe/Berlin] Original REQUEST_URI: /updated-msc-website/api/committees
+[07-Sep-2025 15:31:05 Europe/Berlin] Found API index, resource: committees
+[07-Sep-2025 15:31:05 Europe/Berlin] Request path: /updated-msc-website/api/students
+[07-Sep-2025 15:31:05 Europe/Berlin] Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => students
+)
+
+[07-Sep-2025 15:31:05 Europe/Berlin] Original REQUEST_URI: /updated-msc-website/api/students?role=officer
+[07-Sep-2025 15:31:05 Europe/Berlin] Found API index, resource: students
+[07-Sep-2025 15:31:05 Europe/Berlin] Student route - Path: /updated-msc-website/api/students
+[07-Sep-2025 15:31:05 Europe/Berlin] Student route - Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => students
+)
+
+[07-Sep-2025 15:31:05 Europe/Berlin] Student route - Endpoint: 
+[07-Sep-2025 15:31:05 Europe/Berlin] Student route - ID: null
+[07-Sep-2025 15:31:21 Europe/Berlin] Request path: /updated-msc-website/api/students
+[07-Sep-2025 15:31:21 Europe/Berlin] Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => students
+)
+
+[07-Sep-2025 15:31:21 Europe/Berlin] Original REQUEST_URI: /updated-msc-website/api/students
+[07-Sep-2025 15:31:21 Europe/Berlin] Found API index, resource: students
+[07-Sep-2025 15:31:21 Europe/Berlin] Student route - Path: /updated-msc-website/api/students
+[07-Sep-2025 15:31:21 Europe/Berlin] Student route - Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => students
+)
+
+[07-Sep-2025 15:31:21 Europe/Berlin] Student route - Endpoint: 
+[07-Sep-2025 15:31:21 Europe/Berlin] Student route - ID: null
+[07-Sep-2025 15:31:21 Europe/Berlin] Request path: /updated-msc-website/api/committees
+[07-Sep-2025 15:31:21 Europe/Berlin] Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => committees
+)
+
+[07-Sep-2025 15:31:21 Europe/Berlin] Original REQUEST_URI: /updated-msc-website/api/committees
+[07-Sep-2025 15:31:21 Europe/Berlin] Found API index, resource: committees
+[07-Sep-2025 15:31:21 Europe/Berlin] Request path: /updated-msc-website/api/students
+[07-Sep-2025 15:31:21 Europe/Berlin] Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => students
+)
+
+[07-Sep-2025 15:31:21 Europe/Berlin] Original REQUEST_URI: /updated-msc-website/api/students?role=officer
+[07-Sep-2025 15:31:21 Europe/Berlin] Found API index, resource: students
+[07-Sep-2025 15:31:21 Europe/Berlin] Student route - Path: /updated-msc-website/api/students
+[07-Sep-2025 15:31:21 Europe/Berlin] Student route - Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => students
+)
+
+[07-Sep-2025 15:31:21 Europe/Berlin] Student route - Endpoint: 
+[07-Sep-2025 15:31:21 Europe/Berlin] Student route - ID: null
+[07-Sep-2025 15:31:32 Europe/Berlin] Request path: /updated-msc-website/api/committees
+[07-Sep-2025 15:31:32 Europe/Berlin] Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => committees
+)
+
+[07-Sep-2025 15:31:32 Europe/Berlin] Original REQUEST_URI: /updated-msc-website/api/committees
+[07-Sep-2025 15:31:32 Europe/Berlin] Found API index, resource: committees
+[07-Sep-2025 15:31:32 Europe/Berlin] Request path: /updated-msc-website/api/committees
+[07-Sep-2025 15:31:32 Europe/Berlin] Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => committees
+)
+
+[07-Sep-2025 15:31:32 Europe/Berlin] Original REQUEST_URI: /updated-msc-website/api/committees
+[07-Sep-2025 15:31:32 Europe/Berlin] Found API index, resource: committees
+[07-Sep-2025 15:31:34 Europe/Berlin] Request path: /updated-msc-website/api/committees/16
+[07-Sep-2025 15:31:34 Europe/Berlin] Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => committees
+    [3] => 16
+)
+
+[07-Sep-2025 15:31:34 Europe/Berlin] Original REQUEST_URI: /updated-msc-website/api/committees/16
+[07-Sep-2025 15:31:34 Europe/Berlin] Found API index, resource: committees
+[07-Sep-2025 15:31:38 Europe/Berlin] Request path: /updated-msc-website/api/committees/16
+[07-Sep-2025 15:31:38 Europe/Berlin] Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => committees
+    [3] => 16
+)
+
+[07-Sep-2025 15:31:38 Europe/Berlin] Original REQUEST_URI: /updated-msc-website/api/committees/16
+[07-Sep-2025 15:31:38 Europe/Berlin] Found API index, resource: committees
+[07-Sep-2025 15:31:54 Europe/Berlin] Request path: /updated-msc-website/api/committees/16
+[07-Sep-2025 15:31:54 Europe/Berlin] Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => committees
+    [3] => 16
+)
+
+[07-Sep-2025 15:31:54 Europe/Berlin] Original REQUEST_URI: /updated-msc-website/api/committees/16
+[07-Sep-2025 15:31:54 Europe/Berlin] Found API index, resource: committees
+[07-Sep-2025 15:31:54 Europe/Berlin] Request path: /updated-msc-website/api/committees
+[07-Sep-2025 15:31:54 Europe/Berlin] Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => committees
+)
+
+[07-Sep-2025 15:31:54 Europe/Berlin] Original REQUEST_URI: /updated-msc-website/api/committees
+[07-Sep-2025 15:31:54 Europe/Berlin] Found API index, resource: committees
+[07-Sep-2025 15:31:55 Europe/Berlin] Request path: /updated-msc-website/api/committees/16
+[07-Sep-2025 15:31:55 Europe/Berlin] Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => committees
+    [3] => 16
+)
+
+[07-Sep-2025 15:31:55 Europe/Berlin] Original REQUEST_URI: /updated-msc-website/api/committees/16
+[07-Sep-2025 15:31:55 Europe/Berlin] Found API index, resource: committees
+[07-Sep-2025 15:31:59 Europe/Berlin] Request path: /updated-msc-website/api/committees/16
+[07-Sep-2025 15:31:59 Europe/Berlin] Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => committees
+    [3] => 16
+)
+
+[07-Sep-2025 15:31:59 Europe/Berlin] Original REQUEST_URI: /updated-msc-website/api/committees/16
+[07-Sep-2025 15:31:59 Europe/Berlin] Found API index, resource: committees
+[07-Sep-2025 15:31:59 Europe/Berlin] Request path: /updated-msc-website/api/committees
+[07-Sep-2025 15:31:59 Europe/Berlin] Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => committees
+)
+
+[07-Sep-2025 15:31:59 Europe/Berlin] Original REQUEST_URI: /updated-msc-website/api/committees
+[07-Sep-2025 15:31:59 Europe/Berlin] Found API index, resource: committees
