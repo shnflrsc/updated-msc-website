@@ -1736,7 +1736,7 @@
             function openDeleteModal(eventId, eventName = "") {
                 eventIdToDelete = eventId;
                 const msg = document.getElementById("deleteEventMessage");
-                msg.textContent = `Are you sure you want to delete this event?`;
+                msg.textContent = `Are you sure you want to permanently delete this event?`;
                 deleteModal.style.display = "flex";
             }
 
@@ -1755,6 +1755,7 @@
                         showToast("Event deleted successfully!", "success");
                         document.getElementById("current-upcoming").innerHTML = "";
                         getUpcomingEvents();
+                        getCanceledEvents();
                     } else {
                         showToast("Failed to delete event.", "error");
                     }
@@ -1799,6 +1800,7 @@
                         showToast("Event cancelled successfully!", "success");
                         document.getElementById("current-upcoming").innerHTML = "";
                         getUpcomingEvents();
+                        getCanceledEvents();
                     } else {
                         showToast(response.message, "error");
                     }
@@ -1973,10 +1975,8 @@
                                         onclick="openCancelModal(${evt.event_id})">
                                     Cancel
                                     </a>
-                                    <a href="#" class="btn btn-danger"
-                                        onclick="openDeleteModal(${evt.event_id})">
-                                        <i
-                                            class="bi bi-trash-fill"></i>
+                                    <a href="#" class="btn btn-danger" onclick="openDeleteModal(${evt.event_id})">
+                                        <i class="bi bi-trash-fill"></i>
                                     </a>
                                     </div>
                             </div>
@@ -1999,6 +1999,7 @@
                 //console.log(data);
 
                 const container = document.getElementById("cancelled-events");
+                container.innerHTML = "";
 
                 data.data.forEach(evt => {
                     const eventDate = new Date(evt.event_date);
@@ -2008,6 +2009,7 @@
                         year: "numeric"
                     });
 
+                    //onclick="return confirm('Are you sure you want to delete this event?')"
                     const div = document.createElement("div");
                     div.innerHTML = `
                         <div class="event-item"> 
@@ -2024,11 +2026,10 @@
                                     <span class="event-status status-cancelled"> ${evt.event_status} </span>
                                 </div>
                                 <div class="event-actions">
-                                    <a href="#" class="btn btn-primary">View Details</a>
-                                    <a href="#" class="btn btn-secondary">Edit</a>
-                                    <a href="#" class="btn btn-danger"
-                                        onclick="return confirm('Are you sure you want to delete this event?')"><i
-                                            class="bi bi-trash-fill"></i>
+                                    <a href="#" class="btn btn-primary" onclick="showEventDashboard(${evt.event_id})">View Details</a>
+                                    <a href="#" class="btn btn-secondary" onclick="editEvent(${evt.event_id})">Edit</a>
+                                    <a href="#" class="btn btn-danger" onclick="openDeleteModal(${evt.event_id})">
+                                        <i class="bi bi-trash-fill"></i>
                                     </a>
                                     </div>
                             </div>
@@ -2050,6 +2051,7 @@
                 //console.log(data);
 
                 const container = document.getElementById("past-events");
+                container.innerHTML = "";
 
                 data.data.forEach(evt => {
                     const eventDate = new Date(evt.event_date);
@@ -2076,7 +2078,7 @@
                                 </div>
                                 <div class="event-actions">
                                     <a href="#" class="btn btn-primary" onclick="showEventDashboard(${evt.event_id})">Dashboard</a>
-                                    <a href="#" class="btn btn-secondary">Edit Details</a>
+                                    <a href="#" class="btn btn-secondary" onclick="editEvent(${evt.event_id})">Edit Details</a>
                                 </div>
                             </div>
                         </div>
