@@ -212,11 +212,11 @@
             <div class="hidden md:flex items-center space-x-6">
                 <a href="index.html"
                     class="text-gray-400 font-semibold transition-colors duration-300 hover:text-[#b9da05] cursor-pointer">Home</a>
-                <a
+                <a href="index.html#about"
                     class="text-gray-400 font-semibold transition-colors duration-300 hover:text-[#b9da05] cursor-pointer">About</a>
-                <a
+                <a href="index.html#team"
                     class="text-gray-400 font-semibold transition-colors duration-300 hover:text-[#b9da05] cursor-pointer">Team</a>
-                <a
+                <a href="index.html#partners"
                     class="text-gray-400 font-semibold transition-colors duration-300 hover:text-[#b9da05] cursor-pointer">Partners</a>
                 <button id="login-button-desktop"
                     class="bg-[#b9da05] text-[#00071c] font-bold py-2 px-4 rounded-full transition-colors duration-300 hover:bg-white hover:text-[#00071c] shadow-md">
@@ -313,24 +313,6 @@
     <script>
         const API_BASE = "/updated-msc-website/api";
 
-        // function scrollToSection(id) {
-        //     const section = document.getElementById(id);
-        //     if (section) {
-        //         section.scrollIntoView({ behavior: 'smooth' });
-        //         // Close mobile menu after click if it's open
-        //         const mobileMenu = document.getElementById('mobile-menu');
-        //         const mobileMenuButton = document.getElementById('mobile-menu-button');
-        //         const mobileMenuIcon = document.getElementById('mobile-menu-icon');
-        //         if (mobileMenu.classList.contains('active')) {
-        //             mobileMenu.classList.remove('active');
-        //             mobileMenuButton.classList.remove('active');
-        //             mobileMenuIcon.classList.remove('fa-xmark');
-        //             mobileMenuIcon.classList.add('fa-bars');
-        //             document.body.style.overflow = ''; // Ibalik ang scroll
-        //         }
-        //     }
-        // }
-
         // Mobile Menu Toggle
         const mobileMenuButton = document.getElementById('mobile-menu-button');
         const mobileMenu = document.getElementById('mobile-menu');
@@ -342,7 +324,6 @@
             if (mobileMenu.classList.contains('active')) {
                 mobileMenuIcon.classList.remove('fa-bars');
                 mobileMenuIcon.classList.add('fa-xmark');
-                // Lock the body scroll when the menu is open
                 document.body.style.overflow = 'hidden';
             } else {
                 mobileMenuIcon.classList.remove('fa-xmark');

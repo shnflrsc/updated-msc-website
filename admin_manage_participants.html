@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Event Calendar | BulSU MSC</title>
+    <title>Manage Participants | BulSU MSC</title>
     <link href="./Logos/Bulsu MSC Logo-02.png" rel="icon" type="image/png" />
 
     <link
@@ -478,6 +478,10 @@
             </div>
         </nav>
 
+        <button id="sidebarToggle" class="lg:hidden fixed top-4 right-4 z-50 bg-[#b9da05] text-[#011538] p-2 rounded-md">
+            <i class="fas fa-bars"></i>
+        </button>
+
         <main class="main-content">
 
             <div class="header-wrapper header">
@@ -542,6 +546,11 @@
                     return null;
                 }
             }
+
+            document.getElementById('sidebarToggle').addEventListener('click', function () {
+                const sidebar = document.querySelector('.sidebar');
+                sidebar.classList.toggle('open');
+            });
 
             const eventId = sessionStorage.getItem("selectedEventId");
             //console.log("Loaded Event ID:", eventId);

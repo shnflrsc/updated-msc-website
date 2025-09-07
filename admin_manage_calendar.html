@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Event Calendar | BulSU MSC</title>
+    <title>Manage Calendar | BulSU MSC</title>
     <link href="./Logos/Bulsu MSC Logo-02.png" rel="icon" type="image/png" />
 
     <link
@@ -242,7 +242,7 @@
         }
 
         /* Responsive */
-        /* @media (max-width: 768px) {
+        @media (max-width: 768px) {
             .sidebar {
                 transform: translateX(-100%);
                 transition: transform 0.3s ease;
@@ -256,9 +256,9 @@
                 margin-left: 0;
                 padding: 20px;
             }
-        } */
+        }
 
-        @media (max-width: 768px) {
+        /* @media (max-width: 768px) {
             .sidebar {
                 transform: translateX(-100%);
                 transition: transform 0.3s ease;
@@ -274,7 +274,7 @@
                 margin-left: 0;
                 padding: 20px;
             }
-        }
+        } */
     </style>
 </head>
 
@@ -303,6 +303,11 @@
             </div>
         </nav>
 
+        <button id="sidebarToggle"
+            class="lg:hidden fixed top-4 right-4 z-50 bg-[#b9da05] text-[#011538] p-2 rounded-md">
+            <i class="fas fa-bars"></i>
+        </button>
+
         <!-- main content -->
         <!-- <main class="pl-[300px] flex flex-col min-h-screen space-y-4 w-full p-4"> -->
         <main class="flex flex-col min-h-screen w-full p-4 md:pl-[300px]">
@@ -326,14 +331,10 @@
 
         <!-- Modal: Single Event  -->
         <div id="single-event-modal"
-            class="fixed inset-0 bg-black bg-opacity-40 flex items-center justify-center z-50 hidden">
-            <div
-                class="bg-[#011538] border border-white/20 rounded-lg shadow-xl max-w-md w-full mx-4 p-6 relative animate-fadeIn text-white">
-                <button onclick="closeSingleEventModal()"
-                    class="absolute top-3 right-3 text-gray-400 hover:text-red-500">
-                    <i class="fas fa-times text-lg"></i>
-                </button>
-                <div class="space-y-4 text-sm text-gray-300">
+            class="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center z-50 hidden">
+            <!-- <div class="bg-[#011538] border border-white/20 rounded-lg shadow-xl max-w-md w-full mx-4 p-6 relative animate-fadeIn text-white"> -->
+            <!-- <button onclick="closeSingleEventModal()" class="absolute top-3 right-3 text-gray-400 hover:text-red-500"><i class="fas fa-times text-lg"></i></button> -->
+            <!-- <div class="space-y-4 text-sm text-gray-300">
                     <h3 id="single-modal-title" class="text-xl font-semibold text-white"></h3>
                     <div class="border-b border-white/20"></div>
                     <div id="single-modal-content" class="space-y-3">
@@ -350,8 +351,8 @@
                             View Participants
                         </button>
                     </div>
-                </div>
-            </div>
+                </div> -->
+
         </div>
 
         <!-- Modal: Multiple Events -->
@@ -372,8 +373,17 @@
             </div>
         </div>
 
+        <div id="viewEventModal" class="w-full h-full hidden z-50 t-0 l-0 overflow-auto">
+
+        </div>
+
         <script>
             const API_BASE = "/updated-msc-website/api/events";
+
+            document.getElementById('sidebarToggle').addEventListener('click', function () {
+                const sidebar = document.querySelector('.sidebar');
+                sidebar.classList.toggle('open');
+            });
 
             function getEventColor(status) {
                 switch (status) {
@@ -529,10 +539,9 @@
 
             // Single event modal
             function openSingleEventModal(event) {
-                const modal = document.getElementById("single-event-modal");
-                modal.classList.remove("hidden");
-
-                document.getElementById("single-modal-title").textContent = event.title;
+                console.log(event);
+                const container = document.getElementById("single-event-modal");
+                container.innerHTML = "";
 
                 const dateTimeString = `${event.date}T${event.time}`;
                 const date = new Date(dateTimeString);
@@ -543,20 +552,67 @@
                     day: 'numeric'
                 });
 
-                document.getElementById("event-day-time").textContent = `${formattedDate}`;
-                document.getElementById("event-location").textContent = event.location;
+                // <button onclick='closeSingleEventModal()' class="absolute top-3 right-3 text-gray-400 hover:text-red-500"><i class="fas fa-times text-lg"></i></button>
+                const div = document.createElement("div");
+                div.innerHTML = `
+                    <div class="flex flex-col gap-4 bg-[#011538] border border-white/20 rounded-lg shadow-xl w-full h-full mx-4 p-6 animate-fadeIn">
+                        <div class="w-full flex gap-4">
+                            <div class="w-20 h-20 rounded-md bg-gray-700 flex items-center justify-center">
+                                ${event.event_batch_image
+                        ? `<img src="${event.event_batch_image}" alt="Event Badge" class="event-img" />`
+                        : `<i class="bi bi-calendar-event"></i>`
+                    }
+                            </div>
+                            <div>
+                                <p>${event.title}</p>
+                                <p>${event.description}</p>
+                                <span class="text-[#b9da05] text-xs flex items-center gap-1">
+                                    <i class="bi bi-calendar text-[#b9da05]"></i> ${formattedDate}
+                                </span>
+                            </div>
+                        </div>
 
-                const participantsBtn = document.querySelector("#single-event-modal #view-participants-btn");
-                const newBtn = participantsBtn.cloneNode(true);
-                participantsBtn.parentNode.replaceChild(newBtn, participantsBtn);
+                        <button id="view-participants-btn" class="w-full bg-[#b9da05] text-[#011538] py-2 rounded-md">View Participants</button>
+                    </div>
+                `;
 
-                newBtn.addEventListener("click", () => {
-                    //sessionStorage.setItem("selectedEventId", event.id);
+                container.appendChild(div);
+                container.classList.remove("hidden");
+
+                // ✅ Attach event listener AFTER rendering
+                const participantsBtn = div.querySelector("#view-participants-btn");
+                participantsBtn.addEventListener("click", () => {
                     closeSingleEventModal();
-                    sessionStorage.setItem('fromPage', 'calendar'); 
-                    sessionStorage.setItem('selectedEventId', event.id);
+                    sessionStorage.setItem("fromPage", "calendar");
+                    sessionStorage.setItem("selectedEventId", event.id);
                     window.location.href = "admin_manage_participants.html";
                 });
+
+                // document.getElementById("single-modal-title").textContent = event.title;
+
+                // const dateTimeString = `${event.date}T${event.time}`;
+                // const date = new Date(dateTimeString);
+
+                // const formattedDate = date.toLocaleDateString('en-US', {
+                //     weekday: 'long',
+                //     month: 'long',
+                //     day: 'numeric'
+                // });
+
+                // document.getElementById("event-day-time").textContent = `${formattedDate}`;
+                // document.getElementById("event-location").textContent = event.location;
+
+                // const participantsBtn = document.querySelector("#single-event-modal #view-participants-btn");
+                // const newBtn = participantsBtn.cloneNode(true);
+                // participantsBtn.parentNode.replaceChild(newBtn, participantsBtn);
+
+                // newBtn.addEventListener("click", () => {
+                //     //sessionStorage.setItem("selectedEventId", event.id);
+                //     closeSingleEventModal();
+                //     sessionStorage.setItem('fromPage', 'calendar');
+                //     sessionStorage.setItem('selectedEventId', event.id);
+                //     window.location.href = "admin_manage_participants.html";
+                // });
             }
 
             function openMultipleEventsModal(events, date) {

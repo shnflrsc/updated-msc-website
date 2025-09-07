@@ -352,8 +352,8 @@
             }
 
             .main-content {
-                margin-left: 0;
-                padding: 20px;
+                margin-left: 2px;
+                /* padding: 20px; */
             }
         }
     </style>
@@ -384,10 +384,14 @@
             </div>
         </nav>
 
+        <button id="sidebarToggle" class="lg:hidden fixed top-4 right-4 z-50 bg-[#b9da05] text-[#011538] p-2 rounded-md">
+            <i class="fas fa-bars"></i>
+        </button>
+
         <!-- main content -->
         <main class="main-content">
             <div class="header">
-                <h1>Welcome, Admin!</h1>
+                <h1 id="-title">Welcome, Admin!</h1>
                 <p>Manage and oversee the BulSU MSC community</p>
             </div>
 
@@ -522,6 +526,11 @@
                 return { success: false, message: err.message };
             }
         }
+
+        document.getElementById('sidebarToggle').addEventListener('click', function () {
+            const sidebar = document.querySelector('.sidebar');
+            sidebar.classList.toggle('open');
+        });
 
         function animateCounter(id, endValue, duration = 1200) {
             const el = document.getElementById(id);

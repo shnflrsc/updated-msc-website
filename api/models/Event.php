@@ -367,8 +367,8 @@ class Event
      */
     public function getCalendarEvents($startDate, $endDate)
     {
-        $sql = "SELECT event_id, event_name, event_date, event_time_start, event_time_end, event_status
-                       event_type, event_status, location
+        $sql = "SELECT event_id, event_name, event_date, event_time_start, event_time_end, event_status,
+                       event_type, event_status, location, description
                 FROM events 
                 WHERE event_date BETWEEN :start_date AND :end_date
                 AND event_status = 'upcoming'
