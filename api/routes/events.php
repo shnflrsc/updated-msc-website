@@ -42,7 +42,9 @@ error_log("Event route - Action: " . ($action ?? 'null'));
 
 switch ($method) {
     case 'GET':
-        if ($endpoint === 'upcoming') {
+        if ($endpoint === 'allEvents'){
+            $eventController->getEvents();
+        } else if ($endpoint === 'upcoming') {
             $eventController->getUpcoming();
         } else if ($endpoint === 'upcomingPreview') {
             $eventController->getUpcomingPreview();
@@ -70,6 +72,8 @@ switch ($method) {
             $eventController->getStatusCounts();
         } elseif ($endpoint === 'monthly-distribution') {
             $eventController->getEventsPerMonth();
+        } else if ($endpoint === 'student-event-stats' && is_numeric($id)) {
+            $eventController->countStudentEventStats($id);
         } elseif ($endpoint === 'student' && is_numeric($id)) {
             $eventController->getEventsByStudent($id);
         } else if ($endpoint === 'attended' && is_numeric($id)) {

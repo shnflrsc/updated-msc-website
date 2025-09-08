@@ -287,7 +287,8 @@
         </section>
 
         <!-- Member Profile -->
-        <section id="memberProfile" class="flex flex-col lg:flex-row items-stretch w-11/12 max-w-7xl mx-auto my-8 gap-5">
+        <section id="memberProfile"
+            class="flex flex-col lg:flex-row items-stretch w-11/12 max-w-7xl mx-auto my-8 gap-5">
             <div
                 class="w-full lg:w-5/12 p-6 py-4 shadow-xl rounded-lg bg-[#011538] border border-white/20 text-white flex flex-col">
                 <div class="flex items-center justify-between mb-4 pb-3 border-b border-white/20">
@@ -384,7 +385,7 @@
                 <div class="mt-6 space-y-2">
                     <div class="tab-content max-h-[38rem] overflow-y-auto" id="tab-announcements">
                         <p class="text-gray-300"></p>
-                
+
                     </div>
                     <div class="tab-content hidden max-h-[38rem] overflow-y-auto" id="tab-events">
                         <p class="text-gray-300"></p>
@@ -638,24 +639,15 @@
 
         // COUNT: Events Joined & Pre-Registered
         async function fetchStudentEventStats(user_id) {
-            const response = await apiCall(`/events/student/${user_id}`, "GET");
+            const response = await apiCall(`/events/student-event-stats/${user_id}`, "GET");
+            console.log("Event Stats:", response);
 
-            if (response && response.success && Array.isArray(response.data)) {
-                const events = response.data;
-
-                let attendedCount = 0;
-                let registeredCount = 0;
-
-                events.forEach(ev => {
-                    if (ev.attendance_status === "attended") attendedCount++;
-                    if (ev.attendance_status === "registered") registeredCount++;
-                });
-
-                document.getElementById("attendedCount").textContent = attendedCount;
-                document.getElementById("registeredCount").textContent = registeredCount;
+            if (response.success) {
+                document.getElementById("attendedCount").textContent = response.data.attended_count;
+                document.getElementById("registeredCount").textContent = response.data.registered_count;
             } else {
-                document.getElementById("attendedCount").textContent = "0";
                 document.getElementById("registeredCount").textContent = "0";
+                document.getElementById("attendedCount").textContent = "0";
             }
         }
 
@@ -818,7 +810,9 @@
                     <div class="relative p-5 m-4 border border-white/20 bg-[#011538] rounded-lg shadow-sm transition-all duration-300 ease-out hover:shadow-xl hover:scale-[1.02] hover:bg-[#0a1d4a] group">
                         <div class="flex items-start gap-3">
                             <div class="w-24 h-24 rounded-md bg-[#1a1f3a] text-[#64748b] text-sm flex items-center justify-center overflow-hidden">
-                                <i class="bi bi-megaphone"></i>
+                                ${ann.image_url
+                            ? `<img src="${ann.image_url}" alt="Event Badge" class="rounded-md object-cover w-full h-full" />`
+                            : `<i class="bi bi-megaphone"></i>`}
                             </div>
                             <div class="flex-grow">
                                 <h4 class="text-sm sm:text-base md:text-base lg:text-lg text-white font-semibold">
@@ -831,8 +825,8 @@
                     </div>
                     `;
                     container.insertAdjacentHTML("beforeend", html);
-                    });
-                    container.insertAdjacentHTML("beforeend", `
+                });
+                container.insertAdjacentHTML("beforeend", `
                     <a href="announcements.html"
                         class="text-blue-400 hover:text-blue-300 text-sm font-medium px-4 mt-2 inline-block">
                         View All Announcements →

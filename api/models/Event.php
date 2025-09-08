@@ -157,7 +157,7 @@ class Event
         }
     }
     */
-    
+
     /**
      * Update Event [Allow partial updates]
      */
@@ -248,9 +248,7 @@ class Event
         }
     }
 
-    /**
-     * Get upcoming events
-     */
+     /*
     public function getUpcoming($limit = 10) //Default: 10
     {
         $sql = "SELECT * FROM events 
@@ -261,6 +259,53 @@ class Event
 
         $stmt = $this->db->prepare($sql);
         $stmt->bindValue(':limit', $limit, PDO::PARAM_INT);
+        $stmt->execute();
+
+        return $stmt->fetchAll();
+    }
+    */
+
+    /**
+     * GET: ALL Events
+     */
+    public function getEvents($limit = null){
+        $sql = "SELECT * FROM events 
+            ORDER BY event_date ASC, event_time_start ASC";
+
+        if ($limit !== null) {
+            $sql .= " LIMIT :limit";
+        }
+
+        $stmt = $this->db->prepare($sql);
+
+        if ($limit !== null) {
+            $stmt->bindValue(':limit', (int)$limit, PDO::PARAM_INT);
+        }
+
+        $stmt->execute();
+
+        return $stmt->fetchAll();
+    }
+
+    /**
+     * GET: Upcoming events
+     */
+    public function getUpcoming($limit = null){
+        $sql = "SELECT * FROM events 
+            WHERE event_status = 'upcoming' 
+            AND event_date >= CURDATE()
+            ORDER BY event_date ASC, event_time_start ASC";
+
+        if ($limit !== null) {
+            $sql .= " LIMIT :limit";
+        }
+
+        $stmt = $this->db->prepare($sql);
+
+        if ($limit !== null) {
+            $stmt->bindValue(':limit', (int)$limit, PDO::PARAM_INT);
+        }
+
         $stmt->execute();
 
         return $stmt->fetchAll();
@@ -518,6 +563,30 @@ class Event
         $result = $stmt->fetch(PDO::FETCH_ASSOC);
         return $result['total'] ?? 0;
     }
+
+    /**
+     * COUNT: Attended & Pre-Registered events (student) 
+     */
+    public function getStudentEventStats($studentId)
+    {
+        $stmt = $this->db->prepare("SELECT
+        SUM(CASE 
+            WHEN er.attendance_status = 'registered' 
+                AND e.event_date >= CURDATE() 
+            THEN 1 ELSE 0 END) AS registered_count,
+        SUM(CASE 
+            WHEN er.attendance_status = 'attended' 
+            THEN 1 ELSE 0 END) AS attended_count
+        FROM event_registrations er
+        JOIN events e ON er.event_id = e.event_id
+        WHERE er.student_id = :studentId
+        ");
+
+        $stmt->execute([':studentId' => $studentId]);
+        $result = $stmt->fetch(PDO::FETCH_ASSOC);
+        return $result ?: ['registered_count' => 0, 'attended_count' => 0];
+    }
+
 
     /**
      * COUNT: Events (Upcoming)
