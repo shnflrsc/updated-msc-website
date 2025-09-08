@@ -801,17 +801,23 @@
 
                 container.innerHTML = "";
                 data.data.forEach(ann => {
-                    const announcementDateTime = new Date(ann.date_posted); // use date_posted, not created_at
-
+                    const announcementDateTime = new Date(ann.date_posted);
                     const pad = (n) => n.toString().padStart(2, "0");
                     const formattedDateTime = `${pad(announcementDateTime.getMonth() + 1)}-${pad(announcementDateTime.getDate())}-${announcementDateTime.getFullYear()}`;
+
+                    // console.log(ann.image_url);
+                    // const imagePath = ann.image_url.startsWith("/")
+                    //     ? ann.image_url.substring(1)  // remove the leading /
+                    //     : ann.image_url;
+
+                    const imgSrc = `${API_BASE}/${ann.image_url}`;
 
                     const html = `
                     <div class="relative p-5 m-4 border border-white/20 bg-[#011538] rounded-lg shadow-sm transition-all duration-300 ease-out hover:shadow-xl hover:scale-[1.02] hover:bg-[#0a1d4a] group">
                         <div class="flex items-start gap-3">
                             <div class="w-24 h-24 rounded-md bg-[#1a1f3a] text-[#64748b] text-sm flex items-center justify-center overflow-hidden">
                                 ${ann.image_url
-                            ? `<img src="${ann.image_url}" alt="Event Badge" class="rounded-md object-cover w-full h-full" />`
+                            ? `<img src="${imgSrc}" alt="Event Badge" class="rounded-md object-cover w-full h-full" />`
                             : `<i class="bi bi-megaphone"></i>`}
                             </div>
                             <div class="flex-grow">
