@@ -520,6 +520,29 @@ class Event
     }
 
     /**
+     * COUNT: Attended & Pre-Registered events (student) 
+     */
+    public function getStudentEventStats($studentId){
+        $stmt = $this->db->prepare("SELECT
+        SUM(CASE 
+            WHEN er.attendance_status = 'registered' 
+                AND e.event_date >= CURDATE() 
+            THEN 1 ELSE 0 END) AS registered_count,
+        SUM(CASE 
+            WHEN er.attendance_status = 'attended' 
+            THEN 1 ELSE 0 END) AS attended_count
+        FROM event_registrations er
+        JOIN events e ON er.event_id = e.event_id
+        WHERE er.student_id = :studentId
+        ");
+        
+        $stmt->execute([':studentId' => $studentId]);
+        $result = $stmt->fetch(PDO::FETCH_ASSOC);
+        return $result ?: ['registered_count' => 0, 'attended_count' => 0];
+    }
+    
+
+    /**
      * COUNT: Events (Upcoming)
      */
     public function countUpcomingEvents()

@@ -713,6 +713,19 @@ class EventController
     }
 
     /**
+     * COUNT: Attended & Pre-Registered events (student)
+     */
+    public function countStudentEventStats($studentId) {
+    $event = new Event();
+    try {
+        $counts = $event->getStudentEventStats($studentId);
+        echo json_encode(['success' => true, 'data' => $counts]);
+    } catch (Exception $e) {
+        echo json_encode(['success' => false, 'message' => $e->getMessage()]);
+    }
+    }
+
+    /**
      * COUNT: Events (Upcoming)
      */
     public function countUpcomingEvents()

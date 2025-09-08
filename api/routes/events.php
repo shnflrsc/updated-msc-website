@@ -70,6 +70,8 @@ switch ($method) {
             $eventController->getStatusCounts();
         } elseif ($endpoint === 'monthly-distribution') {
             $eventController->getEventsPerMonth();
+        } else if ($endpoint === 'student-event-stats' && is_numeric($id)) {
+            $eventController->countStudentEventStats($id);
         } elseif ($endpoint === 'student' && is_numeric($id)) {
             $eventController->getEventsByStudent($id);
         } else if ($endpoint === 'attended' && is_numeric($id)) {
