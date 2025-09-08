@@ -662,6 +662,23 @@ class EventController
     }
 
     /**
+     * GET: All Events
+     */
+    public function getEvents()
+    {
+        try {
+            $limit = isset($_GET['limit']) ? (int)$_GET['limit'] : null;
+
+            $events = $this->eventModel->getEvents($limit);
+
+            Response::success($events);
+        } catch (Exception $e) {
+            Response::serverError($e->getMessage());
+        }
+    }
+
+
+    /**
      * Get: Registered Events by a Student
      */
     public function getEventsByStudent($studentId)
@@ -715,14 +732,15 @@ class EventController
     /**
      * COUNT: Attended & Pre-Registered events (student)
      */
-    public function countStudentEventStats($studentId) {
-    $event = new Event();
-    try {
-        $counts = $event->getStudentEventStats($studentId);
-        echo json_encode(['success' => true, 'data' => $counts]);
-    } catch (Exception $e) {
-        echo json_encode(['success' => false, 'message' => $e->getMessage()]);
-    }
+    public function countStudentEventStats($studentId)
+    {
+        $event = new Event();
+        try {
+            $counts = $event->getStudentEventStats($studentId);
+            echo json_encode(['success' => true, 'data' => $counts]);
+        } catch (Exception $e) {
+            echo json_encode(['success' => false, 'message' => $e->getMessage()]);
+        }
     }
 
     /**

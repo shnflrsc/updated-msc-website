@@ -42,7 +42,9 @@ error_log("Event route - Action: " . ($action ?? 'null'));
 
 switch ($method) {
     case 'GET':
-        if ($endpoint === 'upcoming') {
+        if ($endpoint === 'allEvents'){
+            $eventController->getEvents();
+        } else if ($endpoint === 'upcoming') {
             $eventController->getUpcoming();
         } else if ($endpoint === 'upcomingPreview') {
             $eventController->getUpcomingPreview();
