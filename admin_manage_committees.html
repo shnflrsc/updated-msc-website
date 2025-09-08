@@ -417,7 +417,7 @@
             <div class="form-group">
               <label>Members:</label>
               <div id="membersContainer"></div>
-              <button type="button" id="addMemberBtn" class="btn btn-secondary mt-2">+ Add Member</button>
+              <button type="button" id="addMemberBtn" class="btn btn-secondary mt-2">+ Add Officer</button>
             </div>
             <button type="submit" class="btn btn-primary">Create Committee</button>
           </form>
@@ -646,20 +646,25 @@
         document.getElementById('viewCommitteeName').textContent = committee.name;
         document.getElementById('viewCommitteeDescription').textContent = committee.description || '';
 
-        // Use map to show head name
         document.getElementById('viewCommitteeHead').textContent =
             officersMap[committee.head_id] || 'N/A';
 
+        // ✅ FIX: re-add this line
         const membersList = document.getElementById('viewCommitteeMembers');
         membersList.innerHTML = '';
+
         (committee.members || []).forEach(m => {
           const li = document.createElement('li');
-          li.textContent = studentsMap[m.student_id] || `ID ${m.student_id}`;
+          const name = studentsMap[m.student_id] || `ID ${m.student_id}`;
+          li.textContent = m.position 
+            ? `${name} – ${m.position}`
+            : name;
           membersList.appendChild(li);
         });
 
         document.getElementById('viewCommitteeModal').classList.remove('hidden');
       });
+
 
         // EDIT
         card.querySelector('.edit-btn')?.addEventListener('click', async () => {
@@ -678,19 +683,24 @@
           const membersContainer = document.getElementById('editMembersContainer');
           membersContainer.innerHTML = '';
           (committee.members || []).forEach(m => {
+            const wrapper = document.createElement('div');
+            wrapper.classList.add('member-item', 'flex', 'gap-2', 'mb-2');
+
             const select = document.createElement('select');
-            select.classList.add('form-control', 'mb-2');
-
-            // use officers list only
-            const officerOptions = document.getElementById('officerOptions').innerHTML;
-            select.innerHTML = officerOptions;
-
-            // preselect the current member
+            select.classList.add('form-control');
+            select.innerHTML = document.getElementById('officerOptions').innerHTML;
             select.value = m.student_id || '';
-            membersContainer.appendChild(select);
+
+            const input = document.createElement('input');
+            input.type = 'text';
+            input.placeholder = 'Position Name';
+            input.classList.add('form-control');
+            input.value = m.position || '';
+
+            wrapper.appendChild(select);
+            wrapper.appendChild(input);
+            membersContainer.appendChild(wrapper);
           });
-
-
 
           document.getElementById('editCommitteeModal').classList.remove('hidden');
         });
@@ -712,16 +722,39 @@
 
     // Add/Edit Member buttons (outside loop)
     document.getElementById('addEditMemberBtn')?.addEventListener('click', () => {
+      const wrapper = document.createElement('div');
+      wrapper.classList.add('member-item', 'flex', 'gap-2', 'mb-2');
+
       const select = document.createElement('select');
-      select.classList.add('form-control', 'mb-2');
+      select.classList.add('form-control');
       select.innerHTML = document.getElementById('officerOptions').innerHTML;
-      document.getElementById('editMembersContainer').appendChild(select);
+
+      const input = document.createElement('input');
+      input.type = 'text';
+      input.placeholder = 'Position Name';
+      input.classList.add('form-control');
+
+      wrapper.appendChild(select);
+      wrapper.appendChild(input);
+      document.getElementById('editMembersContainer').appendChild(wrapper);
     });
+
     document.getElementById('addMemberBtn')?.addEventListener('click', () => {
+      const wrapper = document.createElement('div');
+      wrapper.classList.add('member-item', 'flex', 'gap-2', 'mb-2');
+
       const select = document.createElement('select');
-      select.classList.add('form-control', 'mb-2');
+      select.classList.add('form-control');
       select.innerHTML = document.getElementById('officerOptions').innerHTML;
-      document.getElementById('membersContainer').appendChild(select);
+
+      const input = document.createElement('input');
+      input.type = 'text';
+      input.placeholder = 'Position Name';
+      input.classList.add('form-control');
+
+      wrapper.appendChild(select);
+      wrapper.appendChild(input);
+      document.getElementById('membersContainer').appendChild(wrapper);
     });
 
     // Edit form submit
@@ -732,8 +765,12 @@
       const description = document.getElementById('editCommitteeDescription').value.trim();
       const head_id = document.getElementById('editOfficerOptions').value;
 
-      const members = Array.from(document.getElementById('editMembersContainer').querySelectorAll('select'))
-        .map(s => ({ student_id: s.value }));
+      const members = Array.from(document.querySelectorAll('#editMembersContainer .member-item'))
+        .map(wrapper => ({
+          student_id: wrapper.querySelector('select').value,
+          position: wrapper.querySelector('input').value || null
+        }))
+        .filter(m => m.student_id);
 
       const payload = { name, description, head_id, members };
       const res = await apicall(`${API_BASE}/committees/${id}`, "PUT", payload);
@@ -762,10 +799,13 @@
         }
 
         // Collect members from the membersContainer
-        const memberSelects = document.getElementById('membersContainer').querySelectorAll('select');
-        const members = Array.from(memberSelects)
-          .map(s => ({ student_id: s.value }))    // create array of member objects
-          .filter(m => m.student_id);             // remove empty selections
+        const memberItems = document.querySelectorAll('#membersContainer .member-item');
+        const members = Array.from(memberItems)
+          .map(wrapper => ({
+            student_id: wrapper.querySelector('select').value,
+            position: wrapper.querySelector('input').value || null
+          }))
+          .filter(m => m.student_id);
 
         const newCommittee = {
           name: committeeName,
