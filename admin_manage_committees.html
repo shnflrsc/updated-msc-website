@@ -415,7 +415,7 @@
               </select>
             </div>
             <div class="form-group">
-              <label>Members:</label>
+              <label>Committee Associates:</label>
               <div id="membersContainer"></div>
               <button type="button" id="addMemberBtn" class="btn btn-secondary mt-2">+ Add Officer</button>
             </div>
@@ -432,7 +432,7 @@
       <h3 class="text-white text-lg font-semibold mb-4" id="viewCommitteeName"></h3>
       <p class="text-gray-300 mb-2" id="viewCommitteeDescription"></p>
       <p class="text-gray-300"><strong>Head:</strong> <span id="viewCommitteeHead"></span></p>
-      <p class="text-gray-300"><strong>Members:</strong></p>
+      <p class="text-gray-300"><strong>Associates:</strong></p>
       <ul id="viewCommitteeMembers" class="list-disc list-inside text-gray-400"></ul>
       <div class="flex justify-end mt-4">
         <button id="closeViewModal" class="btn btn-danger">Close</button>
@@ -459,9 +459,9 @@
           <select id="editOfficerOptions" class="form-control"></select>
         </div>
         <div class="form-group">
-          <label>Members:</label>
+          <label>Associates:</label>
           <div id="editMembersContainer"></div>
-          <button type="button" id="addEditMemberBtn" class="btn btn-secondary mt-2">+ Add Member</button>
+          <button type="button" id="addEditMemberBtn" class="btn btn-secondary mt-2">+ Add Officer</button>
         </div>
         <div class="flex justify-end gap-2">
           <button type="submit" class="btn btn-primary">Save</button>
@@ -588,7 +588,7 @@
       async function loadOfficers() {
         const officerSelect = document.getElementById("officerOptions");
         if (!officerSelect) return;
-        officerSelect.innerHTML = '<option value="">Select Committee Head</option>';
+        officerSelect.innerHTML = '<option value="">Select Committee Officer</option>';
 
         const result = await apicall(`${API_BASE}/students?role=officer`, "GET");
         const officers = result?.data?.students || [];
