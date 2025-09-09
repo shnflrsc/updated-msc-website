@@ -248,7 +248,7 @@ class Event
         }
     }
 
-     /*
+    /*
     public function getUpcoming($limit = 10) //Default: 10
     {
         $sql = "SELECT * FROM events 
@@ -268,7 +268,8 @@ class Event
     /**
      * GET: ALL Events
      */
-    public function getEvents($limit = null){
+    public function getEvents($limit = null)
+    {
         $sql = "SELECT * FROM events 
             ORDER BY event_date ASC, event_time_start ASC";
 
@@ -290,7 +291,8 @@ class Event
     /**
      * GET: Upcoming events
      */
-    public function getUpcoming($limit = null){
+    public function getUpcoming($limit = null)
+    {
         $sql = "SELECT * FROM events 
             WHERE event_status = 'upcoming' 
             AND event_date >= CURDATE()
@@ -627,5 +629,135 @@ class Event
         $stmt->execute();
 
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    /**
+     * TESTING: Verify Attendance
+     */
+    public function importAttendance($eventId, $students)
+    {
+        try {
+            $inserted = 0;
+
+            foreach ($students as $student) {
+                if (empty($student['msc_id'])) {
+                    continue; 
+                }
+
+                $stmt = $this->db->prepare("SELECT id FROM students WHERE msc_id = :msc_id");
+                $stmt->execute(['msc_id' => $student['msc_id']]);
+                $studentRow = $stmt->fetch(PDO::FETCH_ASSOC);
+
+                if ($studentRow) {
+                    $studentId = $studentRow['id'];
+
+                    $stmt2 = $this->db->prepare("
+                    INSERT INTO event_registrations (event_id, student_id, attendance_status)
+                    VALUES (:event_id, :student_id, 'attended')
+                    ON DUPLICATE KEY UPDATE attendance_status = 'attended'
+                ");
+                    $stmt2->execute([
+                        'event_id' => $eventId,
+                        'student_id' => $studentId
+                    ]);
+
+                    $inserted++;
+                }
+            }
+
+            return [
+                "success" => true,
+                "imported" => $inserted
+            ];
+        } catch (Exception $e) {
+            throw new Exception("Failed to import attendance: " . $e->getMessage());
+        }
+    }
+
+    /**
+     * TESTING: Event Participants
+     */
+    public function getEventParticipants($eventId)
+    {
+        try {
+            $sql = "
+            SELECT 
+                e.event_id,
+                e.event_name,
+                e.event_date,
+                e.event_time_start,
+                e.event_time_end,
+                e.location,
+                e.event_type,
+                e.event_status,
+                e.description,
+                e.event_image_url,
+                e.event_batch_image,
+                s.id AS student_id,
+                s.msc_id,
+                s.student_no,
+                s.first_name,
+                s.last_name,
+                s.year_level,
+                s.program,
+                s.college,
+                er.attendance_status,
+                er.registration_date
+            FROM events e
+            LEFT JOIN event_registrations er ON e.event_id = er.event_id
+            LEFT JOIN students s ON er.student_id = s.id
+            WHERE e.event_id = :event_id
+            ORDER BY s.last_name, s.first_name
+        ";
+
+            $stmt = $this->db->prepare($sql);
+            $stmt->execute(['event_id' => $eventId]);
+            $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+            if (!$rows) {
+                return null; // no participants
+            }
+
+            // Event details from first row
+            $eventDetails = [
+                "event_id"        => $rows[0]['event_id'],
+                "event_name"      => $rows[0]['event_name'],
+                "event_date"      => $rows[0]['event_date'],
+                "event_time_start" => $rows[0]['event_time_start'],
+                "event_time_end"  => $rows[0]['event_time_end'],
+                "location"        => $rows[0]['location'],
+                "event_type"      => $rows[0]['event_type'],
+                "event_status"    => $rows[0]['event_status'],
+                "description"     => $rows[0]['description'],
+                "event_image_url" => $rows[0]['event_image_url'],
+                "event_batch_image" => $rows[0]['event_batch_image'],
+            ];
+
+            // Participants
+            $participants = [];
+            foreach ($rows as $row) {
+                if ($row['student_id']) {
+                    $participants[] = [
+                        "student_id"        => $row['student_id'],
+                        "msc_id"            => $row['msc_id'],
+                        "student_no"        => $row['student_no'],
+                        "first_name"        => $row['first_name'],
+                        "last_name"         => $row['last_name'],
+                        "year_level"        => $row['year_level'],
+                        "program"           => $row['program'],
+                        "college"           => $row['college'],
+                        "attendance_status" => $row['attendance_status'],
+                        "registration_date" => $row['registration_date'],
+                    ];
+                }
+            }
+
+            return [
+                "event"        => $eventDetails,
+                "participants" => $participants
+            ];
+        } catch (Exception $e) {
+            throw new Exception("Failed to fetch event participants: " . $e->getMessage());
+        }
     }
 }
