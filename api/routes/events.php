@@ -42,13 +42,13 @@ error_log("Event route - Action: " . ($action ?? 'null'));
 
 switch ($method) {
     case 'GET':
-        if ($endpoint === 'allEvents'){
+        if ($endpoint === 'allEvents') {
             $eventController->getEvents();
         } else if ($endpoint === 'upcoming') {
             $eventController->getUpcoming();
         } else if ($endpoint === 'upcomingPreview') {
             $eventController->getUpcomingPreview();
-        } else if($endpoint === 'upcomingPreview2'){
+        } else if ($endpoint === 'upcomingPreview2') {
             $eventController->getUpcomingPreview2();
         } else if ($endpoint === 'upcomingCalendar') {
             $eventController->getUpcomingEventsCalendar();
@@ -62,6 +62,8 @@ switch ($method) {
             $eventController->getUnivCalendarEvents();
         } elseif ($endpoint && is_numeric($endpoint) && $id === 'registrations') {
             $eventController->getRegistrations($endpoint);
+        } else if ($endpoint && is_numeric($endpoint) && $id === 'participantsList') {
+            $eventController->getEventParticipants($endpoint);
         } elseif ($endpoint && is_numeric($endpoint)) {
             $eventController->getById($endpoint);
         } elseif ($endpoint === 'count') {
@@ -102,6 +104,8 @@ switch ($method) {
     //         echo json_encode(['success' => false, 'message' => 'POST endpoint not found: ' . $endpoint]);
     //     }
     //     break;
+
+    /*
     case 'POST':
         if ($endpoint && is_numeric($endpoint) && $id === 'register') {
             $eventController->register($endpoint);
@@ -115,6 +119,8 @@ switch ($method) {
             $eventController->uploadEventImage('badge');
         } elseif ($endpoint && is_numeric($endpoint) && $id === 'status') {
             $eventController->updateStatus($endpoint);
+        } else if($endpoint && is_numeric($endpoint) && $id === 'import-csv'){
+            $eventController->importAttendance($endpoint);
         } elseif ($endpoint && is_numeric($endpoint)) {
             $eventController->update($endpoint);
         } else {
@@ -122,7 +128,29 @@ switch ($method) {
             echo json_encode(['success' => false, 'message' => 'POST endpoint not found: ' . $endpoint]);
         }
         break;
-
+    */
+    case 'POST':
+        if ($endpoint && is_numeric($endpoint) && $id === 'register') {
+            $eventController->register($endpoint);
+        } elseif ($endpoint === '' || $endpoint === 'create') {
+            $eventController->create();
+        } elseif ($endpoint && is_numeric($endpoint) && $id === 'cancel') {
+            $eventController->cancelEvent($endpoint);
+        } elseif ($endpoint === 'upload-image') {
+            $eventController->uploadEventImage('event');
+        } elseif ($endpoint === 'upload-badge') {
+            $eventController->uploadEventImage('badge');
+        } elseif ($endpoint && is_numeric($endpoint) && $id === 'status') {
+            $eventController->updateStatus($endpoint);
+        } elseif ($endpoint && is_numeric($endpoint) && $id === 'import-attendance') {
+            $eventController->importAttendance($endpoint);  
+        } elseif ($endpoint && is_numeric($endpoint)) {
+            $eventController->update($endpoint);
+        } else {
+            http_response_code(404);
+            echo json_encode(['success' => false, 'message' => 'POST endpoint not found: ' . $endpoint]);
+        }
+        break;
 
     case 'PUT':
         if ($endpoint && is_numeric($endpoint) && $id === 'attendance' && $action) {

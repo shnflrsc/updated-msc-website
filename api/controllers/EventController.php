@@ -785,4 +785,50 @@ class EventController
             Response::serverError($e->getMessage());
         }
     }
+
+    /**
+     * TESTING: Verify Attendance
+     */
+    public function importAttendance($eventId)
+    {
+        try {
+            AuthMiddleware::requireOfficer(); // officers only
+
+            $data = json_decode(file_get_contents("php://input"), true);
+
+            if (!isset($data['students']) || !is_array($data['students'])) {
+                Response::validationError(['students' => 'Invalid or missing students data']);
+            }
+
+            $result = $this->eventModel->importAttendance($eventId, $data['students']);
+            Response::success($result, "Attendance imported successfully.");
+        } catch (Exception $e) {
+            Response::serverError($e->getMessage());
+        }
+    }
+
+    /** 
+     * TESTING: Event Participants
+     */
+    public function getEventParticipants($eventId)
+    {
+        try {
+            AuthMiddleware::requireOfficer(); 
+
+            if (!$eventId) {
+                Response::validationError(['event_id' => 'Missing event ID']);
+                return;
+            }
+
+            $result = $this->eventModel->getEventParticipants($eventId);
+
+            if ($result) {
+                Response::success($result, "Event participants loaded successfully.");
+            } else {
+                Response::notFound("Event not found or no participants.");
+            }
+        } catch (Exception $e) {
+            Response::serverError($e->getMessage());
+        }
+    }
 }
