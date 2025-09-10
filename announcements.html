@@ -457,7 +457,7 @@
 
             announcements.forEach(announcement => {
                 const card = document.createElement("div");
-                //card.classList.add("announcement-card");
+                card.classList.add("announcement-card");
                 card.dataset.title = announcement.title;
                 card.dataset.date = new Date(announcement.date_posted).toLocaleDateString("en-US", { month: "long", day: "numeric", year: "numeric" });
                 card.dataset.content = announcement.content;
