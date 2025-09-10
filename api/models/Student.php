@@ -375,4 +375,34 @@ class Student
         $result = $stmt->fetch(PDO::FETCH_ASSOC);
         return $result['total'] ?? 0;
     }
+
+    /**
+     * TESTING: Get Student details by msc_id
+     */
+    public function getByMscIds($mscIds)
+    {
+        if (empty($mscIds)) {
+            return [];
+        }
+
+        // Create placeholders like ?, ?, ? for IN()
+        $placeholders = implode(',', array_fill(0, count($mscIds), '?'));
+
+        $sql = "SELECT 
+                id, 
+                msc_id, 
+                student_no, 
+                first_name, 
+                last_name, 
+                year_level, 
+                program, 
+                college 
+            FROM students 
+            WHERE msc_id IN ($placeholders)";
+
+        $stmt = $this->db->prepare($sql);
+        $stmt->execute($mscIds);
+
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
 }

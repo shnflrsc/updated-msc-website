@@ -641,7 +641,7 @@ class Event
 
             foreach ($students as $student) {
                 if (empty($student['msc_id'])) {
-                    continue; 
+                    continue;
                 }
 
                 $stmt = $this->db->prepare("SELECT id FROM students WHERE msc_id = :msc_id");
@@ -675,11 +675,12 @@ class Event
     }
 
     /**
-     * TESTING: Event Participants
+     * Get Event Participants + Counts
      */
     public function getEventParticipants($eventId)
     {
         try {
+            // Fetch event + participants
             $sql = "
             SELECT 
                 e.event_id,
@@ -708,8 +709,7 @@ class Event
             LEFT JOIN students s ON er.student_id = s.id
             WHERE e.event_id = :event_id
             ORDER BY s.last_name, s.first_name
-        ";
-
+            ";
             $stmt = $this->db->prepare($sql);
             $stmt->execute(['event_id' => $eventId]);
             $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -718,19 +718,40 @@ class Event
                 return null; // no participants
             }
 
+            // Aggregate counts
+            $countSql = "
+            SELECT 
+                COUNT(*) AS total_registered,                                     -- everyone with a registration row
+                SUM(attendance_status = 'attended') AS total_attended,
+  SUM(attendance_status = 'registered') AS total_still_registered
+            FROM event_registrations
+            WHERE event_id = :event_id
+            ";
+            $stmt2 = $this->db->prepare($countSql);
+            $stmt2->execute(['event_id' => $eventId]);
+            $counts = $stmt2->fetch(PDO::FETCH_ASSOC);
+
+            $totalRegistered       = (int)($counts['total_registered'] ?? 0);
+            $totalAttended         = (int)($counts['total_attended'] ?? 0);
+            $totalStillRegistered  = (int)($counts['total_still_registered'] ?? 0);
+            $attendanceRate        = $totalRegistered > 0 ? round(($totalAttended / $totalRegistered) * 100, 2) : 0;
             // Event details from first row
             $eventDetails = [
-                "event_id"        => $rows[0]['event_id'],
-                "event_name"      => $rows[0]['event_name'],
-                "event_date"      => $rows[0]['event_date'],
+                "event_id"         => $rows[0]['event_id'],
+                "event_name"       => $rows[0]['event_name'],
+                "event_date"       => $rows[0]['event_date'],
                 "event_time_start" => $rows[0]['event_time_start'],
-                "event_time_end"  => $rows[0]['event_time_end'],
-                "location"        => $rows[0]['location'],
-                "event_type"      => $rows[0]['event_type'],
-                "event_status"    => $rows[0]['event_status'],
-                "description"     => $rows[0]['description'],
-                "event_image_url" => $rows[0]['event_image_url'],
+                "event_time_end"   => $rows[0]['event_time_end'],
+                "location"         => $rows[0]['location'],
+                "event_type"       => $rows[0]['event_type'],
+                "event_status"     => $rows[0]['event_status'],
+                "description"      => $rows[0]['description'],
+                "event_image_url"  => $rows[0]['event_image_url'],
                 "event_batch_image" => $rows[0]['event_batch_image'],
+                "total_registered"      => $totalRegistered,
+                "total_attended"        => $totalAttended,
+                "total_still_registered" => $totalStillRegistered,
+                "attendance_rate"       => $attendanceRate
             ];
 
             // Participants

@@ -452,4 +452,37 @@ class StudentController
             echo json_encode(['success' => false, 'message' => $e->getMessage()]);
         }
     }
+
+    /**
+     * TESTING: Get Student details by msc_id
+     */
+     public function getStudentsByMscIds()
+    {
+        header("Content-Type: application/json");
+
+        try {
+            $input = json_decode(file_get_contents("php://input"), true);
+
+            if (!isset($input['msc_ids']) || !is_array($input['msc_ids'])) {
+                echo json_encode([
+                    "success" => false,
+                    "message" => "msc_ids must be provided as an array"
+                ]);
+                return;
+            }
+
+            $mscIds = array_filter($input['msc_ids']); // remove empty
+            $students = $this->studentModel->getByMscIds($mscIds);
+
+            echo json_encode([
+                "success" => true,
+                "data" => $students
+            ]);
+        } catch (Exception $e) {
+            echo json_encode([
+                "success" => false,
+                "message" => "Error: " . $e->getMessage()
+            ]);
+        }
+    }
 }
