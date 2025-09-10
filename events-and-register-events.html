@@ -709,61 +709,32 @@
         }
     }
 
-    let currentEventIndex = 0;
-    let currentEvents = [];
-
-    function showEvent(index, sectionId) {
-        const cards = document.querySelectorAll(`#${sectionId} .event-card`);
-        cards.forEach((card, i) => {
-            card.classList.toggle('active', i === index);
-        });
-        
-        const section = document.getElementById(sectionId);
-        const prevBtn = section.querySelector('.nav-arrow.prev');
-        const nextBtn = section.querySelector('.nav-arrow.next');
-        
-        if (prevBtn && nextBtn) {
-            prevBtn.disabled = index === 0;
-            nextBtn.disabled = index === cards.length - 1;
-        }
-    }
-
-    function nextEvent(sectionId) {
-        const cards = document.querySelectorAll(`#${sectionId} .event-card`);
-        if (currentEventIndex < cards.length - 1) {
-            currentEventIndex++;
-            showEvent(currentEventIndex, sectionId);
-        }
-    }
-
-    function prevEvent(sectionId) {
-        if (currentEventIndex > 0) {
-            currentEventIndex--;
-            showEvent(currentEventIndex, sectionId);
-        }
-    }
-
     async function loadEvents() {
         try {
             const response = await apiCall("/events?page=1&limit=100", "GET");
             const events = response?.data?.events || [];
-            
+            if (!events.length) return;
+
             const today = new Date();
             const upcomingEvents = [];
             const completedEvents = [];
+            const pastEvents = [];
 
             events.forEach(event => {
                 const eventDate = new Date(event.event_date);
 
                 if (event.event_status?.toLowerCase() === "upcoming") {
                     upcomingEvents.push(event);
-                } else if (event.event_status?.toLowerCase() === "completed" || eventDate < today) {
+                } else if (event.event_status?.toLowerCase() === "completed") {
                     completedEvents.push(event);
+                } else if (eventDate < today) {
+                    pastEvents.push(event);
                 }
             });
 
             renderEvents(upcomingEvents, "upcomingSection");
-            renderEvents(completedEvents, "pastSection");
+            renderEvents(completedEvents, "completedSection");
+            renderEvents(pastEvents, "pastSection");
 
             attachCardListeners();
         } catch (err) {
@@ -771,76 +742,122 @@
         }
     }
 
-    function renderEvents(eventsArray, sectionId) {
-        const section = document.getElementById(sectionId).querySelector(".event-list");
-        section.innerHTML = "";
-
-        if (!eventsArray.length) {
-            section.innerHTML = `
-                <div class="empty-state">
-                    <i class="bi bi-calendar-event"></i>
-                    <h3>No Events Yet</h3>
-                    <p>Stay tuned! We'll post upcoming events and activities here as they become available.</p>
-                </div>
-            `;
-            return;
-        }
-
-        if (eventsArray.length > 1) {
-            section.innerHTML = ``
-        }
-
-        eventsArray.forEach((event, index) => {
-            const card = document.createElement("div");
-            card.classList.add("event-card");
-            if (index === 0) card.classList.add("active");
+function renderEvents(eventsArray, sectionId) {
+    const section = document.getElementById(sectionId).querySelector(".event-list");
+    section.innerHTML = "";
+    eventsArray.forEach(event => {
+        const card = document.createElement("div");
+        card.classList.add("event-card");
             card.dataset.id = event.event_id;
             card.dataset.title = event.event_name;
             card.dataset.date = event.event_date;
             card.dataset.status = event.event_status;
             card.dataset.content = event.description;
-
-            card.innerHTML = `
-                <div class="event-image">
+            card.dataset.capacity = event.capacity || 0;          // ✅ max capacity from backend
+            card.dataset.registeredCount = event.attendants || 0; // ✅ current attendees from backend
+        card.innerHTML = `
+            <div class="flex gap-3">
+                <div class="w-24 h-24 rounded-md bg-[#1a1f3a] text-[#64748b] text-sm flex items-center justify-center overflow-hidden">
                     ${event.event_batch_image   
                     ? `<img src="${event.event_batch_image}" alt="Event Badge" class="rounded-md object-cover w-full h-full" />`
-                    : `<i class="bi bi-calendar-event"></i>`}
+                    : `<i class="bi bi-megaphone"></i>`}
                 </div>
-                <div class="event-content">
-                    <div>
-                        <h3>${event.event_name}</h3>
-                        <p class="date">${event.event_date}</p>
-                    </div>
-                    <p class="excerpt">${event.description}</p>
+                <div class="flex-grow">
+                    <h3>${event.event_name}</h3>
+                    <p class="date">${event.event_date}</p>
+                    <p class="excerpt">${event.description.substring(0, 50)}...</p>
                 </div>
-            `;
+            </div>  
+        `;
 
-            card.addEventListener("click", () => {
-                document.getElementById("modalTitle").textContent = card.dataset.title;
-                document.getElementById("modalDate").textContent = card.dataset.date;
-                document.getElementById("modalContent").textContent = card.dataset.content;
+        // ✅ Attach click listener here
+        card.addEventListener("click", () => {
+            document.getElementById("modalTitle").textContent = card.dataset.title;
+            document.getElementById("modalDate").textContent = card.dataset.date;
+            document.getElementById("modalContent").textContent = card.dataset.content;
 
-                const registerBtn = document.getElementById("registerBtn");
-                registerBtn.dataset.eventId = card.dataset.id;
+            const registerBtn = document.getElementById("registerBtn");
+            registerBtn.dataset.eventId = card.dataset.id;
+            registerBtn.style.display = (card.dataset.status.toLowerCase() === "upcoming") 
+                ? "inline-block" 
+                : "none";
 
-                registerBtn.style.display = (card.dataset.status.toLowerCase() === "upcoming") 
-                    ? "inline-block" 
-                    : "none";
-                    
-                document.getElementById("eventModal").style.display = "flex";
-            });
-
-            section.appendChild(card);
+            document.getElementById("eventModal").style.display = "flex";
         });
 
-        if (eventsArray.length > 1) {
-            showEvent(0, sectionId);
-        }
-    }
+        section.appendChild(card);
+    });
+}
+
 
     window.addEventListener("DOMContentLoaded", loadEvents);
     </script>
+    <script>
+    document.addEventListener("DOMContentLoaded", async () => {
+        try {
+            const eventsData = await apiCall("/events?page=1&limit=100", "GET");
+            const events = eventsData?.data?.events || [];
 
+            events.forEach(event => {
+                console.log(event.event_id, event.event_name, event.event_date, event.event_status);
+            });
+
+            if (!eventsData || !eventsData.data) {
+                console.error("❌ No event data received");
+                return;
+            }
+
+            const today = new Date();
+
+            const pastEvents = [];
+            const completedEvents = [];
+            const upcomingEvents = [];
+
+            events.forEach(event => {
+                const now = new Date();
+                const eventEnd = new Date(`${event.event_date}T${event.event_time_end}`);
+                if (eventEnd > now) {
+                    upcomingEvents.push(event);
+                } else if (event.event_status && event.event_status.toLowerCase() === "completed") {
+                    completedEvents.push(event);
+                } else {
+                    pastEvents.push(event);
+                }
+            });
+
+            const pastCards = document.querySelectorAll("#pastSection .event-card");
+            const completedCards = document.querySelectorAll("#completedSection .event-card");
+            const upcomingCards = document.querySelectorAll("#upcomingSection .event-card");
+
+            function updateCard(card, event) {
+                card.dataset.id = event.event_id || "unknown";
+                card.dataset.title = event.event_name || "Untitled Event";
+                card.dataset.date = event.event_date || "Unknown Date";
+                card.dataset.time = `${event.event_time_start || "???"} - ${event.event_time_end || "???"}`;
+                card.dataset.location = event.location || "TBA";
+                card.dataset.description = event.description || "No description available.";
+                card.querySelector("h3").textContent = event.event_name || "Untitled Event";
+                card.querySelector("p.date").textContent = event.event_date || "Unknown Date";
+                card.querySelector("p.excerpt").textContent = event.description.substring(0, 50) + "...";
+            }
+
+            pastEvents.forEach((event, i) => {
+                if (pastCards[i]) updateCard(pastCards[i], event);
+            });
+
+            completedEvents.forEach((event, i) => {
+                if (completedCards[i]) updateCard(completedCards[i], event);
+            });
+
+            upcomingEvents.forEach((event, i) => {
+                if (upcomingCards[i]) updateCard(upcomingCards[i], event);
+            });
+
+        } catch (err) {
+            console.error("⚠ Error loading events:", err);
+        }
+    });
+    </script>
     <script>
         function attachCardListeners() {
             const modal = document.getElementById("eventModal");
@@ -855,7 +872,16 @@
 
                     registerBtn.dataset.eventId = card.dataset.id;
 
-                    registerBtn.style.display = (card.dataset.status === "upcoming") ? "inline-block" : "none";
+                    if (card.dataset.status === "upcoming") {
+                        if (parseInt(card.dataset.registeredCount) >= parseInt(card.dataset.capacity)) {
+                            registerBtn.style.display = "none";  // ✅ hide button if full
+                            showMessage("⚠ This event is already at full capacity.");
+                        } else {
+                            registerBtn.style.display = "inline-block";
+                        }
+                    } else {
+                        registerBtn.style.display = "none";
+                    }
                     
                     modal.style.display = "flex";
                 });
@@ -868,6 +894,18 @@
                 const eventId = registerBtn.dataset.eventId;
                 if (!eventId) {
                     showMessage("Event ID not found.");
+                    return;
+                }
+
+                // ✅ Double-check capacity before API call
+                const card = document.querySelector(`.event-card[data-id='${eventId}']`);
+                if (!card) {
+                    showMessage("⚠ Event not found.");
+                    return;
+                }
+
+                if (parseInt(card.dataset.registeredCount) >= parseInt(card.dataset.capacity)) {
+                    showMessage("⚠ Sorry, this event is already full.");
                     return;
                 }
 

@@ -952,7 +952,7 @@
                             <div class="form-group">
                                 <label for="capacity">Capacity (Optional)</label>
                                 <input type="number" id="capacity" name="capacity" class="form-control"
-                                    placeholder="e.g. 100 (0 or empty for unlimited)" min="0">
+                                    placeholder="e.g. 100 (0 or empty for unlimited)" min="1">
                             </div>
                             <div class="form-group">
                                 <label for="status">Initial Status</label>
@@ -1589,7 +1589,8 @@
             dashboard.querySelector(".info-grid .info-item:nth-child(2) span").textContent = evt.location;
             dashboard.querySelector(".info-grid .info-item:nth-child(3) span").textContent = evt.event_type;
             dashboard.querySelector(".info-grid .info-item:nth-child(4) span").textContent = evt.event_restriction;
-            dashboard.querySelector(".info-grid .info-item:nth-child(5) span").textContent = `-`;
+            dashboard.querySelector(".info-grid .info-item:nth-child(5) span").textContent = 
+                `${evt.attendants || 0} / ${evt.capacity || 0}`;
             dashboard.querySelector(".info-grid .info-item:nth-child(6) span").textContent =
                 evt.registration_required ? "Registration Required" : "No Registration";
             dashboard.querySelector(".info-grid .info-item:nth-child(7) .event-status").textContent = evt.event_status;
@@ -1694,7 +1695,7 @@
                 event_name: document.getElementById("title").value,
                 event_date: event_date,
                 event_time_start: event_time_start,
-                event_time_end: document.getElementById("end_date").value, // event_time_end
+                event_time_end: document.getElementById("end_date").value, 
                 event_type: document.getElementById("event_type").value,
                 registration_required: document.getElementById("registration_required").checked ? 1 : 0,
                 event_restriction: document.getElementById("event_restriction").value,
@@ -1702,7 +1703,8 @@
                 description: document.getElementById("description").value,
                 event_status: "upcoming",
                 event_image_url: eventImagePath,
-                event_batch_image: badgeImagePath
+                event_batch_image: badgeImagePath,
+                capacity: parseInt(document.getElementById("capacity")?.value || "1", 10)
             };
 
             //console.log("New Event:", newEvent);
@@ -1980,6 +1982,7 @@
                                 <div class="event-meta">
                                     <span><i class="bi bi-calendar"></i> ${formattedDateTime}</span>
                                     <span><i class="bi bi-geo-alt"></i> ${evt.location} </span>
+                                    <span><i class="bi bi-people"></i> ${evt.attendants || 0} / ${evt.capacity || 0}</span>
                                     <span class="event-status status-upcoming"> ${evt.event_status} </span>
                                 </div>
                                 <div class="event-actions">
