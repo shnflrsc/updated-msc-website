@@ -91,6 +91,8 @@ switch ($method) {
     case 'POST':
         if ($endpoint === 'create') {
             $studentController->create();
+        } else if($endpoint === 'msc-ids'){
+            $studentController->getStudentsByMscIds();
         } elseif ($endpoint && $id === 'toggle-active') {
             $studentController->toggleActive($endpoint);
         } elseif ($endpoint === 'upload-profile' && is_numeric($id)) {

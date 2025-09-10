@@ -12,6 +12,7 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Segoe+UI:wght@400;600;700&family=Orbitron:wght@400;600;700&display=swap"
         rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
     <style>
         :root {
             --primary-color: #b9da05;
@@ -149,6 +150,12 @@
             color: var(--text-color);
         }
 
+        /*Process att. btn: disabled states*/
+        #process-attendance-btn:disabled{
+            background-color: gray;
+            border: none;
+            transition: ease-in 0.2s;
+        }
         .camera-frame {
             background-color: var(--secondary-color);
             border: 2px solid var(--border-color);
@@ -414,19 +421,12 @@
 
                         <!-- action buttons -->
                         <div class="d-grid gap-3 mb-4">
-                            <button type="button" class="btn btn-secondary btn-lg" id="import-csv-btn">
+                            <button type="button" class="btn btn-secondary btn-lg" id="import-csv-btn" disabled>
                                 <i class="bi bi-file-earmark-arrow-up me-2"></i>Import CSV of QR Attendance
                             </button>
-                            <button type="submit" class="btn btn-primary btn-lg" id="process-attendance-btn">
+                            <button type="submit" class="btn btn-primary btn-lg" id="process-attendance-btn" disabled>
                                 <i class="bi bi-check-circle-fill me-2"></i>Process Attendance
                             </button>
-                        </div>
-
-                        <!-- For Testing: -->
-                        <p id="event-name" style="color:#b9da05; font-size: 26px; font-weight: bold;"></p>
-                        <div>
-                            <ol id="participants-list">
-                            </ol>
                         </div>
 
                         <!-- attendance summary -->
@@ -460,6 +460,59 @@
                                 </div>
                             </div>
                         </div>
+
+                        <!-- For Testing: -->
+                        <p id="event-name" style="color:#b9da05; font-size: 26px; font-weight: bold;"></p>
+                        <!-- <p id="totalRegistered" style="color:#b9da05; font-size: 20px;"></p>
+                        <p id="attendedCount" style="color:#b9da05; font-size: 20px;"></p>
+                        <p id="registeredOnlyCount" style="color:#b9da05; font-size: 20px;"></p> -->
+
+                        <div class="table-container mt-4 p-1 border-lg">
+                            <div class="d-flex justify-content-end mb-3">
+                                <div class="dropdown">
+                                    <button class="btn btn-secondary dropdown-toggle mt-2 border-white/20" type="button"
+                                        id="filterColumnsBtn" data-bs-toggle="dropdown" aria-expanded="false">
+                                        <i class="bi bi-funnel"></i> Filter Columns
+                                    </button>
+                                    <ul class="dropdown-menu dropdown-menu-dark p-3" aria-labelledby="filterColumnsBtn"
+                                        id="filterColumnsMenu">
+                                        <li><label><input type="checkbox" class="column-toggle" data-col="0" checked>
+                                                MSC ID</label></li>
+                                        <li><label><input type="checkbox" class="column-toggle" data-col="1" checked>
+                                                Name</label></li>
+                                        <li><label><input type="checkbox" class="column-toggle" data-col="2" checked>
+                                                College</label></li>
+                                        <li><label><input type="checkbox" class="column-toggle" data-col="3" checked>
+                                                Program</label></li>
+                                        <li><label><input type="checkbox" class="column-toggle" data-col="4" checked>
+                                                Year Level</label></li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <div class="overflow-x-auto w-full rounded-lg border-2 border-white/10">
+                                <table class="min-w-full text-left text-white bg-[#011538] rounded-lg shadow-inner">
+                                    <thead class="bg-[#0c2045] border-b border-[#b9da05]">
+                                        <tr>
+                                            <th class="px-4 py-3 text-sm sm:text-base font-semibold">MSC ID</th>
+                                            <th class="px-4 py-3 text-sm sm:text-base font-semibold">Name</th>
+                                            <th class="px-4 py-3 text-sm sm:text-base font-semibold">College</th>
+                                            <th class="px-4 py-3 text-sm sm:text-base font-semibold">Program</th>
+                                            <th class="px-4 py-3 text-sm sm:text-base font-semibold">Year Level</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="participants-table-body"
+                                        class="divide-y divide-white/10 text-sm sm:text-base">
+                                        <tr class="hover:bg-[#0b1c3a]/70 transition-colors">
+                                            <td colspan="5" class="text-center py-6 text-gray-400">
+                                                Select an event.
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <!-- End of table -->
                     </form>
                 </div>
             </div>
@@ -505,6 +558,23 @@
             }
         }
 
+        document.getElementById("eventList").addEventListener("change", (event) => {
+            const selectedValue = event.target.value;
+            console.log('Event Select change: ', selectedValue);
+            if (selectedValue === "") {
+                console.log("[Reset Form]");
+                //diables buttons
+                document.getElementById("import-csv-btn").disabled = true;
+                document.getElementById("process-attendance-btn").disabled = true; //not disablign
+                //hide attendandeSummary + reset table rows
+                document.getElementById('attendance-summary').style.display = 'none';;
+                const tbody = document.getElementById('participants-table-body');
+                tbody.innerHTML = `<tr><td colspan="7" class="text-center py-4 text-gray-400">Select an event.</td></tr>`;
+            } else {
+                document.getElementById("import-csv-btn").disabled = false;
+            }
+        });
+
         async function getUpcomingEvents() {
             const data = await apiCall("/events/allEvents", "GET");
 
@@ -535,44 +605,6 @@
             }
         }
 
-        async function getEventParticipants(eventId) {
-            const data = await apiCall(`/events/${eventId}/participantsList`, "GET");
-
-            if (data?.success) {
-                console.log("Participants for Event:", data.data);
-
-                const event = data.data.event;
-                const participants = data.data.participants;
-                document.getElementById("event-name").innerText = `Participants for Event: ${event.event_name}`;
-
-                const list = document.getElementById("participants-list");
-                list.innerHTML = "";
-
-                //temp: displayed correctly
-                //replace: render a data table
-                participants.forEach(p => {
-                    const li = document.createElement("li");
-                    li.textContent = `${p.first_name} ${p.last_name} - (${p.college}) - (${p.program}) - (${p.year_level})`;
-                    list.appendChild(li);
-                });
-            } else {
-                console.error("Failed to fetch participants:", data?.message);
-            }
-        }
-
-        document.getElementById("eventList").addEventListener("change", function () {
-            selectedEventId = this.value;
-            console.log("[Change Event Selected] Event ID:", selectedEventId);
-
-            if (selectedEventId) {
-                getEventParticipants(selectedEventId);
-            }
-        });
-
-        document.addEventListener("DOMContentLoaded", () => {
-            getUpcomingEvents();
-        });
-
         function normalizeStudents(rows) {
             return rows.map(r => {
                 let id = r.msc_id || r.NAME || r.student_no || r.email || r.id;
@@ -583,6 +615,7 @@
             }).filter(Boolean);
         }
 
+        let selectedFile;
         async function uploadAttendance(eventId, file) {
             return new Promise((resolve, reject) => {
                 if (!eventId) {
@@ -622,6 +655,7 @@
             });
         }
 
+        let previewedStudents = [];
         document.getElementById("import-csv-btn").addEventListener("click", () => {
             const input = document.createElement("input");
             input.type = "file";
@@ -629,16 +663,181 @@
             input.click();
 
             input.addEventListener("change", async (e) => {
-                const file = e.target.files[0];
+                selectedFile = e.target.files[0];
                 const eventId = document.getElementById("eventList").value;
 
-                try {
-                    const res = await uploadAttendance(eventId, file);
-                    alert(`Attendance imported successfully! Imported: ${res.data.imported}`);
-                } catch (err) {
-                    alert("Failed to import attendance: " + err);
+                if (!eventId) {
+                    alert("Please select an event first.");
+                    return;
+                }
+
+                if (selectedFile) {
+                    Papa.parse(selectedFile, {
+                        header: true,
+                        skipEmptyLines: true,
+                        complete: async function (results) {
+                            const rows = results.data;
+                            console.log("CSV Preview Rows:", rows);
+
+                            previewedStudents = normalizeStudents(rows);
+
+                            if (previewedStudents.length === 0) {
+                                alert("No valid student identifiers found in CSV.");
+                                return;
+                            }
+
+                            // Collect MSC IDs
+                            const mscIds = previewedStudents.map(s => s.msc_id);
+
+                            try {
+                                // Fetch student details from backend
+                                const res = await fetch(`${API_BASE}/students/msc-ids`, {
+                                    method: "POST",
+                                    headers: { "Content-Type": "application/json" },
+                                    body: JSON.stringify({ msc_ids: mscIds })
+                                });
+                                const data = await res.json();
+
+                                if (!data.success) {
+                                    alert("Failed to load student details: " + data.message);
+                                    return;
+                                }
+
+                                const studentsFromDB = data.data;
+
+                                const dbMap = {};
+                                studentsFromDB.forEach(stu => {
+                                    dbMap[stu.msc_id] = stu;
+                                });
+
+                                // Show preview in table
+                                const tbody = document.getElementById("participants-table-body");
+                                tbody.innerHTML = "";
+
+                                previewedStudents.forEach((s, idx) => {
+                                    const dbInfo = dbMap[s.msc_id] || {};
+
+                                    const tr = document.createElement("tr");
+                                    tr.innerHTML = `
+                                    <td class="px-4 py-2">${s.msc_id}</td>
+                                    <td class="px-4 py-2">${dbInfo.first_name ? dbInfo.first_name + " " + dbInfo.last_name : "-"}</td>
+                                    <td class="px-4 py-2">${dbInfo.college || "-"}</td>
+                                    <td class="px-4 py-2">${dbInfo.program || "-"}</td>
+                                    <td class="px-4 py-2">${dbInfo.year_level || "-"}</td>
+                                   
+                                    `;
+                                    tbody.appendChild(tr);
+                                });
+
+                                document.getElementById('attendance-summary').style.display = 'block';
+                                document.getElementById('summary-event-title').textContent = "CSV Preview (Not Yet Uploaded)";
+                                document.getElementById('members-registered').textContent = previewedStudents.length;
+                                document.getElementById('members-attended').textContent = "-";
+                                document.getElementById('attendance-rate').textContent = "-";
+                                updateProgressBar(0);
+
+                                alert(`Preview loaded for ${previewedStudents.length} students.\nClick "Process Attendance" to upload.`);
+                                document.getElementById("process-attendance-btn").disabled = false;
+                            } catch (err) {
+                                alert("Error fetching student details: " + err.message);
+                            }
+                        }
+                    });
                 }
             });
+        });
+
+        document.getElementById("process-attendance-btn").addEventListener("click", async (e) => {
+            e.preventDefault(); 
+            const eventId = document.getElementById("eventList").value;
+
+            try {
+                const res = await uploadAttendance(eventId, selectedFile);
+                alert(`Attendance imported successfully! Imported: ${res.data.imported}`);
+                //display the inserted data to DB
+                getEventParticipants(eventId);
+            } catch (err) {
+                alert("Failed to import attendance: " + err);
+            }
+        });
+
+        async function getEventParticipants(eventId) {
+            const data = await apiCall(`/events/${eventId}/participantsList`, "GET");
+
+            if (data?.success) {
+                console.log("Participants for Event:", data.data);
+
+                const event = data.data.event;
+                const participants = data.data.participants;
+                console.log(event.total_registered);
+
+                document.getElementById('attendance-summary').style.display = 'block';
+                document.getElementById('summary-event-title').textContent = `${event.event_name}`;
+                document.getElementById('members-registered').textContent = `${event.total_registered}`;
+                document.getElementById('members-attended').textContent = `${event.total_attended}`;
+                document.getElementById('attendance-rate').textContent = `${event.attendance_rate}%`;
+                updateProgressBar(`${event.attendance_rate}`);
+
+                //document.getElementById('event-name').textContent = `Participants: ${event.event_name}`;
+                const tbody = document.getElementById('participants-table-body');
+                tbody.innerHTML = '';
+
+                let participantsCount = 1;
+                participants.forEach(p => {
+                    const fullName = [p.first_name, p.middle_name, p.last_name].filter(Boolean).join(" ");
+                    const tr = document.createElement('tr');
+                    tr.innerHTML = `<td class="px-4 py-2">${p.msc_id}</td>
+                        <td class="px-4 py-2">${fullName}</td>
+                        <td class="px-4 py-2">${p.college}</td>
+                        <td class="px-4 py-2">${p.program}</td>
+                        <td class="px-4 py-2">${p.year_level}</td>
+                    `;
+                    tbody.appendChild(tr);
+                    participantsCount++;
+                });
+                if (`${event.total_registered}` == 0) {
+                    tbody.innerHTML = `<tr><td colspan="7" class="text-center py-4 text-gray-400">No registered participants.</td></tr>`; //fix sentence 
+                }
+            } else {
+                console.error("Failed to fetch participants:", data?.message);
+            }
+        }
+
+        // Column filter logic
+        document.addEventListener("change", function (e) {
+            if (e.target.classList.contains("column-toggle")) {
+                const colIndex = parseInt(e.target.dataset.col);
+                const table = document.querySelector("table");
+                const rows = table.querySelectorAll("tr");
+
+                rows.forEach(row => {
+                    const cells = row.querySelectorAll("th, td");
+                    if (cells[colIndex]) {
+                        cells[colIndex].style.display = e.target.checked ? "" : "none";
+                    }
+                });
+            }
+        });
+
+        function updateProgressBar(percentage) {
+            const progressBar = document.getElementById('progress-bar');
+            const validPercentage = Math.max(0, Math.min(100, percentage));
+            progressBar.style.width = validPercentage + '%';
+            progressBar.textContent = validPercentage + '%';
+            progressBar.setAttribute('aria-valuenow', validPercentage);
+        }
+
+        document.getElementById("eventList").addEventListener("change", function () {
+            selectedEventId = this.value;
+            console.log("[Change Event Selected] Event ID:", selectedEventId);
+
+            if (selectedEventId) {
+                getEventParticipants(selectedEventId);
+            }
+        });
+
+        document.addEventListener("DOMContentLoaded", () => {
+            getUpcomingEvents();
         });
     </script>
 </body>
