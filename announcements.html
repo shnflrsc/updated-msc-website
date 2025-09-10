@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="./Logos/Bulsu MSC Logo-02.png" rel="icon" type="image/png" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
-    
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
     <title>Announcements | BulSU MSC</title>
     
@@ -137,6 +137,8 @@
         }
 
         .announcement-card {
+            display: flex;
+
             background: #011538;
             border: 1px solid rgba(255, 255, 255, 0.2);
             border-radius: 20px;
@@ -451,6 +453,7 @@
 
             const listContainer = document.querySelector(".announcement-list");
             listContainer.innerHTML = "";
+            console.log(announcements);
 
             announcements.forEach(announcement => {
                 const card = document.createElement("div");
@@ -459,14 +462,26 @@
                 card.dataset.date = new Date(announcement.date_posted).toLocaleDateString("en-US", { month: "long", day: "numeric", year: "numeric" });
                 card.dataset.content = announcement.content;
 
-                card.innerHTML = `
-                    <h3>${announcement.title}</h3>
-                    <p class="date">${new Date(announcement.date_posted).toLocaleDateString("en-US", { month: "long", day: "numeric", year: "numeric" })}</p>
-                    <p class="excerpt">${announcement.content.substring(0, 50)}...</p>
-                `;
+                const imgSrc = `${API_BASE}/${announcement.image_url}`;
 
+                card.innerHTML = `
+                    <div class="flex">
+                        <div class="flex items-start gap-3">
+                            <div class="w-24 h-24 rounded-md bg-[#1a1f3a] text-[#64748b] text-sm flex items-center justify-center overflow-hidden">
+                                ${announcement.image_url ?
+                                `<img src="${imgSrc}" alt="Event Badge" class="rounded-md object-cover w-full h-full" />`
+                                : `<i class="bi bi-megaphone"></i>`}
+                            </div>
+                            <div class="flex-grow">
+                                <h3>${announcement.title}</h3>
+                                <p class="date">${new Date(announcement.date_posted).toLocaleDateString("en-US", { month: "long", day: "numeric", year: "numeric" })}</p>
+                                <p class="excerpt">${announcement.content.substring(0, 50)}...</p>
+                            </div>
+                        </div>
+                    </div>
+                `;
                 listContainer.appendChild(card);
-            });
+                });
 
             console.log(`✅ Rendered ${announcements.length} announcements`);
 
