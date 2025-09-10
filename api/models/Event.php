@@ -179,7 +179,8 @@ class Event
                 'description',
                 'event_image_url',
                 'event_batch_image',
-                'event_restriction'
+                'event_restriction',
+                'capacity'
             ];
 
             $setParts = [];
