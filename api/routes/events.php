@@ -64,6 +64,8 @@ switch ($method) {
             $eventController->getRegistrations($endpoint);
         } else if ($endpoint && is_numeric($endpoint) && $id === 'participantsList') {
             $eventController->getEventParticipants($endpoint);
+        } else if(is_numeric($endpoint) && isset($id) && $id === 'eventDashboard'){
+            $eventController->getEventById($endpoint);
         } elseif ($endpoint && is_numeric($endpoint)) {
             $eventController->getById($endpoint);
         } elseif ($endpoint === 'count') {

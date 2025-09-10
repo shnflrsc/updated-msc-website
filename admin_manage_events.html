@@ -1237,7 +1237,7 @@
                             </div>
                         </div>
                         <div class="progress-bar">
-                            <div class="progress-fill" style="width: 79%;">79%</div>
+                            <div class="progress-fill" style="width: 0%;"></div>
                         </div>
                     </div>
                 </div>
@@ -1538,13 +1538,14 @@
             dashboard.style.display = "block";
             dashboard.classList.add("active");
 
-            const response = await apiCall(`/events/${eventId}`, "GET");
+            const response = await apiCall(`/events/${eventId}/eventDashboard`, "GET");
             if (!response?.success) {
                 console.error("Failed to fetch event details:", response.message);
                 return;
             }
-
+            
             const evt = response.data;
+            console.log(response.data);
             renderDashboardButtons(evt);
 
             const editBtn = dashboard.querySelector(".btn.btn-secondary");
@@ -1595,17 +1596,17 @@
             dashboard.querySelector(".info-grid .info-item:nth-child(8) span").textContent =
                 `Created: ${new Date(evt.created_at).toLocaleString()}`;
 
-            // Attendance summary: set all to 0
-            dashboard.querySelector(".attendance-card .stat-item:nth-child(1) .stat-value").textContent = evt.attendants || '0';
-            dashboard.querySelector(".attendance-card .stat-item:nth-child(2) .stat-value").textContent = evt.attendants || '0';
-            dashboard.querySelector(".attendance-card .stat-item:nth-child(3) .stat-value").textContent = evt.attendants || '0';
-            dashboard.querySelector(".attendance-card .stat-item:nth-child(4) .stat-value").textContent = evt.attendants || '0';
-            dashboard.querySelector(".attendance-card .stat-item:nth-child(5) .stat-value").textContent = evt.attendants || '0';
-            dashboard.querySelector(".attendance-card .stat-item:nth-child(6) .stat-value").textContent = evt.attendants || '0';
-
+            // Attendance summary: 
+            dashboard.querySelector(".attendance-card .stat-item:nth-child(1) .stat-value").textContent = evt.total_registered || '0';
+            dashboard.querySelector(".attendance-card .stat-item:nth-child(2) .stat-value").textContent = evt.total_attended || '0';
+            dashboard.querySelector(".attendance-card .stat-item:nth-child(3) .stat-value").textContent = '0';
+            dashboard.querySelector(".attendance-card .stat-item:nth-child(4) .stat-value").textContent = '0';
+            dashboard.querySelector(".attendance-card .stat-item:nth-child(5) .stat-value").textContent = evt.total_registered || '0';
+            dashboard.querySelector(".attendance-card .stat-item:nth-child(6) .stat-value").textContent = evt.total_attended || '0';
+            dashboard.querySelector(".attendance-card .stat-item:nth-child(7) .stat-value").textContent = `${evt.attendance_rate}%` || '0';
             // Update progress bar
-            //dashboard.querySelector(".progress-bar .progress-fill").style.width = "-";
-            //dashboard.querySelector(".progress-bar .progress-fill").textContent = "-";
+            dashboard.querySelector(".progress-bar .progress-fill").style.width = `${evt.attendance_rate}%`;
+            dashboard.querySelector(".progress-bar .progress-fill").textContent = `${evt.attendance_rate} %`;
         }
 
         // function hideEventDashboard() {

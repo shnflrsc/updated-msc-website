@@ -781,4 +781,46 @@ class Event
             throw new Exception("Failed to fetch event participants: " . $e->getMessage());
         }
     }
+
+    /**
+     * GET: for Event Dashboard
+     */
+    public function findEventById($eventId){
+        try {
+            $stmt = $this->db->prepare("SELECT * FROM events WHERE event_id = :event_id");
+            $stmt->execute(['event_id' => $eventId]);
+            $event = $stmt->fetch(PDO::FETCH_ASSOC);
+
+            if (!$event) {
+                return null; 
+            }
+
+            // Aggregate counts from event_registrations
+            $countSql = "
+            SELECT 
+                COUNT(*) AS total_registered,
+                SUM(attendance_status = 'attended') AS total_attended,
+                SUM(attendance_status = 'registered') AS total_still_registered
+                FROM event_registrations
+                WHERE event_id = :event_id
+                ";
+            $stmt2 = $this->db->prepare($countSql);
+            $stmt2->execute(['event_id' => $eventId]);
+            $counts = $stmt2->fetch(PDO::FETCH_ASSOC);
+
+            $totalRegistered       = (int)($counts['total_registered'] ?? 0);
+            $totalAttended         = (int)($counts['total_attended'] ?? 0);
+            $totalStillRegistered  = (int)($counts['total_still_registered'] ?? 0);
+            $attendanceRate        = $totalRegistered > 0 ? round(($totalAttended / $totalRegistered) * 100, 2) : 0;
+
+            $event['total_registered']       = $totalRegistered;
+            $event['total_attended']         = $totalAttended;
+            $event['total_still_registered'] = $totalStillRegistered;
+            $event['attendance_rate']        = $attendanceRate;
+
+            return $event;
+        } catch (Exception $e) {
+            throw new Exception("Failed to fetch event details: " . $e->getMessage());
+        }
+    }
 }

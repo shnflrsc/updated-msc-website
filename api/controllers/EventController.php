@@ -200,6 +200,35 @@ class EventController
     }
 
     /**
+     * GET: for Event Dashboard
+     */
+    public function getEventById($eventId)
+    {
+        try {
+            $event = $this->eventModel->findEventById($eventId);
+
+            if (!$event) {
+                echo json_encode([
+                    "success" => false,
+                    "message" => "Event not found"
+                ]);
+                return;
+            }
+
+            echo json_encode([
+                "success" => true,
+                "data"    => $event
+            ]);
+        } catch (Exception $e) {
+            http_response_code(500);
+            echo json_encode([
+                "success" => false,
+                "message" => $e->getMessage()
+            ]);
+        }
+    }
+
+    /**
      * Update event (Officer only)
      */
     /*
@@ -813,7 +842,7 @@ class EventController
     public function getEventParticipants($eventId)
     {
         try {
-            AuthMiddleware::requireOfficer(); 
+            AuthMiddleware::requireOfficer();
 
             if (!$eventId) {
                 Response::validationError(['event_id' => 'Missing event ID']);
