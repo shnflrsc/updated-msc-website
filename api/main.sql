@@ -98,7 +98,7 @@ CREATE TABLE IF NOT EXISTS password_resets (
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
---Create committees table for msc committees
+-- Create committees table for msc committees
 CREATE TABLE IF NOT EXISTS committees (
     committee_id INT AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(50) UNIQUE NOT NULL,
@@ -107,7 +107,7 @@ CREATE TABLE IF NOT EXISTS committees (
     FOREIGN KEY(head_id) REFERENCES students(id)
 );
 
---Create committee_members table for linking students to committees
+-- Create committee_members table for linking students to committees
 CREATE TABLE IF NOT EXISTS committee_members (
     officer_id INT(11) PRIMARY KEY AUTO_INCREMENT,
     id INT(11) NOT NULL,

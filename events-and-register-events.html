@@ -573,13 +573,13 @@ function renderEvents(eventsArray, sectionId) {
     eventsArray.forEach(event => {
         const card = document.createElement("div");
         card.classList.add("event-card");
-        card.dataset.id = event.event_id;
-        card.dataset.title = event.event_name;
-        card.dataset.date = event.event_date;
-        card.dataset.status = event.event_status;
-        card.dataset.content = event.description;
-        console.log(event.event_batch_image);
-
+            card.dataset.id = event.event_id;
+            card.dataset.title = event.event_name;
+            card.dataset.date = event.event_date;
+            card.dataset.status = event.event_status;
+            card.dataset.content = event.description;
+            card.dataset.capacity = event.capacity || 0;          // ✅ max capacity from backend
+            card.dataset.registeredCount = event.attendants || 0; // ✅ current attendees from backend
         card.innerHTML = `
             <div class="flex gap-3">
                 <div class="w-24 h-24 rounded-md bg-[#1a1f3a] text-[#64748b] text-sm flex items-center justify-center overflow-hidden">
@@ -697,7 +697,16 @@ function renderEvents(eventsArray, sectionId) {
 
                     registerBtn.dataset.eventId = card.dataset.id;
 
-                    registerBtn.style.display = (card.dataset.status === "upcoming") ? "inline-block" : "none";
+                    if (card.dataset.status === "upcoming") {
+                        if (parseInt(card.dataset.registeredCount) >= parseInt(card.dataset.capacity)) {
+                            registerBtn.style.display = "none";  // ✅ hide button if full
+                            showMessage("⚠ This event is already at full capacity.");
+                        } else {
+                            registerBtn.style.display = "inline-block";
+                        }
+                    } else {
+                        registerBtn.style.display = "none";
+                    }
                     
                     modal.style.display = "flex";
                 });
@@ -710,6 +719,18 @@ function renderEvents(eventsArray, sectionId) {
                 const eventId = registerBtn.dataset.eventId;
                 if (!eventId) {
                     showMessage("Event ID not found.");
+                    return;
+                }
+
+                // ✅ Double-check capacity before API call
+                const card = document.querySelector(`.event-card[data-id='${eventId}']`);
+                if (!card) {
+                    showMessage("⚠ Event not found.");
+                    return;
+                }
+
+                if (parseInt(card.dataset.registeredCount) >= parseInt(card.dataset.capacity)) {
+                    showMessage("⚠ Sorry, this event is already full.");
                     return;
                 }
 

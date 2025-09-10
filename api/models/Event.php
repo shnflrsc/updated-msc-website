@@ -25,11 +25,13 @@ class Event
             $sql = "INSERT INTO events (
                 event_name, event_date, event_time_start, event_time_end,
                 location, event_type, registration_required, event_status,
-                description, event_image_url, event_batch_image, event_restriction
+                description, event_image_url, event_batch_image, event_restriction,
+                capacity
             ) VALUES (
                 :event_name, :event_date, :event_time_start, :event_time_end,
                 :location, :event_type, :registration_required, :event_status,
-                :description, :event_image_url, :event_batch_image, :event_restriction
+                :description, :event_image_url, :event_batch_image, :event_restriction,
+                :capacity
             )";
 
             $stmt = $this->db->prepare($sql);
@@ -45,7 +47,8 @@ class Event
                 'description' => $data['description'],
                 'event_image_url' => $data['event_image_url'] ?? null,
                 'event_batch_image' => $data['event_batch_image'] ?? null,
-                'event_restriction' => $data['event_restriction'] ?? 'public'
+                'event_restriction' => $data['event_restriction'] ?? 'public',
+                'capacity' => $data['capacity'] ?? 0
             ]);
 
             return $this->findById($this->db->lastInsertId());
@@ -467,6 +470,13 @@ class Event
 
             if ($checkStmt->fetch()) {
                 throw new Exception("Already registered for this event");
+            }
+
+            // ✅ Check capacity
+            if (isset($event['capacity']) && $event['capacity'] > 0) {
+                if ($event['attendants'] >= $event['capacity']) {
+                    throw new Exception("Event is already full");
+                }
             }
 
             // Register student

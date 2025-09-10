@@ -56440,3 +56440,2856 @@
 
 [08-Sep-2025 11:38:15 Europe/Berlin] Original REQUEST_URI: /updated-msc-website/api/committees
 [08-Sep-2025 11:38:15 Europe/Berlin] Found API index, resource: committees
+[10-Sep-2025 16:36:39 Europe/Berlin] Request path: /updated-msc-website/api/announcements
+[10-Sep-2025 16:36:39 Europe/Berlin] Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => announcements
+)
+
+[10-Sep-2025 16:36:39 Europe/Berlin] Original REQUEST_URI: /updated-msc-website/api/announcements?page=1&limit=10&include_archived=true
+[10-Sep-2025 16:36:39 Europe/Berlin] Found API index, resource: announcements
+[10-Sep-2025 16:36:39 Europe/Berlin] Announcement route - Path: /updated-msc-website/api/announcements
+[10-Sep-2025 16:36:39 Europe/Berlin] Announcement route - Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => announcements
+)
+
+[10-Sep-2025 16:36:39 Europe/Berlin] Announcement route - Endpoint: 
+[10-Sep-2025 16:36:39 Europe/Berlin] Announcement route - ID: null
+[10-Sep-2025 16:36:39 Europe/Berlin] Announcement route - Action: null
+[10-Sep-2025 16:36:47 Europe/Berlin] Request path: /updated-msc-website/api/announcements
+[10-Sep-2025 16:36:47 Europe/Berlin] Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => announcements
+)
+
+[10-Sep-2025 16:36:47 Europe/Berlin] Original REQUEST_URI: /updated-msc-website/api/announcements?page=1&limit=10&include_archived=true
+[10-Sep-2025 16:36:47 Europe/Berlin] Found API index, resource: announcements
+[10-Sep-2025 16:36:47 Europe/Berlin] Announcement route - Path: /updated-msc-website/api/announcements
+[10-Sep-2025 16:36:47 Europe/Berlin] Announcement route - Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => announcements
+)
+
+[10-Sep-2025 16:36:47 Europe/Berlin] Announcement route - Endpoint: 
+[10-Sep-2025 16:36:47 Europe/Berlin] Announcement route - ID: null
+[10-Sep-2025 16:36:47 Europe/Berlin] Announcement route - Action: null
+[10-Sep-2025 16:37:15 Europe/Berlin] Request path: /updated-msc-website/api/students
+[10-Sep-2025 16:37:15 Europe/Berlin] Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => students
+)
+
+[10-Sep-2025 16:37:15 Europe/Berlin] Original REQUEST_URI: /updated-msc-website/api/students
+[10-Sep-2025 16:37:15 Europe/Berlin] Found API index, resource: students
+[10-Sep-2025 16:37:15 Europe/Berlin] Student route - Path: /updated-msc-website/api/students
+[10-Sep-2025 16:37:15 Europe/Berlin] Student route - Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => students
+)
+
+[10-Sep-2025 16:37:15 Europe/Berlin] Student route - Endpoint: 
+[10-Sep-2025 16:37:15 Europe/Berlin] Student route - ID: null
+[10-Sep-2025 16:37:15 Europe/Berlin] Request path: /updated-msc-website/api/committees
+[10-Sep-2025 16:37:15 Europe/Berlin] Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => committees
+)
+
+[10-Sep-2025 16:37:15 Europe/Berlin] Original REQUEST_URI: /updated-msc-website/api/committees
+[10-Sep-2025 16:37:15 Europe/Berlin] Found API index, resource: committees
+[10-Sep-2025 16:37:15 Europe/Berlin] Request path: /updated-msc-website/api/students
+[10-Sep-2025 16:37:15 Europe/Berlin] Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => students
+)
+
+[10-Sep-2025 16:37:15 Europe/Berlin] Original REQUEST_URI: /updated-msc-website/api/students?role=officer
+[10-Sep-2025 16:37:15 Europe/Berlin] Found API index, resource: students
+[10-Sep-2025 16:37:15 Europe/Berlin] Student route - Path: /updated-msc-website/api/students
+[10-Sep-2025 16:37:15 Europe/Berlin] Student route - Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => students
+)
+
+[10-Sep-2025 16:37:15 Europe/Berlin] Student route - Endpoint: 
+[10-Sep-2025 16:37:15 Europe/Berlin] Student route - ID: null
+[10-Sep-2025 16:37:40 Europe/Berlin] Request path: /updated-msc-website/api/students
+[10-Sep-2025 16:37:40 Europe/Berlin] Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => students
+)
+
+[10-Sep-2025 16:37:40 Europe/Berlin] Original REQUEST_URI: /updated-msc-website/api/students
+[10-Sep-2025 16:37:40 Europe/Berlin] Found API index, resource: students
+[10-Sep-2025 16:37:40 Europe/Berlin] Student route - Path: /updated-msc-website/api/students
+[10-Sep-2025 16:37:40 Europe/Berlin] Student route - Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => students
+)
+
+[10-Sep-2025 16:37:40 Europe/Berlin] Student route - Endpoint: 
+[10-Sep-2025 16:37:40 Europe/Berlin] Student route - ID: null
+[10-Sep-2025 16:37:40 Europe/Berlin] Request path: /updated-msc-website/api/committees
+[10-Sep-2025 16:37:40 Europe/Berlin] Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => committees
+)
+
+[10-Sep-2025 16:37:40 Europe/Berlin] Original REQUEST_URI: /updated-msc-website/api/committees
+[10-Sep-2025 16:37:40 Europe/Berlin] Found API index, resource: committees
+[10-Sep-2025 16:37:40 Europe/Berlin] Request path: /updated-msc-website/api/students
+[10-Sep-2025 16:37:40 Europe/Berlin] Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => students
+)
+
+[10-Sep-2025 16:37:40 Europe/Berlin] Original REQUEST_URI: /updated-msc-website/api/students?role=officer
+[10-Sep-2025 16:37:40 Europe/Berlin] Found API index, resource: students
+[10-Sep-2025 16:37:40 Europe/Berlin] Student route - Path: /updated-msc-website/api/students
+[10-Sep-2025 16:37:40 Europe/Berlin] Student route - Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => students
+)
+
+[10-Sep-2025 16:37:40 Europe/Berlin] Student route - Endpoint: 
+[10-Sep-2025 16:37:40 Europe/Berlin] Student route - ID: null
+[10-Sep-2025 16:38:10 Europe/Berlin] Request path: /updated-msc-website/api/students
+[10-Sep-2025 16:38:10 Europe/Berlin] Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => students
+)
+
+[10-Sep-2025 16:38:10 Europe/Berlin] Original REQUEST_URI: /updated-msc-website/api/students
+[10-Sep-2025 16:38:10 Europe/Berlin] Found API index, resource: students
+[10-Sep-2025 16:38:10 Europe/Berlin] Student route - Path: /updated-msc-website/api/students
+[10-Sep-2025 16:38:10 Europe/Berlin] Student route - Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => students
+)
+
+[10-Sep-2025 16:38:10 Europe/Berlin] Student route - Endpoint: 
+[10-Sep-2025 16:38:10 Europe/Berlin] Student route - ID: null
+[10-Sep-2025 16:38:10 Europe/Berlin] Request path: /updated-msc-website/api/committees
+[10-Sep-2025 16:38:10 Europe/Berlin] Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => committees
+)
+
+[10-Sep-2025 16:38:10 Europe/Berlin] Original REQUEST_URI: /updated-msc-website/api/committees
+[10-Sep-2025 16:38:10 Europe/Berlin] Found API index, resource: committees
+[10-Sep-2025 16:38:10 Europe/Berlin] Request path: /updated-msc-website/api/students
+[10-Sep-2025 16:38:10 Europe/Berlin] Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => students
+)
+
+[10-Sep-2025 16:38:10 Europe/Berlin] Original REQUEST_URI: /updated-msc-website/api/students?role=officer
+[10-Sep-2025 16:38:10 Europe/Berlin] Found API index, resource: students
+[10-Sep-2025 16:38:10 Europe/Berlin] Student route - Path: /updated-msc-website/api/students
+[10-Sep-2025 16:38:10 Europe/Berlin] Student route - Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => students
+)
+
+[10-Sep-2025 16:38:10 Europe/Berlin] Student route - Endpoint: 
+[10-Sep-2025 16:38:10 Europe/Berlin] Student route - ID: null
+[10-Sep-2025 16:38:19 Europe/Berlin] Request path: /updated-msc-website/api/students
+[10-Sep-2025 16:38:19 Europe/Berlin] Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => students
+)
+
+[10-Sep-2025 16:38:19 Europe/Berlin] Original REQUEST_URI: /updated-msc-website/api/students?page=1&limit=20
+[10-Sep-2025 16:38:19 Europe/Berlin] Found API index, resource: students
+[10-Sep-2025 16:38:19 Europe/Berlin] Student route - Path: /updated-msc-website/api/students
+[10-Sep-2025 16:38:19 Europe/Berlin] Student route - Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => students
+)
+
+[10-Sep-2025 16:38:19 Europe/Berlin] Student route - Endpoint: 
+[10-Sep-2025 16:38:19 Europe/Berlin] Student route - ID: null
+[10-Sep-2025 16:38:22 Europe/Berlin] Request path: /updated-msc-website/api/students
+[10-Sep-2025 16:38:22 Europe/Berlin] Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => students
+)
+
+[10-Sep-2025 16:38:22 Europe/Berlin] Original REQUEST_URI: /updated-msc-website/api/students?page=1&limit=20
+[10-Sep-2025 16:38:22 Europe/Berlin] Found API index, resource: students
+[10-Sep-2025 16:38:22 Europe/Berlin] Student route - Path: /updated-msc-website/api/students
+[10-Sep-2025 16:38:22 Europe/Berlin] Student route - Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => students
+)
+
+[10-Sep-2025 16:38:22 Europe/Berlin] Student route - Endpoint: 
+[10-Sep-2025 16:38:22 Europe/Berlin] Student route - ID: null
+[10-Sep-2025 16:38:31 Europe/Berlin] Request path: /updated-msc-website/api/students
+[10-Sep-2025 16:38:31 Europe/Berlin] Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => students
+)
+
+[10-Sep-2025 16:38:31 Europe/Berlin] Original REQUEST_URI: /updated-msc-website/api/students?page=1&limit=20
+[10-Sep-2025 16:38:31 Europe/Berlin] Found API index, resource: students
+[10-Sep-2025 16:38:31 Europe/Berlin] Student route - Path: /updated-msc-website/api/students
+[10-Sep-2025 16:38:31 Europe/Berlin] Student route - Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => students
+)
+
+[10-Sep-2025 16:38:31 Europe/Berlin] Student route - Endpoint: 
+[10-Sep-2025 16:38:31 Europe/Berlin] Student route - ID: null
+[10-Sep-2025 16:38:51 Europe/Berlin] Request path: /updated-msc-website/api/students
+[10-Sep-2025 16:38:51 Europe/Berlin] Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => students
+)
+
+[10-Sep-2025 16:38:51 Europe/Berlin] Original REQUEST_URI: /updated-msc-website/api/students?page=1&limit=20
+[10-Sep-2025 16:38:51 Europe/Berlin] Found API index, resource: students
+[10-Sep-2025 16:38:51 Europe/Berlin] Student route - Path: /updated-msc-website/api/students
+[10-Sep-2025 16:38:51 Europe/Berlin] Student route - Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => students
+)
+
+[10-Sep-2025 16:38:51 Europe/Berlin] Student route - Endpoint: 
+[10-Sep-2025 16:38:51 Europe/Berlin] Student route - ID: null
+[10-Sep-2025 16:40:52 Europe/Berlin] Request path: /updated-msc-website/api/students
+[10-Sep-2025 16:40:52 Europe/Berlin] Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => students
+)
+
+[10-Sep-2025 16:40:52 Europe/Berlin] Original REQUEST_URI: /updated-msc-website/api/students?page=1&limit=20
+[10-Sep-2025 16:40:52 Europe/Berlin] Found API index, resource: students
+[10-Sep-2025 16:40:52 Europe/Berlin] Student route - Path: /updated-msc-website/api/students
+[10-Sep-2025 16:40:52 Europe/Berlin] Student route - Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => students
+)
+
+[10-Sep-2025 16:40:52 Europe/Berlin] Student route - Endpoint: 
+[10-Sep-2025 16:40:52 Europe/Berlin] Student route - ID: null
+[10-Sep-2025 17:02:09 Europe/Berlin] Request path: /updated-msc-website/api/events
+[10-Sep-2025 17:02:09 Europe/Berlin] Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => events
+)
+
+[10-Sep-2025 17:02:09 Europe/Berlin] Original REQUEST_URI: /updated-msc-website/api/events?page=1&limit=10
+[10-Sep-2025 17:02:09 Europe/Berlin] Found API index, resource: events
+[10-Sep-2025 17:02:09 Europe/Berlin] Event route - Path: /updated-msc-website/api/events
+[10-Sep-2025 17:02:09 Europe/Berlin] Event route - Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => events
+)
+
+[10-Sep-2025 17:02:09 Europe/Berlin] Event route - Endpoint: 
+[10-Sep-2025 17:02:09 Europe/Berlin] Event route - ID: null
+[10-Sep-2025 17:02:09 Europe/Berlin] Event route - Action: null
+[10-Sep-2025 17:02:22 Europe/Berlin] Request path: /updated-msc-website/api/events
+[10-Sep-2025 17:02:22 Europe/Berlin] Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => events
+)
+
+[10-Sep-2025 17:02:22 Europe/Berlin] Original REQUEST_URI: /updated-msc-website/api/events
+[10-Sep-2025 17:02:22 Europe/Berlin] Found API index, resource: events
+[10-Sep-2025 17:02:22 Europe/Berlin] Event route - Path: /updated-msc-website/api/events
+[10-Sep-2025 17:02:22 Europe/Berlin] Event route - Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => events
+)
+
+[10-Sep-2025 17:02:22 Europe/Berlin] Event route - Endpoint: 
+[10-Sep-2025 17:02:22 Europe/Berlin] Event route - ID: null
+[10-Sep-2025 17:02:22 Europe/Berlin] Event route - Action: null
+[10-Sep-2025 17:05:36 Europe/Berlin] Request path: /updated-msc-website/api/events/canceled
+[10-Sep-2025 17:05:36 Europe/Berlin] Request path: /updated-msc-website/api/events/upcoming
+[10-Sep-2025 17:05:36 Europe/Berlin] Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => events
+    [3] => canceled
+)
+
+[10-Sep-2025 17:05:36 Europe/Berlin] Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => events
+    [3] => upcoming
+)
+
+[10-Sep-2025 17:05:36 Europe/Berlin] Original REQUEST_URI: /updated-msc-website/api/events/canceled
+[10-Sep-2025 17:05:36 Europe/Berlin] Original REQUEST_URI: /updated-msc-website/api/events/upcoming
+[10-Sep-2025 17:05:36 Europe/Berlin] Found API index, resource: events
+[10-Sep-2025 17:05:36 Europe/Berlin] Found API index, resource: events
+[10-Sep-2025 17:05:36 Europe/Berlin] Request path: /updated-msc-website/api/events/past
+[10-Sep-2025 17:05:36 Europe/Berlin] Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => events
+    [3] => past
+)
+
+[10-Sep-2025 17:05:36 Europe/Berlin] Original REQUEST_URI: /updated-msc-website/api/events/past
+[10-Sep-2025 17:05:36 Europe/Berlin] Found API index, resource: events
+[10-Sep-2025 17:05:36 Europe/Berlin] Event route - Path: /updated-msc-website/api/events/canceled
+[10-Sep-2025 17:05:36 Europe/Berlin] Event route - Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => events
+    [3] => canceled
+)
+
+[10-Sep-2025 17:05:36 Europe/Berlin] Event route - Endpoint: canceled
+[10-Sep-2025 17:05:36 Europe/Berlin] Event route - Path: /updated-msc-website/api/events/upcoming
+[10-Sep-2025 17:05:36 Europe/Berlin] Event route - ID: null
+[10-Sep-2025 17:05:36 Europe/Berlin] Event route - Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => events
+    [3] => upcoming
+)
+
+[10-Sep-2025 17:05:36 Europe/Berlin] Event route - Action: null
+[10-Sep-2025 17:05:36 Europe/Berlin] Event route - Endpoint: upcoming
+[10-Sep-2025 17:05:36 Europe/Berlin] Event route - ID: null
+[10-Sep-2025 17:05:36 Europe/Berlin] Event route - Action: null
+[10-Sep-2025 17:05:36 Europe/Berlin] Event route - Path: /updated-msc-website/api/events/past
+[10-Sep-2025 17:05:36 Europe/Berlin] Event route - Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => events
+    [3] => past
+)
+
+[10-Sep-2025 17:05:36 Europe/Berlin] Event route - Endpoint: past
+[10-Sep-2025 17:05:36 Europe/Berlin] Event route - ID: null
+[10-Sep-2025 17:05:36 Europe/Berlin] Event route - Action: null
+[10-Sep-2025 17:15:51 Europe/Berlin] Request path: /updated-msc-website/api/events/canceled
+[10-Sep-2025 17:15:51 Europe/Berlin] Request path: /updated-msc-website/api/events/past
+[10-Sep-2025 17:15:51 Europe/Berlin] Request path: /updated-msc-website/api/events/upcoming
+[10-Sep-2025 17:15:51 Europe/Berlin] Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => events
+    [3] => canceled
+)
+
+[10-Sep-2025 17:15:51 Europe/Berlin] Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => events
+    [3] => past
+)
+
+[10-Sep-2025 17:15:51 Europe/Berlin] Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => events
+    [3] => upcoming
+)
+
+[10-Sep-2025 17:15:51 Europe/Berlin] Original REQUEST_URI: /updated-msc-website/api/events/canceled
+[10-Sep-2025 17:15:51 Europe/Berlin] Original REQUEST_URI: /updated-msc-website/api/events/past
+[10-Sep-2025 17:15:51 Europe/Berlin] Original REQUEST_URI: /updated-msc-website/api/events/upcoming
+[10-Sep-2025 17:15:51 Europe/Berlin] Found API index, resource: events
+[10-Sep-2025 17:15:51 Europe/Berlin] Found API index, resource: events
+[10-Sep-2025 17:15:51 Europe/Berlin] Found API index, resource: events
+[10-Sep-2025 17:15:51 Europe/Berlin] Event route - Path: /updated-msc-website/api/events/canceled
+[10-Sep-2025 17:15:51 Europe/Berlin] Event route - Path: /updated-msc-website/api/events/upcoming
+[10-Sep-2025 17:15:51 Europe/Berlin] Event route - Path: /updated-msc-website/api/events/past
+[10-Sep-2025 17:15:51 Europe/Berlin] Event route - Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => events
+    [3] => upcoming
+)
+
+[10-Sep-2025 17:15:51 Europe/Berlin] Event route - Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => events
+    [3] => past
+)
+
+[10-Sep-2025 17:15:51 Europe/Berlin] Event route - Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => events
+    [3] => canceled
+)
+
+[10-Sep-2025 17:15:51 Europe/Berlin] Event route - Endpoint: upcoming
+[10-Sep-2025 17:15:51 Europe/Berlin] Event route - Endpoint: past
+[10-Sep-2025 17:15:51 Europe/Berlin] Event route - Endpoint: canceled
+[10-Sep-2025 17:15:51 Europe/Berlin] Event route - ID: null
+[10-Sep-2025 17:15:51 Europe/Berlin] Event route - ID: null
+[10-Sep-2025 17:15:51 Europe/Berlin] Event route - ID: null
+[10-Sep-2025 17:15:51 Europe/Berlin] Event route - Action: null
+[10-Sep-2025 17:15:51 Europe/Berlin] Event route - Action: null
+[10-Sep-2025 17:15:51 Europe/Berlin] Event route - Action: null
+[10-Sep-2025 17:15:59 Europe/Berlin] Request path: /updated-msc-website/api/events/past
+[10-Sep-2025 17:15:59 Europe/Berlin] Request path: /updated-msc-website/api/events/upcoming
+[10-Sep-2025 17:15:59 Europe/Berlin] Request path: /updated-msc-website/api/events/canceled
+[10-Sep-2025 17:15:59 Europe/Berlin] Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => events
+    [3] => upcoming
+)
+
+[10-Sep-2025 17:15:59 Europe/Berlin] Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => events
+    [3] => canceled
+)
+
+[10-Sep-2025 17:15:59 Europe/Berlin] Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => events
+    [3] => past
+)
+
+[10-Sep-2025 17:15:59 Europe/Berlin] Original REQUEST_URI: /updated-msc-website/api/events/canceled
+[10-Sep-2025 17:15:59 Europe/Berlin] Original REQUEST_URI: /updated-msc-website/api/events/past
+[10-Sep-2025 17:15:59 Europe/Berlin] Original REQUEST_URI: /updated-msc-website/api/events/upcoming
+[10-Sep-2025 17:15:59 Europe/Berlin] Found API index, resource: events
+[10-Sep-2025 17:15:59 Europe/Berlin] Found API index, resource: events
+[10-Sep-2025 17:15:59 Europe/Berlin] Found API index, resource: events
+[10-Sep-2025 17:15:59 Europe/Berlin] Event route - Path: /updated-msc-website/api/events/past
+[10-Sep-2025 17:15:59 Europe/Berlin] Event route - Path: /updated-msc-website/api/events/upcoming
+[10-Sep-2025 17:15:59 Europe/Berlin] Event route - Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => events
+    [3] => upcoming
+)
+
+[10-Sep-2025 17:15:59 Europe/Berlin] Event route - Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => events
+    [3] => past
+)
+
+[10-Sep-2025 17:15:59 Europe/Berlin] Event route - Endpoint: past
+[10-Sep-2025 17:15:59 Europe/Berlin] Event route - Endpoint: upcoming
+[10-Sep-2025 17:15:59 Europe/Berlin] Event route - ID: null
+[10-Sep-2025 17:15:59 Europe/Berlin] Event route - ID: null
+[10-Sep-2025 17:15:59 Europe/Berlin] Event route - Action: null
+[10-Sep-2025 17:15:59 Europe/Berlin] Event route - Action: null
+[10-Sep-2025 17:15:59 Europe/Berlin] Event route - Path: /updated-msc-website/api/events/canceled
+[10-Sep-2025 17:15:59 Europe/Berlin] Event route - Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => events
+    [3] => canceled
+)
+
+[10-Sep-2025 17:15:59 Europe/Berlin] Event route - Endpoint: canceled
+[10-Sep-2025 17:15:59 Europe/Berlin] Event route - ID: null
+[10-Sep-2025 17:15:59 Europe/Berlin] Event route - Action: null
+[10-Sep-2025 17:17:14 Europe/Berlin] Request path: /updated-msc-website/api/events/upload-image
+[10-Sep-2025 17:17:14 Europe/Berlin] Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => events
+    [3] => upload-image
+)
+
+[10-Sep-2025 17:17:14 Europe/Berlin] Original REQUEST_URI: /updated-msc-website/api/events/upload-image
+[10-Sep-2025 17:17:14 Europe/Berlin] Found API index, resource: events
+[10-Sep-2025 17:17:14 Europe/Berlin] Event route - Path: /updated-msc-website/api/events/upload-image
+[10-Sep-2025 17:17:14 Europe/Berlin] Event route - Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => events
+    [3] => upload-image
+)
+
+[10-Sep-2025 17:17:14 Europe/Berlin] Event route - Endpoint: upload-image
+[10-Sep-2025 17:17:14 Europe/Berlin] Event route - ID: null
+[10-Sep-2025 17:17:14 Europe/Berlin] Event route - Action: null
+[10-Sep-2025 17:17:14 Europe/Berlin] Request path: /updated-msc-website/api/events
+[10-Sep-2025 17:17:14 Europe/Berlin] Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => events
+)
+
+[10-Sep-2025 17:17:14 Europe/Berlin] Original REQUEST_URI: /updated-msc-website/api/events
+[10-Sep-2025 17:17:14 Europe/Berlin] Found API index, resource: events
+[10-Sep-2025 17:17:14 Europe/Berlin] Event route - Path: /updated-msc-website/api/events
+[10-Sep-2025 17:17:14 Europe/Berlin] Event route - Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => events
+)
+
+[10-Sep-2025 17:17:14 Europe/Berlin] Event route - Endpoint: 
+[10-Sep-2025 17:17:14 Europe/Berlin] Event route - ID: null
+[10-Sep-2025 17:17:14 Europe/Berlin] Event route - Action: null
+[10-Sep-2025 17:17:14 Europe/Berlin] PHP Deprecated:  trim(): Passing null to parameter #1 ($string) of type string is deprecated in C:\xampp\htdocs\updated-msc-website\api\utils\Validator.php on line 87
+[10-Sep-2025 17:17:14 Europe/Berlin] Request path: /updated-msc-website/api/events/upcoming
+[10-Sep-2025 17:17:14 Europe/Berlin] Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => events
+    [3] => upcoming
+)
+
+[10-Sep-2025 17:17:14 Europe/Berlin] Original REQUEST_URI: /updated-msc-website/api/events/upcoming
+[10-Sep-2025 17:17:14 Europe/Berlin] Found API index, resource: events
+[10-Sep-2025 17:17:14 Europe/Berlin] Event route - Path: /updated-msc-website/api/events/upcoming
+[10-Sep-2025 17:17:14 Europe/Berlin] Event route - Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => events
+    [3] => upcoming
+)
+
+[10-Sep-2025 17:17:14 Europe/Berlin] Event route - Endpoint: upcoming
+[10-Sep-2025 17:17:14 Europe/Berlin] Event route - ID: null
+[10-Sep-2025 17:17:14 Europe/Berlin] Event route - Action: null
+[10-Sep-2025 17:17:17 Europe/Berlin] Request path: /updated-msc-website/api/events/msc-calendar
+[10-Sep-2025 17:17:17 Europe/Berlin] Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => events
+    [3] => msc-calendar
+)
+
+[10-Sep-2025 17:17:17 Europe/Berlin] Original REQUEST_URI: /updated-msc-website/api/events/msc-calendar?start=2025-09-08&end=2025-09-14
+[10-Sep-2025 17:17:17 Europe/Berlin] Found API index, resource: events
+[10-Sep-2025 17:17:17 Europe/Berlin] Event route - Path: /updated-msc-website/api/events/msc-calendar
+[10-Sep-2025 17:17:17 Europe/Berlin] Event route - Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => events
+    [3] => msc-calendar
+)
+
+[10-Sep-2025 17:17:17 Europe/Berlin] Event route - Endpoint: msc-calendar
+[10-Sep-2025 17:17:17 Europe/Berlin] Event route - ID: null
+[10-Sep-2025 17:17:17 Europe/Berlin] Event route - Action: null
+[10-Sep-2025 17:17:22 Europe/Berlin] Request path: /updated-msc-website/api/events/upcoming
+[10-Sep-2025 17:17:22 Europe/Berlin] Request path: /updated-msc-website/api/events/canceled
+[10-Sep-2025 17:17:22 Europe/Berlin] Request path: /updated-msc-website/api/events/past
+[10-Sep-2025 17:17:22 Europe/Berlin] Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => events
+    [3] => canceled
+)
+
+[10-Sep-2025 17:17:22 Europe/Berlin] Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => events
+    [3] => past
+)
+
+[10-Sep-2025 17:17:22 Europe/Berlin] Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => events
+    [3] => upcoming
+)
+
+[10-Sep-2025 17:17:22 Europe/Berlin] Original REQUEST_URI: /updated-msc-website/api/events/upcoming
+[10-Sep-2025 17:17:22 Europe/Berlin] Original REQUEST_URI: /updated-msc-website/api/events/past
+[10-Sep-2025 17:17:22 Europe/Berlin] Original REQUEST_URI: /updated-msc-website/api/events/canceled
+[10-Sep-2025 17:17:22 Europe/Berlin] Found API index, resource: events
+[10-Sep-2025 17:17:22 Europe/Berlin] Found API index, resource: events
+[10-Sep-2025 17:17:22 Europe/Berlin] Found API index, resource: events
+[10-Sep-2025 17:17:22 Europe/Berlin] Event route - Path: /updated-msc-website/api/events/canceled
+[10-Sep-2025 17:17:22 Europe/Berlin] Event route - Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => events
+    [3] => canceled
+)
+
+[10-Sep-2025 17:17:22 Europe/Berlin] Event route - Path: /updated-msc-website/api/events/upcoming
+[10-Sep-2025 17:17:22 Europe/Berlin] Event route - Path: /updated-msc-website/api/events/past
+[10-Sep-2025 17:17:22 Europe/Berlin] Event route - Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => events
+    [3] => upcoming
+)
+
+[10-Sep-2025 17:17:22 Europe/Berlin] Event route - Endpoint: canceled
+[10-Sep-2025 17:17:22 Europe/Berlin] Event route - Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => events
+    [3] => past
+)
+
+[10-Sep-2025 17:17:22 Europe/Berlin] Event route - ID: null
+[10-Sep-2025 17:17:22 Europe/Berlin] Event route - Endpoint: upcoming
+[10-Sep-2025 17:17:22 Europe/Berlin] Event route - Endpoint: past
+[10-Sep-2025 17:17:22 Europe/Berlin] Event route - ID: null
+[10-Sep-2025 17:17:22 Europe/Berlin] Event route - Action: null
+[10-Sep-2025 17:17:22 Europe/Berlin] Event route - ID: null
+[10-Sep-2025 17:17:22 Europe/Berlin] Event route - Action: null
+[10-Sep-2025 17:17:22 Europe/Berlin] Event route - Action: null
+[10-Sep-2025 17:17:26 Europe/Berlin] Request path: /updated-msc-website/api/events/6
+[10-Sep-2025 17:17:26 Europe/Berlin] Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => events
+    [3] => 6
+)
+
+[10-Sep-2025 17:17:26 Europe/Berlin] Original REQUEST_URI: /updated-msc-website/api/events/6
+[10-Sep-2025 17:17:26 Europe/Berlin] Found API index, resource: events
+[10-Sep-2025 17:17:26 Europe/Berlin] Event route - Path: /updated-msc-website/api/events/6
+[10-Sep-2025 17:17:26 Europe/Berlin] Event route - Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => events
+    [3] => 6
+)
+
+[10-Sep-2025 17:17:26 Europe/Berlin] Event route - Endpoint: 6
+[10-Sep-2025 17:17:26 Europe/Berlin] Event route - ID: null
+[10-Sep-2025 17:17:26 Europe/Berlin] Event route - Action: null
+[10-Sep-2025 17:17:35 Europe/Berlin] Request path: /updated-msc-website/api/events
+[10-Sep-2025 17:17:35 Europe/Berlin] Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => events
+)
+
+[10-Sep-2025 17:17:35 Europe/Berlin] Original REQUEST_URI: /updated-msc-website/api/events?page=1&limit=100
+[10-Sep-2025 17:17:35 Europe/Berlin] Found API index, resource: events
+[10-Sep-2025 17:17:35 Europe/Berlin] Event route - Path: /updated-msc-website/api/events
+[10-Sep-2025 17:17:35 Europe/Berlin] Event route - Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => events
+)
+
+[10-Sep-2025 17:17:35 Europe/Berlin] Event route - Endpoint: 
+[10-Sep-2025 17:17:35 Europe/Berlin] Event route - ID: null
+[10-Sep-2025 17:17:35 Europe/Berlin] Event route - Action: null
+[10-Sep-2025 17:17:35 Europe/Berlin] Request path: /updated-msc-website/api/events
+[10-Sep-2025 17:17:35 Europe/Berlin] Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => events
+)
+
+[10-Sep-2025 17:17:35 Europe/Berlin] Original REQUEST_URI: /updated-msc-website/api/events?page=1&limit=100
+[10-Sep-2025 17:17:35 Europe/Berlin] Found API index, resource: events
+[10-Sep-2025 17:17:35 Europe/Berlin] Event route - Path: /updated-msc-website/api/events
+[10-Sep-2025 17:17:35 Europe/Berlin] Event route - Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => events
+)
+
+[10-Sep-2025 17:17:35 Europe/Berlin] Event route - Endpoint: 
+[10-Sep-2025 17:17:35 Europe/Berlin] Event route - ID: null
+[10-Sep-2025 17:17:35 Europe/Berlin] Event route - Action: null
+[10-Sep-2025 17:18:05 Europe/Berlin] Request path: /updated-msc-website/api/events/5
+[10-Sep-2025 17:18:05 Europe/Berlin] Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => events
+    [3] => 5
+)
+
+[10-Sep-2025 17:18:05 Europe/Berlin] Original REQUEST_URI: /updated-msc-website/api/events/5
+[10-Sep-2025 17:18:05 Europe/Berlin] Found API index, resource: events
+[10-Sep-2025 17:18:05 Europe/Berlin] Event route - Path: /updated-msc-website/api/events/5
+[10-Sep-2025 17:18:05 Europe/Berlin] Event route - Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => events
+    [3] => 5
+)
+
+[10-Sep-2025 17:18:05 Europe/Berlin] Event route - Endpoint: 5
+[10-Sep-2025 17:18:05 Europe/Berlin] Event route - ID: null
+[10-Sep-2025 17:18:05 Europe/Berlin] Event route - Action: null
+[10-Sep-2025 17:18:09 Europe/Berlin] Request path: /updated-msc-website/api/events/5
+[10-Sep-2025 17:18:09 Europe/Berlin] Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => events
+    [3] => 5
+)
+
+[10-Sep-2025 17:18:09 Europe/Berlin] Original REQUEST_URI: /updated-msc-website/api/events/5
+[10-Sep-2025 17:18:09 Europe/Berlin] Found API index, resource: events
+[10-Sep-2025 17:18:09 Europe/Berlin] Event route - Path: /updated-msc-website/api/events/5
+[10-Sep-2025 17:18:09 Europe/Berlin] Event route - Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => events
+    [3] => 5
+)
+
+[10-Sep-2025 17:18:09 Europe/Berlin] Event route - Endpoint: 5
+[10-Sep-2025 17:18:09 Europe/Berlin] Event route - ID: null
+[10-Sep-2025 17:18:09 Europe/Berlin] Event route - Action: null
+[10-Sep-2025 17:18:09 Europe/Berlin] Request path: /updated-msc-website/api/events/upcoming
+[10-Sep-2025 17:18:09 Europe/Berlin] Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => events
+    [3] => upcoming
+)
+
+[10-Sep-2025 17:18:09 Europe/Berlin] Original REQUEST_URI: /updated-msc-website/api/events/upcoming
+[10-Sep-2025 17:18:09 Europe/Berlin] Found API index, resource: events
+[10-Sep-2025 17:18:09 Europe/Berlin] Event route - Path: /updated-msc-website/api/events/upcoming
+[10-Sep-2025 17:18:09 Europe/Berlin] Event route - Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => events
+    [3] => upcoming
+)
+
+[10-Sep-2025 17:18:09 Europe/Berlin] Event route - Endpoint: upcoming
+[10-Sep-2025 17:18:09 Europe/Berlin] Event route - ID: null
+[10-Sep-2025 17:18:09 Europe/Berlin] Event route - Action: null
+[10-Sep-2025 17:18:13 Europe/Berlin] Request path: /updated-msc-website/api/events/5
+[10-Sep-2025 17:18:13 Europe/Berlin] Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => events
+    [3] => 5
+)
+
+[10-Sep-2025 17:18:13 Europe/Berlin] Original REQUEST_URI: /updated-msc-website/api/events/5
+[10-Sep-2025 17:18:13 Europe/Berlin] Found API index, resource: events
+[10-Sep-2025 17:18:13 Europe/Berlin] Event route - Path: /updated-msc-website/api/events/5
+[10-Sep-2025 17:18:13 Europe/Berlin] Event route - Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => events
+    [3] => 5
+)
+
+[10-Sep-2025 17:18:13 Europe/Berlin] Event route - Endpoint: 5
+[10-Sep-2025 17:18:13 Europe/Berlin] Event route - ID: null
+[10-Sep-2025 17:18:13 Europe/Berlin] Event route - Action: null
+[10-Sep-2025 17:18:16 Europe/Berlin] Request path: /updated-msc-website/api/events/5
+[10-Sep-2025 17:18:16 Europe/Berlin] Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => events
+    [3] => 5
+)
+
+[10-Sep-2025 17:18:16 Europe/Berlin] Original REQUEST_URI: /updated-msc-website/api/events/5
+[10-Sep-2025 17:18:16 Europe/Berlin] Found API index, resource: events
+[10-Sep-2025 17:18:16 Europe/Berlin] Event route - Path: /updated-msc-website/api/events/5
+[10-Sep-2025 17:18:16 Europe/Berlin] Event route - Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => events
+    [3] => 5
+)
+
+[10-Sep-2025 17:18:16 Europe/Berlin] Event route - Endpoint: 5
+[10-Sep-2025 17:18:16 Europe/Berlin] Event route - ID: null
+[10-Sep-2025 17:18:16 Europe/Berlin] Event route - Action: null
+[10-Sep-2025 17:18:16 Europe/Berlin] Request path: /updated-msc-website/api/events/upcoming
+[10-Sep-2025 17:18:16 Europe/Berlin] Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => events
+    [3] => upcoming
+)
+
+[10-Sep-2025 17:18:16 Europe/Berlin] Original REQUEST_URI: /updated-msc-website/api/events/upcoming
+[10-Sep-2025 17:18:16 Europe/Berlin] Found API index, resource: events
+[10-Sep-2025 17:18:16 Europe/Berlin] Event route - Path: /updated-msc-website/api/events/upcoming
+[10-Sep-2025 17:18:16 Europe/Berlin] Event route - Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => events
+    [3] => upcoming
+)
+
+[10-Sep-2025 17:18:16 Europe/Berlin] Event route - Endpoint: upcoming
+[10-Sep-2025 17:18:16 Europe/Berlin] Event route - ID: null
+[10-Sep-2025 17:18:16 Europe/Berlin] Event route - Action: null
+[10-Sep-2025 17:18:23 Europe/Berlin] Request path: /updated-msc-website/api/events/5
+[10-Sep-2025 17:18:23 Europe/Berlin] Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => events
+    [3] => 5
+)
+
+[10-Sep-2025 17:18:23 Europe/Berlin] Original REQUEST_URI: /updated-msc-website/api/events/5
+[10-Sep-2025 17:18:23 Europe/Berlin] Found API index, resource: events
+[10-Sep-2025 17:18:23 Europe/Berlin] Event route - Path: /updated-msc-website/api/events/5
+[10-Sep-2025 17:18:23 Europe/Berlin] Event route - Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => events
+    [3] => 5
+)
+
+[10-Sep-2025 17:18:23 Europe/Berlin] Event route - Endpoint: 5
+[10-Sep-2025 17:18:23 Europe/Berlin] Event route - ID: null
+[10-Sep-2025 17:18:23 Europe/Berlin] Event route - Action: null
+[10-Sep-2025 17:18:26 Europe/Berlin] Request path: /updated-msc-website/api/events/5
+[10-Sep-2025 17:18:26 Europe/Berlin] Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => events
+    [3] => 5
+)
+
+[10-Sep-2025 17:18:26 Europe/Berlin] Original REQUEST_URI: /updated-msc-website/api/events/5
+[10-Sep-2025 17:18:26 Europe/Berlin] Found API index, resource: events
+[10-Sep-2025 17:18:26 Europe/Berlin] Event route - Path: /updated-msc-website/api/events/5
+[10-Sep-2025 17:18:26 Europe/Berlin] Event route - Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => events
+    [3] => 5
+)
+
+[10-Sep-2025 17:18:26 Europe/Berlin] Event route - Endpoint: 5
+[10-Sep-2025 17:18:26 Europe/Berlin] Event route - ID: null
+[10-Sep-2025 17:18:26 Europe/Berlin] Event route - Action: null
+[10-Sep-2025 17:18:26 Europe/Berlin] Request path: /updated-msc-website/api/events/upcoming
+[10-Sep-2025 17:18:26 Europe/Berlin] Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => events
+    [3] => upcoming
+)
+
+[10-Sep-2025 17:18:26 Europe/Berlin] Original REQUEST_URI: /updated-msc-website/api/events/upcoming
+[10-Sep-2025 17:18:26 Europe/Berlin] Found API index, resource: events
+[10-Sep-2025 17:18:26 Europe/Berlin] Event route - Path: /updated-msc-website/api/events/upcoming
+[10-Sep-2025 17:18:26 Europe/Berlin] Event route - Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => events
+    [3] => upcoming
+)
+
+[10-Sep-2025 17:18:26 Europe/Berlin] Event route - Endpoint: upcoming
+[10-Sep-2025 17:18:26 Europe/Berlin] Event route - ID: null
+[10-Sep-2025 17:18:26 Europe/Berlin] Event route - Action: null
+[10-Sep-2025 17:18:32 Europe/Berlin] Request path: /updated-msc-website/api/events
+[10-Sep-2025 17:18:32 Europe/Berlin] Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => events
+)
+
+[10-Sep-2025 17:18:32 Europe/Berlin] Original REQUEST_URI: /updated-msc-website/api/events?page=1&limit=100
+[10-Sep-2025 17:18:32 Europe/Berlin] Found API index, resource: events
+[10-Sep-2025 17:18:32 Europe/Berlin] Event route - Path: /updated-msc-website/api/events
+[10-Sep-2025 17:18:32 Europe/Berlin] Event route - Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => events
+)
+
+[10-Sep-2025 17:18:32 Europe/Berlin] Event route - Endpoint: 
+[10-Sep-2025 17:18:32 Europe/Berlin] Event route - ID: null
+[10-Sep-2025 17:18:32 Europe/Berlin] Event route - Action: null
+[10-Sep-2025 17:18:32 Europe/Berlin] Request path: /updated-msc-website/api/events
+[10-Sep-2025 17:18:32 Europe/Berlin] Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => events
+)
+
+[10-Sep-2025 17:18:32 Europe/Berlin] Original REQUEST_URI: /updated-msc-website/api/events?page=1&limit=100
+[10-Sep-2025 17:18:32 Europe/Berlin] Found API index, resource: events
+[10-Sep-2025 17:18:32 Europe/Berlin] Event route - Path: /updated-msc-website/api/events
+[10-Sep-2025 17:18:32 Europe/Berlin] Event route - Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => events
+)
+
+[10-Sep-2025 17:18:32 Europe/Berlin] Event route - Endpoint: 
+[10-Sep-2025 17:18:32 Europe/Berlin] Event route - ID: null
+[10-Sep-2025 17:18:32 Europe/Berlin] Event route - Action: null
+[10-Sep-2025 17:32:57 Europe/Berlin] Request path: /updated-msc-website/api/events
+[10-Sep-2025 17:32:57 Europe/Berlin] Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => events
+)
+
+[10-Sep-2025 17:32:57 Europe/Berlin] Original REQUEST_URI: /updated-msc-website/api/events?page=1&limit=100
+[10-Sep-2025 17:32:57 Europe/Berlin] Found API index, resource: events
+[10-Sep-2025 17:32:57 Europe/Berlin] Event route - Path: /updated-msc-website/api/events
+[10-Sep-2025 17:32:57 Europe/Berlin] Event route - Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => events
+)
+
+[10-Sep-2025 17:32:57 Europe/Berlin] Event route - Endpoint: 
+[10-Sep-2025 17:32:57 Europe/Berlin] Event route - ID: null
+[10-Sep-2025 17:32:57 Europe/Berlin] Event route - Action: null
+[10-Sep-2025 17:32:57 Europe/Berlin] Request path: /updated-msc-website/api/events
+[10-Sep-2025 17:32:57 Europe/Berlin] Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => events
+)
+
+[10-Sep-2025 17:32:57 Europe/Berlin] Original REQUEST_URI: /updated-msc-website/api/events?page=1&limit=100
+[10-Sep-2025 17:32:57 Europe/Berlin] Found API index, resource: events
+[10-Sep-2025 17:32:57 Europe/Berlin] Event route - Path: /updated-msc-website/api/events
+[10-Sep-2025 17:32:57 Europe/Berlin] Event route - Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => events
+)
+
+[10-Sep-2025 17:32:57 Europe/Berlin] Event route - Endpoint: 
+[10-Sep-2025 17:32:57 Europe/Berlin] Event route - ID: null
+[10-Sep-2025 17:32:57 Europe/Berlin] Event route - Action: null
+[10-Sep-2025 17:42:12 Europe/Berlin] Request path: /updated-msc-website/api/events
+[10-Sep-2025 17:42:12 Europe/Berlin] Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => events
+)
+
+[10-Sep-2025 17:42:12 Europe/Berlin] Original REQUEST_URI: /updated-msc-website/api/events?page=1&limit=100
+[10-Sep-2025 17:42:12 Europe/Berlin] Found API index, resource: events
+[10-Sep-2025 17:42:12 Europe/Berlin] Event route - Path: /updated-msc-website/api/events
+[10-Sep-2025 17:42:12 Europe/Berlin] Event route - Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => events
+)
+
+[10-Sep-2025 17:42:12 Europe/Berlin] Event route - Endpoint: 
+[10-Sep-2025 17:42:12 Europe/Berlin] Event route - ID: null
+[10-Sep-2025 17:42:12 Europe/Berlin] Event route - Action: null
+[10-Sep-2025 17:42:12 Europe/Berlin] Request path: /updated-msc-website/api/events
+[10-Sep-2025 17:42:12 Europe/Berlin] Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => events
+)
+
+[10-Sep-2025 17:42:12 Europe/Berlin] Original REQUEST_URI: /updated-msc-website/api/events?page=1&limit=100
+[10-Sep-2025 17:42:12 Europe/Berlin] Found API index, resource: events
+[10-Sep-2025 17:42:12 Europe/Berlin] Event route - Path: /updated-msc-website/api/events
+[10-Sep-2025 17:42:12 Europe/Berlin] Event route - Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => events
+)
+
+[10-Sep-2025 17:42:12 Europe/Berlin] Event route - Endpoint: 
+[10-Sep-2025 17:42:12 Europe/Berlin] Event route - ID: null
+[10-Sep-2025 17:42:12 Europe/Berlin] Event route - Action: null
+[10-Sep-2025 17:42:17 Europe/Berlin] Request path: /updated-msc-website/api/events/canceled
+[10-Sep-2025 17:42:17 Europe/Berlin] Request path: /updated-msc-website/api/events/upcoming
+[10-Sep-2025 17:42:17 Europe/Berlin] Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => events
+    [3] => upcoming
+)
+
+[10-Sep-2025 17:42:17 Europe/Berlin] Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => events
+    [3] => canceled
+)
+
+[10-Sep-2025 17:42:17 Europe/Berlin] Original REQUEST_URI: /updated-msc-website/api/events/canceled
+[10-Sep-2025 17:42:17 Europe/Berlin] Original REQUEST_URI: /updated-msc-website/api/events/upcoming
+[10-Sep-2025 17:42:17 Europe/Berlin] Found API index, resource: events
+[10-Sep-2025 17:42:17 Europe/Berlin] Request path: /updated-msc-website/api/events/past
+[10-Sep-2025 17:42:17 Europe/Berlin] Found API index, resource: events
+[10-Sep-2025 17:42:17 Europe/Berlin] Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => events
+    [3] => past
+)
+
+[10-Sep-2025 17:42:17 Europe/Berlin] Original REQUEST_URI: /updated-msc-website/api/events/past
+[10-Sep-2025 17:42:17 Europe/Berlin] Found API index, resource: events
+[10-Sep-2025 17:42:17 Europe/Berlin] Event route - Path: /updated-msc-website/api/events/canceled
+[10-Sep-2025 17:42:17 Europe/Berlin] Event route - Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => events
+    [3] => canceled
+)
+
+[10-Sep-2025 17:42:17 Europe/Berlin] Event route - Path: /updated-msc-website/api/events/upcoming
+[10-Sep-2025 17:42:17 Europe/Berlin] Event route - Endpoint: canceled
+[10-Sep-2025 17:42:17 Europe/Berlin] Event route - Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => events
+    [3] => upcoming
+)
+
+[10-Sep-2025 17:42:17 Europe/Berlin] Event route - ID: null
+[10-Sep-2025 17:42:17 Europe/Berlin] Event route - Endpoint: upcoming
+[10-Sep-2025 17:42:17 Europe/Berlin] Event route - Action: null
+[10-Sep-2025 17:42:17 Europe/Berlin] Event route - ID: null
+[10-Sep-2025 17:42:17 Europe/Berlin] Event route - Action: null
+[10-Sep-2025 17:42:17 Europe/Berlin] Event route - Path: /updated-msc-website/api/events/past
+[10-Sep-2025 17:42:17 Europe/Berlin] Event route - Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => events
+    [3] => past
+)
+
+[10-Sep-2025 17:42:17 Europe/Berlin] Event route - Endpoint: past
+[10-Sep-2025 17:42:17 Europe/Berlin] Event route - ID: null
+[10-Sep-2025 17:42:17 Europe/Berlin] Event route - Action: null
+[10-Sep-2025 17:42:20 Europe/Berlin] Request path: /updated-msc-website/api/events/5
+[10-Sep-2025 17:42:20 Europe/Berlin] Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => events
+    [3] => 5
+)
+
+[10-Sep-2025 17:42:20 Europe/Berlin] Original REQUEST_URI: /updated-msc-website/api/events/5
+[10-Sep-2025 17:42:20 Europe/Berlin] Found API index, resource: events
+[10-Sep-2025 17:42:20 Europe/Berlin] Event route - Path: /updated-msc-website/api/events/5
+[10-Sep-2025 17:42:20 Europe/Berlin] Event route - Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => events
+    [3] => 5
+)
+
+[10-Sep-2025 17:42:20 Europe/Berlin] Event route - Endpoint: 5
+[10-Sep-2025 17:42:20 Europe/Berlin] Event route - ID: null
+[10-Sep-2025 17:42:20 Europe/Berlin] Event route - Action: null
+[10-Sep-2025 17:42:27 Europe/Berlin] Request path: /updated-msc-website/api/events/5
+[10-Sep-2025 17:42:27 Europe/Berlin] Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => events
+    [3] => 5
+)
+
+[10-Sep-2025 17:42:27 Europe/Berlin] Original REQUEST_URI: /updated-msc-website/api/events/5
+[10-Sep-2025 17:42:27 Europe/Berlin] Found API index, resource: events
+[10-Sep-2025 17:42:27 Europe/Berlin] Event route - Path: /updated-msc-website/api/events/5
+[10-Sep-2025 17:42:27 Europe/Berlin] Event route - Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => events
+    [3] => 5
+)
+
+[10-Sep-2025 17:42:27 Europe/Berlin] Event route - Endpoint: 5
+[10-Sep-2025 17:42:27 Europe/Berlin] Event route - ID: null
+[10-Sep-2025 17:42:27 Europe/Berlin] Event route - Action: null
+[10-Sep-2025 17:42:27 Europe/Berlin] Request path: /updated-msc-website/api/events/upcoming
+[10-Sep-2025 17:42:27 Europe/Berlin] Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => events
+    [3] => upcoming
+)
+
+[10-Sep-2025 17:42:27 Europe/Berlin] Original REQUEST_URI: /updated-msc-website/api/events/upcoming
+[10-Sep-2025 17:42:27 Europe/Berlin] Found API index, resource: events
+[10-Sep-2025 17:42:27 Europe/Berlin] Event route - Path: /updated-msc-website/api/events/upcoming
+[10-Sep-2025 17:42:27 Europe/Berlin] Event route - Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => events
+    [3] => upcoming
+)
+
+[10-Sep-2025 17:42:27 Europe/Berlin] Event route - Endpoint: upcoming
+[10-Sep-2025 17:42:27 Europe/Berlin] Event route - ID: null
+[10-Sep-2025 17:42:27 Europe/Berlin] Event route - Action: null
+[10-Sep-2025 17:42:34 Europe/Berlin] Request path: /updated-msc-website/api/events/5
+[10-Sep-2025 17:42:34 Europe/Berlin] Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => events
+    [3] => 5
+)
+
+[10-Sep-2025 17:42:34 Europe/Berlin] Original REQUEST_URI: /updated-msc-website/api/events/5
+[10-Sep-2025 17:42:34 Europe/Berlin] Found API index, resource: events
+[10-Sep-2025 17:42:34 Europe/Berlin] Event route - Path: /updated-msc-website/api/events/5
+[10-Sep-2025 17:42:34 Europe/Berlin] Event route - Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => events
+    [3] => 5
+)
+
+[10-Sep-2025 17:42:34 Europe/Berlin] Event route - Endpoint: 5
+[10-Sep-2025 17:42:34 Europe/Berlin] Event route - ID: null
+[10-Sep-2025 17:42:34 Europe/Berlin] Event route - Action: null
+[10-Sep-2025 17:42:39 Europe/Berlin] Request path: /updated-msc-website/api/events/5
+[10-Sep-2025 17:42:39 Europe/Berlin] Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => events
+    [3] => 5
+)
+
+[10-Sep-2025 17:42:39 Europe/Berlin] Original REQUEST_URI: /updated-msc-website/api/events/5
+[10-Sep-2025 17:42:39 Europe/Berlin] Found API index, resource: events
+[10-Sep-2025 17:42:39 Europe/Berlin] Event route - Path: /updated-msc-website/api/events/5
+[10-Sep-2025 17:42:39 Europe/Berlin] Event route - Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => events
+    [3] => 5
+)
+
+[10-Sep-2025 17:42:39 Europe/Berlin] Event route - Endpoint: 5
+[10-Sep-2025 17:42:39 Europe/Berlin] Event route - ID: null
+[10-Sep-2025 17:42:39 Europe/Berlin] Event route - Action: null
+[10-Sep-2025 17:42:39 Europe/Berlin] Request path: /updated-msc-website/api/events/upcoming
+[10-Sep-2025 17:42:39 Europe/Berlin] Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => events
+    [3] => upcoming
+)
+
+[10-Sep-2025 17:42:39 Europe/Berlin] Original REQUEST_URI: /updated-msc-website/api/events/upcoming
+[10-Sep-2025 17:42:39 Europe/Berlin] Found API index, resource: events
+[10-Sep-2025 17:42:39 Europe/Berlin] Event route - Path: /updated-msc-website/api/events/upcoming
+[10-Sep-2025 17:42:39 Europe/Berlin] Event route - Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => events
+    [3] => upcoming
+)
+
+[10-Sep-2025 17:42:39 Europe/Berlin] Event route - Endpoint: upcoming
+[10-Sep-2025 17:42:39 Europe/Berlin] Event route - ID: null
+[10-Sep-2025 17:42:39 Europe/Berlin] Event route - Action: null
+[10-Sep-2025 17:42:44 Europe/Berlin] Request path: /updated-msc-website/api/events/5
+[10-Sep-2025 17:42:44 Europe/Berlin] Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => events
+    [3] => 5
+)
+
+[10-Sep-2025 17:42:44 Europe/Berlin] Original REQUEST_URI: /updated-msc-website/api/events/5
+[10-Sep-2025 17:42:44 Europe/Berlin] Found API index, resource: events
+[10-Sep-2025 17:42:44 Europe/Berlin] Event route - Path: /updated-msc-website/api/events/5
+[10-Sep-2025 17:42:44 Europe/Berlin] Event route - Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => events
+    [3] => 5
+)
+
+[10-Sep-2025 17:42:44 Europe/Berlin] Event route - Endpoint: 5
+[10-Sep-2025 17:42:44 Europe/Berlin] Event route - ID: null
+[10-Sep-2025 17:42:44 Europe/Berlin] Event route - Action: null
+[10-Sep-2025 17:42:44 Europe/Berlin] Request path: /updated-msc-website/api/events/canceled
+[10-Sep-2025 17:42:44 Europe/Berlin] Request path: /updated-msc-website/api/events/upcoming
+[10-Sep-2025 17:42:44 Europe/Berlin] Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => events
+    [3] => canceled
+)
+
+[10-Sep-2025 17:42:44 Europe/Berlin] Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => events
+    [3] => upcoming
+)
+
+[10-Sep-2025 17:42:44 Europe/Berlin] Original REQUEST_URI: /updated-msc-website/api/events/canceled
+[10-Sep-2025 17:42:44 Europe/Berlin] Original REQUEST_URI: /updated-msc-website/api/events/upcoming
+[10-Sep-2025 17:42:44 Europe/Berlin] Found API index, resource: events
+[10-Sep-2025 17:42:44 Europe/Berlin] Found API index, resource: events
+[10-Sep-2025 17:42:44 Europe/Berlin] Event route - Path: /updated-msc-website/api/events/canceled
+[10-Sep-2025 17:42:44 Europe/Berlin] Event route - Path: /updated-msc-website/api/events/upcoming
+[10-Sep-2025 17:42:44 Europe/Berlin] Event route - Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => events
+    [3] => canceled
+)
+
+[10-Sep-2025 17:42:44 Europe/Berlin] Event route - Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => events
+    [3] => upcoming
+)
+
+[10-Sep-2025 17:42:44 Europe/Berlin] Event route - Endpoint: canceled
+[10-Sep-2025 17:42:44 Europe/Berlin] Event route - Endpoint: upcoming
+[10-Sep-2025 17:42:44 Europe/Berlin] Event route - ID: null
+[10-Sep-2025 17:42:44 Europe/Berlin] Event route - ID: null
+[10-Sep-2025 17:42:44 Europe/Berlin] Event route - Action: null
+[10-Sep-2025 17:42:44 Europe/Berlin] Event route - Action: null
+[10-Sep-2025 17:42:46 Europe/Berlin] Request path: /updated-msc-website/api/events/6
+[10-Sep-2025 17:42:46 Europe/Berlin] Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => events
+    [3] => 6
+)
+
+[10-Sep-2025 17:42:46 Europe/Berlin] Original REQUEST_URI: /updated-msc-website/api/events/6
+[10-Sep-2025 17:42:46 Europe/Berlin] Found API index, resource: events
+[10-Sep-2025 17:42:46 Europe/Berlin] Event route - Path: /updated-msc-website/api/events/6
+[10-Sep-2025 17:42:46 Europe/Berlin] Event route - Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => events
+    [3] => 6
+)
+
+[10-Sep-2025 17:42:46 Europe/Berlin] Event route - Endpoint: 6
+[10-Sep-2025 17:42:46 Europe/Berlin] Event route - ID: null
+[10-Sep-2025 17:42:46 Europe/Berlin] Event route - Action: null
+[10-Sep-2025 17:42:46 Europe/Berlin] Request path: /updated-msc-website/api/events/canceled
+[10-Sep-2025 17:42:46 Europe/Berlin] Request path: /updated-msc-website/api/events/upcoming
+[10-Sep-2025 17:42:46 Europe/Berlin] Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => events
+    [3] => canceled
+)
+
+[10-Sep-2025 17:42:46 Europe/Berlin] Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => events
+    [3] => upcoming
+)
+
+[10-Sep-2025 17:42:46 Europe/Berlin] Original REQUEST_URI: /updated-msc-website/api/events/canceled
+[10-Sep-2025 17:42:46 Europe/Berlin] Original REQUEST_URI: /updated-msc-website/api/events/upcoming
+[10-Sep-2025 17:42:46 Europe/Berlin] Found API index, resource: events
+[10-Sep-2025 17:42:46 Europe/Berlin] Found API index, resource: events
+[10-Sep-2025 17:42:46 Europe/Berlin] Event route - Path: /updated-msc-website/api/events/upcoming
+[10-Sep-2025 17:42:46 Europe/Berlin] Event route - Path: /updated-msc-website/api/events/canceled
+[10-Sep-2025 17:42:46 Europe/Berlin] Event route - Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => events
+    [3] => canceled
+)
+
+[10-Sep-2025 17:42:46 Europe/Berlin] Event route - Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => events
+    [3] => upcoming
+)
+
+[10-Sep-2025 17:42:46 Europe/Berlin] Event route - Endpoint: canceled
+[10-Sep-2025 17:42:46 Europe/Berlin] Event route - Endpoint: upcoming
+[10-Sep-2025 17:42:46 Europe/Berlin] Event route - ID: null
+[10-Sep-2025 17:42:46 Europe/Berlin] Event route - ID: null
+[10-Sep-2025 17:42:46 Europe/Berlin] Event route - Action: null
+[10-Sep-2025 17:42:46 Europe/Berlin] Event route - Action: null
+[10-Sep-2025 17:43:09 Europe/Berlin] Request path: /updated-msc-website/api/events
+[10-Sep-2025 17:43:09 Europe/Berlin] Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => events
+)
+
+[10-Sep-2025 17:43:09 Europe/Berlin] Original REQUEST_URI: /updated-msc-website/api/events
+[10-Sep-2025 17:43:09 Europe/Berlin] Found API index, resource: events
+[10-Sep-2025 17:43:09 Europe/Berlin] Event route - Path: /updated-msc-website/api/events
+[10-Sep-2025 17:43:09 Europe/Berlin] Event route - Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => events
+)
+
+[10-Sep-2025 17:43:09 Europe/Berlin] Event route - Endpoint: 
+[10-Sep-2025 17:43:09 Europe/Berlin] Event route - ID: null
+[10-Sep-2025 17:43:09 Europe/Berlin] Event route - Action: null
+[10-Sep-2025 17:43:09 Europe/Berlin] PHP Deprecated:  trim(): Passing null to parameter #1 ($string) of type string is deprecated in C:\xampp\htdocs\updated-msc-website\api\utils\Validator.php on line 87
+[10-Sep-2025 17:43:09 Europe/Berlin] PHP Deprecated:  trim(): Passing null to parameter #1 ($string) of type string is deprecated in C:\xampp\htdocs\updated-msc-website\api\utils\Validator.php on line 87
+[10-Sep-2025 17:43:09 Europe/Berlin] Request path: /updated-msc-website/api/events/upcoming
+[10-Sep-2025 17:43:09 Europe/Berlin] Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => events
+    [3] => upcoming
+)
+
+[10-Sep-2025 17:43:09 Europe/Berlin] Original REQUEST_URI: /updated-msc-website/api/events/upcoming
+[10-Sep-2025 17:43:09 Europe/Berlin] Found API index, resource: events
+[10-Sep-2025 17:43:09 Europe/Berlin] Event route - Path: /updated-msc-website/api/events/upcoming
+[10-Sep-2025 17:43:09 Europe/Berlin] Event route - Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => events
+    [3] => upcoming
+)
+
+[10-Sep-2025 17:43:09 Europe/Berlin] Event route - Endpoint: upcoming
+[10-Sep-2025 17:43:09 Europe/Berlin] Event route - ID: null
+[10-Sep-2025 17:43:09 Europe/Berlin] Event route - Action: null
+[10-Sep-2025 17:43:12 Europe/Berlin] Request path: /updated-msc-website/api/events/msc-calendar
+[10-Sep-2025 17:43:12 Europe/Berlin] Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => events
+    [3] => msc-calendar
+)
+
+[10-Sep-2025 17:43:12 Europe/Berlin] Original REQUEST_URI: /updated-msc-website/api/events/msc-calendar?start=2025-09-08&end=2025-09-14
+[10-Sep-2025 17:43:12 Europe/Berlin] Found API index, resource: events
+[10-Sep-2025 17:43:12 Europe/Berlin] Event route - Path: /updated-msc-website/api/events/msc-calendar
+[10-Sep-2025 17:43:12 Europe/Berlin] Event route - Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => events
+    [3] => msc-calendar
+)
+
+[10-Sep-2025 17:43:12 Europe/Berlin] Event route - Endpoint: msc-calendar
+[10-Sep-2025 17:43:12 Europe/Berlin] Event route - ID: null
+[10-Sep-2025 17:43:12 Europe/Berlin] Event route - Action: null
+[10-Sep-2025 17:43:14 Europe/Berlin] Request path: /updated-msc-website/api/events/upcoming
+[10-Sep-2025 17:43:14 Europe/Berlin] Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => events
+    [3] => upcoming
+)
+
+[10-Sep-2025 17:43:14 Europe/Berlin] Request path: /updated-msc-website/api/events/canceled
+[10-Sep-2025 17:43:14 Europe/Berlin] Original REQUEST_URI: /updated-msc-website/api/events/upcoming
+[10-Sep-2025 17:43:14 Europe/Berlin] Request path: /updated-msc-website/api/events/past
+[10-Sep-2025 17:43:14 Europe/Berlin] Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => events
+    [3] => canceled
+)
+
+[10-Sep-2025 17:43:14 Europe/Berlin] Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => events
+    [3] => past
+)
+
+[10-Sep-2025 17:43:14 Europe/Berlin] Found API index, resource: events
+[10-Sep-2025 17:43:14 Europe/Berlin] Original REQUEST_URI: /updated-msc-website/api/events/canceled
+[10-Sep-2025 17:43:14 Europe/Berlin] Original REQUEST_URI: /updated-msc-website/api/events/past
+[10-Sep-2025 17:43:14 Europe/Berlin] Found API index, resource: events
+[10-Sep-2025 17:43:14 Europe/Berlin] Found API index, resource: events
+[10-Sep-2025 17:43:14 Europe/Berlin] Event route - Path: /updated-msc-website/api/events/upcoming
+[10-Sep-2025 17:43:14 Europe/Berlin] Event route - Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => events
+    [3] => upcoming
+)
+
+[10-Sep-2025 17:43:14 Europe/Berlin] Event route - Path: /updated-msc-website/api/events/canceled
+[10-Sep-2025 17:43:14 Europe/Berlin] Event route - Path: /updated-msc-website/api/events/past
+[10-Sep-2025 17:43:14 Europe/Berlin] Event route - Endpoint: upcoming
+[10-Sep-2025 17:43:14 Europe/Berlin] Event route - Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => events
+    [3] => canceled
+)
+
+[10-Sep-2025 17:43:14 Europe/Berlin] Event route - Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => events
+    [3] => past
+)
+
+[10-Sep-2025 17:43:14 Europe/Berlin] Event route - ID: null
+[10-Sep-2025 17:43:14 Europe/Berlin] Event route - Endpoint: canceled
+[10-Sep-2025 17:43:14 Europe/Berlin] Event route - Endpoint: past
+[10-Sep-2025 17:43:14 Europe/Berlin] Event route - Action: null
+[10-Sep-2025 17:43:14 Europe/Berlin] Event route - ID: null
+[10-Sep-2025 17:43:14 Europe/Berlin] Event route - ID: null
+[10-Sep-2025 17:43:14 Europe/Berlin] Event route - Action: null
+[10-Sep-2025 17:43:14 Europe/Berlin] Event route - Action: null
+[10-Sep-2025 17:48:04 Europe/Berlin] Request path: /updated-msc-website/api/events/7
+[10-Sep-2025 17:48:04 Europe/Berlin] Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => events
+    [3] => 7
+)
+
+[10-Sep-2025 17:48:04 Europe/Berlin] Original REQUEST_URI: /updated-msc-website/api/events/7
+[10-Sep-2025 17:48:04 Europe/Berlin] Found API index, resource: events
+[10-Sep-2025 17:48:04 Europe/Berlin] Event route - Path: /updated-msc-website/api/events/7
+[10-Sep-2025 17:48:04 Europe/Berlin] Event route - Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => events
+    [3] => 7
+)
+
+[10-Sep-2025 17:48:04 Europe/Berlin] Event route - Endpoint: 7
+[10-Sep-2025 17:48:04 Europe/Berlin] Event route - ID: null
+[10-Sep-2025 17:48:04 Europe/Berlin] Event route - Action: null
+[10-Sep-2025 17:48:04 Europe/Berlin] Request path: /updated-msc-website/api/events/upcoming
+[10-Sep-2025 17:48:04 Europe/Berlin] Request path: /updated-msc-website/api/events/canceled
+[10-Sep-2025 17:48:04 Europe/Berlin] Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => events
+    [3] => upcoming
+)
+
+[10-Sep-2025 17:48:04 Europe/Berlin] Original REQUEST_URI: /updated-msc-website/api/events/upcoming
+[10-Sep-2025 17:48:04 Europe/Berlin] Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => events
+    [3] => canceled
+)
+
+[10-Sep-2025 17:48:04 Europe/Berlin] Found API index, resource: events
+[10-Sep-2025 17:48:04 Europe/Berlin] Original REQUEST_URI: /updated-msc-website/api/events/canceled
+[10-Sep-2025 17:48:04 Europe/Berlin] Found API index, resource: events
+[10-Sep-2025 17:48:04 Europe/Berlin] Event route - Path: /updated-msc-website/api/events/upcoming
+[10-Sep-2025 17:48:04 Europe/Berlin] Event route - Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => events
+    [3] => upcoming
+)
+
+[10-Sep-2025 17:48:04 Europe/Berlin] Event route - Endpoint: upcoming
+[10-Sep-2025 17:48:04 Europe/Berlin] Event route - ID: null
+[10-Sep-2025 17:48:04 Europe/Berlin] Event route - Path: /updated-msc-website/api/events/canceled
+[10-Sep-2025 17:48:04 Europe/Berlin] Event route - Action: null
+[10-Sep-2025 17:48:04 Europe/Berlin] Event route - Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => events
+    [3] => canceled
+)
+
+[10-Sep-2025 17:48:04 Europe/Berlin] Event route - Endpoint: canceled
+[10-Sep-2025 17:48:04 Europe/Berlin] Event route - ID: null
+[10-Sep-2025 17:48:04 Europe/Berlin] Event route - Action: null
+[10-Sep-2025 17:48:05 Europe/Berlin] Request path: /updated-msc-website/api/events/upcoming
+[10-Sep-2025 17:48:05 Europe/Berlin] Request path: /updated-msc-website/api/events/canceled
+[10-Sep-2025 17:48:05 Europe/Berlin] Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => events
+    [3] => upcoming
+)
+
+[10-Sep-2025 17:48:05 Europe/Berlin] Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => events
+    [3] => canceled
+)
+
+[10-Sep-2025 17:48:05 Europe/Berlin] Original REQUEST_URI: /updated-msc-website/api/events/upcoming
+[10-Sep-2025 17:48:05 Europe/Berlin] Original REQUEST_URI: /updated-msc-website/api/events/canceled
+[10-Sep-2025 17:48:05 Europe/Berlin] Found API index, resource: events
+[10-Sep-2025 17:48:05 Europe/Berlin] Request path: /updated-msc-website/api/events/past
+[10-Sep-2025 17:48:05 Europe/Berlin] Found API index, resource: events
+[10-Sep-2025 17:48:05 Europe/Berlin] Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => events
+    [3] => past
+)
+
+[10-Sep-2025 17:48:05 Europe/Berlin] Original REQUEST_URI: /updated-msc-website/api/events/past
+[10-Sep-2025 17:48:05 Europe/Berlin] Found API index, resource: events
+[10-Sep-2025 17:48:05 Europe/Berlin] Event route - Path: /updated-msc-website/api/events/canceled
+[10-Sep-2025 17:48:05 Europe/Berlin] Event route - Path: /updated-msc-website/api/events/upcoming
+[10-Sep-2025 17:48:05 Europe/Berlin] Event route - Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => events
+    [3] => upcoming
+)
+
+[10-Sep-2025 17:48:05 Europe/Berlin] Event route - Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => events
+    [3] => canceled
+)
+
+[10-Sep-2025 17:48:06 Europe/Berlin] Event route - Endpoint: canceled
+[10-Sep-2025 17:48:06 Europe/Berlin] Event route - Endpoint: upcoming
+[10-Sep-2025 17:48:06 Europe/Berlin] Event route - ID: null
+[10-Sep-2025 17:48:06 Europe/Berlin] Event route - ID: null
+[10-Sep-2025 17:48:06 Europe/Berlin] Event route - Action: null
+[10-Sep-2025 17:48:06 Europe/Berlin] Event route - Action: null
+[10-Sep-2025 17:48:06 Europe/Berlin] Event route - Path: /updated-msc-website/api/events/past
+[10-Sep-2025 17:48:06 Europe/Berlin] Event route - Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => events
+    [3] => past
+)
+
+[10-Sep-2025 17:48:06 Europe/Berlin] Event route - Endpoint: past
+[10-Sep-2025 17:48:06 Europe/Berlin] Event route - ID: null
+[10-Sep-2025 17:48:06 Europe/Berlin] Event route - Action: null
+[10-Sep-2025 17:48:17 Europe/Berlin] Request path: /updated-msc-website/api/events/upcoming
+[10-Sep-2025 17:48:17 Europe/Berlin] Request path: /updated-msc-website/api/events/past
+[10-Sep-2025 17:48:17 Europe/Berlin] Request path: /updated-msc-website/api/events/canceled
+[10-Sep-2025 17:48:17 Europe/Berlin] Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => events
+    [3] => upcoming
+)
+
+[10-Sep-2025 17:48:17 Europe/Berlin] Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => events
+    [3] => past
+)
+
+[10-Sep-2025 17:48:17 Europe/Berlin] Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => events
+    [3] => canceled
+)
+
+[10-Sep-2025 17:48:17 Europe/Berlin] Original REQUEST_URI: /updated-msc-website/api/events/upcoming
+[10-Sep-2025 17:48:17 Europe/Berlin] Original REQUEST_URI: /updated-msc-website/api/events/past
+[10-Sep-2025 17:48:17 Europe/Berlin] Original REQUEST_URI: /updated-msc-website/api/events/canceled
+[10-Sep-2025 17:48:17 Europe/Berlin] Found API index, resource: events
+[10-Sep-2025 17:48:17 Europe/Berlin] Found API index, resource: events
+[10-Sep-2025 17:48:17 Europe/Berlin] Found API index, resource: events
+[10-Sep-2025 17:48:17 Europe/Berlin] Event route - Path: /updated-msc-website/api/events/canceled
+[10-Sep-2025 17:48:17 Europe/Berlin] Event route - Path: /updated-msc-website/api/events/upcoming
+[10-Sep-2025 17:48:17 Europe/Berlin] Event route - Path: /updated-msc-website/api/events/past
+[10-Sep-2025 17:48:17 Europe/Berlin] Event route - Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => events
+    [3] => canceled
+)
+
+[10-Sep-2025 17:48:17 Europe/Berlin] Event route - Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => events
+    [3] => upcoming
+)
+
+[10-Sep-2025 17:48:17 Europe/Berlin] Event route - Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => events
+    [3] => past
+)
+
+[10-Sep-2025 17:48:17 Europe/Berlin] Event route - Endpoint: upcoming
+[10-Sep-2025 17:48:17 Europe/Berlin] Event route - Endpoint: canceled
+[10-Sep-2025 17:48:17 Europe/Berlin] Event route - Endpoint: past
+[10-Sep-2025 17:48:17 Europe/Berlin] Event route - ID: null
+[10-Sep-2025 17:48:17 Europe/Berlin] Event route - ID: null
+[10-Sep-2025 17:48:17 Europe/Berlin] Event route - ID: null
+[10-Sep-2025 17:48:17 Europe/Berlin] Event route - Action: null
+[10-Sep-2025 17:48:17 Europe/Berlin] Event route - Action: null
+[10-Sep-2025 17:48:17 Europe/Berlin] Event route - Action: null
+[10-Sep-2025 17:49:11 Europe/Berlin] Request path: /updated-msc-website/api/events
+[10-Sep-2025 17:49:11 Europe/Berlin] Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => events
+)
+
+[10-Sep-2025 17:49:11 Europe/Berlin] Original REQUEST_URI: /updated-msc-website/api/events
+[10-Sep-2025 17:49:11 Europe/Berlin] Found API index, resource: events
+[10-Sep-2025 17:49:11 Europe/Berlin] Event route - Path: /updated-msc-website/api/events
+[10-Sep-2025 17:49:11 Europe/Berlin] Event route - Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => events
+)
+
+[10-Sep-2025 17:49:11 Europe/Berlin] Event route - Endpoint: 
+[10-Sep-2025 17:49:11 Europe/Berlin] Event route - ID: null
+[10-Sep-2025 17:49:11 Europe/Berlin] Event route - Action: null
+[10-Sep-2025 17:49:17 Europe/Berlin] Request path: /updated-msc-website/api/events
+[10-Sep-2025 17:49:17 Europe/Berlin] Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => events
+)
+
+[10-Sep-2025 17:49:17 Europe/Berlin] Original REQUEST_URI: /updated-msc-website/api/events
+[10-Sep-2025 17:49:17 Europe/Berlin] Found API index, resource: events
+[10-Sep-2025 17:49:17 Europe/Berlin] Event route - Path: /updated-msc-website/api/events
+[10-Sep-2025 17:49:17 Europe/Berlin] Event route - Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => events
+)
+
+[10-Sep-2025 17:49:17 Europe/Berlin] Event route - Endpoint: 
+[10-Sep-2025 17:49:17 Europe/Berlin] Event route - ID: null
+[10-Sep-2025 17:49:17 Europe/Berlin] Event route - Action: null
+[10-Sep-2025 17:49:17 Europe/Berlin] PHP Deprecated:  trim(): Passing null to parameter #1 ($string) of type string is deprecated in C:\xampp\htdocs\updated-msc-website\api\utils\Validator.php on line 87
+[10-Sep-2025 17:49:17 Europe/Berlin] PHP Deprecated:  trim(): Passing null to parameter #1 ($string) of type string is deprecated in C:\xampp\htdocs\updated-msc-website\api\utils\Validator.php on line 87
+[10-Sep-2025 17:49:17 Europe/Berlin] Request path: /updated-msc-website/api/events/upcoming
+[10-Sep-2025 17:49:17 Europe/Berlin] Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => events
+    [3] => upcoming
+)
+
+[10-Sep-2025 17:49:17 Europe/Berlin] Original REQUEST_URI: /updated-msc-website/api/events/upcoming
+[10-Sep-2025 17:49:17 Europe/Berlin] Found API index, resource: events
+[10-Sep-2025 17:49:17 Europe/Berlin] Event route - Path: /updated-msc-website/api/events/upcoming
+[10-Sep-2025 17:49:17 Europe/Berlin] Event route - Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => events
+    [3] => upcoming
+)
+
+[10-Sep-2025 17:49:17 Europe/Berlin] Event route - Endpoint: upcoming
+[10-Sep-2025 17:49:17 Europe/Berlin] Event route - ID: null
+[10-Sep-2025 17:49:17 Europe/Berlin] Event route - Action: null
+[10-Sep-2025 17:49:20 Europe/Berlin] Request path: /updated-msc-website/api/events/msc-calendar
+[10-Sep-2025 17:49:20 Europe/Berlin] Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => events
+    [3] => msc-calendar
+)
+
+[10-Sep-2025 17:49:20 Europe/Berlin] Original REQUEST_URI: /updated-msc-website/api/events/msc-calendar?start=2025-09-08&end=2025-09-14
+[10-Sep-2025 17:49:20 Europe/Berlin] Found API index, resource: events
+[10-Sep-2025 17:49:20 Europe/Berlin] Event route - Path: /updated-msc-website/api/events/msc-calendar
+[10-Sep-2025 17:49:20 Europe/Berlin] Event route - Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => events
+    [3] => msc-calendar
+)
+
+[10-Sep-2025 17:49:20 Europe/Berlin] Event route - Endpoint: msc-calendar
+[10-Sep-2025 17:49:20 Europe/Berlin] Event route - ID: null
+[10-Sep-2025 17:49:20 Europe/Berlin] Event route - Action: null
+[10-Sep-2025 17:49:22 Europe/Berlin] Request path: /updated-msc-website/api/events/upcoming
+[10-Sep-2025 17:49:22 Europe/Berlin] Request path: /updated-msc-website/api/events/canceled
+[10-Sep-2025 17:49:22 Europe/Berlin] Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => events
+    [3] => upcoming
+)
+
+[10-Sep-2025 17:49:22 Europe/Berlin] Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => events
+    [3] => canceled
+)
+
+[10-Sep-2025 17:49:22 Europe/Berlin] Original REQUEST_URI: /updated-msc-website/api/events/upcoming
+[10-Sep-2025 17:49:22 Europe/Berlin] Original REQUEST_URI: /updated-msc-website/api/events/canceled
+[10-Sep-2025 17:49:22 Europe/Berlin] Request path: /updated-msc-website/api/events/past
+[10-Sep-2025 17:49:22 Europe/Berlin] Found API index, resource: events
+[10-Sep-2025 17:49:22 Europe/Berlin] Found API index, resource: events
+[10-Sep-2025 17:49:22 Europe/Berlin] Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => events
+    [3] => past
+)
+
+[10-Sep-2025 17:49:22 Europe/Berlin] Original REQUEST_URI: /updated-msc-website/api/events/past
+[10-Sep-2025 17:49:22 Europe/Berlin] Found API index, resource: events
+[10-Sep-2025 17:49:22 Europe/Berlin] Event route - Path: /updated-msc-website/api/events/canceled
+[10-Sep-2025 17:49:22 Europe/Berlin] Event route - Path: /updated-msc-website/api/events/upcoming
+[10-Sep-2025 17:49:22 Europe/Berlin] Event route - Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => events
+    [3] => canceled
+)
+
+[10-Sep-2025 17:49:22 Europe/Berlin] Event route - Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => events
+    [3] => upcoming
+)
+
+[10-Sep-2025 17:49:22 Europe/Berlin] Event route - Endpoint: upcoming
+[10-Sep-2025 17:49:22 Europe/Berlin] Event route - Endpoint: canceled
+[10-Sep-2025 17:49:22 Europe/Berlin] Event route - ID: null
+[10-Sep-2025 17:49:22 Europe/Berlin] Event route - Path: /updated-msc-website/api/events/past
+[10-Sep-2025 17:49:22 Europe/Berlin] Event route - ID: null
+[10-Sep-2025 17:49:22 Europe/Berlin] Event route - Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => events
+    [3] => past
+)
+
+[10-Sep-2025 17:49:22 Europe/Berlin] Event route - Action: null
+[10-Sep-2025 17:49:22 Europe/Berlin] Event route - Action: null
+[10-Sep-2025 17:49:22 Europe/Berlin] Event route - Endpoint: past
+[10-Sep-2025 17:49:22 Europe/Berlin] Event route - ID: null
+[10-Sep-2025 17:49:22 Europe/Berlin] Event route - Action: null
+[10-Sep-2025 17:49:25 Europe/Berlin] Request path: /updated-msc-website/api/events/8
+[10-Sep-2025 17:49:25 Europe/Berlin] Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => events
+    [3] => 8
+)
+
+[10-Sep-2025 17:49:25 Europe/Berlin] Original REQUEST_URI: /updated-msc-website/api/events/8
+[10-Sep-2025 17:49:25 Europe/Berlin] Found API index, resource: events
+[10-Sep-2025 17:49:25 Europe/Berlin] Event route - Path: /updated-msc-website/api/events/8
+[10-Sep-2025 17:49:25 Europe/Berlin] Event route - Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => events
+    [3] => 8
+)
+
+[10-Sep-2025 17:49:25 Europe/Berlin] Event route - Endpoint: 8
+[10-Sep-2025 17:49:25 Europe/Berlin] Event route - ID: null
+[10-Sep-2025 17:49:25 Europe/Berlin] Event route - Action: null
+[10-Sep-2025 17:49:30 Europe/Berlin] Request path: /updated-msc-website/api/events/8
+[10-Sep-2025 17:49:30 Europe/Berlin] Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => events
+    [3] => 8
+)
+
+[10-Sep-2025 17:49:30 Europe/Berlin] Original REQUEST_URI: /updated-msc-website/api/events/8
+[10-Sep-2025 17:49:30 Europe/Berlin] Found API index, resource: events
+[10-Sep-2025 17:49:30 Europe/Berlin] Event route - Path: /updated-msc-website/api/events/8
+[10-Sep-2025 17:49:30 Europe/Berlin] Event route - Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => events
+    [3] => 8
+)
+
+[10-Sep-2025 17:49:30 Europe/Berlin] Event route - Endpoint: 8
+[10-Sep-2025 17:49:30 Europe/Berlin] Event route - ID: null
+[10-Sep-2025 17:49:30 Europe/Berlin] Event route - Action: null
+[10-Sep-2025 17:49:30 Europe/Berlin] Request path: /updated-msc-website/api/events/upcoming
+[10-Sep-2025 17:49:30 Europe/Berlin] Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => events
+    [3] => upcoming
+)
+
+[10-Sep-2025 17:49:30 Europe/Berlin] Original REQUEST_URI: /updated-msc-website/api/events/upcoming
+[10-Sep-2025 17:49:30 Europe/Berlin] Found API index, resource: events
+[10-Sep-2025 17:49:30 Europe/Berlin] Event route - Path: /updated-msc-website/api/events/upcoming
+[10-Sep-2025 17:49:30 Europe/Berlin] Event route - Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => events
+    [3] => upcoming
+)
+
+[10-Sep-2025 17:49:30 Europe/Berlin] Event route - Endpoint: upcoming
+[10-Sep-2025 17:49:30 Europe/Berlin] Event route - ID: null
+[10-Sep-2025 17:49:30 Europe/Berlin] Event route - Action: null
+[10-Sep-2025 17:49:37 Europe/Berlin] Request path: /updated-msc-website/api/events/8
+[10-Sep-2025 17:49:37 Europe/Berlin] Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => events
+    [3] => 8
+)
+
+[10-Sep-2025 17:49:37 Europe/Berlin] Original REQUEST_URI: /updated-msc-website/api/events/8
+[10-Sep-2025 17:49:37 Europe/Berlin] Found API index, resource: events
+[10-Sep-2025 17:49:37 Europe/Berlin] Event route - Path: /updated-msc-website/api/events/8
+[10-Sep-2025 17:49:37 Europe/Berlin] Event route - Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => events
+    [3] => 8
+)
+
+[10-Sep-2025 17:49:37 Europe/Berlin] Event route - Endpoint: 8
+[10-Sep-2025 17:49:37 Europe/Berlin] Event route - ID: null
+[10-Sep-2025 17:49:37 Europe/Berlin] Event route - Action: null
+[10-Sep-2025 17:49:37 Europe/Berlin] Request path: /updated-msc-website/api/events/upcoming
+[10-Sep-2025 17:49:37 Europe/Berlin] Request path: /updated-msc-website/api/events/canceled
+[10-Sep-2025 17:49:37 Europe/Berlin] Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => events
+    [3] => upcoming
+)
+
+[10-Sep-2025 17:49:37 Europe/Berlin] Original REQUEST_URI: /updated-msc-website/api/events/upcoming
+[10-Sep-2025 17:49:37 Europe/Berlin] Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => events
+    [3] => canceled
+)
+
+[10-Sep-2025 17:49:37 Europe/Berlin] Found API index, resource: events
+[10-Sep-2025 17:49:37 Europe/Berlin] Original REQUEST_URI: /updated-msc-website/api/events/canceled
+[10-Sep-2025 17:49:37 Europe/Berlin] Found API index, resource: events
+[10-Sep-2025 17:49:37 Europe/Berlin] Event route - Path: /updated-msc-website/api/events/upcoming
+[10-Sep-2025 17:49:37 Europe/Berlin] Event route - Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => events
+    [3] => upcoming
+)
+
+[10-Sep-2025 17:49:37 Europe/Berlin] Event route - Path: /updated-msc-website/api/events/canceled
+[10-Sep-2025 17:49:37 Europe/Berlin] Event route - Endpoint: upcoming
+[10-Sep-2025 17:49:37 Europe/Berlin] Event route - Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => events
+    [3] => canceled
+)
+
+[10-Sep-2025 17:49:37 Europe/Berlin] Event route - ID: null
+[10-Sep-2025 17:49:37 Europe/Berlin] Event route - Endpoint: canceled
+[10-Sep-2025 17:49:37 Europe/Berlin] Event route - Action: null
+[10-Sep-2025 17:49:37 Europe/Berlin] Event route - ID: null
+[10-Sep-2025 17:49:37 Europe/Berlin] Event route - Action: null
+[10-Sep-2025 17:53:18 Europe/Berlin] Request path: /updated-msc-website/api/events/upcoming
+[10-Sep-2025 17:53:18 Europe/Berlin] Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => events
+    [3] => upcoming
+)
+
+[10-Sep-2025 17:53:18 Europe/Berlin] Request path: /updated-msc-website/api/events/canceled
+[10-Sep-2025 17:53:18 Europe/Berlin] Original REQUEST_URI: /updated-msc-website/api/events/upcoming
+[10-Sep-2025 17:53:18 Europe/Berlin] Found API index, resource: events
+[10-Sep-2025 17:53:18 Europe/Berlin] Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => events
+    [3] => canceled
+)
+
+[10-Sep-2025 17:53:18 Europe/Berlin] Original REQUEST_URI: /updated-msc-website/api/events/canceled
+[10-Sep-2025 17:53:18 Europe/Berlin] Found API index, resource: events
+[10-Sep-2025 17:53:18 Europe/Berlin] Request path: /updated-msc-website/api/events/past
+[10-Sep-2025 17:53:18 Europe/Berlin] Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => events
+    [3] => past
+)
+
+[10-Sep-2025 17:53:18 Europe/Berlin] Original REQUEST_URI: /updated-msc-website/api/events/past
+[10-Sep-2025 17:53:18 Europe/Berlin] Found API index, resource: events
+[10-Sep-2025 17:53:18 Europe/Berlin] Event route - Path: /updated-msc-website/api/events/upcoming
+[10-Sep-2025 17:53:18 Europe/Berlin] Event route - Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => events
+    [3] => upcoming
+)
+
+[10-Sep-2025 17:53:18 Europe/Berlin] Event route - Path: /updated-msc-website/api/events/canceled
+[10-Sep-2025 17:53:18 Europe/Berlin] Event route - Endpoint: upcoming
+[10-Sep-2025 17:53:18 Europe/Berlin] Event route - Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => events
+    [3] => canceled
+)
+
+[10-Sep-2025 17:53:18 Europe/Berlin] Event route - ID: null
+[10-Sep-2025 17:53:18 Europe/Berlin] Event route - Endpoint: canceled
+[10-Sep-2025 17:53:18 Europe/Berlin] Event route - Action: null
+[10-Sep-2025 17:53:18 Europe/Berlin] Event route - ID: null
+[10-Sep-2025 17:53:18 Europe/Berlin] Event route - Path: /updated-msc-website/api/events/past
+[10-Sep-2025 17:53:18 Europe/Berlin] Event route - Action: null
+[10-Sep-2025 17:53:18 Europe/Berlin] Event route - Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => events
+    [3] => past
+)
+
+[10-Sep-2025 17:53:18 Europe/Berlin] Event route - Endpoint: past
+[10-Sep-2025 17:53:18 Europe/Berlin] Event route - ID: null
+[10-Sep-2025 17:53:18 Europe/Berlin] Event route - Action: null
+[10-Sep-2025 17:53:28 Europe/Berlin] Request path: /updated-msc-website/api/events/upcoming
+[10-Sep-2025 17:53:28 Europe/Berlin] Request path: /updated-msc-website/api/events/canceled
+[10-Sep-2025 17:53:28 Europe/Berlin] Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => events
+    [3] => upcoming
+)
+
+[10-Sep-2025 17:53:28 Europe/Berlin] Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => events
+    [3] => canceled
+)
+
+[10-Sep-2025 17:53:28 Europe/Berlin] Original REQUEST_URI: /updated-msc-website/api/events/upcoming
+[10-Sep-2025 17:53:28 Europe/Berlin] Request path: /updated-msc-website/api/events/past
+[10-Sep-2025 17:53:28 Europe/Berlin] Found API index, resource: events
+[10-Sep-2025 17:53:28 Europe/Berlin] Original REQUEST_URI: /updated-msc-website/api/events/canceled
+[10-Sep-2025 17:53:28 Europe/Berlin] Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => events
+    [3] => past
+)
+
+[10-Sep-2025 17:53:28 Europe/Berlin] Found API index, resource: events
+[10-Sep-2025 17:53:28 Europe/Berlin] Original REQUEST_URI: /updated-msc-website/api/events/past
+[10-Sep-2025 17:53:28 Europe/Berlin] Found API index, resource: events
+[10-Sep-2025 17:53:28 Europe/Berlin] Event route - Path: /updated-msc-website/api/events/upcoming
+[10-Sep-2025 17:53:28 Europe/Berlin] Event route - Path: /updated-msc-website/api/events/canceled
+[10-Sep-2025 17:53:28 Europe/Berlin] Event route - Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => events
+    [3] => upcoming
+)
+
+[10-Sep-2025 17:53:28 Europe/Berlin] Event route - Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => events
+    [3] => canceled
+)
+
+[10-Sep-2025 17:53:28 Europe/Berlin] Event route - Path: /updated-msc-website/api/events/past
+[10-Sep-2025 17:53:28 Europe/Berlin] Event route - Endpoint: upcoming
+[10-Sep-2025 17:53:28 Europe/Berlin] Event route - Endpoint: canceled
+[10-Sep-2025 17:53:28 Europe/Berlin] Event route - Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => events
+    [3] => past
+)
+
+[10-Sep-2025 17:53:28 Europe/Berlin] Event route - ID: null
+[10-Sep-2025 17:53:28 Europe/Berlin] Event route - ID: null
+[10-Sep-2025 17:53:28 Europe/Berlin] Event route - Endpoint: past
+[10-Sep-2025 17:53:28 Europe/Berlin] Event route - Action: null
+[10-Sep-2025 17:53:28 Europe/Berlin] Event route - Action: null
+[10-Sep-2025 17:53:28 Europe/Berlin] Event route - ID: null
+[10-Sep-2025 17:53:28 Europe/Berlin] Event route - Action: null
+[10-Sep-2025 17:54:04 Europe/Berlin] Request path: /updated-msc-website/api/events
+[10-Sep-2025 17:54:04 Europe/Berlin] Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => events
+)
+
+[10-Sep-2025 17:54:04 Europe/Berlin] Original REQUEST_URI: /updated-msc-website/api/events
+[10-Sep-2025 17:54:04 Europe/Berlin] Found API index, resource: events
+[10-Sep-2025 17:54:04 Europe/Berlin] Event route - Path: /updated-msc-website/api/events
+[10-Sep-2025 17:54:04 Europe/Berlin] Event route - Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => events
+)
+
+[10-Sep-2025 17:54:04 Europe/Berlin] Event route - Endpoint: 
+[10-Sep-2025 17:54:04 Europe/Berlin] Event route - ID: null
+[10-Sep-2025 17:54:04 Europe/Berlin] Event route - Action: null
+[10-Sep-2025 17:54:04 Europe/Berlin] PHP Deprecated:  trim(): Passing null to parameter #1 ($string) of type string is deprecated in C:\xampp\htdocs\updated-msc-website\api\utils\Validator.php on line 87
+[10-Sep-2025 17:54:04 Europe/Berlin] PHP Deprecated:  trim(): Passing null to parameter #1 ($string) of type string is deprecated in C:\xampp\htdocs\updated-msc-website\api\utils\Validator.php on line 87
+[10-Sep-2025 17:54:04 Europe/Berlin] Request path: /updated-msc-website/api/events/upcoming
+[10-Sep-2025 17:54:04 Europe/Berlin] Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => events
+    [3] => upcoming
+)
+
+[10-Sep-2025 17:54:04 Europe/Berlin] Original REQUEST_URI: /updated-msc-website/api/events/upcoming
+[10-Sep-2025 17:54:04 Europe/Berlin] Found API index, resource: events
+[10-Sep-2025 17:54:04 Europe/Berlin] Event route - Path: /updated-msc-website/api/events/upcoming
+[10-Sep-2025 17:54:04 Europe/Berlin] Event route - Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => events
+    [3] => upcoming
+)
+
+[10-Sep-2025 17:54:04 Europe/Berlin] Event route - Endpoint: upcoming
+[10-Sep-2025 17:54:04 Europe/Berlin] Event route - ID: null
+[10-Sep-2025 17:54:04 Europe/Berlin] Event route - Action: null
+[10-Sep-2025 17:54:08 Europe/Berlin] Request path: /updated-msc-website/api/events/msc-calendar
+[10-Sep-2025 17:54:08 Europe/Berlin] Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => events
+    [3] => msc-calendar
+)
+
+[10-Sep-2025 17:54:08 Europe/Berlin] Original REQUEST_URI: /updated-msc-website/api/events/msc-calendar?start=2025-09-08&end=2025-09-14
+[10-Sep-2025 17:54:08 Europe/Berlin] Found API index, resource: events
+[10-Sep-2025 17:54:08 Europe/Berlin] Event route - Path: /updated-msc-website/api/events/msc-calendar
+[10-Sep-2025 17:54:08 Europe/Berlin] Event route - Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => events
+    [3] => msc-calendar
+)
+
+[10-Sep-2025 17:54:08 Europe/Berlin] Event route - Endpoint: msc-calendar
+[10-Sep-2025 17:54:08 Europe/Berlin] Event route - ID: null
+[10-Sep-2025 17:54:08 Europe/Berlin] Event route - Action: null
+[10-Sep-2025 17:54:09 Europe/Berlin] Request path: /updated-msc-website/api/events/upcoming
+[10-Sep-2025 17:54:09 Europe/Berlin] Request path: /updated-msc-website/api/events/canceled
+[10-Sep-2025 17:54:09 Europe/Berlin] Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => events
+    [3] => upcoming
+)
+
+[10-Sep-2025 17:54:09 Europe/Berlin] Request path: /updated-msc-website/api/events/past
+[10-Sep-2025 17:54:09 Europe/Berlin] Original REQUEST_URI: /updated-msc-website/api/events/upcoming
+[10-Sep-2025 17:54:09 Europe/Berlin] Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => events
+    [3] => canceled
+)
+
+[10-Sep-2025 17:54:09 Europe/Berlin] Original REQUEST_URI: /updated-msc-website/api/events/canceled
+[10-Sep-2025 17:54:09 Europe/Berlin] Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => events
+    [3] => past
+)
+
+[10-Sep-2025 17:54:09 Europe/Berlin] Found API index, resource: events
+[10-Sep-2025 17:54:09 Europe/Berlin] Original REQUEST_URI: /updated-msc-website/api/events/past
+[10-Sep-2025 17:54:09 Europe/Berlin] Found API index, resource: events
+[10-Sep-2025 17:54:09 Europe/Berlin] Found API index, resource: events
+[10-Sep-2025 17:54:09 Europe/Berlin] Event route - Path: /updated-msc-website/api/events/canceled
+[10-Sep-2025 17:54:09 Europe/Berlin] Event route - Path: /updated-msc-website/api/events/upcoming
+[10-Sep-2025 17:54:09 Europe/Berlin] Event route - Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => events
+    [3] => canceled
+)
+
+[10-Sep-2025 17:54:09 Europe/Berlin] Event route - Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => events
+    [3] => upcoming
+)
+
+[10-Sep-2025 17:54:09 Europe/Berlin] Event route - Endpoint: canceled
+[10-Sep-2025 17:54:09 Europe/Berlin] Event route - Endpoint: upcoming
+[10-Sep-2025 17:54:09 Europe/Berlin] Event route - Path: /updated-msc-website/api/events/past
+[10-Sep-2025 17:54:09 Europe/Berlin] Event route - ID: null
+[10-Sep-2025 17:54:09 Europe/Berlin] Event route - ID: null
+[10-Sep-2025 17:54:09 Europe/Berlin] Event route - Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => events
+    [3] => past
+)
+
+[10-Sep-2025 17:54:09 Europe/Berlin] Event route - Action: null
+[10-Sep-2025 17:54:09 Europe/Berlin] Event route - Action: null
+[10-Sep-2025 17:54:09 Europe/Berlin] Event route - Endpoint: past
+[10-Sep-2025 17:54:09 Europe/Berlin] Event route - ID: null
+[10-Sep-2025 17:54:09 Europe/Berlin] Event route - Action: null
+[10-Sep-2025 17:54:15 Europe/Berlin] Request path: /updated-msc-website/api/events
+[10-Sep-2025 17:54:15 Europe/Berlin] Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => events
+)
+
+[10-Sep-2025 17:54:15 Europe/Berlin] Original REQUEST_URI: /updated-msc-website/api/events?page=1&limit=100
+[10-Sep-2025 17:54:15 Europe/Berlin] Found API index, resource: events
+[10-Sep-2025 17:54:15 Europe/Berlin] Event route - Path: /updated-msc-website/api/events
+[10-Sep-2025 17:54:15 Europe/Berlin] Event route - Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => events
+)
+
+[10-Sep-2025 17:54:15 Europe/Berlin] Event route - Endpoint: 
+[10-Sep-2025 17:54:15 Europe/Berlin] Event route - ID: null
+[10-Sep-2025 17:54:15 Europe/Berlin] Event route - Action: null
+[10-Sep-2025 17:54:15 Europe/Berlin] Request path: /updated-msc-website/api/events
+[10-Sep-2025 17:54:15 Europe/Berlin] Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => events
+)
+
+[10-Sep-2025 17:54:15 Europe/Berlin] Original REQUEST_URI: /updated-msc-website/api/events?page=1&limit=100
+[10-Sep-2025 17:54:15 Europe/Berlin] Found API index, resource: events
+[10-Sep-2025 17:54:15 Europe/Berlin] Event route - Path: /updated-msc-website/api/events
+[10-Sep-2025 17:54:15 Europe/Berlin] Event route - Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => events
+)
+
+[10-Sep-2025 17:54:15 Europe/Berlin] Event route - Endpoint: 
+[10-Sep-2025 17:54:15 Europe/Berlin] Event route - ID: null
+[10-Sep-2025 17:54:15 Europe/Berlin] Event route - Action: null
+[10-Sep-2025 17:54:17 Europe/Berlin] Request path: /updated-msc-website/api/events/9/register
+[10-Sep-2025 17:54:17 Europe/Berlin] Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => events
+    [3] => 9
+    [4] => register
+)
+
+[10-Sep-2025 17:54:17 Europe/Berlin] Original REQUEST_URI: /updated-msc-website/api/events/9/register
+[10-Sep-2025 17:54:17 Europe/Berlin] Found API index, resource: events
+[10-Sep-2025 17:54:17 Europe/Berlin] Event route - Path: /updated-msc-website/api/events/9/register
+[10-Sep-2025 17:54:17 Europe/Berlin] Event route - Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => events
+    [3] => 9
+    [4] => register
+)
+
+[10-Sep-2025 17:54:17 Europe/Berlin] Event route - Endpoint: 9
+[10-Sep-2025 17:54:17 Europe/Berlin] Event route - ID: register
+[10-Sep-2025 17:54:17 Europe/Berlin] Event route - Action: null
+[10-Sep-2025 17:54:32 Europe/Berlin] Request path: /updated-msc-website/api/auth/login
+[10-Sep-2025 17:54:32 Europe/Berlin] Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => auth
+    [3] => login
+)
+
+[10-Sep-2025 17:54:32 Europe/Berlin] Original REQUEST_URI: /updated-msc-website/api/auth/login
+[10-Sep-2025 17:54:32 Europe/Berlin] Found API index, resource: auth
+[10-Sep-2025 17:54:32 Europe/Berlin] Auth route - Path: /updated-msc-website/api/auth/login
+[10-Sep-2025 17:54:32 Europe/Berlin] Auth route - Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => auth
+    [3] => login
+)
+
+[10-Sep-2025 17:54:32 Europe/Berlin] Auth route - API Index: 1
+[10-Sep-2025 17:54:32 Europe/Berlin] Auth route - Auth Index: 2
+[10-Sep-2025 17:54:32 Europe/Berlin] Auth route - Endpoint: login
+[10-Sep-2025 17:54:37 Europe/Berlin] Request path: /updated-msc-website/api/events
+[10-Sep-2025 17:54:37 Europe/Berlin] Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => events
+)
+
+[10-Sep-2025 17:54:37 Europe/Berlin] Original REQUEST_URI: /updated-msc-website/api/events?page=1&limit=100
+[10-Sep-2025 17:54:37 Europe/Berlin] Found API index, resource: events
+[10-Sep-2025 17:54:37 Europe/Berlin] Event route - Path: /updated-msc-website/api/events
+[10-Sep-2025 17:54:37 Europe/Berlin] Event route - Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => events
+)
+
+[10-Sep-2025 17:54:37 Europe/Berlin] Event route - Endpoint: 
+[10-Sep-2025 17:54:37 Europe/Berlin] Event route - ID: null
+[10-Sep-2025 17:54:37 Europe/Berlin] Event route - Action: null
+[10-Sep-2025 17:54:37 Europe/Berlin] Request path: /updated-msc-website/api/events
+[10-Sep-2025 17:54:37 Europe/Berlin] Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => events
+)
+
+[10-Sep-2025 17:54:37 Europe/Berlin] Original REQUEST_URI: /updated-msc-website/api/events?page=1&limit=100
+[10-Sep-2025 17:54:37 Europe/Berlin] Found API index, resource: events
+[10-Sep-2025 17:54:37 Europe/Berlin] Event route - Path: /updated-msc-website/api/events
+[10-Sep-2025 17:54:37 Europe/Berlin] Event route - Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => events
+)
+
+[10-Sep-2025 17:54:37 Europe/Berlin] Event route - Endpoint: 
+[10-Sep-2025 17:54:37 Europe/Berlin] Event route - ID: null
+[10-Sep-2025 17:54:37 Europe/Berlin] Event route - Action: null
+[10-Sep-2025 17:54:39 Europe/Berlin] Request path: /updated-msc-website/api/events/9/register
+[10-Sep-2025 17:54:39 Europe/Berlin] Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => events
+    [3] => 9
+    [4] => register
+)
+
+[10-Sep-2025 17:54:39 Europe/Berlin] Original REQUEST_URI: /updated-msc-website/api/events/9/register
+[10-Sep-2025 17:54:39 Europe/Berlin] Found API index, resource: events
+[10-Sep-2025 17:54:39 Europe/Berlin] Event route - Path: /updated-msc-website/api/events/9/register
+[10-Sep-2025 17:54:39 Europe/Berlin] Event route - Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => events
+    [3] => 9
+    [4] => register
+)
+
+[10-Sep-2025 17:54:39 Europe/Berlin] Event route - Endpoint: 9
+[10-Sep-2025 17:54:39 Europe/Berlin] Event route - ID: register
+[10-Sep-2025 17:54:39 Europe/Berlin] Event route - Action: null
+[10-Sep-2025 17:54:44 Europe/Berlin] Request path: /updated-msc-website/api/events/upcoming
+[10-Sep-2025 17:54:44 Europe/Berlin] Request path: /updated-msc-website/api/events/canceled
+[10-Sep-2025 17:54:44 Europe/Berlin] Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => events
+    [3] => upcoming
+)
+
+[10-Sep-2025 17:54:44 Europe/Berlin] Original REQUEST_URI: /updated-msc-website/api/events/upcoming
+[10-Sep-2025 17:54:44 Europe/Berlin] Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => events
+    [3] => canceled
+)
+
+[10-Sep-2025 17:54:44 Europe/Berlin] Request path: /updated-msc-website/api/events/past
+[10-Sep-2025 17:54:44 Europe/Berlin] Found API index, resource: events
+[10-Sep-2025 17:54:44 Europe/Berlin] Original REQUEST_URI: /updated-msc-website/api/events/canceled
+[10-Sep-2025 17:54:44 Europe/Berlin] Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => events
+    [3] => past
+)
+
+[10-Sep-2025 17:54:44 Europe/Berlin] Found API index, resource: events
+[10-Sep-2025 17:54:44 Europe/Berlin] Original REQUEST_URI: /updated-msc-website/api/events/past
+[10-Sep-2025 17:54:44 Europe/Berlin] Found API index, resource: events
+[10-Sep-2025 17:54:44 Europe/Berlin] Event route - Path: /updated-msc-website/api/events/upcoming
+[10-Sep-2025 17:54:44 Europe/Berlin] Event route - Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => events
+    [3] => upcoming
+)
+
+[10-Sep-2025 17:54:44 Europe/Berlin] Event route - Endpoint: upcoming
+[10-Sep-2025 17:54:44 Europe/Berlin] Event route - Path: /updated-msc-website/api/events/past
+[10-Sep-2025 17:54:44 Europe/Berlin] Event route - Path: /updated-msc-website/api/events/canceled
+[10-Sep-2025 17:54:44 Europe/Berlin] Event route - ID: null
+[10-Sep-2025 17:54:44 Europe/Berlin] Event route - Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => events
+    [3] => canceled
+)
+
+[10-Sep-2025 17:54:44 Europe/Berlin] Event route - Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => events
+    [3] => past
+)
+
+[10-Sep-2025 17:54:44 Europe/Berlin] Event route - Action: null
+[10-Sep-2025 17:54:44 Europe/Berlin] Event route - Endpoint: past
+[10-Sep-2025 17:54:44 Europe/Berlin] Event route - Endpoint: canceled
+[10-Sep-2025 17:54:44 Europe/Berlin] Event route - ID: null
+[10-Sep-2025 17:54:44 Europe/Berlin] Event route - ID: null
+[10-Sep-2025 17:54:44 Europe/Berlin] Event route - Action: null
+[10-Sep-2025 17:54:44 Europe/Berlin] Event route - Action: null
+[10-Sep-2025 17:54:55 Europe/Berlin] Request path: /updated-msc-website/api/auth/login
+[10-Sep-2025 17:54:55 Europe/Berlin] Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => auth
+    [3] => login
+)
+
+[10-Sep-2025 17:54:55 Europe/Berlin] Original REQUEST_URI: /updated-msc-website/api/auth/login
+[10-Sep-2025 17:54:55 Europe/Berlin] Found API index, resource: auth
+[10-Sep-2025 17:54:55 Europe/Berlin] Auth route - Path: /updated-msc-website/api/auth/login
+[10-Sep-2025 17:54:55 Europe/Berlin] Auth route - Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => auth
+    [3] => login
+)
+
+[10-Sep-2025 17:54:55 Europe/Berlin] Auth route - API Index: 1
+[10-Sep-2025 17:54:55 Europe/Berlin] Auth route - Auth Index: 2
+[10-Sep-2025 17:54:55 Europe/Berlin] Auth route - Endpoint: login
+[10-Sep-2025 17:55:02 Europe/Berlin] Request path: /updated-msc-website/api/students
+[10-Sep-2025 17:55:02 Europe/Berlin] Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => students
+)
+
+[10-Sep-2025 17:55:02 Europe/Berlin] Original REQUEST_URI: /updated-msc-website/api/students?page=1&limit=20
+[10-Sep-2025 17:55:02 Europe/Berlin] Found API index, resource: students
+[10-Sep-2025 17:55:02 Europe/Berlin] Student route - Path: /updated-msc-website/api/students
+[10-Sep-2025 17:55:02 Europe/Berlin] Student route - Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => students
+)
+
+[10-Sep-2025 17:55:02 Europe/Berlin] Student route - Endpoint: 
+[10-Sep-2025 17:55:02 Europe/Berlin] Student route - ID: null
+[10-Sep-2025 17:55:17 Europe/Berlin] Request path: /updated-msc-website/api/auth/login
+[10-Sep-2025 17:55:17 Europe/Berlin] Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => auth
+    [3] => login
+)
+
+[10-Sep-2025 17:55:17 Europe/Berlin] Original REQUEST_URI: /updated-msc-website/api/auth/login
+[10-Sep-2025 17:55:17 Europe/Berlin] Found API index, resource: auth
+[10-Sep-2025 17:55:17 Europe/Berlin] Auth route - Path: /updated-msc-website/api/auth/login
+[10-Sep-2025 17:55:17 Europe/Berlin] Auth route - Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => auth
+    [3] => login
+)
+
+[10-Sep-2025 17:55:17 Europe/Berlin] Auth route - API Index: 1
+[10-Sep-2025 17:55:17 Europe/Berlin] Auth route - Auth Index: 2
+[10-Sep-2025 17:55:17 Europe/Berlin] Auth route - Endpoint: login
+[10-Sep-2025 17:55:21 Europe/Berlin] Request path: /updated-msc-website/api/events
+[10-Sep-2025 17:55:21 Europe/Berlin] Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => events
+)
+
+[10-Sep-2025 17:55:21 Europe/Berlin] Original REQUEST_URI: /updated-msc-website/api/events?page=1&limit=100
+[10-Sep-2025 17:55:21 Europe/Berlin] Found API index, resource: events
+[10-Sep-2025 17:55:21 Europe/Berlin] Event route - Path: /updated-msc-website/api/events
+[10-Sep-2025 17:55:21 Europe/Berlin] Event route - Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => events
+)
+
+[10-Sep-2025 17:55:21 Europe/Berlin] Event route - Endpoint: 
+[10-Sep-2025 17:55:21 Europe/Berlin] Event route - ID: null
+[10-Sep-2025 17:55:21 Europe/Berlin] Event route - Action: null
+[10-Sep-2025 17:55:21 Europe/Berlin] Request path: /updated-msc-website/api/events
+[10-Sep-2025 17:55:21 Europe/Berlin] Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => events
+)
+
+[10-Sep-2025 17:55:21 Europe/Berlin] Original REQUEST_URI: /updated-msc-website/api/events?page=1&limit=100
+[10-Sep-2025 17:55:21 Europe/Berlin] Found API index, resource: events
+[10-Sep-2025 17:55:21 Europe/Berlin] Event route - Path: /updated-msc-website/api/events
+[10-Sep-2025 17:55:21 Europe/Berlin] Event route - Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => events
+)
+
+[10-Sep-2025 17:55:21 Europe/Berlin] Event route - Endpoint: 
+[10-Sep-2025 17:55:21 Europe/Berlin] Event route - ID: null
+[10-Sep-2025 17:55:21 Europe/Berlin] Event route - Action: null
+[10-Sep-2025 17:55:43 Europe/Berlin] Request path: /updated-msc-website/api/events/9
+[10-Sep-2025 17:55:43 Europe/Berlin] Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => events
+    [3] => 9
+)
+
+[10-Sep-2025 17:55:43 Europe/Berlin] Original REQUEST_URI: /updated-msc-website/api/events/9
+[10-Sep-2025 17:55:43 Europe/Berlin] Found API index, resource: events
+[10-Sep-2025 17:55:43 Europe/Berlin] Event route - Path: /updated-msc-website/api/events/9
+[10-Sep-2025 17:55:43 Europe/Berlin] Event route - Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => events
+    [3] => 9
+)
+
+[10-Sep-2025 17:55:43 Europe/Berlin] Event route - Endpoint: 9
+[10-Sep-2025 17:55:43 Europe/Berlin] Event route - ID: null
+[10-Sep-2025 17:55:43 Europe/Berlin] Event route - Action: null
+[10-Sep-2025 17:55:52 Europe/Berlin] Request path: /updated-msc-website/api/auth/login
+[10-Sep-2025 17:55:52 Europe/Berlin] Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => auth
+    [3] => login
+)
+
+[10-Sep-2025 17:55:52 Europe/Berlin] Original REQUEST_URI: /updated-msc-website/api/auth/login
+[10-Sep-2025 17:55:52 Europe/Berlin] Found API index, resource: auth
+[10-Sep-2025 17:55:52 Europe/Berlin] Auth route - Path: /updated-msc-website/api/auth/login
+[10-Sep-2025 17:55:52 Europe/Berlin] Auth route - Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => auth
+    [3] => login
+)
+
+[10-Sep-2025 17:55:52 Europe/Berlin] Auth route - API Index: 1
+[10-Sep-2025 17:55:52 Europe/Berlin] Auth route - Auth Index: 2
+[10-Sep-2025 17:55:52 Europe/Berlin] Auth route - Endpoint: login
+[10-Sep-2025 17:55:57 Europe/Berlin] Request path: /updated-msc-website/api/events/9
+[10-Sep-2025 17:55:57 Europe/Berlin] Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => events
+    [3] => 9
+)
+
+[10-Sep-2025 17:55:57 Europe/Berlin] Original REQUEST_URI: /updated-msc-website/api/events/9
+[10-Sep-2025 17:55:57 Europe/Berlin] Found API index, resource: events
+[10-Sep-2025 17:55:57 Europe/Berlin] Event route - Path: /updated-msc-website/api/events/9
+[10-Sep-2025 17:55:57 Europe/Berlin] Event route - Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => events
+    [3] => 9
+)
+
+[10-Sep-2025 17:55:57 Europe/Berlin] Event route - Endpoint: 9
+[10-Sep-2025 17:55:57 Europe/Berlin] Event route - ID: null
+[10-Sep-2025 17:55:57 Europe/Berlin] Event route - Action: null
+[10-Sep-2025 17:55:57 Europe/Berlin] Request path: /updated-msc-website/api/events/upcoming
+[10-Sep-2025 17:55:57 Europe/Berlin] Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => events
+    [3] => upcoming
+)
+
+[10-Sep-2025 17:55:57 Europe/Berlin] Original REQUEST_URI: /updated-msc-website/api/events/upcoming
+[10-Sep-2025 17:55:57 Europe/Berlin] Request path: /updated-msc-website/api/events/canceled
+[10-Sep-2025 17:55:57 Europe/Berlin] Found API index, resource: events
+[10-Sep-2025 17:55:57 Europe/Berlin] Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => events
+    [3] => canceled
+)
+
+[10-Sep-2025 17:55:57 Europe/Berlin] Original REQUEST_URI: /updated-msc-website/api/events/canceled
+[10-Sep-2025 17:55:57 Europe/Berlin] Found API index, resource: events
+[10-Sep-2025 17:55:57 Europe/Berlin] Event route - Path: /updated-msc-website/api/events/upcoming
+[10-Sep-2025 17:55:57 Europe/Berlin] Event route - Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => events
+    [3] => upcoming
+)
+
+[10-Sep-2025 17:55:57 Europe/Berlin] Event route - Path: /updated-msc-website/api/events/canceled
+[10-Sep-2025 17:55:57 Europe/Berlin] Event route - Endpoint: upcoming
+[10-Sep-2025 17:55:57 Europe/Berlin] Event route - ID: null
+[10-Sep-2025 17:55:57 Europe/Berlin] Event route - Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => events
+    [3] => canceled
+)
+
+[10-Sep-2025 17:55:57 Europe/Berlin] Event route - Action: null
+[10-Sep-2025 17:55:57 Europe/Berlin] Event route - Endpoint: canceled
+[10-Sep-2025 17:55:57 Europe/Berlin] Event route - ID: null
+[10-Sep-2025 17:55:57 Europe/Berlin] Event route - Action: null
+[10-Sep-2025 17:56:18 Europe/Berlin] Request path: /updated-msc-website/api/events
+[10-Sep-2025 17:56:18 Europe/Berlin] Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => events
+)
+
+[10-Sep-2025 17:56:18 Europe/Berlin] Original REQUEST_URI: /updated-msc-website/api/events?page=1&limit=100
+[10-Sep-2025 17:56:18 Europe/Berlin] Found API index, resource: events
+[10-Sep-2025 17:56:18 Europe/Berlin] Event route - Path: /updated-msc-website/api/events
+[10-Sep-2025 17:56:18 Europe/Berlin] Event route - Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => events
+)
+
+[10-Sep-2025 17:56:18 Europe/Berlin] Event route - Endpoint: 
+[10-Sep-2025 17:56:18 Europe/Berlin] Event route - ID: null
+[10-Sep-2025 17:56:18 Europe/Berlin] Event route - Action: null
+[10-Sep-2025 17:56:18 Europe/Berlin] Request path: /updated-msc-website/api/events
+[10-Sep-2025 17:56:18 Europe/Berlin] Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => events
+)
+
+[10-Sep-2025 17:56:18 Europe/Berlin] Original REQUEST_URI: /updated-msc-website/api/events?page=1&limit=100
+[10-Sep-2025 17:56:18 Europe/Berlin] Found API index, resource: events
+[10-Sep-2025 17:56:18 Europe/Berlin] Event route - Path: /updated-msc-website/api/events
+[10-Sep-2025 17:56:18 Europe/Berlin] Event route - Path segments: Array
+(
+    [0] => updated-msc-website
+    [1] => api
+    [2] => events
+)
+
+[10-Sep-2025 17:56:18 Europe/Berlin] Event route - Endpoint: 
+[10-Sep-2025 17:56:18 Europe/Berlin] Event route - ID: null
+[10-Sep-2025 17:56:18 Europe/Berlin] Event route - Action: null
