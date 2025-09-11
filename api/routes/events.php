@@ -47,9 +47,9 @@ switch ($method) {
         } else if ($endpoint === 'upcoming') {
             $eventController->getUpcoming();
         } else if ($endpoint === 'upcomingPreview') {
-            $eventController->getUpcomingPreview();
-        } else if ($endpoint === 'upcomingPreview2') {
-            $eventController->getUpcomingPreview2();
+            $eventController->getUpcoming(3);
+        } else if ($endpoint === 'upcomingPreviewMember') {
+            $eventController->getUpcoming(4);
         } else if ($endpoint === 'upcomingCalendar') {
             $eventController->getUpcomingEventsCalendar();
         } else if ($endpoint === 'canceled') {

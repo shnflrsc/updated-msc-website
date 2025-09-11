@@ -643,11 +643,11 @@
             console.log("Event Stats:", response);
 
             if (response.success) {
-                document.getElementById("attendedCount").textContent = response.data.attended_count;
-                document.getElementById("registeredCount").textContent = response.data.registered_count;
+                document.getElementById("attendedCount").textContent = response.data.attended_count ?? 0;
+                document.getElementById("registeredCount").textContent = response.data.registered_count ?? 0;
             } else {
-                document.getElementById("registeredCount").textContent = "0";
-                document.getElementById("attendedCount").textContent = "0";
+                document.getElementById("registeredCount").textContent = 0;
+                document.getElementById("attendedCount").textContent = 0;
             }
         }
 
@@ -785,7 +785,7 @@
 
         async function loadAnnouncements() {
             try {
-                const data = await apiCall("/announcements/recentPreview2");
+                const data = await apiCall("/announcements/recentPreviewMember");
 
                 const container = document.getElementById("tab-announcements");
 
@@ -846,8 +846,7 @@
 
         async function loadEvents() {
             try {
-                //const data = await apiCall("/events/upcoming");
-                const data = await apiCall("/events/upcomingPreview2");
+                const data = await apiCall("/events/upcomingPreviewMember");
 
                 const container = document.getElementById("tab-events");
                 if (!data || !data.success || !Array.isArray(data.data) || data.data.length === 0) {
