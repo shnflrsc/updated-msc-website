@@ -311,13 +311,14 @@
         <!-- main content -->
         <!-- <main class="pl-[300px] flex flex-col min-h-screen space-y-4 w-full p-4"> -->
         <main class="flex flex-col min-h-screen w-full p-4 md:pl-[300px]">
-            <div class="flex flex-col flex-grow shadow-lg rounded-lg border border-[#b9da05] text-white space-y-4">
-                <div class="flex justify-between items-center p-4 border-b border-white/20">
+            <!-- border-[#b9da05] -->
+            <div class="flex flex-col flex-grow shadow-lg rounded-lg bg-[#011538] border-2 border-white/10 text-white p-2">
+                <div class="flex justify-between items-center p-4 border-b border-white/20 mb-2">
                     <button id="prevWeek"
                         class="bg-white/10 border border-white/20 text-white rounded px-3 py-1 hover:bg-[#b9da05] hover:text-[#011538] transition">
                         Previous
                     </button>
-                    <h2 class="text-xl font-semibold text-gray-200 text-center flex-1" id="week-range"></h2>
+                    <h2 class="sm:text-base md:text-xl font-semibold text-gray-200 text-center flex-1" id="week-range"></h2>
                     <button id="nextWeek"
                         class="bg-white/10 border border-white/20 text-white rounded px-3 py-1 hover:bg-[#b9da05] hover:text-[#011538] transition">
                         Next
@@ -473,13 +474,17 @@
                 for (let i = 0; i < 7; i++) {
                     const day = new Date(start);
                     day.setDate(start.getDate() + i);
-                    const dateStr = formatDate(day); // ✅ local time date string
+                    const dateStr = formatDate(day);
 
                     const dayEvents = calendarEvents.filter(e => e.date === dateStr);
+
+                    const today = new Date();
+                    const isToday = dateStr === formatDate(today);
+                
                     // Day cell
                     const cell = document.createElement("div");
-                    cell.className = "flex flex-col sm:flex-row items-start sm:items-center gap-3 border border-white/20 rounded-md p-4 mb-2 bg-[#011538] hover:bg-[#132659] transition-colors duration-200 relative";
-
+                    cell.className = "flex flex-col sm:flex-row items-start sm:items-center gap-3 border border-white/20 rounded-md p-4 mb-2 bg-[#011538] hover:bg-[#ffffff]/10 transition-colors duration-200 relative";
+                    
                     // Left section: Day label | divider | date
                     const header = document.createElement("div");
                     header.className = "flex items-center gap-3 min-w-[120px]";
@@ -494,6 +499,15 @@
                     const dateEl = document.createElement("div");
                     dateEl.className = "text-lg font-bold text-white";
                     dateEl.textContent = day.getDate();
+
+                     if (isToday) {
+                        cell.classList.add("bg-[#b9da05]/30");
+                        header.classList.add("font-bold", "text-[#b9da05]");
+                        dayLabel.classList.add("font-bold", "text-[#b9da05]");
+                        dateEl.classList.add("font-bold", "text-[#b9da05]")
+                    } else {
+                        //cell.classList.add("bg-[#0b1a3d]");
+                    }
 
                     header.appendChild(dayLabel);
                     header.appendChild(divider);
@@ -536,10 +550,9 @@
                     }
                     cell.appendChild(eventsContainer);
                     grid.appendChild(cell);
-            
+
                 }
             }
-
 
             // Single event modal
             function openSingleEventModal(event) {
@@ -583,7 +596,6 @@
                 container.appendChild(div);
                 container.classList.remove("hidden");
 
-                // ✅ Attach event listener AFTER rendering
                 const participantsBtn = div.querySelector("#view-participants-btn");
                 participantsBtn.addEventListener("click", () => {
                     closeSingleEventModal();
