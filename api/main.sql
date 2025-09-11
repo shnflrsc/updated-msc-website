@@ -52,6 +52,7 @@ CREATE TABLE IF NOT EXISTS events (
     event_restriction ENUM('public', 'members', 'officers') DEFAULT 'public',
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+    capacity INT DEFAULT 0
 );
 
 CREATE TABLE IF NOT EXISTS announcements (
