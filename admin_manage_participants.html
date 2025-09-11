@@ -10,8 +10,9 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Segoe+UI:wght@400;500;600;700&family=Orbitron:wght@400;700;900&display=swap"
         rel="stylesheet">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
+
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
     <style>
         :root {
@@ -470,7 +471,7 @@
                 <li><a href="admin_manage_announcements.html"><i class="bi bi-megaphone"></i>Announcements</a></li>
                 <li><a href="admin_manage_events.html"><i class="bi bi-calendar-event"></i>Events</a></li>
                 <li><a href="verify_attendance.html"><i class="bi bi-check2-square"></i>Attendance Verifier</a></li>
-                <li><a href="admin_calendar.html"><i class="bi bi-calendar3"></i>Calendar</a></li>
+                <li><a href="admin_manage_calendar.html"><i class="bi bi-calendar3"></i>Calendar</a></li>
             </ul>
 
             <div class="footer-section">
@@ -478,7 +479,8 @@
             </div>
         </nav>
 
-        <button id="sidebarToggle" class="lg:hidden fixed top-4 right-4 z-50 bg-[#b9da05] text-[#011538] p-2 rounded-md">
+        <button id="sidebarToggle"
+            class="lg:hidden fixed top-4 right-4 z-50 bg-[#b9da05] text-[#011538] p-2 rounded-md">
             <i class="fas fa-bars"></i>
         </button>
 
@@ -495,29 +497,66 @@
             <div class="event-card">
                 <div class="page-header">
                     <div class="header-title-group">
-                        <!-- <img src="./Logos/Bulsu MSC Logo-02.png" alt="BulSU MSC Logo" class="logo"> -->
                         <i class="bi bi-calendar-event"></i>
                         <h2 id="event-title" class="header-title"></h2>
                     </div>
                 </div>
 
                 <div class="table-container">
+                    <div class="flex justify-end mb-3 gap-3">
+                        <button id="filterColumnsBtn"
+                            class="mt-2 px-4 py-2 bg-[#0c2045] text-white rounded-md border border-white/20 hover:bg-[#132c5c] transition">
+                            <i class="bi bi-funnel"></i> Filter Columns
+                            <i class="bi bi-caret-down-fill ml-1 text-sm"></i>
+                        </button>
+                        <div id="filterColumnsMenu"
+                            class="hidden absolute mt-2 w-48 bg-[#0c2045] border border-white/20 rounded-lg shadow-lg p-3 z-20">
+                            <ul class="space-y-2 text-sm text-white">
+                                <li><label class="flex items-center space-x-2">
+                                        <input type="checkbox" class="column-toggle" data-col="0" checked>
+                                        <span>MSC ID</span>
+                                    </label></li>
+                                <li><label class="flex items-center space-x-2">
+                                        <input type="checkbox" class="column-toggle" data-col="1" checked>
+                                        <span>Name</span>
+                                    </label></li>
+                                <li><label class="flex items-center space-x-2">
+                                        <input type="checkbox" class="column-toggle" data-col="2" checked>
+                                        <span>College</span>
+                                    </label></li>
+                                <li><label class="flex items-center space-x-2">
+                                        <input type="checkbox" class="column-toggle" data-col="3" checked>
+                                        <span>Program</span>
+                                    </label></li>
+                                <li><label class="flex items-center space-x-2">
+                                        <input type="checkbox" class="column-toggle" data-col="4" checked>
+                                        <span>Year Level</span>
+                                    </label></li>
+                            </ul>
+                        </div>
+                        <div class="mt-2">
+                            <button id="exportExcelBtn"
+                                class="p-2 bg-[#b9da05] text-[#000000] rounded-md hover:bg-[#a8c905] hover:-translate-y-px"
+                                disabled>
+                                <i class="bi bi-download"></i> Export to Excel
+                            </button>
+                        </div>
+                    </div>
+
                     <div class="overflow-x-auto w-full">
                         <table class="min-w-full text-left text-white bg-[#011538] rounded-lg shadow-inner">
                             <thead class="bg-[#0c2045] border-b border-[#b9da05]">
                                 <tr>
-                                    <th class="px-4 py-3 text-sm sm:text-base font-semibold">#</th>
-                                    <th class="px-4 py-3 text-sm sm:text-base font-semibold">Name</th>
-                                    <th class="px-4 py-3 text-sm sm:text-base font-semibold">Email</th>
-                                    <th class="px-4 py-3 text-sm sm:text-base font-semibold">Student No</th>
                                     <th class="px-4 py-3 text-sm sm:text-base font-semibold">MSC ID</th>
+                                    <th class="px-4 py-3 text-sm sm:text-base font-semibold">Name</th>
+                                    <th class="px-4 py-3 text-sm sm:text-base font-semibold">College</th>
+                                    <th class="px-4 py-3 text-sm sm:text-base font-semibold">Program</th>
+                                    <th class="px-4 py-3 text-sm sm:text-base font-semibold">Year Level</th>
                                 </tr>
                             </thead>
                             <tbody id="participants-table-body" class="divide-y divide-white/10 text-sm sm:text-base">
                                 <tr class="hover:bg-[#0b1c3a]/70 transition-colors">
-                                    <td colspan="5" class="text-center py-6 text-gray-400">
-                                        No participants yet.
-                                    </td>
+                                    <td colspan="5" class="text-center py-6 text-gray-400"></td>
                                 </tr>
                             </tbody>
                         </table>
@@ -526,17 +565,17 @@
             </div>
         </main>
 
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
         <script>
             const API_BASE = "/updated-msc-website/api/";
 
             async function apiCall(endpoint, method = "GET", data = null) {
                 try {
                     const options = {
-                        method: method,
+                        method,
                         headers: { "Content-Type": "application/json" },
                         credentials: "include",
                     };
-
                     if (data) options.body = JSON.stringify(data);
 
                     const response = await fetch(`${API_BASE}${endpoint}`, options);
@@ -547,78 +586,140 @@
                 }
             }
 
-            document.getElementById('sidebarToggle').addEventListener('click', function () {
-                const sidebar = document.querySelector('.sidebar');
-                sidebar.classList.toggle('open');
-            });
+            async function fetchParticipants(eventId) {
+                if (!eventId) {
+                    console.warn("No eventId found in sessionStorage.");
+                    return;
+                }
 
-            const eventId = sessionStorage.getItem("selectedEventId");
-            //console.log("Loaded Event ID:", eventId);
-            async function fetchParticipants() {
-                if (!eventId) return;
+                const data = await apiCall(`events/${eventId}/participantsList`, "GET");
+                const tbody = document.getElementById("participants-table-body");
+                const exportBtn = document.getElementById("exportExcelBtn");
+                tbody.innerHTML = "";
 
-                try {
-                    const data = await apiCall(`events/${eventId}/registrations`, "GET");
+                if (data?.success) {
+                    const event = data.data.event;
+                    const participants = data.data.participants || [];
 
-                    console.log("Response:", data);
+                    document.getElementById("event-title").textContent = event.event_name;
 
-                    const tbody = document.getElementById('participants-table-body');
-                    tbody.innerHTML = '';
-
-                    if (data && data.success && Array.isArray(data.data.registrations)) {
-                        const eventName = data.data.event?.event_name || "Event";
-                        document.getElementById('event-title').textContent = `${eventName}`;
-
-                        data.data.registrations.forEach((p, index) => {
-                            const fullName = [p.first_name, p.middle_name, p.last_name].filter(Boolean).join(" ");
-                            const tr = document.createElement('tr');
-                            tr.innerHTML = `
-                        <td class="px-4 py-2">${index + 1}</td>
-                        <td class="px-4 py-2">${fullName}</td>
-                        <td class="px-4 py-2">${p.email}</td>
-                        <td class="px-4 py-2">${p.student_no || ''}</td>
-                        <td class="px-4 py-2">${p.msc_id}</td>
-                        
-                    `;
-                            tbody.appendChild(tr);
-                        });
-
-                        if (data.data.registrations.length === 0) {
-                            tbody.innerHTML = `<tr><td colspan="7" class="text-center py-4 text-gray-400">No registered participants.</td></tr>`;
-                        }
-                    } else {
-                        tbody.innerHTML = `<tr><td colspan="7" class="text-center py-4 text-gray-400">Failed to load event participants.</td></tr>`;
+                    if (participants.length === 0) {
+                        tbody.innerHTML = `<tr><td colspan="5" class="text-center py-6 text-gray-400">No registered participants.</td></tr>`;
+                        exportBtn.disabled = true; 
+                        exportBtn.classList.add("opacity-50", "cursor-not-allowed");
+                        return;
                     }
-                } catch (err) {
-                    console.error(err);
-                    document.getElementById('participants-table-body').innerHTML =
-                        `<tr><td colspan="7" class="text-center py-4 text-gray-400">Error loading participants.</td></tr>`;
+
+                    participants.forEach(p => {
+                        const fullName = [p.first_name, p.middle_name, p.last_name].filter(Boolean).join(" ");
+                        const tr = document.createElement("tr");
+                        tr.innerHTML = `
+                        <td class="px-4 py-2">${p.msc_id}</td>
+                        <td class="px-4 py-2">${fullName}</td>
+                        <td class="px-4 py-2">${p.college}</td>
+                        <td class="px-4 py-2">${p.program}</td>
+                        <td class="px-4 py-2">${p.year_level}</td>
+                        `;
+                        tbody.appendChild(tr);
+                    });
+
+                    exportBtn.disabled = false;
+                    exportBtn.classList.remove("opacity-50", "cursor-not-allowed");
+
+                } else {
+                    console.error("Failed to fetch participants:", data?.message);
+                    tbody.innerHTML = `<tr><td colspan="5" class="text-center py-6 text-gray-400">Error loading participants.</td></tr>`;
+                    exportBtn.disabled = true;
+                    exportBtn.classList.add("opacity-50", "cursor-not-allowed");
                 }
             }
 
-            document.addEventListener('DOMContentLoaded', () => {
-                fetchParticipants();
+            document.addEventListener("DOMContentLoaded", () => {
+                const eventId = sessionStorage.getItem("selectedEventId");
+                fetchParticipants(eventId);
 
-                const fromPage = sessionStorage.getItem('fromPage') || 'calendar';
-                document.querySelectorAll('.nav-menu a').forEach(link => link.classList.remove('active'));
-                if (fromPage === 'calendar') {
-                    const calendarLink = document.querySelector('.nav-menu a[href="admin_calendar.html"]');
-                    if (calendarLink) calendarLink.classList.add('active');
-                } else if (fromPage === 'events') {
-                    const eventsLink = document.querySelector('.nav-menu a[href="admin_manage_events.html"]');
-                    if (eventsLink) eventsLink.classList.add('active');
+                const fromPage = sessionStorage.getItem("fromPage") || "calendar";
+                document.querySelectorAll(".nav-menu a").forEach(link => link.classList.remove("active"));
+                if (fromPage === "calendar") {
+                    document.querySelector('.nav-menu a[href="admin_manage_calendar.html"]')?.classList.add("active");
+                } else if (fromPage === "events") {
+                    document.querySelector('.nav-menu a[href="admin_manage_events.html"]')?.classList.add("active");
                 }
 
-                const backButton = document.getElementById('backButton');
-                if (fromPage === 'calendar') backButton.innerHTML = '<i class="bi bi-arrow-left-circle me-2"></i>Back to Calendar';
-                else if (fromPage === 'events') backButton.innerHTML = '<i class="bi bi-arrow-left-circle me-2"></i>Back to Events';
-
-                backButton.addEventListener('click', () => {
-                    if (fromPage === 'calendar') window.location.href = 'admin_manage_calendar.html';
-                    else if (fromPage === 'events') window.location.href = 'admin_manage_events.html';
-                });
+                const backButton = document.getElementById("backButton");
+                if (fromPage === "calendar") {
+                    backButton.innerHTML = '<i class="bi bi-arrow-left-circle me-2"></i>Back to Calendar';
+                    backButton.addEventListener("click", () => window.location.href = "admin_manage_calendar.html");
+                } else if (fromPage === "events") {
+                    backButton.innerHTML = '<i class="bi bi-arrow-left-circle me-2"></i>Back to Events';
+                    backButton.addEventListener("click", () => window.location.href = "admin_manage_events.html");
+                }
             });
 
+            function exportTableToExcel(filename = "participants.xlsx") {
+                const tbody = document.getElementById("participants-table-body");
+                const rows = tbody.querySelectorAll("tr");
+                if (rows.length === 1 && rows[0].textContent.includes("No registered participants")) {
+                    alert("No participants to export.");
+                    return;
+                }
+
+                const table = document.querySelector("table");
+                const visibleCols = [];
+                document.querySelectorAll(".column-toggle").forEach((checkbox, i) => {
+                    if (checkbox.checked) visibleCols.push(i);
+                });
+
+                const data = [];
+                const allRows = table.querySelectorAll("tr");
+
+                allRows.forEach(row => {
+                    const cells = row.querySelectorAll("th, td");
+                    const rowData = [];
+                    visibleCols.forEach(i => {
+                        if (cells[i]) rowData.push(cells[i].innerText.trim());
+                    });
+                    data.push(rowData);
+                });
+                const ws = XLSX.utils.aoa_to_sheet(data);
+                const wb = XLSX.utils.book_new();
+                XLSX.utils.book_append_sheet(wb, ws, "Participants");
+                XLSX.writeFile(wb, filename);
+            }
+
+            document.getElementById("exportExcelBtn").addEventListener("click", () => {
+                const eventName = document.getElementById("event-title").textContent || "participants";
+                exportTableToExcel(`${eventName}_participants.xlsx`);
+            });
+
+            document.addEventListener("change", function (e) {
+                if (e.target.classList.contains("column-toggle")) {
+                    const colIndex = parseInt(e.target.dataset.col);
+                    const table = document.querySelector("table");
+                    const rows = table.querySelectorAll("tr");
+
+                    rows.forEach(row => {
+                        const cells = row.querySelectorAll("th, td");
+                        if (cells[colIndex]) {
+                            cells[colIndex].style.display = e.target.checked ? "" : "none";
+                        }
+                    });
+                }
+            });
+
+            const filterBtn = document.getElementById("filterColumnsBtn");
+            const filterMenu = document.getElementById("filterColumnsMenu");
+
+            filterBtn.addEventListener("click", (e) => {
+                e.stopPropagation();
+                filterMenu.classList.toggle("hidden");
+            });
+
+            document.addEventListener("click", (e) => {
+                if (!filterBtn.contains(e.target) && !filterMenu.contains(e.target)) {
+                    filterMenu.classList.add("hidden");
+                }
+            });
         </script>
 </body>
 

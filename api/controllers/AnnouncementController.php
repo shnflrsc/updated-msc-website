@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Announcement Controller
  * Handle announcement-related operations
@@ -15,12 +16,12 @@ CorsConfig::setup();
 class AnnouncementController
 {
     private $announcementModel;
-    
+
     public function __construct()
     {
         $this->announcementModel = new Announcement();
     }
-    
+
     /**
      * Create new announcement (Officer only)
      */
@@ -52,7 +53,6 @@ class AnnouncementController
                         $image_url = "/uploads/" . $filename;
                     }
                 }
-
             } else {
                 // Handle JSON (API clients)
                 $data = json_decode(file_get_contents("php://input"), true);
@@ -88,13 +88,12 @@ class AnnouncementController
             $announcement = $this->announcementModel->create($sanitizedData);
 
             Response::success($announcement, 'Announcement created successfully', 201);
-
         } catch (Exception $e) {
             Response::serverError($e->getMessage());
         }
     }
 
-    
+
     /**
      * Get all announcements
      */
@@ -104,15 +103,15 @@ class AnnouncementController
             $page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
             $limit = isset($_GET['limit']) ? (int)$_GET['limit'] : 20;
             $includeArchived = isset($_GET['include_archived']) && $_GET['include_archived'] === 'true';
-            
+
             // Only officers can view archived announcements
             if ($includeArchived) {
                 AuthMiddleware::requireOfficer();
             }
-            
+
             $announcements = $this->announcementModel->getAll($page, $limit, $includeArchived);
             $totalCount = $this->announcementModel->getTotalCount($includeArchived);
-            
+
             Response::success([
                 'announcements' => $announcements,
                 'pagination' => [
@@ -122,12 +121,11 @@ class AnnouncementController
                     'total_pages' => ceil($totalCount / $limit)
                 ]
             ]);
-            
         } catch (Exception $e) {
             Response::serverError($e->getMessage());
         }
     }
-    
+
     /**
      * Get announcement by ID
      */
@@ -135,23 +133,22 @@ class AnnouncementController
     {
         try {
             $announcement = $this->announcementModel->findById($id);
-            
+
             if (!$announcement) {
                 Response::notFound('Announcement not found');
             }
-            
+
             // Check if announcement is archived and user has permission
             if ($announcement['is_archived']) {
                 AuthMiddleware::requireOfficer();
             }
-            
+
             Response::success($announcement);
-            
         } catch (Exception $e) {
             Response::serverError($e->getMessage());
         }
     }
-    
+
     /**
      * Update announcement (Officer only)
      */
@@ -229,13 +226,12 @@ class AnnouncementController
             } else {
                 Response::serverError('Failed to update announcement');
             }
-
         } catch (Exception $e) {
             Response::serverError($e->getMessage());
         }
     }
 
-    
+
     /**
      * Archive announcement (Officer only)
      */
@@ -243,29 +239,28 @@ class AnnouncementController
     {
         try {
             AuthMiddleware::requireOfficer();
-            
+
             $announcement = $this->announcementModel->findById($id);
             if (!$announcement) {
                 Response::notFound('Announcement not found');
             }
-            
+
             if ($announcement['is_archived']) {
                 Response::error('Announcement is already archived', 400);
             }
-            
+
             $result = $this->announcementModel->archive($id);
-            
+
             if ($result) {
                 Response::success(null, 'Announcement archived successfully');
             } else {
                 Response::serverError('Failed to archive announcement');
             }
-            
         } catch (Exception $e) {
             Response::serverError($e->getMessage());
         }
     }
-    
+
     /**
      * Unarchive announcement (Officer only)
      */
@@ -273,29 +268,28 @@ class AnnouncementController
     {
         try {
             AuthMiddleware::requireOfficer();
-            
+
             $announcement = $this->announcementModel->findById($id);
             if (!$announcement) {
                 Response::notFound('Announcement not found');
             }
-            
+
             if (!$announcement['is_archived']) {
                 Response::error('Announcement is not archived', 400);
             }
-            
+
             $result = $this->announcementModel->unarchive($id);
-            
+
             if ($result) {
                 Response::success(null, 'Announcement unarchived successfully');
             } else {
                 Response::serverError('Failed to unarchive announcement');
             }
-            
         } catch (Exception $e) {
             Response::serverError($e->getMessage());
         }
     }
-    
+
     /**
      * Delete announcement (Officer only)
      */
@@ -303,73 +297,54 @@ class AnnouncementController
     {
         try {
             AuthMiddleware::requireOfficer();
-            
+
             $announcement = $this->announcementModel->findById($id);
             if (!$announcement) {
                 Response::notFound('Announcement not found');
             }
-            
+
             $result = $this->announcementModel->delete($id);
-            
+
             if ($result) {
                 Response::success(null, 'Announcement deleted successfully');
             } else {
                 Response::serverError('Failed to delete announcement');
             }
-            
         } catch (Exception $e) {
             Response::serverError($e->getMessage());
         }
     }
-    
+
     /**
      * Get recent announcements
      */
-    public function getRecent()
+    // public function getRecent()
+    // {
+    //     try {
+    //         $limit = isset($_GET['limit']) ? (int)$_GET['limit'] : 10;
+    //         $announcements = $this->announcementModel->getRecent($limit);
+
+    //         Response::success($announcements);
+
+    //     } catch (Exception $e) {
+    //         Response::serverError($e->getMessage());
+    //     }
+    // }
+
+    public function getRecent($limit = null)
     {
         try {
-            $limit = isset($_GET['limit']) ? (int)$_GET['limit'] : 10;
+            if ($limit === null) {
+                $limit = isset($_GET['limit']) ? (int)$_GET['limit'] : 10;
+            }
+
             $announcements = $this->announcementModel->getRecent($limit);
-            
             Response::success($announcements);
-            
         } catch (Exception $e) {
             Response::serverError($e->getMessage());
         }
     }
 
-    /**
-     * Get recentPreview announcements
-     */
-    public function getRecentPreview()
-    {
-        try {
-            $limit = isset($_GET['limit']) ? (int)$_GET['limit'] : 3;
-            $announcements = $this->announcementModel->getRecent($limit);
-            
-            Response::success($announcements);
-            
-        } catch (Exception $e) {
-            Response::serverError($e->getMessage());
-        }
-    }
-
-    /**
-     * Get recentPreview2 announcements
-     */
-    public function getRecentPreview2()
-    {
-        try {
-            $limit = isset($_GET['limit']) ? (int)$_GET['limit'] : 4;
-            $announcements = $this->announcementModel->getRecent($limit);
-            
-            Response::success($announcements);
-            
-        } catch (Exception $e) {
-            Response::serverError($e->getMessage());
-        }
-    }
-    
     /**
      * Search announcements
      */
@@ -379,13 +354,13 @@ class AnnouncementController
             $query = isset($_GET['q']) ? trim($_GET['q']) : '';
             $page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
             $limit = isset($_GET['limit']) ? (int)$_GET['limit'] : 20;
-            
+
             if (empty($query)) {
                 Response::validationError(['q' => 'Search query is required']);
             }
-            
+
             $announcements = $this->announcementModel->search($query, $page, $limit);
-            
+
             Response::success([
                 'announcements' => $announcements,
                 'pagination' => [
@@ -394,7 +369,6 @@ class AnnouncementController
                     'query' => $query
                 ]
             ]);
-            
         } catch (Exception $e) {
             Response::serverError($e->getMessage());
         }
@@ -426,9 +400,7 @@ $url = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
 if ($method === 'POST' && preg_match('#^/api/announcements/(\d+)/archive$#', $url, $matches)) {
     $controller->archive($matches[1]);
 
-// Unarchive
+    // Unarchive
 } elseif ($method === 'POST' && preg_match('#^/api/announcements/(\d+)/unarchive$#', $url, $matches)) {
     $controller->unarchive($matches[1]);
 }
-
-

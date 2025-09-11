@@ -45,9 +45,9 @@ switch ($method) {
         if ($endpoint === 'recent') {
             $announcementController->getRecent();
         } else if($endpoint === 'recentPreview'){
-            $announcementController->getRecentPreview();
-        } else if($endpoint === 'recentPreview2'){
-            $announcementController->getRecentPreview2();
+            $announcementController->getRecent(3);
+        } else if($endpoint === 'recentPreviewMember'){
+            $announcementController->getRecent(4);
         } elseif ($endpoint === 'search') {
             $announcementController->search();
         } elseif ($endpoint === 'count') {

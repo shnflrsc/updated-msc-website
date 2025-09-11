@@ -153,39 +153,6 @@ class Announcement
     }
 
     /**
-     * Get recent announcements
-     */
-    public function getRecentPreview($limit = 3)
-    {
-        $sql = "SELECT * FROM announcements 
-                WHERE is_archived = 0 
-                ORDER BY date_posted DESC 
-                LIMIT :limit";
-        
-        $stmt = $this->db->prepare($sql);
-        $stmt->bindValue(':limit', $limit, PDO::PARAM_INT);
-        $stmt->execute();
-        return $stmt->fetchAll(PDO::FETCH_ASSOC);
-    }
-
-     /**
-     * Get recent announcements
-     */
-    public function getRecentPreview2($limit = 4)
-    {
-        $sql = "SELECT * FROM announcements 
-                WHERE is_archived = 0 
-                ORDER BY date_posted DESC 
-                LIMIT :limit";
-        
-        $stmt = $this->db->prepare($sql);
-        $stmt->bindValue(':limit', $limit, PDO::PARAM_INT);
-        $stmt->execute();
-        
-        return $stmt->fetchAll();
-    }
-    
-    /**
      * Search announcements
      */
     public function search($query, $page = 1, $limit = 20)

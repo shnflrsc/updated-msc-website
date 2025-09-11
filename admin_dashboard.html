@@ -663,6 +663,17 @@
                 console.log(data);
 
                 const container = document.getElementById("recentAnnouncements");
+                container.innerHTML = "";
+
+                if(data.data.length == 0){
+                    const div = document.createElement("div");
+                    div.innerHTML = `
+                    <div>
+                        <p class="text-gray-400">No announcements found.</p>
+                    </div>
+                    `;
+                    container.appendChild(div);
+                }
 
                 data.data.forEach(ann => {
                     const rawDate = new Date(ann.date_posted);
@@ -699,6 +710,17 @@
                 console.log(data);
 
                 const container = document.getElementById("upcomingEvents");
+                container.innerHTML = "";
+
+                if(data.data.length == 0){
+                    const div = document.createElement("div");
+                    div.innerHTML = `
+                    <div>
+                        <p class="text-gray-400">No upcoming events found.</p>
+                    </div>
+                    `;
+                    container.appendChild(div);
+                }
 
                 data.data.forEach(evt => {
                     const eventDateTime = new Date(`${evt.event_date}T${evt.event_time_start}`);

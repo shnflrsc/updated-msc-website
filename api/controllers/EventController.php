@@ -474,47 +474,31 @@ class EventController
     /**
      * Get upcoming events: default
      */
-    public function getUpcoming()
+    // public function getUpcoming()
+    // {
+    //     try {
+    //         $limit = isset($_GET['limit']) ? (int)$_GET['limit'] : 10; //Default: 10
+    //         $events = $this->eventModel->getUpcoming($limit);
+
+    //         Response::success($events);
+    //     } catch (Exception $e) {
+    //         Response::serverError($e->getMessage());
+    //     }
+    // }
+    public function getUpcoming($limit = null)
     {
         try {
-            $limit = isset($_GET['limit']) ? (int)$_GET['limit'] : 10; //Default: 10
+            if ($limit === null) {
+                $limit = isset($_GET['limit']) ? (int)$_GET['limit'] : 10;
+            }
+
             $events = $this->eventModel->getUpcoming($limit);
-
             Response::success($events);
         } catch (Exception $e) {
             Response::serverError($e->getMessage());
         }
     }
 
-    /**
-     * Get upcoming events: for Admin Dashoard
-     */
-    public function getUpcomingPreview()
-    {
-        try {
-            $limit = isset($_GET['limit']) ? (int)$_GET['limit'] : 3;
-            $events = $this->eventModel->getUpcoming($limit);
-
-            Response::success($events);
-        } catch (Exception $e) {
-            Response::serverError($e->getMessage());
-        }
-    }
-
-    /**
-     * Get upcoming events: for Member's view
-     */
-    public function getUpcomingPreview2()
-    {
-        try {
-            $limit = isset($_GET['limit']) ? (int)$_GET['limit'] : 4;
-            $events = $this->eventModel->getUpcomingPreview2($limit);
-
-            Response::success($events);
-        } catch (Exception $e) {
-            Response::serverError($e->getMessage());
-        }
-    }
 
     public function getUpcomingEventsCalendar()
     {

@@ -1953,9 +1953,21 @@
             const data = await apiCall("/events/upcoming", "GET");
 
             if (data?.success) {
+                //console.log("[Upcoming Events:]");
                 //console.log(data);
+
                 const container = document.getElementById("current-upcoming");
                 container.innerHTML = "";
+
+                if(data.data.length == 0){
+                    const div = document.createElement("div");
+                    div.innerHTML = `
+                    <div>
+                        <p class="text-gray-400">No upcoming events found.</p>
+                    </div>
+                    `;
+                    container.appendChild(div);
+                }
 
                 data.data.forEach(evt => {
                     const eventDateTime = new Date(`${evt.event_date}T${evt.event_time_start}`);
@@ -2000,7 +2012,6 @@
                         </div>
                         `
                         ;
-                    //cancelEvent
                     container.appendChild(div);
                 });
             } else {
@@ -2012,11 +2023,21 @@
             const data = await apiCall("/events/canceled", "GET");
 
             if (data?.success) {
-                //console.log("Canceled Events:");
+                //console.log("[Canceled Events:]");
                 //console.log(data);
 
                 const container = document.getElementById("cancelled-events");
                 container.innerHTML = "";
+
+                if(data.data.length == 0){
+                    const div = document.createElement("div");
+                    div.innerHTML = `
+                    <div>
+                        <p class="text-gray-400">No canceled events found.</p>
+                    </div>
+                    `;
+                    container.appendChild(div);
+                }
 
                 data.data.forEach(evt => {
                     const eventDate = new Date(evt.event_date);
@@ -2064,11 +2085,21 @@
             const data = await apiCall("/events/past", "GET");
 
             if (data?.success) {
-                //console.log("Past Events:");
+                //console.log("[Past Events:]");
                 //console.log(data);
 
                 const container = document.getElementById("past-events");
                 container.innerHTML = "";
+
+                if(data.data.length == 0){
+                    const div = document.createElement("div");
+                    div.innerHTML = `
+                    <div>
+                        <p class="text-gray-400">No past events found.</p>
+                    </div>
+                    `;
+                    container.appendChild(div);
+                }
 
                 data.data.forEach(evt => {
                     const eventDate = new Date(evt.event_date);
