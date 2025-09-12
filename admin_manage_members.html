@@ -472,6 +472,7 @@
                 <th class="px-3 py-3 min-w-[100px]">Section</th>
                 <th class="px-3 py-3 min-w-[200px]">Address</th>
                 <th class="px-3 py-3 min-w-[150px]">Facebook</th>
+                <th class="px-4 py-3 text-sm sm:text-base font-semibold">Status</th>
               </tr>
             </thead>
             <tbody id="membersTableBody" class="divide-y divide-gray-700">
@@ -824,6 +825,41 @@
   </div>
 </div>
 
+  <!-- ✅ Filter Modal -->
+  <div id="filterModal" class="modal">
+    <div class="modal-content" style="max-width: 500px;">
+      <div class="modal-header">
+        <h2 class="text-2xl font-bold text-white">Filter Members</h2>
+        <button class="close" id="closeFilterModal">&times;</button>
+      </div>
+      <div class="modal-body">
+        <form id="filterForm">
+          <div class="form-group">
+            <label for="filterStatus">Status:</label>
+            <select id="filterStatus">
+              <option value="">All</option>
+              <option value="active">Active</option>
+              <option value="inactive">Inactive</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="filterCollege">College:</label>
+            <select id="filterCollege">
+              <option value="">All</option>
+              <option value="CICT">CICT</option>
+              <option value="COE">COE</option>
+              <option value="CBA">CBA</option>
+              <option value="CAS">CAS</option>
+              <option value="COED">COED</option>
+            </select>
+          </div>
+          <div class="form-actions mt-4">
+            <button type="submit" class="bg-[#b9da05] text-[#011538] px-4 py-2 rounded">Apply Filters</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
 
   <script>
     document.getElementById('sidebarToggle').addEventListener('click', function() {
@@ -1041,6 +1077,47 @@
     });
   }
 
+    // Filter modal elements
+  const filterBtn = document.getElementById("filterBtn");
+  const filterModal = document.getElementById("filterModal");
+  const closeFilterModal = document.getElementById("closeFilterModal");
+  const filterForm = document.getElementById("filterForm");
+
+  // Open modal when clicking Filters button
+  filterBtn.addEventListener("click", () => {
+    filterModal.style.display = "block";
+  });
+
+  // Close modal
+  closeFilterModal.addEventListener("click", () => {
+    filterModal.style.display = "none";
+  });
+
+  // Apply filters
+  filterForm.addEventListener("submit", async (e) => {
+    e.preventDefault();
+    const status = document.getElementById("filterStatus").value;
+    const college = document.getElementById("filterCollege").value;
+
+    // Fetch with filters
+    let query = "/students?page=1&limit=20";
+    if (status) query += `&status=${status}`;
+    if (college) query += `&college=${college}`;
+
+    const result = await apiCall(query, "GET");
+
+    if (result.success) {
+      const students = result.data.students.filter(s => s.role !== "officer");
+      renderStudents(students); // 🔥 reuse your existing rendering
+      filterModal.style.display = "none";
+
+      // Update filter button count
+      filterBtn.innerHTML = `<i class="fas fa-filter mr-2"></i> Filters (${students.length} Members)`;
+    }
+  });
+
+  
+
   // Bind event to header checkbox
   document.getElementById("selectAll").addEventListener("change", updateActionCells);
 
@@ -1101,6 +1178,7 @@ async function fetchStudents() {
         <td class="px-3 py-3">${student.section || ""}</td>
         <td class="px-3 py-3">${student.address || ""}</td>
         <td class="px-3 py-3">${student.facebook_link || ""}</td>
+        <td class="px-4 py-2">${student.is_active == 1 ? "Active" : "Inactive"}</td>
       `;
       tbody.appendChild(tr);
     });
