@@ -362,6 +362,11 @@
         }
 
         @media (max-width: 768px) {
+            .hero-section {
+                margin-top: 70px;
+                padding: 40px 1rem;
+            }
+            
             .hero-section h1 {
                 font-size: 1.75rem;
             }
@@ -372,38 +377,111 @@
             
             .announcement-list {
                 gap: 16px;
-                padding: 0 10px;
+                padding: 0 10px 40px;
                 max-width: 100%;
             }
             
             .announcement-card {
-                height: 220px;
-                min-height: 220px;
+                flex-direction: column;
+                height: auto;
+                min-height: auto;
+                display: flex !important;
             }
             
             .announcement-image {
-                width: 220px;
-                padding: 15px;
+                width: 100%;
+                height: 200px;
+                padding: 20px;
             }
             
             .announcement-content {
                 padding: 20px;
             }
             
-            .hero-section {
-                padding: 60px 1rem;
+            .announcement-card h3 {
+                font-size: 1.5rem;
+                margin-bottom: 8px;
+            }
+            
+            .announcement-card .date {
+                font-size: 1rem;
+                margin-bottom: 8px;
+            }
+            
+            .announcement-card .excerpt {
+                font-size: 1rem;
+                line-height: 1.5;
             }
             
             .main-content {
-                padding: 0 1rem;
+                padding: 0 0.5rem;
             }
 
             .nav-arrow {
                 display: none;
             }
 
+            .modal-content {
+                width: 95%;
+                margin: 10px;
+                padding: 20px;
+                max-height: 90vh;
+                overflow-y: auto;
+            }
+            
+            .empty-state {
+                padding: 40px 20px;
+                margin: 0 10px;
+            }
+            
+            .empty-state i {
+                font-size: 3rem;
+            }
+            
+            .empty-state h3 {
+                font-size: 1.25rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero-section {
+                margin-top: 60px;
+                padding: 30px 0.75rem;
+            }
+            
+            .hero-section h1 {
+                font-size: 1.5rem;
+            }
+            
+            .hero-section p {
+                font-size: 0.9rem;
+            }
+            
+            .announcement-list {
+                padding: 0 5px 30px;
+            }
+            
             .announcement-card {
-                display: flex !important;
+                margin: 0 5px;
+            }
+            
+            .announcement-image {
+                height: 180px;
+                padding: 15px;
+            }
+            
+            .announcement-content {
+                padding: 15px;
+            }
+            
+            .announcement-card h3 {
+                font-size: 1.25rem;
+            }
+            
+            .modal-content {
+                width: 98%;
+                margin: 5px;
+                padding: 15px;
             }
         }
     </style>
