@@ -419,6 +419,30 @@
         <button id="filterBtn" class="bg-[#011538] border text-white px-4 py-2 rounded-lg hover:bg-[#b9da05] hover:text-[#011538] transition">
           <i class="fas fa-filter mr-2"></i> Filters (0 Members)
         </button>
+        <div id="filterPopup" 
+          class="absolute mt-2 w-48 bg-[#011538] border border-[#b9da05] rounded-xl shadow-lg p-3 hidden z-50 text-white text-sm">
+          <p class="font-semibold text-[#b9da05] mb-2">Filter Columns</p>
+          <label class="flex items-center gap-2 mb-1">
+            <input type="checkbox" class="column-filter accent-[#b9da05]" value="msc_id" >
+            <span>MSC ID</span>
+          </label>
+          <label class="flex items-center gap-2 mb-1">
+            <input type="checkbox" class="column-filter accent-[#b9da05]" value="name" >
+            <span>Name</span>
+          </label>
+          <label class="flex items-center gap-2 mb-1">
+            <input type="checkbox" class="column-filter accent-[#b9da05]" value="college" >
+            <span>College</span>
+          </label>
+          <label class="flex items-center gap-2 mb-1">
+            <input type="checkbox" class="column-filter accent-[#b9da05]" value="program" >
+            <span>Program</span>
+          </label>
+          <label class="flex items-center gap-2">
+            <input type="checkbox" class="column-filter accent-[#b9da05]" value="year_level" >
+            <span>Year Level</span>
+          </label>
+        </div>
         <button id="exportBtn" class="bg-[#011538] border text-white px-4 py-2 rounded-lg hover:bg-[#b9da05] hover:text-[#011538] transition">
           <i class="fas fa-file-excel mr-2"></i> Export to Excel
         </button>
@@ -460,7 +484,7 @@
                 <th class="px-3 py-3 min-w-[100px]">Membership ID</th>
                 <th class="px-3 py-3 min-w-[120px]">First Name</th>
                 <th class="px-3 py-3 min-w-[120px]">Middle Name</th>
-                <th class="px-3 py-3 min-w-[120px]">Last Name <button class="ml-2" id="sortLastName"><i class="fas fa-sort"></i></button></th>
+                <th class="px-3 py-3 min-w-[120px]">Last Name</th>
                 <th class="px-3 py-3 min-w-[80px]">Suffix</th>
                 <th class="px-3 py-3 min-w-[120px]">Student No.</th>
                 <th class="px-3 py-3 min-w-[200px]">Email</th>
@@ -825,41 +849,6 @@
   </div>
 </div>
 
-  <!-- ✅ Filter Modal -->
-  <div id="filterModal" class="modal">
-    <div class="modal-content" style="max-width: 500px;">
-      <div class="modal-header">
-        <h2 class="text-2xl font-bold text-white">Filter Members</h2>
-        <button class="close" id="closeFilterModal">&times;</button>
-      </div>
-      <div class="modal-body">
-        <form id="filterForm">
-          <div class="form-group">
-            <label for="filterStatus">Status:</label>
-            <select id="filterStatus">
-              <option value="">All</option>
-              <option value="active">Active</option>
-              <option value="inactive">Inactive</option>
-            </select>
-          </div>
-          <div class="form-group">
-            <label for="filterCollege">College:</label>
-            <select id="filterCollege">
-              <option value="">All</option>
-              <option value="CICT">CICT</option>
-              <option value="COE">COE</option>
-              <option value="CBA">CBA</option>
-              <option value="CAS">CAS</option>
-              <option value="COED">COED</option>
-            </select>
-          </div>
-          <div class="form-actions mt-4">
-            <button type="submit" class="bg-[#b9da05] text-[#011538] px-4 py-2 rounded">Apply Filters</button>
-          </div>
-        </form>
-      </div>
-    </div>
-  </div>
 
   <script>
     document.getElementById('sidebarToggle').addEventListener('click', function() {
@@ -1079,44 +1068,77 @@
 
     // Filter modal elements
   const filterBtn = document.getElementById("filterBtn");
-  const filterModal = document.getElementById("filterModal");
-  const closeFilterModal = document.getElementById("closeFilterModal");
-  const filterForm = document.getElementById("filterForm");
+  const filterPopup = document.getElementById("filterPopup");
 
-  // Open modal when clicking Filters button
-  filterBtn.addEventListener("click", () => {
-    filterModal.style.display = "block";
+  // Toggle popup on Filters button click
+  filterBtn.addEventListener("click", (e) => {
+    e.stopPropagation(); // prevent closing immediately
+    filterPopup.classList.toggle("hidden");
+    const rect = filterBtn.getBoundingClientRect();
+    filterPopup.style.position = "absolute";
+    filterPopup.style.top = `${rect.bottom + window.scrollY}px`;
+    filterPopup.style.left = `${rect.left}px`;
   });
 
-  // Close modal
-  closeFilterModal.addEventListener("click", () => {
-    filterModal.style.display = "none";
-  });
-
-  // Apply filters
-  filterForm.addEventListener("submit", async (e) => {
-    e.preventDefault();
-    const status = document.getElementById("filterStatus").value;
-    const college = document.getElementById("filterCollege").value;
-
-    // Fetch with filters
-    let query = "/students?page=1&limit=20";
-    if (status) query += `&status=${status}`;
-    if (college) query += `&college=${college}`;
-
-    const result = await apiCall(query, "GET");
-
-    if (result.success) {
-      const students = result.data.students.filter(s => s.role !== "officer");
-      renderStudents(students); // 🔥 reuse your existing rendering
-      filterModal.style.display = "none";
-
-      // Update filter button count
-      filterBtn.innerHTML = `<i class="fas fa-filter mr-2"></i> Filters (${students.length} Members)`;
+  // Hide popup when clicking outside
+  document.addEventListener("click", (e) => {
+    if (!filterPopup.contains(e.target) && !filterBtn.contains(e.target)) {
+      filterPopup.classList.add("hidden");
     }
   });
 
-  
+  // Apply filter by sorting table when a checkbox is selected
+  document.querySelectorAll(".column-filter").forEach(cb => {
+    cb.addEventListener("change", () => {
+      if (cb.checked) {
+        // uncheck others
+        document.querySelectorAll(".column-filter").forEach(other => {
+          if (other !== cb) other.checked = false;
+        });
+
+        const tbody = document.getElementById("membersTableBody");
+        const rows = Array.from(tbody.querySelectorAll("tr"));
+
+        rows.sort((a, b) => {
+          let aVal = "", bVal = "";
+
+          switch (cb.value) {
+            case "msc_id":
+              aVal = a.querySelector("td:nth-child(2)")?.innerText.trim() || "";
+              bVal = b.querySelector("td:nth-child(2)")?.innerText.trim() || "";
+              // natural sorting so "MSC2" comes before "MSC10"
+              return aVal.localeCompare(bVal, undefined, { numeric: true, sensitivity: "base" });
+
+            case "name":
+              aVal = a.querySelector("td:nth-child(3)")?.innerText.trim() || "";
+              bVal = b.querySelector("td:nth-child(3)")?.innerText.trim() || "";
+              return aVal.localeCompare(bVal);
+
+            case "college":
+              aVal = a.querySelector("td:nth-child(13)")?.innerText.trim() || "";
+              bVal = b.querySelector("td:nth-child(13)")?.innerText.trim() || "";
+              return aVal.localeCompare(bVal);
+
+            case "program":
+              aVal = a.querySelector("td:nth-child(11)")?.innerText.trim() || "";
+              bVal = b.querySelector("td:nth-child(11)")?.innerText.trim() || "";
+              return aVal.localeCompare(bVal);
+
+            case "year_level":
+              aVal = a.querySelector("td:nth-child(12)")?.innerText.trim() || "";
+              bVal = b.querySelector("td:nth-child(12)")?.innerText.trim() || "";
+              return (parseInt(aVal, 10) || 0) - (parseInt(bVal, 10) || 0);
+
+            default:
+              return 0;
+          }
+        });
+
+        // re-append rows in sorted order
+        rows.forEach(row => tbody.appendChild(row));
+      }
+    });
+  });
 
   // Bind event to header checkbox
   document.getElementById("selectAll").addEventListener("change", updateActionCells);
@@ -1140,6 +1162,7 @@ async function fetchStudents() {
     students.forEach(student => {
       const tr = document.createElement("tr");
       tr.dataset.id = student.id; // store student ID for later use
+      tr.dataset.msc_id = student.msc_id;
       tr.dataset.username = student.username; // ✅ keep username for edit
       tr.dataset.email = student.email;       // ✅ keep email for edit
       tr.dataset.first_name = student.first_name;
