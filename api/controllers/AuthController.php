@@ -224,33 +224,34 @@ class AuthController
     {
         try {
             $data = json_decode(file_get_contents("php://input"), true);
-            
+
             // Validate required fields
-            $errors = Validator::validateRequired($data, ['email']);
+            $errors = Validator::validateRequired($data, ['student_no', 'new_password']);
             if (!empty($errors)) {
                 Response::validationError($errors);
             }
-            
-            // Validate email format
-            if (!Validator::validateEmail($data['email'])) {
-                Response::validationError(['email' => 'Invalid email format']);
+
+            // Validate password strength
+            $passwordErrors = Validator::validatePassword($data['new_password']);
+            if (!empty($passwordErrors)) {
+                Response::validationError(['new_password' => $passwordErrors]);
             }
-            
-            // Check if user exists
-            $user = $this->studentModel->findByEmail($data['email']);
+
+            // Find user by student number
+            $user = $this->studentModel->findByStudentNo($data['student_no']);
             if (!$user) {
-                // Don't reveal if email exists or not for security
-                Response::success(null, 'If the email exists, a reset link has been sent');
+                Response::error('Student number not found', 404);
             }
-            
-            // Generate reset token (implement token generation and email sending)
-            // This is a simplified version - in production, you'd want to:
-            // 1. Generate a secure token
-            // 2. Store it in password_resets table with expiration
-            // 3. Send email with reset link
-            
-            Response::success(null, 'If the email exists, a reset link has been sent');
-            
+
+            // Change password
+            $result = $this->studentModel->changePasswordByStudentNo($data['student_no'], $data['new_password']);
+            if ($result) {
+                Response::success(null, 'Password reset successfully');
+            } else {
+                Response::serverError('Failed to reset password');
+            }
+
+
         } catch (Exception $e) {
             Response::serverError($e->getMessage());
         }
