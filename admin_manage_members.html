@@ -419,30 +419,42 @@
         <button id="filterBtn" class="bg-[#011538] border text-white px-4 py-2 rounded-lg hover:bg-[#b9da05] hover:text-[#011538] transition">
           <i class="fas fa-filter mr-2"></i> Filters (0 Members)
         </button>
-        <div id="filterPopup" 
-          class="absolute mt-2 w-48 bg-[#011538] border border-[#b9da05] rounded-xl shadow-lg p-3 hidden z-50 text-white text-sm">
-          <p class="font-semibold text-[#b9da05] mb-2">Filter Columns</p>
-          <label class="flex items-center gap-2 mb-1">
-            <input type="checkbox" class="column-filter accent-[#b9da05]" value="msc_id" >
-            <span>MSC ID</span>
-          </label>
-          <label class="flex items-center gap-2 mb-1">
-            <input type="checkbox" class="column-filter accent-[#b9da05]" value="name" >
-            <span>Name</span>
-          </label>
-          <label class="flex items-center gap-2 mb-1">
-            <input type="checkbox" class="column-filter accent-[#b9da05]" value="college" >
-            <span>College</span>
-          </label>
-          <label class="flex items-center gap-2 mb-1">
-            <input type="checkbox" class="column-filter accent-[#b9da05]" value="program" >
-            <span>Program</span>
-          </label>
-          <label class="flex items-center gap-2">
-            <input type="checkbox" class="column-filter accent-[#b9da05]" value="year_level" >
-            <span>Year Level</span>
-          </label>
+      <div id="filterPopup" class="hidden absolute z-50 bg-[#00071c] rounded-lg shadow-lg p-6 w-80 border border-[#1a1f3a]">
+        <h3 class="text-lg font-bold mb-4 text-[#b9da05] flex items-center font-[Orbitron]">
+          <i class="fas fa-filter mr-2 text-[#b9da05]"></i> Filters
+        </h3>
+
+        <div class="space-y-4">
+          <div>
+            <label for="filterMscId" class="block text-sm font-medium text-gray-300">MSC ID</label>
+            <input type="text" id="filterMscId" class="w-full mt-1 px-3 py-2 bg-[#011538] border border-[#374151] rounded-md text-sm text-white focus:outline-none focus:ring-2 focus:ring-[#b9da05] focus:border-[#b9da05] transition">
+          </div>
+
+          <div>
+            <label for="filterName" class="block text-sm font-medium text-gray-300">Name</label>
+            <input type="text" id="filterName" class="w-full mt-1 px-3 py-2 bg-[#011538] border border-[#374151] rounded-md text-sm text-white focus:outline-none focus:ring-2 focus:ring-[#b9da05] focus:border-[#b9da05] transition">
+          </div>
+
+          <div>
+            <label for="filterCollege" class="block text-sm font-medium text-gray-300">College</label>
+            <input type="text" id="filterCollege" class="w-full mt-1 px-3 py-2 bg-[#011538] border border-[#374151] rounded-md text-sm text-white focus:outline-none focus:ring-2 focus:ring-[#b9da05] focus:border-[#b9da05] transition">
+          </div>
+
+          <div>
+            <label for="filterProgram" class="block text-sm font-medium text-gray-300">Program</label>
+            <input type="text" id="filterProgram" class="w-full mt-1 px-3 py-2 bg-[#011538] border border-[#374151] rounded-md text-sm text-white focus:outline-none focus:ring-2 focus:ring-[#b9da05] focus:border-[#b9da05] transition">
+          </div>
+
+          <div>
+            <label for="filterYearLevel" class="block text-sm font-medium text-gray-300">Year Level</label>
+            <input type="text" id="filterYearLevel" class="w-full mt-1 px-3 py-2 bg-[#011538] border border-[#374151] rounded-md text-sm text-white focus:outline-none focus:ring-2 focus:ring-[#b9da05] focus:border-[#b9da05] transition">
+          </div>
         </div>
+
+        <button id="applyFilterBtn" class="w-full mt-5 bg-[#b9da05] hover:bg-[#a8c905] text-black font-semibold px-4 py-2 rounded-md shadow-md transition">
+          Apply Filters
+        </button>
+      </div>
         <button id="exportBtn" class="bg-[#011538] border text-white px-4 py-2 rounded-lg hover:bg-[#b9da05] hover:text-[#011538] transition">
           <i class="fas fa-file-excel mr-2"></i> Export to Excel
         </button>
@@ -849,7 +861,6 @@
   </div>
 </div>
 
-
   <script>
     document.getElementById('sidebarToggle').addEventListener('click', function() {
       const sidebar = document.getElementById('sidebar');
@@ -1087,58 +1098,116 @@
     }
   });
 
-  // Apply filter by sorting table when a checkbox is selected
-  document.querySelectorAll(".column-filter").forEach(cb => {
-    cb.addEventListener("change", () => {
-      if (cb.checked) {
-        // uncheck others
-        document.querySelectorAll(".column-filter").forEach(other => {
-          if (other !== cb) other.checked = false;
-        });
+  // Apply text-based filters
+  document.getElementById("applyFilterBtn").addEventListener("click", () => {
+    const mscIdVal = document.getElementById("filterMscId").value.trim().toLowerCase();
+    const nameVal = document.getElementById("filterName").value.trim().toLowerCase();
+    const collegeVal = document.getElementById("filterCollege").value.trim().toLowerCase();
+    const programVal = document.getElementById("filterProgram").value.trim().toLowerCase();
+    const yearLevelVal = document.getElementById("filterYearLevel").value.trim().toLowerCase();
 
-        const tbody = document.getElementById("membersTableBody");
-        const rows = Array.from(tbody.querySelectorAll("tr"));
+    const tbody = document.getElementById("membersTableBody");
+    const rows = Array.from(tbody.querySelectorAll("tr"));
 
-        rows.sort((a, b) => {
-          let aVal = "", bVal = "";
+    rows.forEach(row => {
+      const mscId = row.querySelector("td:nth-child(2)")?.innerText.trim().toLowerCase() || "";
+      const name = row.querySelector("td:nth-child(3)")?.innerText.trim().toLowerCase() || "";
+      const college = row.querySelector("td:nth-child(13)")?.innerText.trim().toLowerCase() || "";
+      const program = row.querySelector("td:nth-child(11)")?.innerText.trim().toLowerCase() || "";
+      const yearLevel = row.querySelector("td:nth-child(12)")?.innerText.trim().toLowerCase() || "";
 
-          switch (cb.value) {
-            case "msc_id":
-              aVal = a.querySelector("td:nth-child(2)")?.innerText.trim() || "";
-              bVal = b.querySelector("td:nth-child(2)")?.innerText.trim() || "";
-              // natural sorting so "MSC2" comes before "MSC10"
-              return aVal.localeCompare(bVal, undefined, { numeric: true, sensitivity: "base" });
+      let match = true;
+      if (mscIdVal && !mscId.includes(mscIdVal)) match = false;
+      if (nameVal && !name.includes(nameVal)) match = false;
+      if (collegeVal && !college.includes(collegeVal)) match = false;
+      if (programVal && !program.includes(programVal)) match = false;
+      if (yearLevelVal && !yearLevel.includes(yearLevelVal)) match = false;
 
-            case "name":
-              aVal = a.querySelector("td:nth-child(3)")?.innerText.trim() || "";
-              bVal = b.querySelector("td:nth-child(3)")?.innerText.trim() || "";
-              return aVal.localeCompare(bVal);
-
-            case "college":
-              aVal = a.querySelector("td:nth-child(13)")?.innerText.trim() || "";
-              bVal = b.querySelector("td:nth-child(13)")?.innerText.trim() || "";
-              return aVal.localeCompare(bVal);
-
-            case "program":
-              aVal = a.querySelector("td:nth-child(11)")?.innerText.trim() || "";
-              bVal = b.querySelector("td:nth-child(11)")?.innerText.trim() || "";
-              return aVal.localeCompare(bVal);
-
-            case "year_level":
-              aVal = a.querySelector("td:nth-child(12)")?.innerText.trim() || "";
-              bVal = b.querySelector("td:nth-child(12)")?.innerText.trim() || "";
-              return (parseInt(aVal, 10) || 0) - (parseInt(bVal, 10) || 0);
-
-            default:
-              return 0;
-          }
-        });
-
-        // re-append rows in sorted order
-        rows.forEach(row => tbody.appendChild(row));
-      }
+      row.style.display = match ? "" : "none";
     });
+
+    // hide popup after applying
+    document.getElementById("filterPopup").classList.add("hidden");
   });
+
+  // Track if filters are applied
+let filtersActive = false;
+
+// Apply text-based filters
+document.getElementById("applyFilterBtn").addEventListener("click", () => {
+  const mscIdVal = document.getElementById("filterMscId").value.trim().toLowerCase();
+  const nameVal = document.getElementById("filterName").value.trim().toLowerCase();
+  const collegeVal = document.getElementById("filterCollege").value.trim().toLowerCase();
+  const programVal = document.getElementById("filterProgram").value.trim().toLowerCase();
+  const yearLevelVal = document.getElementById("filterYearLevel").value.trim().toLowerCase();
+
+  const tbody = document.getElementById("membersTableBody");
+  const rows = Array.from(tbody.querySelectorAll("tr"));
+
+  let anyFilter = mscIdVal || nameVal || collegeVal || programVal || yearLevelVal;
+
+  rows.forEach(row => {
+    const mscId = row.querySelector("td:nth-child(2)")?.innerText.trim().toLowerCase() || "";
+    const name = row.querySelector("td:nth-child(3)")?.innerText.trim().toLowerCase() || "";
+    const college = row.querySelector("td:nth-child(13)")?.innerText.trim().toLowerCase() || "";
+    const program = row.querySelector("td:nth-child(11)")?.innerText.trim().toLowerCase() || "";
+    const yearLevel = row.querySelector("td:nth-child(12)")?.innerText.trim().toLowerCase() || "";
+
+    let match = true;
+    if (mscIdVal && !mscId.includes(mscIdVal)) match = false;
+    if (nameVal && !name.includes(nameVal)) match = false;
+    if (collegeVal && !college.includes(collegeVal)) match = false;
+    if (programVal && !program.includes(programVal)) match = false;
+    if (yearLevelVal && !yearLevel.includes(yearLevelVal)) match = false;
+
+    row.style.display = match ? "" : "none";
+  });
+
+  // hide popup after applying
+  document.getElementById("filterPopup").classList.add("hidden");
+
+    // 🔥 Update filterBtn style if any filter applied
+    if (anyFilter) {
+      filtersActive = true;
+
+      // show Filters + X (X is a span with its own id)
+      filterBtn.innerHTML = `Filters <i id="clearFilters" class="fas fa-times ml-2 cursor-pointer text-white"></i>`;
+      filterBtn.style.border = "none";
+      filterBtn.style.color = "white";
+
+      // make the X clickable
+      document.getElementById("clearFilters").addEventListener("click", (e) => {
+        e.stopPropagation(); // prevent reopening popup
+        resetFiltersUI();
+      });
+    } else {
+      resetFiltersUI();
+    }
+  });
+
+  // Function to reset filters UI + table
+  function resetFiltersUI() {
+    filtersActive = false;
+
+    const tbody = document.getElementById("membersTableBody");
+    const rowCount = tbody.querySelectorAll("tr").length;
+
+    filterBtn.innerHTML = `<i class="fas fa-filter mr-2"></i> Filters (${rowCount} Members)`;
+    filterBtn.style.border = ""; 
+    filterBtn.style.background = ""; 
+    filterBtn.style.color = "";
+
+    // clear inputs
+    document.getElementById("filterMscId").value = "";
+    document.getElementById("filterName").value = "";
+    document.getElementById("filterCollege").value = "";
+    document.getElementById("filterProgram").value = "";
+    document.getElementById("filterYearLevel").value = "";
+
+    // show all rows
+    const rows = document.querySelectorAll("#membersTableBody tr");
+    rows.forEach(row => row.style.display = "");
+  }
 
   // Bind event to header checkbox
   document.getElementById("selectAll").addEventListener("change", updateActionCells);
