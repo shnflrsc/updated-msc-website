@@ -1,6 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
 
+<script>
+    document.documentElement.classList.add('loading');
+</script>
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -14,6 +18,9 @@
         rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
+        html.loading body {
+            display: none;
+        }
         :root {
             --primary-color: #b9da05;
             --secondary-color: #011538;
@@ -563,6 +570,17 @@
                 return null;
             }
         }
+
+        (async function checkAdminAccess() {
+            document.documentElement.classList.add('loading');
+            const data = await apiCall("/auth/profile", "GET");
+
+            if (!data?.success) {
+                window.location.href = "login.html";
+                return;
+            }
+            document.documentElement.classList.remove('loading');
+        })();
 
         document.getElementById("eventList").addEventListener("change", (event) => {
             const selectedValue = event.target.value;
