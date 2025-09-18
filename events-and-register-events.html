@@ -425,7 +425,7 @@
             }
             
             .hero-section h1 {
-                font-size: 2rem;
+                font-size: 1.75rem;
             }
             
             .hero-section p {
@@ -433,31 +433,31 @@
             }
             
             .main-content {
-                padding: 0 1rem;
+                padding: 0 0.5rem;
             }
             
             .filter-container {
-                margin-bottom: 30px;
+                margin-bottom: 25px;
+                padding: 0 10px;
             }
             
             .filter-buttons {
                 flex-direction: row;
-                flex-wrap: wrap;
                 width: 100%;
-                max-width: 400px;
+                max-width: 350px;
                 margin: 0 auto;
                 padding: 6px;
             }
             
             .filter-btn {
                 flex: 1;
-                min-width: 120px;
-                padding: 10px 16px;
+                padding: 10px 12px;
                 font-size: 13px;
+                min-width: 100px;
             }
             
             .event-list {
-                gap: 20px;
+                gap: 16px;
                 padding: 0 10px 40px;
                 max-width: 100%;
             }
@@ -471,33 +471,26 @@
                 height: auto;
                 min-height: auto;
                 display: flex !important;
-                margin-bottom: 0;
-            }
-            
-            .event-card.active {
-                display: flex !important;
             }
             
             .event-image {
                 width: 100%;
                 height: 200px;
                 padding: 20px;
-                flex-shrink: 0;
             }
             
             .event-content {
-                padding: 25px;
-                flex: none;
+                padding: 20px;
             }
             
             .event-card h3 {
                 font-size: 1.5rem;
-                margin-bottom: 10px;
+                margin-bottom: 8px;
             }
             
             .event-card .date {
                 font-size: 1rem;
-                margin-bottom: 10px;
+                margin-bottom: 8px;
             }
             
             .event-card .excerpt {
@@ -507,8 +500,10 @@
             
             .modal-content {
                 width: 95%;
-                margin: 20px;
-                padding: 25px;
+                margin: 10px;
+                padding: 20px;
+                max-height: 90vh;
+                overflow-y: auto;
             }
             
             .empty-state {
@@ -522,6 +517,64 @@
             
             .empty-state h3 {
                 font-size: 1.25rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero-section {
+                margin-top: 60px;
+                padding: 30px 0.75rem;
+            }
+            
+            .hero-section h1 {
+                font-size: 1.5rem;
+            }
+            
+            .hero-section p {
+                font-size: 0.9rem;
+            }
+            
+            .filter-container {
+                padding: 0 5px;
+                margin-bottom: 20px;
+            }
+            
+            .filter-buttons {
+                max-width: 320px;
+                padding: 4px;
+            }
+            
+            .filter-btn {
+                padding: 8px 10px;
+                font-size: 12px;
+                min-width: 90px;
+            }
+            
+            .event-list {
+                padding: 0 5px 30px;
+            }
+            
+            .event-card {
+                margin: 0 5px;
+            }
+            
+            .event-image {
+                height: 180px;
+                padding: 15px;
+            }
+            
+            .event-content {
+                padding: 15px;
+            }
+            
+            .event-card h3 {
+                font-size: 1.25rem;
+            }
+            
+            .modal-content {
+                width: 98%;
+                margin: 5px;
+                padding: 15px;
             }
         }
     </style>
@@ -626,15 +679,15 @@
                 </div>
             </section>
         </main>
+    </div>
 
-        <div class="modal" id="eventModal">
-            <div class="modal-content">
-                <span class="close-btn">&times;</span>
-                <h2 id="modalTitle"></h2>
-                <p class="date" id="modalDate"></p>
-                <p id="modalContent"></p>
-                <button id="registerBtn" class="register-btn" style="display:none;">Register Now</button>
-            </div>
+    <div class="modal" id="eventModal">
+        <div class="modal-content">
+            <span class="close-btn">&times;</span>
+            <h2 id="modalTitle"></h2>
+            <p class="date" id="modalDate"></p>
+            <p id="modalContent"></p>
+            <button id="registerBtn" class="register-btn" style="display:none;">Register Now</button>
         </div>
     </div>
 
@@ -709,6 +762,32 @@
         }
     }
 
+    function showEvent(index, sectionId) {
+        const cards = document.querySelectorAll(`#${sectionId} .event-card`);
+        if (!cards.length) return;
+
+        if (index < 0) index = cards.length - 1;
+        if (index >= cards.length) index = 0;
+
+        cards.forEach(card => card.classList.remove("active"));
+        cards[index].classList.add("active");
+
+        document.getElementById(sectionId).dataset.currentIndex = index;
+    }
+
+    function prevEvent(sectionId) {
+        const section = document.getElementById(sectionId);
+        let currentIndex = parseInt(section.dataset.currentIndex || "0", 10);
+        showEvent(currentIndex - 1, sectionId);
+    }
+
+    function nextEvent(sectionId) {
+        const section = document.getElementById(sectionId);
+        let currentIndex = parseInt(section.dataset.currentIndex || "0", 10);
+        showEvent(currentIndex + 1, sectionId);
+    }
+
+
     async function loadEvents() {
         try {
             const response = await apiCall("/events?page=1&limit=100", "GET");
@@ -742,52 +821,74 @@
         }
     }
 
-function renderEvents(eventsArray, sectionId) {
-    const section = document.getElementById(sectionId).querySelector(".event-list");
-    section.innerHTML = "";
-    eventsArray.forEach(event => {
-        const card = document.createElement("div");
-        card.classList.add("event-card");
+    function renderEvents(eventsArray, sectionId) {
+        const section = document.getElementById(sectionId).querySelector(".event-list");
+        section.innerHTML = "";
+
+        eventsArray.forEach((event, index) => {
+            const card = document.createElement("div");
+            card.classList.add("event-card");
+            if (index === 0) card.classList.add("active");
+
             card.dataset.id = event.event_id;
             card.dataset.title = event.event_name;
             card.dataset.date = event.event_date;
             card.dataset.status = event.event_status;
             card.dataset.content = event.description;
-            card.dataset.capacity = event.capacity || 0;          // ✅ max capacity from backend
-            card.dataset.registeredCount = event.attendants || 0; // ✅ current attendees from backend
-        card.innerHTML = `
-            <div class="flex gap-3">
-                <div class="w-24 h-24 rounded-md bg-[#1a1f3a] text-[#64748b] text-sm flex items-center justify-center overflow-hidden">
+            card.dataset.capacity = event.capacity || 0;
+            card.dataset.registeredCount = event.attendants || 0;
+
+            card.innerHTML = `
+                <div class="event-image">
                     ${event.event_batch_image   
-                    ? `<img src="${event.event_batch_image}" alt="Event Badge" class="rounded-md object-cover w-full h-full" />`
-                    : `<i class="bi bi-megaphone"></i>`}
+                    ? `<img src="${event.event_batch_image}" alt="Event Badge" />`
+                    : `<i class="bi bi-calendar-event"></i>`}
                 </div>
-                <div class="flex-grow">
-                    <h3>${event.event_name}</h3>
-                    <p class="date">${event.event_date}</p>
-                    <p class="excerpt">${event.description.substring(0, 50)}...</p>
+                <div class="event-content">
+                    <div>
+                        <h3>${event.event_name}</h3>
+                        <p class="date">${new Date(event.event_date).toLocaleDateString("en-US", { month: "long", day: "numeric", year: "numeric" })}</p>
+                    </div>
+                    <p class="excerpt">${event.description}</p>
                 </div>
-            </div>  
-        `;
+            `;
 
-        // ✅ Attach click listener here
-        card.addEventListener("click", () => {
-            document.getElementById("modalTitle").textContent = card.dataset.title;
-            document.getElementById("modalDate").textContent = card.dataset.date;
-            document.getElementById("modalContent").textContent = card.dataset.content;
+            card.addEventListener("click", () => {
+                document.getElementById("modalTitle").textContent = card.dataset.title;
+                document.getElementById("modalDate").textContent = card.dataset.date;
+                document.getElementById("modalContent").textContent = card.dataset.content;
 
-            const registerBtn = document.getElementById("registerBtn");
-            registerBtn.dataset.eventId = card.dataset.id;
-            registerBtn.style.display = (card.dataset.status.toLowerCase() === "upcoming") 
-                ? "inline-block" 
-                : "none";
+                const registerBtn = document.getElementById("registerBtn");
+                registerBtn.dataset.eventId = card.dataset.id;
+                registerBtn.style.display = (card.dataset.status.toLowerCase() === "upcoming") 
+                    ? "inline-block" 
+                    : "none";
 
-            document.getElementById("eventModal").style.display = "flex";
+                document.getElementById("eventModal").style.display = "flex";
+            });
+
+            section.appendChild(card);
         });
 
-        section.appendChild(card);
-    });
-}
+        if (eventsArray.length > 1) {
+            
+            const prevBtn = document.createElement("button");
+            prevBtn.className = "nav-arrow prev";
+            prevBtn.innerHTML = '<i class="fas fa-chevron-left"></i>';
+            prevBtn.onclick = () => prevEvent(sectionId);
+
+            const nextBtn = document.createElement("button");
+            nextBtn.className = "nav-arrow next";
+            nextBtn.innerHTML = '<i class="fas fa-chevron-right"></i>';
+            nextBtn.onclick = () => nextEvent(sectionId);
+
+            section.appendChild(prevBtn);
+            section.appendChild(nextBtn);
+
+            showEvent(0, sectionId);
+        }
+    }
+
 
 
     window.addEventListener("DOMContentLoaded", loadEvents);
@@ -874,7 +975,7 @@ function renderEvents(eventsArray, sectionId) {
 
                     if (card.dataset.status === "upcoming") {
                         if (parseInt(card.dataset.registeredCount) >= parseInt(card.dataset.capacity)) {
-                            registerBtn.style.display = "none";  // ✅ hide button if full
+                            registerBtn.style.display = "none";
                             showMessage("⚠ This event is already at full capacity.");
                         } else {
                             registerBtn.style.display = "inline-block";
@@ -897,7 +998,6 @@ function renderEvents(eventsArray, sectionId) {
                     return;
                 }
 
-                // ✅ Double-check capacity before API call
                 const card = document.querySelector(`.event-card[data-id='${eventId}']`);
                 if (!card) {
                     showMessage("⚠ Event not found.");
@@ -975,5 +1075,6 @@ function renderEvents(eventsArray, sectionId) {
             attachCardListeners();
         });
     </script>
+
 </body>
 </html>

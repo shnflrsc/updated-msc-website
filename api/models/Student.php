@@ -405,4 +405,17 @@ class Student
 
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
+        public function changePasswordByStudentNo($student_no, $newPassword)
+    {
+        $hashed = password_hash($newPassword, PASSWORD_DEFAULT);
+        $stmt = $this->db->prepare("UPDATE students SET password = :password WHERE student_no = :student_no");
+        return $stmt->execute([':password' => $hashed, ':student_no' => $student_no]);
+    }
+
+    public function findByStudentNo($student_no)
+    {
+        $stmt = $this->db->prepare("SELECT * FROM students WHERE student_no = :student_no LIMIT 1");
+        $stmt->execute([':student_no' => $student_no]);
+        return $stmt->fetch(PDO::FETCH_ASSOC);
+    }
 }
