@@ -367,6 +367,7 @@
                   <div>
                     <label for="middleName" class="text-white text-sm mb-1 font-semibold">Middle Name</label>
                     <input type="text" id="middleName" name="middleName" placeholder="Enter middle name" />
+                    <p id="middleNameError" class="text-red-500 text-xs mt-1 hidden"></p>
                   </div>
                   <div>
                     <label for="lastName" class="text-white text-sm mb-1 font-semibold">Last Name</label>
@@ -425,7 +426,8 @@
                   </div>
                   <div>
                     <label for="phone" class="text-white text-sm mb-1 font-semibold">Phone</label>
-                    <input type="tel" id="phone" name="phone" placeholder="09171234567" />
+                    <input type="tel" id="phone" name="phone" placeholder="09123456789" />
+                    <p id="phoneError" class="text-red-500 text-xs mt-1 hidden"></p>
                   </div>
                   <div class="md:col-span-2">
                     <label for="address" class="text-white text-sm mb-1 font-semibold">Address</label>
@@ -801,6 +803,10 @@
       return date.toISOString().split("T")[0];
     }
 
+    const nameRegex = /^[A-Za-z\s\-]+$/;
+    const phoneRegex = /^09\d{9}$/;
+    const nameFields = ["firstName", "lastName"];
+
     // Required fields for profile updates
     const requiredFields = ["firstName", "lastName", "birthdate", "gender", "student_college", "student_program"];
 
@@ -819,55 +825,167 @@
       student_program: "Program"
     };
 
+    function validatePhoneField(id) {
+      const el = document.getElementById(id);
+      const error = document.getElementById(`${id}Error`);
+      const clean = el.value.replace(/[\s\-()]/g, ""); // strip spaces, dashes, etc.
+      if (!clean.trim()) {
+        if (error) {
+          error.textContent = "";
+          error.classList.add("hidden");
+        }
+        return true;
+      }
+
+      if (!phoneRegex.test(clean)) {
+        if (error) {
+          error.textContent = "Enter a valid contact number.";
+          error.classList.remove("hidden");
+        }
+        return false;
+      }
+
+      if (error) {
+        error.textContent = "";
+        error.classList.add("hidden");
+      }
+      return true;
+    }
+
+
+    function validateNameField(id) {
+      const el = document.getElementById(id);
+      const error = document.getElementById(`${id}Error`);
+
+      if (!el.value.trim()) {
+        if (error) {
+          error.textContent = `${fieldNames[id] || "This field"} is required.`;
+          error.classList.remove("hidden");
+        }
+        return false;
+      } else if (!nameRegex.test(el.value.trim())) {
+        if (error) {
+          error.textContent = `${fieldNames[id] || "This field"} does not allow numbers or special characters.`;
+          error.classList.remove("hidden");
+        }
+        return false;
+      } else {
+        if (error) {
+          error.textContent = "";
+          error.classList.add("hidden");
+        }
+        return true;
+      }
+    }
+
     function validateRequiredFields() {
-      let allFilled = true;
+      let allValid = true;
 
       requiredFields.forEach(id => {
-        const el = document.getElementById(id);
-        const error = document.getElementById(`${id}Error`) || document.getElementById(`${id.replace('student_', '')}Error`);
-
-        if (!el.value.trim()) {
-          if (error) {
-            error.textContent = `${fieldNames[id]} is required.`;
-            error.classList.remove("hidden");
-          }
-          allFilled = false;
+        if (nameFields.includes(id)) {
+          if (!validateNameField(id)) allValid = false;
+        } else if (id === "phone") {
+          if (!validatePhoneField(id)) allValid = false;
         } else {
-          if (error) {
-            error.textContent = "";
-            error.classList.add("hidden");
+          const el = document.getElementById(id);
+          const error = document.getElementById(`${id}Error`) || document.getElementById(`${id.replace('student_', '')}Error`);
+          if (!el.value.trim()) {
+            if (error) {
+              error.textContent = `${fieldNames[id]} is required.`;
+              error.classList.remove("hidden");
+            }
+            allValid = false;
+          } else {
+            if (error) {
+              error.textContent = "";
+              error.classList.add("hidden");
+            }
           }
         }
       });
-      return allFilled;
+
+      return allValid;
     }
+
+    nameFields.forEach(id => {
+      const input = document.getElementById(id);
+      if (input) {
+        input.addEventListener("input", () => {
+          input.value = input.value.replace(/[^A-Za-z\s\-]/g, "");
+          validateNameField(id);
+        });
+      }
+    });
+
+    const phoneInput = document.getElementById("phone");
+    if (phoneInput) {
+      phoneInput.addEventListener("input", () => {
+        validatePhoneField("phone");
+      });
+    }
+
+    function attachBirthdateValidation() {
+      const birthdateInput = document.getElementById("birthdate");
+
+      const today = new Date().toISOString().split("T")[0];
+      const error = document.getElementById("birthdateError");
+
+      if (birthdateInput.value && birthdateInput.value > today) {
+        if (error) {
+          error.textContent = "Birthdate cannot be in the future.";
+          error.classList.remove("hidden");
+        }
+        return false; 
+      } else {
+        if (error) {
+          error.textContent = "";
+          error.classList.add("hidden");
+        }
+        return true; 
+      }
+    }
+
 
     function attachChangeListeners() {
       const fields = document.querySelectorAll("input, select");
       const saveBtn = document.getElementById("saveBtn");
 
       function checkChanges() {
-        const requiredFilled = validateRequiredFields();
+        const requiredFilled = areRequiredFieldsFilled();
+        const requiredValid = validateRequiredFields();
+        const phoneValid = validatePhoneField("phone");
+        const birthdateValid = attachBirthdateValidation(); // ✅ use your existing name
+
+        //const allValid = requiredFilled && requiredValid && phoneValid;
+        const allValid = requiredFilled && requiredValid && phoneValid && birthdateValid;
+
+        function normalize(value) {
+          return (value ?? "").trim();
+        }
 
         const requiredChanged = requiredFields.some(id => {
           const el = document.getElementById(id);
-          const originalValue = originalProfile[fieldMapping[id]] || "";
-          return (el?.value || "").trim() !== originalValue.trim();
+          const current = normalize(el?.value);
+          const original = normalize(originalProfile[fieldMapping[id]]);
+          return current !== original;
         });
 
         const optionalChanged = optionalFields.some(id => {
           const el = document.getElementById(id);
-          const originalValue = originalProfile[id] || "";
-          return (el?.value || "").trim() !== originalValue.trim();
+          const current = normalize(el?.value);
+          const original = normalize(originalProfile[id]);
+          return current !== original;
         });
 
         const fileInput = document.getElementById("profile");
         const validPictureSelected = fileInput?.dataset.valid === "true";
 
-        if ((requiredChanged && requiredFilled) || optionalChanged || validPictureSelected) {
+        if (allValid && (requiredChanged || optionalChanged || validPictureSelected)) {
           saveBtn.classList.remove("pointer-events-none", "opacity-50");
+          saveBtn.removeAttribute("disabled");
         } else {
           saveBtn.classList.add("pointer-events-none", "opacity-50");
+          saveBtn.setAttribute("disabled", "true");
         }
       }
 
@@ -931,6 +1049,7 @@
           reader.readAsDataURL(file);
         });
       }
+      attachBirthdateValidation();
     }
 
     function areRequiredFieldsFilled() {
