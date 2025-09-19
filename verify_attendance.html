@@ -1,6 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
 
+<script>
+    document.documentElement.classList.add('loading');
+</script>
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -14,6 +18,9 @@
         rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
+        html.loading body {
+            display: none;
+        }
         :root {
             --primary-color: #b9da05;
             --secondary-color: #011538;
@@ -151,11 +158,12 @@
         }
 
         /*Process att. btn: disabled states*/
-        #process-attendance-btn:disabled{
+        #process-attendance-btn:disabled {
             background-color: gray;
             border: none;
             transition: ease-in 0.2s;
         }
+
         .camera-frame {
             background-color: var(--secondary-color);
             border: 2px solid var(--border-color);
@@ -378,6 +386,10 @@
             font-size: 18px;
             text-align: center;
         }
+
+        .btn-close:focus {
+            box-shadow: none !important;
+        }
     </style>
 </head>
 
@@ -398,6 +410,7 @@
             <!-- main content -->
             <div class="col-12">
                 <div class="form-container">
+                    <div id="alert-container"></div>
                     <form id="event-form">
                         <!-- event selection -->
                         <div class="mb-4">
@@ -558,6 +571,17 @@
             }
         }
 
+        (async function checkAdminAccess() {
+            document.documentElement.classList.add('loading');
+            const data = await apiCall("/auth/profile", "GET");
+
+            if (!data?.success) {
+                window.location.href = "login.html";
+                return;
+            }
+            document.documentElement.classList.remove('loading');
+        })();
+
         document.getElementById("eventList").addEventListener("change", (event) => {
             const selectedValue = event.target.value;
             console.log('Event Select change: ', selectedValue);
@@ -667,7 +691,8 @@
                 const eventId = document.getElementById("eventList").value;
 
                 if (!eventId) {
-                    alert("Please select an event first.");
+                    //alert("Please select an event first.");
+                    showAlert("Please select an event first.", "danger");
                     return;
                 }
 
@@ -682,7 +707,8 @@
                             previewedStudents = normalizeStudents(rows);
 
                             if (previewedStudents.length === 0) {
-                                alert("No valid student identifiers found in CSV.");
+                                //alert("No valid student identifiers found in CSV.");
+                                showAlert("No valid student identifiers found in CSV.", "danger");
                                 return;
                             }
 
@@ -699,7 +725,8 @@
                                 const data = await res.json();
 
                                 if (!data.success) {
-                                    alert("Failed to load student details: " + data.message);
+                                    //alert("Failed to load student details: " + data.message);
+                                    showAlert("Failed to load student details.", "danger");
                                     return;
                                 }
 
@@ -736,10 +763,12 @@
                                 document.getElementById('attendance-rate').textContent = "-";
                                 updateProgressBar(0);
 
-                                alert(`Preview loaded for ${previewedStudents.length} students.\nClick "Process Attendance" to upload.`);
+                                //alert(`Preview loaded for ${previewedStudents.length} students.\nClick "Process Attendance" to upload.`);
+                                showAlert(`Preview loaded for ${previewedStudents.length} students.<br>Click "Process Attendance" to upload.`, "success");
                                 document.getElementById("process-attendance-btn").disabled = false;
                             } catch (err) {
-                                alert("Error fetching student details: " + err.message);
+                                //alert("Error fetching student details: " + err.message);
+                                showAlert("Error fetching student details.", "danger");
                             }
                         }
                     });
@@ -748,16 +777,18 @@
         });
 
         document.getElementById("process-attendance-btn").addEventListener("click", async (e) => {
-            e.preventDefault(); 
+            e.preventDefault();
             const eventId = document.getElementById("eventList").value;
 
             try {
                 const res = await uploadAttendance(eventId, selectedFile);
-                alert(`Attendance imported successfully! Imported: ${res.data.imported}`);
+                //alert(`Attendance imported successfully! Imported: ${res.data.imported}`);
+                showAlert("Attendance imported successfully.", "success");
                 //display the inserted data to DB
                 getEventParticipants(eventId);
             } catch (err) {
-                alert("Failed to import attendance: " + err);
+                //alert("Failed to import attendance: " + err);
+                showAlert("Failed to import attendanc.", "danger");
             }
         });
 
@@ -839,6 +870,16 @@
         document.addEventListener("DOMContentLoaded", () => {
             getUpcomingEvents();
         });
+
+        function showAlert(message, type = "success") {
+            const container = document.getElementById("alert-container");
+            container.innerHTML = `
+            <div class="alert alert-${type} alert-dismissible fade show mt-3 text-white" role="alert">
+                ${message}
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+            `;
+        }
     </script>
 </body>
 

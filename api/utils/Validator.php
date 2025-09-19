@@ -106,15 +106,12 @@ class Validator
 
     public static function validatePhone($phone)
     {
-        // Remove spaces, dashes, and parentheses
         $clean = preg_replace('/[\s\-()]/', '', $phone);
 
-        // Optional: Convert local mobile format to standard +639
         if (preg_match('/^09\d{9}$/', $clean)) {
-            // Convert 09XXXXXXXXX → +639XXXXXXXXX
-            $clean = '+63' . substr($clean, 1);
+            return $clean; // valid Philippine mobile number
         }
 
-        return $clean;
+        return false; // invalid
     }
 }

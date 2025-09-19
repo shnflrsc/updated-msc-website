@@ -21,8 +21,8 @@ function formatDate(date) {
 function getUnivColorByType(type) {
     switch (type) {
         case "Academic Holiday": return "bg-red-600 text-white";
-        case "Academic Event": return "bg-blue-600 text-white";
-        case "University Event": return "bg-green-600 text-white";
+        case "Academic Event": return "bg-green-600 text-white";
+        //case "University Event": return "bg-green-600 text-white";
         default: return "bg-white/20 text-white";
     }
 }
