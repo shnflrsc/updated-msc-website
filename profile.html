@@ -313,16 +313,18 @@
             </div>
           </div>
 
-          <div class="flex flex-col items-center justify-center text-center">
-            <h2 class="text-2xl text-gray-300 font-bold mb-1 tracking-wide" id="fullName"></h2>
-            <p class="text-sm mb-1 text-gray-300 tracking-wide" id="student_no"></p>
+          <div class="flex flex-col items-center justify-center text-center mb-4">
+            <h2 class="text-2xl text-gray-300 font-bold tracking-wide" id="fullName"></h2>
+            <p class="text-sm  text-gray-300 tracking-wide" id="student_no"></p>
           </div>
 
-          <div class="w-full bg-white m-4"></div>
-          <div class="w-full h-auto flex flex-col items-center gap-2">
+          <!-- Separator -->
+          <div class="w-full h-px bg-[#b9da05] opacity-50 my-6"></div>
+
+          <div class="w-full h-auto flex flex-col items-center gap-2 mt-4">
             <p class="text-gray-200 text-lg font-semibold" id="program"></p>
             <p class="text-gray-300 text-base font-light" id="college"></p>
-            <p class="text-gray-300 text-base font-light" id="year_level" </p>
+            <p class="text-gray-300 text-base font-light" id="year_level"></p>
           </div>
 
           <div class="flex flex-col items-center justify-center text-center mt-4">
@@ -505,11 +507,11 @@
       const fbBtn = document.getElementById("facebookBtn");
       if (user.facebook_link && user.facebook_link.trim() !== "") {
         fbBtn.href = user.facebook_link;
-        fbBtn.target = "_blank"; 
+        fbBtn.target = "_blank";
       } else {
         fbBtn.removeAttribute("href");
-        fbBtn.style.opacity = "0.5";   
-        fbBtn.style.pointerEvents = "none"; 
+        fbBtn.style.opacity = "0.5";
+        fbBtn.style.pointerEvents = "none";
       }
 
       const initials = `${user.first_name?.[0] || ""}${user.last_name?.[0] || ""}`.toUpperCase();
