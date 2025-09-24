@@ -499,6 +499,19 @@ class EventController
         }
     }
 
+    public function getUniversityCalendar()
+    {
+        try {
+            AuthMiddleware::authenticate();
+
+            $limit = isset($_GET['limit']) ? (int)$_GET['limit'] : null;
+            $events = $this->eventModel->getUniversityCalendar($limit);
+
+            Response::success($events);
+        } catch (Exception $e) {
+            Response::serverError($e->getMessage());
+        }
+    }
 
     public function getUpcomingEventsCalendar()
     {
