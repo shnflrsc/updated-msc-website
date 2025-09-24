@@ -822,7 +822,8 @@
             }
 
             const formData = new FormData();
-            formData.append("profile", file);
+            //formData.append("profile", file);
+            formData.append("profile", fileInput.files[0]);
 
             try {
                 const res = await fetch(`${API_BASE}/students/upload-profile/${student_id}`, {

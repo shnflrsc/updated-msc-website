@@ -349,16 +349,16 @@ class StudentController
 
             $fileName = 'profile_' . $id . '_' . time() . '.' . $ext;
             $filePath = $uploadDir . $fileName;
-            $relativePath = '/updated-msc-website/uploads/profiles/' . $fileName;
+            $relativePath = '/uploads/profiles/' . $fileName; 
+            $fullPath = 'https://bulsumsc.org' . $relativePath;
 
             if (!move_uploaded_file($file['tmp_name'], $filePath)) {
                 Response::error('Failed to move uploaded file.', 500);
             }
 
-            // Save the image path
             $this->studentModel->updateProfile($id, ['profile_image_path' => $relativePath]);
 
-            Response::success(['path' => $relativePath], 'Profile picture uploaded successfully.');
+            Response::success(['path' => $fullPath], 'Profile picture uploaded successfully.');
         } catch (Exception $e) {
             Response::serverError($e->getMessage());
         }
@@ -456,7 +456,7 @@ class StudentController
     /**
      * TESTING: Get Student details by msc_id
      */
-     public function getStudentsByMscIds()
+    public function getStudentsByMscIds()
     {
         header("Content-Type: application/json");
 
