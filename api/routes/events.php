@@ -50,6 +50,8 @@ switch ($method) {
             $eventController->getUpcoming(3);
         } else if ($endpoint === 'upcomingPreviewMember') {
             $eventController->getUpcoming(4);
+        } else if ($endpoint === 'universityCalendar') {
+            $eventController->getUniversityCalendar();
         } else if ($endpoint === 'upcomingCalendar') {
             $eventController->getUpcomingEventsCalendar();
         } else if ($endpoint === 'canceled') {
@@ -64,7 +66,7 @@ switch ($method) {
             $eventController->getRegistrations($endpoint);
         } else if ($endpoint && is_numeric($endpoint) && $id === 'participantsList') {
             $eventController->getEventParticipants($endpoint);
-        } else if(is_numeric($endpoint) && isset($id) && $id === 'eventDashboard'){
+        } else if (is_numeric($endpoint) && isset($id) && $id === 'eventDashboard') {
             $eventController->getEventById($endpoint);
         } elseif ($endpoint && is_numeric($endpoint)) {
             $eventController->getById($endpoint);
@@ -145,7 +147,7 @@ switch ($method) {
         } elseif ($endpoint && is_numeric($endpoint) && $id === 'status') {
             $eventController->updateStatus($endpoint);
         } elseif ($endpoint && is_numeric($endpoint) && $id === 'import-attendance') {
-            $eventController->importAttendance($endpoint);  
+            $eventController->importAttendance($endpoint);
         } elseif ($endpoint && is_numeric($endpoint)) {
             $eventController->update($endpoint);
         } else {

@@ -317,6 +317,24 @@ class Event
         return $stmt->fetchAll();
     }
 
+    public function getUniversityCalendar($limit = null)
+    {
+        $sql = "SELECT * FROM university_calendar";
+
+        if ($limit !== null) {
+            $sql .= " LIMIT :limit";
+        }
+
+        $stmt = $this->db->prepare($sql);
+
+        if ($limit !== null) {
+            $stmt->bindValue(':limit', (int)$limit, PDO::PARAM_INT);
+        }
+
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
     /**
      * Get upcoming events: for student calendar
      */
