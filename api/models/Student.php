@@ -40,11 +40,11 @@ class Student
             $sql = "INSERT INTO students (
                 username, email, password, first_name, middle_name, last_name, name_suffix,
                 birthdate, gender, student_no, year_level, college, program,
-                section, address, phone, facebook_link, role, is_active
+                section, address, phone, facebook_link, role, is_active, password_updated
             ) VALUES (
                 :username, :email, :password, :first_name, :middle_name, :last_name, :name_suffix,
                 :birthdate, :gender, :student_no, :year_level, :college, :program,
-                :section, :address, :phone, :facebook_link, :role, :is_active
+                :section, :address, :phone, :facebook_link, :role, :is_active, 0
             )";
 
             $stmt = $this->db->prepare($sql);
@@ -82,6 +82,16 @@ class Student
             return $this->findById($userId);
         } catch (Exception $e) {
             throw new Exception("Failed to create student: " . $e->getMessage());
+        }
+    }
+
+    public function markPasswordUpdated($id)
+    {
+        try {
+            $stmt = $this->db->prepare("UPDATE students SET password_updated = 1 WHERE id = :id");
+            return $stmt->execute(['id' => $id]);
+        } catch (Exception $e) {
+            throw new Exception("Failed to mark password updated: " . $e->getMessage());
         }
     }
 
@@ -218,7 +228,7 @@ class Student
     {
         try {
             $hashedPassword = password_hash($newPassword, PASSWORD_DEFAULT);
-            $stmt = $this->db->prepare("UPDATE students SET password = :password WHERE id = :id");
+            $stmt = $this->db->prepare("UPDATE students SET password = :password, password_updated = 1 WHERE id = :id");
             return $stmt->execute(['password' => $hashedPassword, 'id' => $id]);
         } catch (Exception $e) {
             throw new Exception("Failed to change password: " . $e->getMessage());
@@ -405,10 +415,10 @@ class Student
 
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
-        public function changePasswordByStudentNo($student_no, $newPassword)
+    public function changePasswordByStudentNo($student_no, $newPassword)
     {
         $hashed = password_hash($newPassword, PASSWORD_DEFAULT);
-        $stmt = $this->db->prepare("UPDATE students SET password = :password WHERE student_no = :student_no");
+        $stmt = $this->db->prepare("UPDATE students SET password = :password, password_updated = 1 WHERE student_no = :student_no");
         return $stmt->execute([':password' => $hashed, ':student_no' => $student_no]);
     }
 
