@@ -78,6 +78,7 @@ class AuthMiddleware
         $_SESSION['role'] = $user['role'];
         $_SESSION['email'] = $user['email'];
         $_SESSION['msc_id'] = $user['msc_id'];
+        $_SESSION['password_updated'] = $user['password_updated'];
     }
     
     /**

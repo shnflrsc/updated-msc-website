@@ -11,6 +11,7 @@ CREATE TABLE IF NOT EXISTS students (
     username VARCHAR(50) UNIQUE NOT NULL,
     email VARCHAR(100) UNIQUE NOT NULL,
     password VARCHAR(255) NOT NULL,
+    password_updated TINYINT(1) DEFAULT 0,
 
     first_name VARCHAR(100),
     middle_name VARCHAR(100),
@@ -29,6 +30,7 @@ CREATE TABLE IF NOT EXISTS students (
     facebook_link VARCHAR(255),
 
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+
 
     profile_image_path TEXT,
     is_active BOOLEAN
@@ -138,6 +140,9 @@ CREATE TABLE IF NOT EXISTS university_calendar (
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 );
+
+-- Insert all admins here 
+INSERT INTO students
 
 -- Auto-insertions for university_calendar from January to December 2025
 -- MAY 2025
