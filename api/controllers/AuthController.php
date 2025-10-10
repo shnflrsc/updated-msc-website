@@ -207,6 +207,8 @@ class AuthController
             $result = $this->studentModel->changePassword($userId, $data['new_password']);
             
             if ($result) {
+                $this->studentModel->markPasswordUpdated($userId);
+                $_SESSION['password_updated'] = 1; // keep session in sync
                 Response::success(null, 'Password changed successfully');
             } else {
                 Response::serverError('Failed to change password');
