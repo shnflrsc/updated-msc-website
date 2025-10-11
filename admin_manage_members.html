@@ -1224,7 +1224,7 @@ async function fetchStudents() {
     }
     
         // 🔥 filter out officers
-    const students = result.data.students.filter(s => s.role !== "officer");
+    const students = result.data.students.filter(s => s.role == "member");
     const tbody = document.getElementById("membersTableBody");
     tbody.innerHTML = "";
 

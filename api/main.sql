@@ -6,7 +6,7 @@ USE student_portal;
 CREATE TABLE IF NOT EXISTS students (
     id INT AUTO_INCREMENT PRIMARY KEY,
     msc_id VARCHAR(32) UNIQUE,
-    role ENUM('member', 'officer') DEFAULT 'member', 
+    role ENUM('member', 'officer', 'admin') DEFAULT 'member', 
 
     username VARCHAR(50) UNIQUE NOT NULL,
     email VARCHAR(100) UNIQUE NOT NULL,
