@@ -141,8 +141,6 @@ CREATE TABLE IF NOT EXISTS university_calendar (
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 );
 
--- Insert all admins here 
-INSERT INTO students
 
 -- Auto-insertions for university_calendar from January to December 2025
 -- MAY 2025
