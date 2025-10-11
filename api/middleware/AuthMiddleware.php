@@ -45,7 +45,7 @@ class AuthMiddleware
      */
     public static function requireOfficer()
     {
-        return self::requireRole('officer');
+        return self::requireRole('admin');
     }
     
     /**
