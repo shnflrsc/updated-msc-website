@@ -984,10 +984,9 @@
                                 <label for="event_restriction">Event Restriction</label>
                                 <select id="event_restriction" name="event_restriction" class="form-control">
                                     <option value="public" selected>Open for Public</option>
-                                    <!-- Open for Public, Members Only -->
-                                    <option value="members">Members Only</option>
-                                    <!-- <option value="BulSUans Only">BulSUans Only</option> -->
-                                    <!-- <option value="Invite Only">Invite Only</option> -->
+                                    <option value="membersOnly">Members Only</option>
+                                    <option value="bulsuansOnly">BulSUans Only</option>
+                                    <option value="inviteOnly">Invite Only</option>
                                 </select>
                             </div>
                         </div>
@@ -1465,21 +1464,21 @@
             }
         }
         */
-        
+
         async function apiCall(endpoint, method = "GET", body = null) {
-                try {
-                    const res = await fetch(`${API_BASE}${endpoint}`, {
-                        method,
-                        credentials: "include", 
-                        headers: { "Content-Type": "application/json" },
-                        body: body ? JSON.stringify(body) : null,
-                    });
-                    return await res.json();
-                } catch (err) {
-                    console.error("API call failed:", err);
-                    return { success: false, message: err.message };
-                }
+            try {
+                const res = await fetch(`${API_BASE}${endpoint}`, {
+                    method,
+                    credentials: "include",
+                    headers: { "Content-Type": "application/json" },
+                    body: body ? JSON.stringify(body) : null,
+                });
+                return await res.json();
+            } catch (err) {
+                console.error("API call failed:", err);
+                return { success: false, message: err.message };
             }
+        }
 
         (async function checkAdminAccess() {
             document.documentElement.classList.add('loading');
