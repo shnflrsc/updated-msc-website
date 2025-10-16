@@ -61,6 +61,9 @@ switch ($method) {
             case 'profile':
                 $authController->getProfile();
                 break;
+            case 'check-login':
+                $authController->checkLoginStatus();
+                break;
             case '':
                 // Show available auth endpoints
                 echo json_encode([
