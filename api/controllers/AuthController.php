@@ -170,6 +170,30 @@ class AuthController
             Response::serverError($e->getMessage());
         }
     }
+
+    /**
+     * Check login status
+     * Returns current session user if logged in
+     */
+    public function checkLoginStatus()
+    {
+        try {
+            $user = AuthMiddleware::getCurrentUser();
+
+            if (!$user) {
+                Response::success(['logged_in' => false], 'User not logged in');
+                return;
+            }
+
+            Response::success([
+                'logged_in' => true,
+                'user' => $user
+            ], 'User is logged in');
+        } catch (Exception $e) {
+            Response::serverError($e->getMessage());
+        }
+    }
+
     
     /**
      * Change password

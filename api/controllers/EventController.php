@@ -68,7 +68,7 @@ class EventController
                 $errors['event_status'] = 'Invalid event status';
             }
 
-            if (isset($data['event_restriction']) && !Validator::validateEnum($data['event_restriction'], ['public', 'members', 'officers'])) {
+            if (isset($data['event_restriction']) && !Validator::validateEnum($data['event_restriction'], ['public', 'members', 'bulsuans', 'inviteOnly'])) {
                 $errors['event_restriction'] = 'Invalid event restriction';
             }
 
@@ -603,29 +603,87 @@ class EventController
     /**
      * Register for event
      */
-    public function register($id)
+    public function register($eventId)
     {
         try {
-            $userId = AuthMiddleware::authenticate();
+            $input = json_decode(file_get_contents('php://input'), true);
+            $event = $this->eventModel->findById($eventId);
 
-            $event = $this->eventModel->findById($id);
             if (!$event) {
-                Response::notFound('Event not found');
+                return Response::error("Event not found");
             }
 
-            $result = $this->eventModel->registerStudent($id, $userId);
+            $restriction = strtolower($event['event_restriction'] ?? '');
+
+            switch ($restriction) {
+                case 'members':
+                    session_start();
+                    $userId = $_SESSION['user_id'] ?? null;
+                    if (!$userId) return Response::unauthorized("Login required to register as a member.");
+                    $result = $this->eventModel->registerMember($eventId, $userId);
+                    break;
+
+                case 'bulsuans':
+                    $result = $this->eventModel->registerBulSUan($eventId, $input);
+                    break;
+
+                case 'public':
+                    $result = $this->eventModel->registerPublic($eventId, $input);
+                    break;
+
+                default:
+                    return Response::error("Invalid event restriction type.");
+            }
+
+            return Response::success($result);
+        } catch (Exception $e) {
+            return Response::error($e->getMessage());
+        }
+    }
+
+    /**
+     * Check if Member is registered for an event
+     */
+    public function isUserRegistered($eventId, $userId) {
+    try {
+        $registered = $this->eventModel->checkUserRegistration($eventId, $userId);
+
+        echo json_encode([
+            'success' => true,
+            'registered' => $registered
+        ]);
+    } catch (Exception $e) {
+        http_response_code(500);
+        echo json_encode([
+            'success' => false,
+            'message' => $e->getMessage()
+        ]);
+    }
+}
+
+
+    /**
+     * Cancel pre-registration for an event (Member only)
+     */
+    public function cancelRegistration($eventId)
+    {
+        try {
+            session_start();
+            $userId = $_SESSION['user_id'] ?? null;
+
+            if (!$userId) {
+                return Response::unauthorized("Login required to cancel registration.");
+            }
+
+            $result = $this->eventModel->cancelRegistration($eventId, $userId);
 
             if ($result) {
-                Response::success(null, 'Successfully registered for event');
+                return Response::success(null, "Pre-registration cancelled successfully.");
             } else {
-                Response::serverError('Failed to register for event');
+                return Response::error("You are not registered for this event.");
             }
         } catch (Exception $e) {
-            if (strpos($e->getMessage(), 'already registered') !== false) {
-                Response::error($e->getMessage(), 409);
-            } else {
-                Response::serverError($e->getMessage());
-            }
+            return Response::serverError($e->getMessage());
         }
     }
 

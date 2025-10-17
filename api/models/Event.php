@@ -436,47 +436,136 @@ class Event
     }
 
     /**
-     * Register student for event
+     * Register a MEMBER (MSC logged-in student)
      */
-    public function registerStudent($eventId, $studentId)
+    public function registerMember($eventId, $studentId)
     {
         try {
-            // Check if event exists and allows registration
-            $event = $this->findById($eventId);
-            if (!$event || !$event['registration_required']) {
-                throw new Exception("Event does not require registration or does not exist");
+            // Check for duplicate registration
+            $check = $this->db->prepare("
+                SELECT id FROM event_registrations
+                WHERE event_id = :event_id AND student_id = :student_id
+            ");
+            $check->execute(['event_id' => $eventId, 'student_id' => $studentId]);
+            if ($check->fetch()) {
+                throw new Exception("You are already registered for this event.");
             }
 
-            // Check if already registered
-            $checkStmt = $this->db->prepare("SELECT id FROM event_registrations WHERE event_id = :event_id AND student_id = :student_id");
-            $checkStmt->execute(['event_id' => $eventId, 'student_id' => $studentId]);
+            $stmt = $this->db->prepare("
+                INSERT INTO event_registrations (event_id, student_id, participant_type)
+                VALUES (:event_id, :student_id, 'member')
+            ");
+            $stmt->execute(['event_id' => $eventId, 'student_id' => $studentId]);
 
-            if ($checkStmt->fetch()) {
-                throw new Exception("Already registered for this event");
-            }
+            // Optional: increment attendants count
+            $this->db->prepare("UPDATE events SET attendants = attendants + 1 WHERE event_id = :event_id")
+                    ->execute(['event_id' => $eventId]);
 
-            // ✅ Check capacity
-            if (isset($event['capacity']) && $event['capacity'] > 0) {
-                if ($event['attendants'] >= $event['capacity']) {
-                    throw new Exception("Event is already full");
+            return ["success" => true, "message" => "Successfully registered as a member."];
+        } catch (Exception $e) {
+            throw new Exception("Member registration failed: " . $e->getMessage());
+        }
+    }
+
+    
+    /**
+     * Cancel a Pre-Registration
+     */
+    public function cancelRegistration($eventId, $userId)
+    {
+        $sql = "DELETE FROM event_registrations WHERE event_id = ? AND student_id = ?";
+        $stmt = $this->db->prepare($sql);
+        return $stmt->execute([$eventId, $userId]);
+    }
+
+    /**
+     * Check if a user is registered for an event
+     */
+
+    public function checkUserRegistration($eventId, $userId) {
+        $sql = "SELECT COUNT(*) as count FROM event_registrations 
+                WHERE event_id = ? AND student_id = ?";
+        $stmt = $this->db->prepare($sql);
+        $stmt->execute([$eventId, $userId]);
+        $row = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        return $row['count'] > 0; // returns true/false
+    }
+
+
+    /**
+     * Register a BULSUAN (non-member but BulSU student)
+     */
+    public function registerBulSUan($eventId, $data)
+    {
+        try {
+            // Required fields check
+            $required = ['first_name', 'last_name', 'email', 'program', 'college', 'year_level'];
+            foreach ($required as $field) {
+                if (empty($data[$field])) {
+                    throw new Exception("Missing required field: $field");
                 }
             }
 
-            // Register student
-            $stmt = $this->db->prepare("INSERT INTO event_registrations (event_id, student_id) VALUES (:event_id, :student_id)");
-            $result = $stmt->execute(['event_id' => $eventId, 'student_id' => $studentId]);
+            $stmt = $this->db->prepare("
+                INSERT INTO event_registrations (
+                    event_id, participant_type, first_name, last_name, email, program, college, year_level, section
+                ) VALUES (
+                    :event_id, 'bulsuan', :first_name, :last_name, :email, :program, :college, :year_level, :section
+                )
+            ");
 
-            if ($result) {
-                // Update attendants count
-                $updateStmt = $this->db->prepare("UPDATE events SET attendants = attendants + 1 WHERE event_id = :event_id");
-                $updateStmt->execute(['event_id' => $eventId]);
-            }
+            $stmt->execute([
+                'event_id' => $eventId,
+                'first_name' => $data['first_name'],
+                'last_name' => $data['last_name'],
+                'email' => $data['email'],
+                'program' => $data['program'],
+                'college' => $data['college'],
+                'year_level' => $data['year_level'],
+                'section' => $data['section'] ?? null
+            ]);
 
-            return $result;
+            return ["success" => true, "message" => "BulSUan pre-registration successful."];
         } catch (Exception $e) {
-            throw new Exception("Failed to register for event: " . $e->getMessage());
+            throw new Exception("BulSUan registration failed: " . $e->getMessage());
         }
     }
+
+    /**
+     * Register a PUBLIC participant (Open for public)
+     */
+    public function registerPublic($eventId, $data)
+    {
+        try {
+            $required = ['first_name', 'last_name', 'email'];
+            foreach ($required as $field) {
+                if (empty($data[$field])) {
+                    throw new Exception("Missing required field: $field");
+                }
+            }
+
+            $stmt = $this->db->prepare("
+                INSERT INTO event_registrations (
+                    event_id, participant_type, first_name, last_name, email
+                ) VALUES (
+                    :event_id, 'guest', :first_name, :last_name, :email
+                )
+            ");
+            $stmt->execute([
+                'event_id' => $eventId,
+                'first_name' => $data['first_name'],
+                'last_name' => $data['last_name'],
+                'email' => $data['email']
+            ]);
+
+            return ["success" => true, "message" => "Public registration successful."];
+        } catch (Exception $e) {
+            throw new Exception("Public registration failed: " . $e->getMessage());
+        }
+    }
+
+
 
     /**
      * Get event registrations

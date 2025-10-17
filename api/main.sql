@@ -51,7 +51,7 @@ CREATE TABLE IF NOT EXISTS events (
     event_image_url TEXT,
     event_batch_image TEXT,
     attendants INT DEFAULT 0,
-    event_restriction ENUM('public', 'members', 'officers') DEFAULT 'public',
+    event_restriction ENUM('public', 'members', 'bulsuans', 'inviteOnly') DEFAULT 'public',
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
     capacity INT DEFAULT 0
@@ -83,13 +83,22 @@ CREATE TABLE IF NOT EXISTS settings (
 CREATE TABLE IF NOT EXISTS event_registrations (
     id INT AUTO_INCREMENT PRIMARY KEY,
     event_id INT NOT NULL,
-    student_id INT NOT NULL,
+    student_id INT NULL,
+    first_name VARCHAR(100),
+    last_name VARCHAR(100),
+    email VARCHAR(255),
+    participant_type ENUM('member', 'bulsuan', 'guest') DEFAULT 'guest',
+    program VARCHAR(255),
+    college VARCHAR(255),
+    year_level VARCHAR(50),
+    section VARCHAR(50),
     registration_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     attendance_status ENUM('registered', 'attended', 'absent') DEFAULT 'registered',
     FOREIGN KEY (event_id) REFERENCES events(event_id) ON DELETE CASCADE,
-    FOREIGN KEY (student_id) REFERENCES students(id) ON DELETE CASCADE,
+    FOREIGN KEY (student_id) REFERENCES students(id) ON DELETE SET NULL,
     UNIQUE KEY unique_registration (event_id, student_id)
 );
+
 
 -- Create password_resets table for password recovery
 CREATE TABLE IF NOT EXISTS password_resets (
