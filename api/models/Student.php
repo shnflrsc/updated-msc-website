@@ -181,21 +181,11 @@ class Student
     {
         try {
             $fields = [
-                'first_name',
-                'middle_name',
-                'last_name',
-                'name_suffix',
-                'birthdate',
-                'gender',
-                'student_no',
-                'year_level',
-                'college',
-                'program',
-                'section',
-                'address',
-                'phone',
-                'facebook_link',
-                'profile_image_path'
+            "msc_id", "student_no", "last_name", "first_name", "middle_name", "name_suffix",
+            "college", "program", "year_level", "section", "phone", "email", "bulsu_email",
+            "facebook_link", "address", "birthdate", "age", "gender",
+            "guardian_name", "relationship", "guardian_phone", "guardian_address",
+            'profile_image_path'
             ];
 
             $setParts = [];

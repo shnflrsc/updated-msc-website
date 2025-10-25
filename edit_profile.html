@@ -231,9 +231,9 @@
                         <input id="age" type="number" class="w-full px-4 py-3 rounded-md bg-[#27272a] border border-gray-600 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#b9da05]">
                     </div>
                     <div>
-                        <label for="sex" class="block text-sm font-semibold mb-1">Sex</label>
-                        <select id="sex" class="w-full px-4 py-3 rounded-md bg-[#27272a] border border-gray-600 text-white focus:outline-none focus:ring-2 focus:ring-[#b9da05]">
-                            <option value="">Select Sex</option>
+                        <label for="gender" class="block text-sm font-semibold mb-1">Gender</label>
+                        <select id="gender" class="w-full px-4 py-3 rounded-md bg-[#27272a] border border-gray-600 text-white focus:outline-none focus:ring-2 focus:ring-[#b9da05]">
+                            <option value="">Select Gender</option>
                             <option value="Male">Male</option>
                             <option value="Female">Female</option>
                             <option value="Other">Other</option>
@@ -281,12 +281,155 @@
         </div>
     </main>
 
-    <script>
-        document.getElementById("editProfileForm").addEventListener("submit", function(e) {
-            e.preventDefault();
-            console.log("Profile updated");
-        });
-    </script>
+<script>
+const API_BASE = "/updated-msc-website/api";
+
+/**
+ * Reusable API Call Function
+ */
+async function apiCall(endpoint, method = "GET", data = null) {
+    const options = {
+        method,
+        headers: { "Content-Type": "application/json" },
+        credentials: "include", // keep cookies/session
+    };
+
+    if (data) options.body = JSON.stringify(data);
+
+    try {
+        const res = await fetch(`${API_BASE}${endpoint}`, options);
+        const json = await res.json();
+        return json;
+    } catch (error) {
+        console.error("❌ API call failed:", error);
+        return { success: false, message: "Network error" };
+    }
+}
+
+let studentId = null;
+
+/**
+ * Fetch Logged-in User & Autofill Profile
+ */
+document.addEventListener("DOMContentLoaded", async () => {
+    console.log("🔍 Checking login status...");
+
+    const auth = await apiCall("/auth/check-login", "GET");
+    console.log("📡 Raw auth response:", auth);
+
+    if (auth.success && auth.data?.logged_in) {
+        studentId = auth.data.user.id;
+        console.log("✅ User is logged in!");
+        console.log("👤 User Data:", auth.data.user);
+        console.log("🆔 Student ID:", studentId);
+
+        // Fetch and autofill profile
+        await loadProfileData(studentId);
+    } else {
+        console.warn("⚠️ Not logged in or session expired.");
+        alert("⚠️ Please log in first.");
+        window.location.href = "login.html";
+    }
+});
+
+/**
+ * Load and Autofill Profile Data
+ */
+async function loadProfileData(id) {
+    console.log("📥 Fetching profile data for ID:", id);
+    const profileRes = await apiCall(`/students/${id}`, "GET");
+
+    if (profileRes.success && profileRes.data) {
+        console.log("📄 Profile data received:", profileRes.data);
+        const d = profileRes.data;
+
+        // ✅ Match database column names
+        document.getElementById("mscCode").value = d.msc_id || "";
+        document.getElementById("studentNumber").value = d.student_no || "";
+        document.getElementById("lastName").value = d.last_name || "";
+        document.getElementById("firstName").value = d.first_name || "";
+        document.getElementById("middleName").value = d.middle_name || "";
+        document.getElementById("extension").value = d.name_suffix || "";
+        document.getElementById("college").value = d.college || "";
+        document.getElementById("programMajor").value = d.program || "";
+        document.getElementById("year").value = d.year_level || "";
+        document.getElementById("section").value = d.section || "";
+        document.getElementById("contactNumber").value = d.phone || "";
+        document.getElementById("personalEmail").value = d.email || "";
+        document.getElementById("bulsuEmail").value = d.bulsu_email || "";
+        document.getElementById("facebookLink").value = d.facebook_link || "";
+        document.getElementById("currentAddress").value = d.address || "";
+        document.getElementById("birthdate").value = d.birthdate || "";
+        document.getElementById("age").value = d.age || "";
+        document.getElementById("gender").value = d.gender || "";
+        document.getElementById("guardianName").value = d.guardian_name || "";
+        document.getElementById("guardianRelationship").value = d.relationship || "";
+        document.getElementById("guardianContact").value = d.guardian_phone || "";
+        document.getElementById("guardianAddress").value = d.guardian_address || "";
+
+        console.log("✅ Profile autofill complete!");
+    } else {
+        console.error("⚠️ Failed to fetch profile data:", profileRes.message);
+        alert("Could not load your profile data. Please try again later.");
+    }
+}
+
+/**
+ * Handle Edit Profile Form Submission
+ */
+document.getElementById("editProfileForm").addEventListener("submit", async (e) => {
+    e.preventDefault();
+
+    if (!studentId) {
+        alert("User not loaded yet. Please wait a moment.");
+        console.warn("🚫 Attempted to update profile before login check completed.");
+        return;
+    }
+
+    const formData = {
+        msc_id: document.getElementById("mscCode").value,
+        student_no: document.getElementById("studentNumber").value,
+        last_name: document.getElementById("lastName").value,
+        first_name: document.getElementById("firstName").value,
+        middle_name: document.getElementById("middleName").value,
+        name_suffix: document.getElementById("extension").value,
+        college: document.getElementById("college").value,
+        program: document.getElementById("programMajor").value,
+        year_level: document.getElementById("year").value,
+        section: document.getElementById("section").value,
+        phone: document.getElementById("contactNumber").value,
+        email: document.getElementById("personalEmail").value,
+        bulsu_email: document.getElementById("bulsuEmail").value,
+        facebook_link: document.getElementById("facebookLink").value,
+        address: document.getElementById("currentAddress").value,
+        birthdate: document.getElementById("birthdate").value,
+        age: document.getElementById("age").value,
+        gender: document.getElementById("gender").value,
+        guardian_name: document.getElementById("guardianName").value,
+        relationship: document.getElementById("guardianRelationship").value,
+        guardian_phone: document.getElementById("guardianContact").value,
+        guardian_address: document.getElementById("guardianAddress").value,
+    };
+
+    console.log("📝 Submitting form data:", formData);
+
+    try {
+        const result = await apiCall(`/students/profile/${studentId}`, "PUT", formData);
+        console.log("📬 Server response:", result);
+
+        if (result.success) {
+            alert("✅ Profile updated successfully!");
+        } else {
+            alert("⚠️ Update failed: " + (result.message || "Unknown error"));
+        }
+    } catch (err) {
+        console.error("❌ Update error:", err);
+        alert("❌ Something went wrong while updating your profile.");
+    }
+});
+</script>
+
+
 </body>
 
 </html>
