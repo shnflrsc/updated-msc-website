@@ -12,6 +12,12 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400..900&family=Segoe+UI:wght@400;700&display=swap" rel="stylesheet" />
     <style>
+        /* Remove yellow outline for readonly fields */
+        input[readonly]:focus {
+            outline: none !important;
+            box-shadow: none !important;
+            border-color: #4b5563 !important;
+        }
         @font-face {
             font-family: 'Veonika';
             src: url('https://fonts.cdnfonts.com/s/72818/veonika_free.woff') format('woff');
@@ -107,11 +113,11 @@
     <div class="el"></div>
     <nav id="main-header" class="fixed top-0 left-0 right-0 z-50 transition-all duration-300 ease-in-out py-4">
         <div class="max-w-7xl mx-auto px-4 flex justify-between items-center">
-            <a href="index.html" class="flex items-center space-x-2 text-white transition-colors duration-300 hover:text-[#b9da05]">
+            <a href="index.php" class="flex items-center space-x-2 text-white transition-colors duration-300 hover:text-[#b9da05]">
                 <img src="./Logos/Bulsu MSC Logo-02.png" alt="BULSU MSC Logo" class="h-12">
             </a>
             <div class="hidden md:flex items-center space-x-6">
-                <a href="index.html" class="text-gray-400 font-semibold transition-colors duration-300 hover:text-[#b9da05] cursor-pointer">Home</a>
+                <a href="index.php" class="text-gray-400 font-semibold transition-colors duration-300 hover:text-[#b9da05] cursor-pointer">Home</a>
                 <a class="text-gray-400 font-semibold transition-colors duration-300 hover:text-[#b9da05] cursor-pointer">About</a>
                 <a class="text-gray-400 font-semibold transition-colors duration-300 hover:text-[#b9da05] cursor-pointer">Team</a>
                 <a class="text-gray-400 font-semibold transition-colors duration-300 hover:text-[#b9da05] cursor-pointer">Partners</a>
@@ -128,59 +134,59 @@
         <div class="w-full max-w-4xl bg-[#18181b] text-white p-8 rounded-2xl shadow-lg border border-[#27272a] border-2">
             <h2 class="text-3xl font-bold mb-6 text-center" style="font-family: 'Veonika', sans-serif;">Edit Your Profile</h2>
             <div id="error-box" class="hidden mb-4 text-white border border-red-500 bg-[#27272a] px-4 py-3 rounded text-sm"></div>
-            <form id="editProfileForm">
+            <form id="editProfileForm" novalidate>
                 <div class="form-grid-2col mb-6">
                     <div>
                         <label for="mscCode" class="block text-sm font-semibold mb-1">MSC Code</label>
-                        <input id="mscCode" type="text" class="w-full px-4 py-3 rounded-md bg-[#27272a] border border-gray-600 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#b9da05]">
+                        <input id="mscCode" type="text" class="w-full px-4 py-3 rounded-md bg-[#27272a] border border-gray-600 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#b9da05]" readonly>
                     </div>
                     <div>
                         <label for="studentNumber" class="block text-sm font-semibold mb-1">Student Number</label>
-                        <input id="studentNumber" type="text" class="w-full px-4 py-3 rounded-md bg-[#27272a] border border-gray-600 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#b9da05]">
+                        <input id="studentNumber" type="text" class="w-full px-4 py-3 rounded-md bg-[#27272a] border border-gray-600 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#b9da05]" readonly>
                     </div>
                 </div>
 
                 <div class="form-grid-2col mb-6">
                     <div>
                         <label for="lastName" class="block text-sm font-semibold mb-1">Last Name</label>
-                        <input id="lastName" type="text" class="w-full px-4 py-3 rounded-md bg-[#27272a] border border-gray-600 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#b9da05]">
+                        <input id="lastName" type="text" class="w-full px-4 py-3 rounded-md bg-[#27272a] border border-gray-600 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#b9da05]" readonly>
                     </div>
                     <div>
                         <label for="firstName" class="block text-sm font-semibold mb-1">First Name</label>
-                        <input id="firstName" type="text" class="w-full px-4 py-3 rounded-md bg-[#27272a] border border-gray-600 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#b9da05]">
+                        <input id="firstName" type="text" class="w-full px-4 py-3 rounded-md bg-[#27272a] border border-gray-600 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#b9da05]" readonly>
                     </div>
                 </div>
 
                 <div class="form-grid-2col mb-6">
                     <div>
                         <label for="middleName" class="block text-sm font-semibold mb-1">Middle Name</label>
-                        <input id="middleName" type="text" class="w-full px-4 py-3 rounded-md bg-[#27272a] border border-gray-600 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#b9da05]">
+                        <input id="middleName" type="text" class="w-full px-4 py-3 rounded-md bg-[#27272a] border border-gray-600 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#b9da05]" readonly>
                     </div>
                     <div>
                         <label for="extension" class="block text-sm font-semibold mb-1">Extension</label>
-                        <input id="extension" type="text" class="w-full px-4 py-3 rounded-md bg-[#27272a] border border-gray-600 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#b9da05]">
+                        <input id="extension" type="text" class="w-full px-4 py-3 rounded-md bg-[#27272a] border border-gray-600 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#b9da05]" readonly>
                     </div>
                 </div>
 
                 <div class="form-grid-2col mb-6">
                     <div>
                         <label for="college" class="block text-sm font-semibold mb-1">College</label>
-                        <input id="college" type="text" class="w-full px-4 py-3 rounded-md bg-[#27272a] border border-gray-600 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#b9da05]">
+                        <input id="college" type="text" class="w-full px-4 py-3 rounded-md bg-[#27272a] border border-gray-600 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#b9da05]" readonly>
                     </div>
                     <div>
                         <label for="programMajor" class="block text-sm font-semibold mb-1">Program and Major</label>
-                        <input id="programMajor" type="text" class="w-full px-4 py-3 rounded-md bg-[#27272a] border border-gray-600 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#b9da05]">
+                        <input id="programMajor" type="text" class="w-full px-4 py-3 rounded-md bg-[#27272a] border border-gray-600 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#b9da05]" readonly>
                     </div>
                 </div>
 
                 <div class="form-grid-2col mb-6">
                     <div>
                         <label for="year" class="block text-sm font-semibold mb-1">Year</label>
-                        <input id="year" type="text" class="w-full px-4 py-3 rounded-md bg-[#27272a] border border-gray-600 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#b9da05]">
+                        <input id="year" type="text" class="w-full px-4 py-3 rounded-md bg-[#27272a] border border-gray-600 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#b9da05]" readonly>
                     </div>
                     <div>
                         <label for="section" class="block text-sm font-semibold mb-1">Section</label>
-                        <input id="section" type="text" class="w-full px-4 py-3 rounded-md bg-[#27272a] border border-gray-600 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#b9da05]">
+                        <input id="section" type="text" class="w-full px-4 py-3 rounded-md bg-[#27272a] border border-gray-600 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#b9da05]" readonly>
                     </div>
                 </div>
 
@@ -195,7 +201,7 @@
                     </div>
                     <div>
                         <label for="personalEmail" class="block text-sm font-semibold mb-1">Personal Email</label>
-                        <input id="personalEmail" type="email" class="w-full px-4 py-3 rounded-md bg-[#27272a] border border-gray-600 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#b9da05]">
+                        <input id="personalEmail" type="email" class="w-full px-4 py-3 rounded-md bg-[#27272a] border border-gray-600 text-white placeholder-gray-400 focus:outline-none" readonly>
                     </div>
                 </div>
 
@@ -344,18 +350,18 @@ async function loadProfileData(id) {
         const d = profileRes.data;
 
         // ✅ Match database column names
-        document.getElementById("mscCode").value = d.msc_id || "";
-        document.getElementById("studentNumber").value = d.student_no || "";
-        document.getElementById("lastName").value = d.last_name || "";
-        document.getElementById("firstName").value = d.first_name || "";
-        document.getElementById("middleName").value = d.middle_name || "";
-        document.getElementById("extension").value = d.name_suffix || "";
-        document.getElementById("college").value = d.college || "";
-        document.getElementById("programMajor").value = d.program || "";
-        document.getElementById("year").value = d.year_level || "";
-        document.getElementById("section").value = d.section || "";
+    document.getElementById("mscCode").placeholder = d.msc_id || "";
+    document.getElementById("studentNumber").placeholder = d.student_no || "";
+    document.getElementById("lastName").placeholder = d.last_name || "";
+    document.getElementById("firstName").placeholder = d.first_name || "";
+    document.getElementById("middleName").placeholder = d.middle_name || "";
+    document.getElementById("extension").placeholder = d.name_suffix || "";
+    document.getElementById("college").placeholder = d.college || "";
+    document.getElementById("programMajor").placeholder = d.program || "";
+    document.getElementById("year").placeholder = d.year_level || "";
+    document.getElementById("section").placeholder = d.section || "";
         document.getElementById("contactNumber").value = d.phone || "";
-        document.getElementById("personalEmail").value = d.email || "";
+        document.getElementById("personalEmail").placeholder = d.email || "";
         document.getElementById("bulsuEmail").value = d.bulsu_email || "";
         document.getElementById("facebookLink").value = d.facebook_link || "";
         document.getElementById("currentAddress").value = d.address || "";
@@ -380,25 +386,60 @@ async function loadProfileData(id) {
 document.getElementById("editProfileForm").addEventListener("submit", async (e) => {
     e.preventDefault();
 
+    // Remove previous error messages
+    document.querySelectorAll('.field-error-message').forEach(el => el.remove());
+
     if (!studentId) {
         alert("User not loaded yet. Please wait a moment.");
         console.warn("🚫 Attempted to update profile before login check completed.");
         return;
     }
 
+    // List of required field IDs (excluding readonly fields)
+    const requiredFields = [
+        "contactNumber",
+        "bulsuEmail",
+        "facebookLink",
+        "currentAddress",
+        "birthdate",
+        "age",
+        "gender",
+        "guardianName",
+        "guardianRelationship",
+        "guardianContact",
+        "guardianAddress"
+    ];
+    let hasError = false;
+
+    requiredFields.forEach(id => {
+        const field = document.getElementById(id);
+        let value = field.value;
+        // For select, check value
+        if (field.tagName.toLowerCase() === 'select') {
+            if (!value) {
+                hasError = true;
+                showFieldError(field);
+            }
+        } else {
+            if (!value || value.trim() === "") {
+                hasError = true;
+                showFieldError(field);
+            }
+        }
+    });
+
+    if (hasError) {
+        // Scroll to first error
+        const firstError = document.querySelector('.field-error-message');
+        if (firstError) {
+            firstError.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+        return;
+    }
+
+    // Only send editable fields (do not send readonly fields)
     const formData = {
-        msc_id: document.getElementById("mscCode").value,
-        student_no: document.getElementById("studentNumber").value,
-        last_name: document.getElementById("lastName").value,
-        first_name: document.getElementById("firstName").value,
-        middle_name: document.getElementById("middleName").value,
-        name_suffix: document.getElementById("extension").value,
-        college: document.getElementById("college").value,
-        program: document.getElementById("programMajor").value,
-        year_level: document.getElementById("year").value,
-        section: document.getElementById("section").value,
         phone: document.getElementById("contactNumber").value,
-        email: document.getElementById("personalEmail").value,
         bulsu_email: document.getElementById("bulsuEmail").value,
         facebook_link: document.getElementById("facebookLink").value,
         address: document.getElementById("currentAddress").value,
@@ -427,6 +468,23 @@ document.getElementById("editProfileForm").addEventListener("submit", async (e) 
         alert("❌ Something went wrong while updating your profile.");
     }
 });
+
+function showFieldError(field) {
+    // Only add if not already present
+    if (field.parentNode.querySelector('.field-error-message')) return;
+    const error = document.createElement('div');
+    error.className = 'field-error-message text-xs text-red-500 mt-1';
+    error.textContent = 'This field is required.';
+    field.parentNode.appendChild(error);
+    // Remove error on input/change
+    field.addEventListener('input', removeFieldError, { once: true });
+    field.addEventListener('change', removeFieldError, { once: true });
+}
+
+function removeFieldError(e) {
+    const error = e.target.parentNode.querySelector('.field-error-message');
+    if (error) error.remove();
+}
 </script>
 
 

@@ -106,8 +106,7 @@ class StudentController
 
             // Required fields for profile update
             $requiredFields = [
-            "msc_id", "student_no", "last_name", "first_name", "middle_name", "name_suffix",
-            "college", "program", "year_level", "section", "phone", "email", "bulsu_email",
+            "phone", "bulsu_email",
             "facebook_link", "address", "birthdate", "age", "gender",
             "guardian_name", "relationship", "guardian_phone", "guardian_address"
             ];
