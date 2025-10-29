@@ -4,8 +4,8 @@
     <main class="flex-grow pt-28 flex-row justify-center">
         <!-- Security Modal -->
         <div id="security-reminder"
-            class="hidden fixed top-6 right-6 z-50 bg-[#011538] border border-[#b9da05] text-white shadow-lg rounded-lg w-80 p-4">
-            <p class="text-gray-700 mb-4">
+            class="hidden fixed top-12 right-6 z-50 bg-[#011538] border border-[#b9da05] text-white bg-opacity-60 border-opacity-60 shadow-lg rounded-lg w-80 p-4">
+            <p class="text-gray-400 mb-4">
                 For your security, please update your personal information and change your password.
             </p>
             <div class="flex justify-end">
@@ -34,7 +34,7 @@
                 </div>
                 <div
                     class="bg-white/10 backdrop-blur-sm border border-white/50 p-4 rounded-lg text-center hover:bg-white/20 transition-all">
-                    <p class="text-xs sm:text-sm font-semibold text-gray-300 mb-1">Pre-Registered</hp>
+                    <p class="text-xs sm:text-sm font-semibold text-gray-300 mb-1">Pre-Registered</p>
                     <div class="text-xl sm:text-2xl font-bold text-white" id="registeredCount"></div>
                 </div>
             </div>
@@ -94,7 +94,7 @@
                 </section>
 
                 <div class="w-full flex flex-col sm:flex-row gap-2 py-2">
-                    <a href="edit_profile.html"
+                    <a href="edit_profile.php"
                         class="w-full sm:w-6/12 bg-[#b9da05] text-[#011538] font-semibold py-2 px-4 rounded-lg transition-colors duration-300 hover:bg-[#9abc04] shadow-md text-center flex items-center justify-center gap-2">
                         <i class="fa-solid fa-user-pen"></i>
                         Edit Profile
@@ -116,7 +116,7 @@
 
             <!-- Right Tabs -->
             <div
-                class="w-full lg:w-8/12 p-4 shadow-lg rounded-lg mx-auto bg-[#011538] border border-white/20 text-white flex flex-col">
+                class="w-full lg:w-8/12 p-4 shadow-lg rounded-lg mx-auto bg-[#011538] border border-white/20 text-white flex flex-col overflow-y-auto">
                 <div class="flex justify-between items-center border-b border-white/20 pb-2">
                     <div class="flex flex-wrap gap-4 sm:gap-6" id="tabs">
                         <h3 class="tab text-xs sm:text-base font-semibold cursor-pointer text-[#b9da05] border-b-2 border-[#b9da05] active-tab"
@@ -136,17 +136,17 @@
                 </div>
 
                 <!-- Tab Contents -->
-                <div class="mt-6 space-y-2">
-                    <div class="tab-content max-h-[38rem] overflow-y-auto" id="tab-announcements">
+                <div class="mt-6 space-y-2 overflow-y-auto">
+                    <div class="tab-content max-h-[40rem] overflow-y-auto" id="tab-announcements">
                         <p class="text-gray-300"></p>
 
                     </div>
-                    <div class="tab-content hidden max-h-[38rem] overflow-y-auto" id="tab-events">
+                    <div class="tab-content hidden max-h-[40rem] overflow-y-auto" id="tab-events">
                         <p class="text-gray-300"></p>
                     </div>
 
                     <!-- relative max-w-5xl w-full mx-auto text-sm -->
-                    <div class="tab-content hidden" id="tab-univ-calendar">
+                    <div class="tab-content hidden max-h-[40rem] overflow-y-auto" id="tab-univ-calendar">
                         <div class="">
                             <div id="univ-calendar" class="mt-2 px-4">
                                 <div class="flex justify-between items-center mb-4">
@@ -179,7 +179,7 @@
         <!-- Registered Events -->
         <section class="flex flex-col lg:flex-row w-11/12 max-w-7xl mx-auto my-8 gap-5">
             <div
-                class="lg:w-5/12 max-h-[37rem] p-4 shadow-lg rounded-lg bg-[#011538] border border-white/20 flex flex-col text-white">
+                class="lg:w-5/12 max-h-[37rem] p-4 shadow-lg rounded-lg bg-[#011538] border border-white/20 flex flex-col text-white overflow-y-auto">
                 <div class="flex items-center justify-between mb-4 pb-3 border-b border-white/20">
                     <h3 class="text-base sm:text-lg font-bold">My Registered Events</h3>
                     <div
@@ -195,7 +195,7 @@
 
             <!-- General Calendar: with Event dots -->
             <div
-                class="w-full lg:w-8/12 p-4 shadow-lg rounded-lg bg-[#011538] border border-white/20 text-white flex flex-col">
+                class="w-full lg:w-8/12 p-4 shadow-lg rounded-lg bg-[#011538] border border-white/20 text-white flex flex-col max-h-[37rem] overflow-y-auto">
                 <div class="flex items-center justify-between mb-4 border-b border-white/20 pb-2">
                     <h3 class="text-base sm:text-lg font-bold">Calendar</h3>
                     <div
@@ -216,7 +216,7 @@
                             <i class="fa-solid fa-chevron-left text-xs"></i>
                         </button>
                         <p id="calendar-month-title"
-                            class="text-xs sm:text-sm md:text-lg lg:text-xl text-whitefont-semibold text-center truncate max-w-[120px] sm:max-w-none">
+                            class="text-xs sm:text-sm md:text-lg lg:text-xl text-white font-semibold text-center truncate max-w-[120px] sm:max-w-none">
                         </p>
                         <button onclick="navigateCalendar(1)"
                             class="p-1.5 rounded-full bg-white/10 border border-white/20 text-gray-300 hover:bg-[#b9da05] hover:text-[#011538] transition text-sm">
@@ -226,7 +226,7 @@
                 </div>
 
                 <!-- Calendar Grid -->
-                <div class="border border-white/20 rounded-lg flex-grow flex flex-col">
+                <div class="border border-white/20 rounded-lg flex-grow flex flex-col overflow-hidden">
                     <div
                         class="grid grid-cols-7 p-2 bg-[#b9da05]/20 text-[#b9da05] text-center text-sm font-medium border-b border-white/20">
                         <div>Sun</div>
@@ -237,7 +237,7 @@
                         <div>Fri</div>
                         <div>Sat</div>
                     </div>
-                    <div id="calendar-grid" class="grid grid-cols-7 flex-1 h-full auto-rows-[1fr]"></div>
+                    <div id="calendar-grid" class="grid grid-cols-7 flex-1 h-full auto-rows-[1fr] overflow-y-auto"></div>
                 </div>
             </div>
 
@@ -544,7 +544,7 @@
                     container.insertAdjacentHTML("beforeend", html);
                 });
                 container.insertAdjacentHTML("beforeend", `
-                    <a href="announcements.html"
+                    <a href="announcements.php"
                         class="text-blue-400 hover:text-blue-300 text-sm font-medium px-4 mt-2 inline-block">
                         View All Announcements →
                     </a>
@@ -616,7 +616,7 @@
                     container.insertAdjacentHTML("beforeend", html);
                 });
                 container.insertAdjacentHTML("beforeend", `
-                    <a href="events-and-register-events.html"
+                    <a href="events-and-register-events.php"
                         class="text-blue-400 hover:text-blue-300 text-sm font-medium px-6 mt-2 inline-block">
                         View All Events →
                     </a>

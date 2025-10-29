@@ -2,10 +2,11 @@
 
 <main class="flex-grow flex items-center justify-center pt-28 px-4 pb-8">
     <div class="w-full max-w-4xl bg-[#18181b] text-white p-8 rounded-2xl shadow-lg border-[#27272a] border-2">
-        <h2 class="text-3xl font-bold mb-6 text-center" style="font-family: 'Veonika', sans-serif;">Edit Your Profile</h2>
+        <h3 class="section-title">Edit Your Profile</h3>
         <div id="error-box" class="hidden mb-4 text-white border border-red-500 bg-[#27272a] px-4 py-3 rounded text-sm"></div>
-        <form id="editProfileForm" novalidate>
-            <div class="form-grid-2col mb-6">
+      
+        <form id="editProfileForm" novalidate class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div class="col-span-1 md:col-span-2 grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div>
                     <label for="mscCode" class="block text-sm font-semibold mb-1">MSC Code</label>
                     <input id="mscCode" type="text" class="w-full px-4 py-3 rounded-md bg-[#27272a] border border-gray-600 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#b9da05]" readonly>
@@ -16,7 +17,7 @@
                 </div>
             </div>
 
-            <div class="form-grid-2col mb-6">
+            <div class="col-span-1 md:col-span-2 grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div>
                     <label for="lastName" class="block text-sm font-semibold mb-1">Last Name</label>
                     <input id="lastName" type="text" class="w-full px-4 py-3 rounded-md bg-[#27272a] border border-gray-600 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#b9da05]" readonly>
@@ -27,7 +28,7 @@
                 </div>
             </div>
 
-            <div class="form-grid-2col mb-6">
+            <div class="col-span-1 md:col-span-2 grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div>
                     <label for="middleName" class="block text-sm font-semibold mb-1">Middle Name</label>
                     <input id="middleName" type="text" class="w-full px-4 py-3 rounded-md bg-[#27272a] border border-gray-600 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#b9da05]" readonly>
@@ -38,7 +39,7 @@
                 </div>
             </div>
 
-            <div class="form-grid-2col mb-6">
+            <div class="col-span-1 md:col-span-2 grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div>
                     <label for="college" class="block text-sm font-semibold mb-1">College</label>
                     <input id="college" type="text" class="w-full px-4 py-3 rounded-md bg-[#27272a] border border-gray-600 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#b9da05]" readonly>
@@ -49,7 +50,7 @@
                 </div>
             </div>
 
-            <div class="form-grid-2col mb-6">
+            <div class="col-span-1 md:col-span-2 grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div>
                     <label for="year" class="block text-sm font-semibold mb-1">Year</label>
                     <input id="year" type="text" class="w-full px-4 py-3 rounded-md bg-[#27272a] border border-gray-600 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#b9da05]" readonly>
@@ -60,11 +61,14 @@
                 </div>
             </div>
 
-            <div class="section-divider">
-                <h3 class="section-title">Contact Information</h3>
+            <!-- Contact Information Header spans both columns -->
+            <div class="col-span-1 md:col-span-2">
+                <div class="section-divider">
+                    <h3 class="card-title">Contact Information</h3>
+                </div>
             </div>
 
-            <div class="form-grid-2col mb-6">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 col-span-1 md:col-span-2">
                 <div>
                     <label for="contactNumber" class="block text-sm font-semibold mb-1">Contact Number</label>
                     <input id="contactNumber" type="tel" class="w-full px-4 py-3 rounded-md bg-[#27272a] border border-gray-600 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#b9da05]">
@@ -75,7 +79,7 @@
                 </div>
             </div>
 
-            <div class="form-grid-2col mb-6">
+            <div class="col-span-1 md:col-span-2 grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div>
                     <label for="bulsuEmail" class="block text-sm font-semibold mb-1">BulSU Email</label>
                     <input id="bulsuEmail" type="email" class="w-full px-4 py-3 rounded-md bg-[#27272a] border border-gray-600 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#b9da05]">
@@ -86,11 +90,14 @@
                 </div>
             </div>
 
-            <div class="section-divider">
-                <h3 class="section-title">Personal Information</h3>
+            <!-- Personal Information Header spans both columns -->
+            <div class="col-span-1 md:col-span-2">
+                <div class="section-divider">
+                    <h3 class="card-title">Personal Information</h3>
+                </div>
             </div>
 
-            <div class="form-grid-2col mb-6">
+            <div class="col-span-1 md:col-span-2 grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div>
                     <label for="currentAddress" class="block text-sm font-semibold mb-1">Current Address</label>
                     <input id="currentAddress" type="text" class="w-full px-4 py-3 rounded-md bg-[#27272a] border border-gray-600 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#b9da05]">
@@ -101,7 +108,7 @@
                 </div>
             </div>
 
-            <div class="form-grid-2col mb-6">
+            <div class="col-span-1 md:col-span-2 grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div>
                     <label for="age" class="block text-sm font-semibold mb-1">Age</label>
                     <input id="age" type="number" class="w-full px-4 py-3 rounded-md bg-[#27272a] border border-gray-600 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#b9da05]">
@@ -117,11 +124,14 @@
                 </div>
             </div>
 
-            <div class="section-divider">
-                <h3 class="section-title">Guardian Information</h3>
+            <!-- Guardian Information Header spans both columns -->
+            <div class="col-span-1 md:col-span-2">
+                <div class="section-divider">
+                    <h3 class="card-title">Guardian Information</h3>
+                </div>
             </div>
 
-            <div class="form-grid-2col mb-6">
+            <div class="col-span-1 md:col-span-2 grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div>
                     <label for="guardianName" class="block text-sm font-semibold mb-1">Name of Guardian</label>
                     <input id="guardianName" type="text" class="w-full px-4 py-3 rounded-md bg-[#27272a] border border-gray-600 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#b9da05]">
@@ -132,7 +142,7 @@
                 </div>
             </div>
 
-            <div class="form-grid-2col mb-6">
+            <div class="col-span-1 md:col-span-2 grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div>
                     <label for="guardianContact" class="block text-sm font-semibold mb-1">Contact Number of the Guardian</label>
                     <input id="guardianContact" type="tel" class="w-full px-4 py-3 rounded-md bg-[#27272a] border border-gray-600 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#b9da05]">
@@ -143,7 +153,9 @@
                 </div>
             </div>
 
-            <button type="submit" class="w-full bg-[#b9da05] text-[#00071c] text-m font-bold py-3 rounded-md hover:bg-[#8fae04] hover:text-[#00071c] transition-colors shadow-md mt-8">Save Changes</button>
+            <div class="col-span-1 md:col-span-2">
+                <button type="submit" class="w-full bg-[#b9da05] text-[#00071c] text-m font-bold py-3 rounded-md hover:bg-[#8fae04] hover:text-[#00071c] transition-colors shadow-md mt-2">Save Changes</button>
+            </div>
         </form>
 
         <div class="mt-6 text-center text-sm text-gray-400">

@@ -59,7 +59,7 @@
             </h2>
             <div id="profile" class="section-card flex flex-col gap-2">
                 <div class="bg-[#1f2a40] rounded-md p-6 shadow-lg">
-                    <a href="profile.html"
+                    <a href="profile.php"
                         class="text-base sm:text-lg md:text-xl font-semibold text-[#b9da05] hover:underline">Edit
                         Personal Information</a>
                     <p class="text-xs sm:text-sm md:text-base text-gray-400 mt-1">Update your name, birthday, contact
@@ -77,7 +77,7 @@
             </div>
 
             <div id="password" class="section-card bg-[#1f2a40] rounded-md p-6 shadow-lg hidden">
-                <a href="change_passwordform.html"
+                <a href="change_password.php"
                     class="text-base sm:text-lg md:text-xl font-semibold text-[#b9da05] mb-2 hover:underline">Change
                     Password</a>
                 <p class="sm:text-sm md:text-base text-gray-400 mt-1">Update your account password for security.</p>
@@ -157,7 +157,7 @@
     async function fetchProfile() {
         const data = await apiCall("/auth/profile");
         if (!data || !data.success) {
-            window.location.href = "login.html";
+            window.location.href = "login.php";
             return;
         }
 
@@ -340,7 +340,7 @@
             }
         } else {
             showToast("Session expired. Please login again", "error");
-            window.location.href = "login.html";
+            window.location.href = "login.php";
         }
     });
 
@@ -421,10 +421,10 @@
             });
 
             console.log("✅ Logout successful");
-            window.location.href = "login.html";
+            window.location.href = "login.php";
         } catch (error) {
             console.error("❌ Logout failed:", error);
-            window.location.href = "login.html";
+            window.location.href = "login.php";
         }
     }
 </script>

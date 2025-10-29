@@ -18,7 +18,7 @@
           </div>
         </div>
         <div class="flex flex-col items-center justify-center text-center mb-4">
-          <h2 class="text-2xl text-gray-300 font-bold tracking-wide" id="fullName"></h2>
+          <h2 class="text-2xl text-gray-300 font-bold tracking-wide" id="profileFullName"></h2>
           <p class="text-sm  text-gray-300 tracking-wide" id="student_no"></p>
         </div>
         <div class="w-full h-px bg-[#b9da05] opacity-50 my-6"></div>
@@ -133,7 +133,7 @@
     const user = data.data;
     generateQRCode(user.msc_id || user.student_no);
     document.getElementById("msc_id").textContent = user.msc_id;
-    document.getElementById("fullName").textContent = `${user.first_name} ${user.last_name}`;
+    document.getElementById("profileFullName").textContent = `${user.first_name} ${user.last_name}`;
     document.getElementById("student_no").textContent = user.student_no;
     document.getElementById("program").textContent = user.program;
     document.getElementById("college").textContent = user.college;

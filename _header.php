@@ -36,6 +36,15 @@ switch ($current_page) {
     case 'settings.php':
         $page_title = "Settings | BulSU MSC";
         break;
+    case 'login.php':
+        $page_title = "Login | BulSU MSC";
+        break;
+    case 'forgot_password.php':
+        $page_title = "Forgot Password | BulSU MSC";
+        break;
+    case 'change_password.php':
+        $page_title = "Change Password | BulSU MSC";
+        break;
 }
 ?>
 <!DOCTYPE html>
@@ -65,6 +74,16 @@ switch ($current_page) {
 <body>
     <div class="el"></div>
 
+    <?php if ($isLoggedIn): ?>
+        <!-- Expose minimal session info to JS for immediate display (non-sensitive) -->
+        <script>
+            window.__MSC_SESSION_USER = {
+                username: <?php echo json_encode($_SESSION['username'] ?? null); ?>
+            };
+        </script>
+    <?php endif; ?>
+
+
     <!-- Mobile Sidebar Overlay -->
     <div id="mobile-sidebar-overlay" class="fixed inset-0 bg-black bg-opacity-50 z-[60] hidden md:hidden"></div>
 
@@ -87,15 +106,15 @@ switch ($current_page) {
                 <nav class="space-y-1">
                     <?php if ($isLoggedIn): ?>
                         <!-- Profile Section -->
-                        <div class="flex items-center mb-4 p-3 bg-[#16213e] rounded-lg mx-3">
-                            <div class="w-10 h-10 bg-[#b9da05] rounded-full flex items-center justify-center mr-3">
-                                <i class="fas fa-user text-[#0a1a2e]"></i>
-                            </div>
-                            <div class="flex-1 min-w-0">
-                                <p class="text-white text-sm font-medium truncate">User Profile</p>
-                                <p class="text-gray-400 text-xs">View Profile</p>
-                            </div>
+                        <a href="profile.php" class="flex items-center mb-4 p-3 bg-[#16213e] rounded-lg mx-3 no-underline" aria-label="View Profile">
+                        <div class="w-10 h-10 bg-[#b9da05] rounded-full flex items-center justify-center mr-3">
+                            <i class="fas fa-user text-[#0a1a2e]"></i>
                         </div>
+                        <div class="flex-1 min-w-0">
+                            <p id="fullName" class="text-white text-sm font-medium truncate"></p>
+                            <p class="text-gray-400 text-xs">View Profile</p>
+                        </div>
+                    </a>
                     <?php endif; ?>
 
                     <!-- Home -->
@@ -124,7 +143,7 @@ switch ($current_page) {
                         </a>
 
                         <a href="dashboard.php" class="flex items-center px-4 py-3 text-gray-300 hover:bg-[#16213e] hover:text-white transition-colors duration-200 <?php if ($current_page == 'announcements.php') echo 'bg-[#16213e] text-[#b9da05] border-r-2 border-[#b9da05]'; ?>">
-                            <i class="fas fa-bell w-5 mr-3"></i>
+                            <i class="fas fa-tachometer-alt w-5 mr-3"></i>
                             <span>Dashboard</span>
                         </a>
 
@@ -135,7 +154,7 @@ switch ($current_page) {
                         </a>
 
                         <!-- Calendar -->
-                        <a href="calendar.php" class="flex items-center px-4 py-3 text-gray-300 hover:bg-[#16213e] hover:text-white transition-colors duration-200 <?php if ($current_page == 'calendar.html') echo 'bg-[#16213e] text-[#b9da05] border-r-2 border-[#b9da05]'; ?>">
+                        <a href="calendar.php" class="flex items-center px-4 py-3 text-gray-300 hover:bg-[#16213e] hover:text-white transition-colors duration-200 <?php if ($current_page == 'calendar.php') echo 'bg-[#16213e] text-[#b9da05] border-r-2 border-[#b9da05]'; ?>">
                             <i class="fas fa-calendar-alt w-5 mr-3"></i>
                             <span>Calendar</span>
                         </a>
@@ -167,7 +186,7 @@ switch ($current_page) {
                     </a>
                 <?php else: ?>
                     <!-- Login Button -->
-                    <a href="login.html" class="flex items-center justify-center w-full py-3 px-4 bg-[#b9da05] hover:bg-white text-[#00071c] font-bold rounded-lg transition-colors duration-200">
+                    <a href="login.php" class="flex items-center justify-center w-full py-3 px-4 bg-[#b9da05] hover:bg-white text-[#00071c] font-bold rounded-lg transition-colors duration-200">
                         <i class="fas fa-sign-in-alt mr-2"></i>
                         <span>Login</span>
                     </a>
@@ -189,7 +208,7 @@ switch ($current_page) {
                 <!-- About -->
                 <a href="aboutus.php" class="nav-link font-semibold <?php if ($current_page == 'aboutus.php') echo 'text-[#b9da05]'; ?>">About</a>
                 <!-- Events: Link updated -->
-                <a href="events-and-register-events.php" class="nav-link font-semibold <?php if ($current_page == 'events-and-register-events.html') echo 'text-[#b9da05]'; ?>">Events</a>
+                <a href="events-and-register-events.php" class="nav-link font-semibold <?php if ($current_page == 'events-and-register-events.php') echo 'text-[#b9da05]'; ?>">Events</a>
 
                 <?php if ($isLoggedIn): ?>
                     <!-- Announcements: Added -->
@@ -239,7 +258,7 @@ switch ($current_page) {
                     <!-- Partners: Re-added for non-logged-in users -->
                     <a href="index.php#partners" class="nav-link font-semibold">Partners</a>
 
-                    <a href="login.html" id="login-button-desktop" class="bg-[#b9da05] text-[#00071c] font-bold py-2 px-4 rounded-full transition-colors duration-300 hover:bg-white hover:text-[#00071c] shadow-md">
+                    <a href="login.php" id="login-button-desktop" class="bg-[#b9da05] text-[#00071c] font-bold py-2 px-4 rounded-full transition-colors duration-300 hover:bg-white hover:text-[#00071c] shadow-md">
                         Login
                     </a>
                 <?php endif; ?>
@@ -360,5 +379,36 @@ switch ($current_page) {
                         closeMobileSidebar();
                     }
                 });
+
+                // --- Populate mobile sidebar full name ---
+                try {
+                    const fullNameEl = document.getElementById('fullName');
+                    if (fullNameEl) {
+                        // show immediate username from session if available
+                        if (window.__MSC_SESSION_USER && window.__MSC_SESSION_USER.username) {
+                            fullNameEl.textContent = window.__MSC_SESSION_USER.username;
+                        }
+
+                        // fetch full profile to get first & last name (use credentials)
+                        (async () => {
+                            try {
+                                const resp = await fetch('api/auth/profile', { credentials: 'include' });
+                                if (!resp.ok) return;
+                                const json = await resp.json();
+                                if (json && json.success && json.data) {
+                                    const u = json.data;
+                                    const name = [u.first_name, u.last_name].filter(Boolean).join(' ');
+                                    if (name) fullNameEl.textContent = name;
+                                    else if (u.username) fullNameEl.textContent = u.username;
+                                }
+                            } catch (err) {
+                                // silent fail - keep whatever text is present
+                                console.debug('Could not fetch profile for header:', err);
+                            }
+                        })();
+                    }
+                } catch (e) {
+                    console.debug('fullName population error', e);
+                }
             });
         </script>

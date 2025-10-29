@@ -1,5 +1,7 @@
 <?php include '_header.php'; ?>
 
+<div class="flex flex-col min-h-screen">
+
 <div class="hero-section">
     <h1>BulSU MSC Events</h1>
     <p>Track your upcoming, completed, and past events</p>
@@ -14,7 +16,7 @@
         </div>
     </div>
 
-    <main>
+    <main class="flex-grow pt-28 p-3 flex justify-center">
         <section id="upcomingSection" class="event-section">
             <div class="event-list">
             </div>
@@ -901,3 +903,4 @@
     });
 </script>
 <?php include '_footer.php'; ?>
+</div>

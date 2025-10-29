@@ -1,12 +1,14 @@
 <?php include '_header.php'; ?>
 
+<div class="flex flex-col min-h-screen">
+
 <div class="hero-section">
     <h1>BulSU MSC Announcements</h1>
     <p>Stay updated with the latest from BulSU MSC</p>
 </div>
 
 <div class="main-content">
-    <main>
+    <main class="flex-grow pt-28 p-3 flex justify-center">
         <section id="upcomingSection" class="announcement-section">
             <div class="announcement-list">
             </div>
@@ -185,3 +187,4 @@
 </script>
 
 <?php include '_footer.php'; ?>
+</div>
