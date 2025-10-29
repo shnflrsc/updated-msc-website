@@ -1,7 +1,7 @@
 <?php include '_header.php'; ?>
 
-<!-- Main -->
-<main class="pt-28 p-3 flex flex-col items-center">
+<div class="flex flex-col min-h-screen">
+<main class="flex-grow pt-28 p-3 flex flex-col items-center">
     <section id="header"
         class="w-11/12 max-w-7xl p-6 md:p-6 mx-auto mb-8 flex flex-col gap-5 items-stretch rounded-2xl bg-[#011538] border border-[#b9da05]">
         <div class="flex justify-between items-center mb-4 ">
@@ -93,23 +93,7 @@
         // Logged in → remove loading state
         document.documentElement.classList.remove('loading');
     })();
-
-    //Mobile View: Sidebar
-    const menuButton = document.getElementById("mobile-menu-button");
-    const mobileSidebar = document.getElementById("mobile-sidebar");
-
-    menuButton.addEventListener("click", () => {
-        mobileSidebar.classList.toggle("-translate-x-full");
-    });
-
-    document.addEventListener("click", function(event) {
-        const isClickInsideSidebar = mobileSidebar.contains(event.target);
-        const isClickOnMenu = menuButton.contains(event.target);
-
-        if (!isClickInsideSidebar && !isClickOnMenu) {
-            mobileSidebar.classList.add("-translate-x-full");
-        }
-    });
 </script>
 
 <?php include '_footer.php'; ?>
+</div>

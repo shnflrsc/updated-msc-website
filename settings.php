@@ -1,6 +1,7 @@
 <?php include '_header.php'; ?>
 
-<main class="flex-1 pt-28 p-3 sm:p-20 md:p-20 lg:p-20 sm:px-6 lg:px-28">
+<div class="flex flex-col min-h-screen">
+<main class="flex-grow pt-28 p-3 sm:p-20 md:p-20 lg:p-20 sm:px-6 lg:px-28">
     <section id="settingOptions"
         class="w-11/12 max-w-7xl p-6 mx-auto flex flex-col md:flex-row gap-6 rounded-2xl bg-[#011538] border border-[#b9da05]">
         <aside class="w-64 h-full bg-[#011538] border-r border-[#b9da05] p-4 hidden md:flex flex-col space-y-2">
@@ -410,23 +411,6 @@
             `;
     });
 
-    // Mobile View: Sidebar
-    const menuButton = document.getElementById("mobile-menu-button");
-    const mobileSidebar = document.getElementById("mobile-sidebar");
-
-    menuButton.addEventListener("click", () => {
-        mobileSidebar.classList.toggle("-translate-x-full");
-    });
-
-    document.addEventListener("click", function(event) {
-        const isClickInsideSidebar = mobileSidebar.contains(event.target);
-        const isClickOnMenu = menuButton.contains(event.target);
-
-        if (!isClickInsideSidebar && !isClickOnMenu) {
-            mobileSidebar.classList.add("-translate-x-full");
-        }
-    });
-
     async function logout() {
         try {
             localStorage.clear();
@@ -445,3 +429,4 @@
     }
 </script>
 <?php include '_footer.php'; ?>
+</div>

@@ -1,6 +1,7 @@
 <?php include '_header.php'; ?>
 
-<main class="pt-28 p-3 flex justify-center">
+<div class="flex flex-col min-h-screen">
+<main class="flex-grow pt-28 p-3 flex justify-center">
   <section id="header"
     class="w-11/12 max-w-7xl mx-auto mb-8 bg-transparent flex flex-col lg:flex-row gap-5 items-stretch rounded-2xl">
     <div class="w-full lg:w-5/12 rounded-2xl bg-[#011538] border border-[#b9da05] self-stretch">
@@ -123,25 +124,6 @@
     }
   }
 
-  // Mobile View: Sidebar
-  const menuButton = document.getElementById("mobile-menu-button");
-  const mobileSidebar = document.getElementById("mobile-sidebar");
-
-  if (menuButton && mobileSidebar) {
-    menuButton.addEventListener("click", () => {
-      mobileSidebar.classList.toggle("-translate-x-full");
-    });
-
-    document.addEventListener("click", function(event) {
-      const isClickInsideSidebar = mobileSidebar.contains(event.target);
-      const isClickOnMenu = menuButton.contains(event.target);
-
-      if (!isClickInsideSidebar && !isClickOnMenu) {
-        mobileSidebar.classList.add("-translate-x-full");
-      }
-    });
-  }
-
   async function fetchProfile() {
     const data = await apiCall("/auth/profile");
     console.log("Profile API", data);
@@ -259,3 +241,4 @@
   document.addEventListener("DOMContentLoaded", fetchProfile);
 </script>
 <?php include '_footer.php'; ?>
+</div>
