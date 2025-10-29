@@ -526,6 +526,9 @@ class Event
                 'section' => $data['section'] ?? null
             ]);
 
+            $this->db->prepare("UPDATE events SET attendants = attendants + 1 WHERE event_id = :event_id")
+                    ->execute(['event_id' => $eventId]);
+
             return ["success" => true, "message" => "BulSUan pre-registration successful."];
         } catch (Exception $e) {
             throw new Exception("BulSUan registration failed: " . $e->getMessage());
@@ -558,6 +561,8 @@ class Event
                 'last_name' => $data['last_name'],
                 'email' => $data['email']
             ]);
+            $this->db->prepare("UPDATE events SET attendants = attendants + 1 WHERE event_id = :event_id")
+                ->execute(['event_id' => $eventId]);
 
             return ["success" => true, "message" => "Public registration successful."];
         } catch (Exception $e) {

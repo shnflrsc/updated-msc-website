@@ -1143,50 +1143,152 @@
             const registerBtn = document.getElementById("registerBtn");
 
         document.querySelectorAll(".event-card").forEach(card => {
-            card.addEventListener("click", async () => {
-                const modal = document.getElementById("eventModal");
-                const modalTitle = document.getElementById("modalTitle");
-                const modalDate = document.getElementById("modalDate");
-                const modalDesc = document.getElementById("modalContent");
-                const registerBtn = document.getElementById("registerBtn");
+        card.addEventListener("click", async () => {
+            const modal = document.getElementById("eventModal");
+            const modalTitle = document.getElementById("modalTitle");
+            const modalDate = document.getElementById("modalDate");
+            const modalDesc = document.getElementById("modalContent");
+            const registerBtn = document.getElementById("registerBtn");
 
-                // Set event info
-                modalTitle.textContent = card.dataset.title;
-                modalDate.textContent = card.dataset.date;
-                modalDesc.textContent = card.dataset.content;
+            // Set modal info
+            modalTitle.textContent = card.dataset.title;
+            modalDate.textContent = card.dataset.date;
+            modalDesc.textContent = card.dataset.content;
 
-                registerBtn.dataset.eventId = card.dataset.id;
-                registerBtn.style.display = (card.dataset.status.toLowerCase() === "upcoming") ? "inline-block" : "none";
+            registerBtn.dataset.eventId = card.dataset.id;
+            registerBtn.style.display = (card.dataset.status?.toLowerCase() === "upcoming") 
+                ? "inline-block" 
+                : "none";
 
-                // --- ALWAYS show Cancel Pre-Register button ---
-                let cancelBtn = document.getElementById("cancelPreRegister");
-                if (!cancelBtn) {
-                    cancelBtn = document.createElement("button");
-                    cancelBtn.id = "cancelPreRegister";
-                    cancelBtn.textContent = "Cancel Pre-Registration";
-                    cancelBtn.className = "register-btn"; // same style as Register
-                    modal.querySelector(".modal-content").appendChild(cancelBtn);
+            // ✅ Check login & registration status immediately
+            let isRegistered = false;
+            try {
+                const authStatus = await apiCall("/auth/check-login", "GET");
+                if (authStatus?.success && authStatus?.data?.logged_in) {
+                    const regStatus = await apiCall(`/events/${card.dataset.id}/is-registered`, "GET");
+                    if (regStatus?.success && regStatus?.data?.registered) {
+                        isRegistered = true;
+                        card.dataset.registered = "true";
+                    }
                 }
-                cancelBtn.style.display = "inline-block";
+            } catch (err) {
+                console.warn("Could not verify registration status:", err);
+            }
 
-                // --- Cancel logic ---
-                cancelBtn.onclick = async () => {
-                    const authStatus = await apiCall("/auth/check-login", "GET");
-                    if (!authStatus?.success || !authStatus?.data?.logged_in) {
-                        showMessage('Please <a href="login.html" class="text-blue-500">log in</a> first.');
-                        return;
-                    }
-                    const userId = authStatus.data.user_id;
-                    const result = await apiCall(`/events/${card.dataset.id}/cancel-pre-registration`, "POST", { user_id: userId });
-                    if (result?.success) {
-                        showMessage(result.message || "✅ Registration canceled.");
+            // ✅ Create cancel button if it doesn’t exist
+            let cancelBtn = document.getElementById("cancelPreRegister");
+            if (!cancelBtn) {
+                cancelBtn = document.createElement("button");
+                cancelBtn.id = "cancelPreRegister";
+                cancelBtn.textContent = "Cancel Pre-Registration";
+                cancelBtn.className = "register-btn"; 
+                modal.querySelector(".modal-content").appendChild(cancelBtn);
+            }
+
+            // ✅ Show cancel if already registered
+            cancelBtn.style.display = isRegistered ? "inline-block" : "none";
+
+            // ✅ Cancel Pre-Registration Logic
+            cancelBtn.onclick = async () => {
+                const authStatus = await apiCall("/auth/check-login", "GET");
+                if (!authStatus?.success || !authStatus?.data?.logged_in) {
+                    showMessage('Please <a href="login.html" class="text-blue-500">log in</a> first.');
+                    return;
+                }
+
+                const userId = authStatus.data.user?.id;
+                const result = await apiCall(`/events/${card.dataset.id}/cancel-pre-registration`, "POST", { user_id: userId });
+
+                if (result?.success) {
+                    showMessage(result.message || "✅ Registration canceled.");
+                    cancelBtn.style.display = "none";
+                    registerBtn.style.display = "inline-block";
+                    card.dataset.registered = "false";
+                } else {
+                    showMessage(result?.message || "Cancellation failed.");
+                }
+            };
+
+            // ✅ Register button logic (merged from your newer code)
+            registerBtn.onclick = async () => {
+                const eventId = registerBtn.dataset.eventId;
+                const eventCard = document.querySelector(`.event-card[data-id='${eventId}']`);
+                if (!eventId || !eventCard) return showMessage("⚠ Event not found.");
+
+                const authStatus = await apiCall("/auth/check-login", "GET");
+                const isLoggedIn = authStatus?.success && authStatus.data?.logged_in;
+
+                if (!isLoggedIn) {
+                    // Not logged in → handle by restriction type
+                    if (eventCard.dataset.access === "public") return showPreRegisterFormInsideModal(eventId);
+                    if (eventCard.dataset.access === "bulsuans") return showBulSUPreRegisterForm(eventId);
+                    if (eventCard.dataset.access === "members")
+                        return showMessage('This event is for members only. Please <a href="login.html" class="text-blue-500">log in</a> to register.');
+                    return showMessage("🚫 Restricted event.");
+                }
+
+                // ✅ Already registered → allow cancellation instead
+                const checkRes = await apiCall(`/events/${eventId}/registration-status`, "GET");
+                const alreadyRegistered = checkRes?.success && checkRes.data?.is_registered;
+                if (alreadyRegistered) {
+                    const confirmCancel = confirm("You are already registered for this event. Would you like to cancel your registration?");
+                    if (!confirmCancel) return;
+                    const cancelRes = await apiCall(`/events/${eventId}/cancel-registration`, "DELETE");
+                    if (cancelRes?.success) {
+                        showMessage(cancelRes.message || "Registration cancelled successfully.");
+                        eventCard.dataset.registered = "false";
+                        cancelBtn.style.display = "none";
                     } else {
-                        showMessage(result?.message || "Cancellation failed.");
+                        showMessage(cancelRes?.message || "Failed to cancel registration.");
                     }
-                };
+                    return;
+                }
 
-                modal.style.display = "flex";
-            });
+                // ✅ Not yet registered → proceed with registration
+                let payload = {};
+                try {
+                    const userId = authStatus.data.user.id;
+                    const studentRes = await apiCall(`/students/${userId}`, "GET");
+                    if (studentRes.success && studentRes.data) {
+                        const s = studentRes.data;
+                        payload = {
+                            first_name: s.first_name,
+                            last_name: s.last_name,
+                            middle_name: s.middle_name || "",
+                            suffix: s.name_suffix || "",
+                            gender: s.gender,
+                            email: s.email,
+                            phone: s.phone || "",
+                            facebook: s.facebook_link || "",
+                            student_id: s.student_no,
+                            program: s.program || "",
+                            college: s.college || "",
+                            year_level: s.year_level || "",
+                            section: s.section || "",
+                            user_type: s.role || "bulsuan",
+                        };
+                    }
+                } catch (err) {
+                    console.error("Error fetching student profile:", err);
+                }
+
+                if (!payload.first_name || !payload.last_name || !payload.email) {
+                    showMessage("⚠ Could not load your BulSU profile. Please re-login and try again.");
+                    return;
+                }
+
+                const result = await apiCall(`/events/${eventId}/register`, "POST", payload);
+                if (result?.success) {
+                    showMessage(result.message || "Registered successfully!");
+                    eventCard.dataset.registered = "true";
+                    cancelBtn.style.display = "inline-block";
+                } else {
+                    showMessage(result?.message || "Registration failed.");
+                }
+            };
+
+            modal.style.display = "flex";
+        });
         });
 
 
@@ -1369,6 +1471,7 @@
                 if (result && result.success) {
                     showMessage(result.message || "Pre-registration successful!");
                     formContainer.remove();
+                    window.location.reload();
                 } else {
                     showMessage(result?.message || "Pre-registration failed.");
                 }
@@ -1518,6 +1621,7 @@
                 if (result && result.success) {
                     showMessage(result.message || "Pre-registration successful!");
                     formContainer.remove();
+                    window.location.reload();
                 } else {
                     showMessage(result?.message || "Pre-registration failed.");
                 }
