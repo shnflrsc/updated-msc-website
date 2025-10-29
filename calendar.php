@@ -1,7 +1,7 @@
 <?php include '_header.php'; ?>
 
-<!-- Main -->
-<main class="pt-28 p-3 flex flex-col items-center">
+<div class="flex flex-col min-h-screen">
+<main class="flex-grow pt-28 p-3 flex flex-col items-center">
     <section id="header"
         class="w-11/12 max-w-7xl p-6 md:p-6 mx-auto mb-8 flex flex-col gap-5 items-stretch rounded-2xl bg-[#011538] border border-[#b9da05]">
         <div class="flex justify-between items-center mb-4 ">
@@ -96,3 +96,4 @@
 </script>
 
 <?php include '_footer.php'; ?>
+</div>

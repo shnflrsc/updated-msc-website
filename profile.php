@@ -1,6 +1,7 @@
 <?php include '_header.php'; ?>
 
-<main class="pt-28 p-3 flex justify-center">
+<div class="flex flex-col min-h-screen">
+<main class="flex-grow pt-28 p-3 flex justify-center">
   <section id="header"
     class="w-11/12 max-w-7xl mx-auto mb-8 bg-transparent flex flex-col lg:flex-row gap-5 items-stretch rounded-2xl">
     <div class="w-full lg:w-5/12 rounded-2xl bg-[#011538] border border-[#b9da05] self-stretch">
@@ -240,3 +241,4 @@
   document.addEventListener("DOMContentLoaded", fetchProfile);
 </script>
 <?php include '_footer.php'; ?>
+</div>
