@@ -206,17 +206,17 @@
     <div class="el"></div>
     <nav id="main-header" class="fixed top-0 left-0 right-0 z-50 transition-all duration-300 ease-in-out py-4">
         <div class="max-w-7xl mx-auto px-4 flex justify-between items-center">
-            <a href="index.html" class="flex items-center space-x-2 text-white hover:text-[#b9da05] transition">
+            <a href="index.php" class="flex items-center space-x-2 text-white hover:text-[#b9da05] transition">
                 <img src="./Logos/Bulsu MSC Logo-02.png" alt="BULSU MSC Logo" class="h-12" />
             </a>
             <div class="hidden md:flex items-center space-x-6">
-                <a href="index.html"
+                <a href="index.php"
                     class="text-gray-400 font-semibold transition-colors duration-300 hover:text-[#b9da05] cursor-pointer">Home</a>
-                <a href="index.html#about"
+                <a href="aboutus.php"
                     class="text-gray-400 font-semibold transition-colors duration-300 hover:text-[#b9da05] cursor-pointer">About</a>
-                <a href="index.html#team"
-                    class="text-gray-400 font-semibold transition-colors duration-300 hover:text-[#b9da05] cursor-pointer">Team</a>
-                <a href="index.html#partners"
+                <a href="events-and-register-events.php"
+                    class="text-gray-400 font-semibold transition-colors duration-300 hover:text-[#b9da05] cursor-pointer">Events</a>
+                <a href="index.php#partners"
                     class="text-gray-400 font-semibold transition-colors duration-300 hover:text-[#b9da05] cursor-pointer">Partners</a>
                 <button id="login-button-desktop"
                     class="bg-[#b9da05] text-[#00071c] font-bold py-2 px-4 rounded-full transition-colors duration-300 hover:bg-white hover:text-[#00071c] shadow-md">
@@ -398,7 +398,7 @@
                     if (role === "admin") {
                         window.location.href = "admin_dashboard.html";
                     } else if (role === "member" || role === "officer") {
-                        window.location.href = "dashboard.html";
+                        window.location.href = "dashboard.php";
                     } else {
                         responseEl.textContent = "Unknown role. Please contact support.";
                         responseEl.classList.remove("hidden");
