@@ -93,23 +93,6 @@
         // Logged in → remove loading state
         document.documentElement.classList.remove('loading');
     })();
-
-    //Mobile View: Sidebar
-    const menuButton = document.getElementById("mobile-menu-button");
-    const mobileSidebar = document.getElementById("mobile-sidebar");
-
-    menuButton.addEventListener("click", () => {
-        mobileSidebar.classList.toggle("-translate-x-full");
-    });
-
-    document.addEventListener("click", function(event) {
-        const isClickInsideSidebar = mobileSidebar.contains(event.target);
-        const isClickOnMenu = menuButton.contains(event.target);
-
-        if (!isClickInsideSidebar && !isClickOnMenu) {
-            mobileSidebar.classList.add("-translate-x-full");
-        }
-    });
 </script>
 
 <?php include '_footer.php'; ?>

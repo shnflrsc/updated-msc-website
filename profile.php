@@ -123,25 +123,6 @@
     }
   }
 
-  // Mobile View: Sidebar
-  const menuButton = document.getElementById("mobile-menu-button");
-  const mobileSidebar = document.getElementById("mobile-sidebar");
-
-  if (menuButton && mobileSidebar) {
-    menuButton.addEventListener("click", () => {
-      mobileSidebar.classList.toggle("-translate-x-full");
-    });
-
-    document.addEventListener("click", function(event) {
-      const isClickInsideSidebar = mobileSidebar.contains(event.target);
-      const isClickOnMenu = menuButton.contains(event.target);
-
-      if (!isClickInsideSidebar && !isClickOnMenu) {
-        mobileSidebar.classList.add("-translate-x-full");
-      }
-    });
-  }
-
   async function fetchProfile() {
     const data = await apiCall("/auth/profile");
     console.log("Profile API", data);
