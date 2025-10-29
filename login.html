@@ -395,9 +395,9 @@
 
                 if (res.ok && data.success) {
                     const role = data.data.role;
-                    if (role === "officer") {
+                    if (role === "admin") {
                         window.location.href = "admin_dashboard.html";
-                    } else if (role === "member") {
+                    } else if (role === "member" || role === "officer") {
                         window.location.href = "dashboard.html";
                     } else {
                         responseEl.textContent = "Unknown role. Please contact support.";
