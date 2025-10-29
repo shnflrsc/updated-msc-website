@@ -231,5 +231,8 @@
             }
         });
     </script>
+    <script src="js/tabs.js"></script>
+    <script src="js/calendar.js"></script>
+    <script src="js/univ_calendar.js"></script>
 </body>
 </html>
