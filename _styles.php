@@ -1640,24 +1640,4 @@
             padding: 15px;
         }
     }
-
-    /* edit profile */
-    .form-grid-2col {
-        display: grid;
-        grid-template-columns: repeat(2, 1fr);
-        gap: 1rem;
-    }
-
-    .section-divider {
-        border-top: 2px solid #27272a;
-        margin: 2rem 0 1.5rem 0;
-        padding-top: 1.5rem;
-    }
-
-    .section-title {
-        font-size: 1.25rem;
-        font-weight: 600;
-        color: #b9da05;
-        margin-bottom: 1rem;
-    }
 </style>
