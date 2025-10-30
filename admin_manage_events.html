@@ -1310,6 +1310,7 @@
                                         <option value="public">Open for Public</option>
                                         <option value="members">Members Only</option>
                                         <option value="bulsuans">BulSUans Only</option>
+                                        <option value="inviteOnly">Invite Only</option>
                                     </select>
                                 </div>
                             </div>
@@ -1740,7 +1741,17 @@
                 event_status: "upcoming",
                 event_image_url: eventImagePath,
                 event_batch_image: badgeImagePath,
-                capacity: parseInt(document.getElementById("capacity")?.value || "0", 10)
+                capacity: (() => {
+                    const el = document.getElementById("capacity");
+                    const v = el ? el.value.trim() : "";
+                    if (v === "" || v == null) {
+                        // empty input => treat as "unlimited" => use largest safe integer
+                        return Number.MAX_SAFE_INTEGER;
+                    }
+                    const n = parseInt(v, 10);
+                    // if input is a valid number (including 0), return it; otherwise treat as unlimited
+                    return isNaN(n) ? Number.MAX_SAFE_INTEGER : n;
+                })()
             };
 
             //console.log("New Event:", newEvent);
@@ -1889,7 +1900,7 @@
             document.getElementById("edit_capacity").value = evt.capacity || "";
             document.getElementById("event_status").value = evt.event_status;
             document.getElementById("event_type").value = evt.event_type;
-            document.getElementById("event_restriction").value = evt.event_restriction || "public";
+            document.getElementById("event_restriction").value = evt.event_restriction;
             //document.getElementById("registration_required").checked = evt.registration_required === 1;
             document.getElementById("edit_registration_required").checked = evt.registration_required === 1;
             //console.log(evt.location);
@@ -1962,9 +1973,20 @@
                 event_status: document.getElementById("event_status").value,
                 event_type: document.getElementById("event_type").value,
                 event_restriction: document.getElementById("event_restriction").value,
+                event_restriction: document.getElementById("event_restriction").value,
                 registration_required: document.getElementById("edit_registration_required").checked ? 1 : 0,
                 description: document.getElementById("description").value,
-                capacity: document.getElementById("edit_capacity")?.value || '0'
+                capacity: (() => {
+                    const el = document.getElementById("capacity");
+                    const v = el ? el.value.trim() : "";
+                    if (v === "" || v == null) {
+                        // empty input => treat as "unlimited" => use largest safe integer
+                        return Number.MAX_SAFE_INTEGER;
+                    }
+                    const n = parseInt(v, 10);
+                    // if input is a valid number (including 0), return it; otherwise treat as unlimited
+                    return isNaN(n) ? Number.MAX_SAFE_INTEGER : n;
+                })()
             };
 
             if (eventImagePath) payload.event_image_url = eventImagePath;
@@ -2030,7 +2052,7 @@
                                 <div class="event-meta">
                                     <span><i class="bi bi-calendar"></i> ${formattedDateTime}</span>
                                     <span><i class="bi bi-geo-alt"></i> ${evt.location} </span>
-                                    <span><i class="bi bi-people"></i> ${evt.attendants || 0} / ${evt.capacity || 0}</span>
+                                    <span><i class="bi bi-people"></i> ${evt.attendants || 0} / ${ (evt.capacity === null || evt.capacity === undefined) ? Number.MAX_SAFE_INTEGER : evt.capacity }</span>
                                     <span class="event-status status-upcoming"> ${evt.event_status} </span>
                                 </div>
                                 <div class="event-actions">
