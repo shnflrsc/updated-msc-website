@@ -86,7 +86,7 @@
 
         if (!data || !data.success) {
             // Not logged in → redirect
-            window.location.href = "login.html";
+            window.location.href = "login.php";
             return;
         }
 

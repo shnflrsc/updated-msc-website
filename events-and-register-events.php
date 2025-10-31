@@ -2,13 +2,13 @@
 
 <div class="flex flex-col min-h-screen">
 
-<div class="hero-section">
-    <h1>BulSU MSC Events</h1>
-    <p>Track your upcoming, completed, and past events</p>
+<div class="mt-20 px-5 py-20 text-center max-w-7xl mx-auto mb-0 relative">
+    <h1 class="text-4xl sm:text-5xl font-extrabold text-[#b9da05] mb-4">Events</h1>
+    <p class="text-[1.2rem] text-white/90 relative z-[1]">Track your upcoming, completed, and past events</p>
 </div>
 
 <div class="main-content">
-    <div class="filter-container">
+    <div class="flex justify-center mb-10">
         <div class="filter-buttons">
             <button class="filter-btn active" data-section="upcomingSection">Upcoming</button>
             <button class="filter-btn" data-section="pastSection">Completed</button>
@@ -330,7 +330,7 @@
             cancelBtn.onclick = async () => {
                 const authStatus = await apiCall("/auth/check-login", "GET");
                 if (!authStatus?.success || !authStatus?.data?.logged_in) {
-                    showMessage('Please <a href="login.html" class="text-blue-500">log in</a> first.');
+                    showMessage('Please <a href="login.php" class="text-blue-500">log in</a> first.');
                     return;
                 }
                 const userId = authStatus.data.user_id;
@@ -379,7 +379,7 @@
                     if (eventCard.dataset.access === "public") return showPreRegisterFormInsideModal(eventId);
                     if (eventCard.dataset.access === "bulsuans") return showBulSUPreRegisterForm(eventId);
                     if (eventCard.dataset.access === "members")
-                        return showMessage('This event is for members only. Please <a href="login.html" class="text-blue-500">log in</a> to register.');
+                        return showMessage('This event is for members only. Please <a href="login.php" class="text-blue-500">log in</a> to register.');
                     return showMessage(`🚫 This event is restricted to "${eventAccess}" users only.`);
                 }
 
@@ -738,7 +738,7 @@
             registerBtn.onclick = async () => {
                 const authStatus = await apiCall("/auth/check-login", "GET");
                 if (!authStatus?.success || !authStatus?.data?.logged_in) {
-                    showMessage('Please <a href="login.html" class="text-blue-500">log in</a> first to register.');
+                    showMessage('Please <a href="login.php" class="text-blue-500">log in</a> first to register.');
                     return;
                 }
 
@@ -767,7 +767,7 @@
             cancelPreBtn.onclick = async () => {
                 const authStatus = await apiCall("/auth/check-login", "GET");
                 if (!authStatus?.success || !authStatus?.data?.logged_in) {
-                    showMessage('Please <a href="login.html" class="text-blue-500">log in</a> first.');
+                    showMessage('Please <a href="login.php" class="text-blue-500">log in</a> first.');
                     return;
                 }
 

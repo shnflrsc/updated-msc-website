@@ -127,7 +127,7 @@
   async function fetchProfile() {
     const data = await apiCall("/auth/profile");
     console.log("Profile API", data);
-    if (!data || !data.success) return (window.location.href = "login.html");
+    if (!data || !data.success) return (window.location.href = "login.php");
     document.documentElement.classList.remove("loading");
 
     const user = data.data;

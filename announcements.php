@@ -2,14 +2,14 @@
 
 <div class="flex flex-col min-h-screen">
 
-<div class="hero-section">
-    <h1>BulSU MSC Announcements</h1>
-    <p>Stay updated with the latest from BulSU MSC</p>
+<div class="mt-20 px-5 py-20 text-center max-w-7xl mx-auto mb-0 relative">
+    <h1 class="text-4xl sm:text-5xl font-extrabold text-[#b9da05] mb-4">Announcements</h1>
+    <p class="text-[1.2rem] text-white/90 relative z-[1]">Stay updated with the latest from BulSU MSC</p>
 </div>
 
 <div class="main-content">
     <main class="flex-grow pt-28 p-3 flex justify-center">
-        <section id="upcomingSection" class="announcement-section">
+        <section id="upcomingSection" class="w-full m-0 px-4">
             <div class="announcement-list">
             </div>
         </section>

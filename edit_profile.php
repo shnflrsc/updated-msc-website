@@ -95,6 +95,18 @@
                 <div class="section-divider">
                     <h3 class="card-title">Personal Information</h3>
                 </div>
+                <div class="flex flex-col items-center gap-4 mb-6">
+                    <div class="w-32 h-32 rounded-full shadow-md overflow-hidden border-4 border-[#b9da05]" id="profile-picture-preview">
+                        <!-- Preview will be inserted here -->
+                    </div>
+                    <div class="flex flex-col items-center gap-2">
+                        <label for="profile" class="cursor-pointer px-4 py-2 bg-[#27272a] text-white rounded-md hover:bg-[#3f3f46] transition-colors">
+                            <i class="fas fa-camera mr-2"></i>Change Profile Picture
+                        </label>
+                        <input type="file" id="profile" name="profilePicture" class="hidden" accept="image/*">
+                        <p class="text-sm text-gray-400">Maximum file size: 2MB. Supported formats: JPG, PNG</p>
+                    </div>
+                </div>
             </div>
 
             <div class="col-span-1 md:col-span-2 grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -160,7 +172,7 @@
 
         <div class="mt-6 text-center text-sm text-gray-400">
             <p>To change your Name, College, Program, Student No., or Email Address, please contact BulSU MSC.<br>
-                To change your password, <a href="change_passwordform.html" class="text-[#b9da05] hover:underline">click here</a>.</p>
+                To change your password, <a href="change_password.php" class="text-[#b9da05] hover:underline">click here</a>.</p>
         </div>
 
         <div class="flex flex-col items-center text-center mt-6">
@@ -221,7 +233,7 @@
         } else {
             console.warn("⚠️ Not logged in or session expired.");
             alert("⚠️ Please log in first.");
-            window.location.href = "login.html";
+            window.location.href = "login.php";
         }
     });
 
