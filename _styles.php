@@ -968,35 +968,6 @@
         box-shadow: 0 0 10px rgba(185, 218, 5, 0.5);
     }
 
-    /* events and register */
-    .hero-section {
-        margin-top: 80px;
-        padding: 60px 20px;
-        text-align: center;
-        max-width: 80rem;
-        margin-left: auto;
-        margin-right: auto;
-        margin-bottom: 0;
-        position: relative;
-    }
-
-    .hero-section h1 {
-        font-size: 2.5rem;
-        font-weight: bold;
-        margin-bottom: 10px;
-        font-family: 'Orbitron', sans-serif;
-        color: #b9da05;
-        position: relative;
-        z-index: 1;
-    }
-
-    .hero-section p {
-        font-size: 1.2rem;
-        color: rgba(255, 255, 255, 0.9);
-        position: relative;
-        z-index: 1;
-    }
-
     .main-content {
         flex: 1;
         max-width: 80rem;
