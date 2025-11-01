@@ -4,7 +4,7 @@
     <main class="flex-grow pt-28 flex-row justify-center">
         <!-- Security Modal -->
         <div id="security-reminder"
-            class="hidden fixed top-12 right-6 z-50 bg-[#011538] border border-[#b9da05] text-white bg-opacity-60 border-opacity-60 shadow-lg rounded-lg w-80 p-4">
+            class="hidden fixed bottom-10 right-6 z-50 bg-[#011538] border border-[#b9da05] text-white bg-opacity-60 border-opacity-60 shadow-lg rounded-lg w-80 p-4">
             <p class="text-gray-400 mb-4">
                 For your security, please update your personal information and change your password.
             </p>
@@ -100,7 +100,7 @@
                         Edit Profile
                     </a>
 
-                    <a href="change_passwordform.html"
+                    <a href="change_password.php"
                         class="w-full sm:w-6/12 bg-[#b9da05] text-[#011538] font-semibold py-2 px-4 rounded-lg transition-colors duration-300 hover:bg-[#9abc04] shadow-md text-center flex items-center justify-center gap-2">
                         <i class="fa-solid fa-unlock-keyhole"></i>
                         Change Password
@@ -289,9 +289,9 @@
             const data = await apiCall("/auth/profile", "GET");
 
             if (!data || !data.success) {
-                window.location.href = "login.html";
+                window.location.href = "login.php";
                 loadingScreen.classList.add("opacity-0");
-                setTimeout(() => window.location.href = "login.html", 800);
+                setTimeout(() => window.location.href = "login.php", 800);
                 return;
             }
 
@@ -631,7 +631,7 @@
             const result = await apiCall("/auth/logout", "POST");
             if (result && result.success) {
                 console.log("✅ Logout successful");
-                window.location.href = "login.html"; // Redirect after logout
+                window.location.href = "login.php"; // Redirect after logout
             } else {
                 console.error("❌ Logout failed");
             }

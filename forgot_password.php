@@ -64,7 +64,7 @@ document.getElementById("forgotPasswordForm").addEventListener("submit", async (
     }
 
     alert(result.json?.message || "Password reset successful.");
-    window.location.href = "/updated-msc-website/login.html";
+    window.location.href = "/updated-msc-website/login.php";
 });
 </script>
 

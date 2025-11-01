@@ -84,11 +84,11 @@
             document.documentElement.classList.add('loading'); // keep body hidden while checking
             const data = await apiCall("/auth/profile", "GET");
 
-            if (!data || !data.success) {
-                // Not logged in → redirect
-                window.location.href = "login.html";
-                return;
-            }
+        if (!data || !data.success) {
+            // Not logged in → redirect
+            window.location.href = "login.html";
+            return;
+        }
 
             // Logged in → remove loading state
             document.documentElement.classList.remove('loading');

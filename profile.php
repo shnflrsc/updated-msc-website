@@ -105,11 +105,11 @@
       }
     }
 
-    async function fetchProfile() {
-      const data = await apiCall("/auth/profile");
-      console.log("Profile API", data);
-      if (!data || !data.success) return (window.location.href = "login.html");
-      document.documentElement.classList.remove("loading");
+  async function fetchProfile() {
+    const data = await apiCall("/auth/profile");
+    console.log("Profile API", data);
+    if (!data || !data.success) return (window.location.href = "login.php");
+    document.documentElement.classList.remove("loading");
 
       const user = data.data;
       generateQRCode(user.msc_id || user.student_no);
