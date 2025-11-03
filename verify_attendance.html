@@ -16,13 +16,16 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Segoe+UI:wght@400;600;700&family=Orbitron:wght@400;600;700&display=swap"
         rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Bakbak+One&family=Play:wght@400;700&family=Segoe+UI:wght@400;700&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Bakbak+One&family=Play:wght@400;700&family=Segoe+UI:wght@400;700&display=swap"
+        rel="stylesheet">
 
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         html.loading body {
             display: none;
         }
+
         :root {
             --primary-color: #b9da05;
             --secondary-color: #011538;
@@ -514,6 +517,8 @@
                                             <th class="px-4 py-3 text-sm sm:text-base font-semibold">College</th>
                                             <th class="px-4 py-3 text-sm sm:text-base font-semibold">Program</th>
                                             <th class="px-4 py-3 text-sm sm:text-base font-semibold">Year Level</th>
+                                            <th class="px-4 py-3 text-sm sm:text-base font-semibold">Participant Type
+                                            </th>
                                         </tr>
                                     </thead>
                                     <tbody id="participants-table-body"
@@ -753,6 +758,7 @@
                                     <td class="px-4 py-2">${dbInfo.college || "-"}</td>
                                     <td class="px-4 py-2">${dbInfo.program || "-"}</td>
                                     <td class="px-4 py-2">${dbInfo.year_level || "-"}</td>
+                                    <td class="px-4 py-2">${dbInfo.participant_type || "-"}</td>
                                    
                                     `;
                                     tbody.appendChild(tr);
@@ -817,17 +823,26 @@
 
                 let participantsCount = 1;
                 participants.forEach(p => {
-                    const fullName = [p.first_name, p.middle_name, p.last_name].filter(Boolean).join(" ");
-                    const tr = document.createElement('tr');
-                    tr.innerHTML = `<td class="px-4 py-2">${p.msc_id}</td>
-                        <td class="px-4 py-2">${fullName}</td>
-                        <td class="px-4 py-2">${p.college}</td>
-                        <td class="px-4 py-2">${p.program}</td>
-                        <td class="px-4 py-2">${p.year_level}</td>
-                    `;
+                    let fullName;
+
+                    if (p.participant_type === "Guest" || p.participant_type === "guest" || p.participant_type === "bulsuan") {
+                        fullName = p.first_name + " " + p.last_name || "-"; 
+                    } else {
+                        fullName = [p.first_name, p.middle_name, p.last_name].filter(Boolean).join(" ");
+                    }
+
+                    const tr = document.createElement("tr");
+                    tr.innerHTML = `
+        <td class="px-4 py-2">${p.msc_id || "-"}</td>
+        <td class="px-4 py-2">${fullName}</td>
+        <td class="px-4 py-2">${p.college || "-"}</td>
+        <td class="px-4 py-2">${p.program || "-"}</td>
+        <td class="px-4 py-2">${p.year_level || "-"}</td>
+        <td class="px-4 py-2">${p.participant_type || "-"}</td>
+    `;
                     tbody.appendChild(tr);
-                    participantsCount++;
                 });
+
                 if (`${event.total_registered}` == 0) {
                     tbody.innerHTML = `<tr><td colspan="7" class="text-center py-4 text-gray-400">No registered participants.</td></tr>`; //fix sentence 
                 }
