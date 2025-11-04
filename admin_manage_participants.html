@@ -605,20 +605,25 @@
 
                     if (participants.length === 0) {
                         tbody.innerHTML = `<tr><td colspan="5" class="text-center py-6 text-gray-400">No registered participants.</td></tr>`;
-                        exportBtn.disabled = true; 
+                        exportBtn.disabled = true;
                         exportBtn.classList.add("opacity-50", "cursor-not-allowed");
                         return;
                     }
 
                     participants.forEach(p => {
                         const fullName = [p.first_name, p.middle_name, p.last_name].filter(Boolean).join(" ");
+                        const mscIdDisplay = p.msc_id && p.msc_id !== "null" ? p.msc_id : "-";
+                        const collegeDisplay = p.college || "-";
+                        const programDisplay = p.program || "-";
+                        const yearDisplay = p.year_level || "-";
+
                         const tr = document.createElement("tr");
                         tr.innerHTML = `
-                        <td class="px-4 py-2">${p.msc_id}</td>
-                        <td class="px-4 py-2">${fullName}</td>
-                        <td class="px-4 py-2">${p.college}</td>
-                        <td class="px-4 py-2">${p.program}</td>
-                        <td class="px-4 py-2">${p.year_level}</td>
+                        <td class="px-4 py-2">${mscIdDisplay}</td>
+                        <td class="px-4 py-2">${fullName || "-"}</td>
+                        <td class="px-4 py-2">${collegeDisplay}</td>
+                        <td class="px-4 py-2">${programDisplay}</td>
+                        <td class="px-4 py-2">${yearDisplay}</td>
                         `;
                         tbody.appendChild(tr);
                     });

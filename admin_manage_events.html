@@ -1257,26 +1257,27 @@
                     <div class="modal-body">
                         <form id="editEventForm">
                             <div class="form-group">
-                                <label for="event_name">Event Title *</label>
-                                <input type="text" id="event_name" name="event_name" class="form-control"
+                                <label for="edit_event_name">Event Title *</label>
+                                <input type="text" id="edit_event_name" name="event_name" class="form-control"
                                     placeholder="Enter event title" required>
                             </div>
 
                             <div class="form-row">
                                 <div class="form-group">
-                                    <label for="event_time_start">Start Date & Time</label>
-                                    <input type="datetime-local" id="event_time_start" name="event_time_start"
+                                    <label for="edit_event_time_start">Start Date & Time</label>
+                                    <input type="datetime-local" id="edit_event_time_start" name="event_time_start"
                                         class="form-control">
                                 </div>
                                 <div class="form-group">
-                                    <label for="event_time_end">End Time</label>
-                                    <input type="time" id="event_time_end" name="event_time_end" class="form-control">
+                                    <label for="edit_event_time_end">End Time</label>
+                                    <input type="time" id="edit_event_time_end" name="event_time_end"
+                                        class="form-control">
                                 </div>
                             </div>
 
                             <div class="form-group">
                                 <label for="edit_location">Location</label>
-                                <input type="text" id="edit_location" name="edit_location" class="form-control"
+                                <input type="text" id="edit_location" name="location" class="form-control"
                                     placeholder="e.g. University Gym, Online via MS Teams">
                             </div>
 
@@ -1287,8 +1288,8 @@
                                         placeholder="e.g. 100" min="0">
                                 </div>
                                 <div class="form-group">
-                                    <label for="event_status">Event Status</label>
-                                    <select id="event_status" name="event_status" class="form-control">
+                                    <label for="edit_event_status">Event Status</label>
+                                    <select id="edit_event_status" name="event_status" class="form-control">
                                         <option value="upcoming">Upcoming</option>
                                         <option value="completed">Completed</option>
                                         <option value="cancelled">Cancelled</option>
@@ -1298,15 +1299,15 @@
 
                             <div class="form-row">
                                 <div class="form-group">
-                                    <label for="event_type">Event Type</label>
-                                    <select id="event_type" name="event_type" class="form-control">
+                                    <label for="edit_event_type">Event Type</label>
+                                    <select id="edit_event_type" name="event_type" class="form-control">
                                         <option value="onsite">Onsite</option>
                                         <option value="online">Online</option>
                                     </select>
                                 </div>
                                 <div class="form-group">
-                                    <label for="event_restriction">Event Restriction</label>
-                                    <select id="event_restriction" name="event_restriction" class="form-control">
+                                    <label for="edit_event_restriction">Event Restriction</label>
+                                    <select id="edit_event_restriction" name="event_restriction" class="form-control">
                                         <option value="public">Open for Public</option>
                                         <option value="members">Members Only</option>
                                         <option value="bulsuans">BulSUans Only</option>
@@ -1316,8 +1317,7 @@
                             </div>
 
                             <div class="form-group checkbox-group">
-                                <input type="checkbox" id="edit_registration_required"
-                                    name="edit_registration_required">
+                                <input type="checkbox" id="edit_registration_required" name="registration_required">
                                 <label for="edit_registration_required" style="margin-top: 3px;">Registration
                                     Required</label>
                             </div>
@@ -1350,15 +1350,17 @@
                             </div>
 
                             <div class="form-group">
-                                <label for="description">Description / Details</label>
-                                <textarea id="description" name="description" class="form-control" rows="6"
+                                <label for="edit_description">Description / Details</label>
+                                <textarea id="edit_description" name="description" class="form-control" rows="6"
                                     placeholder="Enter event details, objectives, program flow, speakers, etc."></textarea>
                             </div>
+
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary" id="cancelEditBtn"
                                     onclick="closeEditModal()">Cancel</button>
-                                <button type="submit" class="btn btn-primary" id="saveEditBtn"><i
-                                        class="bi bi-pencil-square"></i> Save Changes</button>
+                                <button type="submit" class="btn btn-primary" id="saveEditBtn">
+                                    <i class="bi bi-pencil-square"></i> Save Changes
+                                </button>
                             </div>
                         </form>
                     </div>
@@ -1409,62 +1411,10 @@
         let upcoming_events_data = [];
         const API_BASE = "/updated-msc-website/api";
 
-        // function openTab(evt, tabName) {
-        //     var i, tabcontent, tablinks;
-
-        //     tabcontent = document.getElementsByClassName("tab-content");
-        //     for (i = 0; i < tabcontent.length; i++) {
-        //         tabcontent[i].classList.remove("active");
-        //     }
-
-        //     tablinks = document.getElementsByClassName("tab-button");
-        //     for (i = 0; i < tablinks.length; i++) {
-        //         tablinks[i].classList.remove("active");
-        //     }
-
-        //     document.getElementById(tabName).classList.add("active");
-        //     evt.currentTarget.classList.add("active");
-        // }
-
         document.getElementById('sidebarToggle').addEventListener('click', function () {
             const sidebar = document.querySelector('.sidebar');
             sidebar.classList.toggle('open');
         });
-
-        /*
-        async function apiCall(endpoint, method = "GET", data = null, title = "", redirect = null) {
-            try {
-                const options = {
-                    method,
-                    headers: { "Content-Type": "application/json" },
-                    credentials: "include",
-                };
-
-                if (data) {
-                    options.body = JSON.stringify(data);
-                }
-
-                //console.log(`${method} ${endpoint}:`, data);
-
-                const response = await fetch(`${API_BASE}${endpoint}`, options);
-                const result = await response.json();
-                //console.log(result);
-
-                if (!response.ok) {
-                    console.log(`Request failed: ${response.status} ${response.statusText}`);
-                } else {
-                    if (redirect) {
-                        window.location.href = redirect;
-                    }
-                }
-
-                return result;
-            } catch (error) {
-                console.error("API Error:", error);
-                return null;
-            }
-        }
-        */
 
         async function apiCall(endpoint, method = "GET", body = null) {
             try {
@@ -1627,7 +1577,7 @@
             dashboard.querySelector(".info-grid .info-item:nth-child(3) span").textContent = evt.event_type;
             dashboard.querySelector(".info-grid .info-item:nth-child(4) span").textContent = evt.event_restriction;
             dashboard.querySelector(".info-grid .info-item:nth-child(5) span").textContent =
-                `${evt.attendants || 0} / ${evt.capacity || 0}`;
+                `${evt.total_registered || 0} / ${evt.capacity || 0}`;
             dashboard.querySelector(".info-grid .info-item:nth-child(6) span").textContent =
                 evt.registration_required ? "Registration Required" : "No Registration";
             dashboard.querySelector(".info-grid .info-item:nth-child(7) .event-status").textContent = evt.event_status;
@@ -1892,30 +1842,30 @@
 
             const evt = response.data;
 
-            document.getElementById("event_name").value = evt.event_name;
-            document.getElementById("event_time_start").value = evt.event_date && evt.event_time_start
-                ? `${evt.event_date}T${evt.event_time_start}`
-                : "";
-            document.getElementById("event_time_end").value = evt.event_time_end;
-            document.getElementById("edit_capacity").value = evt.capacity || "";
-            document.getElementById("event_status").value = evt.event_status;
-            document.getElementById("event_type").value = evt.event_type;
-            document.getElementById("event_restriction").value = evt.event_restriction;
-            //document.getElementById("registration_required").checked = evt.registration_required === 1;
-            document.getElementById("edit_registration_required").checked = evt.registration_required === 1;
-            //console.log(evt.location);
+            document.getElementById("edit_event_name").value = evt.event_name || "";
+            document.getElementById("edit_event_time_start").value =
+                evt.event_date && evt.event_time_start ? `${evt.event_date}T${evt.event_time_start}` : "";
+            document.getElementById("edit_event_time_end").value = evt.event_time_end || "";
             document.getElementById("edit_location").value = evt.location || "";
-            document.getElementById("description").value = evt.description || "";
-            document.getElementById("editEventForm").dataset.eventId = eventId;
+            document.getElementById("edit_capacity").value =
+                evt.capacity && evt.capacity !== 2147483647 ? evt.capacity : "";
+            document.getElementById("edit_event_status").value = evt.event_status || "upcoming";
+            document.getElementById("edit_event_type").value = evt.event_type || "onsite";
+            document.getElementById("edit_event_restriction").value = evt.event_restriction || "public";
+            document.getElementById("edit_registration_required").checked = evt.registration_required === 1;
+            document.getElementById("edit_description").value = evt.description || "";
+
+            document.getElementById("edit_event_image_name").textContent =
+                evt.event_image_url ? evt.event_image_url.split("/").pop() : "No file chosen";
+            document.getElementById("edit_badge_image_name").textContent =
+                evt.event_badge_image ? evt.event_badge_image.split("/").pop() : "No file chosen";
+
+            const form = document.getElementById("editEventForm");
+            form.dataset.eventId = eventId;
+
+            const editModal = document.getElementById("editEventModal");
             editModal.style.display = "flex";
         }
-
-        document.addEventListener("DOMContentLoaded", () => {
-            const editForm = document.getElementById("editEventForm");
-            if (editForm) {
-                editForm.addEventListener("submit", handleEditEvent);
-            }
-        });
 
         async function handleEditEvent(e) {
             e.preventDefault();
@@ -1923,15 +1873,15 @@
             const form = e.target;
             const eventId = form.dataset.eventId;
 
-            const [event_date, event_time_start] =
-                document.getElementById("event_time_start").value.split("T");
-
-            let event_time_end = document.getElementById("event_time_end").value;
-            if (event_time_end) {
-                event_time_end = event_time_end.slice(0, 5);
-            } else {
-                event_time_end = null;
+            const datetimeValue = document.getElementById("edit_event_time_start").value;
+            let event_date = null;
+            let event_time_start = null;
+            if (datetimeValue && datetimeValue.includes("T")) {
+                [event_date, event_time_start] = datetimeValue.split("T");
             }
+
+            let event_time_end = document.getElementById("edit_event_time_end").value || null;
+            if (event_time_end) event_time_end = event_time_end.slice(0, 5);
 
             async function uploadFile(inputId, uploadUrl) {
                 const input = document.getElementById(inputId);
@@ -1944,9 +1894,8 @@
                     const res = await fetch(uploadUrl, {
                         method: "POST",
                         credentials: "include",
-                        body: formData
+                        body: formData,
                     });
-
                     const result = await res.json();
                     if (res.ok && result.success) {
                         return result.data.path;
@@ -1961,38 +1910,36 @@
                 }
             }
 
-            const eventImagePath = await uploadFile("edit_event_image", "/updated-msc-website/api/events/upload-image");
-            const badgeImagePath = await uploadFile("edit_badge_image", "/updated-msc-website/api/events/upload-badge");
+            const eventImagePath = await uploadFile(
+                "edit_event_image",
+                "/updated-msc-website/api/events/upload-image"
+            );
+            const badgeImagePath = await uploadFile(
+                "edit_badge_image",
+                "/updated-msc-website/api/events/upload-badge"
+            );
 
             const payload = {
-                event_name: document.getElementById("event_name").value,
+                event_name: document.getElementById("edit_event_name").value.trim(),
                 event_date,
                 event_time_start,
                 event_time_end,
-                location: document.getElementById("edit_location").value,
-                event_status: document.getElementById("event_status").value,
-                event_type: document.getElementById("event_type").value,
-                event_restriction: document.getElementById("event_restriction").value,
-                event_restriction: document.getElementById("event_restriction").value,
+                location: document.getElementById("edit_location").value.trim(),
+                event_status: document.getElementById("edit_event_status").value,
+                event_type: document.getElementById("edit_event_type").value,
+                event_restriction: document.getElementById("edit_event_restriction").value,
                 registration_required: document.getElementById("edit_registration_required").checked ? 1 : 0,
-                description: document.getElementById("description").value,
+                description: document.getElementById("edit_description").value.trim(),
                 capacity: (() => {
-                    const el = document.getElementById("capacity");
-                    const v = el ? el.value.trim() : "";
-                    if (v === "" || v == null) {
-                        // empty input => treat as "unlimited" => use largest safe integer
-                        return Number.MAX_SAFE_INTEGER;
-                    }
-                    const n = parseInt(v, 10);
-                    // if input is a valid number (including 0), return it; otherwise treat as unlimited
-                    return isNaN(n) ? Number.MAX_SAFE_INTEGER : n;
-                })()
+                    const val = document.getElementById("edit_capacity").value.trim();
+                    if (val === "" || val == null) return Number.MAX_SAFE_INTEGER;
+                    const num = parseInt(val, 10);
+                    return isNaN(num) ? Number.MAX_SAFE_INTEGER : num;
+                })(),
             };
 
             if (eventImagePath) payload.event_image_url = eventImagePath;
-            if (badgeImagePath) payload.event_batch_image = badgeImagePath;
-
-            //console.log("Update Event:", payload);
+            if (badgeImagePath) payload.event_badge_image = badgeImagePath;
 
             const response = await apiCall(`/events/${eventId}`, "PUT", payload);
 
@@ -2003,9 +1950,16 @@
                 getUpcomingEvents();
             } else {
                 console.error("Request failed:", response);
-                showToast("Failed to update event.", response?.message);
+                showToast(response?.message || "Failed to update event.", "error");
             }
         }
+
+        document.addEventListener("DOMContentLoaded", () => {
+            const editForm = document.getElementById("editEventForm");
+            if (editForm) {
+                editForm.addEventListener("submit", handleEditEvent);
+            }
+        });
 
         async function getUpcomingEvents() {
             const data = await apiCall("/events/upcoming", "GET");
@@ -2052,7 +2006,7 @@
                                 <div class="event-meta">
                                     <span><i class="bi bi-calendar"></i> ${formattedDateTime}</span>
                                     <span><i class="bi bi-geo-alt"></i> ${evt.location} </span>
-                                    <span><i class="bi bi-people"></i> ${evt.attendants || 0} / ${ (evt.capacity === null || evt.capacity === undefined) ? Number.MAX_SAFE_INTEGER : evt.capacity }</span>
+                                    <span><i class="bi bi-people"></i> ${evt.attendants || 0} / ${(evt.capacity === null || evt.capacity === undefined) ? Number.MAX_SAFE_INTEGER : evt.capacity}</span>
                                     <span class="event-status status-upcoming"> ${evt.event_status} </span>
                                 </div>
                                 <div class="event-actions">
