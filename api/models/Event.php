@@ -459,7 +459,7 @@ class Event
 
             // Optional: increment attendants count
             $this->db->prepare("UPDATE events SET attendants = attendants + 1 WHERE event_id = :event_id")
-                    ->execute(['event_id' => $eventId]);
+                ->execute(['event_id' => $eventId]);
 
             return ["success" => true, "message" => "Successfully registered as a member."];
         } catch (Exception $e) {
@@ -467,7 +467,7 @@ class Event
         }
     }
 
-    
+
     /**
      * Cancel a Pre-Registration
      */
@@ -482,7 +482,8 @@ class Event
      * Check if a user is registered for an event
      */
 
-    public function checkUserRegistration($eventId, $userId) {
+    public function checkUserRegistration($eventId, $userId)
+    {
         $sql = "SELECT COUNT(*) as count FROM event_registrations 
                 WHERE event_id = ? AND student_id = ?";
         $stmt = $this->db->prepare($sql);
@@ -527,7 +528,7 @@ class Event
             ]);
 
             $this->db->prepare("UPDATE events SET attendants = attendants + 1 WHERE event_id = :event_id")
-                    ->execute(['event_id' => $eventId]);
+                ->execute(['event_id' => $eventId]);
 
             return ["success" => true, "message" => "BulSUan pre-registration successful."];
         } catch (Exception $e) {
@@ -781,22 +782,26 @@ class Event
                 e.description,
                 e.event_image_url,
                 e.event_batch_image,
+
                 s.id AS student_id,
                 s.msc_id,
                 s.student_no,
-                s.first_name,
-                s.last_name,
-                s.year_level,
-                s.program,
-                s.college,
+                COALESCE(s.first_name, er.first_name) AS first_name,
+                COALESCE(s.last_name, er.last_name) AS last_name,
+                COALESCE(s.year_level, er.year_level) AS year_level,
+                COALESCE(s.program, er.program) AS program,
+                COALESCE(s.college, er.college) AS college,
+
+                er.participant_type,
                 er.attendance_status,
                 er.registration_date
             FROM events e
             LEFT JOIN event_registrations er ON e.event_id = er.event_id
             LEFT JOIN students s ON er.student_id = s.id
             WHERE e.event_id = :event_id
-            ORDER BY s.last_name, s.first_name
+            ORDER BY er.registration_date DESC
             ";
+
             $stmt = $this->db->prepare($sql);
             $stmt->execute(['event_id' => $eventId]);
             $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -844,21 +849,27 @@ class Event
             // Participants
             $participants = [];
             foreach ($rows as $row) {
-                if ($row['student_id']) {
-                    $participants[] = [
-                        "student_id"        => $row['student_id'],
-                        "msc_id"            => $row['msc_id'],
-                        "student_no"        => $row['student_no'],
-                        "first_name"        => $row['first_name'],
-                        "last_name"         => $row['last_name'],
-                        "year_level"        => $row['year_level'],
-                        "program"           => $row['program'],
-                        "college"           => $row['college'],
-                        "attendance_status" => $row['attendance_status'],
-                        "registration_date" => $row['registration_date'],
-                    ];
-                }
+                // Build full name for guests or members
+                $firstName = $row['first_name'] ?? '';
+                $lastName  = $row['last_name'] ?? '';
+                $fullName  = trim("$firstName $lastName");
+
+                $participants[] = [
+                    "student_id"        => $row['student_id'] ?? null,
+                    "msc_id"            => $row['msc_id'] ?? null,
+                    "student_no"        => $row['student_no'] ?? null,
+                    "first_name"        => $firstName,
+                    "last_name"         => $lastName,
+                    "fullName"         => $fullName,
+                    "year_level"        => $row['year_level'] ?? '-',
+                    "program"           => $row['program'] ?? '-',
+                    "college"           => $row['college'] ?? '-',
+                    "participant_type"  => $row['participant_type'] ?? 'Guest', // ✅ ensure type exists
+                    "attendance_status" => $row['attendance_status'] ?? '-',
+                    "registration_date" => $row['registration_date'] ?? '-',
+                ];
             }
+
 
             return [
                 "event"        => $eventDetails,
