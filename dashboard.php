@@ -126,13 +126,6 @@
                         <h3 class="tab text-xs sm:text-base text-gray-200 font-semibold cursor-pointer hover:text-[#b9da05]"
                             data-tab="univ-calendar">University Calendar</h3>
                     </div>
-
-                    <div
-                        class="relative p-1 w-8 h-8 sm:p-2 sm:w-10 sm:h-10 bg-white/10 text-[#b9da05] rounded-full flex items-center justify-center">
-                        <i class="fa-solid fa-bell text-sm sm:text-base"></i>
-                        <span
-                            class="absolute top-0 right-0 block h-2 w-2 sm:h-3 sm:w-3 rounded-full bg-red-500 border-2 border-[#011538]"></span>
-                    </div>
                 </div>
 
                 <!-- Tab Contents -->
@@ -526,16 +519,16 @@
                     const html = `
                     <div class="relative p-5 m-4 border border-white/20 bg-[#011538] rounded-lg shadow-sm transition-all duration-300 ease-out hover:shadow-xl hover:scale-[1.02] hover:bg-[#0a1d4a] group">
                         <div class="flex items-start gap-3">
-                            <div class="w-24 h-24 rounded-md bg-[#1a1f3a] text-[#64748b] text-sm flex items-center justify-center overflow-hidden">
+                            <div class="w-24 h-24 flex-shrink-0 rounded-md bg-[#1a1f3a] text-[#64748b] text-sm flex items-center justify-center overflow-hidden">
                                 ${ann.image_url
                             ? `<img src="${imgSrc}" alt="Event Badge" class="rounded-md object-cover w-full h-full" />`
                             : `<i class="bi bi-megaphone"></i>`}
                             </div>
-                            <div class="flex-grow">
+                            <div class="flex-grow min-w-0">
                                 <h4 class="text-sm sm:text-base md:text-base lg:text-lg text-white font-semibold">
                                     ${ann.title}
                                 </h4>
-                                <p class="text-sm text-gray-300 mt-2">${ann.content}</p>
+                                <p class="text-sm text-gray-300 mt-2 line-clamp-3">${ann.content}</p>
                                 <p class="text-xs text-gray-500 mt-2 tracking-wide">${formattedDateTime}</p>
                             </div>
                         </div>
