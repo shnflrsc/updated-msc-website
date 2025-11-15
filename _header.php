@@ -202,7 +202,7 @@ switch ($current_page) {
             </a>
 
             <!-- --- Desktop Navigation (md:flex) --- -->
-            <div class="hidden md:flex items-center space-x-6">
+            <div class="hidden md:flex items-center gap-6">
                 <!-- Home -->
                 <a href="index.php" class="nav-link font-semibold <?php if ($current_page == 'index.php') echo 'text-[#b9da05]'; ?>">Home</a>
                 <!-- About -->
