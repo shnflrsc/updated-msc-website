@@ -1,134 +1,134 @@
 <?php include '_header.php'; ?>
 
 <div class="flex flex-col min-h-screen">
-    <main class="flex-grow flex items-center justify-center pt-28 px-4 pb-8">
-        <div class="w-full max-w-4xl bg-[#18181b] text-white p-8 rounded-2xl shadow-lg border-[#27272a] border-2">
-            <h3 class="section-title">Edit Your Profile</h3>
+    <main class="flex-grow flex items-center justify-center pt-20 sm:pt-28 px-2 sm:px-4 pb-4 sm:pb-8">
+        <div class="w-full max-w-4xl bg-[#18181b] text-white p-4 sm:p-6 md:p-8 rounded-lg sm:rounded-2xl shadow-lg border-[#27272a] border-2">
+            <h3 class="section-title text-xl sm:text-2xl md:text-3xl mb-4">Edit Your Profile</h3>
             <div id="error-box" class="hidden mb-4 text-white border border-red-500 bg-[#27272a] px-4 py-3 rounded text-sm"></div>
 
-            <form id="editProfileForm" enctype="multipart/form-data" novalidate class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div class="col-span-1 md:col-span-2 grid grid-cols-1 md:grid-cols-2 gap-6">
+            <form id="editProfileForm" enctype="multipart/form-data" novalidate class="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
+                <div class="col-span-1 md:col-span-2 grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
                     <div>
-                        <label for="mscCode" class="block text-sm font-semibold mb-1">MSC Code</label>
-                        <input id="mscCode" type="text" class="w-full px-4 py-3 rounded-md bg-[#27272a] border border-gray-600 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#b9da05]" readonly>
+                        <label for="mscCode" class="block text-xs sm:text-sm font-semibold mb-1">MSC Code</label>
+                        <input id="mscCode" type="text" class="w-full px-3 py-2 sm:px-4 sm:py-3 text-sm sm:text-base rounded-md bg-[#27272a] border border-gray-600 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#b9da05]" readonly>
                     </div>
                     <div>
-                        <label for="studentNumber" class="block text-sm font-semibold mb-1">Student Number</label>
-                        <input id="studentNumber" type="text" class="w-full px-4 py-3 rounded-md bg-[#27272a] border border-gray-600 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#b9da05]" readonly>
-                    </div>
-                </div>
-
-                <div class="col-span-1 md:col-span-2 grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <div>
-                        <label for="lastName" class="block text-sm font-semibold mb-1">Last Name</label>
-                        <input id="lastName" type="text" class="w-full px-4 py-3 rounded-md bg-[#27272a] border border-gray-600 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#b9da05]" readonly>
-                    </div>
-                    <div>
-                        <label for="firstName" class="block text-sm font-semibold mb-1">First Name</label>
-                        <input id="firstName" type="text" class="w-full px-4 py-3 rounded-md bg-[#27272a] border border-gray-600 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#b9da05]" readonly>
+                        <label for="studentNumber" class="block text-xs sm:text-sm font-semibold mb-1">Student Number</label>
+                        <input id="studentNumber" type="text" class="w-full px-3 py-2 sm:px-4 sm:py-3 text-sm sm:text-base rounded-md bg-[#27272a] border border-gray-600 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#b9da05]" readonly>
                     </div>
                 </div>
 
-                <div class="col-span-1 md:col-span-2 grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div class="col-span-1 md:col-span-2 grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
                     <div>
-                        <label for="middleName" class="block text-sm font-semibold mb-1">Middle Name</label>
-                        <input id="middleName" type="text" class="w-full px-4 py-3 rounded-md bg-[#27272a] border border-gray-600 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#b9da05]" readonly>
+                        <label for="lastName" class="block text-xs sm:text-sm font-semibold mb-1">Last Name</label>
+                        <input id="lastName" type="text" class="w-full px-3 py-2 sm:px-4 sm:py-3 text-sm sm:text-base rounded-md bg-[#27272a] border border-gray-600 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#b9da05]" readonly>
                     </div>
                     <div>
-                        <label for="extension" class="block text-sm font-semibold mb-1">Extension</label>
-                        <input id="extension" type="text" class="w-full px-4 py-3 rounded-md bg-[#27272a] border border-gray-600 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#b9da05]" readonly>
-                    </div>
-                </div>
-
-                <div class="col-span-1 md:col-span-2 grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <div>
-                        <label for="college" class="block text-sm font-semibold mb-1">College</label>
-                        <input id="college" type="text" class="w-full px-4 py-3 rounded-md bg-[#27272a] border border-gray-600 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#b9da05]" readonly>
-                    </div>
-                    <div>
-                        <label for="programMajor" class="block text-sm font-semibold mb-1">Program and Major</label>
-                        <input id="programMajor" type="text" class="w-full px-4 py-3 rounded-md bg-[#27272a] border border-gray-600 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#b9da05]" readonly>
+                        <label for="firstName" class="block text-xs sm:text-sm font-semibold mb-1">First Name</label>
+                        <input id="firstName" type="text" class="w-full px-3 py-2 sm:px-4 sm:py-3 text-sm sm:text-base rounded-md bg-[#27272a] border border-gray-600 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#b9da05]" readonly>
                     </div>
                 </div>
 
-                <div class="col-span-1 md:col-span-2 grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div class="col-span-1 md:col-span-2 grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
                     <div>
-                        <label for="year" class="block text-sm font-semibold mb-1">Year</label>
-                        <input id="year" type="text" class="w-full px-4 py-3 rounded-md bg-[#27272a] border border-gray-600 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#b9da05]" readonly>
+                        <label for="middleName" class="block text-xs sm:text-sm font-semibold mb-1">Middle Name</label>
+                        <input id="middleName" type="text" class="w-full px-3 py-2 sm:px-4 sm:py-3 text-sm sm:text-base rounded-md bg-[#27272a] border border-gray-600 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#b9da05]" readonly>
                     </div>
                     <div>
-                        <label for="section" class="block text-sm font-semibold mb-1">Section</label>
-                        <input id="section" type="text" class="w-full px-4 py-3 rounded-md bg-[#27272a] border border-gray-600 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#b9da05]" readonly>
+                        <label for="extension" class="block text-xs sm:text-sm font-semibold mb-1">Extension</label>
+                        <input id="extension" type="text" class="w-full px-3 py-2 sm:px-4 sm:py-3 text-sm sm:text-base rounded-md bg-[#27272a] border border-gray-600 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#b9da05]" readonly>
+                    </div>
+                </div>
+
+                <div class="col-span-1 md:col-span-2 grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
+                    <div>
+                        <label for="college" class="block text-xs sm:text-sm font-semibold mb-1">College</label>
+                        <input id="college" type="text" class="w-full px-3 py-2 sm:px-4 sm:py-3 text-sm sm:text-base rounded-md bg-[#27272a] border border-gray-600 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#b9da05]" readonly>
+                    </div>
+                    <div>
+                        <label for="programMajor" class="block text-xs sm:text-sm font-semibold mb-1">Program and Major</label>
+                        <input id="programMajor" type="text" class="w-full px-3 py-2 sm:px-4 sm:py-3 text-sm sm:text-base rounded-md bg-[#27272a] border border-gray-600 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#b9da05]" readonly>
+                    </div>
+                </div>
+
+                <div class="col-span-1 md:col-span-2 grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
+                    <div>
+                        <label for="year" class="block text-xs sm:text-sm font-semibold mb-1">Year</label>
+                        <input id="year" type="text" class="w-full px-3 py-2 sm:px-4 sm:py-3 text-sm sm:text-base rounded-md bg-[#27272a] border border-gray-600 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#b9da05]" readonly>
+                    </div>
+                    <div>
+                        <label for="section" class="block text-xs sm:text-sm font-semibold mb-1">Section</label>
+                        <input id="section" type="text" class="w-full px-3 py-2 sm:px-4 sm:py-3 text-sm sm:text-base rounded-md bg-[#27272a] border border-gray-600 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#b9da05]" readonly>
                     </div>
                 </div>
 
                 <!-- Contact Information Header spans both columns -->
                 <div class="col-span-1 md:col-span-2">
                     <div class="section-divider">
-                        <h3 class="card-title">Contact Information</h3>
+                        <h3 class="card-title text-base sm:text-lg md:text-xl">Contact Information</h3>
                     </div>
                 </div>
 
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 col-span-1 md:col-span-2">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6 col-span-1 md:col-span-2">
                     <div>
-                        <label for="contactNumber" class="block text-sm font-semibold mb-1">Contact Number</label>
-                        <input id="contactNumber" type="tel" class="w-full px-4 py-3 rounded-md bg-[#27272a] border border-gray-600 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#b9da05]">
+                        <label for="contactNumber" class="block text-xs sm:text-sm font-semibold mb-1">Contact Number</label>
+                        <input id="contactNumber" type="tel" class="w-full px-3 py-2 sm:px-4 sm:py-3 text-sm sm:text-base rounded-md bg-[#27272a] border border-gray-600 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#b9da05]">
                     </div>
                     <div>
-                        <label for="personalEmail" class="block text-sm font-semibold mb-1">Personal Email</label>
-                        <input id="personalEmail" type="email" class="w-full px-4 py-3 rounded-md bg-[#27272a] border border-gray-600 text-white placeholder-gray-400 focus:outline-none" readonly>
+                        <label for="personalEmail" class="block text-xs sm:text-sm font-semibold mb-1">Personal Email</label>
+                        <input id="personalEmail" type="email" class="w-full px-3 py-2 sm:px-4 sm:py-3 text-sm sm:text-base rounded-md bg-[#27272a] border border-gray-600 text-white placeholder-gray-400 focus:outline-none" readonly>
                     </div>
                 </div>
 
-                <div class="col-span-1 md:col-span-2 grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div class="col-span-1 md:col-span-2 grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
                     <div>
-                        <label for="bulsuEmail" class="block text-sm font-semibold mb-1">BulSU Email</label>
-                        <input id="bulsuEmail" type="email" class="w-full px-4 py-3 rounded-md bg-[#27272a] border border-gray-600 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#b9da05]">
+                        <label for="bulsuEmail" class="block text-xs sm:text-sm font-semibold mb-1">BulSU Email</label>
+                        <input id="bulsuEmail" type="email" class="w-full px-3 py-2 sm:px-4 sm:py-3 text-sm sm:text-base rounded-md bg-[#27272a] border border-gray-600 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#b9da05]">
                     </div>
                     <div>
-                        <label for="facebookLink" class="block text-sm font-semibold mb-1">Facebook Profile Link</label>
-                        <input id="facebookLink" type="url" class="w-full px-4 py-3 rounded-md bg-[#27272a] border border-gray-600 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#b9da05]">
+                        <label for="facebookLink" class="block text-xs sm:text-sm font-semibold mb-1">Facebook Profile Link</label>
+                        <input id="facebookLink" type="url" class="w-full px-3 py-2 sm:px-4 sm:py-3 text-sm sm:text-base rounded-md bg-[#27272a] border border-gray-600 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#b9da05]">
                     </div>
                 </div>
 
                 <!-- Personal Information Header spans both columns -->
                 <div class="col-span-1 md:col-span-2">
                     <div class="section-divider">
-                        <h3 class="card-title">Personal Information</h3>
+                        <h3 class="card-title text-base sm:text-lg md:text-xl">Personal Information</h3>
                     </div>
-                    <div class="flex flex-col items-center gap-4 mb-6">
-                        <div class="w-32 h-32 rounded-full shadow-md overflow-hidden border-4 border-[#b9da05]" id="profile-picture-preview">
+                    <div class="flex flex-col items-center gap-3 sm:gap-4 mb-4 sm:mb-6">
+                        <div class="w-24 h-24 sm:w-32 sm:h-32 rounded-full shadow-md overflow-hidden border-4 border-[#b9da05]" id="profile-picture-preview">
                             <!-- Preview will be inserted here -->
                         </div>
                         <div class="flex flex-col items-center gap-2">
-                            <label for="profile" class="cursor-pointer px-4 py-2 bg-[#27272a] text-white rounded-md hover:bg-[#3f3f46] transition-colors">
+                            <label for="profile" class="cursor-pointer px-3 py-2 sm:px-4 text-xs sm:text-sm bg-[#27272a] text-white rounded-md hover:bg-[#3f3f46] transition-colors text-center">
                                 <i class="fas fa-camera mr-2"></i>Change Profile Picture
                             </label>
-                            <input type="file" id="profile" name="profilePicture" class="hidden" accept="image/*">
-                            <p class="text-sm text-gray-400">Maximum file size: 2MB. Supported formats: JPG, PNG</p>
+                            <input type="file" id="profile" name="profilePicture" class="hidden" accept="image/*" style="display: none !important; position: absolute; opacity: 0; pointer-events: none;">
+                            <p class="text-xs sm:text-sm text-gray-400 text-center px-2">Maximum file size: 2MB. Supported formats: JPG, PNG</p>
                         </div>
                     </div>
                 </div>
 
-                <div class="col-span-1 md:col-span-2 grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div class="col-span-1 md:col-span-2 grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
                     <div>
-                        <label for="currentAddress" class="block text-sm font-semibold mb-1">Current Address</label>
-                        <input id="currentAddress" type="text" class="w-full px-4 py-3 rounded-md bg-[#27272a] border border-gray-600 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#b9da05]">
+                        <label for="currentAddress" class="block text-xs sm:text-sm font-semibold mb-1">Current Address</label>
+                        <input id="currentAddress" type="text" class="w-full px-3 py-2 sm:px-4 sm:py-3 text-sm sm:text-base rounded-md bg-[#27272a] border border-gray-600 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#b9da05]">
                     </div>
                     <div>
-                        <label for="birthdate" class="block text-sm font-semibold mb-1">Birthdate</label>
-                        <input id="birthdate" type="date" class="w-full px-4 py-3 rounded-md bg-[#27272a] border border-gray-600 text-white focus:outline-none focus:ring-2 focus:ring-[#b9da05]">
+                        <label for="birthdate" class="block text-xs sm:text-sm font-semibold mb-1">Birthdate</label>
+                        <input id="birthdate" type="date" class="w-full px-3 py-2 sm:px-4 sm:py-3 text-sm sm:text-base rounded-md bg-[#27272a] border border-gray-600 text-white focus:outline-none focus:ring-2 focus:ring-[#b9da05]">
                     </div>
                 </div>
 
-                <div class="col-span-1 md:col-span-2 grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div class="col-span-1 md:col-span-2 grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
                     <div>
-                        <label for="age" class="block text-sm font-semibold mb-1">Age</label>
-                        <input id="age" type="number" class="w-full px-4 py-3 rounded-md bg-[#27272a] border border-gray-600 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#b9da05]">
+                        <label for="age" class="block text-xs sm:text-sm font-semibold mb-1">Age</label>
+                        <input id="age" type="number" class="w-full px-3 py-2 sm:px-4 sm:py-3 text-sm sm:text-base rounded-md bg-[#27272a] border border-gray-600 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#b9da05]">
                     </div>
                     <div>
-                        <label for="gender" class="block text-sm font-semibold mb-1">Gender</label>
-                        <select id="gender" class="w-full px-4 py-3 rounded-md bg-[#27272a] border border-gray-600 text-white focus:outline-none focus:ring-2 focus:ring-[#b9da05]">
+                        <label for="gender" class="block text-xs sm:text-sm font-semibold mb-1">Gender</label>
+                        <select id="gender" class="w-full px-3 py-2 sm:px-4 sm:py-3 text-sm sm:text-base rounded-md bg-[#27272a] border border-gray-600 text-white focus:outline-none focus:ring-2 focus:ring-[#b9da05]">
                             <option value="">Select Gender</option>
                             <option value="Male">Male</option>
                             <option value="Female">Female</option>
@@ -140,44 +140,44 @@
                 <!-- Guardian Information Header spans both columns -->
                 <div class="col-span-1 md:col-span-2">
                     <div class="section-divider">
-                        <h3 class="card-title">Guardian Information</h3>
+                        <h3 class="card-title text-base sm:text-lg md:text-xl">Guardian Information</h3>
                     </div>
                 </div>
 
-                <div class="col-span-1 md:col-span-2 grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div class="col-span-1 md:col-span-2 grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
                     <div>
-                        <label for="guardianName" class="block text-sm font-semibold mb-1">Name of Guardian</label>
-                        <input id="guardianName" type="text" class="w-full px-4 py-3 rounded-md bg-[#27272a] border border-gray-600 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#b9da05]">
+                        <label for="guardianName" class="block text-xs sm:text-sm font-semibold mb-1">Name of Guardian</label>
+                        <input id="guardianName" type="text" class="w-full px-3 py-2 sm:px-4 sm:py-3 text-sm sm:text-base rounded-md bg-[#27272a] border border-gray-600 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#b9da05]">
                     </div>
                     <div>
-                        <label for="guardianRelationship" class="block text-sm font-semibold mb-1">Relationship to the Guardian</label>
-                        <input id="guardianRelationship" type="text" class="w-full px-4 py-3 rounded-md bg-[#27272a] border border-gray-600 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#b9da05]">
+                        <label for="guardianRelationship" class="block text-xs sm:text-sm font-semibold mb-1">Relationship to the Guardian</label>
+                        <input id="guardianRelationship" type="text" class="w-full px-3 py-2 sm:px-4 sm:py-3 text-sm sm:text-base rounded-md bg-[#27272a] border border-gray-600 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#b9da05]">
                     </div>
                 </div>
 
-                <div class="col-span-1 md:col-span-2 grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div class="col-span-1 md:col-span-2 grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
                     <div>
-                        <label for="guardianContact" class="block text-sm font-semibold mb-1">Contact Number of the Guardian</label>
-                        <input id="guardianContact" type="tel" class="w-full px-4 py-3 rounded-md bg-[#27272a] border border-gray-600 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#b9da05]">
+                        <label for="guardianContact" class="block text-xs sm:text-sm font-semibold mb-1">Contact Number of the Guardian</label>
+                        <input id="guardianContact" type="tel" class="w-full px-3 py-2 sm:px-4 sm:py-3 text-sm sm:text-base rounded-md bg-[#27272a] border border-gray-600 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#b9da05]">
                     </div>
                     <div>
-                        <label for="guardianAddress" class="block text-sm font-semibold mb-1">Address of the Guardian</label>
-                        <input id="guardianAddress" type="text" class="w-full px-4 py-3 rounded-md bg-[#27272a] border border-gray-600 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#b9da05]">
+                        <label for="guardianAddress" class="block text-xs sm:text-sm font-semibold mb-1">Address of the Guardian</label>
+                        <input id="guardianAddress" type="text" class="w-full px-3 py-2 sm:px-4 sm:py-3 text-sm sm:text-base rounded-md bg-[#27272a] border border-gray-600 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#b9da05]">
                     </div>
                 </div>
 
                 <div class="col-span-1 md:col-span-2">
-                    <button type="submit" class="w-full bg-[#b9da05] text-[#00071c] text-m font-bold py-3 rounded-md hover:bg-[#8fae04] hover:text-[#00071c] transition-colors shadow-md mt-2">Save Changes</button>
+                    <button type="submit" class="w-full bg-[#b9da05] text-[#00071c] text-sm sm:text-base font-bold py-2.5 sm:py-3 rounded-md hover:bg-[#8fae04] hover:text-[#00071c] transition-colors shadow-md mt-2">Save Changes</button>
                 </div>
             </form>
 
-            <div class="mt-6 text-center text-sm text-gray-400">
-                <p>To change your Name, College, Program, Student No., or Email Address, please contact BulSU MSC.<br>
-                    To change your password, <a href="change_password.php" class="text-[#b9da05] hover:underline">click here</a>.</p>
+            <div class="mt-4 sm:mt-6 text-center text-xs sm:text-sm text-gray-400 px-2">
+                <p>To change your Name, College, Program, Student No., or Email Address, please contact BulSU MSC.<br class="hidden sm:block">
+                    <span class="inline-block mt-1 sm:mt-0">To change your password, <a href="change_password.php" class="text-[#b9da05] hover:underline">click here</a>.</span></p>
             </div>
 
-            <div class="flex flex-col items-center text-center mt-6">
-                <small class="text-gray-400">Powered by <b>BulSU MSC</b></small>
+            <div class="flex flex-col items-center text-center mt-4 sm:mt-6">
+                <small class="text-xs sm:text-sm text-gray-400">Powered by <b>BulSU MSC</b></small>
             </div>
         </div>
     </main>
@@ -308,6 +308,13 @@
         document.addEventListener("DOMContentLoaded", () => {
             const profileInput = document.getElementById("profile");
             const profilePreview = document.getElementById("profile-picture-preview");
+            const profileLabel = document.querySelector('label[for="profile"]');
+
+            // Manually trigger file input on label click (ensures it works even if label connection fails)
+            profileLabel.addEventListener("click", function(e) {
+                e.preventDefault();
+                profileInput.click();
+            });
 
             profileInput.addEventListener("change", function() {
                 const file = this.files[0];
