@@ -17,6 +17,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
     <link rel="icon" href="./BulSU MSC Logo-02.png" type="image/png">
     <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Bakbak+One&family=Play:wght@400;700&family=Segoe+UI:wght@400;700&display=swap" rel="stylesheet">
     <style>
         html.loading body {
             display: none;
@@ -70,7 +71,7 @@
 
 
         .logo-section h2 {
-            font-family: 'Orbitron', monospace;
+            font-family: 'Bakbak One', sans-serif;
             font-size: 18px;
             font-weight: 700;
             color: #b9da05;
@@ -140,7 +141,7 @@
         }
 
         .header h1 {
-            font-family: 'Orbitron', monospace;
+            font-family: 'Bakbak One', sans-serif;
             font-size: 28px;
             font-weight: 700;
             color: #b9da05;
@@ -638,6 +639,25 @@
                 padding: 20px;
             }
 
+            .tabs {
+                flex-direction: column;
+                border-bottom: none;
+            }
+
+            .tab-button {
+                width: 100%;
+                text-align: left;
+                padding: 12px 20px;
+                border-bottom: 1px solid #1a1f3a;
+                border-left: 3px solid transparent;
+            }
+
+            .tab-button.active {
+                border-bottom-color: #1a1f3a;
+                border-left-color: #b9da05;
+                background-color: #011538;
+            }
+
             .form-row {
                 grid-template-columns: 1fr;
             }
@@ -657,8 +677,37 @@
                 text-align: center;
             }
 
+            .event-image {
+                width: 100%;
+                max-width: 200px;
+                margin: 0 auto;
+            }
+
             .event-actions {
                 justify-content: center;
+                flex-wrap: wrap;
+            }
+
+            .event-actions .btn {
+                flex: 1 1 auto;
+                min-width: 100px;
+            }
+
+            .info-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            #dashboard-buttons {
+                flex-direction: column;
+                width: 100%;
+            }
+
+            #dashboard-buttons .btn {
+                width: 100%;
             }
         }
 

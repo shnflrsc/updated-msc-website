@@ -395,6 +395,164 @@
         .btn-close:focus {
             box-shadow: none !important;
         }
+
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .page-header {
+                flex-direction: column;
+                gap: 15px;
+                padding: 15px;
+            }
+
+            .header-title-group {
+                flex-direction: column;
+                text-align: center;
+                gap: 10px;
+            }
+
+            .header-title {
+                font-size: 1.75rem;
+            }
+
+            .btn-dashboard {
+                width: 100%;
+                text-align: center;
+            }
+
+            .form-container {
+                padding: 20px 15px;
+            }
+
+            .event-card {
+                text-align: center;
+            }
+
+            .event-logo {
+                margin: 0 auto 15px;
+            }
+
+            .d-grid.gap-3 {
+                gap: 10px !important;
+            }
+
+            .stat-item-row-group {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            .stat-item {
+                padding: 10px;
+                background-color: var(--background-color);
+                border-radius: 8px;
+            }
+
+            .dropdown {
+                width: 100%;
+            }
+
+            .dropdown button {
+                width: 100%;
+            }
+
+            .alert {
+                font-size: 0.875rem;
+            }
+
+            /* Hide table on mobile */
+            .overflow-x-auto table {
+                display: none;
+            }
+
+            /* Show card layout on mobile */
+            .mobile-cards {
+                display: block !important;
+            }
+
+            .participant-card {
+                background-color: var(--secondary-color);
+                border: 1px solid var(--border-color);
+                border-radius: 8px;
+                padding: 15px;
+                margin-bottom: 15px;
+            }
+
+            .participant-card-header {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                margin-bottom: 12px;
+                padding-bottom: 10px;
+                border-bottom: 1px solid var(--border-color);
+            }
+
+            .participant-card-name {
+                font-weight: 700;
+                color: var(--primary-color);
+                font-size: 1rem;
+            }
+
+            .participant-card-badge {
+                background-color: var(--primary-color);
+                color: var(--secondary-color);
+                padding: 4px 10px;
+                border-radius: 12px;
+                font-size: 0.75rem;
+                font-weight: 600;
+            }
+
+            .participant-card-body {
+                display: flex;
+                flex-direction: column;
+                gap: 8px;
+            }
+
+            .participant-detail-row {
+                display: flex;
+                justify-content: space-between;
+                font-size: 0.875rem;
+            }
+
+            .participant-detail-label {
+                color: var(--text-muted);
+                font-weight: 500;
+            }
+
+            .participant-detail-value {
+                color: var(--text-color);
+                text-align: right;
+            }
+        }
+
+        /* Hide mobile cards on desktop */
+        .mobile-cards {
+            display: none;
+        }
+
+        /* Show table on desktop */
+        @media (min-width: 769px) {
+            .mobile-cards {
+                display: none !important;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .header-title {
+                font-size: 1.5rem;
+            }
+
+            .logo {
+                width: 40px;
+                height: 40px;
+            }
+
+            .stat-value {
+                font-size: 20px;
+            }
+
+            .stat-label {
+                font-size: 11px;
+            }
+        }
     </style>
 </head>
 
@@ -524,12 +682,19 @@
                                     <tbody id="participants-table-body"
                                         class="divide-y divide-white/10 text-sm sm:text-base">
                                         <tr class="hover:bg-[#0b1c3a]/70 transition-colors">
-                                            <td colspan="5" class="text-center py-6 text-gray-400">
+                                            <td colspan="6" class="text-center py-6 text-gray-400">
                                                 Select an event.
                                             </td>
                                         </tr>
                                     </tbody>
                                 </table>
+                            </div>
+
+                            <!-- Mobile Card View -->
+                            <div class="mobile-cards" id="participants-mobile-cards">
+                                <div class="text-center py-6" style="color: #8892b0;">
+                                    Select an event.
+                                </div>
                             </div>
                         </div>
                         <!-- End of table -->
@@ -600,7 +765,9 @@
                 //hide attendandeSummary + reset table rows
                 document.getElementById('attendance-summary').style.display = 'none';;
                 const tbody = document.getElementById('participants-table-body');
-                tbody.innerHTML = `<tr><td colspan="7" class="text-center py-4 text-gray-400">Select an event.</td></tr>`;
+                tbody.innerHTML = `<tr><td colspan="6" class="text-center py-4 text-gray-400">Select an event.</td></tr>`;
+                const mobileCards = document.getElementById("participants-mobile-cards");
+                mobileCards.innerHTML = `<div class="text-center py-6" style="color: #8892b0;">Select an event.</div>`;
             } else {
                 document.getElementById("import-csv-btn").disabled = false;
             }
@@ -747,21 +914,57 @@
                                 // Show preview in table
                                 const tbody = document.getElementById("participants-table-body");
                                 tbody.innerHTML = "";
+                                const mobileCards = document.getElementById("participants-mobile-cards");
+                                mobileCards.innerHTML = "";
 
                                 previewedStudents.forEach((s, idx) => {
                                     const dbInfo = dbMap[s.msc_id] || {};
+                                    const fullName = dbInfo.first_name ? dbInfo.first_name + " " + dbInfo.last_name : "-";
+                                    const college = dbInfo.college || "-";
+                                    const program = dbInfo.program || "-";
+                                    const yearLevel = dbInfo.year_level || "-";
+                                    const participantType = dbInfo.participant_type || "-";
 
+                                    // Table row
                                     const tr = document.createElement("tr");
                                     tr.innerHTML = `
                                     <td class="px-4 py-2">${s.msc_id}</td>
-                                    <td class="px-4 py-2">${dbInfo.first_name ? dbInfo.first_name + " " + dbInfo.last_name : "-"}</td>
-                                    <td class="px-4 py-2">${dbInfo.college || "-"}</td>
-                                    <td class="px-4 py-2">${dbInfo.program || "-"}</td>
-                                    <td class="px-4 py-2">${dbInfo.year_level || "-"}</td>
-                                    <td class="px-4 py-2">${dbInfo.participant_type || "-"}</td>
-                                   
+                                    <td class="px-4 py-2">${fullName}</td>
+                                    <td class="px-4 py-2">${college}</td>
+                                    <td class="px-4 py-2">${program}</td>
+                                    <td class="px-4 py-2">${yearLevel}</td>
+                                    <td class="px-4 py-2">${participantType}</td>
                                     `;
                                     tbody.appendChild(tr);
+
+                                    // Mobile card
+                                    const card = document.createElement("div");
+                                    card.className = "participant-card";
+                                    card.innerHTML = `
+                                        <div class="participant-card-header">
+                                            <div class="participant-card-name">${fullName}</div>
+                                            <div class="participant-card-badge">${participantType}</div>
+                                        </div>
+                                        <div class="participant-card-body">
+                                            <div class="participant-detail-row">
+                                                <span class="participant-detail-label">MSC ID:</span>
+                                                <span class="participant-detail-value">${s.msc_id}</span>
+                                            </div>
+                                            <div class="participant-detail-row">
+                                                <span class="participant-detail-label">College:</span>
+                                                <span class="participant-detail-value">${college}</span>
+                                            </div>
+                                            <div class="participant-detail-row">
+                                                <span class="participant-detail-label">Program:</span>
+                                                <span class="participant-detail-value">${program}</span>
+                                            </div>
+                                            <div class="participant-detail-row">
+                                                <span class="participant-detail-label">Year Level:</span>
+                                                <span class="participant-detail-value">${yearLevel}</span>
+                                            </div>
+                                        </div>
+                                    `;
+                                    mobileCards.appendChild(card);
                                 });
 
                                 document.getElementById('attendance-summary').style.display = 'block';
@@ -820,6 +1023,8 @@
                 //document.getElementById('event-name').textContent = `Participants: ${event.event_name}`;
                 const tbody = document.getElementById('participants-table-body');
                 tbody.innerHTML = '';
+                const mobileCards = document.getElementById("participants-mobile-cards");
+                mobileCards.innerHTML = "";
 
                 let participantsCount = 1;
                 participants.forEach(p => {
@@ -831,20 +1036,57 @@
                         fullName = [p.first_name, p.middle_name, p.last_name].filter(Boolean).join(" ");
                     }
 
+                    const mscId = p.msc_id || "-";
+                    const college = p.college || "-";
+                    const program = p.program || "-";
+                    const yearLevel = p.year_level || "-";
+                    const participantType = p.participant_type || "-";
+
+                    // Table row
                     const tr = document.createElement("tr");
                     tr.innerHTML = `
-        <td class="px-4 py-2">${p.msc_id || "-"}</td>
+        <td class="px-4 py-2">${mscId}</td>
         <td class="px-4 py-2">${fullName}</td>
-        <td class="px-4 py-2">${p.college || "-"}</td>
-        <td class="px-4 py-2">${p.program || "-"}</td>
-        <td class="px-4 py-2">${p.year_level || "-"}</td>
-        <td class="px-4 py-2">${p.participant_type || "-"}</td>
+        <td class="px-4 py-2">${college}</td>
+        <td class="px-4 py-2">${program}</td>
+        <td class="px-4 py-2">${yearLevel}</td>
+        <td class="px-4 py-2">${participantType}</td>
     `;
                     tbody.appendChild(tr);
+
+                    // Mobile card
+                    const card = document.createElement("div");
+                    card.className = "participant-card";
+                    card.innerHTML = `
+                        <div class="participant-card-header">
+                            <div class="participant-card-name">${fullName}</div>
+                            <div class="participant-card-badge">${participantType}</div>
+                        </div>
+                        <div class="participant-card-body">
+                            <div class="participant-detail-row">
+                                <span class="participant-detail-label">MSC ID:</span>
+                                <span class="participant-detail-value">${mscId}</span>
+                            </div>
+                            <div class="participant-detail-row">
+                                <span class="participant-detail-label">College:</span>
+                                <span class="participant-detail-value">${college}</span>
+                            </div>
+                            <div class="participant-detail-row">
+                                <span class="participant-detail-label">Program:</span>
+                                <span class="participant-detail-value">${program}</span>
+                            </div>
+                            <div class="participant-detail-row">
+                                <span class="participant-detail-label">Year Level:</span>
+                                <span class="participant-detail-value">${yearLevel}</span>
+                            </div>
+                        </div>
+                    `;
+                    mobileCards.appendChild(card);
                 });
 
                 if (`${event.total_registered}` == 0) {
-                    tbody.innerHTML = `<tr><td colspan="7" class="text-center py-4 text-gray-400">No registered participants.</td></tr>`; //fix sentence 
+                    tbody.innerHTML = `<tr><td colspan="6" class="text-center py-4 text-gray-400">No registered participants.</td></tr>`;
+                    mobileCards.innerHTML = `<div class="text-center py-6" style="color: #8892b0;">No registered participants.</div>`;
                 }
             } else {
                 console.error("Failed to fetch participants:", data?.message);

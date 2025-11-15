@@ -21,8 +21,8 @@
                 <!-- <i class="fa-solid fa-circle-user text-[#b9da05]"></i>  -->
                 <button class="sidebar-btn" onclick="showSection(event, 'password')">
                     <i class="fa-solid fa-lock"></i>Password</button>
-                <button class="sidebar-btn" onclick="showSection(event, 'notifications')">
-                    <i class="fa-solid fa-bell"></i>Notifications</button>
+                <button class="sidebar-btn" onclick="showSection(event, 'delete-account')">
+                    <i class="fa-solid fa-trash"></i>Delete Account</button>
                 <button class="sidebar-btn text-red-400" onclick="logout()">
                     <i class="fa-solid fa-right-from-bracket block">
                     </i>Log Out</button>
@@ -46,6 +46,11 @@
                     onclick="showSection(event, 'password')">
                     <i class="fa-solid fa-lock block"></i>
                     Password
+                </button>
+                <button class="tab-btn flex-1 text-sm sm:text-base text-center"
+                    onclick="showSection(event, 'delete-account')">
+                    <i class="fa-solid fa-trash block"></i>
+                    Delete
                 </button>
                 <button class="tab-btn flex-1 text-sm sm:text-base text-center text-red-400" onclick="logout()">
                     <i class="fa-solid fa-right-from-bracket block"></i>
@@ -83,27 +88,9 @@
                     <p class="sm:text-sm md:text-base text-gray-400 mt-1">Update your account password for security.</p>
                 </div>
 
-                <div id="notifications" class="section-card bg-[#1f2a40] rounded-md p-6 shadow-lg hidden">
-                    <div class="flex items-center justify-between">
-                        <p class="text-xl font-semibold text-[#b9da05] flex items-center gap-2">Push Notifications</p>
-                        <div class="toggle-container relative">
-                            <div class="pulse-ring"></div>
-                            <div class="toggle-switch" id="notification-toggle" onclick="toggleNotifications()">
-                                <div class="toggle-slider">
-                                    <svg class="toggle-icon" fill="currentColor" viewBox="0 0 20 20">
-                                        <path
-                                            d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" />
-                                    </svg>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="status-indicator" id="notification-status-container">
-                        <div class="status-dot"></div>
-                        <p id="notification-status" class="text-base text-gray-400">
-                            Enable push notifications to receive updates.
-                        </p>
-                    </div>
+                <div id="delete-account" class="section-card bg-[#1f2a40] rounded-md p-6 shadow-lg hidden">
+                    <p class="text-base sm:text-lg md:text-xl font-semibold text-red-400 mb-2">Delete Account</p>
+                    <p class="sm:text-sm md:text-base text-gray-400 mt-1">To delete your account, please contact BulSU MSC directly.</p>
                 </div>
             </div>
         </section>
@@ -366,50 +353,6 @@
                 toast.classList.add("hidden");
             }, 5000);
         }
-
-        //Notif toggle:
-        let notificationsEnabled = false;
-
-        function toggleNotifications() {
-            const toggle = document.getElementById('notification-toggle');
-            const status = document.getElementById('notification-status');
-            const statusContainer = document.getElementById('notification-status-container');
-            const toggleIcon = toggle.querySelector('.toggle-icon');
-
-            notificationsEnabled = !notificationsEnabled;
-
-            if (notificationsEnabled) {
-                toggle.classList.add('active');
-                statusContainer.classList.add('active');
-                status.textContent = 'Push notifications has been enabled.';
-                status.className = 'text-base text-gray-400';
-
-                toggleIcon.innerHTML = `
-                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
-                `;
-            } else {
-                toggle.classList.remove('active');
-                statusContainer.classList.remove('active');
-                status.textContent = 'Enable push notifications to receive updates.';
-                status.className = 'text-base text-gray-400';
-
-                toggleIcon.innerHTML = `
-                    <path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"/>
-                `;
-            }
-
-            toggle.style.transform = 'scale(0.95)';
-            setTimeout(() => {
-                toggle.style.transform = 'scale(1)';
-            }, 100);
-        }
-
-        document.addEventListener('DOMContentLoaded', function() {
-            const toggleIcon = document.querySelector('.toggle-icon');
-            toggleIcon.innerHTML = `
-                <path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"/>
-            `;
-        });
 
         async function logout() {
             try {

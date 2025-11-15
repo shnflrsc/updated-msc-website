@@ -150,6 +150,44 @@
         border-color: #b9da05;
     }
 
+    /* Mobile Responsive Styles */
+    @media (max-width: 768px) {
+        /* Stack filter buttons vertically */
+        .filter-buttons {
+            flex-direction: column;
+            align-items: stretch;
+            padding: 0 1rem;
+        }
+
+        .filter-btn {
+            width: 100%;
+            text-align: center;
+            padding: 1rem;
+        }
+
+        /* Adjust event cards for mobile */
+        .event-card {
+            min-height: 400px;
+        }
+
+        .event-image {
+            height: 250px;
+        }
+
+        .event-content {
+            padding: 1.5rem;
+        }
+
+        .event-content h3 {
+            font-size: 1.5rem;
+        }
+
+        .event-content .date,
+        .event-content .excerpt {
+            font-size: 1rem;
+        }
+    }
+
 /* Modal styles */
 .modal {
     display: none;
@@ -179,6 +217,12 @@
     overflow: hidden;
 }
 
+.modal-content:has(.pre-register-container) {
+    grid-template-columns: 1fr;
+    max-width: 700px;
+    overflow-y: auto;
+}
+
 .modal-image {
     width: 100%;
     height: 100%;
@@ -188,6 +232,10 @@
     justify-content: center;
     overflow: hidden;
     position: relative;
+}
+
+.modal-content:has(.pre-register-container) .modal-image {
+    display: none;
 }
 
 .modal-image img {
@@ -276,10 +324,42 @@
 /* Make form container scrollable if needed */
 .pre-register-container {
     color: white;
-    padding: 2rem;
-    overflow-y: auto;
-    max-height: 85vh;
+    padding: 3rem;
     grid-column: 1 / -1;
+    background: linear-gradient(135deg, #16213e 0%, #0f3460 100%);
+    min-height: 100%;
+}
+
+.pre-register-container h2 {
+    color: #b9da05;
+    margin-bottom: 0.5rem;
+    font-size: 2rem;
+    font-weight: 700;
+    text-align: center;
+}
+
+.pre-register-container h3 {
+    color: #b9da05;
+    font-size: 1.3rem;
+    margin: 2rem 0 1rem 0;
+    padding-bottom: 0.5rem;
+    border-bottom: 2px solid rgba(185, 218, 5, 0.3);
+}
+
+.pre-register-container .subtitle {
+    margin-bottom: 2rem;
+    opacity: 0.85;
+    text-align: center;
+    font-size: 1rem;
+    color: rgba(255, 255, 255, 0.9);
+}
+
+.form-section {
+    background: rgba(255, 255, 255, 0.05);
+    padding: 1.5rem;
+    border-radius: 12px;
+    margin-bottom: 1.5rem;
+    border: 1px solid rgba(185, 218, 5, 0.2);
 }
 
 @media (max-width: 968px) {
@@ -290,8 +370,18 @@
     }
     
     .modal-image {
-        height: 0;
-        padding-bottom: 100%;
+        height: 300px;
+        padding-bottom: 0;
+        position: relative;
+    }
+
+    .modal-image img {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
     }
 }
 
@@ -303,10 +393,27 @@
     .modal-content {
         max-height: 95vh;
         width: 95%;
+        overflow-y: auto;
     }
     
     .modal-image {
-        padding-bottom: 100%;
+        height: 250px;
+        padding-bottom: 0;
+        position: relative;
+        min-height: 250px;
+    }
+
+    .modal-image img {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+
+    .modal-image i {
+        font-size: 4rem;
     }
     
     .modal-body {
@@ -338,6 +445,8 @@
     .pre-register-container {
         color: white;
         padding: 2rem;
+        max-height: 85vh;
+        overflow-y: auto;
     }
 
     .pre-register-container h2 {
@@ -353,77 +462,164 @@
     .form-grid {
         display: grid;
         grid-template-columns: repeat(2, 1fr);
-        gap: 1rem;
-        margin-bottom: 1.5rem;
+        gap: 1.5rem;
+        margin-bottom: 0;
+    }
+
+    .form-field {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .form-grid label,
+    .form-field label {
+        display: block;
+        margin-bottom: 0.5rem;
+        color: #b9da05;
+        font-weight: 600;
+        font-size: 0.9rem;
+    }
+
+    .form-grid input,
+    .form-grid select,
+    .form-field input,
+    .form-field select {
+        width: 100%;
+        padding: 0.875rem;
+        background: rgba(255, 255, 255, 0.08);
+        border: 2px solid rgba(185, 218, 5, 0.2);
+        border-radius: 10px;
+        color: white;
+        font-size: 0.95rem;
+        transition: all 0.3s ease;
+    }
+
+    .form-grid input:focus,
+    .form-grid select:focus,
+    .form-field input:focus,
+    .form-field select:focus {
+        outline: none;
+        border-color: #b9da05;
+        background: rgba(255, 255, 255, 0.12);
+        box-shadow: 0 0 0 3px rgba(185, 218, 5, 0.1);
+    }
+
+    .form-grid input::placeholder,
+    .form-field input::placeholder {
+        color: rgba(255, 255, 255, 0.4);
     }
 
     @media (max-width: 768px) {
         .form-grid {
             grid-template-columns: 1fr;
+            gap: 1rem;
+        }
+
+        .pre-register-container {
+            padding: 2rem 1.5rem;
+            max-height: 90vh;
+        }
+
+        .pre-register-container h2 {
+            font-size: 1.5rem;
+        }
+
+        .pre-register-container h3 {
+            font-size: 1.1rem;
+        }
+
+        .form-section {
+            padding: 1rem;
+        }
+
+        .form-actions {
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+
+        .form-actions button {
+            width: 100%;
+            padding: 1rem;
         }
     }
 
-    .form-grid label {
-        display: block;
-        margin-bottom: 0.5rem;
-        color: #b9da05;
-    }
-
-    .form-grid input,
-    .form-grid select {
-        width: 100%;
-        padding: 0.75rem;
-        background: rgba(255, 255, 255, 0.1);
-        border: 1px solid rgba(185, 218, 5, 0.3);
-        border-radius: 8px;
-        color: white;
-    }
-
     .single-select {
-        margin-bottom: 1.5rem;
+        margin-bottom: 2rem;
     }
 
     .single-select label {
         display: block;
         margin-bottom: 0.5rem;
         color: #b9da05;
+        font-weight: 600;
+        font-size: 0.9rem;
     }
 
     .single-select select {
         width: 100%;
-        padding: 0.75rem;
-        background: rgba(255, 255, 255, 0.1);
-        border: 1px solid rgba(185, 218, 5, 0.3);
-        border-radius: 8px;
+        padding: 0.875rem;
+        background: rgba(255, 255, 255, 0.08);
+        border: 2px solid rgba(185, 218, 5, 0.2);
+        border-radius: 10px;
         color: white;
+        font-size: 0.95rem;
+        transition: all 0.3s ease;
+    }
+
+    .single-select select:focus {
+        outline: none;
+        border-color: #b9da05;
+        background: rgba(255, 255, 255, 0.12);
+        box-shadow: 0 0 0 3px rgba(185, 218, 5, 0.1);
     }
 
     .form-actions {
         display: flex;
         gap: 1rem;
-        justify-content: flex-end;
-        margin-top: 1.5rem;
+        justify-content: center;
+        margin-top: 2.5rem;
+        padding-top: 1.5rem;
+        border-top: 1px solid rgba(185, 218, 5, 0.2);
     }
 
     .form-actions button {
-        padding: 0.75rem 2rem;
+        padding: 0.875rem 2.5rem;
         border: none;
-        border-radius: 8px;
-        font-weight: 600;
+        border-radius: 10px;
+        font-weight: 700;
         cursor: pointer;
         transition: all 0.3s ease;
+        font-size: 1rem;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
     }
 
     #submitPreRegister,
     #submitBulSUPreRegister {
-        background: #b9da05;
+        background: linear-gradient(135deg, #b9da05 0%, #a0c005 100%);
         color: #000;
+        box-shadow: 0 4px 15px rgba(185, 218, 5, 0.3);
+    }
+
+    #submitPreRegister:hover,
+    #submitBulSUPreRegister:hover {
+        background: linear-gradient(135deg, #a0c005 0%, #8ab004 100%);
+        transform: translateY(-2px);
+        box-shadow: 0 6px 20px rgba(185, 218, 5, 0.4);
     }
 
     #cancelPreRegister,
     #cancelBulSUPreRegister {
         background: rgba(255, 255, 255, 0.1);
         color: white;
+        border: 2px solid rgba(255, 255, 255, 0.2);
+    }
+
+    #cancelPreRegister:hover,
+    #cancelBulSUPreRegister:hover {
+        background: rgba(255, 255, 255, 0.15);
+        border-color: rgba(255, 255, 255, 0.3);
+        transform: translateY(-2px);
     }
 </style>
 

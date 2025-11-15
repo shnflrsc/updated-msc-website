@@ -227,6 +227,120 @@
     .close-btn:hover {
         transform: rotate(90deg);
     }
+
+    /* Mobile Responsive Styles */
+    @media (max-width: 768px) {
+        /* Header section */
+        .mt-20 {
+            margin-top: 5rem;
+            padding: 2rem 1rem;
+        }
+
+        .mt-20 h1 {
+            font-size: 2rem !important;
+        }
+
+        .mt-20 p {
+            font-size: 1rem !important;
+        }
+
+        /* Announcement cards */
+        .announcement-card {
+            min-height: 300px;
+        }
+
+        .announcement-image {
+            padding-bottom: 100%;
+        }
+
+        .announcement-image i {
+            font-size: 3rem;
+        }
+
+        .announcement-content {
+            padding: 1.25rem;
+        }
+
+        .announcement-content h3 {
+            font-size: 1.1rem;
+        }
+
+        .announcement-content .date {
+            font-size: 0.8rem;
+        }
+
+        .announcement-content .excerpt {
+            font-size: 0.85rem;
+        }
+
+        /* Modal adjustments */
+        .modal {
+            padding: 1rem;
+            align-items: flex-start;
+            padding-top: 2rem;
+        }
+
+        .modal-content {
+            width: 95%;
+            max-height: 90vh;
+            padding: 1.5rem;
+        }
+
+        .modal-content h2 {
+            font-size: 1.4rem;
+            padding-right: 2rem;
+        }
+
+        .modal-content .date {
+            font-size: 0.9rem;
+        }
+
+        .modal-content p {
+            font-size: 0.95rem;
+        }
+
+        .close-btn {
+            font-size: 1.5rem;
+            top: 0.75rem;
+            right: 0.75rem;
+        }
+
+        /* Empty state */
+        .empty-state {
+            padding: 3rem 1.5rem;
+        }
+
+        .empty-state i {
+            font-size: 3rem;
+        }
+
+        .empty-state h3 {
+            font-size: 1.4rem;
+        }
+
+        .empty-state p {
+            font-size: 1rem;
+        }
+
+        /* Main content padding */
+        .main-content {
+            padding: 1rem 0;
+        }
+    }
+
+    @media (max-width: 480px) {
+        .announcement-list {
+            padding: 1rem;
+        }
+
+        .modal-content {
+            padding: 1.25rem;
+        }
+
+        .modal-content h2 {
+            font-size: 1.2rem;
+        }
+    }
 </style>
 
 <div class="flex flex-col min-h-screen">

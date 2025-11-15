@@ -10,6 +10,7 @@
   <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Bakbak+One&family=Play:wght@400;700&family=Segoe+UI:wght@400;700&display=swap" rel="stylesheet">
 
   <style>
     * {
@@ -59,7 +60,7 @@
     }
 
     .logo-section h2 {
-      font-family: 'Orbitron', monospace;
+      font-family: 'Bakbak One', sans-serif;
       font-size: 18px;
       font-weight: 700;
       color: #b9da05;
@@ -129,7 +130,7 @@
     }
 
     .header h1 {
-      font-family: 'Orbitron', monospace;
+      font-family: 'Bakbak One', sans-serif;
       font-size: 28px;
       font-weight: 700;
       color: #b9da05;
@@ -271,21 +272,11 @@
       resize: vertical;
     }
 
-    /* Responsive */
-    @media (max-width: 768px) {
-      .sidebar {
-        transform: translateX(-100%);
-        transition: transform 0.3s ease;
-      }
-
-      .sidebar.open {
-        transform: translateX(0);
-      }
-
-      .main-content {
-        margin-left: 0;
-        padding: 20px;
-      }
+    .announcement-image {
+      width: 120px;         /* same as your height */
+      height: 120px;        /* force square */
+      object-fit: cover;    /* crops image but keeps aspect ratio */
+      border-radius: 8px;   /* optional: rounded corners */
     }
 
     .announcement-card {
@@ -473,10 +464,24 @@
       gap: 15px;
       flex-wrap: wrap;
     }
+
+    .bulk-actions .select-all-container {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .bulk-actions > input[type="checkbox"],
+    .bulk-actions .select-all-container input[type="checkbox"] {
+      margin: 0;
+      cursor: pointer;
+    }
     
     .bulk-actions label {
       color: white;
       font-weight: 500;
+      margin: 0;
+      cursor: pointer;
     }
     
     .bulk-actions select {
@@ -525,6 +530,65 @@
       height: 120px;        /* force square */
       object-fit: cover;    /* crops image but keeps aspect ratio */
       border-radius: 8px;   /* optional: rounded corners */
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .sidebar {
+        transform: translateX(-100%);
+        transition: transform 0.3s ease;
+      }
+
+      .sidebar.open {
+        transform: translateX(0);
+      }
+
+      .main-content {
+        margin-left: 0;
+        padding: 20px;
+      }
+
+      .tabs {
+        flex-direction: column;
+        border-bottom: none;
+      }
+
+      .tab-button {
+        width: 100%;
+        text-align: left;
+        padding: 12px 20px;
+        border-bottom: 1px solid #1a1f3a;
+        border-left: 3px solid transparent;
+      }
+
+      .tab-button.active {
+        border-bottom-color: #1a1f3a;
+        border-left-color: #b9da05;
+        background-color: #011538;
+      }
+
+      .announcement-card {
+        flex-direction: column;
+      }
+
+      .announcement-image {
+        width: 100%;
+        height: 200px;
+      }
+
+      .bulk-actions {
+        flex-direction: column;
+        align-items: stretch;
+      }
+
+      .bulk-actions .select-all-container {
+        justify-content: flex-start;
+      }
+
+      .bulk-actions select,
+      .bulk-actions button {
+        width: 100%;
+      }
     }
 
   </style>
@@ -583,8 +647,10 @@
       <div id="activeAnnouncements" class="tab-content active">
         <!-- bulk actions -->
         <div class="bulk-actions">
-          <input type="checkbox" id="selectAllActive" class="announcement-checkbox">
-          <label for="selectAllActive">Select All</label>
+          <div class="select-all-container">
+            <input type="checkbox" id="selectAllActive" class="announcement-checkbox">
+            <label for="selectAllActive">Select All</label>
+          </div>
           <select id="bulkActionActive">
             <option value="">Bulk Actions...</option>
             <option value="archive">Archive Selected</option>
@@ -600,8 +666,10 @@
       <div id="archived" class="tab-content">
         <!-- bulk actions for archived -->
         <div class="bulk-actions">
-          <input type="checkbox" id="selectAllArchived" class="announcement-checkbox">
-          <label for="selectAllArchived">Select All</label>
+          <div class="select-all-container">
+            <input type="checkbox" id="selectAllArchived" class="announcement-checkbox">
+            <label for="selectAllArchived">Select All</label>
+          </div>
           <select id="bulkActionArchived">
             <option value="">Bulk Actions...</option>
             <option value="restore">Restore Selected</option>
@@ -713,11 +781,6 @@
     
     <!-- Script for the backend retrieval -->
   <script>
-    document.getElementById('sidebarToggle').addEventListener('click', function() {
-      const sidebar = document.querySelector('.sidebar');
-      sidebar.classList.toggle('open');
-    });
-
     function openTab(event, tabName) {
       const tabs = document.querySelectorAll('.tab-button');
       const tabContents = document.querySelectorAll('.tab-content');
@@ -1141,6 +1204,12 @@
 
     document.addEventListener("DOMContentLoaded", () => {
       loadAnnouncements(); // initial load
+
+      // Sidebar toggle for mobile
+      document.getElementById('sidebarToggle').addEventListener('click', function () {
+        const sidebar = document.querySelector('.sidebar');
+        sidebar.classList.toggle('open');
+      });
     });
     </script>
 </body>
