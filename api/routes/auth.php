@@ -40,6 +40,9 @@ switch ($method) {
             case 'register':
                 $authController->register();
                 break;
+            case 'admin-register':  
+                $authController->adminRegister();
+                break;
             case 'logout':
                 $authController->logout();
                 break;

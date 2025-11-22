@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Authentication Controller
  * Handle authentication-related operations
@@ -15,12 +16,12 @@ CorsConfig::setup();
 class AuthController
 {
     private $studentModel;
-    
+
     public function __construct()
     {
         $this->studentModel = new Student();
     }
-    
+
     /**
      * Handle user login
      */
@@ -28,44 +29,43 @@ class AuthController
     {
         try {
             $data = json_decode(file_get_contents("php://input"), true);
-            
+
             // Validate required fields
             $errors = Validator::validateRequired($data, ['username', 'password']);
             if (!empty($errors)) {
                 Response::validationError($errors);
             }
-            
+
             // Sanitize input
             $username = Validator::sanitize($data['username']);
             $password = $data['password'];
-            
+
             // Find user by username or email
             $user = $this->studentModel->findByUsername($username);
             if (!$user) {
                 $user = $this->studentModel->findByEmail($username);
             }
-            
+
             if (!$user || !$this->studentModel->verifyPassword($user['password'], $password)) {
                 Response::error('Invalid username/email or password', 401);
             }
-            
+
             if (!$user['is_active']) {
                 Response::error('Account is deactivated. Please contact administrator.', 403);
             }
-            
+
             // Set user session
             AuthMiddleware::setUserSession($user);
-            
+
             // Remove password from response
             unset($user['password']);
-            
+
             Response::success($user, 'Login successful');
-            
         } catch (Exception $e) {
             Response::serverError($e->getMessage());
         }
     }
-    
+
     /**
      * Handle user registration
      */
@@ -73,21 +73,30 @@ class AuthController
     {
         try {
             $data = json_decode(file_get_contents("php://input"), true);
-            
+
             // Required fields for registration
             $requiredFields = [
-                'username', 'email', 'password', 'first_name', 'last_name',
-                'birthdate', 'gender', 'student_no', 'year_level', 'college', 'program'
+                'username',
+                'email',
+                'password',
+                'first_name',
+                'last_name',
+                'birthdate',
+                'gender',
+                'student_no',
+                'year_level',
+                'college',
+                'program'
             ];
-            
+
             // Validate required fields
             $errors = Validator::validateRequired($data, $requiredFields);
-            
+
             // Validate email format
             if (isset($data['email']) && !Validator::validateEmail($data['email'])) {
                 $errors['email'] = 'Invalid email format';
             }
-            
+
             // Validate password strength
             if (isset($data['password'])) {
                 $passwordErrors = Validator::validatePassword($data['password']);
@@ -95,37 +104,36 @@ class AuthController
                     $errors['password'] = $passwordErrors;
                 }
             }
-            
+
             // Validate date format
             if (isset($data['birthdate']) && !Validator::validateDate($data['birthdate'])) {
                 $errors['birthdate'] = 'Invalid date format. Use YYYY-MM-DD';
             }
-            
+
             // Validate gender enum
             if (isset($data['gender']) && !Validator::validateEnum($data['gender'], ['Male', 'Female', 'Other'])) {
                 $errors['gender'] = 'Invalid gender value';
             }
-            
+
             // Validate phone if provided
             if (!empty($data['phone']) && !Validator::validatePhone($data['phone'])) {
                 $errors['phone'] = 'Invalid phone number format';
             }
-            
+
             if (!empty($errors)) {
                 Response::validationError($errors);
             }
-            
+
             // Sanitize input data
             $sanitizedData = Validator::sanitize($data);
-            
+
             // Create student
             $student = $this->studentModel->create($sanitizedData);
-            
+
             // Remove password from response
             unset($student['password']);
-            
+
             Response::success($student, 'Registration successful', 201);
-            
         } catch (Exception $e) {
             if (strpos($e->getMessage(), 'already exists') !== false) {
                 Response::error($e->getMessage(), 409);
@@ -134,7 +142,53 @@ class AuthController
             }
         }
     }
-    
+
+    /**
+     * Register officer/admin
+     */
+    public function adminRegister()
+    {
+        try {
+            $data = json_decode(file_get_contents("php://input"), true);
+
+            // Minimal required fields
+            $requiredFields = ['msc_id', 'email', 'password', 'first_name', 'last_name', 'role'];
+
+            // Validate required fields
+            $errors = Validator::validateRequired($data, $requiredFields);
+            if (!empty($errors)) {
+                Response::validationError($errors);
+            }
+
+            // Optional/default fields
+            $data['middle_name'] = $data['middle_name'] ?? '';
+            $data['name_suffix'] = $data['name_suffix'] ?? '';
+            $data['student_no'] = $data['student_no'] ?? '';
+            $data['year_level'] = $data['year_level'] ?? '';
+            $data['college'] = $data['college'] ?? '';
+            $data['program'] = $data['program'] ?? '';
+
+            // Sanitize input
+            $sanitizedData = Validator::sanitize($data);
+
+            // Hash password
+            $sanitizedData['password'] = password_hash($sanitizedData['password'], PASSWORD_DEFAULT);
+
+            $student = $this->studentModel->create($sanitizedData);
+
+            // Remove password from response
+            unset($student['password']);
+
+            Response::success($student, 'User registered successfully', 201);
+        } catch (Exception $e) {
+            if (strpos($e->getMessage(), 'already exists') !== false) {
+                Response::error($e->getMessage(), 409);
+            } else {
+                Response::serverError($e->getMessage());
+            }
+        }
+    }
+
     /**
      * Handle user logout
      */
@@ -147,7 +201,7 @@ class AuthController
             Response::serverError($e->getMessage());
         }
     }
-    
+
     /**
      * Get current user profile
      */
@@ -156,16 +210,15 @@ class AuthController
         try {
             $userId = AuthMiddleware::authenticate();
             $user = $this->studentModel->findById($userId);
-            
+
             if (!$user) {
                 Response::notFound('User not found');
             }
-            
+
             // Remove password from response
             unset($user['password']);
-            
+
             Response::success($user);
-            
         } catch (Exception $e) {
             Response::serverError($e->getMessage());
         }
@@ -194,7 +247,7 @@ class AuthController
         }
     }
 
-    
+
     /**
      * Change password
      */
@@ -203,33 +256,33 @@ class AuthController
         try {
             $userId = AuthMiddleware::authenticate();
             $data = json_decode(file_get_contents("php://input"), true);
-            
+
             // Validate required fields
             $errors = Validator::validateRequired($data, ['current_password', 'new_password']);
             if (!empty($errors)) {
                 Response::validationError($errors);
             }
-            
+
             // Validate new password strength
             $passwordErrors = Validator::validatePassword($data['new_password']);
             if (!empty($passwordErrors)) {
                 Response::validationError(['new_password' => $passwordErrors]);
             }
-            
+
             // Get current user
             $user = $this->studentModel->findById($userId);
             if (!$user) {
                 Response::notFound('User not found');
             }
-            
+
             // Verify current password
             if (!$this->studentModel->verifyPassword($user['password'], $data['current_password'])) {
                 Response::error('Current password is incorrect', 400);
             }
-            
+
             // Change password
             $result = $this->studentModel->changePassword($userId, $data['new_password']);
-            
+
             if ($result) {
                 $this->studentModel->markPasswordUpdated($userId);
                 $_SESSION['password_updated'] = 1; // keep session in sync
@@ -237,12 +290,11 @@ class AuthController
             } else {
                 Response::serverError('Failed to change password');
             }
-            
         } catch (Exception $e) {
             Response::serverError($e->getMessage());
         }
     }
-    
+
     /**
      * Forgot password - initiate reset process
      */
@@ -276,8 +328,6 @@ class AuthController
             } else {
                 Response::serverError('Failed to reset password');
             }
-
-
         } catch (Exception $e) {
             Response::serverError($e->getMessage());
         }

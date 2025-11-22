@@ -117,20 +117,21 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     // Password toggle
-    document.querySelectorAll(".toggle-password").forEach(btn => {
-        btn.addEventListener("click", () => {
-            const target = document.getElementById(btn.dataset.target);
-            if (target.type === "password") {
-                target.type = "text";
-            } else {
-                target.type = "password";
-            }
-        });
-    });
+    // document.querySelectorAll(".toggle-password").forEach(btn => {
+    //     btn.addEventListener("click", () => {
+    //         const target = document.getElementById(btn.dataset.target);
+    //         if (target.type === "password") {
+    //             target.type = "text";
+    //         } else {
+    //             target.type = "password";
+    //         }
+    //     });
+    // });
 
     // Form validation
     document.getElementById("registrationForm").addEventListener("submit", (e) => {
         e.preventDefault();
+        /*
         const errorBox = document.getElementById("error-box");
         errorBox.classList.add("hidden");
 
@@ -147,6 +148,7 @@ document.addEventListener("DOMContentLoaded", () => {
             showError("You must agree to the Terms of Service and Privacy Policy");
             return;
         }
+        */
 
     });
 

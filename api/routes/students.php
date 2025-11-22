@@ -50,6 +50,8 @@ switch ($method) {
             $studentController->countByCollege(); //chart by College
         } elseif ($endpoint === 'yearLevel-distribution') {
             $studentController->countByYearLevel(); //chart by Year Level
+        } elseif ($endpoint === 'next-msc-id'){
+            $studentController->nextMscId(); 
         } elseif ($endpoint && is_numeric($endpoint)) {
             // endpoint is actually the ID
             $studentController->getById($endpoint);
