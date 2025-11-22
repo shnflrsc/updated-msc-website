@@ -106,9 +106,17 @@ class StudentController
 
             // Required fields for profile update
             $requiredFields = [
-            "phone", "bulsu_email",
-            "facebook_link", "address", "birthdate", "age", "gender",
-            "guardian_name", "relationship", "guardian_phone", "guardian_address"
+                "phone",
+                "bulsu_email",
+                "facebook_link",
+                "address",
+                "birthdate",
+                "age",
+                "gender",
+                "guardian_name",
+                "relationship",
+                "guardian_phone",
+                "guardian_address"
             ];
 
             // Validate required fields
@@ -344,7 +352,7 @@ class StudentController
 
             $fileName = 'profile_' . $id . '_' . time() . '.' . $ext;
             $filePath = $uploadDir . $fileName;
-            $relativePath = '/uploads/profiles/' . $fileName; 
+            $relativePath = '/uploads/profiles/' . $fileName;
             $fullPath = 'https://bulsumsc.org' . $relativePath;
 
             if (!move_uploaded_file($file['tmp_name'], $filePath)) {
@@ -478,6 +486,21 @@ class StudentController
                 "success" => false,
                 "message" => "Error: " . $e->getMessage()
             ]);
+        }
+    }
+
+    public function nextMscId()
+    {
+        try {
+            //AuthMiddleware::requireOfficer();
+
+            $mscId = $this->studentModel->getNextMscId();
+
+            Response::success([
+                'msc_id' => $mscId
+            ]);
+        } catch (Exception $e) {
+            Response::serverError($e->getMessage());
         }
     }
 }

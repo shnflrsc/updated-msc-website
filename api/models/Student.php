@@ -181,11 +181,29 @@ class Student
     {
         try {
             $fields = [
-            "msc_id", "student_no", "last_name", "first_name", "middle_name", "name_suffix",
-            "college", "program", "year_level", "section", "phone", "email", "bulsu_email",
-            "facebook_link", "address", "birthdate", "age", "gender",
-            "guardian_name", "relationship", "guardian_phone", "guardian_address",
-            'profile_image_path'
+                "msc_id",
+                "student_no",
+                "last_name",
+                "first_name",
+                "middle_name",
+                "name_suffix",
+                "college",
+                "program",
+                "year_level",
+                "section",
+                "phone",
+                "email",
+                "bulsu_email",
+                "facebook_link",
+                "address",
+                "birthdate",
+                "age",
+                "gender",
+                "guardian_name",
+                "relationship",
+                "guardian_phone",
+                "guardian_address",
+                'profile_image_path'
             ];
 
             $setParts = [];
@@ -417,5 +435,45 @@ class Student
         $stmt = $this->db->prepare("SELECT * FROM students WHERE student_no = :student_no LIMIT 1");
         $stmt->execute([':student_no' => $student_no]);
         return $stmt->fetch(PDO::FETCH_ASSOC);
+    }
+
+    /**
+     * Get the next MSC ID (for members only)
+     */
+    public function getNextMscId()
+    {
+        try {
+            // Get school year code from settings table
+            $syStmt = $this->db->prepare("SELECT value FROM settings WHERE key_name = 'school_year_code'");
+            $syStmt->execute();
+            $currentCode = $syStmt->fetchColumn() ?: '2526';
+
+            // Query last MSC ID for this school year
+            $stmt = $this->db->prepare("
+            SELECT msc_id 
+            FROM students 
+            WHERE msc_id LIKE :pattern 
+            ORDER BY msc_id DESC 
+            LIMIT 1
+        ");
+
+            $stmt->execute(['pattern' => "MSC{$currentCode}-%"]);
+            $last = $stmt->fetch(PDO::FETCH_ASSOC);
+
+            if (!$last) {
+                $nextNumber = 1;
+            } else {
+                // Get last 3 digits
+                $lastNum = intval(substr($last['msc_id'], -3));
+                $nextNumber = $lastNum + 1;
+            }
+
+            // Format new MSC ID
+            $nextMscId = "MSC{$currentCode}-" . str_pad($nextNumber, 3, '0', STR_PAD_LEFT);
+
+            return $nextMscId;
+        } catch (Exception $e) {
+            throw new Exception("Failed to generate next MSC ID: " . $e->getMessage());
+        }
     }
 }
