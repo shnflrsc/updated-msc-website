@@ -603,6 +603,7 @@ class EventController
     /**
      * Register for event
      */
+    /*
     public function register($eventId)
     {
         try {
@@ -640,26 +641,65 @@ class EventController
             return Response::error($e->getMessage());
         }
     }
+        */
+    public function register($eventId)
+    {
+        try {
+            $input = json_decode(file_get_contents('php://input'), true);
+            $event = $this->eventModel->findById($eventId);
+            if (!$event) {
+                return Response::error("Event not found");
+            }
+            $restriction = strtolower($event['event_restriction'] ?? '');
+
+            $result = null;
+            switch ($restriction) {
+                case 'members':
+                    session_start();
+                    $userId = $_SESSION['user_id'] ?? null;
+                    if (!$userId) return Response::unauthorized("Login required to register as a member.");
+                    $result = $this->eventModel->registerMember($eventId, $userId);
+                    break;
+                case 'bulsuans':
+                    $result = $this->eventModel->registerBulSUan($eventId, $input);
+                    break;
+                case 'public':
+                    $result = $this->eventModel->registerPublic($eventId, $input);
+                    break;
+                default:
+                    return Response::error("Invalid event restriction type.");
+            }
+
+            if (isset($result['message']) && isset($result['data'])) {
+                return Response::success($result['data'], $result['message']);
+            } else {
+                return Response::success($result);
+            }
+        } catch (Exception $e) {
+            return Response::error($e->getMessage());
+        }
+    }
 
     /**
      * Check if Member is registered for an event
      */
-    public function isUserRegistered($eventId, $userId) {
-    try {
-        $registered = $this->eventModel->checkUserRegistration($eventId, $userId);
+    public function isUserRegistered($eventId, $userId)
+    {
+        try {
+            $registered = $this->eventModel->checkUserRegistration($eventId, $userId);
 
-        echo json_encode([
-            'success' => true,
-            'registered' => $registered
-        ]);
-    } catch (Exception $e) {
-        http_response_code(500);
-        echo json_encode([
-            'success' => false,
-            'message' => $e->getMessage()
-        ]);
+            echo json_encode([
+                'success' => true,
+                'registered' => $registered
+            ]);
+        } catch (Exception $e) {
+            http_response_code(500);
+            echo json_encode([
+                'success' => false,
+                'message' => $e->getMessage()
+            ]);
+        }
     }
-}
 
 
     /**

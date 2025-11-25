@@ -497,6 +497,7 @@ class Event
     /**
      * Register a BULSUAN (non-member but BulSU student)
      */
+    /*
     public function registerBulSUan($eventId, $data)
     {
         try {
@@ -535,10 +536,123 @@ class Event
             throw new Exception("BulSUan registration failed: " . $e->getMessage());
         }
     }
+        */
+
+    /**
+     * Register a BulSUan participant (BulSU students/employees only)
+     */
+    public function registerBulSUan($eventId, $data)
+    {
+        try {
+            $required = ['first_name', 'last_name', 'email', 'gender', 'student_id', 'program', 'college', 'year_level'];
+            foreach ($required as $field) {
+                if (empty($data[$field])) {
+                    throw new Exception("Missing required field: $field");
+                }
+            }
+
+            // Check if this email already registered for this event
+            $checkStmt = $this->db->prepare("
+            SELECT id FROM event_registrations 
+            WHERE event_id = :event_id AND email = :email
+        ");
+            $checkStmt->execute([
+                'event_id' => $eventId,
+                'email' => $data['email']
+            ]);
+
+            if ($checkStmt->fetch()) {
+                throw new Exception("This email is already registered for this event.");
+            }
+
+            // Insert the registration
+            $stmt = $this->db->prepare("
+            INSERT INTO event_registrations (
+                event_id, 
+                participant_type, 
+                first_name,
+                middle_name,
+                last_name,
+                suffix,
+                email,
+                gender,
+                phone,
+                facebook_link,
+                program,
+                college,
+                year_level,
+                section,
+                registration_date
+            ) VALUES (
+                :event_id,
+                'bulsuan', 
+                :first_name,
+                :middle_name,
+                :last_name,
+                :suffix,
+                :email,
+                :gender,
+                :phone,
+                :facebook,
+                :program,
+                :college,
+                :year_level,
+                :section,
+                NOW()
+            )
+        ");
+
+            $stmt->execute([
+                'event_id' => $eventId,
+                'first_name' => $data['first_name'],
+                'middle_name' => $data['middle_name'] ?? null,
+                'last_name' => $data['last_name'],
+                'suffix' => $data['suffix'] ?? null,
+                'email' => $data['email'],
+                'gender' => $data['gender'],
+                'phone' => $data['phone'] ?? null,
+                'facebook' => $data['facebook'] ?? null,
+                'program' => $data['program'],
+                'college' => $data['college'],
+                'year_level' => $data['year_level'],
+                'section' => $data['section'] ?? null
+            ]);
+
+            // Get the auto-increment ID that was just created
+            $registrationId = $this->db->lastInsertId();
+
+            // Update event attendants count
+            $this->db->prepare("UPDATE events SET attendants = attendants + 1 WHERE event_id = :event_id")
+                ->execute(['event_id' => $eventId]);
+
+            // Return success with registration_id for QR code generation
+            // return [
+            //     "message" => "Pre-registration successful! Please save your QR code for attendance verification.",
+            //     "data" => [
+            //         "registration_id" => $registrationId,
+            //         "event_id" => $eventId,
+            //         "participant_type" => "bulsuan",
+            //         "student_id" => $data['student_id'],
+            //         "full_name" => trim($data['first_name'] . ' ' . ($data['middle_name'] ?? '') . ' ' . $data['last_name'])
+            //     ]
+            // ];
+
+            return [
+                "registration_id" => $registrationId,
+                "event_id" => $eventId,
+                "participant_type" => "bulsuan",
+                "student_id" => $data['student_id'],
+                "full_name" => trim($data['first_name'] . ' ' . ($data['middle_name'] ?? '') . ' ' . $data['last_name'])
+            ];
+        } catch (Exception $e) {
+            throw new Exception("BulSUan registration failed: " . $e->getMessage());
+        }
+    }
 
     /**
      * Register a PUBLIC participant (Open for public)
      */
+    /*
     public function registerPublic($eventId, $data)
     {
         try {
@@ -570,8 +684,195 @@ class Event
             throw new Exception("Public registration failed: " . $e->getMessage());
         }
     }
+        */
+    /**
+     * Register a PUBLIC participant (Open for public - Guest)
+     */
+    /*
+    public function registerPublic($eventId, $data)
+    {
+        try {
+            $required = ['first_name', 'last_name', 'email', 'gender'];
+            foreach ($required as $field) {
+                if (empty($data[$field])) {
+                    throw new Exception("Missing required field: $field");
+                }
+            }
 
+            // Check if this email already registered for this event (prevent duplicates)
+            $checkStmt = $this->db->prepare("
+            SELECT id FROM event_registrations 
+            WHERE event_id = :event_id AND email = :email AND participant_type = 'guest'
+        ");
+            $checkStmt->execute([
+                'event_id' => $eventId,
+                'email' => $data['email']
+            ]);
 
+            if ($checkStmt->fetch()) {
+                throw new Exception("This email is already registered for this event.");
+            }
+
+            // Insert the registration with all provided fields
+            $stmt = $this->db->prepare("
+            INSERT INTO event_registrations (
+                event_id, 
+                participant_type, 
+                first_name,
+                middle_name,
+                last_name,
+                suffix,
+                email,
+                gender,
+                phone,
+                facebook_link,
+                registration_date
+            ) VALUES (
+                :event_id, 
+                'guest', 
+                :first_name,
+                :middle_name,
+                :last_name,
+                :suffix,
+                :email,
+                :gender,
+                :phone,
+                :facebook,
+                NOW()
+            )
+        ");
+
+            $stmt->execute([
+                'event_id' => $eventId,
+                'first_name' => $data['first_name'],
+                'middle_name' => $data['middle_name'] ?? null,
+                'last_name' => $data['last_name'],
+                'suffix' => $data['suffix'] ?? null,
+                'email' => $data['email'],
+                'gender' => $data['gender'],
+                'phone' => $data['phone'] ?? null,
+                'facebook' => $data['facebook'] ?? null
+            ]);
+
+            // Get the auto-increment ID that was just created
+            $registrationId = $this->db->lastInsertId();
+
+            // Update event attendants count
+            $this->db->prepare("UPDATE events SET attendants = attendants + 1 WHERE event_id = :event_id")
+                ->execute(['event_id' => $eventId]);
+
+            // Return success with registration_id for QR code generation
+            // return [
+            //     "message" => "Pre-registration successful! Please save your QR code for attendance verification.",
+            //     "data" => [
+            //         "registration_id" => $registrationId,
+            //         "event_id" => $eventId,
+            //         "participant_type" => "guest",
+            //         "full_name" => trim($data['first_name'] . ' ' . ($data['middle_name'] ?? '') . ' ' . $data['last_name'])
+            //     ]
+            // ];
+
+            return [
+                "registration_id" => $registrationId,
+                "event_id" => $eventId,
+                "participant_type" => "guest",
+                "full_name" => trim($data['first_name'] . ' ' . ($data['middle_name'] ?? '') . ' ' . $data['last_name'])
+            ];
+        } catch (Exception $e) {
+            throw new Exception("Public registration failed: " . $e->getMessage());
+        }
+    }
+        */
+
+    /**
+     * Register a PUBLIC participant (Open for public - Guest)
+     */
+    public function registerPublic($eventId, $data)
+    {
+        try {
+            $required = ['first_name', 'last_name', 'email', 'gender'];
+            foreach ($required as $field) {
+                if (empty($data[$field])) {
+                    throw new Exception("Missing required field: $field");
+                }
+            }
+
+            // Check if this email already registered for this event (prevent duplicates)
+            $checkStmt = $this->db->prepare("
+            SELECT id FROM event_registrations 
+            WHERE event_id = :event_id AND email = :email AND participant_type = 'guest'
+        ");
+            $checkStmt->execute([
+                'event_id' => $eventId,
+                'email' => $data['email']
+            ]);
+
+            if ($checkStmt->fetch()) {
+                throw new Exception("This email is already registered for this event.");
+            }
+
+            // Insert the registration with all provided fields
+            $stmt = $this->db->prepare("
+            INSERT INTO event_registrations (
+                event_id, 
+                participant_type, 
+                first_name,
+                middle_name,
+                last_name,
+                suffix,
+                email,
+                gender,
+                phone,
+                facebook_link,
+                registration_date
+            ) VALUES (
+                :event_id, 
+                'guest', 
+                :first_name,
+                :middle_name,
+                :last_name,
+                :suffix,
+                :email,
+                :gender,
+                :phone,
+                :facebook,
+                NOW()
+            )
+        ");
+
+            $stmt->execute([
+                'event_id' => $eventId,
+                'first_name' => $data['first_name'],
+                'middle_name' => $data['middle_name'] ?? null,
+                'last_name' => $data['last_name'],
+                'suffix' => $data['suffix'] ?? null,
+                'email' => $data['email'],
+                'gender' => $data['gender'],
+                'phone' => $data['phone'] ?? null,
+                'facebook' => $data['facebook'] ?? null
+            ]);
+
+            $registrationId = $this->db->lastInsertId();
+
+            $qrCode = "GUEST-" . $registrationId;
+
+            $this->db->prepare("UPDATE event_registrations SET qr_code = :qr_code WHERE id = :id")
+                ->execute(['qr_code' => $qrCode, 'id' => $registrationId]);
+
+            $this->db->prepare("UPDATE events SET attendants = attendants + 1 WHERE event_id = :event_id")
+                ->execute(['event_id' => $eventId]);
+
+            return [
+                "registration_id" => $registrationId,
+                "qr_code" => $qrCode,
+                "event_id" => $eventId,
+                "participant_type" => "guest",
+                "full_name" => trim($data['first_name'] . ' ' . ($data['middle_name'] ?? '') . ' ' . $data['last_name'])
+            ];
+        } catch (Exception $e) {
+            throw new Exception("Public registration failed: " . $e->getMessage());
+        }
+    }
 
     /**
      * Get event registrations
@@ -763,59 +1064,56 @@ class Event
     }
 
     /**
-     * Get Event Participants + Counts
+     * Get Event Participants + Counts (Only Attended)
      */
     public function getEventParticipants($eventId)
     {
         try {
-            // Fetch event + participants
+            // Fetch event + participants who attended
             $sql = "
-            SELECT 
-                e.event_id,
-                e.event_name,
-                e.event_date,
-                e.event_time_start,
-                e.event_time_end,
-                e.location,
-                e.event_type,
-                e.event_status,
-                e.description,
-                e.event_image_url,
-                e.event_batch_image,
+        SELECT 
+            e.event_id,
+            e.event_name,
+            e.event_date,
+            e.event_time_start,
+            e.event_time_end,
+            e.location,
+            e.event_type,
+            e.event_status,
+            e.description,
+            e.event_image_url,
+            e.event_batch_image,
 
-                s.id AS student_id,
-                s.msc_id,
-                s.student_no,
-                COALESCE(s.first_name, er.first_name) AS first_name,
-                COALESCE(s.last_name, er.last_name) AS last_name,
-                COALESCE(s.year_level, er.year_level) AS year_level,
-                COALESCE(s.program, er.program) AS program,
-                COALESCE(s.college, er.college) AS college,
+            s.id AS student_id,
+            s.msc_id,
+            s.student_no,
+            COALESCE(s.first_name, er.first_name) AS first_name,
+            COALESCE(s.last_name, er.last_name) AS last_name,
+            COALESCE(s.year_level, er.year_level) AS year_level,
+            COALESCE(s.program, er.program) AS program,
+            COALESCE(s.college, er.college) AS college,
 
-                er.participant_type,
-                er.attendance_status,
-                er.registration_date
-            FROM events e
-            LEFT JOIN event_registrations er ON e.event_id = er.event_id
-            LEFT JOIN students s ON er.student_id = s.id
-            WHERE e.event_id = :event_id
-            ORDER BY er.registration_date DESC
-            ";
+            er.participant_type,
+            er.attendance_status,
+            er.registration_date
+        FROM events e
+        LEFT JOIN event_registrations er ON e.event_id = er.event_id
+        LEFT JOIN students s ON er.student_id = s.id
+        WHERE e.event_id = :event_id
+          AND er.attendance_status = 'attended'
+        ORDER BY er.registration_date DESC
+        ";
 
             $stmt = $this->db->prepare($sql);
             $stmt->execute(['event_id' => $eventId]);
             $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-            if (!$rows) {
-                return null; // no participants
-            }
-
             // Aggregate counts
             $countSql = "
             SELECT 
-                COUNT(*) AS total_registered,                                     -- everyone with a registration row
+                COUNT(*) AS total_registered,                                     
                 SUM(attendance_status = 'attended') AS total_attended,
-  SUM(attendance_status = 'registered') AS total_still_registered
+                SUM(attendance_status = 'registered') AS total_still_registered
             FROM event_registrations
             WHERE event_id = :event_id
             ";
@@ -827,29 +1125,35 @@ class Event
             $totalAttended         = (int)($counts['total_attended'] ?? 0);
             $totalStillRegistered  = (int)($counts['total_still_registered'] ?? 0);
             $attendanceRate        = $totalRegistered > 0 ? round(($totalAttended / $totalRegistered) * 100, 2) : 0;
-            // Event details from first row
+
             $eventDetails = [
-                "event_id"         => $rows[0]['event_id'],
-                "event_name"       => $rows[0]['event_name'],
-                "event_date"       => $rows[0]['event_date'],
-                "event_time_start" => $rows[0]['event_time_start'],
-                "event_time_end"   => $rows[0]['event_time_end'],
-                "location"         => $rows[0]['location'],
-                "event_type"       => $rows[0]['event_type'],
-                "event_status"     => $rows[0]['event_status'],
-                "description"      => $rows[0]['description'],
-                "event_image_url"  => $rows[0]['event_image_url'],
-                "event_batch_image" => $rows[0]['event_batch_image'],
+                "event_id"         => $rows[0]['event_id'] ?? $eventId,
+                "event_name"       => $rows[0]['event_name'] ?? '',
+                "event_date"       => $rows[0]['event_date'] ?? '',
+                "event_time_start" => $rows[0]['event_time_start'] ?? '',
+                "event_time_end"   => $rows[0]['event_time_end'] ?? '',
+                "location"         => $rows[0]['location'] ?? '',
+                "event_type"       => $rows[0]['event_type'] ?? '',
+                "event_status"     => $rows[0]['event_status'] ?? '',
+                "description"      => $rows[0]['description'] ?? '',
+                "event_image_url"  => $rows[0]['event_image_url'] ?? '',
+                "event_batch_image" => $rows[0]['event_batch_image'] ?? '',
                 "total_registered"      => $totalRegistered,
                 "total_attended"        => $totalAttended,
                 "total_still_registered" => $totalStillRegistered,
                 "attendance_rate"       => $attendanceRate
             ];
 
-            // Participants
+            // If no attended participants, return message
+            if (!$rows) {
+                return [
+                    "event" => $eventDetails,
+                    "participants" => "no participants yet"
+                ];
+            }
+
             $participants = [];
             foreach ($rows as $row) {
-                // Build full name for guests or members
                 $firstName = $row['first_name'] ?? '';
                 $lastName  = $row['last_name'] ?? '';
                 $fullName  = trim("$firstName $lastName");
@@ -860,16 +1164,15 @@ class Event
                     "student_no"        => $row['student_no'] ?? null,
                     "first_name"        => $firstName,
                     "last_name"         => $lastName,
-                    "fullName"         => $fullName,
+                    "fullName"          => $fullName,
                     "year_level"        => $row['year_level'] ?? '-',
                     "program"           => $row['program'] ?? '-',
                     "college"           => $row['college'] ?? '-',
-                    "participant_type"  => $row['participant_type'] ?? 'Guest', // ✅ ensure type exists
+                    "participant_type"  => $row['participant_type'] ?? 'Guest',
                     "attendance_status" => $row['attendance_status'] ?? '-',
                     "registration_date" => $row['registration_date'] ?? '-',
                 ];
             }
-
 
             return [
                 "event"        => $eventDetails,
@@ -879,6 +1182,7 @@ class Event
             throw new Exception("Failed to fetch event participants: " . $e->getMessage());
         }
     }
+
 
     /**
      * GET: for Event Dashboard

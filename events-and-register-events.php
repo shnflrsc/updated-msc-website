@@ -760,21 +760,28 @@
             card.dataset.registeredCount = event.attendants || 0;
             card.dataset.access = event.event_restriction || "public";
             card.dataset.image = event.event_batch_image || ""; // Store image URL
+            
+            let imgPath = event.event_batch_image || "";
+            if (imgPath.startsWith("/updated-msc-website")) {
+                imgPath = imgPath.replace("/updated-msc-website", "");
+            }
+            const fullImgPath = imgPath ? `${window.location.origin}${imgPath}` : null;
 
             card.innerHTML = `
-                <div class="event-image">
-                    ${event.event_batch_image   
-                    ? `<img src="${event.event_batch_image}" alt="Event Badge" />`
+            <div class="event-image">
+                ${fullImgPath
+                    ? `<img src="${fullImgPath}" alt="Event Badge" />`
                     : `<i class="bi bi-calendar-event"></i>`}
+            </div>
+            <div class="event-content">
+                <div>
+                    <h3>${event.event_name}</h3>
+                    <p class="date">${new Date(event.event_date).toLocaleDateString("en-US", { month: "long", day: "numeric", year: "numeric" })}</p>
                 </div>
-                <div class="event-content">
-                    <div>
-                        <h3>${event.event_name}</h3>
-                        <p class="date">${new Date(event.event_date).toLocaleDateString("en-US", { month: "long", day: "numeric", year: "numeric" })}</p>
-                    </div>
-                    <p class="excerpt">${event.description}</p>
-                </div>
+                <p class="excerpt">${event.description}</p>
+            </div>
             `;
+
 
             card.addEventListener("click", () => {
                 document.getElementById("modalTitle").textContent = card.dataset.title;
@@ -784,7 +791,12 @@
                 // Update modal image
                 const modalImage = document.getElementById("modalImage");
                 if (card.dataset.image) {
-                    modalImage.innerHTML = `<img src="${card.dataset.image}" alt="Event Image" />`;
+                    //modalImage.innerHTML = `<img src="${window.location.origin + card.dataset.image.replace('/updated-msc-website', '')} alt="Event Image" />`;
+                   let imgPath = card.dataset.image;
+                    if (imgPath.startsWith("/updated-msc-website")) {
+                        imgPath = imgPath.replace("/updated-msc-website", ""); 
+                    }
+                    modalImage.innerHTML = `<img src="${window.location.origin + imgPath}" alt="Event Image" />`;
                 } else {
                     modalImage.innerHTML = `<i class="bi bi-calendar-event"></i>`;
                 }
@@ -813,7 +825,7 @@
             const events = eventsData?.data?.events || [];
 
             events.forEach(event => {
-                console.log(event.event_id, event.event_name, event.event_date, event.event_status);
+                console.log(event.event_id, event.event_name, event.event_date, event.event_status, event.event_batch_image);
             });
 
             if (!eventsData || !eventsData.data) {
@@ -1113,6 +1125,7 @@
                 });
             });
 
+            /*
             document.getElementById("submitPreRegister").addEventListener("click", async () => {
                 const data = {
                     first_name: document.getElementById("firstName").value,
@@ -1139,7 +1152,131 @@
                 } else {
                     showMessage(result?.message || "Pre-registration failed.");
                 }
+                */
+                document.getElementById("submitPreRegister").addEventListener("click", async () => {
+            const participantType = document.getElementById("participantType").value;
+
+            const data = {
+                first_name: document.getElementById("firstName").value,
+                last_name: document.getElementById("lastName").value,
+                middle_name: document.getElementById("middleName").value,
+                suffix: document.getElementById("suffix").value,
+                gender: document.getElementById("gender").value,
+                email: document.getElementById("email").value,
+                phone: document.getElementById("phone").value,
+                facebook: document.getElementById("facebook").value,
+                user_type: participantType,
+            };
+
+            // Validate basic fields
+            if (!data.first_name || !data.last_name || !data.email || !data.gender || !participantType) {
+                alert("Please fill in all required fields.");
+                return;
+            }
+
+            const result = await apiCall(`/events/${eventId}/register`, "POST", data);
+
+            console.log("API Response:", result);
+
+            if (result && result.success) {
+                showMessage("Pre-registration successful! Your QR code will download automatically.");
+
+                // Close the modal first
+                formContainer.remove();
+                const modal = document.getElementById("eventModal");
+                modal.style.display = "none";
+
+                let qrData;
+                if (result.data && result.data.qr_code) {
+                    qrData = result.data.qr_code;
+                } else {
+                    console.error("No qr_code returned from API:", result);
+                    alert("Registration successful but QR code generation failed. Please contact support.");
+                    return;
+                }
+
+                console.log("Generating QR with data:", qrData);
+
+                // Create a temporary container for QR generation
+                const tempDiv = document.createElement("div");
+                tempDiv.style.position = "absolute";
+                tempDiv.style.left = "-9999px";
+                document.body.appendChild(tempDiv);
+
+                // Generate QR code
+                new QRCode(tempDiv, {
+                    text: qrData,
+                    width: 200,
+                    height: 200,
+                    colorDark: "#06047b",
+                    colorLight: "#ffffff",
+                    correctLevel: QRCode.CorrectLevel.H,
+                });
+
+                // Wait longer for QR code to fully render
+                setTimeout(() => {
+                    const canvas = tempDiv.querySelector("canvas");
+                    const img = tempDiv.querySelector("img");
+
+                    const padding = 20;
+
+                    if (canvas) {
+                        // Create a new canvas with extra padding
+                        const paddedCanvas = document.createElement("canvas");
+                        const size = canvas.width + padding * 2;
+                        paddedCanvas.width = size;
+                        paddedCanvas.height = size;
+
+                        const ctx = paddedCanvas.getContext("2d");
+                        ctx.fillStyle = "#ffffff";
+                        ctx.fillRect(0, 0, size, size);
+                        ctx.drawImage(canvas, padding, padding);
+
+                        const url = paddedCanvas.toDataURL("image/png");
+                        const a = document.createElement("a");
+                        const identifier = data.student_id || `${data.first_name}-${data.last_name}`;
+                        a.href = url;
+                        a.download = `Event-${eventId}-${identifier}-QR.png`;
+                        document.body.appendChild(a);
+                        a.click();
+                        document.body.removeChild(a);
+                        
+                        console.log("QR code download triggered successfully");
+                    } else if (img) {
+                        // For <img> fallback
+                        const paddedCanvas = document.createElement("canvas");
+                        const size = img.width + padding * 2;
+                        paddedCanvas.width = size;
+                        paddedCanvas.height = size;
+
+                        const ctx = paddedCanvas.getContext("2d");
+                        ctx.fillStyle = "#ffffff";
+                        ctx.fillRect(0, 0, size, size);
+                        ctx.drawImage(img, padding, padding);
+
+                        const url = paddedCanvas.toDataURL("image/png");
+                        const a = document.createElement("a");
+                        const identifier = data.student_id || `${data.first_name}-${data.last_name}`;
+                        a.href = url;
+                        a.download = `Event-${eventId}-${identifier}-QR.png`;
+                        document.body.appendChild(a);
+                        a.click();
+                        document.body.removeChild(a);
+                        
+                        console.log("QR code download triggered successfully (img fallback)");
+                    } else {
+                        console.error("No canvas or img element found for QR code");
+                        alert("QR code generation failed. Please try again.");
+                    }
+
+                    // Clean up temporary div
+                    document.body.removeChild(tempDiv);
+                }, 500); // Increased timeout to 500ms
+            } else {
+                showMessage(result?.message || "Pre-registration failed.");
+            }
             });
+            
         }
 
         function showBulSUPreRegisterForm(eventId) {
@@ -1405,5 +1542,5 @@
         attachCardListeners();
     });
 </script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
 <?php include '_footer.php'; ?>
-</div>
