@@ -1259,6 +1259,13 @@ registerBtn.addEventListener("click", async () => {
             });
 
             document.getElementById("submitPreRegister").addEventListener("click", async () => {
+                    const participantType = document.getElementById("participantType").value;
+                    // Determine user_type based on participant type selection
+                    let user_type = "guest";
+                    if (participantType === "BulSUan") {
+                        user_type = "bulsuan";
+                    }
+                
                 const data = {
                     first_name: document.getElementById("firstName").value,
                     last_name: document.getElementById("lastName").value,
@@ -1268,7 +1275,7 @@ registerBtn.addEventListener("click", async () => {
                     email: document.getElementById("email").value,
                     phone: document.getElementById("phone").value,
                     facebook: document.getElementById("facebook").value,
-                    user_type: "guest",
+                    user_type: user_type,
                 };
 
                 if (!data.first_name || !data.last_name || !data.email || !data.gender) {
@@ -1397,6 +1404,13 @@ registerBtn.addEventListener("click", async () => {
             });
 
             document.getElementById("submitBulSUPreRegister").addEventListener("click", async () => {
+                // Check if user is logged in to determine user_type
+                const authStatus = await apiCall("/auth/check-login", "GET");
+                const isLoggedIn = authStatus?.success && authStatus.data?.logged_in;
+                
+                // Determine user_type based on login status
+                const user_type = isLoggedIn ? "member" : "bulsuan";
+
                 const data = {
                     first_name: document.getElementById("firstName").value,
                     last_name: document.getElementById("lastName").value,
@@ -1411,7 +1425,7 @@ registerBtn.addEventListener("click", async () => {
                     college: document.getElementById("college").value,
                     year_level: document.getElementById("yearLevel").value,
                     section: document.getElementById("section").value,
-                    user_type: "bulsuan",
+                    user_type: user_type, // Dynamic user_type based on login status
                 };
 
                 if (!data.first_name || !data.last_name || !data.email || !data.gender || !data.student_id || !data.program || !data.college || !data.year_level) {

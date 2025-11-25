@@ -508,16 +508,26 @@ class Event
                 }
             }
 
+            // Determine participant type - use provided user_type or default to 'bulsuan'
+            $participantType = $data['user_type'] ?? 'bulsuan';
+            
+            // Validate that the participant type is one of the allowed values
+            $allowedTypes = ['guest', 'member', 'bulsuan'];
+            if (!in_array($participantType, $allowedTypes)) {
+                $participantType = 'bulsuan'; // Fallback to bulsuan if invalid type
+            }
+
             $stmt = $this->db->prepare("
                 INSERT INTO event_registrations (
                     event_id, participant_type, first_name, last_name, email, program, college, year_level, section
                 ) VALUES (
-                    :event_id, 'bulsuan', :first_name, :last_name, :email, :program, :college, :year_level, :section
+                    :event_id, :participant_type, :first_name, :last_name, :email, :program, :college, :year_level, :section
                 )
             ");
 
             $stmt->execute([
                 'event_id' => $eventId,
+                'participant_type' => $participantType, // Use dynamic participant type
                 'first_name' => $data['first_name'],
                 'last_name' => $data['last_name'],
                 'email' => $data['email'],
