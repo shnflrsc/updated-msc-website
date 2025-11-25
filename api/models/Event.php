@@ -1226,4 +1226,61 @@ class Event
             throw new Exception("Failed to fetch event details: " . $e->getMessage());
         }
     }
+
+    public function markAttendanceByIdentifiers($eventId, $identifiers)
+    {
+        try {
+            $conn = Database::getInstance()->getConnection();
+
+            if (empty($identifiers)) {
+                return ['updated' => 0, 'message' => 'No identifiers provided'];
+            }
+
+            $identifiers = array_map('trim', $identifiers);
+            $placeholders = implode(',', array_fill(0, count($identifiers), '?'));
+
+            $linkSql = "UPDATE event_registrations er
+                    INNER JOIN students s ON er.email = s.email
+                    SET er.student_id = s.id,
+                        er.participant_type = 'member'
+                    WHERE er.event_id = ?
+                    AND er.student_id IS NULL
+                    AND s.msc_id IN ($placeholders)";
+
+            $linkParams = array_merge([$eventId], $identifiers);
+            $linkStmt = $conn->prepare($linkSql);
+            $linkStmt->execute($linkParams);
+
+            $linked = $linkStmt->rowCount();
+            error_log("Linked $linked records by email");
+
+            $updateSql = "UPDATE event_registrations er
+                      LEFT JOIN students s ON er.student_id = s.id
+                      SET er.attendance_status = 'attended
+                      WHERE er.event_id = ?
+                      AND er.attendance_status = 'registered'
+                      AND (
+                          er.qr_code IN ($placeholders)
+                          OR s.msc_id IN ($placeholders)
+                      )";
+
+            $updateParams = array_merge(
+                [$eventId],
+                $identifiers,
+                $identifiers
+            );
+
+            $updateStmt = $conn->prepare($updateSql);
+            $updateStmt->execute($updateParams);
+
+            return [
+                'updated' => $updateStmt->rowCount(),
+                'linked' => $linked,
+                'event_id' => (int)$eventId
+            ];
+        } catch (PDOException $e) {
+            error_log("Error: " . $e->getMessage());
+            throw new Exception("Failed to mark attendance: " . $e->getMessage());
+        }
+    }
 }

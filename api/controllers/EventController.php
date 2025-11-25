@@ -955,4 +955,48 @@ class EventController
             Response::serverError($e->getMessage());
         }
     }
+
+    /**
+     * Mark attendance for multiple participants
+     */
+    public function markAttendance($eventId)
+    {
+        try {
+            AuthMiddleware::requireOfficer(); 
+
+            $input = json_decode(file_get_contents('php://input'), true);
+
+            $identifiers = $input['identifiers'] ?? null;
+
+            if (empty($identifiers) || !is_array($identifiers)) {
+                Response::validationError([
+                    'identifiers' => 'Identifiers array is required'
+                ]);
+                return;
+            }
+
+            $event = $this->eventModel->findById($eventId);
+            if (!$event) {
+                Response::notFound('Event not found');
+                return;
+            }
+
+            $result = $this->eventModel->markAttendanceByIdentifiers($eventId, $identifiers);
+
+            if ($result['updated'] > 0) {
+                Response::success(
+                    $result,
+                    "Successfully marked {$result['updated']} participant(s) as attended"
+                );
+            } else {
+                Response::success(
+                    $result,
+                    "No attendance records were updated. Participants may already be marked as attended or not found."
+                );
+            }
+        } catch (Exception $e) {
+            error_log("Error marking attendance: " . $e->getMessage());
+            Response::serverError('Failed to mark attendance: ' . $e->getMessage());
+        }
+    }
 }

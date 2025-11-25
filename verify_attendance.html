@@ -987,6 +987,7 @@
             });
         });
 
+        /*
         document.getElementById("process-attendance-btn").addEventListener("click", async (e) => {
             e.preventDefault();
             const eventId = document.getElementById("eventList").value;
@@ -1000,6 +1001,50 @@
             } catch (err) {
                 //alert("Failed to import attendance: " + err);
                 showAlert("Failed to import attendanc.", "danger");
+            }
+        });
+        */
+        document.getElementById("process-attendance-btn").addEventListener("click", async (e) => {
+            e.preventDefault();
+            const eventId = document.getElementById("eventList").value;
+
+            if (!eventId || !selectedFile) {
+                showAlert("Please select an event and import a CSV first.", "danger");
+                return;
+            }
+
+            try {
+                // Extract identifiers from CSV
+                const identifiers = previewedStudents.map(s => s.msc_id);
+
+                console.log("Sending identifiers:", identifiers);
+                console.log("Event ID:", eventId);
+
+                // Call the mark attendance endpoint with identifiers
+                const attendanceRes = await apiCall(`/events/${eventId}/mark-attendance`, "POST", {
+                    identifiers: identifiers
+                });
+
+                console.log("Response:", attendanceRes);
+
+                if (attendanceRes?.success) {
+                    const msg = `Attendance processed successfully! 
+                         Updated: ${attendanceRes.data.updated}
+                         Matched: ${attendanceRes.data.matched_records}
+                         Already attended: ${attendanceRes.data.already_attended || 0}`;
+                    showAlert(msg, "success");
+
+                    // Refresh the participants list
+                    getEventParticipants(eventId);
+                    // Disable the button after processing
+                    document.getElementById("process-attendance-btn").disabled = true;
+                    // Clear the selected file
+                    selectedFile = null;
+                } else {
+                    showAlert("Failed to mark attendance: " + (attendanceRes?.message || "Unknown error"), "danger");
+                }
+            } catch (err) {
+                showAlert("Failed to process attendance: " + err, "danger");
             }
         });
 
