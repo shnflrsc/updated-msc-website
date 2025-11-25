@@ -1031,7 +1031,7 @@
                     let fullName;
 
                     if (p.participant_type === "Guest" || p.participant_type === "guest" || p.participant_type === "bulsuan") {
-                        fullName = p.first_name + " " + p.last_name || "-"; 
+                        fullName = p.first_name + " " + p.last_name || "-";
                     } else {
                         fullName = [p.first_name, p.middle_name, p.last_name].filter(Boolean).join(" ");
                     }
@@ -1045,13 +1045,13 @@
                     // Table row
                     const tr = document.createElement("tr");
                     tr.innerHTML = `
-        <td class="px-4 py-2">${mscId}</td>
-        <td class="px-4 py-2">${fullName}</td>
-        <td class="px-4 py-2">${college}</td>
-        <td class="px-4 py-2">${program}</td>
-        <td class="px-4 py-2">${yearLevel}</td>
-        <td class="px-4 py-2">${participantType}</td>
-    `;
+                        <td class="px-4 py-2">${mscId}</td>
+                        <td class="px-4 py-2">${fullName}</td>
+                        <td class="px-4 py-2">${college}</td>
+                        <td class="px-4 py-2">${program}</td>
+                        <td class="px-4 py-2">${yearLevel}</td>
+                        <td class="px-4 py-2">${participantType}</td>
+                    `;
                     tbody.appendChild(tr);
 
                     // Mobile card
