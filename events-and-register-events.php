@@ -946,83 +946,228 @@
             closeBtn.addEventListener("click", () => modal.style.display = "none");
             modal.addEventListener("click", e => { if (e.target === modal) modal.style.display = "none"; });
 
-            registerBtn.addEventListener("click", async () => {
-                const eventId = registerBtn.dataset.eventId;
-                const eventCard = document.querySelector(`.event-card[data-id='${eventId}']`);
-                if (!eventId || !eventCard) {
-                    showMessage("⚠ Event not found.");
-                    return;
-                }
+registerBtn.addEventListener("click", async () => {
+    console.group("🚀 EVENT REGISTRATION DEBUG");
+    console.log("📍 Registration button clicked");
+    
+    const eventId = registerBtn.dataset.eventId;
+    const eventCard = document.querySelector(`.event-card[data-id='${eventId}']`);
+    
+    if (!eventId || !eventCard) {
+        console.error("❌ Event not found - eventId:", eventId, "eventCard:", eventCard);
+        showMessage("⚠ Event not found.");
+        console.groupEnd();
+        return;
+    }
 
-                const authStatus = await apiCall("/auth/check-login", "GET");
-                const isLoggedIn = authStatus?.success && authStatus.data?.logged_in;
+    console.log("✅ Event found:", {
+        eventId: eventId,
+        eventName: eventCard.dataset.title,
+        eventAccess: eventCard.dataset.access,
+        eventStatus: eventCard.dataset.status
+    });
 
-                const accessMap = {
-                    public: "open for public",
-                    members: "members only",
-                    bulsuans: "BulSUans only",
-                    inviteOnly: "invite only"
+    // Check authentication status
+    console.log("🔐 Checking authentication status...");
+    const authStatus = await apiCall("/auth/check-login", "GET");
+    const isLoggedIn = authStatus?.success && authStatus.data?.logged_in;
+    
+    console.log("🔑 Auth Status:", {
+        success: authStatus?.success,
+        loggedIn: isLoggedIn,
+        userData: authStatus?.data
+    });
+
+    const accessMap = {
+        public: "open for public",
+        members: "members only",
+        bulsuans: "BulSUans only",
+        inviteOnly: "invite only"
+    };
+    const eventAccess = accessMap[eventCard.dataset.access] || "open for public";
+
+    console.log("🎯 Event Access Analysis:", {
+        rawAccess: eventCard.dataset.access,
+        mappedAccess: eventAccess,
+        isLoggedIn: isLoggedIn
+    });
+
+    if (!isLoggedIn) {
+        console.log("👤 User is NOT logged in - handling public/BulSU registration");
+        if (eventCard.dataset.access === "public") {
+            console.log("📝 Showing public pre-registration form");
+            return showPreRegisterFormInsideModal(eventId);
+        }
+        if (eventCard.dataset.access === "bulsuans") {
+            console.log("🎓 Showing BulSU pre-registration form");
+            return showBulSUPreRegisterForm(eventId);
+        }
+        if (eventCard.dataset.access === "members") {
+            console.log("🔒 Event is members only - redirecting to login");
+            return showMessage('This event is for members only. Please <a href="login.php" class="text-blue-500">log in</a> to register.');
+        }
+        console.log("🚫 Event access restricted:", eventAccess);
+        return showMessage(`🚫 This event is restricted to "${eventAccess}" users only.`);
+    }
+
+    console.log("✅ User IS logged in - proceeding with member registration");
+    
+    // Check event capacity
+    console.log("📊 Checking event capacity:", {
+        registered: eventCard.dataset.registeredCount,
+        capacity: eventCard.dataset.capacity
+    });
+    
+    if (parseInt(eventCard.dataset.registeredCount) >= parseInt(eventCard.dataset.capacity)) {
+        console.warn("⚠ Event is already full");
+        showMessage("⚠ Sorry, this event is already full.");
+        console.groupEnd();
+        return;
+    }
+
+    let payload = {};
+    let userRole = "guest";
+
+    try {
+        console.log("👤 Building registration payload...");
+        const userId = authStatus.data.user.id;
+        userRole = authStatus.data.user.role || "guest";
+        
+        console.log("📋 User Info:", {
+            userId: userId,
+            userRole: userRole,
+            fullUserData: authStatus.data.user
+        });
+
+        // For members, determine if they're also a BulSUan
+        if (userRole === "member") {
+            console.log("🎖️ User is a MEMBER - checking for BulSU data...");
+            
+            // Check if they have student data (BulSUan member)
+            const studentRes = await apiCall(`/students/${userId}`, "GET");
+            console.log("🎓 Student API Response:", studentRes);
+
+            if (studentRes.success && studentRes.data && studentRes.data.student_no) {
+                console.log("✅ User is a BulSUan member");
+                const s = studentRes.data;
+                payload = {
+                    first_name: s.first_name,
+                    last_name: s.last_name,
+                    middle_name: s.middle_name || "",
+                    suffix: s.name_suffix || "",
+                    gender: s.gender,
+                    email: s.email,
+                    phone: s.phone || "",
+                    facebook: s.facebook_link || "",
+                    student_id: s.student_no,
+                    program: s.program || "",
+                    college: s.college || "",
+                    year_level: s.year_level || "",
+                    section: s.section || "",
+                    user_type: "member", // Explicitly set as member
                 };
-                const eventAccess = accessMap[eventCard.dataset.access] || "open for public";
-
-                if (!isLoggedIn) {
-                    if (eventCard.dataset.access === "public") return showPreRegisterFormInsideModal(eventId);
-                    if (eventCard.dataset.access === "bulsuans") return showBulSUPreRegisterForm(eventId);
-                    if (eventCard.dataset.access === "members")
-                        return showMessage('This event is for members only. Please <a href="login.php" class="text-blue-500">log in</a> to register.');
-                    return showMessage(`🚫 This event is restricted to "${eventAccess}" users only.`);
+                console.log("📦 BulSU Member Payload:", payload);
+            } else {
+                console.log("ℹ️ User is a regular member (not BulSUan)");
+                // Try to get member profile data
+                const memberRes = await apiCall(`/members/${userId}`, "GET");
+                console.log("👥 Member API Response:", memberRes);
+                
+                if (memberRes.success && memberRes.data) {
+                    const m = memberRes.data;
+                    payload = {
+                        first_name: m.first_name,
+                        last_name: m.last_name,
+                        middle_name: m.middle_name || "",
+                        suffix: m.suffix || "",
+                        gender: m.gender,
+                        email: m.email,
+                        phone: m.phone || "",
+                        facebook: m.facebook || "",
+                        student_id: "",
+                        program: "",
+                        college: "",
+                        year_level: "",
+                        section: "",
+                        user_type: "member", // Explicitly set as member
+                    };
+                    console.log("📦 Regular Member Payload:", payload);
                 }
+            }
+        } else {
+            console.log("👤 User role is:", userRole);
+        }
+    } catch (err) {
+        console.error("❌ Error fetching user profile:", err);
+    }
 
-                if (parseInt(eventCard.dataset.registeredCount) >= parseInt(eventCard.dataset.capacity)) {
-                    showMessage("⚠ Sorry, this event is already full.");
-                    return;
-                }
+    // If payload is still empty, use basic user info
+    if (!payload.first_name && authStatus.data.user) {
+        console.log("🔄 Using basic user info from auth data");
+        const user = authStatus.data.user;
+        payload = {
+            first_name: user.first_name || "Member",
+            last_name: user.last_name || "User",
+            middle_name: "",
+            suffix: "",
+            gender: user.gender || "",
+            email: user.email || "",
+            phone: user.phone || "",
+            facebook: "",
+            student_id: "",
+            program: "",
+            college: "",
+            year_level: "",
+            section: "",
+            user_type: userRole, // Use the actual user role
+        };
+        console.log("📦 Fallback Payload:", payload);
+    }
 
-                let payload = {};
+    // Final validation and role assignment
+    console.log("🎯 Final Payload Before Registration:", {
+        payload: payload,
+        hasFirstName: !!payload.first_name,
+        hasLastName: !!payload.last_name,
+        hasEmail: !!payload.email,
+        userType: payload.user_type,
+        expectedUserType: userRole
+    });
 
-                try {
-                    const userId = authStatus.data.user.id;
-                    const studentRes = await apiCall(`/students/${userId}`, "GET");
+    if (!payload.first_name || !payload.last_name || !payload.email) {
+        console.error("❌ Missing required fields in payload");
+        showMessage("⚠ Could not load your profile. Please re-login and try again.");
+        console.groupEnd();
+        return;
+    }
 
-                    if (studentRes.success && studentRes.data) {
-                        const s = studentRes.data;
-                        payload = {
-                            first_name: s.first_name,
-                            last_name: s.last_name,
-                            middle_name: s.middle_name || "",
-                            suffix: s.name_suffix || "",
-                            gender: s.gender,
-                            email: s.email,
-                            phone: s.phone || "",
-                            facebook: s.facebook_link || "",
-                            student_id: s.student_no,
-                            program: s.program || "",
-                            college: s.college || "",
-                            year_level: s.year_level || "",
-                            section: s.section || "",
-                            user_type: s.role || "bulsuan",
-                        };
-                    } else {
-                        console.warn("Could not fetch student info — using fallback empty data.");
-                    }
-                } catch (err) {
-                    console.error("Error fetching student profile:", err);
-                }
+    // Ensure user_type is correctly set
+    if (isLoggedIn && userRole === "member" && payload.user_type !== "member") {
+        console.warn("⚠️ Correcting user_type from", payload.user_type, "to 'member'");
+        payload.user_type = "member";
+    }
 
-                if (!payload.first_name || !payload.last_name || !payload.email) {
-                    showMessage("⚠ Could not load your BulSU profile. Please re-login and try again.");
-                    return;
-                }
+    console.log("📤 Sending registration request...", {
+        endpoint: `/events/${eventId}/register`,
+        payload: payload
+    });
 
-                const result = await apiCall(`/events/${eventId}/register`, "POST", payload);
+    // Make the registration API call
+    const result = await apiCall(`/events/${eventId}/register`, "POST", payload);
 
-                if (result?.success) {
-                    showMessage(result.message || "Registered successfully!");
-                    eventCard.dataset.registered = "true";
-                } else {
-                    showMessage(result?.message || "Registration failed.");
-                }
-            });
+    console.log("📥 Registration API Response:", result);
+
+    if (result?.success) {
+        console.log("✅ Registration successful!");
+        showMessage(result.message || "Registered successfully!");
+        eventCard.dataset.registered = "true";
+    } else {
+        console.error("❌ Registration failed:", result?.message);
+        showMessage(result?.message || "Registration failed.");
+    }
+
+    console.groupEnd();
+});
 
         function showPreRegisterFormInsideModal(eventId) {
             const modal = document.getElementById("eventModal");
@@ -1406,4 +1551,3 @@
     });
 </script>
 <?php include '_footer.php'; ?>
-</div>

@@ -536,6 +536,7 @@ class Event
         }
     }
 
+
     /**
      * Register a PUBLIC participant (Open for public)
      */
@@ -549,15 +550,25 @@ class Event
                 }
             }
 
+            // Determine participant type - use provided user_type or default to 'guest'
+            $participantType = $data['user_type'] ?? 'guest';
+            
+            // Validate that the participant type is one of the allowed values
+            $allowedTypes = ['guest', 'member', 'bulsuan'];
+            if (!in_array($participantType, $allowedTypes)) {
+                $participantType = 'guest'; // Fallback to guest if invalid type
+            }
+
             $stmt = $this->db->prepare("
                 INSERT INTO event_registrations (
                     event_id, participant_type, first_name, last_name, email
                 ) VALUES (
-                    :event_id, 'guest', :first_name, :last_name, :email
+                    :event_id, :participant_type, :first_name, :last_name, :email
                 )
             ");
             $stmt->execute([
                 'event_id' => $eventId,
+                'participant_type' => $participantType, // Use dynamic participant type
                 'first_name' => $data['first_name'],
                 'last_name' => $data['last_name'],
                 'email' => $data['email']
@@ -570,7 +581,6 @@ class Event
             throw new Exception("Public registration failed: " . $e->getMessage());
         }
     }
-
 
 
     /**
