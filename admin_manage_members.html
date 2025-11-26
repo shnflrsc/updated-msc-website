@@ -1367,7 +1367,7 @@ async function fetchStudents() {
       return;
     }
     
-    const students = result.data.students.filter(s => s.role == "member");
+    const students = result.data.students.filter(s => s.role == "member" || s.role == "officer");
     const tbody = document.getElementById("membersTableBody");
     const mobileCards = document.getElementById("mobileCards");
     
