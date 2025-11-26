@@ -716,33 +716,78 @@
             const events = response?.data?.events || [];
             if (!events.length) return;
 
-            const today = new Date();
+            const now = new Date();
             const upcomingEvents = [];
             const completedEvents = [];
-            const pastEvents = [];
 
             events.forEach(event => {
-                const eventDate = new Date(event.event_date);
-
-                if (event.event_status?.toLowerCase() === "upcoming") {
-                    upcomingEvents.push(event);
-                } else if (event.event_status?.toLowerCase() === "completed") {
+                // Create a Date object for the event's end time
+                const eventEndDateTime = new Date(`${event.event_date}T${event.event_time_end}`);
+                
+                // Check if event has ended (current time is after event end time)
+                if (now > eventEndDateTime) {
                     completedEvents.push(event);
-                } else if (eventDate < today) {
-                    pastEvents.push(event);
+                } else {
+                    upcomingEvents.push(event);
                 }
             });
 
             renderEvents(upcomingEvents, "upcomingSection");
-            renderEvents(completedEvents, "completedSection");
-            renderEvents(pastEvents, "pastSection");
+            renderEvents(completedEvents, "pastSection"); // Note: using "pastSection" as completed section
 
             attachCardListeners();
+            
+            // Start checking for event status changes every minute
+            startEventStatusChecker();
         } catch (err) {
             console.error("Error loading events:", err);
         }
     }
 
+    // Function to check and update event status in real-time
+    function startEventStatusChecker() {
+        setInterval(() => {
+            updateEventStatuses();
+        }, 60000); // Check every minute
+    }
+
+    function updateEventStatuses() {
+        const now = new Date();
+        const upcomingSection = document.getElementById("upcomingSection").querySelector(".event-list");
+        const completedSection = document.getElementById("pastSection").querySelector(".event-list");
+        
+        const upcomingCards = Array.from(upcomingSection.querySelectorAll(".event-card"));
+        
+        upcomingCards.forEach(card => {
+            const eventDate = card.dataset.date;
+            const eventTimeEnd = card.dataset.time ? card.dataset.time.split(' - ')[1] : '23:59';
+            
+            // Create Date object for event end time
+            const eventEndDateTime = new Date(`${eventDate}T${eventTimeEnd}`);
+            
+            // If event has ended, move it to completed section
+            if (now > eventEndDateTime) {
+                // Remove from upcoming
+                card.remove();
+                
+                // Update card status
+                card.dataset.status = "completed";
+                
+                // Hide register button if it exists in modal data
+                const registerBtn = document.getElementById("registerBtn");
+                if (registerBtn && registerBtn.dataset.eventId === card.dataset.id) {
+                    registerBtn.style.display = "none";
+                }
+                
+                // Add to completed section
+                completedSection.appendChild(card);
+                
+                console.log(`Moved event "${card.dataset.title}" to completed section`);
+            }
+        });
+    }
+
+    // Update the renderEvents function to include time data
     function renderEvents(eventsArray, sectionId) {
         const section = document.getElementById(sectionId).querySelector(".event-list");
         section.innerHTML = "";
@@ -754,56 +799,52 @@
             card.dataset.id = event.event_id;
             card.dataset.title = event.event_name;
             card.dataset.date = event.event_date;
+            card.dataset.time = `${event.event_time_start || "00:00"} - ${event.event_time_end || "23:59"}`;
             card.dataset.status = event.event_status;
             card.dataset.content = event.description;
             card.dataset.capacity = event.capacity || 0;
             card.dataset.registeredCount = event.attendants || 0;
             card.dataset.access = event.event_restriction || "public";
-            card.dataset.image = event.event_batch_image || ""; // Store image URL
-            
-            let imgPath = event.event_batch_image || "";
-            if (imgPath.startsWith("/updated-msc-website")) {
-                imgPath = imgPath.replace("/updated-msc-website", "");
-            }
-            const fullImgPath = imgPath ? `${window.location.origin}${imgPath}` : null;
+            card.dataset.image = event.event_batch_image || "";
 
             card.innerHTML = `
-            <div class="event-image">
-                ${fullImgPath
-                    ? `<img src="${fullImgPath}" alt="Event Badge" />`
+                <div class="event-image">
+                    ${event.event_batch_image   
+                    ? `<img src="${event.event_batch_image}" alt="Event Badge" />`
                     : `<i class="bi bi-calendar-event"></i>`}
-            </div>
-            <div class="event-content">
-                <div>
-                    <h3>${event.event_name}</h3>
-                    <p class="date">${new Date(event.event_date).toLocaleDateString("en-US", { month: "long", day: "numeric", year: "numeric" })}</p>
                 </div>
-                <p class="excerpt">${event.description}</p>
-            </div>
+                <div class="event-content">
+                    <div>
+                        <h3>${event.event_name}</h3>
+                        <p class="date">${new Date(event.event_date).toLocaleDateString("en-US", { month: "long", day: "numeric", year: "numeric" })}</p>
+                        <p class="date">${event.event_time_start || "TBA"} - ${event.event_time_end || "TBA"}</p>
+                    </div>
+                    <p class="excerpt">${event.description}</p>
+                </div>
             `;
-
 
             card.addEventListener("click", () => {
                 document.getElementById("modalTitle").textContent = card.dataset.title;
-                document.getElementById("modalDate").textContent = card.dataset.date;
+                document.getElementById("modalDate").textContent = `${card.dataset.date} • ${card.dataset.time}`;
                 document.getElementById("modalContent").textContent = card.dataset.content;
 
                 // Update modal image
                 const modalImage = document.getElementById("modalImage");
                 if (card.dataset.image) {
-                    //modalImage.innerHTML = `<img src="${window.location.origin + card.dataset.image.replace('/updated-msc-website', '')} alt="Event Image" />`;
-                   let imgPath = card.dataset.image;
-                    if (imgPath.startsWith("/updated-msc-website")) {
-                        imgPath = imgPath.replace("/updated-msc-website", ""); 
-                    }
-                    modalImage.innerHTML = `<img src="${window.location.origin + imgPath}" alt="Event Image" />`;
+                    modalImage.innerHTML = `<img src="${card.dataset.image}" alt="Event Image" />`;
                 } else {
                     modalImage.innerHTML = `<i class="bi bi-calendar-event"></i>`;
                 }
 
                 const registerBtn = document.getElementById("registerBtn");
                 registerBtn.dataset.eventId = card.dataset.id;
-                registerBtn.style.display = (card.dataset.status.toLowerCase() === "upcoming") ?
+                
+                // Check if event has ended to determine if registration should be available
+                const now = new Date();
+                const eventEndDateTime = new Date(`${card.dataset.date}T${card.dataset.time.split(' - ')[1]}`);
+                const isEventEnded = now > eventEndDateTime;
+                
+                registerBtn.style.display = (card.dataset.status.toLowerCase() === "upcoming" && !isEventEnded) ?
                     "inline-block" :
                     "none";
 
@@ -825,7 +866,7 @@
             const events = eventsData?.data?.events || [];
 
             events.forEach(event => {
-                console.log(event.event_id, event.event_name, event.event_date, event.event_status, event.event_batch_image);
+                console.log(event.event_id, event.event_name, event.event_date, event.event_status);
             });
 
             if (!eventsData || !eventsData.data) {
@@ -958,83 +999,228 @@
             closeBtn.addEventListener("click", () => modal.style.display = "none");
             modal.addEventListener("click", e => { if (e.target === modal) modal.style.display = "none"; });
 
-            registerBtn.addEventListener("click", async () => {
-                const eventId = registerBtn.dataset.eventId;
-                const eventCard = document.querySelector(`.event-card[data-id='${eventId}']`);
-                if (!eventId || !eventCard) {
-                    showMessage("⚠ Event not found.");
-                    return;
-                }
+registerBtn.addEventListener("click", async () => {
+    console.group("🚀 EVENT REGISTRATION DEBUG");
+    console.log("📍 Registration button clicked");
+    
+    const eventId = registerBtn.dataset.eventId;
+    const eventCard = document.querySelector(`.event-card[data-id='${eventId}']`);
+    
+    if (!eventId || !eventCard) {
+        console.error("❌ Event not found - eventId:", eventId, "eventCard:", eventCard);
+        showMessage("⚠ Event not found.");
+        console.groupEnd();
+        return;
+    }
 
-                const authStatus = await apiCall("/auth/check-login", "GET");
-                const isLoggedIn = authStatus?.success && authStatus.data?.logged_in;
+    console.log("✅ Event found:", {
+        eventId: eventId,
+        eventName: eventCard.dataset.title,
+        eventAccess: eventCard.dataset.access,
+        eventStatus: eventCard.dataset.status
+    });
 
-                const accessMap = {
-                    public: "open for public",
-                    members: "members only",
-                    bulsuans: "BulSUans only",
-                    inviteOnly: "invite only"
+    // Check authentication status
+    console.log("🔐 Checking authentication status...");
+    const authStatus = await apiCall("/auth/check-login", "GET");
+    const isLoggedIn = authStatus?.success && authStatus.data?.logged_in;
+    
+    console.log("🔑 Auth Status:", {
+        success: authStatus?.success,
+        loggedIn: isLoggedIn,
+        userData: authStatus?.data
+    });
+
+    const accessMap = {
+        public: "open for public",
+        members: "members only",
+        bulsuans: "BulSUans only",
+        inviteOnly: "invite only"
+    };
+    const eventAccess = accessMap[eventCard.dataset.access] || "open for public";
+
+    console.log("🎯 Event Access Analysis:", {
+        rawAccess: eventCard.dataset.access,
+        mappedAccess: eventAccess,
+        isLoggedIn: isLoggedIn
+    });
+
+    if (!isLoggedIn) {
+        console.log("👤 User is NOT logged in - handling public/BulSU registration");
+        if (eventCard.dataset.access === "public") {
+            console.log("📝 Showing public pre-registration form");
+            return showPreRegisterFormInsideModal(eventId);
+        }
+        if (eventCard.dataset.access === "bulsuans") {
+            console.log("🎓 Showing BulSU pre-registration form");
+            return showBulSUPreRegisterForm(eventId);
+        }
+        if (eventCard.dataset.access === "members") {
+            console.log("🔒 Event is members only - redirecting to login");
+            return showMessage('This event is for members only. Please <a href="login.php" class="text-blue-500">log in</a> to register.');
+        }
+        console.log("🚫 Event access restricted:", eventAccess);
+        return showMessage(`🚫 This event is restricted to "${eventAccess}" users only.`);
+    }
+
+    console.log("✅ User IS logged in - proceeding with member registration");
+    
+    // Check event capacity
+    console.log("📊 Checking event capacity:", {
+        registered: eventCard.dataset.registeredCount,
+        capacity: eventCard.dataset.capacity
+    });
+    
+    if (parseInt(eventCard.dataset.registeredCount) >= parseInt(eventCard.dataset.capacity)) {
+        console.warn("⚠ Event is already full");
+        showMessage("⚠ Sorry, this event is already full.");
+        console.groupEnd();
+        return;
+    }
+
+    let payload = {};
+    let userRole = "guest";
+
+    try {
+        console.log("👤 Building registration payload...");
+        const userId = authStatus.data.user.id;
+        userRole = authStatus.data.user.role || "guest";
+        
+        console.log("📋 User Info:", {
+            userId: userId,
+            userRole: userRole,
+            fullUserData: authStatus.data.user
+        });
+
+        // For members, determine if they're also a BulSUan
+        if (userRole === "member") {
+            console.log("🎖️ User is a MEMBER - checking for BulSU data...");
+            
+            // Check if they have student data (BulSUan member)
+            const studentRes = await apiCall(`/students/${userId}`, "GET");
+            console.log("🎓 Student API Response:", studentRes);
+
+            if (studentRes.success && studentRes.data && studentRes.data.student_no) {
+                console.log("✅ User is a BulSUan member");
+                const s = studentRes.data;
+                payload = {
+                    first_name: s.first_name,
+                    last_name: s.last_name,
+                    middle_name: s.middle_name || "",
+                    suffix: s.name_suffix || "",
+                    gender: s.gender,
+                    email: s.email,
+                    phone: s.phone || "",
+                    facebook: s.facebook_link || "",
+                    student_id: s.student_no,
+                    program: s.program || "",
+                    college: s.college || "",
+                    year_level: s.year_level || "",
+                    section: s.section || "",
+                    user_type: "member", // Explicitly set as member
                 };
-                const eventAccess = accessMap[eventCard.dataset.access] || "open for public";
-
-                if (!isLoggedIn) {
-                    if (eventCard.dataset.access === "public") return showPreRegisterFormInsideModal(eventId);
-                    if (eventCard.dataset.access === "bulsuans") return showBulSUPreRegisterForm(eventId);
-                    if (eventCard.dataset.access === "members")
-                        return showMessage('This event is for members only. Please <a href="login.php" class="text-blue-500">log in</a> to register.');
-                    return showMessage(`🚫 This event is restricted to "${eventAccess}" users only.`);
+                console.log("📦 BulSU Member Payload:", payload);
+            } else {
+                console.log("ℹ️ User is a regular member (not BulSUan)");
+                // Try to get member profile data
+                const memberRes = await apiCall(`/members/${userId}`, "GET");
+                console.log("👥 Member API Response:", memberRes);
+                
+                if (memberRes.success && memberRes.data) {
+                    const m = memberRes.data;
+                    payload = {
+                        first_name: m.first_name,
+                        last_name: m.last_name,
+                        middle_name: m.middle_name || "",
+                        suffix: m.suffix || "",
+                        gender: m.gender,
+                        email: m.email,
+                        phone: m.phone || "",
+                        facebook: m.facebook || "",
+                        student_id: "",
+                        program: "",
+                        college: "",
+                        year_level: "",
+                        section: "",
+                        user_type: "member", // Explicitly set as member
+                    };
+                    console.log("📦 Regular Member Payload:", payload);
                 }
+            }
+        } else {
+            console.log("👤 User role is:", userRole);
+        }
+    } catch (err) {
+        console.error("❌ Error fetching user profile:", err);
+    }
 
-                if (parseInt(eventCard.dataset.registeredCount) >= parseInt(eventCard.dataset.capacity)) {
-                    showMessage("⚠ Sorry, this event is already full.");
-                    return;
-                }
+    // If payload is still empty, use basic user info
+    if (!payload.first_name && authStatus.data.user) {
+        console.log("🔄 Using basic user info from auth data");
+        const user = authStatus.data.user;
+        payload = {
+            first_name: user.first_name || "Member",
+            last_name: user.last_name || "User",
+            middle_name: "",
+            suffix: "",
+            gender: user.gender || "",
+            email: user.email || "",
+            phone: user.phone || "",
+            facebook: "",
+            student_id: "",
+            program: "",
+            college: "",
+            year_level: "",
+            section: "",
+            user_type: userRole, // Use the actual user role
+        };
+        console.log("📦 Fallback Payload:", payload);
+    }
 
-                let payload = {};
+    // Final validation and role assignment
+    console.log("🎯 Final Payload Before Registration:", {
+        payload: payload,
+        hasFirstName: !!payload.first_name,
+        hasLastName: !!payload.last_name,
+        hasEmail: !!payload.email,
+        userType: payload.user_type,
+        expectedUserType: userRole
+    });
 
-                try {
-                    const userId = authStatus.data.user.id;
-                    const studentRes = await apiCall(`/students/${userId}`, "GET");
+    if (!payload.first_name || !payload.last_name || !payload.email) {
+        console.error("❌ Missing required fields in payload");
+        showMessage("⚠ Could not load your profile. Please re-login and try again.");
+        console.groupEnd();
+        return;
+    }
 
-                    if (studentRes.success && studentRes.data) {
-                        const s = studentRes.data;
-                        payload = {
-                            first_name: s.first_name,
-                            last_name: s.last_name,
-                            middle_name: s.middle_name || "",
-                            suffix: s.name_suffix || "",
-                            gender: s.gender,
-                            email: s.email,
-                            phone: s.phone || "",
-                            facebook: s.facebook_link || "",
-                            student_id: s.student_no,
-                            program: s.program || "",
-                            college: s.college || "",
-                            year_level: s.year_level || "",
-                            section: s.section || "",
-                            user_type: s.role || "bulsuan",
-                        };
-                    } else {
-                        console.warn("Could not fetch student info — using fallback empty data.");
-                    }
-                } catch (err) {
-                    console.error("Error fetching student profile:", err);
-                }
+    // Ensure user_type is correctly set
+    if (isLoggedIn && userRole === "member" && payload.user_type !== "member") {
+        console.warn("⚠️ Correcting user_type from", payload.user_type, "to 'member'");
+        payload.user_type = "member";
+    }
 
-                if (!payload.first_name || !payload.last_name || !payload.email) {
-                    showMessage("⚠ Could not load your BulSU profile. Please re-login and try again.");
-                    return;
-                }
+    console.log("📤 Sending registration request...", {
+        endpoint: `/events/${eventId}/register`,
+        payload: payload
+    });
 
-                const result = await apiCall(`/events/${eventId}/register`, "POST", payload);
+    // Make the registration API call
+    const result = await apiCall(`/events/${eventId}/register`, "POST", payload);
 
-                if (result?.success) {
-                    showMessage(result.message || "Registered successfully!");
-                    eventCard.dataset.registered = "true";
-                } else {
-                    showMessage(result?.message || "Registration failed.");
-                }
-            });
+    console.log("📥 Registration API Response:", result);
+
+    if (result?.success) {
+        console.log("✅ Registration successful!");
+        showMessage(result.message || "Registered successfully!");
+        eventCard.dataset.registered = "true";
+    } else {
+        console.error("❌ Registration failed:", result?.message);
+        showMessage(result?.message || "Registration failed.");
+    }
+
+    console.groupEnd();
+});
 
         function showPreRegisterFormInsideModal(eventId) {
             const modal = document.getElementById("eventModal");
@@ -1125,8 +1311,14 @@
                 });
             });
 
-            /*
             document.getElementById("submitPreRegister").addEventListener("click", async () => {
+                    const participantType = document.getElementById("participantType").value;
+                    // Determine user_type based on participant type selection
+                    let user_type = "guest";
+                    if (participantType === "BulSUan") {
+                        user_type = "bulsuan";
+                    }
+                
                 const data = {
                     first_name: document.getElementById("firstName").value,
                     last_name: document.getElementById("lastName").value,
@@ -1136,7 +1328,7 @@
                     email: document.getElementById("email").value,
                     phone: document.getElementById("phone").value,
                     facebook: document.getElementById("facebook").value,
-                    user_type: "guest",
+                    user_type: user_type,
                 };
 
                 if (!data.first_name || !data.last_name || !data.email || !data.gender) {
@@ -1152,131 +1344,7 @@
                 } else {
                     showMessage(result?.message || "Pre-registration failed.");
                 }
-                */
-                document.getElementById("submitPreRegister").addEventListener("click", async () => {
-            const participantType = document.getElementById("participantType").value;
-
-            const data = {
-                first_name: document.getElementById("firstName").value,
-                last_name: document.getElementById("lastName").value,
-                middle_name: document.getElementById("middleName").value,
-                suffix: document.getElementById("suffix").value,
-                gender: document.getElementById("gender").value,
-                email: document.getElementById("email").value,
-                phone: document.getElementById("phone").value,
-                facebook: document.getElementById("facebook").value,
-                user_type: participantType,
-            };
-
-            // Validate basic fields
-            if (!data.first_name || !data.last_name || !data.email || !data.gender || !participantType) {
-                alert("Please fill in all required fields.");
-                return;
-            }
-
-            const result = await apiCall(`/events/${eventId}/register`, "POST", data);
-
-            console.log("API Response:", result);
-
-            if (result && result.success) {
-                showMessage("Pre-registration successful! Your QR code will download automatically.");
-
-                // Close the modal first
-                formContainer.remove();
-                const modal = document.getElementById("eventModal");
-                modal.style.display = "none";
-
-                let qrData;
-                if (result.data && result.data.qr_code) {
-                    qrData = result.data.qr_code;
-                } else {
-                    console.error("No qr_code returned from API:", result);
-                    alert("Registration successful but QR code generation failed. Please contact support.");
-                    return;
-                }
-
-                console.log("Generating QR with data:", qrData);
-
-                // Create a temporary container for QR generation
-                const tempDiv = document.createElement("div");
-                tempDiv.style.position = "absolute";
-                tempDiv.style.left = "-9999px";
-                document.body.appendChild(tempDiv);
-
-                // Generate QR code
-                new QRCode(tempDiv, {
-                    text: qrData,
-                    width: 200,
-                    height: 200,
-                    colorDark: "#06047b",
-                    colorLight: "#ffffff",
-                    correctLevel: QRCode.CorrectLevel.H,
-                });
-
-                // Wait longer for QR code to fully render
-                setTimeout(() => {
-                    const canvas = tempDiv.querySelector("canvas");
-                    const img = tempDiv.querySelector("img");
-
-                    const padding = 20;
-
-                    if (canvas) {
-                        // Create a new canvas with extra padding
-                        const paddedCanvas = document.createElement("canvas");
-                        const size = canvas.width + padding * 2;
-                        paddedCanvas.width = size;
-                        paddedCanvas.height = size;
-
-                        const ctx = paddedCanvas.getContext("2d");
-                        ctx.fillStyle = "#ffffff";
-                        ctx.fillRect(0, 0, size, size);
-                        ctx.drawImage(canvas, padding, padding);
-
-                        const url = paddedCanvas.toDataURL("image/png");
-                        const a = document.createElement("a");
-                        const identifier = data.student_id || `${data.first_name}-${data.last_name}`;
-                        a.href = url;
-                        a.download = `Event-${eventId}-${identifier}-QR.png`;
-                        document.body.appendChild(a);
-                        a.click();
-                        document.body.removeChild(a);
-                        
-                        console.log("QR code download triggered successfully");
-                    } else if (img) {
-                        // For <img> fallback
-                        const paddedCanvas = document.createElement("canvas");
-                        const size = img.width + padding * 2;
-                        paddedCanvas.width = size;
-                        paddedCanvas.height = size;
-
-                        const ctx = paddedCanvas.getContext("2d");
-                        ctx.fillStyle = "#ffffff";
-                        ctx.fillRect(0, 0, size, size);
-                        ctx.drawImage(img, padding, padding);
-
-                        const url = paddedCanvas.toDataURL("image/png");
-                        const a = document.createElement("a");
-                        const identifier = data.student_id || `${data.first_name}-${data.last_name}`;
-                        a.href = url;
-                        a.download = `Event-${eventId}-${identifier}-QR.png`;
-                        document.body.appendChild(a);
-                        a.click();
-                        document.body.removeChild(a);
-                        
-                        console.log("QR code download triggered successfully (img fallback)");
-                    } else {
-                        console.error("No canvas or img element found for QR code");
-                        alert("QR code generation failed. Please try again.");
-                    }
-
-                    // Clean up temporary div
-                    document.body.removeChild(tempDiv);
-                }, 500); // Increased timeout to 500ms
-            } else {
-                showMessage(result?.message || "Pre-registration failed.");
-            }
             });
-            
         }
 
         function showBulSUPreRegisterForm(eventId) {
@@ -1389,6 +1457,13 @@
             });
 
             document.getElementById("submitBulSUPreRegister").addEventListener("click", async () => {
+                // Check if user is logged in to determine user_type
+                const authStatus = await apiCall("/auth/check-login", "GET");
+                const isLoggedIn = authStatus?.success && authStatus.data?.logged_in;
+                
+                // Determine user_type based on login status
+                const user_type = isLoggedIn ? "member" : "bulsuan";
+
                 const data = {
                     first_name: document.getElementById("firstName").value,
                     last_name: document.getElementById("lastName").value,
@@ -1403,7 +1478,7 @@
                     college: document.getElementById("college").value,
                     year_level: document.getElementById("yearLevel").value,
                     section: document.getElementById("section").value,
-                    user_type: "bulsuan",
+                    user_type: user_type, // Dynamic user_type based on login status
                 };
 
                 if (!data.first_name || !data.last_name || !data.email || !data.gender || !data.student_id || !data.program || !data.college || !data.year_level) {
@@ -1505,21 +1580,33 @@
             };
         }
 
+        // Also update the existing checkEventStatus function to be more robust
         function checkEventStatus() {
             const now = new Date();
+            const upcomingSection = document.getElementById("upcomingSection").querySelector(".event-list");
+            const completedSection = document.getElementById("pastSection").querySelector(".event-list");
 
-            document.querySelectorAll(".event-card[data-registered='true']").forEach(card => {
-                const eventEnd = new Date(`${card.dataset.date}T${card.dataset.time.split(' - ')[1]}`);
-                if (now > eventEnd) {
-                    const completedSection = document.querySelector("#completedSection .event-list");
-                    completedSection.appendChild(card);
-
+            document.querySelectorAll("#upcomingSection .event-card").forEach(card => {
+                const eventDate = card.dataset.date;
+                const eventTimeEnd = card.dataset.time ? card.dataset.time.split(' - ')[1] : '23:59';
+                const eventEndDateTime = new Date(`${eventDate}T${eventTimeEnd}`);
+                
+                if (now > eventEndDateTime) {
+                    // Move to completed section
+                    card.remove();
                     card.dataset.status = "completed";
+                    completedSection.appendChild(card);
+                    
+                    // Update any open modal
+                    const registerBtn = document.getElementById("registerBtn");
+                    if (registerBtn && registerBtn.dataset.eventId === card.dataset.id) {
+                        registerBtn.style.display = "none";
+                    }
                 }
             });
         }
 
-        setInterval(checkEventStatus, 30000);
+        setInterval(updateEventStatuses, 60000); // Check every minute instead of 30 seconds
 
         document.querySelectorAll(".filter-btn").forEach(btn => {
             btn.addEventListener("click", () => {
@@ -1542,5 +1629,4 @@
         attachCardListeners();
     });
 </script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
 <?php include '_footer.php'; ?>
