@@ -603,6 +603,7 @@ class EventController
     /**
      * Register for event
      */
+    /*
     public function register($eventId)
     {
         try {
@@ -640,26 +641,128 @@ class EventController
             return Response::error($e->getMessage());
         }
     }
+        */
+
+    /*
+    public function register($eventId)
+    {
+        try {
+            $input = json_decode(file_get_contents('php://input'), true);
+            $event = $this->eventModel->findById($eventId);
+            if (!$event) {
+                return Response::error("Event not found");
+            }
+            $restriction = strtolower($event['event_restriction'] ?? '');
+
+            $result = null;
+            switch ($restriction) {
+                case 'members':
+                    session_start();
+                    $userId = $_SESSION['user_id'] ?? null;
+                    if (!$userId) return Response::unauthorized("Login required to register as a member.");
+                    $result = $this->eventModel->registerMember($eventId, $userId);
+                    break;
+                case 'bulsuans':
+                    $result = $this->eventModel->registerBulSUan($eventId, $input);
+                    break;
+                case 'public':
+                    $result = $this->eventModel->registerPublic($eventId, $input);
+                    break;
+                default:
+                    return Response::error("Invalid event restriction type.");
+            }
+
+            if (isset($result['message']) && isset($result['data'])) {
+                return Response::success($result['data'], $result['message']);
+            } else {
+                return Response::success($result);
+            }
+        } catch (Exception $e) {
+            return Response::error($e->getMessage());
+        }
+    }
+        */
+    public function register($eventId)
+    {
+        try {
+            $input = json_decode(file_get_contents('php://input'), true);
+            $event = $this->eventModel->findById($eventId);
+            if (!$event) {
+                return Response::error("Event not found");
+            }
+
+            $restriction = strtolower($event['event_restriction'] ?? '');
+
+            if (session_status() === PHP_SESSION_NONE) {
+                session_start();
+            }
+
+            $userId = $_SESSION['user_id'] ?? $_SESSION['student_id'] ?? null;
+            $isLoggedIn = !empty($userId);
+
+            //error_log("Register Debug - User ID: " . ($userId ?? 'null') . ", Logged in: " . ($isLoggedIn ? 'yes' : 'no') . ", Event restriction: " . $restriction);
+
+            $result = null;
+
+            switch ($restriction) {
+                case 'members':
+                    // Members only - must be logged in
+                    if (!$isLoggedIn) {
+                        return Response::unauthorized("Login required to register as a member.");
+                    }
+                    $result = $this->eventModel->registerMember($eventId, $userId);
+                    break;
+
+                case 'bulsuans':
+                    if ($isLoggedIn) {
+                        $result = $this->eventModel->registerMember($eventId, $userId);
+                    } else {
+                        $result = $this->eventModel->registerBulSUan($eventId, $input);
+                    }
+                    break;
+
+                case 'public':
+                    if ($isLoggedIn) {
+                        $result = $this->eventModel->registerMember($eventId, $userId);
+                    } else {
+                        $result = $this->eventModel->registerPublic($eventId, $input);
+                    }
+                    break;
+
+                default:
+                    return Response::error("Invalid event restriction type.");
+            }
+
+            if (isset($result['message']) && isset($result['data'])) {
+                return Response::success($result['data'], $result['message']);
+            } else {
+                return Response::success($result);
+            }
+        } catch (Exception $e) {
+            return Response::error($e->getMessage());
+        }
+    }
 
     /**
      * Check if Member is registered for an event
      */
-    public function isUserRegistered($eventId, $userId) {
-    try {
-        $registered = $this->eventModel->checkUserRegistration($eventId, $userId);
+    public function isUserRegistered($eventId, $userId)
+    {
+        try {
+            $registered = $this->eventModel->checkUserRegistration($eventId, $userId);
 
-        echo json_encode([
-            'success' => true,
-            'registered' => $registered
-        ]);
-    } catch (Exception $e) {
-        http_response_code(500);
-        echo json_encode([
-            'success' => false,
-            'message' => $e->getMessage()
-        ]);
+            echo json_encode([
+                'success' => true,
+                'registered' => $registered
+            ]);
+        } catch (Exception $e) {
+            http_response_code(500);
+            echo json_encode([
+                'success' => false,
+                'message' => $e->getMessage()
+            ]);
+        }
     }
-}
 
 
     /**
@@ -913,6 +1016,50 @@ class EventController
             }
         } catch (Exception $e) {
             Response::serverError($e->getMessage());
+        }
+    }
+
+    /**
+     * Mark attendance for multiple participants
+     */
+    public function markAttendance($eventId)
+    {
+        try {
+            AuthMiddleware::requireOfficer();
+
+            $input = json_decode(file_get_contents('php://input'), true);
+
+            $identifiers = $input['identifiers'] ?? null;
+
+            if (empty($identifiers) || !is_array($identifiers)) {
+                Response::validationError([
+                    'identifiers' => 'Identifiers array is required'
+                ]);
+                return;
+            }
+
+            $event = $this->eventModel->findById($eventId);
+            if (!$event) {
+                Response::notFound('Event not found');
+                return;
+            }
+
+            $result = $this->eventModel->markAttendanceByIdentifiers($eventId, $identifiers);
+
+            if ($result['updated'] > 0) {
+                Response::success(
+                    $result,
+                    "Successfully marked {$result['updated']} participant(s) as attended"
+                );
+            } else {
+                Response::success(
+                    $result,
+                    "No attendance records were updated. Participants may already be marked as attended or not found."
+                );
+            }
+        } catch (Exception $e) {
+            error_log("Error marking attendance: " . $e->getMessage());
+            Response::serverError('Failed to mark attendance: ' . $e->getMessage());
         }
     }
 }

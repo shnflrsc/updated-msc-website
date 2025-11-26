@@ -7,7 +7,7 @@ function navigateCalendar(monthOffset) {
 }
 
 async function fetchCalendarEvents() {
-  const data = await apiCall("/events/universityCalendar", "GET");
+  const data = await apiCall("/events/upcomingPreview", "GET"); //change the data source of event dots
   if (data?.success) {
     upcomingEvents = data.data.map(evt => evt.event_date);
   } else {
