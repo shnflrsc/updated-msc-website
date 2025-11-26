@@ -716,33 +716,78 @@
             const events = response?.data?.events || [];
             if (!events.length) return;
 
-            const today = new Date();
+            const now = new Date();
             const upcomingEvents = [];
             const completedEvents = [];
-            const pastEvents = [];
 
             events.forEach(event => {
-                const eventDate = new Date(event.event_date);
-
-                if (event.event_status?.toLowerCase() === "upcoming") {
-                    upcomingEvents.push(event);
-                } else if (event.event_status?.toLowerCase() === "completed") {
+                // Create a Date object for the event's end time
+                const eventEndDateTime = new Date(`${event.event_date}T${event.event_time_end}`);
+                
+                // Check if event has ended (current time is after event end time)
+                if (now > eventEndDateTime) {
                     completedEvents.push(event);
-                } else if (eventDate < today) {
-                    pastEvents.push(event);
+                } else {
+                    upcomingEvents.push(event);
                 }
             });
 
             renderEvents(upcomingEvents, "upcomingSection");
-            renderEvents(completedEvents, "completedSection");
-            renderEvents(pastEvents, "pastSection");
+            renderEvents(completedEvents, "pastSection"); // Note: using "pastSection" as completed section
 
             attachCardListeners();
+            
+            // Start checking for event status changes every minute
+            startEventStatusChecker();
         } catch (err) {
             console.error("Error loading events:", err);
         }
     }
 
+    // Function to check and update event status in real-time
+    function startEventStatusChecker() {
+        setInterval(() => {
+            updateEventStatuses();
+        }, 60000); // Check every minute
+    }
+
+    function updateEventStatuses() {
+        const now = new Date();
+        const upcomingSection = document.getElementById("upcomingSection").querySelector(".event-list");
+        const completedSection = document.getElementById("pastSection").querySelector(".event-list");
+        
+        const upcomingCards = Array.from(upcomingSection.querySelectorAll(".event-card"));
+        
+        upcomingCards.forEach(card => {
+            const eventDate = card.dataset.date;
+            const eventTimeEnd = card.dataset.time ? card.dataset.time.split(' - ')[1] : '23:59';
+            
+            // Create Date object for event end time
+            const eventEndDateTime = new Date(`${eventDate}T${eventTimeEnd}`);
+            
+            // If event has ended, move it to completed section
+            if (now > eventEndDateTime) {
+                // Remove from upcoming
+                card.remove();
+                
+                // Update card status
+                card.dataset.status = "completed";
+                
+                // Hide register button if it exists in modal data
+                const registerBtn = document.getElementById("registerBtn");
+                if (registerBtn && registerBtn.dataset.eventId === card.dataset.id) {
+                    registerBtn.style.display = "none";
+                }
+                
+                // Add to completed section
+                completedSection.appendChild(card);
+                
+                console.log(`Moved event "${card.dataset.title}" to completed section`);
+            }
+        });
+    }
+
+    // Update the renderEvents function to include time data
     function renderEvents(eventsArray, sectionId) {
         const section = document.getElementById(sectionId).querySelector(".event-list");
         section.innerHTML = "";
@@ -754,12 +799,13 @@
             card.dataset.id = event.event_id;
             card.dataset.title = event.event_name;
             card.dataset.date = event.event_date;
+            card.dataset.time = `${event.event_time_start || "00:00"} - ${event.event_time_end || "23:59"}`;
             card.dataset.status = event.event_status;
             card.dataset.content = event.description;
             card.dataset.capacity = event.capacity || 0;
             card.dataset.registeredCount = event.attendants || 0;
             card.dataset.access = event.event_restriction || "public";
-            card.dataset.image = event.event_batch_image || ""; // Store image URL
+            card.dataset.image = event.event_batch_image || "";
 
             card.innerHTML = `
                 <div class="event-image">
@@ -771,6 +817,7 @@
                     <div>
                         <h3>${event.event_name}</h3>
                         <p class="date">${new Date(event.event_date).toLocaleDateString("en-US", { month: "long", day: "numeric", year: "numeric" })}</p>
+                        <p class="date">${event.event_time_start || "TBA"} - ${event.event_time_end || "TBA"}</p>
                     </div>
                     <p class="excerpt">${event.description}</p>
                 </div>
@@ -778,7 +825,7 @@
 
             card.addEventListener("click", () => {
                 document.getElementById("modalTitle").textContent = card.dataset.title;
-                document.getElementById("modalDate").textContent = card.dataset.date;
+                document.getElementById("modalDate").textContent = `${card.dataset.date} • ${card.dataset.time}`;
                 document.getElementById("modalContent").textContent = card.dataset.content;
 
                 // Update modal image
@@ -791,7 +838,13 @@
 
                 const registerBtn = document.getElementById("registerBtn");
                 registerBtn.dataset.eventId = card.dataset.id;
-                registerBtn.style.display = (card.dataset.status.toLowerCase() === "upcoming") ?
+                
+                // Check if event has ended to determine if registration should be available
+                const now = new Date();
+                const eventEndDateTime = new Date(`${card.dataset.date}T${card.dataset.time.split(' - ')[1]}`);
+                const isEventEnded = now > eventEndDateTime;
+                
+                registerBtn.style.display = (card.dataset.status.toLowerCase() === "upcoming" && !isEventEnded) ?
                     "inline-block" :
                     "none";
 
@@ -1527,21 +1580,33 @@ registerBtn.addEventListener("click", async () => {
             };
         }
 
+        // Also update the existing checkEventStatus function to be more robust
         function checkEventStatus() {
             const now = new Date();
+            const upcomingSection = document.getElementById("upcomingSection").querySelector(".event-list");
+            const completedSection = document.getElementById("pastSection").querySelector(".event-list");
 
-            document.querySelectorAll(".event-card[data-registered='true']").forEach(card => {
-                const eventEnd = new Date(`${card.dataset.date}T${card.dataset.time.split(' - ')[1]}`);
-                if (now > eventEnd) {
-                    const completedSection = document.querySelector("#completedSection .event-list");
-                    completedSection.appendChild(card);
-
+            document.querySelectorAll("#upcomingSection .event-card").forEach(card => {
+                const eventDate = card.dataset.date;
+                const eventTimeEnd = card.dataset.time ? card.dataset.time.split(' - ')[1] : '23:59';
+                const eventEndDateTime = new Date(`${eventDate}T${eventTimeEnd}`);
+                
+                if (now > eventEndDateTime) {
+                    // Move to completed section
+                    card.remove();
                     card.dataset.status = "completed";
+                    completedSection.appendChild(card);
+                    
+                    // Update any open modal
+                    const registerBtn = document.getElementById("registerBtn");
+                    if (registerBtn && registerBtn.dataset.eventId === card.dataset.id) {
+                        registerBtn.style.display = "none";
+                    }
                 }
             });
         }
 
-        setInterval(checkEventStatus, 30000);
+        setInterval(updateEventStatuses, 60000); // Check every minute instead of 30 seconds
 
         document.querySelectorAll(".filter-btn").forEach(btn => {
             btn.addEventListener("click", () => {
