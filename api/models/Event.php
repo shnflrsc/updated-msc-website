@@ -295,6 +295,7 @@ class Event
     /**
      * GET: Upcoming events
      */
+    /*
     public function getUpcoming($limit = null)
     {
         $sql = "SELECT * FROM events 
@@ -315,6 +316,44 @@ class Event
         $stmt->execute();
 
         return $stmt->fetchAll();
+    }
+    */
+    public function getUpcoming($limit = null)
+    {
+        $sql = "SELECT 
+                e.*,
+                COUNT(er.id) AS total_registered,
+                SUM(CASE WHEN er.attendance_status = 'attended' THEN 1 ELSE 0 END) AS total_attended,
+                SUM(CASE WHEN er.attendance_status = 'registered' THEN 1 ELSE 0 END) AS total_still_registered
+            FROM events e
+            LEFT JOIN event_registrations er ON e.event_id = er.event_id
+            WHERE e.event_status = 'upcoming' 
+            AND e.event_date >= CURDATE()
+            GROUP BY e.event_id
+            ORDER BY e.event_date ASC, e.event_time_start ASC";
+
+        if ($limit !== null) {
+            $sql .= " LIMIT :limit";
+        }
+
+        $stmt = $this->db->prepare($sql);
+
+        if ($limit !== null) {
+            $stmt->bindValue(':limit', (int)$limit, PDO::PARAM_INT);
+        }
+
+        $stmt->execute();
+        $events = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+        foreach ($events as &$event) {
+            $totalRegistered = (int)$event['total_registered'];
+            $totalAttended = (int)$event['total_attended'];
+            $event['attendance_rate'] = $totalRegistered > 0
+                ? round(($totalAttended / $totalRegistered) * 100, 2)
+                : 0;
+        }
+
+        return $events;
     }
 
     public function getUniversityCalendar($limit = null)
@@ -1187,6 +1226,7 @@ class Event
     /**
      * GET: for Event Dashboard
      */
+    /*
     public function findEventById($eventId)
     {
         try {
@@ -1221,6 +1261,57 @@ class Event
             $event['total_still_registered'] = $totalStillRegistered;
             $event['attendance_rate']        = $attendanceRate;
 
+            return $event;
+        } catch (Exception $e) {
+            throw new Exception("Failed to fetch event details: " . $e->getMessage());
+        }
+    }
+    */
+
+    public function findEventById($eventId)
+    {
+        try {
+            $stmt = $this->db->prepare("SELECT * FROM events WHERE event_id = :event_id");
+            $stmt->execute(['event_id' => $eventId]);
+            $event = $stmt->fetch(PDO::FETCH_ASSOC);
+            if (!$event) {
+                return null;
+            }
+            // Aggregate counts from event_registrations
+            $countSql = "
+        SELECT 
+            COUNT(*) AS total_registered,
+            SUM(attendance_status = 'attended') AS total_attended,
+
+            SUM(participant_type = 'member') AS total_member_registered,
+            SUM(participant_type = 'member' AND attendance_status = 'attended') AS total_member_attended,
+            
+            SUM(participant_type = 'guest') AS total_guest_registered,
+            SUM(participant_type = 'guest' AND attendance_status = 'attended') AS total_guest_attended
+            FROM event_registrations
+            WHERE event_id = :event_id
+            ";
+            $stmt2 = $this->db->prepare($countSql);
+            $stmt2->execute(['event_id' => $eventId]);
+            $counts = $stmt2->fetch(PDO::FETCH_ASSOC);
+
+            $totalRegistered       = (int)($counts['total_registered'] ?? 0);
+            $totalAttended         = (int)($counts['total_attended'] ?? 0);
+
+            $totalMemberRegistered  = (int)($counts['total_member_registered'] ?? 0);
+            $totalMemberAttended  = (int)($counts['total_member_attended'] ?? 0);
+            $totalGuestRegistered  = (int)($counts['total_guest_registered'] ?? 0);
+            $totalGuestAttended  = (int)($counts['total_guest_attended'] ?? 0);
+            $attendanceRate        = $totalRegistered > 0 ? round(($totalAttended / $totalRegistered) * 100, 2) : 0;
+
+            $event['total_registered']       = $totalRegistered;
+            $event['total_attended']         = $totalAttended;
+
+            $event['total_member_registered'] = $totalMemberRegistered;
+            $event['total_member_attended'] = $totalMemberAttended;
+            $event['total_guest_registered'] = $totalGuestRegistered;
+            $event['total_guest_attended'] = $totalGuestAttended;
+            $event['attendance_rate']        = $attendanceRate;
             return $event;
         } catch (Exception $e) {
             throw new Exception("Failed to fetch event details: " . $e->getMessage());

@@ -1633,10 +1633,10 @@
                 `Created: ${new Date(evt.created_at).toLocaleString()}`;
 
             // Attendance summary: 
-            dashboard.querySelector(".attendance-card .stat-item:nth-child(1) .stat-value").textContent = evt.total_registered || '0';
-            dashboard.querySelector(".attendance-card .stat-item:nth-child(2) .stat-value").textContent = evt.total_attended || '0';
-            dashboard.querySelector(".attendance-card .stat-item:nth-child(3) .stat-value").textContent = '0';
-            dashboard.querySelector(".attendance-card .stat-item:nth-child(4) .stat-value").textContent = '0';
+            dashboard.querySelector(".attendance-card .stat-item:nth-child(1) .stat-value").textContent = evt.total_member_registered || '0';
+            dashboard.querySelector(".attendance-card .stat-item:nth-child(2) .stat-value").textContent = evt.total_member_attended || '0';
+            dashboard.querySelector(".attendance-card .stat-item:nth-child(3) .stat-value").textContent = evt.total_guest_registered || '0';
+            dashboard.querySelector(".attendance-card .stat-item:nth-child(4) .stat-value").textContent = evt.total_guest_attended || '0';
             dashboard.querySelector(".attendance-card .stat-item:nth-child(5) .stat-value").textContent = evt.total_registered || '0';
             dashboard.querySelector(".attendance-card .stat-item:nth-child(6) .stat-value").textContent = evt.total_attended || '0';
             dashboard.querySelector(".attendance-card .stat-item:nth-child(7) .stat-value").textContent = `${evt.attendance_rate}%` || '0';
@@ -2054,7 +2054,7 @@
                                 <div class="event-meta">
                                     <span><i class="bi bi-calendar"></i> ${formattedDateTime}</span>
                                     <span><i class="bi bi-geo-alt"></i> ${evt.location} </span>
-                                    <span><i class="bi bi-people"></i> ${evt.attendants || 0} / ${(evt.capacity === null || evt.capacity === undefined) ? Number.MAX_SAFE_INTEGER : evt.capacity}</span>
+                                    <span><i class="bi bi-people"></i> ${evt.total_registered} / ${(evt.capacity === null || evt.capacity === undefined) ? Number.MAX_SAFE_INTEGER : evt.capacity}</span> 
                                     <span class="event-status status-upcoming"> ${evt.event_status} </span>
                                 </div>
                                 <div class="event-actions">
