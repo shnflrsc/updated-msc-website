@@ -86,8 +86,8 @@ switch ($method) {
             $eventController->getAttendedEventsByStudent($id);
         } elseif ($endpoint === '' || $endpoint === 'all') {
             $eventController->getAll();
-        }elseif ($endpoint && is_numeric($endpoint) && $id === 'check-registration' && isset($_GET['user_id'])) {
-        $eventController->isUserRegistered($endpoint, $_GET['user_id']);
+        } elseif ($endpoint && is_numeric($endpoint) && $id === 'check-registration' && isset($_GET['user_id'])) {
+            $eventController->isUserRegistered($endpoint, $_GET['user_id']);
         } else {
             http_response_code(404);
             echo json_encode(['success' => false, 'message' => 'Event endpoint not found: ' . $endpoint]);
@@ -140,7 +140,7 @@ switch ($method) {
             $eventController->register($endpoint);
         } elseif ($endpoint && is_numeric($endpoint) && $id === 'cancel-pre-registration') {
             $eventController->cancelRegistration($endpoint);
-        }elseif ($endpoint === '' || $endpoint === 'create') {
+        } elseif ($endpoint === '' || $endpoint === 'create') {
             $eventController->create();
         } elseif ($endpoint && is_numeric($endpoint) && $id === 'cancel') {
             $eventController->cancelEvent($endpoint);
@@ -152,6 +152,8 @@ switch ($method) {
             $eventController->updateStatus($endpoint);
         } elseif ($endpoint && is_numeric($endpoint) && $id === 'import-attendance') {
             $eventController->importAttendance($endpoint);
+        } elseif ($endpoint && is_numeric($endpoint) && $id === 'mark-attendance') {
+            $eventController->markAttendance($endpoint);
         } elseif ($endpoint && is_numeric($endpoint)) {
             $eventController->update($endpoint);
         } else {
