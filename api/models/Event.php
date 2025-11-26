@@ -477,6 +477,7 @@ class Event
     /**
      * Register a MEMBER (MSC logged-in student)
      */
+    /*
     public function registerMember($eventId, $studentId)
     {
         try {
@@ -505,7 +506,120 @@ class Event
             throw new Exception("Member registration failed: " . $e->getMessage());
         }
     }
+    */
+    public function registerMember($eventId, $studentId)
+    {
+        try {
+            $check = $this->db->prepare("
+            SELECT id FROM event_registrations
+            WHERE event_id = :event_id AND student_id = :student_id
+        ");
+            $check->execute(['event_id' => $eventId, 'student_id' => $studentId]);
+            if ($check->fetch()) {
+                throw new Exception("You are already registered for this event.");
+            }
 
+            $studentStmt = $this->db->prepare("
+            SELECT 
+                first_name,
+                middle_name,
+                last_name,
+                name_suffix,
+                email,
+                gender,
+                phone,
+                facebook_link,
+                student_no,
+                program,
+                college,
+                year_level,
+                section
+            FROM students
+            WHERE id = :student_id
+        ");
+            $studentStmt->execute(['student_id' => $studentId]);
+            $student = $studentStmt->fetch(PDO::FETCH_ASSOC);
+
+            if (!$student) {
+                throw new Exception("Student information not found.");
+            }
+
+            $stmt = $this->db->prepare("
+            INSERT INTO event_registrations (
+                event_id,
+                student_id,
+                participant_type,
+                first_name,
+                middle_name,
+                last_name,
+                suffix,
+                email,
+                gender,
+                phone,
+                facebook_link,
+                program,
+                college,
+                year_level,
+                section,
+                registration_date
+            ) VALUES (
+                :event_id,
+                :student_id,
+                'member',
+                :first_name,
+                :middle_name,
+                :last_name,
+                :suffix,
+                :email,
+                :gender,
+                :phone,
+                :facebook_link,
+                :program,
+                :college,
+                :year_level,
+                :section,
+                NOW()
+            )
+        ");
+
+            $stmt->execute([
+                'event_id' => $eventId,
+                'student_id' => $studentId,
+                'first_name' => $student['first_name'],
+                'middle_name' => $student['middle_name'] ?? null,
+                'last_name' => $student['last_name'],
+                'suffix' => $student['name_suffix'] ?? null,
+                'email' => $student['email'],
+                'gender' => $student['gender'],
+                'phone' => $student['phone'] ?? null,
+                'facebook_link' => $student['facebook_link'] ?? null,
+                'program' => $student['program'] ?? null,
+                'college' => $student['college'] ?? null,
+                'year_level' => $student['year_level'] ?? null,
+                'section' => $student['section'] ?? null
+            ]);
+
+            $registrationId = $this->db->lastInsertId();
+
+            $this->db->prepare("
+            UPDATE events 
+            SET attendants = attendants + 1 
+            WHERE event_id = :event_id
+        ")->execute(['event_id' => $eventId]);
+
+            return [
+                "message" => "Successfully registered as a member.",
+                "data" => [
+                    "registration_id" => $registrationId,
+                    "event_id" => $eventId,
+                    "participant_type" => "member",
+                    "full_name" => trim($student['first_name'] . ' ' . ($student['middle_name'] ?? '') . ' ' . $student['last_name'])
+                ]
+            ];
+        } catch (Exception $e) {
+            throw new Exception("Member registration failed: " . $e->getMessage());
+        }
+    }
 
     /**
      * Cancel a Pre-Registration

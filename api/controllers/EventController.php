@@ -642,6 +642,8 @@ class EventController
         }
     }
         */
+
+    /*
     public function register($eventId)
     {
         try {
@@ -666,6 +668,67 @@ class EventController
                 case 'public':
                     $result = $this->eventModel->registerPublic($eventId, $input);
                     break;
+                default:
+                    return Response::error("Invalid event restriction type.");
+            }
+
+            if (isset($result['message']) && isset($result['data'])) {
+                return Response::success($result['data'], $result['message']);
+            } else {
+                return Response::success($result);
+            }
+        } catch (Exception $e) {
+            return Response::error($e->getMessage());
+        }
+    }
+        */
+    public function register($eventId)
+    {
+        try {
+            $input = json_decode(file_get_contents('php://input'), true);
+            $event = $this->eventModel->findById($eventId);
+            if (!$event) {
+                return Response::error("Event not found");
+            }
+
+            $restriction = strtolower($event['event_restriction'] ?? '');
+
+            if (session_status() === PHP_SESSION_NONE) {
+                session_start();
+            }
+
+            $userId = $_SESSION['user_id'] ?? $_SESSION['student_id'] ?? null;
+            $isLoggedIn = !empty($userId);
+
+            //error_log("Register Debug - User ID: " . ($userId ?? 'null') . ", Logged in: " . ($isLoggedIn ? 'yes' : 'no') . ", Event restriction: " . $restriction);
+
+            $result = null;
+
+            switch ($restriction) {
+                case 'members':
+                    // Members only - must be logged in
+                    if (!$isLoggedIn) {
+                        return Response::unauthorized("Login required to register as a member.");
+                    }
+                    $result = $this->eventModel->registerMember($eventId, $userId);
+                    break;
+
+                case 'bulsuans':
+                    if ($isLoggedIn) {
+                        $result = $this->eventModel->registerMember($eventId, $userId);
+                    } else {
+                        $result = $this->eventModel->registerBulSUan($eventId, $input);
+                    }
+                    break;
+
+                case 'public':
+                    if ($isLoggedIn) {
+                        $result = $this->eventModel->registerMember($eventId, $userId);
+                    } else {
+                        $result = $this->eventModel->registerPublic($eventId, $input);
+                    }
+                    break;
+
                 default:
                     return Response::error("Invalid event restriction type.");
             }
@@ -962,7 +1025,7 @@ class EventController
     public function markAttendance($eventId)
     {
         try {
-            AuthMiddleware::requireOfficer(); 
+            AuthMiddleware::requireOfficer();
 
             $input = json_decode(file_get_contents('php://input'), true);
 
