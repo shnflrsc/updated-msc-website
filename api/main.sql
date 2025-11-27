@@ -90,11 +90,17 @@ CREATE TABLE IF NOT EXISTS settings (
 -- Create event_registrations table for tracking registrations
 CREATE TABLE IF NOT EXISTS event_registrations (
     id INT AUTO_INCREMENT PRIMARY KEY,
+    qr_code VARCHAR(50), 
     event_id INT NOT NULL,
     student_id INT NULL,
     first_name VARCHAR(100),
+    middle_name VARCHAR(100), 
     last_name VARCHAR(100),
+    suffix VARCHAR(20), 
     email VARCHAR(255),
+    gender ENUM('Male', 'Female', 'Other'), 
+    phone VARCHAR(20), 
+    facebook_link VARCHAR(255), 
     participant_type ENUM('member', 'bulsuan', 'guest') DEFAULT 'guest',
     program VARCHAR(255),
     college VARCHAR(255),
@@ -104,7 +110,8 @@ CREATE TABLE IF NOT EXISTS event_registrations (
     attendance_status ENUM('registered', 'attended', 'absent') DEFAULT 'registered',
     FOREIGN KEY (event_id) REFERENCES events(event_id) ON DELETE CASCADE,
     FOREIGN KEY (student_id) REFERENCES students(id) ON DELETE SET NULL,
-    UNIQUE KEY unique_registration (event_id, student_id)
+    UNIQUE KEY unique_registration (event_id, student_id),
+    INDEX idx_qr_code (qr_code) 
 );
 
 

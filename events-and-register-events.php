@@ -152,7 +152,6 @@
 
     /* Mobile Responsive Styles */
     @media (max-width: 768px) {
-
         /* Stack filter buttons vertically */
         .filter-buttons {
             flex-direction: column;
@@ -189,492 +188,491 @@
         }
     }
 
-    /* Modal styles */
-    .modal {
-        display: none;
-        position: fixed;
-        z-index: 1000;
-        left: 0;
-        top: 0;
-        width: 100%;
-        height: 100%;
-        background-color: rgba(0, 0, 0, 0.8);
-        justify-content: center;
-        align-items: center;
-        padding: 2rem;
-    }
+/* Modal styles */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8);
+    justify-content: center;
+    align-items: center;
+    padding: 2rem;
+}
 
+.modal-content {
+    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+    padding: 0;
+    border-radius: 16px;
+    max-width: 800px;
+    width: 90%;
+    max-height: 85vh;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    position: relative;
+    border: 2px solid rgba(185, 218, 5, 0.3);
+    overflow: hidden;
+}
+
+.modal-content:has(.pre-register-container) {
+    grid-template-columns: 1fr;
+    max-width: 700px;
+    overflow-y: auto;
+}
+
+.modal-image {
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, #0f3460 0%, #16213e 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    position: relative;
+}
+
+.modal-content:has(.pre-register-container) .modal-image {
+    display: none;
+}
+
+.modal-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.modal-image i {
+    font-size: 5rem;
+    color: #b9da05;
+}
+
+.modal-body {
+    padding: 2rem;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.modal-content h2 {
+    color: #b9da05;
+    font-size: 1.6rem;
+    margin: 0 0 0.5rem 0;
+    line-height: 1.3;
+}
+
+.modal-content .date {
+    color: #ffffff;
+    font-size: 0.9rem;
+    opacity: 0.9;
+    margin-bottom: 1rem;
+    display: block;
+}
+
+.modal-content p {
+    color: #ffffff;
+    line-height: 1.6;
+    font-size: 0.95rem;
+    margin-bottom: 1rem;
+    flex-grow: 1;
+}
+
+.close-btn {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    font-size: 1.5rem;
+    color: #b9da05;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    z-index: 10;
+    background: rgba(0, 0, 0, 0.7);
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.close-btn:hover {
+    transform: rotate(90deg);
+    background: rgba(0, 0, 0, 0.9);
+}
+
+.register-btn {
+    background: #b9da05;
+    color: #000;
+    padding: 0.7rem 1.8rem;
+    border: none;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    align-self: flex-start;
+    font-size: 0.95rem;
+}
+
+.register-btn:hover {
+    background: #a0c005;
+    transform: scale(1.05);
+}
+
+/* Make form container scrollable if needed */
+.pre-register-container {
+    color: white;
+    padding: 3rem;
+    grid-column: 1 / -1;
+    background: linear-gradient(135deg, #16213e 0%, #0f3460 100%);
+    min-height: 100%;
+}
+
+.pre-register-container h2 {
+    color: #b9da05;
+    margin-bottom: 0.5rem;
+    font-size: 2rem;
+    font-weight: 700;
+    text-align: center;
+}
+
+.pre-register-container h3 {
+    color: #b9da05;
+    font-size: 1.3rem;
+    margin: 2rem 0 1rem 0;
+    padding-bottom: 0.5rem;
+    border-bottom: 2px solid rgba(185, 218, 5, 0.3);
+}
+
+.pre-register-container .subtitle {
+    margin-bottom: 2rem;
+    opacity: 0.85;
+    text-align: center;
+    font-size: 1rem;
+    color: rgba(255, 255, 255, 0.9);
+}
+
+.form-section {
+    background: rgba(255, 255, 255, 0.05);
+    padding: 1.5rem;
+    border-radius: 12px;
+    margin-bottom: 1.5rem;
+    border: 1px solid rgba(185, 218, 5, 0.2);
+}
+
+@media (max-width: 968px) {
     .modal-content {
-        background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
-        padding: 0;
-        border-radius: 16px;
-        max-width: 800px;
-        width: 90%;
-        max-height: 85vh;
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        position: relative;
-        border: 2px solid rgba(185, 218, 5, 0.3);
-        overflow: hidden;
-    }
-
-    .modal-content:has(.pre-register-container) {
         grid-template-columns: 1fr;
-        max-width: 700px;
-        overflow-y: auto;
+        max-width: 600px;
+        max-height: 90vh;
     }
-
+    
     .modal-image {
-        width: 100%;
-        height: 100%;
-        background: linear-gradient(135deg, #0f3460 0%, #16213e 100%);
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        overflow: hidden;
+        height: 300px;
+        padding-bottom: 0;
         position: relative;
-    }
-
-    .modal-content:has(.pre-register-container) .modal-image {
-        display: none;
     }
 
     .modal-image img {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+}
+
+@media (max-width: 768px) {
+    .modal {
+        padding: 1rem;
+    }
+    
+    .modal-content {
+        max-height: 95vh;
+        width: 95%;
+        overflow-y: auto;
+    }
+    
+    .modal-image {
+        height: 250px;
+        padding-bottom: 0;
+        position: relative;
+        min-height: 250px;
+    }
+
+    .modal-image img {
+        position: absolute;
+        top: 0;
+        left: 0;
         width: 100%;
         height: 100%;
         object-fit: cover;
     }
 
     .modal-image i {
-        font-size: 5rem;
-        color: #b9da05;
+        font-size: 4rem;
     }
-
+    
     .modal-body {
-        padding: 2rem;
-        overflow-y: auto;
-        display: flex;
-        flex-direction: column;
-        justify-content: space-between;
+        padding: 1.5rem;
     }
-
+    
     .modal-content h2 {
-        color: #b9da05;
-        font-size: 1.6rem;
-        margin: 0 0 0.5rem 0;
-        line-height: 1.3;
+        font-size: 1.3rem;
     }
-
-    .modal-content .date {
-        color: #ffffff;
-        font-size: 0.9rem;
-        opacity: 0.9;
-        margin-bottom: 1rem;
-        display: block;
-    }
-
+    
     .modal-content p {
-        color: #ffffff;
-        line-height: 1.6;
-        font-size: 0.95rem;
-        margin-bottom: 1rem;
-        flex-grow: 1;
+        font-size: 0.9rem;
     }
 
     .close-btn {
-        position: absolute;
         top: 1rem;
         right: 1rem;
         font-size: 1.5rem;
-        color: #b9da05;
-        cursor: pointer;
-        transition: all 0.3s ease;
-        z-index: 10;
-        background: rgba(0, 0, 0, 0.7);
         width: 35px;
         height: 35px;
-        border-radius: 50%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-    }
-
-    .close-btn:hover {
-        transform: rotate(90deg);
-        background: rgba(0, 0, 0, 0.9);
     }
 
     .register-btn {
-        background: #b9da05;
-        color: #000;
         padding: 0.7rem 1.8rem;
-        border: none;
-        border-radius: 8px;
-        font-weight: 600;
-        cursor: pointer;
-        transition: all 0.3s ease;
-        align-self: flex-start;
         font-size: 0.95rem;
     }
 
-    .register-btn:hover {
-        background: #a0c005;
-        transform: scale(1.05);
-    }
-
-    /* Make form container scrollable if needed */
+    /* Pre-register form styles */
     .pre-register-container {
         color: white;
-        padding: 3rem;
-        grid-column: 1 / -1;
-        background: linear-gradient(135deg, #16213e 0%, #0f3460 100%);
-        min-height: 100%;
+        padding: 2rem;
+        max-height: 85vh;
+        overflow-y: auto;
     }
 
     .pre-register-container h2 {
         color: #b9da05;
-        margin-bottom: 0.5rem;
-        font-size: 2rem;
-        font-weight: 700;
-        text-align: center;
-    }
-
-    .pre-register-container h3 {
-        color: #b9da05;
-        font-size: 1.3rem;
-        margin: 2rem 0 1rem 0;
-        padding-bottom: 0.5rem;
-        border-bottom: 2px solid rgba(185, 218, 5, 0.3);
+        margin-bottom: 1rem;
     }
 
     .pre-register-container .subtitle {
-        margin-bottom: 2rem;
-        opacity: 0.85;
-        text-align: center;
-        font-size: 1rem;
-        color: rgba(255, 255, 255, 0.9);
-    }
-
-    .form-section {
-        background: rgba(255, 255, 255, 0.05);
-        padding: 1.5rem;
-        border-radius: 12px;
         margin-bottom: 1.5rem;
-        border: 1px solid rgba(185, 218, 5, 0.2);
+        opacity: 0.8;
     }
 
-    @media (max-width: 968px) {
-        .modal-content {
-            grid-template-columns: 1fr;
-            max-width: 600px;
-            max-height: 90vh;
-        }
+    .form-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1.5rem;
+        margin-bottom: 0;
+    }
 
-        .modal-image {
-            height: 300px;
-            padding-bottom: 0;
-            position: relative;
-        }
+    .form-field {
+        display: flex;
+        flex-direction: column;
+    }
 
-        .modal-image img {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
+    .form-grid label,
+    .form-field label {
+        display: block;
+        margin-bottom: 0.5rem;
+        color: #b9da05;
+        font-weight: 600;
+        font-size: 0.9rem;
+    }
+
+    .form-grid input,
+    .form-grid select,
+    .form-field input,
+    .form-field select {
+        width: 100%;
+        padding: 0.875rem;
+        background: rgba(255, 255, 255, 0.08);
+        border: 2px solid rgba(185, 218, 5, 0.2);
+        border-radius: 10px;
+        color: white;
+        font-size: 0.95rem;
+        transition: all 0.3s ease;
+    }
+
+    .form-grid input:focus,
+    .form-grid select:focus,
+    .form-field input:focus,
+    .form-field select:focus {
+        outline: none;
+        border-color: #b9da05;
+        background: rgba(255, 255, 255, 0.12);
+        box-shadow: 0 0 0 3px rgba(185, 218, 5, 0.1);
+    }
+
+    .form-grid input::placeholder,
+    .form-field input::placeholder {
+        color: rgba(255, 255, 255, 0.4);
     }
 
     @media (max-width: 768px) {
-        .modal {
-            padding: 1rem;
+        .form-grid {
+            grid-template-columns: 1fr;
+            gap: 1rem;
         }
 
-        .modal-content {
-            max-height: 95vh;
-            width: 95%;
-            overflow-y: auto;
-        }
-
-        .modal-image {
-            height: 250px;
-            padding-bottom: 0;
-            position: relative;
-            min-height: 250px;
-        }
-
-        .modal-image img {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
-        .modal-image i {
-            font-size: 4rem;
-        }
-
-        .modal-body {
-            padding: 1.5rem;
-        }
-
-        .modal-content h2 {
-            font-size: 1.3rem;
-        }
-
-        .modal-content p {
-            font-size: 0.9rem;
-        }
-
-        .close-btn {
-            top: 1rem;
-            right: 1rem;
-            font-size: 1.5rem;
-            width: 35px;
-            height: 35px;
-        }
-
-        .register-btn {
-            padding: 0.7rem 1.8rem;
-            font-size: 0.95rem;
-        }
-
-        /* Pre-register form styles */
         .pre-register-container {
-            color: white;
-            padding: 2rem;
-            max-height: 85vh;
-            overflow-y: auto;
+            padding: 2rem 1.5rem;
+            max-height: 90vh;
         }
 
         .pre-register-container h2 {
-            color: #b9da05;
-            margin-bottom: 1rem;
+            font-size: 1.5rem;
         }
 
-        .pre-register-container .subtitle {
-            margin-bottom: 1.5rem;
-            opacity: 0.8;
+        .pre-register-container h3 {
+            font-size: 1.1rem;
         }
 
-        .form-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 1.5rem;
-            margin-bottom: 0;
-        }
-
-        .form-field {
-            display: flex;
-            flex-direction: column;
-        }
-
-        .form-grid label,
-        .form-field label {
-            display: block;
-            margin-bottom: 0.5rem;
-            color: #b9da05;
-            font-weight: 600;
-            font-size: 0.9rem;
-        }
-
-        .form-grid input,
-        .form-grid select,
-        .form-field input,
-        .form-field select {
-            width: 100%;
-            padding: 0.875rem;
-            background: rgba(255, 255, 255, 0.08);
-            border: 2px solid rgba(185, 218, 5, 0.2);
-            border-radius: 10px;
-            color: white;
-            font-size: 0.95rem;
-            transition: all 0.3s ease;
-        }
-
-        .form-grid input:focus,
-        .form-grid select:focus,
-        .form-field input:focus,
-        .form-field select:focus {
-            outline: none;
-            border-color: #b9da05;
-            background: rgba(255, 255, 255, 0.12);
-            box-shadow: 0 0 0 3px rgba(185, 218, 5, 0.1);
-        }
-
-        .form-grid input::placeholder,
-        .form-field input::placeholder {
-            color: rgba(255, 255, 255, 0.4);
-        }
-
-        @media (max-width: 768px) {
-            .form-grid {
-                grid-template-columns: 1fr;
-                gap: 1rem;
-            }
-
-            .pre-register-container {
-                padding: 2rem 1.5rem;
-                max-height: 90vh;
-            }
-
-            .pre-register-container h2 {
-                font-size: 1.5rem;
-            }
-
-            .pre-register-container h3 {
-                font-size: 1.1rem;
-            }
-
-            .form-section {
-                padding: 1rem;
-            }
-
-            .form-actions {
-                flex-direction: column;
-                gap: 0.75rem;
-            }
-
-            .form-actions button {
-                width: 100%;
-                padding: 1rem;
-            }
-        }
-
-        .single-select {
-            margin-bottom: 2rem;
-        }
-
-        .single-select label {
-            display: block;
-            margin-bottom: 0.5rem;
-            color: #b9da05;
-            font-weight: 600;
-            font-size: 0.9rem;
-        }
-
-        .single-select select {
-            width: 100%;
-            padding: 0.875rem;
-            background: rgba(255, 255, 255, 0.08);
-            border: 2px solid rgba(185, 218, 5, 0.2);
-            border-radius: 10px;
-            color: white;
-            font-size: 0.95rem;
-            transition: all 0.3s ease;
-        }
-
-        .single-select select:focus {
-            outline: none;
-            border-color: #b9da05;
-            background: rgba(255, 255, 255, 0.12);
-            box-shadow: 0 0 0 3px rgba(185, 218, 5, 0.1);
+        .form-section {
+            padding: 1rem;
         }
 
         .form-actions {
-            display: flex;
-            gap: 1rem;
-            justify-content: center;
-            margin-top: 2.5rem;
-            padding-top: 1.5rem;
-            border-top: 1px solid rgba(185, 218, 5, 0.2);
+            flex-direction: column;
+            gap: 0.75rem;
         }
 
         .form-actions button {
-            padding: 0.875rem 2.5rem;
-            border: none;
-            border-radius: 10px;
-            font-weight: 700;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            font-size: 1rem;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
+            width: 100%;
+            padding: 1rem;
         }
+    }
 
-        #submitPreRegister,
-        #submitBulSUPreRegister {
-            background: linear-gradient(135deg, #b9da05 0%, #a0c005 100%);
-            color: #000;
-            box-shadow: 0 4px 15px rgba(185, 218, 5, 0.3);
-        }
+    .single-select {
+        margin-bottom: 2rem;
+    }
 
-        #submitPreRegister:hover,
-        #submitBulSUPreRegister:hover {
-            background: linear-gradient(135deg, #a0c005 0%, #8ab004 100%);
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(185, 218, 5, 0.4);
-        }
+    .single-select label {
+        display: block;
+        margin-bottom: 0.5rem;
+        color: #b9da05;
+        font-weight: 600;
+        font-size: 0.9rem;
+    }
 
-        #cancelPreRegister,
-        #cancelBulSUPreRegister {
-            background: rgba(255, 255, 255, 0.1);
-            color: white;
-            border: 2px solid rgba(255, 255, 255, 0.2);
-        }
+    .single-select select {
+        width: 100%;
+        padding: 0.875rem;
+        background: rgba(255, 255, 255, 0.08);
+        border: 2px solid rgba(185, 218, 5, 0.2);
+        border-radius: 10px;
+        color: white;
+        font-size: 0.95rem;
+        transition: all 0.3s ease;
+    }
 
-        #cancelPreRegister:hover,
-        #cancelBulSUPreRegister:hover {
-            background: rgba(255, 255, 255, 0.15);
-            border-color: rgba(255, 255, 255, 0.3);
-            transform: translateY(-2px);
-        }
+    .single-select select:focus {
+        outline: none;
+        border-color: #b9da05;
+        background: rgba(255, 255, 255, 0.12);
+        box-shadow: 0 0 0 3px rgba(185, 218, 5, 0.1);
+    }
+
+    .form-actions {
+        display: flex;
+        gap: 1rem;
+        justify-content: center;
+        margin-top: 2.5rem;
+        padding-top: 1.5rem;
+        border-top: 1px solid rgba(185, 218, 5, 0.2);
+    }
+
+    .form-actions button {
+        padding: 0.875rem 2.5rem;
+        border: none;
+        border-radius: 10px;
+        font-weight: 700;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        font-size: 1rem;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+    }
+
+    #submitPreRegister,
+    #submitBulSUPreRegister {
+        background: linear-gradient(135deg, #b9da05 0%, #a0c005 100%);
+        color: #000;
+        box-shadow: 0 4px 15px rgba(185, 218, 5, 0.3);
+    }
+
+    #submitPreRegister:hover,
+    #submitBulSUPreRegister:hover {
+        background: linear-gradient(135deg, #a0c005 0%, #8ab004 100%);
+        transform: translateY(-2px);
+        box-shadow: 0 6px 20px rgba(185, 218, 5, 0.4);
+    }
+
+    #cancelPreRegister,
+    #cancelBulSUPreRegister {
+        background: rgba(255, 255, 255, 0.1);
+        color: white;
+        border: 2px solid rgba(255, 255, 255, 0.2);
+    }
+
+    #cancelPreRegister:hover,
+    #cancelBulSUPreRegister:hover {
+        background: rgba(255, 255, 255, 0.15);
+        border-color: rgba(255, 255, 255, 0.3);
+        transform: translateY(-2px);
+    }
 </style>
 
 <!-- Rest of your HTML remains exactly the same -->
 <div class="flex flex-col min-h-screen">
 
-    <div class="mt-20 px-5 py-20 text-center max-w-7xl mx-auto mb-0 relative">
-        <h1 class="text-4xl sm:text-5xl font-extrabold text-[#b9da05] mb-4">Events</h1>
-        <p class="text-[1.2rem] text-white/90 relative z-[1]">Track your upcoming, completed, and past events</p>
-    </div>
+<div class="mt-20 px-5 py-20 text-center max-w-7xl mx-auto mb-0 relative">
+    <h1 class="text-4xl sm:text-5xl font-extrabold text-[#b9da05] mb-4">Events</h1>
+    <p class="text-[1.2rem] text-white/90 relative z-[1]">Track your upcoming, completed, and past events</p>
+</div>
 
-    <div class="main-content">
-        <div class="flex justify-center mb-10">
-            <div class="flex flex-wrap justify-center gap-4">
-                <button class="filter-btn active" data-section="upcomingSection">Upcoming</button>
-                <button class="filter-btn" data-section="pastSection">Completed</button>
-                <button class="filter-btn" onclick="window.location.href='previous-activities.php'">Past Activities</button>
-            </div>
-        </div>
-
-        <main class="flex-grow pt-10 p-3 flex justify-center">
-            <section id="upcomingSection" class="event-section">
-                <div class="event-list">
-                </div>
-            </section>
-
-            <section id="pastSection" class="event-section" style="display:none;">
-                <div class="event-list">
-                </div>
-            </section>
-        </main>
-    </div>
-
-    <div class="modal" id="eventModal">
-        <div class="modal-content">
-            <span class="close-btn">&times;</span>
-            <div class="modal-image" id="modalImage">
-                <i class="bi bi-calendar-event"></i>
-            </div>
-            <div class="modal-body">
-                <h2 id="modalTitle"></h2>
-                <p class="date" id="modalDate"></p>
-                <p id="modalContent"></p>
-                <button id="registerBtn" class="register-btn" style="display:none;">Register Now</button>
-            </div>
+<div class="main-content">
+    <div class="flex justify-center mb-10">
+        <div class="flex flex-wrap justify-center gap-4">
+            <button class="filter-btn active" data-section="upcomingSection">Upcoming</button>
+            <button class="filter-btn" data-section="pastSection">Completed</button>
+            <button class="filter-btn" onclick="window.location.href='previous-activities.php'">Past Activities</button>
         </div>
     </div>
 
-    <div id="messageModal" class="modal">
-        <div class="modal-content">
-            <span class="close-btn" id="messageCloseBtn">&times;</span>
-            <div class="modal-body">
-                <p id="messageText"></p>
+    <main class="flex-grow pt-10 p-3 flex justify-center">
+        <section id="upcomingSection" class="event-section">
+            <div class="event-list">
             </div>
+        </section>
+
+        <section id="pastSection" class="event-section" style="display:none;">
+            <div class="event-list">
+            </div>
+        </section>
+    </main>
+</div>
+
+<div class="modal" id="eventModal">
+    <div class="modal-content">
+        <span class="close-btn">&times;</span>
+        <div class="modal-image" id="modalImage">
+            <i class="bi bi-calendar-event"></i>
+        </div>
+        <div class="modal-body">
+            <h2 id="modalTitle"></h2>
+            <p class="date" id="modalDate"></p>
+            <p id="modalContent"></p>
+            <button id="registerBtn" class="register-btn" style="display:none;">Register Now</button>
+        </div>
+    </div>
+</div>
+
+<div id="messageModal" class="modal">
+    <div class="modal-content">
+        <span class="close-btn" id="messageCloseBtn">&times;</span>
+        <div class="modal-body">
+            <p id="messageText"></p>
         </div>
     </div>
 </div>
@@ -682,7 +680,7 @@
 <!-- All your existing scripts remain exactly the same -->
 <script>
     const API_BASE = "/updated-msc-website/api";
-
+    
     window.addEventListener('scroll', function() {
         const header = document.getElementById('main-header');
         if (window.scrollY > 50) {
@@ -726,7 +724,7 @@
             events.forEach(event => {
                 // Create a Date object for the event's end time
                 const eventEndDateTime = new Date(`${event.event_date}T${event.event_time_end}`);
-
+                
                 // Check if event has ended (current time is after event end time)
                 if (now > eventEndDateTime) {
                     completedEvents.push(event);
@@ -739,7 +737,7 @@
             renderEvents(completedEvents, "pastSection"); // Note: using "pastSection" as completed section
 
             attachCardListeners();
-
+            
             // Start checking for event status changes every minute
             startEventStatusChecker();
         } catch (err) {
@@ -758,33 +756,33 @@
         const now = new Date();
         const upcomingSection = document.getElementById("upcomingSection").querySelector(".event-list");
         const completedSection = document.getElementById("pastSection").querySelector(".event-list");
-
+        
         const upcomingCards = Array.from(upcomingSection.querySelectorAll(".event-card"));
-
+        
         upcomingCards.forEach(card => {
             const eventDate = card.dataset.date;
             const eventTimeEnd = card.dataset.time ? card.dataset.time.split(' - ')[1] : '23:59';
-
+            
             // Create Date object for event end time
             const eventEndDateTime = new Date(`${eventDate}T${eventTimeEnd}`);
-
+            
             // If event has ended, move it to completed section
             if (now > eventEndDateTime) {
                 // Remove from upcoming
                 card.remove();
-
+                
                 // Update card status
                 card.dataset.status = "completed";
-
+                
                 // Hide register button if it exists in modal data
                 const registerBtn = document.getElementById("registerBtn");
                 if (registerBtn && registerBtn.dataset.eventId === card.dataset.id) {
                     registerBtn.style.display = "none";
                 }
-
+                
                 // Add to completed section
                 completedSection.appendChild(card);
-
+                
                 console.log(`Moved event "${card.dataset.title}" to completed section`);
             }
         });
@@ -809,7 +807,7 @@
             card.dataset.registeredCount = event.attendants || 0;
             card.dataset.access = event.event_restriction || "public";
             card.dataset.image = event.event_batch_image || "";
-
+            
             let imgPath = event.event_batch_image || "";
             if (imgPath.startsWith("/updated-msc-website")) {
                 imgPath = imgPath.replace("/updated-msc-website", "");
@@ -842,9 +840,9 @@
                 const modalImage = document.getElementById("modalImage");
                 if (card.dataset.image) {
                     //modalImage.innerHTML = `<img src="${window.location.origin + card.dataset.image.replace('/updated-msc-website', '')} alt="Event Image" />`;
-                    let imgPath = card.dataset.image;
+                   let imgPath = card.dataset.image;
                     if (imgPath.startsWith("/updated-msc-website")) {
-                        imgPath = imgPath.replace("/updated-msc-website", "");
+                        imgPath = imgPath.replace("/updated-msc-website", ""); 
                     }
                     modalImage.innerHTML = `<img src="${window.location.origin + imgPath}" alt="Event Image" />`;
                 } else {
@@ -857,7 +855,7 @@
                 const now = new Date();
                 const eventEndDateTime = new Date(`${card.dataset.date}T${card.dataset.time.split(' - ')[1]}`);
                 const isEventEnded = now > eventEndDateTime;
-
+                
                 registerBtn.style.display = (card.dataset.status.toLowerCase() === "upcoming" && !isEventEnded) ?
                     "inline-block" :
                     "none";
@@ -942,158 +940,154 @@
 
 <!-- Keep all remaining scripts exactly as they were -->
 <script>
-    function attachCardListeners() {
-        const modal = document.getElementById("eventModal");
-        const closeBtn = document.querySelector(".close-btn");
-        const registerBtn = document.getElementById("registerBtn");
+        function attachCardListeners() {
+            const modal = document.getElementById("eventModal");
+            const closeBtn = document.querySelector(".close-btn");
+            const registerBtn = document.getElementById("registerBtn");
 
         document.querySelectorAll(".event-card").forEach(card => {
-            card.addEventListener("click", async () => {
-                const modal = document.getElementById("eventModal");
-                const modalTitle = document.getElementById("modalTitle");
-                const modalDate = document.getElementById("modalDate");
-                const modalDesc = document.getElementById("modalContent");
-                const registerBtn = document.getElementById("registerBtn");
+        card.addEventListener("click", async () => {
+            const modal = document.getElementById("eventModal");
+            const modalTitle = document.getElementById("modalTitle");
+            const modalDate = document.getElementById("modalDate");
+            const modalDesc = document.getElementById("modalContent");
+            const registerBtn = document.getElementById("registerBtn");
 
-                modalTitle.textContent = card.dataset.title;
-                modalDate.textContent = card.dataset.date;
-                modalDesc.textContent = card.dataset.content;
+            modalTitle.textContent = card.dataset.title;
+            modalDate.textContent = card.dataset.date;
+            modalDesc.textContent = card.dataset.content;
 
-                registerBtn.dataset.eventId = card.dataset.id;
-                registerBtn.style.display = (card.dataset.status?.toLowerCase() === "upcoming") ? "inline-block" : "none";
+            registerBtn.dataset.eventId = card.dataset.id;
+            registerBtn.style.display = (card.dataset.status?.toLowerCase() === "upcoming") ? "inline-block" : "none";
 
-                let isRegistered = false;
-                try {
-                    const authStatus = await apiCall("/auth/check-login", "GET");
-                    if (authStatus?.success && authStatus?.data?.logged_in) {
-                        const regStatus = await apiCall(`/events/${card.dataset.id}/is-registered`, "GET");
-                        if (regStatus?.success && regStatus?.data?.registered) {
-                            isRegistered = true;
-                            card.dataset.registered = "true";
-                        }
-                    }
-                } catch (err) {
-                    console.warn("Could not verify registration status:", err);
-                }
-
-                let cancelBtn = document.getElementById("cancelPreRegister");
-                if (!cancelBtn) {
-                    cancelBtn = document.createElement("button");
-                    cancelBtn.id = "cancelPreRegister";
-                    cancelBtn.textContent = "Cancel Pre-Registration";
-                    cancelBtn.className = "register-btn";
-                    modal.querySelector(".modal-content").appendChild(cancelBtn);
-                }
-
-                cancelBtn.style.display = isRegistered ? "inline-block" : "none";
-
-                cancelBtn.onclick = async () => {
-                    const authStatus = await apiCall("/auth/check-login", "GET");
-                    if (!authStatus?.success || !authStatus?.data?.logged_in) {
-                        showMessage('Please <a href="login.php" class="text-blue-500">log in</a> first.');
-                        return;
-                    }
-                    const userId = authStatus.data.user_id;
-                    const result = await apiCall(`/events/${card.dataset.id}/cancel-pre-registration`, "POST", {
-                        user_id: userId
-                    });
-                    if (result?.success) {
-                        showMessage(result.message || "✅ Registration canceled.");
-                        cancelBtn.style.display = "none";
-                        registerBtn.style.display = "inline-block";
-                        card.dataset.registered = "false";
-                    } else {
-                        showMessage(result?.message || "Cancellation failed.");
-                    }
-                };
-
-                modal.style.display = "flex";
-            });
-        });
-
-
-        closeBtn.addEventListener("click", () => modal.style.display = "none");
-        modal.addEventListener("click", e => {
-            if (e.target === modal) modal.style.display = "none";
-        });
-
-        registerBtn.addEventListener("click", async () => {
-            const eventId = registerBtn.dataset.eventId;
-            const eventCard = document.querySelector(`.event-card[data-id='${eventId}']`);
-            if (!eventId || !eventCard) {
-                showMessage("⚠ Event not found.");
-                return;
-            }
-
-            const authStatus = await apiCall("/auth/check-login", "GET");
-            const isLoggedIn = authStatus?.success && authStatus.data?.logged_in;
-
-            const accessMap = {
-                public: "open for public",
-                members: "members only",
-                bulsuans: "BulSUans only",
-                inviteOnly: "invite only"
-            };
-            const eventAccess = accessMap[eventCard.dataset.access] || "open for public";
-
-            if (!isLoggedIn) {
-                if (eventCard.dataset.access === "public") return showPreRegisterFormInsideModal(eventId);
-                if (eventCard.dataset.access === "bulsuans") return showBulSUPreRegisterForm(eventId);
-                if (eventCard.dataset.access === "members")
-                    return showMessage('This event is for members only. Please <a href="login.php" class="text-blue-500">log in</a> to register.');
-                return showMessage(`🚫 This event is restricted to "${eventAccess}" users only.`);
-            }
-
-            if (parseInt(eventCard.dataset.registeredCount) >= parseInt(eventCard.dataset.capacity)) {
-                showMessage("⚠ Sorry, this event is already full.");
-                return;
-            }
-
-            let payload = {};
-
+            let isRegistered = false;
             try {
-                const userId = authStatus.data.user.id;
-                const studentRes = await apiCall(`/students/${userId}`, "GET");
-
-                if (studentRes.success && studentRes.data) {
-                    const s = studentRes.data;
-                    payload = {
-                        first_name: s.first_name,
-                        last_name: s.last_name,
-                        middle_name: s.middle_name || "",
-                        suffix: s.name_suffix || "",
-                        gender: s.gender,
-                        email: s.email,
-                        phone: s.phone || "",
-                        facebook: s.facebook_link || "",
-                        student_id: s.student_no,
-                        program: s.program || "",
-                        college: s.college || "",
-                        year_level: s.year_level || "",
-                        section: s.section || "",
-                        user_type: s.role || "bulsuan",
-                    };
-                } else {
-                    console.warn("Could not fetch student info — using fallback empty data.");
+                const authStatus = await apiCall("/auth/check-login", "GET");
+                if (authStatus?.success && authStatus?.data?.logged_in) {
+                    const regStatus = await apiCall(`/events/${card.dataset.id}/is-registered`, "GET");
+                    if (regStatus?.success && regStatus?.data?.registered) {
+                        isRegistered = true;
+                        card.dataset.registered = "true";
+                    }
                 }
             } catch (err) {
-                console.error("Error fetching student profile:", err);
+                console.warn("Could not verify registration status:", err);
             }
 
-            if (!payload.first_name || !payload.last_name || !payload.email) {
-                showMessage("⚠ Could not load your BulSU profile. Please re-login and try again.");
-                return;
+            let cancelBtn = document.getElementById("cancelPreRegister");
+            if (!cancelBtn) {
+                cancelBtn = document.createElement("button");
+                cancelBtn.id = "cancelPreRegister";
+                cancelBtn.textContent = "Cancel Pre-Registration";
+                cancelBtn.className = "register-btn";
+                modal.querySelector(".modal-content").appendChild(cancelBtn);
             }
 
-            const result = await apiCall(`/events/${eventId}/register`, "POST", payload);
+            cancelBtn.style.display = isRegistered ? "inline-block" : "none";
 
-            if (result?.success) {
-                showMessage(result.message || "Registered successfully!");
-                eventCard.dataset.registered = "true";
-            } else {
-                showMessage(result?.message || "Registration failed.");
-            }
+            cancelBtn.onclick = async () => {
+                const authStatus = await apiCall("/auth/check-login", "GET");
+                if (!authStatus?.success || !authStatus?.data?.logged_in) {
+                    showMessage('Please <a href="login.php" class="text-blue-500">log in</a> first.');
+                    return;
+                }
+                const userId = authStatus.data.user_id;
+                const result = await apiCall(`/events/${card.dataset.id}/cancel-pre-registration`, "POST", { user_id: userId });
+                if (result?.success) {
+                    showMessage(result.message || "✅ Registration canceled.");
+                    cancelBtn.style.display = "none";
+                    registerBtn.style.display = "inline-block";
+                    card.dataset.registered = "false";
+                } else {
+                    showMessage(result?.message || "Cancellation failed.");
+                }
+            };
+
+            modal.style.display = "flex";
         });
+        });
+
+
+            closeBtn.addEventListener("click", () => modal.style.display = "none");
+            modal.addEventListener("click", e => { if (e.target === modal) modal.style.display = "none"; });
+
+            registerBtn.addEventListener("click", async () => {
+                const eventId = registerBtn.dataset.eventId;
+                const eventCard = document.querySelector(`.event-card[data-id='${eventId}']`);
+                if (!eventId || !eventCard) {
+                    showMessage("⚠ Event not found.");
+                    return;
+                }
+
+                const authStatus = await apiCall("/auth/check-login", "GET");
+                const isLoggedIn = authStatus?.success && authStatus.data?.logged_in;
+
+                const accessMap = {
+                    public: "open for public",
+                    members: "members only",
+                    bulsuans: "BulSUans only",
+                    inviteOnly: "invite only"
+                };
+                const eventAccess = accessMap[eventCard.dataset.access] || "open for public";
+
+                if (!isLoggedIn) {
+                    if (eventCard.dataset.access === "public") return showPreRegisterFormInsideModal(eventId);
+                    if (eventCard.dataset.access === "bulsuans") return showBulSUPreRegisterForm(eventId);
+                    if (eventCard.dataset.access === "members")
+                        return showMessage('This event is for members only. Please <a href="login.php" class="text-blue-500">log in</a> to register.');
+                    return showMessage(`🚫 This event is restricted to "${eventAccess}" users only.`);
+                }
+
+                if (parseInt(eventCard.dataset.registeredCount) >= parseInt(eventCard.dataset.capacity)) {
+                    showMessage("⚠ Sorry, this event is already full.");
+                    return;
+                }
+
+                let payload = {};
+
+                try {
+                    const userId = authStatus.data.user.id;
+                    const studentRes = await apiCall(`/students/${userId}`, "GET");
+
+                    if (studentRes.success && studentRes.data) {
+                        const s = studentRes.data;
+                        payload = {
+                            first_name: s.first_name,
+                            last_name: s.last_name,
+                            middle_name: s.middle_name || "",
+                            suffix: s.name_suffix || "",
+                            gender: s.gender,
+                            email: s.email,
+                            phone: s.phone || "",
+                            facebook: s.facebook_link || "",
+                            student_id: s.student_no,
+                            program: s.program || "",
+                            college: s.college || "",
+                            year_level: s.year_level || "",
+                            section: s.section || "",
+                            user_type: s.role || "bulsuan",
+                        };
+                    } else {
+                        console.warn("Could not fetch student info — using fallback empty data.");
+                    }
+                } catch (err) {
+                    console.error("Error fetching student profile:", err);
+                }
+
+                if (!payload.first_name || !payload.last_name || !payload.email) {
+                    showMessage("⚠ Could not load your BulSU profile. Please re-login and try again.");
+                    return;
+                }
+
+                const result = await apiCall(`/events/${eventId}/register`, "POST", payload);
+
+                if (result?.success) {
+                    showMessage(result.message || "Registered successfully!");
+                    eventCard.dataset.registered = "true";
+                } else {
+                    showMessage(result?.message || "Registration failed.");
+                }
+            });
 
         function showPreRegisterFormInsideModal(eventId) {
             const modal = document.getElementById("eventModal");
@@ -1160,7 +1154,7 @@
                         <label>Phone Number</label>
                         <input type="text" id="phone">
 
-                        <label>Facebook Profile Name</label>
+                        <label>Facebook Profile Link</label>
                         <input type="text" id="facebook">
                     </div>
                 </div>
@@ -1212,130 +1206,130 @@
                     showMessage(result?.message || "Pre-registration failed.");
                 }
                 */
-            document.getElementById("submitPreRegister").addEventListener("click", async () => {
-                const participantType = document.getElementById("participantType").value;
+                document.getElementById("submitPreRegister").addEventListener("click", async () => {
+            const participantType = document.getElementById("participantType").value;
 
-                const data = {
-                    first_name: document.getElementById("firstName").value,
-                    last_name: document.getElementById("lastName").value,
-                    middle_name: document.getElementById("middleName").value,
-                    suffix: document.getElementById("suffix").value,
-                    gender: document.getElementById("gender").value,
-                    email: document.getElementById("email").value,
-                    phone: document.getElementById("phone").value,
-                    facebook: document.getElementById("facebook").value,
-                    user_type: participantType,
-                };
+            const data = {
+                first_name: document.getElementById("firstName").value,
+                last_name: document.getElementById("lastName").value,
+                middle_name: document.getElementById("middleName").value,
+                suffix: document.getElementById("suffix").value,
+                gender: document.getElementById("gender").value,
+                email: document.getElementById("email").value,
+                phone: document.getElementById("phone").value,
+                facebook: document.getElementById("facebook").value,
+                user_type: participantType,
+            };
 
-                // Validate basic fields
-                if (!data.first_name || !data.last_name || !data.email || !data.gender || !participantType) {
-                    alert("Please fill in all required fields.");
+            // Validate basic fields
+            if (!data.first_name || !data.last_name || !data.email || !data.gender || !participantType) {
+                alert("Please fill in all required fields.");
+                return;
+            }
+
+            const result = await apiCall(`/events/${eventId}/register`, "POST", data);
+
+            console.log("API Response:", result);
+
+            if (result && result.success) {
+                showMessage("Pre-registration successful! Your QR code will download automatically.");
+
+                // Close the modal first
+                formContainer.remove();
+                const modal = document.getElementById("eventModal");
+                modal.style.display = "none";
+
+                let qrData;
+                if (result.data && result.data.qr_code) {
+                    qrData = result.data.qr_code;
+                } else {
+                    console.error("No qr_code returned from API:", result);
+                    alert("Registration successful but QR code generation failed. Please contact support.");
                     return;
                 }
 
-                const result = await apiCall(`/events/${eventId}/register`, "POST", data);
+                console.log("Generating QR with data:", qrData);
 
-                console.log("API Response:", result);
+                // Create a temporary container for QR generation
+                const tempDiv = document.createElement("div");
+                tempDiv.style.position = "absolute";
+                tempDiv.style.left = "-9999px";
+                document.body.appendChild(tempDiv);
 
-                if (result && result.success) {
-                    showMessage("Pre-registration successful! Your QR code will download automatically.");
+                // Generate QR code
+                new QRCode(tempDiv, {
+                    text: qrData,
+                    width: 200,
+                    height: 200,
+                    colorDark: "#06047b",
+                    colorLight: "#ffffff",
+                    correctLevel: QRCode.CorrectLevel.H,
+                });
 
-                    // Close the modal first
-                    formContainer.remove();
-                    const modal = document.getElementById("eventModal");
-                    modal.style.display = "none";
+                // Wait longer for QR code to fully render
+                setTimeout(() => {
+                    const canvas = tempDiv.querySelector("canvas");
+                    const img = tempDiv.querySelector("img");
 
-                    let qrData;
-                    if (result.data && result.data.qr_code) {
-                        qrData = result.data.qr_code;
+                    const padding = 20;
+
+                    if (canvas) {
+                        // Create a new canvas with extra padding
+                        const paddedCanvas = document.createElement("canvas");
+                        const size = canvas.width + padding * 2;
+                        paddedCanvas.width = size;
+                        paddedCanvas.height = size;
+
+                        const ctx = paddedCanvas.getContext("2d");
+                        ctx.fillStyle = "#ffffff";
+                        ctx.fillRect(0, 0, size, size);
+                        ctx.drawImage(canvas, padding, padding);
+
+                        const url = paddedCanvas.toDataURL("image/png");
+                        const a = document.createElement("a");
+                        const identifier = data.student_id || `${data.first_name}-${data.last_name}`;
+                        a.href = url;
+                        a.download = `Event-${eventId}-${identifier}-QR.png`;
+                        document.body.appendChild(a);
+                        a.click();
+                        document.body.removeChild(a);
+                        
+                        console.log("QR code download triggered successfully");
+                    } else if (img) {
+                        // For <img> fallback
+                        const paddedCanvas = document.createElement("canvas");
+                        const size = img.width + padding * 2;
+                        paddedCanvas.width = size;
+                        paddedCanvas.height = size;
+
+                        const ctx = paddedCanvas.getContext("2d");
+                        ctx.fillStyle = "#ffffff";
+                        ctx.fillRect(0, 0, size, size);
+                        ctx.drawImage(img, padding, padding);
+
+                        const url = paddedCanvas.toDataURL("image/png");
+                        const a = document.createElement("a");
+                        const identifier = data.student_id || `${data.first_name}-${data.last_name}`;
+                        a.href = url;
+                        a.download = `Event-${eventId}-${identifier}-QR.png`;
+                        document.body.appendChild(a);
+                        a.click();
+                        document.body.removeChild(a);
+                        
+                        console.log("QR code download triggered successfully (img fallback)");
                     } else {
-                        console.error("No qr_code returned from API:", result);
-                        alert("Registration successful but QR code generation failed. Please contact support.");
-                        return;
+                        console.error("No canvas or img element found for QR code");
+                        alert("QR code generation failed. Please try again.");
                     }
 
-                    console.log("Generating QR with data:", qrData);
-
-                    // Create a temporary container for QR generation
-                    const tempDiv = document.createElement("div");
-                    tempDiv.style.position = "absolute";
-                    tempDiv.style.left = "-9999px";
-                    document.body.appendChild(tempDiv);
-
-                    // Generate QR code
-                    new QRCode(tempDiv, {
-                        text: qrData,
-                        width: 200,
-                        height: 200,
-                        colorDark: "#06047b",
-                        colorLight: "#ffffff",
-                        correctLevel: QRCode.CorrectLevel.H,
-                    });
-
-                    // Wait longer for QR code to fully render
-                    setTimeout(() => {
-                        const canvas = tempDiv.querySelector("canvas");
-                        const img = tempDiv.querySelector("img");
-
-                        const padding = 20;
-
-                        if (canvas) {
-                            // Create a new canvas with extra padding
-                            const paddedCanvas = document.createElement("canvas");
-                            const size = canvas.width + padding * 2;
-                            paddedCanvas.width = size;
-                            paddedCanvas.height = size;
-
-                            const ctx = paddedCanvas.getContext("2d");
-                            ctx.fillStyle = "#ffffff";
-                            ctx.fillRect(0, 0, size, size);
-                            ctx.drawImage(canvas, padding, padding);
-
-                            const url = paddedCanvas.toDataURL("image/png");
-                            const a = document.createElement("a");
-                            const identifier = data.student_id || `${data.first_name}-${data.last_name}`;
-                            a.href = url;
-                            a.download = `Event-${eventId}-${identifier}-QR.png`;
-                            document.body.appendChild(a);
-                            a.click();
-                            document.body.removeChild(a);
-
-                            console.log("QR code download triggered successfully");
-                        } else if (img) {
-                            // For <img> fallback
-                            const paddedCanvas = document.createElement("canvas");
-                            const size = img.width + padding * 2;
-                            paddedCanvas.width = size;
-                            paddedCanvas.height = size;
-
-                            const ctx = paddedCanvas.getContext("2d");
-                            ctx.fillStyle = "#ffffff";
-                            ctx.fillRect(0, 0, size, size);
-                            ctx.drawImage(img, padding, padding);
-
-                            const url = paddedCanvas.toDataURL("image/png");
-                            const a = document.createElement("a");
-                            const identifier = data.student_id || `${data.first_name}-${data.last_name}`;
-                            a.href = url;
-                            a.download = `Event-${eventId}-${identifier}-QR.png`;
-                            document.body.appendChild(a);
-                            a.click();
-                            document.body.removeChild(a);
-
-                            console.log("QR code download triggered successfully (img fallback)");
-                        } else {
-                            console.error("No canvas or img element found for QR code");
-                            alert("QR code generation failed. Please try again.");
-                        }
-
-                        // Clean up temporary div
-                        document.body.removeChild(tempDiv);
-                    }, 500); // Increased timeout to 500ms
-                } else {
-                    showMessage(result?.message || "Pre-registration failed.");
-                }
+                    // Clean up temporary div
+                    document.body.removeChild(tempDiv);
+                }, 500); // Increased timeout to 500ms
+            } else {
+                showMessage(result?.message || "Pre-registration failed.");
+            }
             });
-
+            
         }
 
         function showBulSUPreRegisterForm(eventId) {
@@ -1394,7 +1388,7 @@
                         <label>Phone Number</label>
                         <input type="text" id="phone">
 
-                        <label>Facebook Profile Name</label>
+                        <label>Facebook Profile Link</label>
                         <input type="text" id="facebook">
                     </div>
                 </div>
@@ -1536,9 +1530,7 @@
 
                 const userId = authStatus.data.user_id;
 
-                const result = await apiCall(`/events/${eventId}/cancel-pre-registration`, "POST", {
-                    user_id: userId
-                });
+                const result = await apiCall(`/events/${eventId}/cancel-pre-registration`, "POST", { user_id: userId });
                 if (result?.success) {
                     showMessage(result.message || "✅ Registration canceled.");
                 } else {
@@ -1576,24 +1568,24 @@
                 const eventDate = card.dataset.date;
                 const eventTimeEnd = card.dataset.time ? card.dataset.time.split(' - ')[1] : '23:59';
                 const eventEndDateTime = new Date(`${eventDate}T${eventTimeEnd}`);
-
+                
                 if (now > eventEndDateTime) {
                     // Move to completed section
                     card.remove();
 
                     card.dataset.status = "completed";
                     completedSection.appendChild(card);
-
-                    // Update any open modal
-                    const registerBtn = document.getElementById("registerBtn");
-                    if (registerBtn && registerBtn.dataset.eventId === card.dataset.id) {
-                        registerBtn.style.display = "none";
+                        
+                        // Update any open modal
+                        const registerBtn = document.getElementById("registerBtn");
+                        if (registerBtn && registerBtn.dataset.eventId === card.dataset.id) {
+                            registerBtn.style.display = "none";
+                        }
                     }
-                }
-            });
-        }
+                });
+            }
 
-        setInterval(updateEventStatuses, 60000); // Check every minute instead of 30 seconds
+       setInterval(updateEventStatuses, 60000); // Check every minute instead of 30 seconds
 
         document.querySelectorAll(".filter-btn").forEach(btn => {
             btn.addEventListener("click", () => {
@@ -1618,3 +1610,4 @@
 </script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
 <?php include '_footer.php'; ?>
+</div>
