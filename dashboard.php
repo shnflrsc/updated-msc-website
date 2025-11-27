@@ -140,8 +140,8 @@
 
                     <!-- relative max-w-5xl w-full mx-auto text-sm -->
                     <div class="tab-content hidden max-h-[40rem] overflow-y-auto" id="tab-univ-calendar">
-                        <div class="">
-                            <div id="univ-calendar" class="mt-2 px-4">
+                        <div class="overflow-x-auto">
+                            <div id="univ-calendar" class="mt-2 px-4 min-w-[600px]">
                                 <div class="flex justify-between items-center mb-4">
                                     <button id="prevWeek"
                                         class="px-2.5 py-1 text-xs sm:px-3 sm:py-1.5 sm:text-sm md:px-4 md:py-2 md:text-base 
@@ -158,7 +158,7 @@
                                 </div>
                                 <div class="border border-white/20 rounded-lg overflow-hidden">
                                     <div id="univ-calendar-grid"
-                                        class="grid grid-rows-7 gap-2 text-xs text-gray-200 w-full">
+                                        class="grid grid-rows-7 gap-2 text-xs text-gray-200 w-full min-w-[550px]">
                                     </div>
                                 </div>
                             </div>
