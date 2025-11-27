@@ -940,6 +940,8 @@ class Event
     /**
      * Register a PUBLIC participant (Open for public - Guest)
      */
+    //Initial working, but guest-no is not correct
+    /*
     public function registerPublic($eventId, $data)
     {
         try {
@@ -1017,6 +1019,101 @@ class Event
 
             return [
                 "registration_id" => $registrationId,
+                "qr_code" => $qrCode,
+                "event_id" => $eventId,
+                "participant_type" => "guest",
+                "full_name" => trim($data['first_name'] . ' ' . ($data['middle_name'] ?? '') . ' ' . $data['last_name'])
+            ];
+        } catch (Exception $e) {
+            throw new Exception("Public registration failed: " . $e->getMessage());
+        }
+    }
+    */
+    public function registerPublic($eventId, $data)
+    {
+        try {
+            $required = ['first_name', 'last_name', 'email', 'gender'];
+            foreach ($required as $field) {
+                if (empty($data[$field])) {
+                    throw new Exception("Missing required field: $field");
+                }
+            }
+
+            $checkStmt = $this->db->prepare("
+            SELECT id FROM event_registrations 
+            WHERE event_id = :event_id AND email = :email AND participant_type = 'guest'
+        ");
+            $checkStmt->execute([
+                'event_id' => $eventId,
+                'email' => $data['email']
+            ]);
+
+            if ($checkStmt->fetch()) {
+                throw new Exception("This email is already registered for this event.");
+            }
+
+            // Count existing guest registrations for this event
+            $countStmt = $this->db->prepare("
+            SELECT COUNT(*) AS guest_count 
+            FROM event_registrations 
+            WHERE event_id = :event_id AND participant_type = 'guest'
+        ");
+            $countStmt->execute(['event_id' => $eventId]);
+            $row = $countStmt->fetch(PDO::FETCH_ASSOC);
+
+            $guestNumber = $row['guest_count'] + 1;
+            $qrCode = "GUEST-" . str_pad($guestNumber, 3, '0', STR_PAD_LEFT);
+
+            // Insert new guest with QR code
+            $stmt = $this->db->prepare("
+            INSERT INTO event_registrations (
+                event_id, 
+                participant_type, 
+                qr_code,
+                first_name,
+                middle_name,
+                last_name,
+                suffix,
+                email,
+                gender,
+                phone,
+                facebook_link,
+                registration_date
+            ) VALUES (
+                :event_id, 
+                'guest', 
+                :qr_code,
+                :first_name,
+                :middle_name,
+                :last_name,
+                :suffix,
+                :email,
+                :gender,
+                :phone,
+                :facebook,
+                NOW()
+            )
+        ");
+
+            $stmt->execute([
+                'event_id' => $eventId,
+                'qr_code' => $qrCode,
+                'first_name' => $data['first_name'],
+                'middle_name' => $data['middle_name'] ?? null,
+                'last_name' => $data['last_name'],
+                'suffix' => $data['suffix'] ?? null,
+                'email' => $data['email'],
+                'gender' => $data['gender'],
+                'phone' => $data['phone'] ?? null,
+                'facebook' => $data['facebook'] ?? null
+            ]);
+
+            $this->db->prepare("
+            UPDATE events SET attendants = attendants + 1 
+            WHERE event_id = :event_id
+        ")->execute(['event_id' => $eventId]);
+
+            return [
                 "qr_code" => $qrCode,
                 "event_id" => $eventId,
                 "participant_type" => "guest",
