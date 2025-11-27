@@ -173,7 +173,8 @@
 
             <div class="mt-4 sm:mt-6 text-center text-xs sm:text-sm text-gray-400 px-2">
                 <p>To change your Name, College, Program, Student No., or Email Address, please contact BulSU MSC.<br class="hidden sm:block">
-                    <span class="inline-block mt-1 sm:mt-0">To change your password, <a href="change_password.php" class="text-[#b9da05] hover:underline">click here</a>.</span></p>
+                    <span class="inline-block mt-1 sm:mt-0">To change your password, <a href="change_password.php" class="text-[#b9da05] hover:underline">click here</a>.</span>
+                </p>
             </div>
 
             <div class="flex flex-col items-center text-center mt-4 sm:mt-6">
@@ -181,6 +182,15 @@
             </div>
         </div>
     </main>
+
+    <div id="toast" class="fixed bottom-6 right-6 z-50 hidden">
+        <div id="toast-content"
+            class="flex items-center max-w-xs p-4 text-sm text-white bg-green-600 rounded-lg shadow-lg animate-slide-in"
+            role="alert">
+            <i class="fas fa-check-circle mr-2 text-white"></i>
+            <div id="toast-message"></div>
+        </div>
+    </div>
 
     <script>
         const API_BASE = "/updated-msc-website/api";
@@ -275,7 +285,7 @@
 
                 const profilePreview = document.getElementById("profile-picture-preview");
                 if (profilePreview) {
-                    profilePreview.innerHTML = ""; 
+                    profilePreview.innerHTML = "";
 
                     if (d.profile_image_path) {
                         let fullUrl = d.profile_image_path;
@@ -450,15 +460,39 @@
                 console.log("📬 Server response:", result);
 
                 if (result.success) {
-                    alert("✅ Profile updated successfully!");
+                    //alert("✅ Profile updated successfully!");
+                    showToast("Profile updated successfully!", "success");
                 } else {
-                    alert("⚠️ Update failed: " + (result.message || "Unknown error"));
+                    //alert("⚠️ Update failed: " + (result.message || "Unknown error"));
+                    console.log("Update failed: " + (result.message || "Unknown error"))
+                    showToast("Failed to update profile.", "error");
                 }
             } catch (err) {
                 console.error("❌ Update error:", err);
                 alert("❌ Something went wrong while updating your profile.");
             }
         });
+
+        function showToast(message, type = "success") {
+            const toast = document.getElementById("toast");
+            const toastMessage = document.getElementById("toast-message");
+            const toastContent = document.getElementById("toast-content");
+
+            toastMessage.textContent = message;
+
+            if (type === "success") {
+                toastContent.className = "flex items-center max-w-xs p-4 text-sm text-white bg-green-600 rounded-lg shadow-lg animate-slide-in";
+                toastContent.querySelector("i").className = "fas fa-check-circle mr-2 text-white";
+            } else if (type === "error") {
+                toastContent.className = "flex items-center max-w-xs p-4 text-sm text-white bg-red-600 rounded-lg shadow-lg animate-slide-in";
+                toastContent.querySelector("i").className = "fas fa-times-circle mr-2 text-white";
+            }
+
+            toast.classList.remove("hidden");
+            setTimeout(() => {
+                toast.classList.add("hidden");
+            }, 5000);
+        }
 
         function showFieldError(field) {
             // Only add if not already present
