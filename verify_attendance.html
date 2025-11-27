@@ -1028,10 +1028,7 @@
                 console.log("Response:", attendanceRes);
 
                 if (attendanceRes?.success) {
-                    const msg = `Attendance processed successfully! 
-                         Updated: ${attendanceRes.data.updated}
-                         Matched: ${attendanceRes.data.matched_records}
-                         Already attended: ${attendanceRes.data.already_attended || 0}`;
+                    const msg = `Attendance processed successfully!`;
                     showAlert(msg, "success");
 
                     // Refresh the participants list
