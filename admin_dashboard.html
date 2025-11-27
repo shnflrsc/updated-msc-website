@@ -352,7 +352,9 @@
         /* Responsive */
         @media (max-width: 768px) {
             .sidebar {
-                transform: translateX(-100%);
+                right: 0;
+                left: auto;
+                transform: translateX(100%);
                 transition: transform 0.3s ease;
             }
 
@@ -365,10 +367,19 @@
                 /* padding: 20px; */
             }
         }
+
+        @media (max-width: 1024px) {
+            #sidebarOverlay.active {
+                display: block;
+            }
+        }
     </style>
 </head>
 
 <body>
+    <!-- Mobile Sidebar Overlay -->
+    <div id="sidebarOverlay" class="fixed inset-0 bg-black bg-opacity-50 z-[999] hidden lg:hidden"></div>
+
     <div class="container">
         <!-- sidebar -->
         <nav class="sidebar">
@@ -548,9 +559,41 @@
             document.documentElement.classList.remove('loading');
         })();
 
-        document.getElementById('sidebarToggle').addEventListener('click', function () {
-            const sidebar = document.querySelector('.sidebar');
-            sidebar.classList.toggle('open');
+        const sidebar = document.querySelector('.sidebar');
+        const sidebarToggle = document.getElementById('sidebarToggle');
+        const sidebarOverlay = document.getElementById('sidebarOverlay');
+
+        function openSidebar() {
+            sidebar.classList.add('open');
+            sidebarOverlay.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeSidebar() {
+            sidebar.classList.remove('open');
+            sidebarOverlay.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        sidebarToggle.addEventListener('click', function () {
+            if (sidebar.classList.contains('open')) {
+                closeSidebar();
+            } else {
+                openSidebar();
+            }
+        });
+
+        // Close sidebar when clicking overlay
+        sidebarOverlay.addEventListener('click', closeSidebar);
+
+        // Close sidebar when clicking menu items on mobile
+        const navLinks = document.querySelectorAll('.nav-menu a');
+        navLinks.forEach(link => {
+            link.addEventListener('click', function() {
+                if (window.innerWidth < 1024) {
+                    closeSidebar();
+                }
+            });
         });
 
         function animateCounter(id, endValue, duration = 1200) {

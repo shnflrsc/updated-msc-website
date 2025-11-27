@@ -5,21 +5,21 @@
     <section class="w-11/12 max-w-6xl flex flex-col lg:flex-row gap-5 items-stretch">
       <!-- Left Section -->
       <div class="w-full lg:w-5/12 bg-[#011538] border border-[#b9da05] rounded-2xl flex flex-col">
-        <div class="px-4 sm:px-6 py-4 flex flex-col items-center">
-          <div class="w-32 h-32 rounded-full shadow-md overflow-hidden border-4 border-[#b9da05]" id="profile-picture-container"></div>
-          <div class="w-24 h-24 bg-white p-2 rounded-lg flex items-center justify-center mt-2">
-            <div id="qr-code" class="w-full h-full"></div>
+        <div class="px-4 sm:px-6 py-4 sm:py-6 flex flex-col items-center">
+          <div class="w-24 h-24 sm:w-32 sm:h-32 rounded-full shadow-md overflow-hidden border-4 border-[#b9da05]" id="profile-picture-container"></div>
+          <div class="w-20 h-20 sm:w-24 sm:h-24 bg-white p-1.5 sm:p-2 rounded-lg flex items-center justify-center mt-3">
+            <div id="qr-code" class="w-full h-full flex items-center justify-center"></div>
           </div>
-          <p id="msc_id" class="text-gray-200 text-md tracking-wide mt-2"></p>
-          <h2 class="text-2xl text-gray-300 font-bold tracking-wide mt-4" id="profileFullName"></h2>
-          <p class="text-sm text-gray-300 tracking-wide" id="student_no"></p>
-          <div class="w-full h-px bg-[#b9da05] opacity-50 my-6"></div>
-          <div class="flex flex-col items-center gap-2">
-            <p class="text-gray-200 text-lg font-semibold" id="program"></p>
-            <p class="text-gray-300 text-base font-light" id="college"></p>
-            <p class="text-gray-300 text-base font-light" id="year_level"></p>
+          <p id="msc_id" class="text-gray-200 text-sm sm:text-md tracking-wide mt-2"></p>
+          <h2 class="text-xl sm:text-2xl text-gray-300 font-bold tracking-wide mt-3 sm:mt-4 text-center px-2" id="profileFullName"></h2>
+          <p class="text-xs sm:text-sm text-gray-300 tracking-wide" id="student_no"></p>
+          <div class="w-full h-px bg-[#b9da05] opacity-50 my-4 sm:my-6"></div>
+          <div class="flex flex-col items-center gap-1.5 sm:gap-2">
+            <p class="text-gray-200 text-base sm:text-lg font-semibold text-center px-2" id="program"></p>
+            <p class="text-gray-300 text-sm sm:text-base font-light text-center px-2" id="college"></p>
+            <p class="text-gray-300 text-sm sm:text-base font-light" id="year_level"></p>
           </div>
-          <div class="flex gap-2 mt-4">
+          <div class="flex flex-wrap gap-2 mt-3 sm:mt-4 justify-center">
             <span class="bg-[#03850a] text-white px-4 py-1 rounded-2xl text-md font-semibold">Active</span>
             <span class="bg-[#03378f] text-white px-4 py-1 rounded-full text-md font-semibold" id="role"></span>
           </div>
@@ -28,9 +28,9 @@
 
       <!-- Right Section -->
       <div class="w-full lg:w-7/12 bg-[#011538] border border-[#b9da05] rounded-2xl flex flex-col">
-        <div class="px-4 sm:px-6 py-4 flex flex-col gap-4">
-          <h2 class="text-lg sm:text-2xl font-bold text-white mb-4">Personal Information</h2>
-          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div class="px-4 sm:px-6 py-4 sm:py-6 flex flex-col gap-3 sm:gap-4">
+          <h2 class="text-lg sm:text-2xl font-bold text-white mb-2 sm:mb-4">Personal Information</h2>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-3 sm:gap-4">
             <div>
               <p class="text-md text-gray-200">Section:</p>
               <p id="section" class="text-white text-md mb-1">...</p>
@@ -64,9 +64,9 @@
               <p id="phone" class="text-md text-gray-200 mb-1"></p>
             </div>
             <div>
-              <p class="text-md text-gray-200">Social Media:</p>
+              <p class="text-sm sm:text-md text-gray-200 font-medium">Social Media:</p>
               <div class="flex items-center gap-2">
-                <a id="facebookBtn" href="#" target="_blank" class="text-white cursor-pointer text-2xl hover:text-blue-700">
+                <a id="facebookBtn" href="#" target="_blank" class="text-white cursor-pointer text-xl sm:text-2xl hover:text-blue-700">
                   <i class="fa-brands fa-square-facebook"></i>
                 </a>
               </div>
@@ -180,14 +180,26 @@
     function generateQRCode(data) {
       const qrContainer = document.getElementById("qr-code");
       qrContainer.innerHTML = "";
+      
+      // Responsive QR code size
+      const isMobile = window.innerWidth < 640;
+      const qrSize = isMobile ? 80 : 96;
+      
       new QRCode(qrContainer, {
         text: data,
-        width: 120,
-        height: 120,
+        width: qrSize,
+        height: qrSize,
         colorDark: "#06047b",
         colorLight: "#ffffff",
         correctLevel: QRCode.CorrectLevel.H,
       });
+      
+      // Center the QR code
+      const qrImg = qrContainer.querySelector('img');
+      if (qrImg) {
+        qrImg.style.margin = 'auto';
+        qrImg.style.display = 'block';
+      }
     }
 
     function formatDate(dateStr) {

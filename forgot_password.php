@@ -2,8 +2,8 @@
 include '_header.php';
 ?>
 
-<main class="flex-grow pt-28 flex items-center justify-center min-h-screen">
-  <div class="w-full max-w-md mx-auto p-8 bg-[#011538] border border-[#b9da05] text-white rounded-2xl shadow-2xl">
+<main class="flex-grow pt-28 flex items-center justify-center min-h-screen p-4 sm:p-6">
+  <div class="w-full max-w-sm mx-auto p-6 sm:p-8 bg-[#011538] border border-[#b9da05] text-white rounded-2xl shadow-2xl">
     <h2 class="section-title">Forgot Password</h2>
     <p class="text-center text-sm -mt-6 mb-10">Enter your student number and type your new password.</p>
 

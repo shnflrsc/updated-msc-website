@@ -197,6 +197,12 @@ switch ($current_page) {
 
     <nav id="main-header" class="fixed top-0 left-0 right-0 z-50 py-4">
         <div class="max-w-7xl mx-auto px-4 flex justify-between items-center">
+            <!-- Mobile Menu Button - Now on the left (md:hidden) -->
+            <div class="md:hidden flex items-center space-x-4">
+                <button id="mobile-menu-button" class="text-gray-300 hover:text-[#b9da05] focus:outline-none">
+                    <i id="mobile-menu-icon" class="fas fa-bars text-2xl transition-transform duration-300"></i>
+                </button>
+            </div>
             <a href="index.php" class="flex items-center space-x-2 text-white transition-colors duration-300 hover:text-[#b9da05]">
                 <img src="./Logos/Bulsu MSC Logo-02.png" alt="BULSU MSC Logo" class="h-12" onerror="this.onerror=null; this.src='https://placehold.co/100x50/00071c/b9da05?text=Logo';">
             </a>
@@ -262,13 +268,6 @@ switch ($current_page) {
                         Login
                     </a>
                 <?php endif; ?>
-            </div>
-
-            <!-- Mobile Menu Button (md:hidden) -->
-            <div class="md:hidden flex items-center space-x-4">
-                <button id="mobile-menu-button" class="text-gray-300 hover:text-[#b9da05] focus:outline-none">
-                    <i id="mobile-menu-icon" class="fas fa-bars text-2xl transition-transform duration-300"></i>
-                </button>
             </div>
         </div>
     </nav>
@@ -392,7 +391,7 @@ switch ($current_page) {
                         // fetch full profile to get first & last name (use credentials)
                         (async () => {
                             try {
-                                const resp = await fetch('api/auth/profile', { credentials: 'include' });
+                                const resp = await fetch('/updated-msc-website/api/auth/profile', { credentials: 'include' });
                                 if (!resp.ok) return;
                                 const json = await resp.json();
                                 if (json && json.success && json.data) {

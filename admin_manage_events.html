@@ -43,12 +43,12 @@
 
         .sidebar {
             width: 280px;
-            background-color: #00071c;
-            padding: 20px 0;
-            position: fixed;
-            height: 100vh;
-            overflow-y: auto;
-            z-index: 1000;
+          background-color: #00071c;
+          padding: 20px 0;
+          position: fixed;
+          height: 100vh;
+          overflow-y: auto;
+          z-index: 1000;
         }
 
         .logo-section {
@@ -130,10 +130,11 @@
         }
 
         .main-content {
-            margin-left: 280px;
-            flex: 1;
-            padding: 30px;
-            background-color: #080c24;
+          margin-left: 280px;
+          flex: 1;
+          padding: 20px;
+          background-color: #080c24;
+          min-width: 0; 
         }
 
         .header {
@@ -626,18 +627,28 @@
         /* Responsive */
         @media (max-width: 768px) {
             .sidebar {
-                transform: translateX(-100%);
+                right: 0;
+                left: auto;
+                transform: translateX(100%);
                 transition: transform 0.3s ease;
-            }
-
-            .sidebar.open {
+                z-index: 55;
+              }
+        
+              .sidebar.open {
                 transform: translateX(0);
-            }
-
-            .main-content {
+              }
+        
+              .main-content {
                 margin-left: 0;
-                padding: 20px;
-            }
+                margin-right: 0;
+                padding: 25px 30px;
+              }
+        
+              #sidebarOverlay.active {
+                display: block;
+              }  .overflow-x-auto {
+            -webkit-overflow-scrolling: touch;
+          }
 
             .tabs {
                 flex-direction: column;
@@ -869,6 +880,8 @@
 </head>
 
 <body>
+     <div id="sidebarOverlay" class="fixed inset-0 bg-black bg-opacity-50 z-[50] hidden lg:hidden"></div>
+    
     <div class="container">
         <!-- sidebar -->
         <nav class="sidebar">
@@ -894,9 +907,8 @@
             </div>
         </nav>
 
-        <button id="sidebarToggle"
-            class="lg:hidden fixed top-4 right-4 z-50 bg-[#b9da05] text-[#011538] p-2 rounded-md">
-            <i class="fas fa-bars"></i>
+        <button id="sidebarToggle" class="lg:hidden fixed top-4 right-4 z-[60] bg-[#b9da05] text-[#011538] p-2 rounded-md">
+          <i class="fas fa-bars"></i>
         </button>
 
         <!-- main content -->
@@ -1360,7 +1372,6 @@
                                         <option value="public">Open for Public</option>
                                         <option value="members">Members Only</option>
                                         <option value="bulsuans">BulSUans Only</option>
-                                        <option value="inviteOnly">Invite Only</option>
                                     </select>
                                 </div>
                             </div>
@@ -2046,7 +2057,7 @@
                             <div class="event-image">
                                 ${evt.event_batch_image
                             ? `<img src="${evt.event_batch_image}" alt="Event Badge" class="event-img" />`
-                            : `<i class="bi bi-calendar-event"></i>`}
+                                : `<i class="bi bi-calendar-event"></i>`}
                             </div>
                             <div class="event-details">
                                 <h4 class="event-title"> ${evt.event_name}</h4>
