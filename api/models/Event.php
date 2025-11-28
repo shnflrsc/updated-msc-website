@@ -1314,12 +1314,12 @@ class Event
     }
 
     /**
-     * Get Event Participants + Counts (Only Attended)
+     * Get Event Participants + Counts (Registered + Attended)
      */
+    /*
     public function getEventParticipants($eventId)
     {
         try {
-            // Fetch event + participants who attended
             $sql = "
         SELECT 
             e.event_id,
@@ -1333,7 +1333,6 @@ class Event
             e.description,
             e.event_image_url,
             e.event_batch_image,
-
             s.id AS student_id,
             s.msc_id,
             s.student_no,
@@ -1350,7 +1349,6 @@ class Event
         LEFT JOIN event_registrations er ON e.event_id = er.event_id
         LEFT JOIN students s ON er.student_id = s.id
         WHERE e.event_id = :event_id
-          AND er.attendance_status = 'attended'
         ORDER BY er.registration_date DESC
         ";
 
@@ -1407,6 +1405,7 @@ class Event
                 $firstName = $row['first_name'] ?? '';
                 $lastName  = $row['last_name'] ?? '';
                 $fullName  = trim("$firstName $lastName");
+                //$attendance_status =
 
                 $participants[] = [
                     "student_id"        => $row['student_id'] ?? null,
@@ -1418,7 +1417,7 @@ class Event
                     "year_level"        => $row['year_level'] ?? '-',
                     "program"           => $row['program'] ?? '-',
                     "college"           => $row['college'] ?? '-',
-                    "participant_type"  => $row['participant_type'] ?? 'Guest',
+                    "participant_type"  => $row['participant_type'],
                     "attendance_status" => $row['attendance_status'] ?? '-',
                     "registration_date" => $row['registration_date'] ?? '-',
                 ];
@@ -1427,6 +1426,128 @@ class Event
             return [
                 "event"        => $eventDetails,
                 "participants" => $participants
+            ];
+        } catch (Exception $e) {
+            throw new Exception("Failed to fetch event participants: " . $e->getMessage());
+        }
+    }
+    */
+    public function getEventParticipants($eventId)
+    {
+        try {
+            //Event details
+            $eventSql = "
+            SELECT 
+                event_id,
+                event_name,
+                event_date,
+                event_time_start,
+                event_time_end,
+                location,
+                event_type,
+                event_status,
+                description,
+                event_image_url,
+                event_batch_image
+            FROM events
+            WHERE event_id = :event_id
+        ";
+
+            $stmtEvent = $this->db->prepare($eventSql);
+            $stmtEvent->execute(['event_id' => $eventId]);
+            $event = $stmtEvent->fetch(PDO::FETCH_ASSOC);
+
+            if (!$event) {
+                throw new Exception("Event not found.");
+            }
+
+            //Participants list
+            $participantSql = "
+            SELECT 
+                er.id,
+                er.student_id,
+                er.participant_type,
+                er.attendance_status,
+                er.registration_date,
+                er.first_name AS g_first_name,
+                er.middle_name AS g_middle_name,
+                er.last_name AS g_last_name,
+                s.msc_id,
+                s.student_no,
+                COALESCE(s.first_name, er.first_name) AS first_name,
+                COALESCE(s.middle_name, er.middle_name) AS middle_name,
+                COALESCE(s.last_name, er.last_name) AS last_name,
+                COALESCE(s.year_level, er.year_level) AS year_level,
+                COALESCE(s.program, er.program) AS program,
+                COALESCE(s.college, er.college) AS college
+            FROM event_registrations er
+            LEFT JOIN students s ON er.student_id = s.id
+            WHERE er.event_id = :event_id
+            ORDER BY er.registration_date DESC
+        ";
+
+            $stmtParticipants = $this->db->prepare($participantSql);
+            $stmtParticipants->execute(['event_id' => $eventId]);
+            $participants = $stmtParticipants->fetchAll(PDO::FETCH_ASSOC);
+
+            $countSql = "
+            SELECT 
+                COUNT(*) AS total_registered,
+                SUM(attendance_status = 'attended') AS total_attended,
+                SUM(attendance_status = 'registered') AS total_still_registered
+            FROM event_registrations
+            WHERE event_id = :event_id
+        ";
+
+            $stmtCount = $this->db->prepare($countSql);
+            $stmtCount->execute(['event_id' => $eventId]);
+            $counts = $stmtCount->fetch(PDO::FETCH_ASSOC);
+
+            $totalRegistered      = (int)($counts['total_registered'] ?? 0);
+            $totalAttended        = (int)($counts['total_attended'] ?? 0);
+            $totalStillRegistered = (int)($counts['total_still_registered'] ?? 0);
+            $attendanceRate       = $totalRegistered > 0
+                ? round(($totalAttended / $totalRegistered) * 100, 2)
+                : 0;
+
+            $eventDetails = array_merge($event, [
+                "total_registered"       => $totalRegistered,
+                "total_attended"         => $totalAttended,
+                "total_still_registered" => $totalStillRegistered,
+                "attendance_rate"        => $attendanceRate
+            ]);
+
+            $formattedParticipants = [];
+
+            foreach ($participants as $p) {
+                $fullName = trim(
+                    implode(" ", array_filter([
+                        $p['first_name'],
+                        $p['middle_name'],
+                        $p['last_name']
+                    ]))
+                );
+
+                $formattedParticipants[] = [
+                    "student_id"        => $p['student_id'] ?? null,
+                    "msc_id"            => $p['msc_id'] ?? null,
+                    "student_no"        => $p['student_no'] ?? null,
+                    "first_name"        => $p['first_name'],
+                    "middle_name"       => $p['middle_name'],
+                    "last_name"         => $p['last_name'],
+                    "fullName"          => $fullName,
+                    "year_level"        => $p['year_level'] ?? "-",
+                    "program"           => $p['program'] ?? "-",
+                    "college"           => $p['college'] ?? "-",
+                    "participant_type"  => $p['participant_type'],
+                    "attendance_status" => $p['attendance_status'],
+                    "registration_date" => $p['registration_date']
+                ];
+            }
+
+            return [
+                "event"        => $eventDetails,
+                "participants" => $formattedParticipants
             ];
         } catch (Exception $e) {
             throw new Exception("Failed to fetch event participants: " . $e->getMessage());

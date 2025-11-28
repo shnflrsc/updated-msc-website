@@ -520,6 +520,7 @@
             .participant-detail-value {
                 color: var(--text-color);
                 text-align: right;
+                font-size: 14px;
             }
         }
 
@@ -662,6 +663,10 @@
                                                 Program</label></li>
                                         <li><label><input type="checkbox" class="column-toggle" data-col="4" checked>
                                                 Year Level</label></li>
+                                        <li><label><input type="checkbox" class="column-toggle" data-col="5" checked>
+                                                Participant Type</label></li>
+                                        <li><label><input type="checkbox" class="column-toggle" data-col="6" checked>
+                                                Attendance Status</label></li>
                                     </ul>
                                 </div>
                             </div>
@@ -676,6 +681,8 @@
                                             <th class="px-4 py-3 text-sm sm:text-base font-semibold">Program</th>
                                             <th class="px-4 py-3 text-sm sm:text-base font-semibold">Year Level</th>
                                             <th class="px-4 py-3 text-sm sm:text-base font-semibold">Participant Type
+                                            </th>
+                                            <th class="px-4 py-3 text-sm sm:text-base font-semibold">Attendance Status
                                             </th>
                                         </tr>
                                     </thead>
@@ -922,8 +929,9 @@
                                     const fullName = dbInfo.first_name ? dbInfo.first_name + " " + dbInfo.last_name : "-";
                                     const college = dbInfo.college || "-";
                                     const program = dbInfo.program || "-";
-                                    const yearLevel = dbInfo.year_level || "-";
-                                    const participantType = dbInfo.participant_type || "-";
+                                    const year_level = dbInfo.year_level || "-";
+                                    const participant_type = dbInfo.participant_type.charAt(0).toUpperCase() + dbInfo.participant_type.slice(1);
+                                    const attendance_status = dbInfo.attendance_status || "-";
 
                                     // Table row
                                     const tr = document.createElement("tr");
@@ -932,8 +940,9 @@
                                     <td class="px-4 py-2">${fullName}</td>
                                     <td class="px-4 py-2">${college}</td>
                                     <td class="px-4 py-2">${program}</td>
-                                    <td class="px-4 py-2">${yearLevel}</td>
-                                    <td class="px-4 py-2">${participantType}</td>
+                                    <td class="px-4 py-2">${year_level}</td>
+                                    <td class="px-4 py-2">${participant_type}</td>
+                                    <td class="px-4 py-2">${attendance_status}</td>
                                     `;
                                     tbody.appendChild(tr);
 
@@ -943,7 +952,7 @@
                                     card.innerHTML = `
                                         <div class="participant-card-header">
                                             <div class="participant-card-name">${fullName}</div>
-                                            <div class="participant-card-badge">${participantType}</div>
+                                            <div class="participant-card-badge">${participant_type}</div>
                                         </div>
                                         <div class="participant-card-body">
                                             <div class="participant-detail-row">
@@ -960,7 +969,15 @@
                                             </div>
                                             <div class="participant-detail-row">
                                                 <span class="participant-detail-label">Year Level:</span>
-                                                <span class="participant-detail-value">${yearLevel}</span>
+                                                <span class="participant-detail-value">${year_level}</span>
+                                            </div>
+                                            <div class="participant-detail-row">
+                                                <span class="participant-detail-label">Participant Type:</span>
+                                                <span class="participant-detail-value">${participant_type}</span>
+                                            </div>
+                                            <div class="participant-detail-row">
+                                                <span class="participant-detail-label">Attendance Status:</span>
+                                                <span class="participant-detail-value">${attendance_status}</span>
                                             </div>
                                         </div>
                                     `;
@@ -1049,11 +1066,10 @@
             const data = await apiCall(`/events/${eventId}/participantsList`, "GET");
 
             if (data?.success) {
-                console.log("Participants for Event:", data.data);
-
                 const event = data.data.event;
                 const participants = data.data.participants;
-                console.log(event.total_registered);
+                console.log("Participants for Event:", event.event_name);
+                console.log("Total registered: " + event.total_registered);
 
                 document.getElementById('attendance-summary').style.display = 'block';
                 document.getElementById('summary-event-title').textContent = `${event.event_name}`;
@@ -1070,19 +1086,13 @@
 
                 let participantsCount = 1;
                 participants.forEach(p => {
-                    let fullName;
-
-                    if (p.participant_type === "Guest" || p.participant_type === "guest" || p.participant_type === "bulsuan") {
-                        fullName = p.first_name + " " + p.last_name || "-";
-                    } else {
-                        fullName = [p.first_name, p.middle_name, p.last_name].filter(Boolean).join(" ");
-                    }
-
+                    const fullName = p.first_name + " " + p.last_name || "-";
                     const mscId = p.msc_id || "-";
                     const college = p.college || "-";
                     const program = p.program || "-";
                     const yearLevel = p.year_level || "-";
-                    const participantType = p.participant_type || "-";
+                    const participantType = p.participant_type.charAt(0).toUpperCase() + p.participant_type.slice(1);
+                    const attendance_status = p.attendance_status.charAt(0).toUpperCase() + p.attendance_status.slice(1);
 
                     // Table row
                     const tr = document.createElement("tr");
@@ -1093,6 +1103,7 @@
                         <td class="px-4 py-2">${program}</td>
                         <td class="px-4 py-2">${yearLevel}</td>
                         <td class="px-4 py-2">${participantType}</td>
+                        <td class="px-4 py-2">${attendance_status}</td>
                     `;
                     tbody.appendChild(tr);
 
@@ -1102,7 +1113,6 @@
                     card.innerHTML = `
                         <div class="participant-card-header">
                             <div class="participant-card-name">${fullName}</div>
-                            <div class="participant-card-badge">${participantType}</div>
                         </div>
                         <div class="participant-card-body">
                             <div class="participant-detail-row">
@@ -1120,6 +1130,14 @@
                             <div class="participant-detail-row">
                                 <span class="participant-detail-label">Year Level:</span>
                                 <span class="participant-detail-value">${yearLevel}</span>
+                            </div>
+                            <div class="participant-detail-row">
+                                <span class="participant-detail-label">Participant Type:</span>
+                                <span class="participant-detail-value">${participantType}</span>
+                            </div>
+                            <div class="participant-detail-row">
+                                <span class="participant-detail-label">Attendance Status:</span>
+                                <span class="participant-detail-value">${attendance_status}</span>
                             </div>
                         </div>
                     `;

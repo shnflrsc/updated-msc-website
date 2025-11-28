@@ -14,7 +14,9 @@
     <script src="https://cdn.tailwindcss.com"></script>
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
-     <link href="https://fonts.googleapis.com/css2?family=Bakbak+One&family=Play:wght@400;700&family=Segoe+UI:wght@400;700&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Bakbak+One&family=Play:wght@400;700&family=Segoe+UI:wght@400;700&display=swap"
+        rel="stylesheet">
     <style>
         :root {
             --primary-color: #b9da05;
@@ -377,7 +379,7 @@
 
         .header-title {
             font-family: 'Bakbak One', sans-serif;
-            font-size: 24px;
+            font-size: 32px;
             font-weight: 700;
             color: var(--primary-color);
             margin: 0;
@@ -492,7 +494,7 @@
             }
 
             .header-title {
-                font-size: 18px;
+                font-size: 26px;
             }
 
             /* Hide desktop table on mobile */
@@ -638,19 +640,23 @@
                                     </label></li>
                                 <li><label class="flex items-center space-x-2">
                                         <input type="checkbox" class="column-toggle" data-col="2" checked>
-                                        <span>Participant Type</span>
-                                    </label></li>
-                                <li><label class="flex items-center space-x-2">
-                                        <input type="checkbox" class="column-toggle" data-col="3" checked>
                                         <span>College</span>
                                     </label></li>
                                 <li><label class="flex items-center space-x-2">
-                                        <input type="checkbox" class="column-toggle" data-col="4" checked>
+                                        <input type="checkbox" class="column-toggle" data-col="3" checked>
                                         <span>Program</span>
                                     </label></li>
                                 <li><label class="flex items-center space-x-2">
-                                        <input type="checkbox" class="column-toggle" data-col="5" checked>
+                                        <input type="checkbox" class="column-toggle" data-col="4" checked>
                                         <span>Year Level</span>
+                                    </label></li>
+                                <li><label class="flex items-center space-x-2">
+                                        <input type="checkbox" class="column-toggle" data-col="5" checked>
+                                        <span>Participant Type</span>
+                                    </label></li>
+                                <li><label class="flex items-center space-x-2">
+                                        <input type="checkbox" class="column-toggle" data-col="6" checked>
+                                        <span>Attendance Status</span>
                                     </label></li>
                             </ul>
                         </div>
@@ -669,10 +675,11 @@
                                 <tr>
                                     <th class="px-4 py-3 text-sm sm:text-base font-semibold">MSC ID</th>
                                     <th class="px-4 py-3 text-sm sm:text-base font-semibold">Name</th>
-                                    <th class="px-4 py-3 text-sm sm:text-base font-semibold">Participant Type</th>
                                     <th class="px-4 py-3 text-sm sm:text-base font-semibold">College</th>
                                     <th class="px-4 py-3 text-sm sm:text-base font-semibold">Program</th>
                                     <th class="px-4 py-3 text-sm sm:text-base font-semibold">Year Level</th>
+                                    <th class="px-4 py-3 text-sm sm:text-base font-semibold">Participant Type</th>
+                                    <th class="px-4 py-3 text-sm sm:text-base font-semibold">Attendance Status</th>
                                 </tr>
                             </thead>
                             <tbody id="participants-table-body" class="divide-y divide-white/10 text-sm sm:text-base">
@@ -718,7 +725,6 @@
                 const exportBtn = document.getElementById("exportExcelBtn");
                 tbody.innerHTML = "";
 
-                // Get or create mobile cards container
                 let mobileContainer = document.getElementById("mobile-cards-container");
                 if (!mobileContainer) {
                     mobileContainer = document.createElement("div");
@@ -731,6 +737,7 @@
                 if (data?.success) {
                     const event = data.data.event;
                     const participants = data.data.participants || [];
+                    console.log(participants);
 
                     document.getElementById("event-title").textContent = event.event_name;
 
@@ -744,23 +751,25 @@
 
                     participants.forEach(p => {
                         const fullName = [p.first_name, p.middle_name, p.last_name].filter(Boolean).join(" ");
-                        const mscIdDisplay = p.msc_id && p.msc_id !== "null" ? p.msc_id : "-";
-                        const collegeDisplay = p.college || "-";
-                        const programDisplay = p.program || "-";
-                        const yearDisplay = p.year_level || "-";
+                        const msc_id = p.msc_id && p.msc_id !== "null" ? p.msc_id : "-";
+                        const college = p.college || "-";
+                        const program = p.program || "-";
+                        const year_level = p.year_level || "-";
+                        const attendance_status = p.attendance_status.charAt(0).toUpperCase() + p.attendance_status.slice(1);
+                        console.log(fullName + ":" + p.attendance_status);
 
                         // Desktop table row
-                        const participantType = p.participant_type || "Guest";
-                        const typeDisplay = participantType.charAt(0).toUpperCase() + participantType.slice(1);
-                        
+                        const participant_type = p.participant_type.charAt(0).toUpperCase() + p.participant_type.slice(1);
+
                         const tr = document.createElement("tr");
                         tr.innerHTML = `
-                        <td class="px-4 py-2">${mscIdDisplay}</td>
+                        <td class="px-4 py-2">${msc_id}</td>
                         <td class="px-4 py-2">${fullName || "-"}</td>
-                        <td class="px-4 py-2">${typeDisplay}</td>
-                        <td class="px-4 py-2">${collegeDisplay}</td>
-                        <td class="px-4 py-2">${programDisplay}</td>
-                        <td class="px-4 py-2">${yearDisplay}</td>
+                        <td class="px-4 py-2">${college}</td>
+                        <td class="px-4 py-2">${program}</td>
+                        <td class="px-4 py-2">${year_level}</td>
+                        <td class="px-4 py-2">${participant_type}</td>
+                        <td class="px-4 py-2">${attendance_status}</td>
                         `;
                         tbody.appendChild(tr);
 
@@ -780,23 +789,27 @@
                             <div style="display: flex; flex-direction: column; gap: 8px;">
                                 <div style="display: flex; justify-content: space-between; padding: 6px 0; font-size: 14px;">
                                     <span style="color: #8892b0; font-weight: 500;">MSC ID:</span>
-                                    <span style="color: #ffffff; text-align: right;">${mscIdDisplay}</span>
-                                </div>
-                                <div style="display: flex; justify-content: space-between; padding: 6px 0; font-size: 14px;">
-                                    <span style="color: #8892b0; font-weight: 500;">Participant Type:</span>
-                                    <span style="color: #ffffff; text-align: right;">${typeDisplay}</span>
+                                    <span style="color: #ffffff; text-align: right;">${msc_id}</span>
                                 </div>
                                 <div style="display: flex; justify-content: space-between; padding: 6px 0; font-size: 14px;">
                                     <span style="color: #8892b0; font-weight: 500;">College:</span>
-                                    <span style="color: #ffffff; text-align: right;">${collegeDisplay}</span>
+                                    <span style="color: #ffffff; text-align: right;">${college}</span>
                                 </div>
                                 <div style="display: flex; justify-content: space-between; padding: 6px 0; font-size: 14px;">
                                     <span style="color: #8892b0; font-weight: 500;">Program:</span>
-                                    <span style="color: #ffffff; text-align: right;">${programDisplay}</span>
+                                    <span style="color: #ffffff; text-align: right;">${program}</span>
                                 </div>
                                 <div style="display: flex; justify-content: space-between; padding: 6px 0; font-size: 14px;">
                                     <span style="color: #8892b0; font-weight: 500;">Year Level:</span>
-                                    <span style="color: #ffffff; text-align: right;">${yearDisplay}</span>
+                                    <span style="color: #ffffff; text-align: right;">${year_level}</span>
+                                </div>
+                                <div style="display: flex; justify-content: space-between; padding: 6px 0; font-size: 14px;">
+                                    <span style="color: #8892b0; font-weight: 500;">Participant Type:</span>
+                                    <span style="color: #ffffff; text-align: right;">${participant_type}</span>
+                                </div>
+                                <div style="display: flex; justify-content: space-between; padding: 6px 0; font-size: 14px;">
+                                    <span style="color: #8892b0; font-weight: 500;">Attendance Status:</span>
+                                    <span style="color: #ffffff; text-align: right;">${attendance_status}</span>
                                 </div>
                             </div>
                         `;
