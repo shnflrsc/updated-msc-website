@@ -322,6 +322,16 @@
         transform: scale(1.05);
     }
 
+    .register-btn.cancel {
+    background: #dc3545 !important;
+    color: white !important;
+    }
+
+    .register-btn.cancel:hover {
+        background: #c82333 !important;
+        transform: translateY(-2px);
+    }
+
     /* Make form container scrollable if needed */
     .pre-register-container {
         color: white;
@@ -960,101 +970,147 @@
                 modalDesc.textContent = card.dataset.content;
 
                 registerBtn.dataset.eventId = card.dataset.id;
-                registerBtn.style.display = (card.dataset.status?.toLowerCase() === "upcoming") ? "inline-block" : "none";
+                
+                // Check if event has ended to determine if registration should be available
+                const now = new Date();
+                const eventEndDateTime = new Date(`${card.dataset.date}T${card.dataset.time.split(' - ')[1]}`);
+                const isEventEnded = now > eventEndDateTime;
 
-                let isRegistered = false;
-                try {
-                    const authStatus = await apiCall("/auth/check-login", "GET");
-                    if (authStatus?.success && authStatus?.data?.logged_in) {
-                        const regStatus = await apiCall(`/events/${card.dataset.id}/is-registered`, "GET");
-                        if (regStatus?.success && regStatus?.data?.registered) {
-                            isRegistered = true;
+                // Hide register button initially
+                registerBtn.style.display = "none";
+
+                // Hide any existing cancel button
+                const existingCancelBtn = document.getElementById("cancelPreRegister");
+                if (existingCancelBtn) {
+                    existingCancelBtn.style.display = "none";
+                }
+
+                const authStatus = await apiCall("/auth/check-login", "GET");
+                const isLoggedIn = authStatus?.success && authStatus?.data?.logged_in;
+
+                // Logic for different user types and event restrictions
+                if (isLoggedIn) {
+                    // LOGIC 2: Member logic
+                    try {
+                        const userEmail = authStatus.data.user.email;
+                        
+                        // Check registration by email
+                        const emailCheck = await checkEmailRegistration(card.dataset.id, userEmail);
+                        
+                        if (emailCheck.registered) {
+                            // User is registered - show cancel button
+                            showCancelButtonForMember(card.dataset.id, userEmail, card);
                             card.dataset.registered = "true";
+                        } else {
+                            // User is not registered - show register button if event is upcoming
+                            if (card.dataset.status?.toLowerCase() === "upcoming" && !isEventEnded) {
+                                registerBtn.style.display = "inline-block";
+                                registerBtn.textContent = "Register Now";
+                            }
+                            card.dataset.registered = "false";
+                        }
+                    } catch (err) {
+                        console.warn("Could not verify registration status:", err);
+                        if (card.dataset.status?.toLowerCase() === "upcoming" && !isEventEnded) {
+                            registerBtn.style.display = "inline-block";
                         }
                     }
-                } catch (err) {
-                    console.warn("Could not verify registration status:", err);
-                }
-
-                let cancelBtn = document.getElementById("cancelPreRegister");
-                if (!cancelBtn) {
-                    cancelBtn = document.createElement("button");
-                    cancelBtn.id = "cancelPreRegister";
-                    cancelBtn.textContent = "Cancel Pre-Registration";
-                    cancelBtn.className = "register-btn";
-                    modal.querySelector(".modal-content").appendChild(cancelBtn);
-                }
-
-                cancelBtn.style.display = isRegistered ? "inline-block" : "none";
-
-                cancelBtn.onclick = async () => {
-                    const authStatus = await apiCall("/auth/check-login", "GET");
-                    if (!authStatus?.success || !authStatus?.data?.logged_in) {
-                        showMessage('Please <a href="login.php" class="text-blue-500">log in</a> first.');
-                        return;
-                    }
-                    const userId = authStatus.data.user_id;
-                    const result = await apiCall(`/events/${card.dataset.id}/cancel-pre-registration`, "POST", {
-                        user_id: userId
-                    });
-                    if (result?.success) {
-                        showMessage(result.message || "✅ Registration canceled.");
-                        cancelBtn.style.display = "none";
+                } else {
+                    // Non-member logic - we'll check email registration when they try to register
+                    if (card.dataset.status?.toLowerCase() === "upcoming" && !isEventEnded) {
                         registerBtn.style.display = "inline-block";
-                        card.dataset.registered = "false";
-                    } else {
-                        showMessage(result?.message || "Cancellation failed.");
+                        registerBtn.textContent = "Register Now";
                     }
-                };
+                }
+
+                // Update modal image
+                const modalImage = document.getElementById("modalImage");
+                if (card.dataset.image) {
+                    let imgPath = card.dataset.image;
+                    if (imgPath.startsWith("/updated-msc-website")) {
+                        imgPath = imgPath.replace("/updated-msc-website", "");
+                    }
+                    modalImage.innerHTML = `<img src="${window.location.origin + imgPath}" alt="Event Image" />`;
+                } else {
+                    modalImage.innerHTML = `<i class="bi bi-calendar-event"></i>`;
+                }
 
                 modal.style.display = "flex";
             });
         });
 
+    // Existing close button and modal click handlers...
+    closeBtn.addEventListener("click", () => modal.style.display = "none");
+    modal.addEventListener("click", e => {
+        if (e.target === modal) modal.style.display = "none";
+    });
 
-        closeBtn.addEventListener("click", () => modal.style.display = "none");
-        modal.addEventListener("click", e => {
-            if (e.target === modal) modal.style.display = "none";
-        });
+    const newRegisterBtn = registerBtn.cloneNode(true);
+    registerBtn.parentNode.replaceChild(newRegisterBtn, registerBtn);
 
-        registerBtn.addEventListener("click", async () => {
-            const eventId = registerBtn.dataset.eventId;
-            const eventCard = document.querySelector(`.event-card[data-id='${eventId}']`);
-            if (!eventId || !eventCard) {
-                showMessage("⚠ Event not found.");
-                return;
-            }
+    // Add fresh event listener
+    newRegisterBtn.addEventListener("click", handleRegisterButtonClick, { once: false });
 
-            const authStatus = await apiCall("/auth/check-login", "GET");
-            const isLoggedIn = authStatus?.success && authStatus.data?.logged_in;
+    async function handleRegisterButtonClick() {
+        const eventId = this.dataset.eventId;
+        const eventCard = document.querySelector(`.event-card[data-id='${eventId}']`);
+        if (!eventId || !eventCard) {
+            showMessage("⚠ Event not found.");
+            return;
+        }
 
-            const accessMap = {
-                public: "open for public",
-                members: "members only",
-                bulsuans: "BulSUans only",
-                inviteOnly: "invite only"
-            };
-            const eventAccess = accessMap[eventCard.dataset.access] || "open for public";
+        const authStatus = await apiCall("/auth/check-login", "GET");
+        const isLoggedIn = authStatus?.success && authStatus?.data?.logged_in;
 
-            if (!isLoggedIn) {
-                if (eventCard.dataset.access === "public") return showPreRegisterFormInsideModal(eventId);
-                if (eventCard.dataset.access === "bulsuans") return showBulSUPreRegisterForm(eventId);
-                if (eventCard.dataset.access === "members")
-                    return showMessage('This event is for members only. Please <a href="login.php" class="text-blue-500">log in</a> to register.');
-                return showMessage(`🚫 This event is restricted to "${eventAccess}" users only.`);
+        // If user is logged in, prevent double registration by disabling button temporarily
+        if (isLoggedIn) {
+            this.disabled = true;
+            this.textContent = "Processing...";
+        }
+
+        const accessMap = {
+            public: "open for public",
+            members: "members only",
+            bulsuans: "BulSUans only",
+            inviteOnly: "invite only"
+        };
+        const eventAccess = accessMap[eventCard.dataset.access] || "open for public";
+
+         // LOGIC 2: For members, if event is "members only" or "bulsuans only" or "public"
+        if (isLoggedIn) {
+            try {
+                const userEmail = authStatus.data.user.email;
+                // Check if already registered by email (more reliable)
+                const emailCheck = await checkEmailRegistration(eventId, userEmail);
+                
+                if (emailCheck.registered) {
+                    showMessage(`You are already registered for this event as a ${emailCheck.participant_type}.`);
+                    
+                    // Hide register button and show cancel button
+                    this.style.display = "none";
+                    showCancelButtonForMember(eventId, userEmail, eventCard);
+                    
+                    // Re-enable button
+                    this.disabled = false;
+                    this.textContent = "Register Now";
+                    return;
+                }
+            } catch (err) {
+                console.warn("Could not verify registration status:", err);
             }
 
             if (parseInt(eventCard.dataset.registeredCount) >= parseInt(eventCard.dataset.capacity)) {
                 showMessage("⚠ Sorry, this event is already full.");
+                this.disabled = false;
+                this.textContent = "Register Now";
                 return;
             }
 
             let payload = {};
+            const userId = authStatus.data.user.id;
 
             try {
-                const userId = authStatus.data.user.id;
                 const studentRes = await apiCall(`/students/${userId}`, "GET");
-
                 if (studentRes.success && studentRes.data) {
                     const s = studentRes.data;
                     payload = {
@@ -1073,8 +1129,6 @@
                         section: s.section || "",
                         user_type: s.role || "bulsuan",
                     };
-                } else {
-                    console.warn("Could not fetch student info — using fallback empty data.");
                 }
             } catch (err) {
                 console.error("Error fetching student profile:", err);
@@ -1082,48 +1136,356 @@
 
             if (!payload.first_name || !payload.last_name || !payload.email) {
                 showMessage("⚠ Could not load your BulSU profile. Please re-login and try again.");
+                this.disabled = false;
+                this.textContent = "Register Now";
                 return;
             }
 
             const result = await apiCall(`/events/${eventId}/register`, "POST", payload);
 
+            // Re-enable button regardless of result
+            this.disabled = false;
+            this.textContent = "Register Now";
+
             if (result?.success) {
-                showMessage(result.message || "Registered successfully!");
-                eventCard.dataset.registered = "true";
+                if (result.data?.duplicate) {
+                    // LOGIC 1: Show cancel button for duplicate registration
+                    showMessage(`You are already registered for this event with email: <strong>${result.data.email}</strong>. 
+                        <br><br>
+                        <button id="cancelByEmailBtn" class="register-btn" style="background: #dc3545; margin-top: 10px;">
+                            Cancel Pre-Registration
+                        </button>`);
+                    
+                    document.getElementById("cancelByEmailBtn").addEventListener("click", async () => {
+                        const cancelResult = await apiCall(`/events/${eventId}/cancel-by-email`, "POST", { 
+                            email: result.data.email 
+                        });
+                        if (cancelResult?.success) {
+                            showMessage("Your pre-registration has been cancelled.");
+                            // Update event card data
+                            const currentCount = parseInt(eventCard.dataset.registeredCount) || 0;
+                            if (currentCount > 0) {
+                                eventCard.dataset.registeredCount = (currentCount - 1).toString();
+                            }
+                            // Refresh the modal
+                            document.getElementById("eventModal").style.display = "none";
+                        } else {
+                            showMessage(cancelResult?.message || "Failed to cancel pre-registration.");
+                        }
+                    });
+                } else {
+                    showMessage(result.message || "Registered successfully!");
+                    eventCard.dataset.registered = "true";
+                    
+                    // After successful registration, show cancel button for member
+                    const userEmail = authStatus.data.user.email;
+                    showCancelButtonForMember(eventId, userEmail, eventCard);
+                    
+                    // Generate QR code for member if available
+                    if (result.data && result.data.qr_code) {
+                        generateAndDownloadQRCode(result.data.qr_code, eventId, payload);
+                    }
+                }
             } else {
                 showMessage(result?.message || "Registration failed.");
             }
+            return;
+        }
+
+        if (!isLoggedIn) {
+            if (eventCard.dataset.access === "public") return showPreRegisterFormInsideModal(eventId);
+            if (eventCard.dataset.access === "bulsuans") return showBulSUPreRegisterForm(eventId);
+            if (eventCard.dataset.access === "members")
+                return showMessage('This event is for members only. Please <a href="login.php" class="text-blue-500">log in</a> to register.');
+            return showMessage(`🚫 This event is restricted to "${eventAccess}" users only.`);
+        }
+
+        // For logged-in members - check if already registered
+        try {
+            const userId = authStatus.data.user.id || authStatus.data.user_id;
+            const regStatus = await apiCall(`/events/${eventId}/is-registered?user_id=${userId}`, "GET");
+            
+            if (regStatus?.success && regStatus?.data?.registered) {
+                showMessage("You are already registered for this event.");
+                // Re-enable button
+                this.disabled = false;
+                this.textContent = "Register Now";
+                return;
+            }
+        } catch (err) {
+            console.warn("Could not verify registration status:", err);
+        }
+
+        if (parseInt(eventCard.dataset.registeredCount) >= parseInt(eventCard.dataset.capacity)) {
+            showMessage("⚠ Sorry, this event is already full.");
+            // Re-enable button
+            this.disabled = false;
+            this.textContent = "Register Now";
+            return;
+        }
+
+        let payload = {};
+
+        try {
+            const userId = authStatus.data.user.id;
+            const studentRes = await apiCall(`/students/${userId}`, "GET");
+
+            if (studentRes.success && studentRes.data) {
+                const s = studentRes.data;
+                payload = {
+                    first_name: s.first_name,
+                    last_name: s.last_name,
+                    middle_name: s.middle_name || "",
+                    suffix: s.name_suffix || "",
+                    gender: s.gender,
+                    email: s.email,
+                    phone: s.phone || "",
+                    facebook: s.facebook_link || "",
+                    student_id: s.student_no,
+                    program: s.program || "",
+                    college: s.college || "",
+                    year_level: s.year_level || "",
+                    section: s.section || "",
+                    user_type: s.role || "bulsuan",
+                };
+            } else {
+                console.warn("Could not fetch student info — using fallback empty data.");
+            }
+        } catch (err) {
+            console.error("Error fetching student profile:", err);
+        }
+
+        if (!payload.first_name || !payload.last_name || !payload.email) {
+            showMessage("⚠ Could not load your BulSU profile. Please re-login and try again.");
+            // Re-enable button
+            this.disabled = false;
+            this.textContent = "Register Now";
+            return;
+        }
+
+        const result = await apiCall(`/events/${eventId}/register`, "POST", payload);
+
+        // Re-enable button regardless of result
+        this.disabled = false;
+        this.textContent = "Register Now";
+
+        if (result?.success) {
+            showMessage(result.message || "Registered successfully!");
+            eventCard.dataset.registered = "true";
+            
+            // After successful registration, show cancel button for member
+            const userId = authStatus.data.user.id || authStatus.data.user_id;
+            showCancelButtonForMember(eventId, userId);
+            
+            // Generate QR code for member if available
+            if (result.data && result.data.qr_code) {
+                generateAndDownloadQRCode(result.data.qr_code, eventId, payload);
+            }
+        } else {
+            showMessage(result?.message || "Registration failed.");
+        }
+    }
+
+    function generateAndDownloadQRCode(qrData, eventId, userData) {
+        // Create a temporary container for QR generation
+        const tempDiv = document.createElement("div");
+        tempDiv.style.position = "absolute";
+        tempDiv.style.left = "-9999px";
+        document.body.appendChild(tempDiv);
+
+        // Generate QR code
+        new QRCode(tempDiv, {
+            text: qrData,
+            width: 200,
+            height: 200,
+            colorDark: "#06047b",
+            colorLight: "#ffffff",
+            correctLevel: QRCode.CorrectLevel.H,
         });
 
-        function showPreRegisterFormInsideModal(eventId) {
-            const modal = document.getElementById("eventModal");
-            const modalContent = document.querySelector("#eventModal .modal-content");
+        // Wait for QR code to fully render
+        setTimeout(() => {
+            const canvas = tempDiv.querySelector("canvas");
+            const img = tempDiv.querySelector("img");
 
-            const modalTitle = document.getElementById("modalTitle");
-            const modalDate = document.getElementById("modalDate");
-            const modalDesc = document.getElementById("modalContent");
-            const registerBtn = document.getElementById("registerBtn");
+            const padding = 20;
 
-            [modalTitle, modalDate, modalDesc, registerBtn].forEach(el => {
-                if (el) el.style.display = "none";
+            if (canvas) {
+                // Create a new canvas with extra padding
+                const paddedCanvas = document.createElement("canvas");
+                const size = canvas.width + padding * 2;
+                paddedCanvas.width = size;
+                paddedCanvas.height = size;
+
+                const ctx = paddedCanvas.getContext("2d");
+                ctx.fillStyle = "#ffffff";
+                ctx.fillRect(0, 0, size, size);
+                ctx.drawImage(canvas, padding, padding);
+
+                const url = paddedCanvas.toDataURL("image/png");
+                const a = document.createElement("a");
+                const identifier = userData.student_id || `${userData.first_name}-${userData.last_name}`;
+                a.href = url;
+                a.download = `Event-${eventId}-${identifier}-QR.png`;
+                document.body.appendChild(a);
+                a.click();
+                document.body.removeChild(a);
+
+                console.log("QR code download triggered successfully for member");
+            } else if (img) {
+                // For <img> fallback
+                const paddedCanvas = document.createElement("canvas");
+                const size = img.width + padding * 2;
+                paddedCanvas.width = size;
+                paddedCanvas.height = size;
+
+                const ctx = paddedCanvas.getContext("2d");
+                ctx.fillStyle = "#ffffff";
+                ctx.fillRect(0, 0, size, size);
+                ctx.drawImage(img, padding, padding);
+
+                const url = paddedCanvas.toDataURL("image/png");
+                const a = document.createElement("a");
+                const identifier = userData.student_id || `${userData.first_name}-${userData.last_name}`;
+                a.href = url;
+                a.download = `Event-${eventId}-${identifier}-QR.png`;
+                document.body.appendChild(a);
+                a.click();
+                document.body.removeChild(a);
+
+                console.log("QR code download triggered successfully (img fallback)");
+            } else {
+                console.error("No canvas or img element found for QR code");
+                alert("QR code generation failed. Please try again.");
+            }
+
+            // Clean up temporary div
+            document.body.removeChild(tempDiv);
+        }, 500);
+    }
+
+
+    // Function to show cancel button for members
+    function showCancelButtonForMember(eventId, userEmail, eventCard = null) {
+        const registerBtn = document.getElementById("registerBtn");
+        registerBtn.style.display = "none";
+
+        let cancelBtn = document.getElementById("cancelPreRegister");
+        if (!cancelBtn) {
+            cancelBtn = document.createElement("button");
+            cancelBtn.id = "cancelPreRegister";
+            cancelBtn.textContent = "Cancel Pre-Registration";
+            cancelBtn.className = "register-btn cancel";
+            cancelBtn.style.marginLeft = "10px";
+            document.querySelector(".modal-body").appendChild(cancelBtn);
+        }
+
+        cancelBtn.style.display = "inline-block";
+        cancelBtn.dataset.eventId = eventId;
+
+        cancelBtn.onclick = async () => {
+            const confirmCancel = confirm("Are you sure you want to cancel your registration?");
+            if (!confirmCancel) return;
+
+            const result = await apiCall(`/events/${eventId}/cancel-by-email`, "POST", {
+                email: userEmail
             });
+            
+            if (result?.success) {
+                showMessage("✅ Registration canceled successfully.");
+                cancelBtn.style.display = "none";
+                registerBtn.style.display = "inline-block";
+                
+                // Update the card dataset if provided
+                if (eventCard) {
+                    eventCard.dataset.registered = "false";
+                    // Update registered count
+                    const currentCount = parseInt(eventCard.dataset.registeredCount) || 0;
+                    if (currentCount > 0) {
+                        eventCard.dataset.registeredCount = (currentCount - 1).toString();
+                    }
+                }
+                
+                // Close modal after successful cancellation
+                setTimeout(() => {
+                    document.getElementById("eventModal").style.display = "none";
+                }, 1500);
+            } else {
+                showMessage(result?.message || "Cancellation failed.");
+            }
+        };
+    }
 
-            const formContainer = document.createElement("div");
-            formContainer.classList.add("pre-register-container");
+    async function showPreRegisterFormInsideModal(eventId) {
+        const authStatus = await apiCall("/auth/check-login", "GET");
+    let userEmail = null;
+    
+    if (authStatus?.success && authStatus?.data?.logged_in) {
+        userEmail = authStatus.data.user.email;
+    }
+    
+    // If user is logged in and has email, check if already registered
+    if (userEmail) {
+        const registrationCheck = await checkEmailRegistration(eventId, email);
+        if (registrationCheck.registered) {
+            // Show message with cancel button
+            showMessage(`You are already registered for this event as a ${registrationCheck.participant_type}. 
+                <br><br>
+                <button id="cancelByEmailBtn" class="register-btn" style="background: #dc3545; margin-top: 10px;">
+                    Cancel Pre-Registration
+                </button>`);
+            
+            document.getElementById("cancelByEmailBtn").addEventListener("click", async () => {
+                const result = await apiCall(`/events/${eventId}/cancel-by-email`, "POST", { email });
+                if (result?.success) {
+                    showMessage("Your pre-registration has been cancelled.");
+                    // Update event card data
+                    const eventCard = document.querySelector(`.event-card[data-id='${eventId}']`);
+                    if (eventCard) {
+                        const currentCount = parseInt(eventCard.dataset.registeredCount) || 0;
+                        if (currentCount > 0) {
+                            eventCard.dataset.registeredCount = (currentCount - 1).toString();
+                        }
+                    }
+                    // Close modal
+                    const modal = document.getElementById("eventModal");
+                    modal.style.display = "none";
+                } else {
+                    showMessage(result?.message || "Failed to cancel pre-registration.");
+                }
+            });
+            return;
+        }
+    }
+        const modal = document.getElementById("eventModal");
+        const modalContent = document.querySelector("#eventModal .modal-content");
 
-            formContainer.innerHTML = `
-                <h2>Pre-Register for Event</h2>
-                <p class="subtitle">This event is open for public participants. Please fill out your information below:</p>
+        const modalTitle = document.getElementById("modalTitle");
+        const modalDate = document.getElementById("modalDate");
+        const modalDesc = document.getElementById("modalContent");
+        const registerBtn = document.getElementById("registerBtn");
 
-                <div class="single-select">
-                    <label>Participant Type*</label>
-                    <select id="participantType" required>
-                        <option value="" disabled selected>Select Type</option>
-                        <option value="Guest">Guest</option>
-                        <option value="BulSUan">BulSUan</option>
-                    </select>
-                </div>
+        [modalTitle, modalDate, modalDesc, registerBtn].forEach(el => {
+            if (el) el.style.display = "none";
+        });
 
+        const formContainer = document.createElement("div");
+        formContainer.classList.add("pre-register-container");
+
+        formContainer.innerHTML = `
+            <h2>Pre-Register for Event</h2>
+            <p class="subtitle">This event is open for public participants. Please fill out your information below:</p>
+
+            <div class="single-select">
+                <label>Participant Type*</label>
+                <select id="participantType" required>
+                    <option value="" disabled selected>Select Type</option>
+                    <option value="guest">Guest</option>
+                    <option value="bulsuan">BulSUan</option>
+                </select>
+            </div>
+
+            <div id="guestFields">
                 <div class="form-grid">
                     <div class="left-col">
                         <label>First Name*</label>
@@ -1164,18 +1526,98 @@
                         <input type="text" id="facebook">
                     </div>
                 </div>
+            </div>
 
-                <div class="form-actions">
-                    <button id="submitPreRegister">Submit</button>
-                    <button id="cancelPreRegister">Cancel</button>
+            <div id="bulsuanFields" style="display: none;">
+                <div class="form-grid">
+                    <div class="left-col">
+                        <label>First Name*</label>
+                        <input type="text" id="bulsuFirstName" required>
+
+                        <label>Last Name*</label>
+                        <input type="text" id="bulsuLastName" required>
+
+                        <label>Email*</label>
+                        <input type="email" id="bulsuEmail" required>
+
+                        <label>Gender*</label>
+                        <select id="bulsuGender" required>
+                            <option value="" disabled selected>Select Gender</option>
+                            <option>Male</option>
+                            <option>Female</option>
+                            <option>Other</option>
+                        </select>
+                    </div>
+
+                    <div class="right-col">
+                        <label>Middle Name</label>
+                        <input type="text" id="bulsuMiddleName">
+
+                        <label>Suffix</label>
+                        <select id="bulsuSuffix">
+                            <option>None</option>
+                            <option>Jr.</option>
+                            <option>I</option>
+                            <option>II</option>
+                            <option>III</option>
+                        </select>
+
+                        <label>Phone Number</label>
+                        <input type="text" id="bulsuPhone">
+
+                        <label>Facebook Profile Link</label>
+                        <input type="text" id="bulsuFacebook">
+                    </div>
                 </div>
-            `;
 
-            const existingForm = document.querySelector(".pre-register-container");
+                <h3>BulSU Information</h3>
+                <div class="form-grid">
+                    <div class="left-col">
+                        <label>Student/Employee ID*</label>
+                        <input type="text" id="studentId" required>
+
+                        <label>Program*</label>
+                        <input type="text" id="program" required>
+                    </div>
+                    <div class="right-col">
+                        <label>College*</label>
+                        <input type="text" id="college" required>
+
+                        <label>Year Level*</label>
+                        <select id="yearLevel" required>
+                            <option value="" disabled selected>Select Year Level</option>
+                            <option>1st year</option>
+                            <option>2nd year</option>
+                            <option>3rd year</option>
+                            <option>4th year</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-grid">
+                    <label>Section</label>
+                    <input type="text" id="section">
+                </div>
+            </div>
+
+            <div class="form-actions">
+                <button id="submitPreRegister">Submit</button>
+                <button id="cancelPreRegister">Cancel</button>
+            </div>
+        `;
+
+        const existingForm = document.querySelector(".pre-register-container");
             if (existingForm) existingForm.remove();
 
             modalContent.appendChild(formContainer);
             modal.style.display = "flex";
+
+            // Add event listener for participant type change
+            document.getElementById("participantType").addEventListener("change", function() {
+                const isBulSUan = this.value === "bulsuan";
+                document.getElementById("guestFields").style.display = isBulSUan ? "none" : "block";
+                document.getElementById("bulsuanFields").style.display = isBulSUan ? "block" : "none";
+            });
 
             document.getElementById("cancelPreRegister").addEventListener("click", () => {
                 formContainer.remove();
@@ -1184,52 +1626,78 @@
                 });
             });
 
-            /*
             document.getElementById("submitPreRegister").addEventListener("click", async () => {
-                const data = {
-                    first_name: document.getElementById("firstName").value,
-                    last_name: document.getElementById("lastName").value,
-                    middle_name: document.getElementById("middleName").value,
-                    suffix: document.getElementById("suffix").value,
-                    gender: document.getElementById("gender").value,
-                    email: document.getElementById("email").value,
-                    phone: document.getElementById("phone").value,
-                    facebook: document.getElementById("facebook").value,
-                    user_type: "guest",
-                };
+                const participantType = document.getElementById("participantType").value.toLowerCase();
+                
+                let data = {};
+                let email = "";
 
-                if (!data.first_name || !data.last_name || !data.email || !data.gender) {
+                if (participantType === "guest") {
+                    data = {
+                        first_name: document.getElementById("firstName").value,
+                        last_name: document.getElementById("lastName").value,
+                        middle_name: document.getElementById("middleName").value,
+                        suffix: document.getElementById("suffix").value,
+                        gender: document.getElementById("gender").value,
+                        email: document.getElementById("email").value,
+                        phone: document.getElementById("phone").value,
+                        facebook: document.getElementById("facebook").value,
+                        user_type: "guest",
+                    };
+                    email = document.getElementById("email").value;
+                } else if (participantType === "bulsuan") {
+                    data = {
+                        first_name: document.getElementById("bulsuFirstName").value,
+                        last_name: document.getElementById("bulsuLastName").value,
+                        middle_name: document.getElementById("bulsuMiddleName").value,
+                        suffix: document.getElementById("bulsuSuffix").value,
+                        gender: document.getElementById("bulsuGender").value,
+                        email: document.getElementById("bulsuEmail").value,
+                        phone: document.getElementById("bulsuPhone").value,
+                        facebook: document.getElementById("bulsuFacebook").value,
+                        student_id: document.getElementById("studentId").value,
+                        program: document.getElementById("program").value,
+                        college: document.getElementById("college").value,
+                        year_level: document.getElementById("yearLevel").value,
+                        section: document.getElementById("section").value,
+                        user_type: "bulsuan",
+                    };
+                    email = document.getElementById("bulsuEmail").value;
+                }
+
+                // Validate required fields
+                if (!data.first_name || !data.last_name || !data.email || !data.gender || !participantType) {
                     alert("Please fill in all required fields.");
                     return;
                 }
 
-                const result = await apiCall(`/events/${eventId}/register`, "POST", data);
-                if (result && result.success) {
-                    showMessage(result.message || "Pre-registration successful!");
-                    formContainer.remove();
-                    window.location.reload();
-                } else {
-                    showMessage(result?.message || "Pre-registration failed.");
+                if (participantType === "bulsuan" && (!data.student_id || !data.program || !data.college || !data.year_level)) {
+                    alert("Please fill in all required BulSU information fields.");
+                    return;
                 }
-                */
-            document.getElementById("submitPreRegister").addEventListener("click", async () => {
-                const participantType = document.getElementById("participantType").value;
 
-                const data = {
-                    first_name: document.getElementById("firstName").value,
-                    last_name: document.getElementById("lastName").value,
-                    middle_name: document.getElementById("middleName").value,
-                    suffix: document.getElementById("suffix").value,
-                    gender: document.getElementById("gender").value,
-                    email: document.getElementById("email").value,
-                    phone: document.getElementById("phone").value,
-                    facebook: document.getElementById("facebook").value,
-                    user_type: participantType,
-                };
-
-                // Validate basic fields
-                if (!data.first_name || !data.last_name || !data.email || !data.gender || !participantType) {
-                    alert("Please fill in all required fields.");
+                // First, check if this email is already registered
+                const registrationCheck = await checkEmailRegistration(eventId, email);
+                if (registrationCheck.registered) {
+                    // Show message with cancel button
+                    showMessage(`You are already registered for this event as a ${registrationCheck.participant_type}. 
+                        <br><br>
+                        <button id="cancelByEmailBtn" class="register-btn" style="background: #dc3545; margin-top: 10px;">
+                            Cancel Pre-Registration
+                        </button>`);
+                    
+                    document.getElementById("cancelByEmailBtn").addEventListener("click", async () => {
+                        const result = await apiCall(`/events/${eventId}/cancel-by-email`, "POST", { email });
+                        if (result?.success) {
+                            showMessage("Your pre-registration has been cancelled.");
+                            formContainer.remove();
+                            [modalTitle, modalDate, modalDesc, registerBtn].forEach(el => {
+                                if (el) el.style.display = "";
+                            });
+                        } else {
+                            showMessage(result?.message || "Failed to cancel pre-registration.");
+                        }
+                    });
                     return;
                 }
 
@@ -1238,6 +1706,27 @@
                 console.log("API Response:", result);
 
                 if (result && result.success) {
+                    if (result.data && result.data.duplicate) {
+                        showMessage(`You are already registered for this event with email: <strong>${result.data.email}</strong>. 
+                            <br><br>
+                            <button id="cancelByEmailBtn" class="register-btn" style="background: #dc3545; margin-top: 10px;">
+                                Cancel Pre-Registration
+                            </button>`);
+                        
+                        document.getElementById("cancelByEmailBtn").addEventListener("click", async () => {
+                            const cancelResult = await apiCall(`/events/${eventId}/cancel-by-email`, "POST", { email: result.data.email });
+                            if (cancelResult?.success) {
+                                showMessage("Your pre-registration has been cancelled.");
+                                formContainer.remove();
+                                [modalTitle, modalDate, modalDesc, registerBtn].forEach(el => {
+                                    if (el) el.style.display = "";
+                                });
+                            } else {
+                                showMessage(cancelResult?.message || "Failed to cancel pre-registration.");
+                            }
+                        });
+                        return;
+                    }
                     showMessage("Registration successful! Please keep your downloaded QR code for verification.");
 
                     // Close the modal first
@@ -1335,10 +1824,10 @@
                     showMessage(result?.message || "Pre-registration failed.");
                 }
             });
-
         }
 
-        function showBulSUPreRegisterForm(eventId) {
+        async function showBulSUPreRegisterForm(eventId) {
+            
             const modal = document.getElementById("eventModal");
             const modalContent = document.querySelector("#eventModal .modal-content");
 
@@ -1448,6 +1937,41 @@
             });
 
             document.getElementById("submitBulSUPreRegister").addEventListener("click", async () => {
+
+                const email = document.getElementById("email").value;
+                // Check if already registered
+                const registrationCheck = await checkEmailRegistration(eventId, email);
+                
+                if (registrationCheck.registered) {
+                    showMessage(`You are already registered for this event as a ${registrationCheck.participant_type}. 
+                        <br><br>
+                        <button id="cancelByEmailBtn" class="register-btn" style="background: #dc3545; margin-top: 10px;">
+                            Cancel Pre-Registration
+                        </button>`);
+                    
+                    document.getElementById("cancelByEmailBtn").addEventListener("click", async () => {
+                        const result = await apiCall(`/events/${eventId}/cancel-by-email`, "POST", { email });
+                        if (result?.success) {
+                            showMessage("Your pre-registration has been cancelled.");
+                            formContainer.remove();
+                            [modalTitle, modalDate, modalDesc, registerBtn].forEach(el => {
+                                if (el) el.style.display = "";
+                            });
+                            // Update event card data if needed
+                            const eventCard = document.querySelector(`.event-card[data-id='${eventId}']`);
+                            if (eventCard) {
+                                const currentCount = parseInt(eventCard.dataset.registeredCount) || 0;
+                                if (currentCount > 0) {
+                                    eventCard.dataset.registeredCount = (currentCount - 1).toString();
+                                }
+                            }
+                        } else {
+                            showMessage(result?.message || "Failed to cancel pre-registration.");
+                        }
+                    });
+                    return;
+                }
+
                 const data = {
                     first_name: document.getElementById("firstName").value,
                     last_name: document.getElementById("lastName").value,
@@ -1472,9 +1996,119 @@
 
                 const result = await apiCall(`/events/${eventId}/register`, "POST", data);
                 if (result && result.success) {
+                    if (result.data && result.data.duplicate) {
+                        showMessage(`You are already registered for this event with email: <strong>${result.data.email}</strong>. 
+                            <br><br>
+                            <button id="cancelByEmailBtn" class="register-btn" style="background: #dc3545; margin-top: 10px;">
+                                Cancel Pre-Registration
+                            </button>`);
+                        
+                        document.getElementById("cancelByEmailBtn").addEventListener("click", async () => {
+                            const cancelResult = await apiCall(`/events/${eventId}/cancel-by-email`, "POST", { email: result.data.email });
+                            if (cancelResult?.success) {
+                                showMessage("Your pre-registration has been cancelled.");
+                                formContainer.remove();
+                                [modalTitle, modalDate, modalDesc, registerBtn].forEach(el => {
+                                    if (el) el.style.display = "";
+                                });
+                            } else {
+                                showMessage(cancelResult?.message || "Failed to cancel pre-registration.");
+                            }
+                        });
+                        return;
+                    }
                     showMessage(result.message || "Pre-registration successful!");
+                    // Close the modal first
                     formContainer.remove();
-                    window.location.reload();
+                    const modal = document.getElementById("eventModal");
+                    modal.style.display = "none";
+
+                    let qrData;
+                    if (result.data && result.data.qr_code) {
+                        qrData = result.data.qr_code;
+                    } else {
+                        console.error("No qr_code returned from API:", result);
+                        alert("Registration successful but QR code generation failed. Please contact support.");
+                        return;
+                    }
+
+                    console.log("Generating QR with data:", qrData);
+
+                    // Create a temporary container for QR generation
+                    const tempDiv = document.createElement("div");
+                    tempDiv.style.position = "absolute";
+                    tempDiv.style.left = "-9999px";
+                    document.body.appendChild(tempDiv);
+
+                    // Generate QR code
+                    new QRCode(tempDiv, {
+                        text: qrData,
+                        width: 200,
+                        height: 200,
+                        colorDark: "#06047b",
+                        colorLight: "#ffffff",
+                        correctLevel: QRCode.CorrectLevel.H,
+                    });
+
+                    // Wait longer for QR code to fully render
+                    setTimeout(() => {
+                        const canvas = tempDiv.querySelector("canvas");
+                        const img = tempDiv.querySelector("img");
+
+                        const padding = 20;
+
+                        if (canvas) {
+                            // Create a new canvas with extra padding
+                            const paddedCanvas = document.createElement("canvas");
+                            const size = canvas.width + padding * 2;
+                            paddedCanvas.width = size;
+                            paddedCanvas.height = size;
+
+                            const ctx = paddedCanvas.getContext("2d");
+                            ctx.fillStyle = "#ffffff";
+                            ctx.fillRect(0, 0, size, size);
+                            ctx.drawImage(canvas, padding, padding);
+
+                            const url = paddedCanvas.toDataURL("image/png");
+                            const a = document.createElement("a");
+                            const identifier = data.student_id || `${data.first_name}-${data.last_name}`;
+                            a.href = url;
+                            a.download = `Event-${eventId}-${identifier}-QR.png`;
+                            document.body.appendChild(a);
+                            a.click();
+                            document.body.removeChild(a);
+
+                            console.log("QR code download triggered successfully");
+                        } else if (img) {
+                            // For <img> fallback
+                            const paddedCanvas = document.createElement("canvas");
+                            const size = img.width + padding * 2;
+                            paddedCanvas.width = size;
+                            paddedCanvas.height = size;
+
+                            const ctx = paddedCanvas.getContext("2d");
+                            ctx.fillStyle = "#ffffff";
+                            ctx.fillRect(0, 0, size, size);
+                            ctx.drawImage(img, padding, padding);
+
+                            const url = paddedCanvas.toDataURL("image/png");
+                            const a = document.createElement("a");
+                            const identifier = data.student_id || `${data.first_name}-${data.last_name}`;
+                            a.href = url;
+                            a.download = `Event-${eventId}-${identifier}-QR.png`;
+                            document.body.appendChild(a);
+                            a.click();
+                            document.body.removeChild(a);
+
+                            console.log("QR code download triggered successfully (img fallback)");
+                        } else {
+                            console.error("No canvas or img element found for QR code");
+                            alert("QR code generation failed. Please try again.");
+                        }
+
+                        // Clean up temporary div
+                        document.body.removeChild(tempDiv);
+                    }, 500); // Increased timeout to 500ms
                 } else {
                     showMessage(result?.message || "Pre-registration failed.");
                 }
@@ -1559,11 +2193,26 @@
             messageModal.style.display = "flex";
 
             const closeBtn = document.getElementById("messageCloseBtn");
-            closeBtn.onclick = () => messageModal.style.display = "none";
+            closeBtn.onclick = () => window.location.reload();
 
             messageModal.onclick = e => {
                 if (e.target === messageModal) messageModal.style.display = "none";
             };
+        }
+
+        // Add this function to check if email is registered for an event
+        async function checkEmailRegistration(eventId, email) {
+            try {
+                const response = await apiCall(`/events/${eventId}/check-email?email=${encodeURIComponent(email)}`, 'GET');
+                // The response structure is {success: true, data: {registered: true, participant_type: 'guest'}}
+                if (response?.success && response.data) {
+                    return response.data;
+                }
+                return { registered: false, participant_type: null };
+            } catch (err) {
+                console.error("Error checking email registration:", err);
+                return { registered: false, participant_type: null };
+            }
         }
 
         // Also update the existing checkEventStatus function to be more robust
