@@ -447,6 +447,31 @@ class EventController
     }
 
     /**
+ * Cancel pre-registration by email (for guests and BulSUans)
+ */
+    public function cancelRegistrationByEmail($eventId)
+    {
+        try {
+            $data = json_decode(file_get_contents('php://input'), true);
+            $email = $data['email'] ?? null;
+
+            if (!$email) {
+                return Response::error("Email is required.");
+            }
+
+            $result = $this->eventModel->cancelRegistrationByEmail($eventId, $email);
+
+            if ($result) {
+                return Response::success(null, "Pre-registration cancelled successfully.");
+            } else {
+                return Response::error("No registration found for this email.");
+            }
+        } catch (Exception $e) {
+            return Response::serverError($e->getMessage());
+        }
+    }
+
+    /**
      * Delete event (Officer only)
      */
     public function delete($id)
@@ -601,87 +626,8 @@ class EventController
     }
 
     /**
-     * Register for event
+     * Register for an event
      */
-    /*
-    public function register($eventId)
-    {
-        try {
-            $input = json_decode(file_get_contents('php://input'), true);
-            $event = $this->eventModel->findById($eventId);
-
-            if (!$event) {
-                return Response::error("Event not found");
-            }
-
-            $restriction = strtolower($event['event_restriction'] ?? '');
-
-            switch ($restriction) {
-                case 'members':
-                    session_start();
-                    $userId = $_SESSION['user_id'] ?? null;
-                    if (!$userId) return Response::unauthorized("Login required to register as a member.");
-                    $result = $this->eventModel->registerMember($eventId, $userId);
-                    break;
-
-                case 'bulsuans':
-                    $result = $this->eventModel->registerBulSUan($eventId, $input);
-                    break;
-
-                case 'public':
-                    $result = $this->eventModel->registerPublic($eventId, $input);
-                    break;
-
-                default:
-                    return Response::error("Invalid event restriction type.");
-            }
-
-            return Response::success($result);
-        } catch (Exception $e) {
-            return Response::error($e->getMessage());
-        }
-    }
-        */
-
-    /*
-    public function register($eventId)
-    {
-        try {
-            $input = json_decode(file_get_contents('php://input'), true);
-            $event = $this->eventModel->findById($eventId);
-            if (!$event) {
-                return Response::error("Event not found");
-            }
-            $restriction = strtolower($event['event_restriction'] ?? '');
-
-            $result = null;
-            switch ($restriction) {
-                case 'members':
-                    session_start();
-                    $userId = $_SESSION['user_id'] ?? null;
-                    if (!$userId) return Response::unauthorized("Login required to register as a member.");
-                    $result = $this->eventModel->registerMember($eventId, $userId);
-                    break;
-                case 'bulsuans':
-                    $result = $this->eventModel->registerBulSUan($eventId, $input);
-                    break;
-                case 'public':
-                    $result = $this->eventModel->registerPublic($eventId, $input);
-                    break;
-                default:
-                    return Response::error("Invalid event restriction type.");
-            }
-
-            if (isset($result['message']) && isset($result['data'])) {
-                return Response::success($result['data'], $result['message']);
-            } else {
-                return Response::success($result);
-            }
-        } catch (Exception $e) {
-            return Response::error($e->getMessage());
-        }
-    }
-        */
     public function register($eventId)
     {
         try {
@@ -700,41 +646,49 @@ class EventController
             $userId = $_SESSION['user_id'] ?? $_SESSION['student_id'] ?? null;
             $isLoggedIn = !empty($userId);
 
-            //error_log("Register Debug - User ID: " . ($userId ?? 'null') . ", Logged in: " . ($isLoggedIn ? 'yes' : 'no') . ", Event restriction: " . $restriction);
-
             $result = null;
-
             switch ($restriction) {
                 case 'members':
-                    // Members only - must be logged in
-                    if (!$isLoggedIn) {
-                        return Response::unauthorized("Login required to register as a member.");
-                    }
+                    session_start();
+                    $userId = $_SESSION['user_id'] ?? $_SESSION['student_id'] ?? null;
+                    if (!$userId) return Response::unauthorized("Login required to register as a member.");
                     $result = $this->eventModel->registerMember($eventId, $userId);
                     break;
-
                 case 'bulsuans':
+                    // For BulSUans, check if user is logged in as a member
                     if ($isLoggedIn) {
-                        $result = $this->eventModel->registerMember($eventId, $userId);
-                    } else {
-                        $result = $this->eventModel->registerBulSUan($eventId, $input);
+                        // Pass student_id for logged-in BulSU members
+                        $input['student_id'] = $userId;
                     }
+                    $result = $this->eventModel->registerBulSUan($eventId, $input);
                     break;
-
                 case 'public':
+                    // For public events, check if user is logged in
                     if ($isLoggedIn) {
-                        $result = $this->eventModel->registerMember($eventId, $userId);
-                    } else {
-                        $result = $this->eventModel->registerPublic($eventId, $input);
+                        // Pass student_id for logged-in members registering for public events
+                        $input['student_id'] = $userId;
                     }
+                    $result = $this->eventModel->registerPublic($eventId, $input);
                     break;
-
                 default:
                     return Response::error("Invalid event restriction type.");
             }
 
-            if (isset($result['message']) && isset($result['data'])) {
+            // Handle the response - check for duplicate email case
+            if (isset($result['success']) && $result['success'] === false && $result['message'] === 'duplicate_email') {
+                return Response::success([
+                    'duplicate' => true,
+                    'email' => $result['email']
+                ], "This email is already registered for this event.");
+            }
+
+            // Handle successful registration with QR code
+            if (isset($result['qr_code'])) {
+                return Response::success($result, "Registration successful! Please keep your QR code for verification.");
+            } else if (isset($result['message']) && isset($result['data'])) {
                 return Response::success($result['data'], $result['message']);
+            } else if (isset($result['registration_id'])) {
+                return Response::success($result);
             } else {
                 return Response::success($result);
             }
@@ -763,7 +717,18 @@ class EventController
             ]);
         }
     }
-
+    /**
+     * Check if email is registered for an event
+     */
+    public function checkEmailRegistration($eventId, $email)
+    {
+        try {
+            $registered = $this->eventModel->checkEmailRegistration($eventId, $email);
+            Response::success(['registered' => $registered]);
+        } catch (Exception $e) {
+            Response::serverError($e->getMessage());
+        }
+    }
 
     /**
      * Cancel pre-registration for an event (Member only)

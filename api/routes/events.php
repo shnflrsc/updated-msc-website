@@ -88,6 +88,8 @@ switch ($method) {
             $eventController->getAll();
         } elseif ($endpoint && is_numeric($endpoint) && $id === 'check-registration' && isset($_GET['user_id'])) {
             $eventController->isUserRegistered($endpoint, $_GET['user_id']);
+        } elseif ($endpoint && is_numeric($endpoint) && $id === 'check-email' && isset($_GET['email'])) {
+    $eventController->checkEmailRegistration($endpoint, $_GET['email']);
         } else {
             http_response_code(404);
             echo json_encode(['success' => false, 'message' => 'Event endpoint not found: ' . $endpoint]);
@@ -140,6 +142,8 @@ switch ($method) {
             $eventController->register($endpoint);
         } elseif ($endpoint && is_numeric($endpoint) && $id === 'cancel-pre-registration') {
             $eventController->cancelRegistration($endpoint);
+        } elseif ($endpoint && is_numeric($endpoint) && $id === 'cancel-by-email') {
+        $eventController->cancelRegistrationByEmail($endpoint);
         } elseif ($endpoint === '' || $endpoint === 'create') {
             $eventController->create();
         } elseif ($endpoint && is_numeric($endpoint) && $id === 'cancel') {
