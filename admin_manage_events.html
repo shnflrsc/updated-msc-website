@@ -1609,12 +1609,15 @@
             let newElement;
             if (evt.event_image_url) {
                 newElement = document.createElement("img");
-                newElement.src = evt.event_image_url;
+                //newElement.src = `https://bulsumsc.org${evt.event_image_url}`;
+                const path = evt.event_image_url.replace("/updated-msc-website", "");
+                const BASE_URL = window.location.origin;
+                newElement.src = BASE_URL + path;
                 newElement.alt = "Event Poster";
                 newElement.classList.add("event-img");
             } else {
                 newElement = document.createElement("i");
-                newElement.classList.add("bi", "bi-calendar-event", "no-badge-icon");
+                newElement.classList.add("bi", "bi-calendar-event" , "no-badge-icon");
             }
             imgContainer.appendChild(newElement);
 
@@ -1734,8 +1737,8 @@
                 }
             }
 
-            const eventImagePath = await uploadFile("event_image", "/updated-msc-website/api/events/upload-image");
-            const badgeImagePath = await uploadFile("badge_image", "/updated-msc-website/api/events/upload-badge");
+            const eventImagePath = await uploadFile("event_image", "/api/events/upload-image");
+            const badgeImagePath = await uploadFile("badge_image", "/api/events/upload-badge")
 
             const newEvent = {
                 event_name: document.getElementById("title").value,
@@ -1917,7 +1920,7 @@
             document.getElementById("edit_event_image_name").textContent =
                 evt.event_image_url ? evt.event_image_url.split("/").pop() : "No file chosen";
             document.getElementById("edit_badge_image_name").textContent =
-                evt.event_badge_image ? evt.event_badge_image.split("/").pop() : "No file chosen";
+                evt.event_batch_image ? evt.event_batch_image.split("/").pop() : "No file chosen"
 
             const form = document.getElementById("editEventForm");
             form.dataset.eventId = eventId;
@@ -1971,11 +1974,11 @@
 
             const eventImagePath = await uploadFile(
                 "edit_event_image",
-                "/updated-msc-website/api/events/upload-image"
+                "/api/events/upload-image"
             );
             const badgeImagePath = await uploadFile(
                 "edit_badge_image",
-                "/updated-msc-website/api/events/upload-badge"
+                "/api/events/upload-badge"
             );
 
             const payload = {
@@ -1998,7 +2001,7 @@
             };
 
             if (eventImagePath) payload.event_image_url = eventImagePath;
-            if (badgeImagePath) payload.event_badge_image = badgeImagePath;
+            if (badgeImagePath) payload.event_batch_image = badgeImagePath;
 
             const response = await apiCall(`/events/${eventId}`, "PUT", payload);
 
@@ -2056,8 +2059,9 @@
                         <div class="event-item"> 
                             <div class="event-image">
                                 ${evt.event_batch_image
-                            ? `<img src="${evt.event_batch_image}" alt="Event Badge" class="event-img" />`
-                                : `<i class="bi bi-calendar-event"></i>`}
+                                ? `<img src="${window.location.origin + evt.event_batch_image.replace('/updated-msc-website', '')}" 
+                                    alt="Event Badge" class="event-img" />`
+                                : `<i class="bi bi-calendar-event text-[#b9da05]"></i>`}
                             </div>
                             <div class="event-details">
                                 <h4 class="event-title"> ${evt.event_name}</h4>
@@ -2124,8 +2128,9 @@
                         <div class="event-item"> 
                             <div class="event-image"> 
                                 ${evt.event_batch_image
-                            ? `<img src="${evt.event_batch_image}" alt="Event Badge" class="event-img" />`
-                            : `<i class="bi bi-calendar-event"></i>`}
+                            ? `<img src="${window.location.origin + evt.event_batch_image.replace('/updated-msc-website', '')}" 
+                                    alt="Event Badge" class="event-img" />`
+                                : `<i class="bi bi-calendar-event text-[#b9da05]"></i>`}}
                             </div>
                             <div class="event-details">
                                 <h4 class="event-title"> ${evt.event_name}</h4>
@@ -2185,8 +2190,9 @@
                         <div class="event-item"> 
                             <div class="event-image"> 
                                 ${evt.event_batch_image
-                            ? `<img src="${evt.event_batch_image}" alt="Event Badge" class="event-img" />`
-                            : `<i class="bi bi-calendar-event"></i>`}
+                            ? `<img src="${window.location.origin + evt.event_batch_image.replace('/updated-msc-website', '')}" 
+                                alt="Event Badge" class="event-img" />`
+                            : `<i class="bi bi-calendar-event text-[#b9da05]"></i>`}}
                             </div>
                             <div class="event-details">
                                 <h4 class="event-title"> ${evt.event_name}</h4>

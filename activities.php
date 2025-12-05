@@ -818,9 +818,9 @@
             card.dataset.capacity = event.capacity || 0;
             card.dataset.registeredCount = event.attendants || 0;
             card.dataset.access = event.event_restriction || "public";
-            card.dataset.image = event.event_batch_image || "";
+            card.dataset.image = event.event_image_url|| "";
 
-            let imgPath = event.event_batch_image || "";
+            let imgPath = event.event_image_url || "";
             if (imgPath.startsWith("/updated-msc-website")) {
                 imgPath = imgPath.replace("/updated-msc-website", "");
             }
