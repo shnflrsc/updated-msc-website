@@ -1292,6 +1292,14 @@
                             </div>
                             <div class="stat-item">
                                 <div class="stat-value"></div>
+                                <div class="stat-label">Officers Registered</div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-value"></div>
+                                <div class="stat-label">Officers Attended</div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-value"></div>
                                 <div class="stat-label">Total Registered</div>
                             </div>
                             <div class="stat-item">
@@ -1651,9 +1659,11 @@
             dashboard.querySelector(".attendance-card .stat-item:nth-child(2) .stat-value").textContent = evt.total_member_attended || '0';
             dashboard.querySelector(".attendance-card .stat-item:nth-child(3) .stat-value").textContent = evt.total_guest_registered || '0';
             dashboard.querySelector(".attendance-card .stat-item:nth-child(4) .stat-value").textContent = evt.total_guest_attended || '0';
-            dashboard.querySelector(".attendance-card .stat-item:nth-child(5) .stat-value").textContent = evt.total_registered || '0';
-            dashboard.querySelector(".attendance-card .stat-item:nth-child(6) .stat-value").textContent = evt.total_attended || '0';
-            dashboard.querySelector(".attendance-card .stat-item:nth-child(7) .stat-value").textContent = `${evt.attendance_rate}%` || '0';
+            dashboard.querySelector(".attendance-card .stat-item:nth-child(5) .stat-value").textContent = evt.total_officer_registered || '0';
+            dashboard.querySelector(".attendance-card .stat-item:nth-child(6) .stat-value").textContent = evt.total_officer_attended || '0';
+            dashboard.querySelector(".attendance-card .stat-item:nth-child(7) .stat-value").textContent = evt.total_registered || '0';
+            dashboard.querySelector(".attendance-card .stat-item:nth-child(8) .stat-value").textContent = evt.total_attended || '0';
+            dashboard.querySelector(".attendance-card .stat-item:nth-child(9) .stat-value").textContent = `${evt.attendance_rate}%` || '0';
             // Update progress bar
             dashboard.querySelector(".progress-bar .progress-fill").style.width = `${evt.attendance_rate}%`;
             dashboard.querySelector(".progress-bar .progress-fill").textContent = `${evt.attendance_rate} %`;

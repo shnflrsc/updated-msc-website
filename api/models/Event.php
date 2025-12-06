@@ -1466,12 +1466,12 @@ class Event
         SELECT 
             COUNT(*) AS total_registered,
             SUM(attendance_status = 'attended') AS total_attended,
-
             SUM(participant_type = 'member') AS total_member_registered,
             SUM(participant_type = 'member' AND attendance_status = 'attended') AS total_member_attended,
-            
             SUM(participant_type = 'guest') AS total_guest_registered,
-            SUM(participant_type = 'guest' AND attendance_status = 'attended') AS total_guest_attended
+            SUM(participant_type = 'guest' AND attendance_status = 'attended') AS total_guest_attended,
+            SUM(participant_type = 'officer') AS total_officer_registered,
+            SUM(participant_type = 'officer' AND attendance_status = 'attended') AS total_officer_attended
             FROM event_registrations
             WHERE event_id = :event_id
             ";
@@ -1486,6 +1486,8 @@ class Event
             $totalMemberAttended  = (int)($counts['total_member_attended'] ?? 0);
             $totalGuestRegistered  = (int)($counts['total_guest_registered'] ?? 0);
             $totalGuestAttended  = (int)($counts['total_guest_attended'] ?? 0);
+            $totalOfficerRegistered  = (int)($counts['total_officer_registered'] ?? 0);
+            $totalOfficerAttended  = (int)($counts['total_officer_attended'] ?? 0);
             $attendanceRate        = $totalRegistered > 0 ? round(($totalAttended / $totalRegistered) * 100, 2) : 0;
 
             $event['total_registered']       = $totalRegistered;
@@ -1495,6 +1497,8 @@ class Event
             $event['total_member_attended'] = $totalMemberAttended;
             $event['total_guest_registered'] = $totalGuestRegistered;
             $event['total_guest_attended'] = $totalGuestAttended;
+            $event['total_officer_registered'] = $totalOfficerRegistered;
+            $event['total_officer_attended'] = $totalOfficerAttended;
             $event['attendance_rate']        = $attendanceRate;
             return $event;
         } catch (Exception $e) {
