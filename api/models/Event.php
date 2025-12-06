@@ -807,7 +807,6 @@ class Event
     /**
      * Register a PUBLIC participant (non-BulSU individuals OR logged-in members)
      */
-    
     public function registerPublic($eventId, $data)
     {
         try {
@@ -817,7 +816,7 @@ class Event
                     throw new Exception("Missing required field: $field");
                 }
             }
-
+    
             // Check if this email already registered for this event
             $checkStmt = $this->db->prepare("
                 SELECT id FROM event_registrations 
@@ -827,7 +826,7 @@ class Event
                 'event_id' => $eventId,
                 'email' => $data['email']
             ]);
-
+    
             if ($checkStmt->fetch()) {
                 return [
                     "success" => false,
@@ -835,26 +834,30 @@ class Event
                     "email" => $data['email']
                 ];
             }
-
-            $studentId = $data['student_id'] ?? null;
+    
+            $studentId = null; // Default to null for non-members
             $participantType = 'guest'; // Default
             
-            // If student_id is provided, check if it's a member/officer
-            if ($studentId) {
+            // Check if user_type is specified in data (for public form submissions)
+            if (isset($data['user_type']) && $data['user_type'] === 'bulsuan') {
+                $participantType = 'bulsuan';
+            }
+            // If student_id is provided AND it exists in students table
+            else if (isset($data['student_id']) && !empty($data['student_id'])) {
                 $studentCheck = $this->db->prepare("
                     SELECT id, role FROM students WHERE id = :student_id
                 ");
-                $studentCheck->execute(['student_id' => $studentId]);
+                $studentCheck->execute(['student_id' => $data['student_id']]);
                 $studentInfo = $studentCheck->fetch(PDO::FETCH_ASSOC);
                 
                 if ($studentInfo) {
                     // This is a logged-in member/officer
+                    $studentId = $data['student_id'];
                     $participantType = $studentInfo['role']; // 'member' or 'officer'
-                } else {
-                    $studentId = null; // Student doesn't exist
                 }
+                // If student doesn't exist, keep studentId as null and participantType as guest/bulsuan
             }
-
+    
             // Count registrations based on participant type
             $countStmt = $this->db->prepare("
                 SELECT COUNT(*) AS type_count 
@@ -866,7 +869,7 @@ class Event
                 'participant_type' => $participantType
             ]);
             $row = $countStmt->fetch(PDO::FETCH_ASSOC);
-
+    
             $typeNumber = $row['type_count'] + 1;
             
             // Generate appropriate QR code based on participant type
@@ -874,10 +877,12 @@ class Event
                 $qrCode = "OFFICER-" . str_pad($typeNumber, 3, '0', STR_PAD_LEFT);
             } elseif ($participantType === 'member') {
                 $qrCode = "MEMBER-" . str_pad($typeNumber, 3, '0', STR_PAD_LEFT);
+            } elseif ($participantType === 'bulsuan') {
+                $qrCode = "BULSUAN-" . str_pad($typeNumber, 3, '0', STR_PAD_LEFT);
             } else {
                 $qrCode = "GUEST-" . str_pad($typeNumber, 3, '0', STR_PAD_LEFT);
             }
-
+    
             // Insert new registration
             $stmt = $this->db->prepare("
                 INSERT INTO event_registrations (
@@ -918,10 +923,10 @@ class Event
                     NOW()
                 )
             ");
-
+    
             $stmt->execute([
                 'event_id' => $eventId,
-                'student_id' => $studentId,
+                'student_id' => $studentId, // This can be NULL for guests/bulsuans
                 'participant_type' => $participantType,
                 'qr_code' => $qrCode,
                 'first_name' => $data['first_name'],
@@ -937,14 +942,14 @@ class Event
                 'year_level' => $data['year_level'] ?? null,
                 'section' => $data['section'] ?? null
             ]);
-
+    
             $registrationId = $this->db->lastInsertId();
-
+    
             $this->db->prepare("
                 UPDATE events SET attendants = attendants + 1 
                 WHERE event_id = :event_id
             ")->execute(['event_id' => $eventId]);
-
+    
             return [
                 "qr_code" => $qrCode,
                 "event_id" => $eventId,
@@ -957,6 +962,7 @@ class Event
             throw new Exception("Public registration failed: " . $e->getMessage());
         }
     }
+
 
     /**
      * Get event registrations
@@ -1148,8 +1154,124 @@ class Event
     }
 
     /**
-     * GET: Event Participants (for Event Details page)
+     * Get Event Participants + Counts (Registered + Attended)
      */
+    /*
+    public function getEventParticipants($eventId)
+    {
+        try {
+            $sql = "
+        SELECT 
+            e.event_id,
+            e.event_name,
+            e.event_date,
+            e.event_time_start,
+            e.event_time_end,
+            e.location,
+            e.event_type,
+            e.event_status,
+            e.description,
+            e.event_image_url,
+            e.event_batch_image,
+            s.id AS student_id,
+            s.msc_id,
+            s.student_no,
+            COALESCE(s.first_name, er.first_name) AS first_name,
+            COALESCE(s.last_name, er.last_name) AS last_name,
+            COALESCE(s.year_level, er.year_level) AS year_level,
+            COALESCE(s.program, er.program) AS program,
+            COALESCE(s.college, er.college) AS college,
+
+            er.participant_type,
+            er.attendance_status,
+            er.registration_date
+        FROM events e
+        LEFT JOIN event_registrations er ON e.event_id = er.event_id
+        LEFT JOIN students s ON er.student_id = s.id
+        WHERE e.event_id = :event_id
+        ORDER BY er.registration_date DESC
+        ";
+
+            $stmt = $this->db->prepare($sql);
+            $stmt->execute(['event_id' => $eventId]);
+            $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+            // Aggregate counts
+            $countSql = "
+            SELECT 
+                COUNT(*) AS total_registered,                                     
+                SUM(attendance_status = 'attended') AS total_attended,
+                SUM(attendance_status = 'registered') AS total_still_registered
+            FROM event_registrations
+            WHERE event_id = :event_id
+            ";
+            $stmt2 = $this->db->prepare($countSql);
+            $stmt2->execute(['event_id' => $eventId]);
+            $counts = $stmt2->fetch(PDO::FETCH_ASSOC);
+
+            $totalRegistered       = (int)($counts['total_registered'] ?? 0);
+            $totalAttended         = (int)($counts['total_attended'] ?? 0);
+            $totalStillRegistered  = (int)($counts['total_still_registered'] ?? 0);
+            $attendanceRate        = $totalRegistered > 0 ? round(($totalAttended / $totalRegistered) * 100, 2) : 0;
+
+            $eventDetails = [
+                "event_id"         => $rows[0]['event_id'] ?? $eventId,
+                "event_name"       => $rows[0]['event_name'] ?? '',
+                "event_date"       => $rows[0]['event_date'] ?? '',
+                "event_time_start" => $rows[0]['event_time_start'] ?? '',
+                "event_time_end"   => $rows[0]['event_time_end'] ?? '',
+                "location"         => $rows[0]['location'] ?? '',
+                "event_type"       => $rows[0]['event_type'] ?? '',
+                "event_status"     => $rows[0]['event_status'] ?? '',
+                "description"      => $rows[0]['description'] ?? '',
+                "event_image_url"  => $rows[0]['event_image_url'] ?? '',
+                "event_batch_image" => $rows[0]['event_batch_image'] ?? '',
+                "total_registered"      => $totalRegistered,
+                "total_attended"        => $totalAttended,
+                "total_still_registered" => $totalStillRegistered,
+                "attendance_rate"       => $attendanceRate
+            ];
+
+            // If no attended participants, return message
+            if (!$rows) {
+                return [
+                    "event" => $eventDetails,
+                    "participants" => "no participants yet"
+                ];
+            }
+
+            $participants = [];
+            foreach ($rows as $row) {
+                $firstName = $row['first_name'] ?? '';
+                $lastName  = $row['last_name'] ?? '';
+                $fullName  = trim("$firstName $lastName");
+                //$attendance_status =
+
+                $participants[] = [
+                    "student_id"        => $row['student_id'] ?? null,
+                    "msc_id"            => $row['msc_id'] ?? null,
+                    "student_no"        => $row['student_no'] ?? null,
+                    "first_name"        => $firstName,
+                    "last_name"         => $lastName,
+                    "fullName"          => $fullName,
+                    "year_level"        => $row['year_level'] ?? '-',
+                    "program"           => $row['program'] ?? '-',
+                    "college"           => $row['college'] ?? '-',
+                    "participant_type"  => $row['participant_type'],
+                    "attendance_status" => $row['attendance_status'] ?? '-',
+                    "registration_date" => $row['registration_date'] ?? '-',
+                ];
+            }
+
+            return [
+                "event"        => $eventDetails,
+                "participants" => $participants
+            ];
+        } catch (Exception $e) {
+            throw new Exception("Failed to fetch event participants: " . $e->getMessage());
+        }
+    }
+    */
     public function getEventParticipants($eventId)
     {
         try {
@@ -1212,7 +1334,11 @@ class Event
             SELECT 
                 COUNT(*) AS total_registered,
                 SUM(attendance_status = 'attended') AS total_attended,
-                SUM(attendance_status = 'registered') AS total_still_registered
+                SUM(attendance_status = 'registered') AS total_still_registered,
+                SUM(attendance_status = 'registered' AND participant_type = 'member') AS total_members_registered,
+                SUM(attendance_status = 'registered' AND participant_type = 'officer') AS total_officers_registered,
+                SUM(attendance_status = 'attended' AND participant_type = 'member') AS total_members_attended,
+                SUM(attendance_status = 'attended' AND participant_type = 'officer') AS total_officers_attended
             FROM event_registrations
             WHERE event_id = :event_id
         ";
@@ -1224,6 +1350,10 @@ class Event
             $totalRegistered      = (int)($counts['total_registered'] ?? 0);
             $totalAttended        = (int)($counts['total_attended'] ?? 0);
             $totalStillRegistered = (int)($counts['total_still_registered'] ?? 0);
+            $totalMemberRegistered = (int)($counts['total_members_registered'] ?? 0);
+            $totalOfficerRegistered = (int)($counts['total_officers_registered'] ?? 0);
+            $totalMemberAttended = (int)($counts['total_members_attended'] ?? 0);
+            $totalOfficerAttended = (int)($counts['total_officers_attended'] ?? 0);
             $attendanceRate       = $totalRegistered > 0
                 ? round(($totalAttended / $totalRegistered) * 100, 2)
                 : 0;
@@ -1232,6 +1362,10 @@ class Event
                 "total_registered"       => $totalRegistered,
                 "total_attended"         => $totalAttended,
                 "total_still_registered" => $totalStillRegistered,
+                "total_members_registered"  => $totalMemberRegistered,
+                "total_officers_registered"  => $totalOfficerRegistered,
+                "total_members_attended"  => $totalMemberAttended,
+                "total_officers_attended"  => $totalOfficerAttended,
                 "attendance_rate"        => $attendanceRate
             ]);
 
