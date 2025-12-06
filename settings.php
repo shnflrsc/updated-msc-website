@@ -64,7 +64,7 @@
                 </h2>
                 <div id="profile" class="section-card flex flex-col gap-2">
                     <div class="bg-[#1f2a40] rounded-md p-6 shadow-lg">
-                        <a href="profile.php"
+                        <a href="edit_profile.php"
                             class="text-base sm:text-lg md:text-xl font-semibold text-[#b9da05] hover:underline">Edit
                             Personal Information</a>
                         <p class="text-xs sm:text-sm md:text-base text-gray-400 mt-1">Update your name, birthday, contact

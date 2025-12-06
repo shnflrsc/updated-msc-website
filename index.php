@@ -21,7 +21,7 @@
     </div>
     <div id="ad-modal-portrait" class="ad-modal">
         <div id="ad-modal-portrait-content" class="ad-modal-content">
-            <button class="ad-modal-close-button bg-gray-800 text-white p-2 rounded-full hover:bg-gray-600 transition-colors">
+            <button class="ad-modal-close-button bg-gray-800 text-white p-2 mt-7 rounded-full hover:bg-gray-600 transition-colors">
                 <i class="fas fa-xmark"></i>
             </button>
             <a href="https://www.facebook.com/share/p/1Cw3PacZBf/" target="_blank">

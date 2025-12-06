@@ -305,7 +305,7 @@
             document.getElementById("firstName").textContent = user.first_name;
             document.getElementById("studentNo").textContent = user.student_no;
             document.getElementById("program").textContent = user.program;
-            document.getElementById("role").textContent = user.role;
+            document.getElementById("role").textContent = user.role.charAt(0).toUpperCase() + user.role.slice(1);;
             document.getElementById("user-college").textContent = user.college;
             document.getElementById("user-year-level").textContent = user.year_level;
             document.getElementById("user-msc-id").textContent = user.msc_id;
@@ -408,6 +408,7 @@
                 const studentId = profileData.data.id;
 
                 const eventsData = await apiCall(`/events/student/${studentId}`);
+                console.log("My Registered Events:", eventsData);
                 const list = document.getElementById("registered-events-list");
 
                 if (!eventsData || !eventsData.success || !Array.isArray(eventsData.data) || eventsData.data.length === 0) {
@@ -421,7 +422,7 @@
                     return;
                 }
                 list.innerHTML = "";
-
+                
                 eventsData.data.forEach(evt => {
                     const eventDateTime = new Date(`${evt.event_date}T${evt.event_time_start}`);
                     const formattedDateTime = eventDateTime.toLocaleString("en-US", {
@@ -432,6 +433,12 @@
                         minute: "2-digit",
                         hour12: true
                     });
+                    
+                    let imgPath = evt.event_batch_image || "";
+                    if (imgPath.startsWith("/updated-msc-website")) {
+                        imgPath = imgPath.replace("/updated-msc-website", "");
+                    }
+                    const fullImgPath = imgPath ? `${window.location.origin}${imgPath}` : null;
 
                     const html = `
                     <div class="relative flex flex-row gap-4 p-5 m-4 bg-[#011538] border border-white/20 
@@ -442,10 +449,10 @@
                         <div class="w-24 h-24 flex-shrink-0 rounded-md bg-[#1a1f3a] text-[#64748b] text-sm 
                             flex items-center justify-center overflow-hidden">
                             ${evt.event_batch_image
-                            ? `<img src="${evt.event_batch_image}" alt="Event Badge" class="rounded-md object-cover w-full h-full" />`
-                            : `<i class="bi bi-calendar-event"></i>`}
+                            ? `<img src="${fullImgPath}" alt="Event Badge" class="rounded-md object-cover w-full h-full" />`
+                            : `<i class="bi bi-calendar-event text-[#b9da05]"></i>`}
                         </div>
-                        <div class="flex-grow">
+                        <div class="flex-grow justify-center">
                             <div class="flex justify-between items-center flex-wrap gap-2">
                                 <h4 class="text-md md:text-xl font-semibold">
                                     ${evt.event_name}
@@ -490,6 +497,7 @@
         async function loadAnnouncements() {
             try {
                 const data = await apiCall("/announcements/recentPreviewMember");
+                console.log("All Announcements:", data);
 
                 const container = document.getElementById("tab-announcements");
 
@@ -548,18 +556,20 @@
             }
         }
 
-        async function loadEvents() {
+       async function loadEvents() {
             try {
                 const data = await apiCall("/events/upcomingPreviewMember");
-
+                console.log("All Events:", data);
+                console.log("Events data structure:", JSON.stringify(data, null, 2)); 
+        
                 const container = document.getElementById("tab-events");
                 if (!data || !data.success || !Array.isArray(data.data) || data.data.length === 0) {
                     showEmptyState("tab-events", "fa-calendar-days", "No events available.");
                     return;
                 }
-
+        
                 container.innerHTML = "";
-
+        
                 data.data.forEach(evt => {
                     const eventDateTime = new Date(`${evt.event_date}T${evt.event_time_start}`);
                     const formattedDateTime = eventDateTime.toLocaleString("en-US", {
@@ -570,7 +580,13 @@
                         minute: "2-digit",
                         hour12: true
                     });
-
+                    
+                    let imgPath = evt.event_batch_image || "";
+                    if (imgPath.startsWith("/updated-msc-website")) {
+                        imgPath = imgPath.replace("/updated-msc-website", "");
+                    }
+                    const imgSrc = imgPath ? imgPath : null;
+        
                     const html = `
                     <div class="relative flex flex-row gap-4 p-5 m-4 bg-[#011538] border border-white/20 
                         rounded-xl shadow-md transition-all duration-300 ease-out group text-white
@@ -579,9 +595,9 @@
                             transition-transform duration-300 origin-top"></span>
                         <div class="w-24 h-24 flex-shrink-0 rounded-md bg-[#1a1f3a] text-[#64748b] text-sm 
                             flex items-center justify-center overflow-hidden">
-                            ${evt.event_batch_image
-                            ? `<img src="${evt.event_batch_image}" alt="Event Badge" class="rounded-md object-cover w-full h-full" />`
-                            : `<i class="bi bi-calendar-event"></i>`}
+                            ${imgSrc
+                            ? `<img src="${imgSrc}" alt="Event Badge" class="rounded-md object-cover w-full h-full" />`
+                            : `<i class="bi bi-calendar-event text-[#b9da05]"></i>`}
                         </div>
                         <div class="flex-grow">
                             <div class="flex justify-between items-center flex-wrap gap-2">
@@ -594,7 +610,7 @@
                                 </span>
                             </div>
                             <p class="text-sm text-gray-300 mt-2">${evt.description}</p>
-
+        
                             <div class="flex flex-wrap gap-3 mt-2 items-center">
                                 <span class="text-xs text-[#64748b]">
                                     <i class="bi bi-calendar text-[#b9da05]"></i> ${formattedDateTime}
@@ -609,7 +625,7 @@
                     container.insertAdjacentHTML("beforeend", html);
                 });
                 container.insertAdjacentHTML("beforeend", `
-                    <a href="events-and-register-events.php"
+                    <a href="activities.php"
                         class="text-blue-400 hover:text-blue-300 text-sm font-medium px-6 mt-2 inline-block">
                         View All Events →
                     </a>
