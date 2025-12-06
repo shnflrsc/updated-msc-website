@@ -620,8 +620,16 @@
                                             <div class="stat-label">Members Registered</div>
                                         </div>
                                         <div class="stat-item">
+                                            <div class="stat-value" id="officers-registered">0</div>
+                                            <div class="stat-label">Officers Registered</div>
+                                        </div>
+                                        <div class="stat-item">
                                             <div class="stat-value" id="members-attended">0</div>
                                             <div class="stat-label">Members Attended</div>
+                                        </div>
+                                        <div class="stat-item">
+                                            <div class="stat-value" id="officers-attended">0</div>
+                                            <div class="stat-label">Officers Attended</div>
                                         </div>
                                         <div class="stat-item">
                                             <div class="stat-value" id="attendance-rate">0%</div>
@@ -689,7 +697,7 @@
                                     <tbody id="participants-table-body"
                                         class="divide-y divide-white/10 text-sm sm:text-base">
                                         <tr class="hover:bg-[#0b1c3a]/70 transition-colors">
-                                            <td colspan="6" class="text-center py-6 text-gray-400">
+                                            <td colspan="8" class="text-center py-6 text-gray-400">
                                                 Select an event.
                                             </td>
                                         </tr>
@@ -772,7 +780,7 @@
                 //hide attendandeSummary + reset table rows
                 document.getElementById('attendance-summary').style.display = 'none';;
                 const tbody = document.getElementById('participants-table-body');
-                tbody.innerHTML = `<tr><td colspan="6" class="text-center py-4 text-gray-400">Select an event.</td></tr>`;
+                tbody.innerHTML = `<tr><td colspan="8" class="text-center py-4 text-gray-400">Select an event.</td></tr>`;
                 const mobileCards = document.getElementById("participants-mobile-cards");
                 mobileCards.innerHTML = `<div class="text-center py-6" style="color: #8892b0;">Select an event.</div>`;
             } else {
@@ -984,10 +992,13 @@
                                     mobileCards.appendChild(card);
                                 });
 
+                                //attendance summary preview
                                 document.getElementById('attendance-summary').style.display = 'block';
                                 document.getElementById('summary-event-title').textContent = "CSV Preview (Not Yet Uploaded)";
-                                document.getElementById('members-registered').textContent = previewedStudents.length;
+                                document.getElementById('members-registered').textContent = "-"
                                 document.getElementById('members-attended').textContent = "-";
+                                document.getElementById('officers-registered').textContent = "-"
+                                document.getElementById('officers-attended').textContent = "-";
                                 document.getElementById('attendance-rate').textContent = "-";
                                 updateProgressBar(0);
 
@@ -1073,8 +1084,10 @@
 
                 document.getElementById('attendance-summary').style.display = 'block';
                 document.getElementById('summary-event-title').textContent = `${event.event_name}`;
-                document.getElementById('members-registered').textContent = `${event.total_registered}`;
-                document.getElementById('members-attended').textContent = `${event.total_attended}`;
+                document.getElementById('members-registered').textContent = `${event.total_members_registered}`;
+                document.getElementById('officers-registered').textContent = `${event.total_officers_registered}`;
+                document.getElementById('members-attended').textContent = `${event.total_members_attended}`;
+                document.getElementById('officers-attended').textContent = `${event.total_officers_attended}`;  
                 document.getElementById('attendance-rate').textContent = `${event.attendance_rate}%`;
                 updateProgressBar(`${event.attendance_rate}`);
 
@@ -1145,8 +1158,8 @@
                 });
 
                 if (`${event.total_registered}` == 0) {
-                    tbody.innerHTML = `<tr><td colspan="6" class="text-center py-4 text-gray-400">No registered participants.</td></tr>`;
-                    mobileCards.innerHTML = `<div class="text-center py-6" style="color: #8892b0;">No registered participants.</div>`;
+                    tbody.innerHTML = `<tr><td colspan="8" class="text-center py-4 text-gray-400">No data available.</td></tr>`;
+                    mobileCards.innerHTML = `<div class="text-center py-6" style="color: #8892b0;">No data available.</div>`;
                 }
             } else {
                 console.error("Failed to fetch participants:", data?.message);

@@ -695,7 +695,7 @@
 
         <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
         <script>
-            const API_BASE = "/updated-msc-website/api/";
+            const API_BASE = "/updated-msc-website/api";
 
             async function apiCall(endpoint, method = "GET", data = null) {
                 try {
@@ -720,7 +720,7 @@
                     return;
                 }
 
-                const data = await apiCall(`events/${eventId}/participantsList`, "GET");
+                const data = await apiCall(`/events/${eventId}/participantsList`, "GET");
                 const tbody = document.getElementById("participants-table-body");
                 const exportBtn = document.getElementById("exportExcelBtn");
                 tbody.innerHTML = "";

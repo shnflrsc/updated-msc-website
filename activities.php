@@ -799,6 +799,31 @@
             }
         });
     }
+    
+    function formatTime(time) {
+        // time = "HH:MM:SS"
+        const [hour, minute] = time.split(":");
+        const date = new Date();
+        date.setHours(hour, minute);
+    
+        return date.toLocaleTimeString("en-US", {
+            hour: "numeric",
+            minute: "2-digit",
+            hour12: true
+        });
+    }
+    
+    function formatDate(dateString) {
+        // dateString = "YYYY-MM-DD"
+        const date = new Date(dateString);
+    
+        return date.toLocaleDateString("en-US", {
+            month: "long",
+            day: "numeric",
+            year: "numeric"
+        });
+    }
+
 
     // Update the renderEvents function to include time data
     function renderEvents(eventsArray, sectionId) {
@@ -808,19 +833,23 @@
         eventsArray.forEach((event, index) => {
             const card = document.createElement("div");
             card.classList.add("event-card");
+            
+            const formattedTimeStart= formatTime(event.event_time_start || "00:00");
+            const formattedTimeEnd = formatTime(event.event_time_end || "23:59");
+            const formattedDate = formatDate(event.event_date);
 
             card.dataset.id = event.event_id;
             card.dataset.title = event.event_name;
-            card.dataset.date = event.event_date;
+            card.dataset.date = formattedDate;
             card.dataset.time = `${event.event_time_start || "00:00"} - ${event.event_time_end || "23:59"}`;
             card.dataset.status = event.event_status;
             card.dataset.content = event.description;
             card.dataset.capacity = event.capacity || 0;
             card.dataset.registeredCount = event.attendants || 0;
             card.dataset.access = event.event_restriction || "public";
-            card.dataset.image = event.event_batch_image || "";
+            card.dataset.image = event.event_image_url|| "";
 
-            let imgPath = event.event_batch_image || "";
+            let imgPath = event.event_image_url || "";
             if (imgPath.startsWith("/updated-msc-website")) {
                 imgPath = imgPath.replace("/updated-msc-website", "");
             }
@@ -836,7 +865,7 @@
                 <div>
                     <h3>${event.event_name}</h3>
                     <p class="date">${new Date(event.event_date).toLocaleDateString("en-US", { month: "long", day: "numeric", year: "numeric" })}</p>
-                    <p class="date">${event.event_time_start || "TBA"} - ${event.event_time_end || "TBA"}</p>
+                    <p class="date">${formattedTimeStart || "TBA"} - ${formattedTimeEnd || "TBA"}</p>
                 </div>
                 <p class="excerpt">${event.description}</p>
             </div>

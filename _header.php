@@ -15,8 +15,8 @@ switch ($current_page) {
     case 'aboutus.php':
         $page_title = "About Us | BulSU MSC";
         break;
-    case 'events-and-register-events.php':
-        $page_title = "Events | BulSU MSC";
+    case 'activities.php':
+        $page_title = "Activities | BulSU MSC";
         break;
     case 'announcements.php':
         $page_title = "Announcements | BulSU MSC";
@@ -93,7 +93,7 @@ switch ($current_page) {
             <!-- Sidebar Header -->
             <div class="flex items-center justify-between p-4 border-b border-gray-700">
                 <div class="flex items-center space-x-2">
-                    <img src="./Logos/Bulsu MSC Logo-02.png" alt="BULSU MSC Logo" class="h-8" onerror="this.onerror=null; this.src='https://placehold.co/100x50/00071c/b9da05?text=Logo';">
+                    <img src="./Logos/Bulsu MSC beta.png" alt="BULSU MSC Logo" class="h-8" onerror="this.onerror=null; this.src='https://placehold.co/100x50/00071c/b9da05?text=Logo';">
                     <span class="text-white font-semibold text-sm">BulSU MSC</span>
                 </div>
                 <button id="mobile-sidebar-close" class="text-gray-400 hover:text-white">
@@ -130,9 +130,9 @@ switch ($current_page) {
                     </a>
 
                     <!-- Events -->
-                    <a href="events-and-register-events.php" class="flex items-center px-4 py-3 text-gray-300 hover:bg-[#16213e] hover:text-white transition-colors duration-200 <?php if ($current_page == 'events-and-register-events.php') echo 'bg-[#16213e] text-[#b9da05] border-r-2 border-[#b9da05]'; ?>">
+                    <a href="activities.php" class="flex items-center px-4 py-3 text-gray-300 hover:bg-[#16213e] hover:text-white transition-colors duration-200 <?php if ($current_page == 'activities.php') echo 'bg-[#16213e] text-[#b9da05] border-r-2 border-[#b9da05]'; ?>">
                         <i class="fas fa-calendar w-5 mr-3"></i>
-                        <span>Events</span>
+                        <span>Activities</span>
                     </a>
 
                     <?php if ($isLoggedIn): ?>
@@ -204,7 +204,7 @@ switch ($current_page) {
                 </button>
             </div>
             <a href="index.php" class="flex items-center space-x-2 text-white transition-colors duration-300 hover:text-[#b9da05]">
-                <img src="./Logos/Bulsu MSC Logo-02.png" alt="BULSU MSC Logo" class="h-12" onerror="this.onerror=null; this.src='https://placehold.co/100x50/00071c/b9da05?text=Logo';">
+                <img src="./Logos/Bulsu MSC beta.png" alt="BULSU MSC Logo" class="h-12" onerror="this.onerror=null; this.src='https://placehold.co/100x50/00071c/b9da05?text=Logo';">
             </a>
 
             <!-- --- Desktop Navigation (md:flex) --- -->
@@ -214,7 +214,7 @@ switch ($current_page) {
                 <!-- About -->
                 <a href="aboutus.php" class="nav-link font-semibold <?php if ($current_page == 'aboutus.php') echo 'text-[#b9da05]'; ?>">About</a>
                 <!-- Events: Link updated -->
-                <a href="events-and-register-events.php" class="nav-link font-semibold <?php if ($current_page == 'events-and-register-events.php') echo 'text-[#b9da05]'; ?>">Events</a>
+                <a href="activities.php" class="nav-link font-semibold <?php if ($current_page == 'activities.php') echo 'text-[#b9da05]'; ?>">Activities</a>
 
                 <?php if ($isLoggedIn): ?>
                     <!-- Announcements: Added -->
@@ -391,7 +391,7 @@ switch ($current_page) {
                         // fetch full profile to get first & last name (use credentials)
                         (async () => {
                             try {
-                                const resp = await fetch('/updated-msc-website/api/auth/profile', { credentials: 'include' });
+                                const resp = await fetch('api/auth/profile', { credentials: 'include' });
                                 if (!resp.ok) return;
                                 const json = await resp.json();
                                 if (json && json.success && json.data) {
