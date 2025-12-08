@@ -347,6 +347,34 @@ class Student
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
+    
+    /*
+     * CHART: Registered Members per College
+    */
+    public function countRegMembersPerCollege()
+    {
+        $stmt = $this->db->prepare("SELECT college, COUNT(*) AS total FROM event_registrations WHERE `participant_type` = 'member' GROUP BY college");
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+    
+    /*
+    * CHART: Number of Registrations Per Day
+    */
+    public function countRegistrationsPerDay()
+    {
+        $stmt = $this->db->prepare("
+            SELECT 
+                DATE(registration_date) AS reg_date,
+                COUNT(*) AS total_registrations
+            FROM event_registrations
+            GROUP BY reg_date
+            ORDER BY reg_date ASC
+        ");
+
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
 
     /**
      * Delete student

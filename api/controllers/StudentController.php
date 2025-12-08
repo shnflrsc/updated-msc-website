@@ -316,6 +316,36 @@ class StudentController
             echo json_encode(['success' => false, 'message' => $e->getMessage()]);
         }
     }
+    
+    /*
+     * CHART: Registered Members per College
+    */
+    public function countRegisteredMembersPerCollege()
+    {
+        $student = new Student();
+
+        try {
+            $data = $student->countRegMembersPerCollege();
+            echo json_encode(['success' => true, 'data' => $data]);
+        } catch (Exception $e) {
+            echo json_encode(['success' => false, 'message' => $e->getMessage()]);
+        }
+    }
+    
+    /*
+    * CHART: Number of Registrations Per Day
+    */
+    public function countRegistrationsPerDay()
+    {
+        $student = new Student(); // or Student(), but better placed in Event model
+
+        try {
+            $data = $student->countRegistrationsPerDay();
+            echo json_encode(['success' => true, 'data' => $data]);
+        } catch (Exception $e) {
+            echo json_encode(['success' => false, 'message' => $e->getMessage()]);
+        }
+    }
 
     public function uploadProfilePicture($id)
     {
@@ -490,7 +520,6 @@ class StudentController
         }
     }
     */
-
     public function getStudentsByMscIds()
     {
         header("Content-Type: application/json");

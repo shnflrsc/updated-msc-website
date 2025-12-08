@@ -47,7 +47,11 @@ switch ($method) {
         } else if($endpoint === 'countMembers'){
             $studentController->countMembers();
         } elseif ($endpoint === 'college-distribution') {
-            $studentController->countByCollege(); //chart by College
+            $studentController->countByCollege(); //chart by College: countRegisteredMembersPerCollege
+        } else if($endpoint === 'registered-members-distribution'){
+            $studentController->countRegisteredMembersPerCollege();
+        } else if($endpoint === 'daily-registrations'){
+            $studentController->countRegistrationsPerDay();
         } elseif ($endpoint === 'yearLevel-distribution') {
             $studentController->countByYearLevel(); //chart by Year Level
         } elseif ($endpoint === 'next-msc-id'){
