@@ -80,7 +80,7 @@ class="w-full px-4 py-3 rounded-md bg-[#27272a] border border-gray-600 text-whit
 </main>
 
 <script>
-const API_BASE = "/api";
+const API_BASE = "/updated-msc-website/api";
 
 const togglePasswordBtn = document.getElementById("togglePasswordBtn");
 const passwordInput = document.getElementById("loginPassword");
