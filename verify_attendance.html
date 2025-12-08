@@ -653,7 +653,25 @@
                         <p id="registeredOnlyCount" style="color:#b9da05; font-size: 20px;"></p> -->
 
                         <div class="table-container mt-4 p-1 border-lg">
-                            <div class="d-flex justify-content-end mb-3">
+                            <div class="d-flex justify-content-between mb-3">
+                                <!-- SORT BY DROPDOWN -->
+                                <div class="dropdown">
+                                    <button class="btn btn-secondary dropdown-toggle mt-2 border-white/20" type="button"
+                                        id="sortColumnsBtn" data-bs-toggle="dropdown" aria-expanded="false">
+                                        <i class="bi bi-arrow-down-up"></i> Sort By
+                                    </button>
+                                    <ul class="dropdown-menu dropdown-menu-dark p-3" aria-labelledby="sortColumnsBtn" id="sortColumnsMenu">
+                                        <li><button type="button" class="dropdown-item sort-option" data-col="0">MSC ID</button></li>
+                                        <li><button type="button" class="dropdown-item sort-option" data-col="1">Name</button></li>
+                                        <li><button type="button" class="dropdown-item sort-option" data-col="2">College</button></li>
+                                        <li><button type="button" class="dropdown-item sort-option" data-col="3">Program</button></li>
+                                        <!--<li><button type="button" class="dropdown-item sort-option" data-col="4">Year Level</button></li>-->
+                                        <li><button type="button" class="dropdown-item sort-option" data-col="5">Participant Type</button></li>
+                                        <li><button type="button" class="dropdown-item sort-option" data-col="6">Attendance Status</button></li>
+                                    </ul>
+                                </div>
+
+                                <!-- FILTER COLUMNS DROPDOWN -->
                                 <div class="dropdown">
                                     <button class="btn btn-secondary dropdown-toggle mt-2 border-white/20" type="button"
                                         id="filterColumnsBtn" data-bs-toggle="dropdown" aria-expanded="false">
@@ -661,20 +679,13 @@
                                     </button>
                                     <ul class="dropdown-menu dropdown-menu-dark p-3" aria-labelledby="filterColumnsBtn"
                                         id="filterColumnsMenu">
-                                        <li><label><input type="checkbox" class="column-toggle" data-col="0" checked>
-                                                MSC ID</label></li>
-                                        <li><label><input type="checkbox" class="column-toggle" data-col="1" checked>
-                                                Name</label></li>
-                                        <li><label><input type="checkbox" class="column-toggle" data-col="2" checked>
-                                                College</label></li>
-                                        <li><label><input type="checkbox" class="column-toggle" data-col="3" checked>
-                                                Program</label></li>
-                                        <li><label><input type="checkbox" class="column-toggle" data-col="4" checked>
-                                                Year Level</label></li>
-                                        <li><label><input type="checkbox" class="column-toggle" data-col="5" checked>
-                                                Participant Type</label></li>
-                                        <li><label><input type="checkbox" class="column-toggle" data-col="6" checked>
-                                                Attendance Status</label></li>
+                                        <li><label><input type="checkbox" class="column-toggle" data-col="0" checked> MSC ID</label></li>
+                                        <li><label><input type="checkbox" class="column-toggle" data-col="1" checked> Name</label></li>
+                                        <li><label><input type="checkbox" class="column-toggle" data-col="2" checked> College</label></li>
+                                        <li><label><input type="checkbox" class="column-toggle" data-col="3" checked> Program</label></li>
+                                        <li><label><input type="checkbox" class="column-toggle" data-col="4" checked> Year Level</label></li>
+                                        <li><label><input type="checkbox" class="column-toggle" data-col="5" checked> Participant Type</label></li>
+                                        <li><label><input type="checkbox" class="column-toggle" data-col="6" checked> Attendance Status</label></li>
                                     </ul>
                                 </div>
                             </div>
@@ -723,7 +734,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.4.1/papaparse.min.js"></script>
 
     <script>
-        const API_BASE = "/updated-msc-website/api";
+        const API_BASE = "/api";
 
         async function apiCall(endpoint, method = "GET", data = null, title = "", redirect = null) {
             try {
@@ -1165,6 +1176,35 @@
                 console.error("Failed to fetch participants:", data?.message);
             }
         }
+        
+        //sort by column logic
+        document.addEventListener("click", function (e) {
+            if (!e.target.classList.contains("sort-option")) return;
+
+            e.preventDefault(); 
+
+            const colIndex = parseInt(e.target.dataset.col);
+            const tbody = document.getElementById("participants-table-body");
+
+            let rows = Array.from(tbody.querySelectorAll("tr"));
+
+            let isAsc = tbody.dataset.sortOrder !== "asc";
+            tbody.dataset.sortOrder = isAsc ? "asc" : "desc";
+
+            rows.sort((a, b) => {
+                let A = a.children[colIndex].innerText.trim().toLowerCase();
+                let B = b.children[colIndex].innerText.trim().toLowerCase();
+
+                if (!isNaN(A) && !isNaN(B) && A !== "" && B !== "") {
+                    return isAsc ? A - B : B - A;
+                }
+
+                return isAsc ? A.localeCompare(B) : B.localeCompare(A);
+            });
+
+            tbody.innerHTML = "";
+            rows.forEach(row => tbody.appendChild(row));
+        });
 
         // Column filter logic
         document.addEventListener("change", function (e) {

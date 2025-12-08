@@ -1,4 +1,7 @@
 <?php
+require_once __DIR__ . '/api/middleware/AuthMiddleware.php';
+AuthMiddleware::guestOnly();
+
 include '_header.php';
 ?>
 
@@ -77,7 +80,7 @@ class="w-full px-4 py-3 rounded-md bg-[#27272a] border border-gray-600 text-whit
 </main>
 
 <script>
-const API_BASE = "/updated-msc-website/api";
+const API_BASE = "/api";
 
 const togglePasswordBtn = document.getElementById("togglePasswordBtn");
 const passwordInput = document.getElementById("loginPassword");
