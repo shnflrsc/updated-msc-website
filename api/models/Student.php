@@ -462,7 +462,7 @@ class Student
 
         $placeholders = implode(',', array_fill(0, count($mscIds), '?'));
 
-        $sql = "
+       $sql = "
             (
                 SELECT 
                     msc_id,
@@ -472,21 +472,21 @@ class Student
                     college,
                     year_level,
                     id AS student_id,
-                    role AS participant_type,
+                    role AS participant_type
                 FROM students
                 WHERE msc_id IN ($placeholders)
             )
             UNION ALL
             (
                 SELECT 
-                    participant_type,
                     qr_code AS msc_id,
                     first_name,
                     last_name,
                     program,
                     college,
                     year_level,
-                    NULL AS student_id
+                    NULL AS student_id,
+                    participant_type
                 FROM event_registrations
                 WHERE qr_code IN ($placeholders)
             )

@@ -734,7 +734,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.4.1/papaparse.min.js"></script>
 
     <script>
-        const API_BASE = "/api";
+        const API_BASE = "/updated-msc-website/api";
 
         async function apiCall(endpoint, method = "GET", data = null, title = "", redirect = null) {
             try {
@@ -927,6 +927,7 @@
                                 if (!data.success) {
                                     //alert("Failed to load student details: " + data.message);
                                     showAlert("Failed to load student details.", "danger");
+                                    console.log("Error: " + data.message);  
                                     return;
                                 }
 
