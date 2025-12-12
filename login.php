@@ -1,4 +1,7 @@
 <?php
+require_once __DIR__ . '/api/middleware/AuthMiddleware.php';
+AuthMiddleware::guestOnly();
+
 include '_header.php';
 ?>
 

@@ -3,7 +3,7 @@
 <div class="flex flex-col min-h-screen">
     <main class="flex-grow pt-28 p-3 flex flex-col items-center">
         <section id="header"
-            class="w-11/12 max-w-7xl p-6 md:p-6 mx-auto mb-8 flex flex-col gap-5 items-stretch rounded-2xl bg-[#011538] border border-[#b9da05]">
+            class="w-11/12 max-w-7xl p-6 md:p-6 mx-auto mb-4 flex flex-col gap-5 items-stretch rounded-2xl bg-[#011538] border border-[#b9da05]">
             <div class="flex justify-between items-center mb-4 ">
                 <button onclick="goToToday()"
                     class="px-3 py-1 text-xs sm:px-3 sm:py-1.5 sm:text-sm md:px-4 md:py-2 md:text-base 
@@ -79,20 +79,6 @@
                 return null;
             }
         }
-
-        (async function fetchProfile() {
-            document.documentElement.classList.add('loading'); // keep body hidden while checking
-            const data = await apiCall("/auth/profile", "GET");
-
-        if (!data || !data.success) {
-            // Not logged in → redirect
-            window.location.href = "login.html";
-            return;
-        }
-
-            // Logged in → remove loading state
-            document.documentElement.classList.remove('loading');
-        })();
     </script>
 
     <?php include '_footer.php'; ?>

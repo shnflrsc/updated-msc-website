@@ -89,4 +89,17 @@ class AuthMiddleware
         session_start();
         session_destroy();
     }
+    
+    /**
+     * Prevent logged-in users from accessing guest-only pages
+     */
+    public static function guestOnly()
+    {
+        session_start();
+
+        if (isset($_SESSION['user_id'])) {
+            header("Location: /dashboard.php");
+            exit();
+        }
+    }
 }

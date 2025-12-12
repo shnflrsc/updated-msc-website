@@ -632,14 +632,38 @@
             border-color: rgba(255, 255, 255, 0.3);
             transform: translateY(-2px);
         }
+    }
+    
+    .no-events-message {
+        text-align: center;
+        padding: 1rem 1rem;
+        color: #ffffff;
+        opacity: 0.8;
+    }
+    .no-events-message i {
+        font-size: 4rem;
+        color: #b9da05;
+        margin-bottom: 1.5rem;
+        display: block;
+    }
+    .no-events-message h3 {
+        font-size: 1.8rem;
+        color: #b9da05;
+        margin-bottom: 0.5rem;
+        font-weight: 600;
+    }
+    .no-events-message p {
+        font-size: 1.1rem;
+        opacity: 0.7;
+    }
 </style>
 
 <!-- Rest of your HTML remains exactly the same -->
 <div class="flex flex-col min-h-screen">
 
     <div class="mt-20 px-5 py-20 text-center max-w-7xl mx-auto mb-0 relative">
-        <h1 class="text-4xl sm:text-5xl font-extrabold text-[#b9da05] mb-4">Events</h1>
-        <p class="text-[1.2rem] text-white/90 relative z-[1]">Track your upcoming, completed, and past events</p>
+        <h1 class="text-4xl sm:text-5xl font-extrabold text-[#b9da05] mb-4">Activities</h1>
+        <p class="text-[1.2rem] text-white/90 relative z-[1]">Track your upcoming, completed, and past activities.</p>
     </div>
 
     <div class="main-content">
@@ -659,6 +683,11 @@
 
             <section id="pastSection" class="event-section" style="display:none;">
                 <div class="event-list">
+                    <div class="no-events-message" style="grid-column: 1 / -1;">
+                        <i class="bi bi-calendar-x"></i>
+                        <h3>No Events Available</h3>
+                        <p>There are currently no completed events at this time.</p>
+                    </div>
                 </div>
             </section>
         </main>
@@ -829,6 +858,18 @@
     function renderEvents(eventsArray, sectionId) {
         const section = document.getElementById(sectionId).querySelector(".event-list");
         section.innerHTML = "";
+        
+        if (!eventsArray || eventsArray.length === 0) {
+            const noEventsHTML = `
+                <div class="no-events-message" style="grid-column: 1 / -1;">
+                    <i class="bi bi-calendar-x"></i>
+                    <h3>No Data Available</h3>
+                    <p>There are currently no ${sectionId === 'upcomingSection' ? 'upcoming' : 'completed'} activities at this time.</p>
+                </div>
+            `;
+            section.innerHTML = noEventsHTML;
+            return;
+        }
 
         eventsArray.forEach((event, index) => {
             const card = document.createElement("div");

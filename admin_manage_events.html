@@ -1217,9 +1217,9 @@
             <div id="event-dashboard" class="tab-content" style="display: none;">
                 <div class="card">
                     <div
-                        style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
-                        <h3>Event Overview</h3>
-                        <div id="dashboard-buttons" style="display: flex; gap: 10px;">
+                        class="flex flex-col md:flex-row justify-between mb-4">
+                        <h3 class="text-2xl">Event Overview</h3>
+                        <div id="dashboard-buttons" class="flex gap-3">
                         </div>
                     </div>
                     <div class="event-header">
@@ -1314,6 +1314,18 @@
                         <div class="progress-bar">
                             <div class="progress-fill" style="width: 0%;"></div>
                         </div>
+                    </div>
+                </div>
+                
+                <div class="w-full flex flex-col md:flex-row gap-2 ">
+                    <div class="w-full md:w-2/4 h-72 bg-[#011538] mt-4 p-6 rounded-md border border-[#1a1f3a]">
+                        <h3 class="text-lg font-semibold text-gray-200 mb-4">Registered Members per College</h3>
+                        <canvas id="registeredMembersPerCollegeChart" class="w-full h-64"></canvas>
+                    </div>
+
+                    <div class="w-full md:w-2/4 h-72 bg-[#011538] mt-4 p-6 rounded-md border border-[#1a1f3a]">
+                        <h3 class="text-lg font-semibold text-gray-200 mb-4">Registration per Day</h3>
+                        <canvas id="regPerDayChart" class="w-full h-64"></canvas>
                     </div>
                 </div>
             </div>
@@ -1552,7 +1564,7 @@
 
             const participantsBtn = document.createElement("a");
             participantsBtn.href = "#";
-            participantsBtn.className = "btn btn-info";
+            participantsBtn.className = "bg-[#06b6d4] text-xs px-4 py-2 flex justify-start md:justify-center items-center text-white rounded-md hover:bg-[#0891b2]";
             participantsBtn.textContent = "Participants";
             participantsBtn.addEventListener("click", function (e) {
                 e.preventDefault();
@@ -1564,7 +1576,7 @@
 
             const eventListBtn = document.createElement("a");
             eventListBtn.href = "#";
-            eventListBtn.className = "btn btn-secondary";
+            eventListBtn.className = "bg-[#374151] text-xs px-4 py-2 flex justify-start md:justify-center items-center text-white rounded-md hover:bg-[#4b5563]";
             eventListBtn.textContent = "Event List";
             eventListBtn.addEventListener("click", function (e) {
                 e.preventDefault();
@@ -1634,18 +1646,23 @@
             dashboard.querySelector(".event-info > p").textContent = evt.description;
 
             dashboard.querySelector(".info-grid .info-item:nth-child(1) span").textContent =
-                `${new Date(evt.event_date + "T" + evt.event_time_start).toLocaleString("en-US", {
-                    month: "short",
-                    day: "numeric",
-                    year: "numeric",
-                    hour: "numeric",
-                    minute: "2-digit",
-                    hour12: true
-                })} to ${evt.event_time_end}`;
+            `${new Date(evt.event_date + "T" + evt.event_time_start).toLocaleString("en-US", {
+                month: "short",
+                day: "numeric",
+                year: "numeric",
+                hour: "numeric",
+                minute: "2-digit",
+                hour12: true
+            })} to ${new Date(evt.event_date + "T" + evt.event_time_end).toLocaleString("en-US", {
+                hour: "numeric",
+                minute: "2-digit",
+                hour12: true
+            })}`;
+
 
             dashboard.querySelector(".info-grid .info-item:nth-child(2) span").textContent = evt.location;
-            dashboard.querySelector(".info-grid .info-item:nth-child(3) span").textContent = evt.event_type;
-            dashboard.querySelector(".info-grid .info-item:nth-child(4) span").textContent = evt.event_restriction;
+            dashboard.querySelector(".info-grid .info-item:nth-child(3) span").textContent = evt.event_type.charAt(0).toUpperCase() + evt.event_type.slice(1);
+            dashboard.querySelector(".info-grid .info-item:nth-child(4) span").textContent = evt.event_restriction.charAt(0).toUpperCase() + evt.event_restriction.slice(1);
             dashboard.querySelector(".info-grid .info-item:nth-child(5) span").textContent =
                 `${evt.total_registered || 0} / ${evt.capacity || 0}`;
             dashboard.querySelector(".info-grid .info-item:nth-child(6) span").textContent =
@@ -2274,6 +2291,9 @@
             }, 3000);
         }
     </script>
+    
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="js/event_dashboard_charts.js"></script>
 </body>
 
 </html>

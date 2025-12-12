@@ -19,7 +19,7 @@
                 style="filter: blur(15px); background-size: 400% 400%; z-index: -1;"></div>
             <h2 class="text-xl sm:text-xl md:text-2xl lg:text-3xl font-bold mb-1" id="welcome-msg"></h2>
             <p class="text-base sm:text-md md:text-lg lg:text-xl text-gray-300 mb-6">
-                Here's what's happening with your membership and upcoming events.
+                Here's what's happening with your membership and upcoming activities.
             </p>
             <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
                 <div
@@ -119,11 +119,11 @@
                 class="w-full lg:w-8/12 p-4 shadow-lg rounded-lg mx-auto bg-[#011538] border border-white/20 text-white flex flex-col overflow-y-auto">
                 <div class="flex justify-between items-center border-b border-white/20 pb-2">
                     <div class="flex flex-wrap gap-4 sm:gap-6" id="tabs">
-                        <h3 class="tab text-xs sm:text-base font-semibold cursor-pointer text-[#b9da05] border-b-2 border-[#b9da05] active-tab"
+                        <h3 class="tab text-md sm:text-base font-semibold cursor-pointer text-[#b9da05] border-b-2 border-[#b9da05] active-tab"
                             data-tab="announcements">Announcements</h3>
-                        <h3 class="tab text-xs sm:text-base text-gray-200 font-semibold cursor-pointer hover:text-[#b9da05]"
-                            data-tab="events">Events</h3>
-                        <h3 class="tab text-xs sm:text-base text-gray-200 font-semibold cursor-pointer hover:text-[#b9da05]"
+                        <h3 class="tab text-md sm:text-base text-gray-200 font-semibold cursor-pointer hover:text-[#b9da05]"
+                            data-tab="events">Activities</h3>
+                        <h3 class="tab text-md sm:text-base text-gray-200 font-semibold cursor-pointer hover:text-[#b9da05]"
                             data-tab="univ-calendar">University Calendar</h3>
                     </div>
                 </div>
@@ -141,7 +141,7 @@
                     <!-- relative max-w-5xl w-full mx-auto text-sm -->
                     <div class="tab-content hidden max-h-[40rem] overflow-y-auto" id="tab-univ-calendar">
                         <div class="overflow-x-auto">
-                            <div id="univ-calendar" class="mt-2 px-4 min-w-[600px]">
+                            <div id="univ-calendar" class="mt-2 px-1 min-w-[600px]">
                                 <div class="flex justify-between items-center mb-4">
                                     <button id="prevWeek"
                                         class="px-2.5 py-1 text-xs sm:px-3 sm:py-1.5 sm:text-sm md:px-4 md:py-2 md:text-base 
@@ -174,7 +174,7 @@
             <div
                 class="lg:w-5/12 max-h-[37rem] p-4 shadow-lg rounded-lg bg-[#011538] border border-white/20 flex flex-col text-white overflow-y-auto">
                 <div class="flex items-center justify-between mb-4 pb-3 border-b border-white/20">
-                    <h3 class="text-base sm:text-lg font-bold">My Registered Events</h3>
+                    <h3 class="text-base sm:text-lg font-bold">My Registered Activities</h3>
                     <div
                         class="p-2 w-8 h-8 sm:w-10 sm:h-10 flex items-center justify-center text-[#b9da05] bg-white/10 rounded-full">
                         <i class="fa-solid fa-calendar-check"></i>
@@ -252,7 +252,7 @@
 
     <script>
         const API_BASE = "/updated-msc-website/api";
-
+        
         async function apiCall(endpoint, method = "GET", data = null, title = "") {
             try {
                 const options = {
@@ -344,7 +344,7 @@
         // COUNT: Events Joined & Pre-Registered
         async function fetchStudentEventStats(user_id) {
             const response = await apiCall(`/events/student-event-stats/${user_id}`, "GET");
-            console.log("Event Stats:", response);
+            //console.log("Event Stats:", response);
 
             if (response.success) {
                 document.getElementById("attendedCount").textContent = response.data.attended_count ?? 0;
@@ -408,7 +408,7 @@
                 const studentId = profileData.data.id;
 
                 const eventsData = await apiCall(`/events/student/${studentId}`);
-                console.log("My Registered Events:", eventsData);
+                //console.log("My Registered Events:", eventsData);
                 const list = document.getElementById("registered-events-list");
 
                 if (!eventsData || !eventsData.success || !Array.isArray(eventsData.data) || eventsData.data.length === 0) {
@@ -441,39 +441,34 @@
                     const fullImgPath = imgPath ? `${window.location.origin}${imgPath}` : null;
 
                     const html = `
-                    <div class="relative flex flex-row gap-4 p-5 m-4 bg-[#011538] border border-white/20 
-                        rounded-xl shadow-md transition-all duration-300 ease-out group text-white
-                        hover:shadow-2xl hover:-translate-y-1 hover:border-[#b9da05]/60 overflow-hidden">
-                        <span class="absolute left-0 top-0 h-full w-1 bg-[#b9da05] scale-y-0 group-hover:scale-y-100 
-                            transition-transform duration-300 origin-top"></span>
-                        <div class="w-24 h-24 flex-shrink-0 rounded-md bg-[#1a1f3a] text-[#64748b] text-sm 
-                            flex items-center justify-center overflow-hidden">
-                            ${evt.event_batch_image
-                            ? `<img src="${fullImgPath}" alt="Event Badge" class="rounded-md object-cover w-full h-full" />`
-                            : `<i class="bi bi-calendar-event text-[#b9da05]"></i>`}
-                        </div>
-                        <div class="flex-grow justify-center">
-                            <div class="flex justify-between items-center flex-wrap gap-2">
-                                <h4 class="text-md md:text-xl font-semibold">
-                                    ${evt.event_name}
-                                </h4>
-                                <span class="text-xs text-[#3b82f6]/50 bg-[#3b82f6]/20 px-3 py-2 rounded-full 
-                                    font-semibold uppercase tracking-wide">
-                                    ${evt.event_status}
-                                </span>
+                    <a href="activities.php" class="flex flex-col gap-3 p-5 bg-[#011538] border border-white/20
+                    rounded-xl shadow-md transition-all duration-300 ease-out group text-white
+                    hover:shadow-2xl hover:-translate-y-1 hover:border-[#b9da05]/60 overflow-hidden">
+                            <div class="flex items-start gap-3">
+                                <div class="w-24 h-24 shrink-0 rounded-md bg-[#1a1f3a] text-[#64748b] text-sm
+                                    flex items-center justify-center overflow-hidden">
+                                    ${evt.event_batch_image
+                                    ? `<img src="${fullImgPath}" alt="Event Badge" class="rounded-md object-cover w-full h-full" />`
+                                    : `<i class="bi bi-calendar-event text-[#eeeee9]"></i>`}
+                                </div>
+                                <div class="flex items-center flex-wrap gap-2">
+                                    <h4 class="text-base md:text-xl font-semibold">
+                                        ${evt.event_name}
+                                    </h4>
+                                </div>
                             </div>
-                            <p class="text-sm text-gray-300 mt-2">${evt.description}</p>
-
-                            <div class="flex flex-wrap gap-3 mt-2 items-center">
-                                <span class="text-xs text-[#64748b]">
+                            <div class="flex-grow justify-center">
+                                <p class="text-sm md:text-base text-gray-300 mt-2 ">${evt.description}</p>
+                                <div class="flex flex-wrap gap-3 mt-2 items-center">
+                                    <span class="text-sm text-[#64748b]">
                                     <i class="bi bi-calendar text-[#b9da05]"></i> ${formattedDateTime}
-                                </span>
-                                <span class="text-xs text-[#64748b]">
+                                    </span>
+                                    <span class="text-sm text-[#64748b]">
                                     <i class="bi bi-geo-alt text-[#b9da05]"></i> ${evt.location}
-                                </span>
+                                    </span>
+                                </div>
                             </div>
-                        </div>
-                    </div>
+                    </a>
                     `;
                     list.insertAdjacentHTML("beforeend", html);
                 });
@@ -497,7 +492,7 @@
         async function loadAnnouncements() {
             try {
                 const data = await apiCall("/announcements/recentPreviewMember");
-                console.log("All Announcements:", data);
+                //console.log("All Announcements:", data);
 
                 const container = document.getElementById("tab-announcements");
 
@@ -559,8 +554,7 @@
        async function loadEvents() {
             try {
                 const data = await apiCall("/events/upcomingPreviewMember");
-                console.log("All Events:", data);
-                console.log("Events data structure:", JSON.stringify(data, null, 2)); 
+                //console.log("All Events:", data);
         
                 const container = document.getElementById("tab-events");
                 if (!data || !data.success || !Array.isArray(data.data) || data.data.length === 0) {
@@ -588,46 +582,41 @@
                     const imgSrc = imgPath ? imgPath : null;
         
                     const html = `
-                    <div class="relative flex flex-row gap-4 p-5 m-4 bg-[#011538] border border-white/20 
-                        rounded-xl shadow-md transition-all duration-300 ease-out group text-white
-                        hover:shadow-2xl hover:-translate-y-1 hover:border-[#b9da05]/60 overflow-hidden">
-                        <span class="absolute left-0 top-0 h-full w-1 bg-[#b9da05] scale-y-0 group-hover:scale-y-100 
-                            transition-transform duration-300 origin-top"></span>
-                        <div class="w-24 h-24 flex-shrink-0 rounded-md bg-[#1a1f3a] text-[#64748b] text-sm 
-                            flex items-center justify-center overflow-hidden">
-                            ${imgSrc
-                            ? `<img src="${imgSrc}" alt="Event Badge" class="rounded-md object-cover w-full h-full" />`
-                            : `<i class="bi bi-calendar-event text-[#b9da05]"></i>`}
-                        </div>
-                        <div class="flex-grow">
-                            <div class="flex justify-between items-center flex-wrap gap-2">
-                                <h4 class="text-md md:text-xl font-semibold">
-                                    ${evt.event_name}
+                    <a href="activities.php" class="flex flex-col gap-3 p-5 mt-2 bg-[#011538] border border-white/20 
+                    rounded-xl shadow-md transition-all duration-300 ease-out group text-white
+                    hover:shadow-2xl hover:-translate-y-1 hover:border-[#b9da05]/60 overflow-hidden">
+                        <div class="flex items-start gap-3">
+                            <div class="w-24 h-24 flex-shrink-0 rounded-md bg-[#1a1f3a] text-[#64748b] text-sm 
+                                flex items-center justify-center overflow-hidden">
+                                ${imgSrc
+                                ? `<img src="${imgSrc}" alt="Event Badge" class="rounded-md object-cover w-full h-full" />`
+                                : `<i class="bi bi-calendar-event text-[#b9da05]"></i>`}
+                            </div>
+                            <div class="flex items-start flex-wrap">
+                                <h4 class="text-base md:text-2xl font-semibold">
+                                ${evt.event_name}
                                 </h4>
-                                <span class="text-xs text-[#3b82f6]/50 bg-[#3b82f6]/20 px-3 py-2 rounded-full 
-                                    font-semibold uppercase tracking-wide">
-                                    ${evt.event_status}
-                                </span>
                             </div>
-                            <p class="text-sm text-gray-300 mt-2">${evt.description}</p>
-        
+                        </div>
+                        <div class="flex-grow justify-center">
+                            <p class="text-sm md:text-base text-gray-300 mt-2 ">${evt.description}</p>
                             <div class="flex flex-wrap gap-3 mt-2 items-center">
-                                <span class="text-xs text-[#64748b]">
-                                    <i class="bi bi-calendar text-[#b9da05]"></i> ${formattedDateTime}
+                                <span class="text-sm text-[#64748b]">
+                                <i class="bi bi-calendar text-[#b9da05]"></i> ${formattedDateTime}
                                 </span>
-                                <span class="text-xs text-[#64748b]">
-                                    <i class="bi bi-geo-alt text-[#b9da05]"></i> ${evt.location}
+                                <span class="text-sm text-[#64748b]">
+                                <i class="bi bi-geo-alt text-[#b9da05]"></i> ${evt.location}
                                 </span>
                             </div>
                         </div>
-                    </div>
+                    </a>
                     `;
                     container.insertAdjacentHTML("beforeend", html);
                 });
                 container.insertAdjacentHTML("beforeend", `
                     <a href="activities.php"
                         class="text-blue-400 hover:text-blue-300 text-sm font-medium px-6 mt-2 inline-block">
-                        View All Events →
+                        View All Activities →
                     </a>
                 `);
             } catch (err) {

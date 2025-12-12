@@ -38,7 +38,7 @@ include '_header.php';
 </style>
 
 <div class="flex flex-col min-h-screen">
-<main class="flex-grow flex items-center justify-center pt-28 px-4">
+<main class="flex-grow flex items-center justify-center pt-28 pb-8 px-4">
   <div class="w-full max-w-md mx-auto p-8 bg-[#011538] border border-[#b9da05] text-white rounded-2xl shadow-2xl">
     <h2 class="section-title">Change Password</h2>
     

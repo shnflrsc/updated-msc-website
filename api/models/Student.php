@@ -347,6 +347,34 @@ class Student
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
+    
+    /*
+     * CHART: Registered Members per College
+    */
+    public function countRegMembersPerCollege()
+    {
+        $stmt = $this->db->prepare("SELECT college, COUNT(*) AS total FROM event_registrations WHERE `participant_type` = 'member' GROUP BY college");
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+    
+    /*
+    * CHART: Number of Registrations Per Day
+    */
+    public function countRegistrationsPerDay()
+    {
+        $stmt = $this->db->prepare("
+            SELECT 
+                DATE(registration_date) AS reg_date,
+                COUNT(*) AS total_registrations
+            FROM event_registrations
+            GROUP BY reg_date
+            ORDER BY reg_date ASC
+        ");
+
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
 
     /**
      * Delete student
@@ -434,7 +462,7 @@ class Student
 
         $placeholders = implode(',', array_fill(0, count($mscIds), '?'));
 
-        $sql = "
+       $sql = "
             (
                 SELECT 
                     msc_id,
@@ -444,21 +472,21 @@ class Student
                     college,
                     year_level,
                     id AS student_id,
-                    role AS participant_type,
+                    role AS participant_type
                 FROM students
                 WHERE msc_id IN ($placeholders)
             )
             UNION ALL
             (
                 SELECT 
-                    participant_type,
                     qr_code AS msc_id,
                     first_name,
                     last_name,
                     program,
                     college,
                     year_level,
-                    NULL AS student_id
+                    NULL AS student_id,
+                    participant_type
                 FROM event_registrations
                 WHERE qr_code IN ($placeholders)
             )
