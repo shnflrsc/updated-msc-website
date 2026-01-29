@@ -9,7 +9,7 @@
                 <a href="https://yorpnyc.org.ph/yorphubv1/Organization/OrgDetails/YO-11965-090325" target="_blank" rel="noopener noreferrer"><img src="./Logos/yorplogo.png" alt="YORP Seal" class="h-10 w-10"></a>
             </div>
         </div>
-        <p class="text-gray-500 text-sm">&copy; 2025 BulSU Microsoft Student Community. All rights reserved.</p>
+        <p class="text-gray-500 text-sm">&copy; 2026 BulSU Microsoft Student Community. All rights reserved. Version 2.1</p>
         <div class="flex justify-center space-x-4 mt-2">
             <a href="https://www.facebook.com/bulsu.officialmsc" target="_blank" class="text-gray-400 hover:text-[#b9da05] transition-colors duration-300"><i class="fab fa-facebook-f"></i></a>
             <a href="https://www.instagram.com/bulsumsc/" target="_blank" class="text-gray-400 hover:text-[#b9da05] transition-colors duration-300"><i class="fab fa-instagram"></i></a>
