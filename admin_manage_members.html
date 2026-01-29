@@ -1844,7 +1844,7 @@ document.getElementById("applyBtn").addEventListener("click", async () => {
           })
           .catch(err => console.error(err));
   }
-  //for testing only
+  // Rows per page selection
   const rowsPerPageSelect = document.getElementById("rowsPerPage");
 
   // Set default selected value (25)
@@ -1853,7 +1853,7 @@ document.getElementById("applyBtn").addEventListener("click", async () => {
   // Listen for changes
   rowsPerPageSelect.addEventListener("change", () => {
     rowsPerPage = parseInt(rowsPerPageSelect.value, 10);
-    fetchStudents(); // 🔥 reload table immediately
+    fetchStudents(); 
   });
     // Call on page load
     fetchStudents();
