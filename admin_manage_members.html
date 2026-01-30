@@ -624,11 +624,13 @@
         <div class="flex items-center gap-2">
           <label for="rowsPerPage" class="text-white">Rows per page:</label>
           <select id="rowsPerPage" class="bg-[#011538] border text-white px-2 py-1 rounded">
-            <option>5</option>
-            <option>25</option>
-            <option>50</option>
-            <option>75</option>
-            <option>100</option>
+            <option value="5">5</option>
+            <option value="25">25</option>
+            <option value="50">50</option>
+            <option value="75">75</option>
+            <option value="100">100</option>
+            <option value="250">250</option>
+            <option value="500">500</option>
           </select>
         </div>
       </div>
@@ -1140,6 +1142,7 @@
   </script>
   <script>
   const API_BASE = "/updated-msc-website/api";
+  let rowsPerPage = 25;
 
   // 1️⃣ Define apiCall first
   async function apiCall(endpoint, method = "GET", data = null) {
@@ -1400,7 +1403,7 @@ document.getElementById("applyFilterBtn").addEventListener("click", () => {
 
 async function fetchStudents() {
   try {
-    const result = await apiCall("/students?page=1&limit=20", "GET");
+    const result = await apiCall(`/students?page=1&limit=${rowsPerPage}`, "GET");
     console.log("API result:", result);
 
     if (!result?.success) {
@@ -1841,7 +1844,17 @@ document.getElementById("applyBtn").addEventListener("click", async () => {
           })
           .catch(err => console.error(err));
   }
+  // Rows per page selection
+  const rowsPerPageSelect = document.getElementById("rowsPerPage");
 
+  // Set default selected value (25)
+  rowsPerPageSelect.value = rowsPerPage;
+
+  // Listen for changes
+  rowsPerPageSelect.addEventListener("change", () => {
+    rowsPerPage = parseInt(rowsPerPageSelect.value, 10);
+    fetchStudents(); 
+  });
     // Call on page load
     fetchStudents();
 
