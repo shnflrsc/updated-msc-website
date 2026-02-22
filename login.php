@@ -39,7 +39,7 @@ include '_header.php';
 </style>
 
 
-<main class="flex-grow pt-28 flex items-center justify-center min-h-screen p-4 sm:p-6">
+<main class="flex-grow pt-28 flex items-center justify-center min-h-screen p-4 sm:p-6 mt-8">
  <div class="w-full max-w-sm mx-auto p-6 sm:p-8 bg-[#011538] border border-[#b9da05] text-white rounded-2xl shadow-2xl page-auth-container">
  <h2 class="section-title">Login</h2>
 
