@@ -6,7 +6,7 @@
         <div id="security-reminder"
             class="hidden fixed bottom-10 right-6 z-50 bg-[#011538] border border-[#b9da05] text-white bg-opacity-60 border-opacity-60 shadow-lg rounded-lg w-80 p-4">
             <p class="text-gray-400 mb-4">
-                For your security, please update your personal information and change your password.
+                For your security, please update your personal information, remember your username, and change your password.
             </p>
             <div class="flex justify-end">
             </div>
