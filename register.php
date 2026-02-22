@@ -358,36 +358,6 @@ include '_header.php';
         }
     }
 
-    async function testRegister() {
-        const mscId = await generateNextMscId();
-
-        const data = {
-            msc_id: mscId,
-            username: mscId,
-            email: document.getElementById("regEmail").value,
-            password: mscId,
-            first_name: document.getElementById("regFirstName").value,
-            middle_name: document.getElementById("regMiddleName").value,
-            last_name: document.getElementById("regLastName").value,
-            name_suffix: document.getElementById("regSuffix").value,
-            role: 'member',
-            student_no: document.getElementById("regStudentNo").value,
-            year_level: document.getElementById("regYearLevel").value,
-            college: document.getElementById("regCollege").value,
-            program: document.getElementById("regProgram").value,
-        };
-
-        const result = await apiCall("/auth/admin-register", "POST", data, "📝 User Registration");
-
-        if (result && result.success) {
-            showStatusMessage(result.message || "User registered successfully!", true);
-            document.getElementById("registrationForm").reset();
-            document.getElementById("regProgram").innerHTML = "<option>Select a College first</option>";
-        } else {
-            showStatusMessage(result?.message || "An error occurred during registration.", false);
-        }
-    }
-
     async function register() {
         const mscId = await generateNextMscId();
 
