@@ -58,14 +58,40 @@ include '_header.php';
         color: #ff5c5c;
         border: 1px solid #ff5c5c;
     }
+    .el {
+            background: conic-gradient(from 180deg at 50% 70%,hsla(0,0%,98%,1) 0deg,#b9da05 72.0000010728836deg,#0051ff 144.0000021457672deg,#0095ff 216.00000858306885deg,#b9da05 288.0000042915344deg,hsla(0,0%,98%,1) 1turn);
+            width: 100%;
+            height: 100%;
+            mask:
+                radial-gradient(circle at 50% 50%, white 2px, transparent 2.5px) 50% 50% / var(--size) var(--size),
+                url("https://assets.codepen.io/605876/noise-mask.png") 256px 50% / 256px 256px;
+            mask-composite: intersect;
+            animation: flicker 20s infinite linear;
+            position: fixed;
+            z-index: 1;
+            top: 0;
+            left: 0;
+        }
+
+    header, footer {
+        position: relative;
+        z-index: 100;
+    }
+
+    @keyframes flicker {
+        to {
+            mask-position: 50% 50%, 0 50%;
+            }
+    }
 </style>
 
 <main class="flex-grow flex items-center justify-center pt-28 px-4 mb-8">
+    <div class="el"></div>
     <div
-        class="w-full max-w-4xl bg-[#18181b] text-white p-8 rounded-2xl shadow-lg border border-[#27272a] border-2">
+        class="w-full max-w-4xl bg-[#18181b] text-white p-8 rounded-2xl shadow-lg border-[#27272a] border-2 z-40">
         <h2 class="text-3xl font-bold mb-6 text-center" style="font-family: 'Veonika', sans-serif;">Create Your
             Account</h2>
-        <div id="status-message" class="hidden mb-4 px-4 py-8 rounded text-sm text-white font-medium mb-4"></div>
+        <div id="status-message" class="hidden px-4 py-8 rounded text-sm text-white font-medium mb-4"></div>
         <div id="error-box"
             class="hidden mb-4 text-white border border-red-500 bg-[#27272a] px-4 py-3 rounded text-sm"></div>
         <form id="registrationForm">
@@ -87,6 +113,24 @@ include '_header.php';
                 </div>
             </div>
 
+            <div class="flex items-stretch gap-2 mb-6">
+                <div class="w-full">
+                    <label for="regEmail" class="block text-sm font-semibold mb-1">Email Address</label>
+                    <input id="regEmail" type="email" required
+                        class="w-full px-4 py-3 rounded-md bg-[#27272a] border border-gray-600 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#b9da05]">
+                    <!-- <p class="text-xs text-gray-400 mt-1">Please enter a valid email address</p> -->
+                </div>    
+                <div class="w-full">
+                    <label for="regPhone" class="block text-sm font-semibold mb-1">Phone Number</label>
+                    <input type="tel" id="regPhone" name="regPhone" placeholder="e.g. 09123456789" required class="w-full px-4 py-3 rounded-md bg-[#27272a] border border-gray-600 text-white focus:outline-none focus:ring-2 focus:ring-[#b9da05]">
+                </div>
+            </div>
+
+            <div>
+                <label for="regFacebook" class="block text-sm font-semibold mb-1">Facebook Username (Optional)</label>
+                <input type="text" id="regFacebook" name="regFacebook" class="w-full px-4 py-3 rounded-md bg-[#27272a] border border-gray-600 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#b9da05]">
+            </div>
+
             <div class="form-grid mb-6">
                 <div>
                     <label for="regSuffix" class="block text-sm font-semibold mb-1">Name Suffix</label>
@@ -105,11 +149,11 @@ include '_header.php';
                     </select>
                 </div>
                 <div>
-                    <label for="regBirthDate">Birthdate</label>
-                    <input type="date" name="regBirthDate" id="regBirthDate" class="w-full px-4 py-3 rounded-md bg-[#27272a] border border-gray-600 text-white focus:outline-none focus:ring-2 focus:ring-[#b9da05]">
+                    <label for="regBirthDate" class="block text-sm font-semibold mb-1">Birthdate</label>
+                    <input type="date" name="regBirthDate" id="regBirthDate" class="w-full px-4 py-3 rounded-md bg-[#27272a] border border-gray-600 text-white focus:outline-none focus:ring-2 focus:ring-[#b9da05] [color-scheme:dark]">
                 </div>
                 <div>
-                    <label for="regGender">Gender</label>
+                    <label for="regGender" class="block text-sm font-semibold mb-1">Gender</label>
                     <select id="regGender" name="regGender" required class="w-full px-4 py-3 rounded-md bg-[#27272a] border border-gray-600 text-white focus:outline-none focus:ring-2 focus:ring-[#b9da05]">
                         <option value="">Select Gender</option>
                         <option value="Male">Male</option>
@@ -117,62 +161,7 @@ include '_header.php';
                         <option value="Other">Other</option>
                     </select>
                 </div>
-                <div>
-                    <label for="regPhone">Phone Number</label>
-                    <input type="tel" id="regPhone" name="regPhone" placeholder="e.g. 09123456789" required class="w-full px-4 py-3 rounded-md bg-[#27272a] border border-gray-600 text-white focus:outline-none focus:ring-2 focus:ring-[#b9da05]">
-                </div>
-                <div>
-                    <label for="regEmail" class="block text-sm font-semibold mb-1">Email Address</label>
-                    <input id="regEmail" type="email" required
-                        class="w-full px-4 py-3 rounded-md bg-[#27272a] border border-gray-600 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#b9da05]">
-                    <!-- <p class="text-xs text-gray-400 mt-1">Please enter a valid email address</p> -->
-                </div>
-                <div>
-                    <label for="regFacebook">Facebook Username (Optional)</label>
-                    <input type="text" id="regFacebook" name="regFacebook" class="w-full px-4 py-3 rounded-md bg-[#27272a] border border-gray-600 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#b9da05]">
-                </div>
             </div>
-
-            <!-- <div class="form-grid-2 mb-6">
-                    <div>
-                        <label for="regPassword" class="block text-sm font-semibold mb-1">Password</label>
-                        <div class="password-wrapper">
-                            <input type="password" id="regPassword" placeholder="Enter your password" required
-                                class="w-full px-4 py-3 pr-12 rounded-md bg-[#27272a] border border-gray-600 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#b9da05]">
-                            <button type="button" class="toggle-password" data-target="regPassword">👁</button>
-                        </div>
-                        <small id="passwordHint" style="color: red; display: none;" class="text-xs">Password must
-                            contain at least one uppercase letter, one lowercase letter, and one number.</small>
-                        <p class="text-xs text-gray-400 mt-1">Must be at least 8 characters</p>
-                    </div>
-                    <div>
-                        <label for="confirmPassword" class="block text-sm font-semibold mb-1">Confirm Password</label>
-                        <div class="password-wrapper">
-                            <input id="confirmPassword" type="password" required
-                                class="w-full px-4 py-3 pr-12 rounded-md bg-[#27272a] border border-gray-600 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#b9da05]">
-                            <button type="button" class="toggle-password" data-target="confirmPassword">👁</button>
-                        </div>
-                        <p class="text-xs text-gray-400 mt-1">Please re-enter your password</p>
-                    </div>
-                </div> -->
-
-            <!-- <div class="form-grid-2 mb-6">
-                    <div>
-                        <label for="regBirthdate" class="block text-sm font-semibold mb-1">Birthdate</label>
-                        <input id="regBirthdate" type="date" required
-                            class="w-full px-4 py-3 rounded-md bg-[#27272a] border border-gray-600 text-white focus:outline-none focus:ring-2 focus:ring-[#b9da05]">
-                    </div>
-                    <div>
-                        <label for="regGender" class="block text-sm font-semibold mb-1">Gender</label>
-                        <select id="regGender" required
-                            class="w-full px-4 py-3 rounded-md bg-[#27272a] border border-gray-600 text-white focus:outline-none focus:ring-2 focus:ring-[#b9da05]">
-                            <option value="">Select Gender</option>
-                            <option value="Male">Male</option>
-                            <option value="Female">Female</option>
-                            <option value="Other">Other</option>
-                        </select>
-                    </div>
-                </div> -->
 
             <div class="form-grid mb-6">
                 <div>
@@ -185,6 +174,9 @@ include '_header.php';
                     <input id="regSection" type="text" required
                         class="w-full px-4 py-3 rounded-md bg-[#27272a] border border-gray-600 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#b9da05]">
                 </div>
+            </div>
+
+            <div class="form-grid mb-6">
                 <div>
                     <label for="regYearLevel" class="block text-sm font-semibold mb-1">Year Level</label>
                     <select id="regYearLevel" required
@@ -213,27 +205,27 @@ include '_header.php';
             </div>
 
             <div>
-                <label for="regAddress">Address (Optional)</label>
+                <label for="regAddress" class="block text-sm font-semibold mb-1">Address (Optional)</label>
                 <textarea id="regAddress" name="regAddress" rows="2" class="w-full px-4 py-3 rounded-md bg-[#27272a] border border-gray-600 text-white focus:outline-none focus:ring-2 focus:ring-[#b9da05]"></textarea>
             </div>
 
-            <!-- <div class="flex items-start mb-6">
-                    <input type="checkbox" id="terms" class="mt-1 mr-2 accent-[#b9da05]">
-                    <label for="terms" class="text-sm text-gray-300">I agree to the <a href="#" class="text-[#b9da05] hover:underline">Terms of Service</a> and <a href="#" class="text-[#b9da05] hover:underline">Privacy Policy</a>.</label>
-                </div> -->
+            <div class="flex items-start mb-6">
+                <input type="checkbox" id="terms" class="mt-1 mr-2 accent-[#b9da05]" required>
+                <label for="terms" class="text-sm text-gray-300">I agree to the <a href="#" class="text-[#b9da05] hover:underline">Terms of Service</a> and <a href="#" class="text-[#b9da05] hover:underline">Privacy Policy</a>.</label>
+            </div>
 
             <button type="submit"
                 class="w-full bg-[#b9da05] text-[#00071c] text-m font-bold py-3 rounded-md hover:bg-[#8fae04] hover:text-[#00071c] transition-colors shadow-md">Create
                 Account</button>
-        </form>
-
-        <!-- <div class="flex flex-col items-center text-center mt-6">
+            
+            <div class="flex flex-col items-center text-center mt-6">
                 <div class="flex justify-center items-center gap-1">
                     <p>Already have an account?</p>
-                    <a href="login.html" class="text-[#b9da05] hover:underline">Sign in here</a>
+                    <a href="login.php" class="text-[#b9da05] hover:underline">Sign in here</a>
                 </div>
                 <small class="text-gray-400 mt-2">Powered by <b>BulSU MSC</b></small>
-            </div> -->
+            </div>
+        </form>
     </div>
 </main>
 
@@ -263,24 +255,6 @@ include '_header.php';
             });
         });
     });
-
-    // password strength hint
-    /*
-    const regPassword = document.getElementById("regPassword");
-    const hint = document.getElementById("passwordHint");
-
-    regPassword.addEventListener("input", function () {
-        const password = this.value;
-        const valid = /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d).{8,}$/.test(password);
-
-        if (!valid && password.length > 0) {
-            hint.style.display = "block";
-        } else {
-            hint.style.display = "none";
-        }
-    });
-    */
-
 
     const API_BASE = "/updated-msc-website/api";
 
@@ -322,13 +296,6 @@ include '_header.php';
             const result = await response.json();
             console.log(result);
 
-            if (!response.ok) {
-                openStatusModal("❌ " + title + " Failed", result.message || `${title} failed`, false);
-            } else {
-                openStatusModal("✅ " + title + " Successful", result.message || `${title} successful`, true);
-                // window.location.href = "login.php";
-            }
-
             return result;
         } catch (error) {
             console.error("API Error:", error);
@@ -336,12 +303,6 @@ include '_header.php';
             return null;
         }
     }
-
-    /*
-    birthdate: document.getElementById("regBirthdate").value,
-    gender: document.getElementById("regGender").value,
-    password: document.getElementById("regPassword").value,
-    */
 
     async function generateNextMscId() {
         try {
@@ -385,7 +346,7 @@ include '_header.php';
             const result = await apiCall("/students/createMember", "POST", data);
 
             if (result.success) {
-                showStatusMessage(result.message || "User registered successfully!", true);
+                showStatusMessage(result.message || "You have registered successfully!", true);
                 document.getElementById("registrationForm").reset();
                 document.getElementById("regProgram").innerHTML = "<option>Select a College first</option>";
             } else {
