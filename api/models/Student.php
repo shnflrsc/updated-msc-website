@@ -85,6 +85,72 @@ class Student
         }
     }
 
+    public function createMember($data)
+    {
+        try {
+            // Check if username or email already exists
+            $checkStmt = $this->db->prepare("SELECT id FROM students WHERE username = :username OR email = :email");
+            $checkStmt->execute([
+                'username' => $data['username'],
+                'email' => $data['email']
+            ]);
+
+            if ($checkStmt->fetch()) {
+                throw new Exception("Username or email already exists");
+            }
+
+            // Hash password
+            $hashedPassword = password_hash($data['password'], PASSWORD_DEFAULT);
+
+            // Insert student
+            $sql = "INSERT INTO students (
+                username, email, password, first_name, middle_name, last_name, name_suffix,
+                birthdate, gender, student_no, year_level, college, program,
+                section, address, phone, facebook_link, role, is_active, password_updated
+            ) VALUES (
+                :username, :email, :password, :first_name, :middle_name, :last_name, :name_suffix,
+                :birthdate, :gender, :student_no, :year_level, :college, :program,
+                :section, :address, :phone, :facebook_link, :role, :is_active, 0
+            )";
+
+            $stmt = $this->db->prepare($sql);
+            $stmt->execute([
+                'username' => $data['username'],
+                'email' => $data['email'],
+                'password' => $hashedPassword,
+                'first_name' => $data['first_name'],
+                'middle_name' => $data['middle_name'],
+                'last_name' => $data['last_name'],
+                'name_suffix' => $data['name_suffix'],
+                'birthdate' => $data['birthdate'],
+                'gender' => $data['gender'],
+                'student_no' => $data['student_no'],
+                'year_level' => $data['year_level'],
+                'college' => $data['college'],
+                'program' => $data['program'],
+                'section' => $data['section'],
+                'address' => $data['address'],
+                'phone' => $data['phone'],
+                'facebook_link' => $data['facebook_link'],
+                'role' => 'member', // Always set it to member so the form cannot create new officers/admins.
+                'is_active' => true
+            ]);
+
+            $userId = $this->db->lastInsertId();
+
+            // Generate MSC ID
+            $mscId = $this->generateMscId($data['role'] ?? 'member');
+
+            // Update student with MSC ID
+            $updateStmt = $this->db->prepare("UPDATE students SET msc_id = :msc_id WHERE id = :id");
+            $updateStmt->execute(['msc_id' => $mscId, 'id' => $userId]);
+
+            return $this->findById($userId);
+        } catch (Exception $e) {
+            throw new Exception("Failed to create student: " . $e->getMessage());
+        }
+    }
+
     public function markPasswordUpdated($id)
     {
         try {

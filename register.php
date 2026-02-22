@@ -390,7 +390,7 @@
             username: mscId,
             email: document.getElementById("regEmail").value,
             facebook_link: document.getElementById("regFacebook").value,
-            password: mscId,
+            password: document.getElementById("regStudentNo").value,
             first_name: document.getElementById("regFirstName").value,
             middle_name: document.getElementById("regMiddleName").value,
             last_name: document.getElementById("regLastName").value,
@@ -407,7 +407,7 @@
         };
 
         try {
-            const result = await apiCall("/students/create", "POST", data);
+            const result = await apiCall("/students/createMember", "POST", data);
 
             if (result.success) {
                 showStatusMessage(result.message || "User registered successfully!", true);
