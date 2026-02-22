@@ -60,7 +60,7 @@ include '_header.php';
     }
 </style>
 
-<main class="flex-grow flex items-center justify-center pt-28 px-4">
+<main class="flex-grow flex items-center justify-center pt-28 px-4 mb-8">
     <div
         class="w-full max-w-4xl bg-[#18181b] text-white p-8 rounded-2xl shadow-lg border border-[#27272a] border-2">
         <h2 class="text-3xl font-bold mb-6 text-center" style="font-family: 'Veonika', sans-serif;">Create Your
@@ -89,7 +89,7 @@ include '_header.php';
 
             <div class="form-grid mb-6">
                 <div>
-                    <label for="regSuffix" class="block text-sm font-semibold mb-1">Name Suffix:</label>
+                    <label for="regSuffix" class="block text-sm font-semibold mb-1">Name Suffix</label>
                     <!-- <input id="regUsername" type="text" required class="w-full px-4 py-3 rounded-md bg-[#27272a] border border-gray-600 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#b9da05]"> -->
                     <!-- <p class="text-xs text-gray-400 mt-1">Must be at least 3 characters</p> -->
                     <select id="regSuffix"
@@ -105,11 +105,11 @@ include '_header.php';
                     </select>
                 </div>
                 <div>
-                    <label for="regBirthDate">Birthdate:</label>
+                    <label for="regBirthDate">Birthdate</label>
                     <input type="date" name="regBirthDate" id="regBirthDate" class="w-full px-4 py-3 rounded-md bg-[#27272a] border border-gray-600 text-white focus:outline-none focus:ring-2 focus:ring-[#b9da05]">
                 </div>
                 <div>
-                    <label for="regGender">Gender:</label>
+                    <label for="regGender">Gender</label>
                     <select id="regGender" name="regGender" required class="w-full px-4 py-3 rounded-md bg-[#27272a] border border-gray-600 text-white focus:outline-none focus:ring-2 focus:ring-[#b9da05]">
                         <option value="">Select Gender</option>
                         <option value="Male">Male</option>
@@ -118,7 +118,7 @@ include '_header.php';
                     </select>
                 </div>
                 <div>
-                    <label for="regPhone">Phone Number:</label>
+                    <label for="regPhone">Phone Number</label>
                     <input type="tel" id="regPhone" name="regPhone" placeholder="e.g. 09123456789" required class="w-full px-4 py-3 rounded-md bg-[#27272a] border border-gray-600 text-white focus:outline-none focus:ring-2 focus:ring-[#b9da05]">
                 </div>
                 <div>
@@ -128,7 +128,7 @@ include '_header.php';
                     <!-- <p class="text-xs text-gray-400 mt-1">Please enter a valid email address</p> -->
                 </div>
                 <div>
-                    <label for="regFacebook">Facebook Username:</label>
+                    <label for="regFacebook">Facebook Username (Optional)</label>
                     <input type="text" id="regFacebook" name="regFacebook" class="w-full px-4 py-3 rounded-md bg-[#27272a] border border-gray-600 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#b9da05]">
                 </div>
             </div>
@@ -213,7 +213,7 @@ include '_header.php';
             </div>
 
             <div>
-                <label for="regAddress">Address:</label>
+                <label for="regAddress">Address (Optional)</label>
                 <textarea id="regAddress" name="regAddress" rows="2" class="w-full px-4 py-3 rounded-md bg-[#27272a] border border-gray-600 text-white focus:outline-none focus:ring-2 focus:ring-[#b9da05]"></textarea>
             </div>
 
