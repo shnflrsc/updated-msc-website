@@ -97,7 +97,9 @@ switch ($method) {
     case 'POST':
         if ($endpoint === 'create') {
             $studentController->create();
-        } else if($endpoint === 'msc-ids'){
+        } else if ($endpoint === 'createMember') {
+            $studentController->createMember();
+        } else if ($endpoint === 'msc-ids'){
             $studentController->getStudentsByMscIds();
         } elseif ($endpoint && $id === 'toggle-active') {
             $studentController->toggleActive($endpoint);
