@@ -442,7 +442,7 @@ class StudentController
 
             $student = $this->studentModel->createMember($data);
 
-            Response::success($student, 'Student created successfully');
+            Response::success($student, 'You have registered successfully!');
         } catch (Exception $e) {
             Response::serverError($e->getMessage());
         }

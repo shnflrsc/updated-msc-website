@@ -147,7 +147,7 @@ class Student
 
             return $this->findById($userId);
         } catch (Exception $e) {
-            throw new Exception("Failed to create student: " . $e->getMessage());
+            throw new Exception("Registration failed: " . $e->getMessage());
         }
     }
 
