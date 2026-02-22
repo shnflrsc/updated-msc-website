@@ -74,7 +74,10 @@ class="w-full px-4 py-3 rounded-md bg-[#27272a] border border-gray-600 text-whit
 
  <div class="flex flex-col items-center text-center mt-4">
  <small class="text-gray-400 mt-2">Powered by <b>BulSU MSC</b></small>
- <a href="forgot_password.php" class="text-[#b9da05] mt-2 text-sm">Forgot password?</a>
+ <div class="flex flex-row justify-between w-full">
+    <a href="register.php" class="text-[#b9da05] mt-2 text-sm">Create an account</a>
+    <a href="forgot_password.php" class="text-[#b9da05] mt-2 text-sm">Forgot password?</a>
+ </div>
  </div>
  </div>
 </main>
