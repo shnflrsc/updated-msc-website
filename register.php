@@ -113,7 +113,7 @@ include '_header.php';
                 </div>
             </div>
 
-            <div class="flex items-stretch gap-2 mb-6">
+            <div class="form-grid mb-6">
                 <div class="w-full">
                     <label for="regEmail" class="block text-sm font-semibold mb-1">Email Address</label>
                     <input id="regEmail" type="email" required
@@ -215,7 +215,8 @@ include '_header.php';
             </div>
 
             <button type="submit"
-                class="w-full bg-[#b9da05] text-[#00071c] text-m font-bold py-3 rounded-md hover:bg-[#8fae04] hover:text-[#00071c] transition-colors shadow-md">Create
+                id="regSubmit"
+                class="w-full bg-[#b9da05] text-[#00071c] text-m font-bold py-3 rounded-md hover:bg-[#8fae04] hover:text-[#00071c] transition-colors shadow-md cursor-pointer">Create
                 Account</button>
             
             <div class="flex flex-col items-center text-center mt-6">
@@ -311,13 +312,36 @@ include '_header.php';
                 credentials: "include"
             });
             const responseData = await res.json();
-            console.log("Generated MSC ID:", responseData);
+            // console.log("Generated MSC ID:", responseData);
             return responseData.data.msc_id;
         } catch (err) {
             console.error("Failed to fetch MSC ID:", err);
             return undefined;
         }
     }
+
+    async function loginAndRedirect(username, password) {
+        try {
+            const res = await fetch(`${API_BASE}/auth/login`, {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                credentials: "include",
+                body: JSON.stringify({ username, password }),
+        });
+
+        const data = await res.json();
+
+        console.log("Login after registration:", data);
+
+        if (res.ok && data.success) {
+            window.location.href = "profile.php";
+        } else {
+            showStatusMessage(data.message || "Login failed after registration. Please try logging in manually.", false);
+        }
+    } catch (err) {
+        showStatusMessage(data.message || "Login failed after registration. Please try logging in manually.", false);
+    }
+}
 
     async function register() {
         const mscId = await generateNextMscId();
@@ -349,6 +373,13 @@ include '_header.php';
                 showStatusMessage(result.message || "You have registered successfully!", true);
                 document.getElementById("registrationForm").reset();
                 document.getElementById("regProgram").innerHTML = "<option>Select a College first</option>";
+                
+                document.getElementById("regSubmit").disabled = true;
+                document.getElementById("regSubmit").textContent = "Redirecting...";
+
+                setTimeout(() => {
+                    loginAndRedirect(data.username, data.password);
+                }, 5000)
             } else {
                 showStatusMessage(result?.message || "An error occurred during registration.", false);
             }
@@ -374,7 +405,7 @@ include '_header.php';
 
         setTimeout(() => {
             msgBox.style.display = "none";
-        }, 8000);
+        }, 5000);
     }
 </script>
 
