@@ -1,4 +1,9 @@
-<?php include '_header.php'; ?>
+<?php
+require_once __DIR__ . '/api/middleware/AuthMiddleware.php';
+AuthMiddleware::guestOnly();
+
+include '_header.php';
+?>
 
 <style>
     .form-grid {
