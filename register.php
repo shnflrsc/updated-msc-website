@@ -334,7 +334,7 @@ include '_header.php';
         console.log("Login after registration:", data);
 
         if (res.ok && data.success) {
-            window.location.href = "profile.php";
+            window.location.href = "dashboard.php";
         } else {
             showStatusMessage(data.message || "Login failed after registration. Please try logging in manually.", false);
         }
