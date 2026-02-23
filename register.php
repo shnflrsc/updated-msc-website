@@ -68,14 +68,14 @@ include '_header.php';
             mask-composite: intersect;
             animation: flicker 20s infinite linear;
             position: fixed;
-            z-index: 1;
+            z-index: 0;
             top: 0;
-            left: 0;
+            left: -10;
         }
 
     header, footer {
         position: relative;
-        z-index: 100;
+        z-index: 0;
     }
 
     @keyframes flicker {
@@ -87,8 +87,9 @@ include '_header.php';
 
 <main class="flex-grow flex items-center justify-center pt-28 px-4 mb-8">
     <div class="el"></div>
+
     <div
-        class="w-full max-w-4xl bg-[#18181b] text-white p-8 rounded-2xl shadow-lg border-[#27272a] border-2 z-40">
+        class="w-full max-w-4xl bg-[#18181b] text-white p-8 rounded-2xl shadow-lg border-[#27272a] border-2 z-0">
         <h2 class="text-3xl font-bold mb-6 text-center" style="font-family: 'Veonika', sans-serif;">Create Your
             Account</h2>
         <div id="status-message" class="hidden px-4 py-8 rounded text-sm text-white font-medium mb-4"></div>
@@ -228,14 +229,6 @@ include '_header.php';
         </form>
     </div>
 </main>
-
-<div id="statusModal" class="status-modal hidden">
-    <div class="status-modal-content">
-        <span id="statusModalClose" class="status-modal-close">&times;</span>
-        <h3 id="statusModalTitle"></h3>
-        <p id="statusModalMessage"></p>
-    </div>
-</div>
 
 <script src="program-and-course.js"></script>
 <script>
