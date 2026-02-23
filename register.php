@@ -212,7 +212,7 @@ include '_header.php';
 
             <div class="flex items-start mb-6">
                 <input type="checkbox" id="terms" class="mt-1 mr-2 accent-[#b9da05]" required>
-                <label for="terms" class="text-sm text-gray-300">I agree to the <a href="#" class="text-[#b9da05] hover:underline">Terms of Service</a> and <a href="#" class="text-[#b9da05] hover:underline">Privacy Policy</a>.</label>
+                <label for="terms" class="text-sm text-gray-300">I agree to the <a href="terms-of-service.php" class="text-[#b9da05] hover:underline">Terms of Service</a> and <a href="privacy-policy.php" class="text-[#b9da05] hover:underline">Privacy Policy</a>.</label>
             </div>
 
             <button type="submit"
