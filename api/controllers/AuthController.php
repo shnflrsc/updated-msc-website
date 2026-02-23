@@ -266,7 +266,7 @@ class AuthController
             // Validate new password strength
             $passwordErrors = Validator::validatePassword($data['new_password']);
             if (!empty($passwordErrors)) {
-                Response::validationError(['new_password' => $passwordErrors]);
+                Response::validationError(['new_password' => $passwordErrors], 'New password does not meet strength requirements');
             }
 
             // Get current user
