@@ -55,7 +55,7 @@ const editrprograms = {
     "BS Mechanical Engineering",
     "BS Mechatronics Engineering",
   ],
-  "College of Education": [
+  "College of Professional Teacher Education": [
     "B Early Childhood Education",
     "B Elementary Education",
     "B Physical Education",
