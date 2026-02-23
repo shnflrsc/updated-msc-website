@@ -308,9 +308,26 @@ include '_header.php';
     }
 }
 
+    const collegeAbbreviations = {
+        "College of Architecture and Fine Arts": "CAFA",
+        "College of Arts and Letters": "CAL",
+        "College of Business Education and Accountancy": "CBEA",
+        "College of Criminal Justice Education": "CCJE",
+        "College of Hospitality and Tourism Management": "CHTM",
+        "College of Information and Communications Technology": "CICT",
+        "College of Industrial Technology": "CIT",
+        "College of Nursing": "CN",
+        "College of Engineering": "COE",
+        "College of Professional Teacher Education": "CPTED",
+        "College of Science": "CS",
+        "College of Sports, Exercise and Recreation": "CSER",
+        "College of Social Sciences and Philosophy": "CSSP",
+    };
+
     async function register() {
         const mscId = await generateNextMscId();
         const studentNo = document.getElementById("regStudentNo").value;
+        const college = collegeAbbreviations[document.getElementById("regCollege").value] || document.getElementById("regCollege").value;
 
         const data = {
             username: mscId,
@@ -327,7 +344,7 @@ include '_header.php';
             student_no: studentNo,
             section: document.getElementById("regSection").value,
             year_level: document.getElementById("regYearLevel").value,
-            college: document.getElementById("regCollege").value,
+            college: college,
             program: document.getElementById("regProgram").value,
             address: document.getElementById("regAddress").value
         };
@@ -376,6 +393,6 @@ include '_header.php';
             msgBox.style.display = "none";
         }, 5000);
     }
-</script>
+</script>   
 
 <?php include '_footer.php'; ?>
