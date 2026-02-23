@@ -182,10 +182,10 @@ include '_header.php';
                     <select id="regYearLevel" required
                         class="w-full px-4 py-3 rounded-md bg-[#27272a] border border-gray-600 text-white focus:outline-none focus:ring-2 focus:ring-[#b9da05]">
                         <option value="">Select Year Level</option>
-                        <option value="1st Year">1st Year</option>
-                        <option value="2nd Year">2nd Year</option>
-                        <option value="3rd Year">3rd Year</option>
-                        <option value="4th Year">4th Year</option>
+                        <option value="1st Year">Freshman (First Year)</option>
+                        <option value="2nd Year">Sophomore (Second Year)</option>
+                        <option value="3rd Year">Junior (Third Year)</option>
+                        <option value="4th Year">Senior (Fourth Year)</option>
                     </select>
                 </div>
                 <div>
