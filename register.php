@@ -239,42 +239,7 @@ include '_header.php';
 
 <script src="program-and-course.js"></script>
 <script>
-    // Toggle Password Visibility
-    document.addEventListener("DOMContentLoaded", () => {
-        document.querySelectorAll('.toggle-password').forEach(button => {
-            button.addEventListener('click', function() {
-                this.getAttribute('data-target');
-                const input = document.getElementById(this.getAttribute('data-target'));
-                if (!input) return;
-
-                if (input.type === 'password') {
-                    this.textContent = "🙈"; // change icon
-                } else {
-                    this.textContent = "👁"; // change icon back
-                }
-            });
-        });
-    });
-
     const API_BASE = "/updated-msc-website/api";
-
-    function openStatusModal(title, message, isSuccess) {
-        const modal = document.getElementById("statusModal");
-        document.getElementById("statusModalTitle").innerText = title;
-        document.getElementById("statusModalMessage").innerText = message;
-        document.getElementById("statusModalTitle").style.color = isSuccess ? "green" : "red";
-        modal.style.display = "flex";
-    }
-
-    document.getElementById("statusModalClose").onclick = function() {
-        document.getElementById("statusModal").style.display = "none";
-    };
-
-    window.onclick = function(e) {
-        if (e.target === document.getElementById("statusModal")) {
-            document.getElementById("statusModal").style.display = "none";
-        }
-    };
 
     async function apiCall(endpoint, method = "GET", data = null, title = "") {
         try {
@@ -298,8 +263,8 @@ include '_header.php';
 
             return result;
         } catch (error) {
-            console.error("API Error:", error);
-            openStatusModal("⚠ Network Error", `Network error during ${title}`, false);
+            // console.error("API Error:", error);
+            showStatusMessage("⚠ Network Error", `Network error during ${title}`, false);
             return null;
         }
     }
@@ -314,7 +279,8 @@ include '_header.php';
             // console.log("Generated MSC ID:", responseData);
             return responseData.data.msc_id;
         } catch (err) {
-            console.error("Failed to fetch MSC ID:", err);
+            // console.error("Failed to fetch MSC ID:", err);
+            showStatusMessage("⚠ Error", "Failed to generate MSC ID. Please try again.", false);
             return undefined;
         }
     }
@@ -344,12 +310,13 @@ include '_header.php';
 
     async function register() {
         const mscId = await generateNextMscId();
+        const studentNo = document.getElementById("regStudentNo").value;
 
         const data = {
             username: mscId,
             email: document.getElementById("regEmail").value,
             facebook_link: document.getElementById("regFacebook").value,
-            password: document.getElementById("regStudentNo").value,
+            password: studentNo,
             first_name: document.getElementById("regFirstName").value,
             middle_name: document.getElementById("regMiddleName").value,
             last_name: document.getElementById("regLastName").value,
@@ -357,7 +324,7 @@ include '_header.php';
             birthdate: document.getElementById("regBirthDate").value,
             gender: document.getElementById("regGender").value,
             phone: document.getElementById("regPhone").value,
-            student_no: document.getElementById("regStudentNo").value,
+            student_no: studentNo,
             section: document.getElementById("regSection").value,
             year_level: document.getElementById("regYearLevel").value,
             college: document.getElementById("regCollege").value,
