@@ -61,6 +61,7 @@ include '_header.php';
         <div class="relative">
           <input type="password" id="newPassword" placeholder="Enter your new password" required
                  class="password-input w-full px-4 py-3 rounded-md bg-[#27272a] border border-gray-600 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#b9da05]" />
+          <p class="text-xs text-gray-400 mt-1">Must be at least 8 characters long and contain at least one uppercase letter, one lowercase letter, and one number.</p>
           <button type="button" class="toggle-password" onclick="togglePassword('newPassword')" aria-label="Toggle password visibility">
             <i class="bi bi-eye-fill"></i>
           </button>
