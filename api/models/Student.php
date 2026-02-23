@@ -99,6 +99,13 @@ class Student
                 throw new Exception("Username or email already exists");
             }
 
+            $requiredFields = ['username', 'email', 'password', 'first_name', 'last_name', 'phone', 'birthdate', 'gender', 'section', 'student_no', 'year_level', 'college', 'program'];
+            foreach ($requiredFields as $field) {
+                if (empty($data[$field])) {
+                    throw new Exception("The {$field} field is required.");
+                }
+            }
+
             // Hash password
             $hashedPassword = password_hash($data['password'], PASSWORD_DEFAULT);
 
