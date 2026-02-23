@@ -216,8 +216,7 @@ include '_header.php';
 
             <button type="submit"
                 id="regSubmit"
-                class="w-full bg-[#b9da05] text-[#00071c] text-m font-bold py-3 rounded-md hover:bg-[#8fae04] hover:text-[#00071c] transition-colors shadow-md cursor-pointer">Create
-                Account</button>
+                class="w-full bg-[#b9da05] text-[#00071c] text-m font-bold py-3 rounded-md hover:bg-[#8fae04] hover:text-[#00071c] transition-colors shadow-md cursor-pointer">Create Account</button>
             
             <div class="flex flex-col items-center text-center mt-6">
                 <div class="flex justify-center items-center gap-1">
@@ -291,11 +290,11 @@ include '_header.php';
                 options.body = JSON.stringify(data);
             }
 
-            console.log(`🚀 ${method} ${endpoint}:`, data);
+            // console.log(`🚀 ${method} ${endpoint}:`, data);
 
             const response = await fetch(`${API_BASE}${endpoint}`, options);
             const result = await response.json();
-            console.log(result);
+            // console.log(result);
 
             return result;
         } catch (error) {
@@ -331,7 +330,7 @@ include '_header.php';
 
         const data = await res.json();
 
-        console.log("Login after registration:", data);
+        // console.log("Login after registration:", data);
 
         if (res.ok && data.success) {
             window.location.href = "dashboard.php";
@@ -376,6 +375,7 @@ include '_header.php';
                 
                 document.getElementById("regSubmit").disabled = true;
                 document.getElementById("regSubmit").textContent = "Redirecting...";
+                document.getElementById("regSubmit").classList.add("cursor-not-allowed", "bg-[#6e8100]", "hover:bg-[#6e8100]", "text-gray-400", "hover:text-gray-400");
 
                 setTimeout(() => {
                     loginAndRedirect(data.username, data.password);
@@ -385,8 +385,10 @@ include '_header.php';
             }
 
         } catch (err) {
-            console.error(err);
-            console.log("An error occurred while adding member.");
+            showStatusMessage(err || "An error occurred during registration. Please try again.", false);
+            document.getElementById("regSubmit").disabled = false;
+            document.getElementById("regSubmit").textContent = "Create Account";
+            document.getElementById("regSubmit").classList.remove("cursor-not-allowed", "bg-[#6e8100]", "hover:bg-[#6e8100]", "text-gray-400", "hover:text-gray-400");
         }
 
     }
