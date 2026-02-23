@@ -29,7 +29,7 @@ CREATE TABLE IF NOT EXISTS students (
     guardian_phone VARCHAR(20) NOT NULL,
     guardian_address TEXT,
     student_no VARCHAR(50),
-    year_level VARCHAR(20),
+    year_level VARCHAR(50),
     college VARCHAR(100),
     program VARCHAR(100),
     section VARCHAR(50),
