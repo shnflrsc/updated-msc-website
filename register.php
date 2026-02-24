@@ -99,37 +99,37 @@ include '_header.php';
             <div class="form-grid mb-6">
                 <div>
                     <label for="regFirstName" class="block text-sm font-semibold mb-1">First Name</label>
-                    <input id="regFirstName" type="text" required
-                        class="w-full px-4 py-3 rounded-md bg-[#27272a] border border-gray-600 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#b9da05]">
+                    <input id="regFirstName" type="text" placeholder="Xoft" required
+                        class="w-full px-4 py-3 rounded-md bg-[#27272a] border border-gray-600 text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-[#b9da05]">
                 </div>
                 <div>
                     <label for="regMiddleName" class="block text-sm font-semibold mb-1">Middle Name</label>
                     <input id="regMiddleName" type="text"
-                        class="w-full px-4 py-3 rounded-md bg-[#27272a] border border-gray-600 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#b9da05]">
+                        class="w-full px-4 py-3 rounded-md bg-[#27272a] border border-gray-600 text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-[#b9da05]">
                 </div>
                 <div>
                     <label for="regLastName" class="block text-sm font-semibold mb-1">Last Name</label>
-                    <input id="regLastName" type="text" required
-                        class="w-full px-4 py-3 rounded-md bg-[#27272a] border border-gray-600 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#b9da05]">
+                    <input id="regLastName" type="text" placeholder="Dela Cruz" required
+                        class="w-full px-4 py-3 rounded-md bg-[#27272a] border border-gray-600 text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-[#b9da05]">
                 </div>
             </div>
 
             <div class="form-grid mb-6">
                 <div class="w-full">
                     <label for="regEmail" class="block text-sm font-semibold mb-1">Email Address</label>
-                    <input id="regEmail" type="email" required
-                        class="w-full px-4 py-3 rounded-md bg-[#27272a] border border-gray-600 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#b9da05]">
+                    <input id="regEmail" type="email" placeholder="xoftdelacruz@gmail.com" required
+                        class="w-full px-4 py-3 rounded-md bg-[#27272a] border border-gray-600 text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-[#b9da05]">
                     <!-- <p class="text-xs text-gray-400 mt-1">Please enter a valid email address</p> -->
                 </div>    
                 <div class="w-full">
                     <label for="regPhone" class="block text-sm font-semibold mb-1">Phone Number</label>
-                    <input type="tel" id="regPhone" name="regPhone" placeholder="e.g. 09123456789" required class="w-full px-4 py-3 rounded-md bg-[#27272a] border border-gray-600 text-white focus:outline-none focus:ring-2 focus:ring-[#b9da05]">
+                    <input type="tel" id="regPhone" name="regPhone" placeholder="09234567890" required class="w-full px-4 py-3 rounded-md bg-[#27272a] border border-gray-600 text-white focus:outline-none focus:ring-2 focus:ring-[#b9da05] placeholder-gray-500">
                 </div>
             </div>
 
             <div>
                 <label for="regFacebook" class="block text-sm font-semibold mb-1">Facebook Username (Optional)</label>
-                <input type="text" id="regFacebook" name="regFacebook" class="w-full px-4 py-3 rounded-md bg-[#27272a] border border-gray-600 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#b9da05]">
+                <input type="text" id="regFacebook" name="regFacebook" class="w-full px-4 py-3 rounded-md bg-[#27272a] border border-gray-600 text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-[#b9da05]" placeholder="https://www.facebook.com/yourprofilename">
             </div>
 
             <div class="form-grid mb-6">
@@ -167,13 +167,13 @@ include '_header.php';
             <div class="form-grid mb-6">
                 <div>
                     <label for="regStudentNo" class="block text-sm font-semibold mb-1">Student No.</label>
-                    <input id="regStudentNo" type="text" required
-                        class="w-full px-4 py-3 rounded-md bg-[#27272a] border border-gray-600 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#b9da05]">
+                    <input id="regStudentNo" type="text" placeholder="2025000001" required
+                        class="w-full px-4 py-3 rounded-md bg-[#27272a] border border-gray-600 text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-[#b9da05]">
                 </div>
                 <div>
                     <label for="regSection" class="block text-sm font-semibold mb-1">Section</label>
-                    <input id="regSection" type="text" required
-                        class="w-full px-4 py-3 rounded-md bg-[#27272a] border border-gray-600 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#b9da05]">
+                    <input id="regSection" type="text" placeholder="BSCpE 2A" required
+                        class="w-full px-4 py-3 rounded-md bg-[#27272a] border border-gray-600 text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-[#b9da05]">
                 </div>
             </div>
 
@@ -207,7 +207,7 @@ include '_header.php';
 
             <div>
                 <label for="regAddress" class="block text-sm font-semibold mb-1">Address (Optional)</label>
-                <textarea id="regAddress" name="regAddress" rows="2" class="w-full px-4 py-3 rounded-md bg-[#27272a] border border-gray-600 text-white focus:outline-none focus:ring-2 focus:ring-[#b9da05]"></textarea>
+                <textarea id="regAddress" name="regAddress" rows="2" class="w-full px-4 py-3 rounded-md bg-[#27272a] border border-gray-600 text-white focus:outline-none focus:ring-2 focus:ring-[#b9da05] placeholder-gray-500" placeholder="Block 20 Lot 21, MSC Street, Brgy. Xoft, Malolos City, Bulacan"></textarea>
             </div>
 
             <div class="flex items-start mb-6">
