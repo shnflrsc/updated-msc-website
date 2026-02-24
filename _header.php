@@ -45,6 +45,15 @@ switch ($current_page) {
     case 'change_password.php':
         $page_title = "Change Password | BulSU MSC";
         break;
+    case 'register.php':
+        $page_title = "Register | BulSU MSC";
+        break;
+    case 'terms_of_service.php':
+        $page_title = "Terms of Service | BulSU MSC";
+        break;
+    case 'privacy_policy.php':
+        $page_title = "Privacy Policy | BulSU MSC";
+        break;
 }
 ?>
 <!DOCTYPE html>
