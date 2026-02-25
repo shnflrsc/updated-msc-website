@@ -59,19 +59,19 @@ include '_header.php';
         border: 1px solid #ff5c5c;
     }
     .el {
-            background: conic-gradient(from 180deg at 50% 70%,hsla(0,0%,98%,1) 0deg,#b9da05 72.0000010728836deg,#0051ff 144.0000021457672deg,#0095ff 216.00000858306885deg,#b9da05 288.0000042915344deg,hsla(0,0%,98%,1) 1turn);
-            width: 100%;
-            height: 100%;
-            mask:
-                radial-gradient(circle at 50% 50%, white 2px, transparent 2.5px) 50% 50% / var(--size) var(--size),
-                url("https://assets.codepen.io/605876/noise-mask.png") 256px 50% / 256px 256px;
-            mask-composite: intersect;
-            animation: flicker 20s infinite linear;
-            position: fixed;
-            z-index: 0;
-            top: 0;
-            left: -10;
-        }
+        background: conic-gradient(from 180deg at 50% 70%,hsla(0,0%,98%,1) 0deg,#b9da05 72.0000010728836deg,#0051ff 144.0000021457672deg,#0095ff 216.00000858306885deg,#b9da05 288.0000042915344deg,hsla(0,0%,98%,1) 1turn);
+        width: 100%;
+        height: 100%;
+        mask:
+            radial-gradient(circle at 50% 50%, white 2px, transparent 2.5px) 50% 50% / var(--size) var(--size),
+            url("https://assets.codepen.io/605876/noise-mask.png") 256px 50% / 256px 256px;
+        mask-composite: intersect;
+        animation: flicker 20s infinite linear;
+        position: fixed;
+        z-index: 0;
+        top: 0;
+        left: -10;
+    }
 
     header, footer {
         position: relative;
@@ -119,7 +119,6 @@ include '_header.php';
                     <label for="regEmail" class="block text-sm font-semibold mb-1">Email Address</label>
                     <input id="regEmail" type="email" placeholder="xoftdelacruz@gmail.com" required
                         class="w-full px-4 py-3 rounded-md bg-[#27272a] border border-gray-600 text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-[#b9da05]">
-                    <!-- <p class="text-xs text-gray-400 mt-1">Please enter a valid email address</p> -->
                 </div>    
                 <div class="w-full">
                     <label for="regPhone" class="block text-sm font-semibold mb-1">Phone Number</label>
@@ -135,8 +134,6 @@ include '_header.php';
             <div class="form-grid mb-6">
                 <div>
                     <label for="regSuffix" class="block text-sm font-semibold mb-1">Name Suffix</label>
-                    <!-- <input id="regUsername" type="text" required class="w-full px-4 py-3 rounded-md bg-[#27272a] border border-gray-600 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#b9da05]"> -->
-                    <!-- <p class="text-xs text-gray-400 mt-1">Must be at least 3 characters</p> -->
                     <select id="regSuffix"
                         class="w-full px-4 py-3 rounded-md bg-[#27272a] border border-gray-600 text-white focus:outline-none focus:ring-2 focus:ring-[#b9da05]">
                         <option value="">None</option>
@@ -172,7 +169,7 @@ include '_header.php';
                 </div>
                 <div>
                     <label for="regSection" class="block text-sm font-semibold mb-1">Section</label>
-                    <input id="regSection" type="text" placeholder="BSCpE 2A" required
+                    <input id="regSection" type="text" placeholder="BSIT 1D-G2" required
                         class="w-full px-4 py-3 rounded-md bg-[#27272a] border border-gray-600 text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-[#b9da05]">
                 </div>
             </div>
