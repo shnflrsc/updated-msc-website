@@ -146,7 +146,7 @@ class Student
             $userId = $this->db->lastInsertId();
 
             // Generate MSC ID
-            $mscId = $this->generateMscId($data['role'] ?? 'member');
+            $mscId = $this->getNextMscId();
 
             // Update student with MSC ID
             $updateStmt = $this->db->prepare("UPDATE students SET msc_id = :msc_id WHERE id = :id");
@@ -617,7 +617,7 @@ class Student
             }
 
             // Format new MSC ID
-            $nextMscId = "MSC{$currentCode}-" . str_pad($nextNumber, 3, '0', STR_PAD_LEFT);
+            $nextMscId = "MSC{$currentCode}" . str_pad($nextNumber, 3, '0', STR_PAD_LEFT);
 
             return $nextMscId;
         } catch (Exception $e) {
